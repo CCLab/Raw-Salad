@@ -1,32 +1,58 @@
-/**
- *  Assert function based on code by Ayman Hourieh
- *  Licenced under CC BY-NC-SA 3.0
- *  http://aymanh.com/9-javascript-tips-you-may-not-know#assertion
- *  
- *  Usage: 
- *  Assert.assert( exp, message );
- *
- *  For example:
- *  Assert.assert( n != 0, "n === 0" );
- *  sth = x / n;  
- */
-
 var Assert = (function () {
         var that = {};
-
-        that.AssertionException = function ( message ) {
-            this.message = message;
-        }
-
-        that.AssertionException.prototype.toString = function () {
-            return "AssertionException: " + this.message;
-        };
+        var browser = is_browser();
 
         that.assert = function ( exp, message ) {
             if( !Boolean( exp )) {
-                throw new that.AssertionException( message );
+                print_error( message );
             }
         };
 
+        that.isTrue = function ( obj, message ) {
+            if( !obj ) {
+                print_error( message );
+            }
+        };
+        
+        that.isFalse = function ( obj, message ) {
+            if( !!obj ) {
+                print_error( message );
+            }
+        };
+
+        function is_browser() {
+            try {
+                if( document ) {
+                    return true;
+                }
+            }
+            catch( e ) {
+                return false;
+            }
+        }
+
+        function print_error( message ) {
+            if( browser ) {
+                var style = "position: fixed; \
+                    top: 0px; \
+                    left: 0px; \  
+                    width: 200px; \
+                    background: #a55; \
+                    color: #fff; \
+                    font-family: sans-serif; \
+                    font-size: 11px; \
+                    padding: 10px";
+                var body = document.getElementsByTagName( 'body' )[0];
+                var error = document.createElement( 'div' );
+                error.setAttribute( 'style', style );
+                error.innerHTML = message;
+
+                body.appendChild( error );
+            }
+            else {
+                print( message );
+            }
+        }
+        
         return that;
     })();
