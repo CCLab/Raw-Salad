@@ -1,5 +1,5 @@
 /**
- *  Assert function by Ayman Hourieh
+ *  Assert function based on code by Ayman Hourieh
  *  Licenced under CC BY-NC-SA 3.0
  *  http://aymanh.com/9-javascript-tips-you-may-not-know#assertion
  *  
@@ -12,17 +12,21 @@
  */
 
 var Assert = (function () {
-        var AssertionException = function ( message ) {
+        var that = {};
+
+        that.AssertionException = function ( message ) {
             this.message = message;
         }
 
-        AssertionException.prototype.toString = function () {
+        that.AssertionException.prototype.toString = function () {
             return "AssertionException: " + this.message;
         };
 
-        var assert = function ( exp, message ) {
+        that.assert = function ( exp, message ) {
             if( !Boolean( exp )) {
-                throw new AssertionException( message );
+                throw new that.AssertionException( message );
             }
         };
+
+        return that;
     })();
