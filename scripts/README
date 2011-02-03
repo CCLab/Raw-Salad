@@ -1,1 +1,2 @@
-This folder contains all the helper scripts.
+installer_FEDORA.sh 
+	All the software you need to join the development including db, web framework and JavaScript libs.
