@@ -12,7 +12,7 @@ Technology used
 - Django Web Framework <http://djangoproject.com>
 - jQuery <http://jquery.com>
 - ProtoVis <http://vis.stanford.edu/protovis/>
-
+- Less CSS <http://lesscss.org/>
 
 The main contributors are (in alpha order):
 -------------------------------------------
