@@ -1,0 +1,14 @@
+.alert {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+
+    width: 150px;
+    height: 300px;
+
+    padding: 10px;
+
+    background: #f55;
+    color: #fff;
+    font-family: sans-serif;
+}
