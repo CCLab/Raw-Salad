@@ -37,3 +37,4 @@ jsAssert
 A simple JavaScript function for making assertions.
 
 **Author**: Centrum Cyfrowe
+**License**: BSD
