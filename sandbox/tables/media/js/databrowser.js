@@ -47,7 +47,7 @@
 	var resp_len = resp.length;
         var keys = get_keys( [resp[0]._id, resp[0].value] );
         var keys_len = keys.length;
-	var table = [ "<table><thead>" ];
+	var table = [ "<table><thead><td class='index'>No.</td>" ];
 	var inx = 0;
         var i, row, col, key;
         var container = $("#"+container_id);
@@ -60,7 +60,10 @@
         table[ ++inx ] =  "</thead>";
 
 	for( row = 0; row < resp_len; row += 1 ) {
-	    table[ ++inx ] = "<tr>";
+	    table[ ++inx ] = "<tr><td class='index'>";
+	    table[ ++inx ] = row + 1;
+	    table[ ++inx ] = "</td>";
+
             for( col = 0; col < keys_len; col += 1 ) {
                 key = keys[ col ];
 	        table[ ++inx ] = "<td>";
@@ -73,6 +76,7 @@
 	        table[ ++inx ] = "</td>";
             }
 	    table[ ++inx ] = "</tr>";
+            
 	}
 	table[ ++inx ] =  "</table>";
 
