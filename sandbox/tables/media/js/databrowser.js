@@ -4,24 +4,28 @@
     $('#i').click( function () {
 	$.ajax({
 	    url: "/button_i/",
-	    type: "POST",
-	    data: {},
 	    complete: button_i_loaded
 	});
     });
     
     function button_i_loaded( response, status ) {
 
-	var table = "<table>",
-	    json_object = JSON.parse( response.responseText );
+   	var resp = JSON.parse( response.responseText );
+	var resp_len = resp.length;
+	var table = [ "<table>" ];
+	var inx = 0;
 
-	for( var i = 0; i < json_object.length; i += 1 ) {
-	    table += '<tr><td>' + json_object[i]['id'] + '</td><td>' + json_object[i]['name'] + '</td></tr>';
+	for( var i = 0; i < resp_len; i += 1 ) {
+	    table[ ++inx ] = "<tr><td>";
+	    table[ ++inx ] = resp[i]["id"];
+	    table[ ++inx ] = "</td><td>";
+	    table[ ++inx ] = resp[i]["name"];
+	    table[ ++inx ] = "</td></tr>";
 	}
-	table += '</table>';
+	table[ ++inx ] =  "</table>";
 
-	$("#table-container").append( $(table) )
-	$('tr:even').css( 'background', '#ccc' );
+	$("#table-container").append( $(table.join("")) )
+	$("tr:even").css( "background", "#ccc" );
     };
 
 
@@ -29,8 +33,6 @@
     $('#ii').click( function () {
 	$.ajax({
 	    url: "/button_ii/",
-	    type: "POST",
-	    data: {},
 	    complete: button_ii_loaded
 	});
     });
@@ -44,8 +46,6 @@
     $('#iii').click( function () {
 	$.ajax({
 	    url: "/button_iii/",
-	    type: "POST",
-	    data: {},
 	    complete: button_iii_loaded
 	});
     });
