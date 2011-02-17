@@ -3,19 +3,23 @@ from django.shortcuts import render_to_response
 from django.template import Context, loader
 from django.utils import simplejson as json
 
-
 def main_page( request ):
     return render_to_response( "databrowser.html" )
 
 def button_i( request ):
-    data = [{ "id": 1, "name": "Janek" },
-            { "id": 2, "name": "Staszek" },
-            { "id": 3, "name": "Hanka" }]
-
+    data = get_data_i()
     return HttpResponse( json.dumps( data ));
 
 def button_ii( request ):
-    return HttpResponse( "Working II" );
+    data = get_data_ii()
+    return HttpResponse( json.dumps( data ));
 
 def button_iii( request ):
-    return HttpResponse( "Working III" );
+    return HttpResponse();
+
+
+def get_data_i():
+    return [{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":856271,"recs":505}},{"_id":{"kand_plec":"K","kand_typ":"partia","kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":386308,"recs":241}},{"_id":{"kand_plec":"M","kand_typ":"organizacja","kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":108105,"recs":82}},{"_id":{"kand_plec":"M","kand_typ":"wyborczy","kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":46457,"recs":132}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"Czestochowa","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":44538,"recs":129}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"Katowice","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":38399,"recs":158}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"Sosnowiec","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":34586,"recs":114}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"bielski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":30805,"recs":124}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"bedzinski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":28641,"recs":112}},{"_id":{"kand_plec":"M","kand_typ":"wyborczy","kand_jednostka":"zywiecki","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":28536,"recs":121}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"Gliwice","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":26909,"recs":113}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"Bielsko-Biala","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":26837,"recs":124}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"czestochowski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":24955,"recs":136}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"zawiercianski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":24262,"recs":117}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"cieszynski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":23002,"recs":90}},{"_id":{"kand_plec":"K","kand_typ":"partia","kand_jednostka":"Katowice","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":22943,"recs":64}},{"_id":{"kand_plec":"M","kand_typ":"partia","kand_jednostka":"zywiecki","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":22549,"recs":124}},{"_id":{"kand_plec":"K","kand_typ":"wyborczy","kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":22350,"recs":44}},{"_id":{"kand_plec":"M","kand_typ":"wyborczy","kand_jednostka":"Bielsko-Biala","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":19881,"recs":59}},{"_id":{"kand_plec":"M","kand_typ":"wyborczy","kand_jednostka":"Katowice","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":19832,"recs":51}}]
+
+def get_data_ii():
+    return [{"_id":{"kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":856271,"recs":505}},{"_id":{"kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":386308,"recs":241}},{"_id":{"kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":108105,"recs":82}},{"_id":{"kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":46457,"recs":132}},{"_id":{"kand_jednostka":"Czestochowa","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":44538,"recs":129}},{"_id":{"kand_jednostka":"Katowice","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":38399,"recs":158}},{"_id":{"kand_jednostka":"Sosnowiec","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":34586,"recs":114}},{"_id":{"kand_jednostka":"bielski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":30805,"recs":124}},{"_id":{"kand_jednostka":"bedzinski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":28641,"recs":112}},{"_id":{"kand_jednostka":"zywiecki","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":28536,"recs":121}},{"_id":{"kand_jednostka":"Gliwice","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":26909,"recs":113}},{"_id":{"kand_jednostka":"Bielsko-Biala","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":26837,"recs":124}},{"_id":{"kand_jednostka":"czestochowski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":24955,"recs":136}},{"_id":{"kand_jednostka":"zawiercianski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":24262,"recs":117}},{"_id":{"kand_jednostka":"cieszynski","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":23002,"recs":90}},{"_id":{"kand_jednostka":"Katowice","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":22943,"recs":64}},{"_id":{"kand_jednostka":"zywiecki","kand_szczebel":"powiat"},"value":{"kand_glosow_sum":22549,"recs":124}},{"_id":{"kand_jednostka":"slaskie","kand_szczebel":"sejmik"},"value":{"kand_glosow_sum":22350,"recs":44}},{"_id":{"kand_jednostka":"Bielsko-Biala","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":19881,"recs":59}},{"_id":{"kand_jednostka":"Katowice","kand_szczebel":"miasto na prawach powiatu"},"value":{"kand_glosow_sum":19832,"recs":51}}]
