@@ -47,28 +47,44 @@
 	var resp_len = resp.length;
         var keys = get_keys( [resp[0]._id, resp[0].value] );
         var keys_len = keys.length;
-	var table = [ "<table><thead><td class='index'>No.</td>" ];
+	var table = [ "<table><thead>" ];
 	var inx = 0;
-        var i, row, col, key;
+        var i, row, col, key, val;
         var container = $("#"+container_id);
 
         for( i = 0; i < keys_len; i += 1 ) {
-            table[ ++inx ] = "<td>";
+            if( keys[i] === 'kand_plec' ) {
+                table[ ++inx ] = "<td class='plec'>";
+            }
+            else if( keys[i] === 'kand_szczebel' ) {
+	        table[ ++inx ] = "<td class='szczebel'>";
+            }
+            else { 
+                table[ ++inx ] = "<td>";
+            }                
             table[ ++inx ] = keys[i].toUpperCase();
             table[ ++inx ] = "</td>";
         }
-        table[ ++inx ] =  "</thead>";
+        table[ ++inx ] =  "</thead><tbody>";
 
 	for( row = 0; row < resp_len; row += 1 ) {
-	    table[ ++inx ] = "<tr><td class='index'>";
-	    table[ ++inx ] = row + 1;
-	    table[ ++inx ] = "</td>";
-
+	    table[ ++inx ] = "<tr>";
             for( col = 0; col < keys_len; col += 1 ) {
                 key = keys[ col ];
-	        table[ ++inx ] = "<td>";
-                if( resp[ row ]._id[ key ] !== undefined ) {
-	            table[ ++inx ] = resp[ row ]._id[ key ];
+                val = resp[ row ]._id[ key ];
+
+                if( key === 'kand_plec' ) {
+	            table[ ++inx ] = "<td class='plec'>";
+                }
+                else if( key === 'kand_szczebel' ) {
+	            table[ ++inx ] = "<td class='szczebel'>";
+                }
+                else {
+	            table[ ++inx ] = "<td>";
+                }                
+                    
+                if( val !== undefined ) {
+	            table[ ++inx ] = val;
                 }
                 else {
                     table[ ++inx ] = resp[ row ].value[ key ];
@@ -78,10 +94,10 @@
 	    table[ ++inx ] = "</tr>";
             
 	}
-	table[ ++inx ] =  "</table>";
+	table[ ++inx ] =  "</tbody></table>";
 
         container.find('table').remove();
-	container.append( $(table.join("")) ).find("tr:even").css( "background", "#ccc" );
+	container.append( $(table.join("")) );
     };
 
 
