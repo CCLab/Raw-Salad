@@ -6,16 +6,13 @@ from django.utils import simplejson as json
 def main_page( request ):
     return render_to_response( "databrowser.html" )
 
-def button_i( request ):
+def first_table( request ):
     data = get_data_i()
     return HttpResponse( json.dumps( data ));
 
-def button_ii( request ):
+def second_table( request ):
     data = get_data_ii()
     return HttpResponse( json.dumps( data ));
-
-def button_iii( request ):
-    return HttpResponse();
 
 
 def get_data_i():

@@ -1,46 +1,21 @@
 (function () {
-
-    //  BUTTON I
-    $('#i').click( function () {
-	$.ajax({
-	    url: "/button_i/",
-	    complete: button_i_loaded
-	});
-    });
+    $.each( [{ url: "/first/", complete: first_loaded }, 
+	     { url: "/second/", complete: second_loaded }],
+            function ( i, v ) {
+                $.ajax( v );
+            }
+          );
     
-    function button_i_loaded( response, status ) {
+    
+    function first_loaded( response, status ) {
         create_table( response.responseText, "table-container-i" );
     }
 
-    //  BUTTON II
-    $('#ii').click( function () {
-	$.ajax({
-	    url: "/button_ii/",
-	    complete: button_ii_loaded
-	});
-    });
-    
-    function button_ii_loaded( response, status ) {
+
+    function second_loaded( response, status ) {
         create_table( response.responseText, "table-container-ii" );
     };
-
-
-    //  BUTTON III
-    $('#iii').click( function () {
-	$.ajax({
-	    url: "/button_iii/",
-	    complete: button_iii_loaded
-	});
-    });
     
-    function button_iii_loaded( response, status ) {
-    };
-
-
-    //  CLEAR VIEW BUTTON
-    $('#clear').click( function() {
-        $('table').remove();
-    });
 
     function create_table( json_response, container_id ) {
    	var resp = JSON.parse( json_response );
@@ -82,7 +57,7 @@
                 else {
 	            table[ ++inx ] = "<td>";
                 }                
-                    
+                
                 if( val !== undefined ) {
 	            table[ ++inx ] = val;
                 }
