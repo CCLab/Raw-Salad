@@ -1,4 +1,6 @@
 (function () {
+    var resp;
+    
     $.each( [{ url: "/first/", complete: first_loaded }, 
 	     { url: "/second/", complete: second_loaded }],
             function ( i, v ) {
@@ -8,39 +10,32 @@
     
     
     function first_loaded( response, status ) {
-        create_table( response.responseText, "table-container-i" );
+   	resp = JSON.parse( response.responseText );        
+        create_table( "table-container-i" );
     }
 
 
     function second_loaded( response, status ) {
-        create_table( response.responseText, "table-container-ii" );
+   	resp = JSON.parse( response.responseText );        
+        create_table( "table-container-ii" );
     };
     
 
-    function create_table( json_response, container_id ) {
-   	var resp = JSON.parse( json_response );
+    function create_table( container_id ) {
 	var resp_len = resp.length;
         var keys = get_keys( [resp[0]._id, resp[0].value] );
         var keys_len = keys.length;
-	var table = [ "<table><thead>" ];
+	var table = [ "<table><thead><tr>" ];
 	var inx = 0;
         var i, row, col, key, val;
         var container = $("#"+container_id);
 
         for( i = 0; i < keys_len; i += 1 ) {
-            if( keys[i] === 'kand_plec' ) {
-                table[ ++inx ] = "<td class='plec'>";
-            }
-            else if( keys[i] === 'kand_szczebel' ) {
-	        table[ ++inx ] = "<td class='szczebel'>";
-            }
-            else { 
-                table[ ++inx ] = "<td>";
-            }                
+            table[ ++inx ] = "<th>";
             table[ ++inx ] = keys[i].toUpperCase();
-            table[ ++inx ] = "</td>";
+            table[ ++inx ] = "</th>";
         }
-        table[ ++inx ] =  "</thead><tbody>";
+        table[ ++inx ] =  "</tr></thead><tbody>";
 
 	for( row = 0; row < resp_len; row += 1 ) {
 	    table[ ++inx ] = "<tr>";
@@ -48,16 +43,7 @@
                 key = keys[ col ];
                 val = resp[ row ]._id[ key ];
 
-                if( key === 'kand_plec' ) {
-	            table[ ++inx ] = "<td class='plec'>";
-                }
-                else if( key === 'kand_szczebel' ) {
-	            table[ ++inx ] = "<td class='szczebel'>";
-                }
-                else {
-	            table[ ++inx ] = "<td>";
-                }                
-                
+	        table[ ++inx ] = "<td>";
                 if( val !== undefined ) {
 	            table[ ++inx ] = val;
                 }
@@ -71,8 +57,17 @@
 	}
 	table[ ++inx ] =  "</tbody></table>";
 
-        container.find('table').remove();
 	container.append( $(table.join("")) );
+        container.find('table').dataTable(
+            {
+                "bAutoWidth": true,
+                "bFilter": false,
+                "bInfo": false,
+                "bLengthChange": false,
+                "bPaginate": false,
+                "bProcessing": true,
+            }
+        );
     };
 
 
