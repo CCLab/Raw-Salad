@@ -10,6 +10,9 @@
   font-family: sans-serif;
   color: #333333;
 }
+a {
+  text-decoration: none;
+}
 #wraper {
   position: relative;
   width: 960px;
@@ -121,4 +124,44 @@ li:hover {
   margin: auto;
   background-color: #555;
   color: #fff;
+}
+.perspective-head {
+  width: 100%;
+  height: 14px;
+  padding: 3px;
+  background-color: #a9dbfe;
+  margin-bottom: 10px;
+}
+.perspective-desc {
+  color: #fff;
+  margin-left: 5px;
+}
+.perspective {
+  height: 40px;
+  margin-bottom: 10px;
+  clear: both;
+}
+.perspective:hover {
+  background-color: #a9dbfe;
+  cursor: pointer;
+}
+.perspective-icon {
+  position: relative;
+  height: 34px;
+  width: 154px;
+  margin-right: 10px;
+  float: left;
+  border: solid 3px #a9dbfe;
+}
+.perspective-icon-label {
+  position: absolute;
+  width: 100%;
+  top: 11px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+.perspective-info {
+  float: right;
+  width: 330px;
 }
