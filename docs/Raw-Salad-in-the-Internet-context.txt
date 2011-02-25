@@ -1,0 +1,6 @@
+RAW SALAD IN CONTEXT
+
+Raw Salad provides a collection of mechanisms for making a heavy use of the Internet context of the application. All of them are based on open and widely recognised web standards. 
+
+PUBLIC API
+Raw Salad features two separate API mechanisms serving different functionality. 
