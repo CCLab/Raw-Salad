@@ -65,12 +65,12 @@ for National Budget), legal status of data. Additional options include: download
 all button and perspective switch.
 The perspective switch allows user to choose the way data will be shown for her
 or him in the data browser. The switch consists of two lists of perspectives: 
-    * structures (obligatory for all data-sets) �the basic raw data access point 
+    * structures (obligatory for all data-sets): the basic raw data access point 
       providing basic data structures as a browser. E.g. Nation Budget 
       structures could be task-oriented budget or institutional budget, Local 
       Elections structures could be territorial structure or party based 
       structure. 
-    * questions (or stories about data) �some predefined perspectives on a 
+    * questions (or stories about data): some predefined perspectives on a 
       data-set that could be helpful to answer some questions (or to tell some 
       story about data). E.g. National Budget questions could be "National to EU
       money in the budget" Local Elections question could be "Women to men in 
@@ -84,7 +84,8 @@ To move on from the Choose view to the Browse view user has to choose one of
 the perspectives. 
 
 BROWSE
-// to be described
+The BROWSE view is the view where user is provided with a direct access to data.
+
 
 USE
 // to be described

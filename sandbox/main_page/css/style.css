@@ -76,6 +76,7 @@ a {
   float: right;
   width: 330px;
   padding-top: 5px;
+  height: 95px;
 }
 .collection-name {
   font-weight: bold;
