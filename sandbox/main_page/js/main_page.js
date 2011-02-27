@@ -1,19 +1,30 @@
 (function () {
-    $('.accordeon').hide();
-    $('.expert_blog').hide();    
-    $('.dataset-name').click( function () {
-        $(this).next().toggle();
-        $(this).parent().next().toggle();
-        $(this).parent().parent().siblings().find('.accordeon').hide();
-        $(this).parent().parent().siblings().find('.expert_blog').hide();        
-    });
-    $('.dataset-name').hover( 
+
+    $('#blog-extra').hide();
+
+    $('#collections-list').hover(
         function () {
-            var label = $(this).html();
-            $('#status-bar').html("Kliknij w pasek, by zobaczyć szczegóły kolekcji " + label);
+            $('#head-img').attr('src', './img/head_1.png');
         },
         function () {
-            $('#status-bar').html('');
+            $('#head-img').attr('src', './img/head_0.png');
         }
     );
+
+    $('#more').click( function () {
+        $(this).css('color', '#fff');
+        $('#blog-extra').slideDown( 500 );
+//        $('#about').toggle();
+//        $('#tutorial').toggle();
+    });
+ 
+    $('#less').click( function () {
+        $('#blog-extra').slideUp( 500, function () {
+            $('#more').css('color', '#333');
+        });
+//        $('#about').toggle();
+//        $('#tutorial').toggle();
+    });
+      
+
 })();

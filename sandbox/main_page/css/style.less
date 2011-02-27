@@ -1,5 +1,9 @@
 @bgcolor: #fff;
+@blue: #a9dbfe;
+@green: #6eff96;
+@yellow: #ffdd00;
 @grey: #d2d3d5;
+@icon-border: 3px;
 @height: 600px;
 
 .reset {
@@ -9,12 +13,15 @@
 
 
 /*  C S S   D E C L A R A T I O N S  */
-
 * {
     .reset;
     font-size: 11px;
     font-family: sans-serif;
-    color: #333;
+    color: #333
+}
+
+a {
+    text-decoration: none;
 }
 
 #wraper {
@@ -33,118 +40,112 @@
     background: @bgcolor;
     position: absolute;
     left: 0px;
-    width: 50px;
+    width: 100px;
     height: @height;
 }
 
-    #logo {
-        width: 26px;
-        height: 18px;
-        background: @grey;
-        padding: 16px 12px;
-    }
-
-    #icons {
-        width: 50px;
-        position: absolute;
-        top: 60px;
-    }
-
-    .icon {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 5px;
-        background: @bgcolor + #141;
-    }   
-
-    
 /*  L E F T   C O L U M N  */
 
-#main_column {
+#left_column {
     position: absolute;
-    left: 55px;
-    top: 30px;
-    width: 905px;
-    height: @height - 30px;
+    left: 60px;
+    top: 0px;
+    width: 500px;
+    height: @height;
 }
-    .dataset {
-        clear: both;
-        margin-bottom: 5px;    
+    #head {
+        width: 500px;
+        margin-bottom: 20px;
     }
     
-    .data {
+    #collections-head {
+        margin-bottom: 10px;
+    }
+
+    #collections-list {
+    }
+
+    #collections-list:after {
+        color: @bgcolor;
+        content: ".";
+    }
+    
+    .collection {
+        height: 100px;
+        margin-bottom: 10px;
+        clear: both;
+    }
+
+    .collection:hover {
+        background-color: @blue;
+        cursor: pointer;
+    }
+
+    .collection-icon {
+        position: relative;
+        height: 100px - ( 2 * @icon-border );
+        width: 160px - ( 2 * @icon-border );
+        margin-right: 10px;
         float: left;
-        width: 445px;
+        border: solid @icon-border @blue;
     }
-        
-    .dataset-name {
-        height: 16px;
-        width: 440px;
-        padding: 2px;
-        margin-bottom: 5px;
 
-        background: @grey;
+    .collection-icon-label {
+        position: absolute;
+        width: 100%;
+        top: 50px - @icon-border - 7px;
+        text-align: center;
         font-size: 14px;
-        font-family: sans-serif;
     }
 
-    .accordeon {
-    }
-        
-        .info {
-            float: left;    
-            width: 180px;
-            min-height: 285px;
-            margin-right: 5px;
-            
-            background: @grey;
-        }
-        
-        .collections {
-            float: right;
-            width: 260px;
-        }
-            
-        .collection {
-            width: 260px;
-            min-height: 140px;
-            margin-bottom:5px;
-            clear: both;
-        }
-        
-        .collection-label {
-            float: left;
-            width: 85px;
-            min-height: 140px;
-            margin-right: 5px;
-           
-            background: @grey - #333;
-        }
-        
-        .collection-names {
-            float: right;
-            width: 170px;
-            min-height: 140px;
-        }
-        
-        .high {
-            background: @grey;
-        }
-         
-        .low {
-            background: #f1f3f2;
-        }
-
-    .expert_blog {
+    .collection-info {
         float: right;
-        background: @bgcolor - #111;
-        width: 455px;
-        min-height: 310px;
-        color: #555;
+        width: 330px;
+        height: 100px - 5px;
+        padding-top: 5px;
     }
 
-    .low-five {
+    .collection-name {
+        font-weight: bold;
         margin-bottom: 5px;
+    }
+
+#right_column {
+    position: absolute;
+    left: 570px;
+    top: 0px;
+    width: 390px;
+    height: @height;   
+}
+
+    .right-block {
+        margin-bottom: 10px;
+    }
+
+/*    #about {
+        position: absolute;
+        top: 230px;
+    }
+
+    #tutorial {
+        position: absolute;
+        top: 420px;
+    }
+*/
+    ul {
+        margin-left: 20px;
+    }
+    li:hover {
+        color: silver;
+        cursor: pointer;
+    }
+
+    .right {
+        text-align: right;
+    }
+    .right:hover {
+        color: silver;
+        cursor: pointer;        
     }
 
 #status-bar {
@@ -154,6 +155,56 @@
     padding: 5px;
     bottom: 0px;
     margin: auto;
-    background-color: #aaa;
+    background-color: #555;
     color: #fff;
+}
+
+
+
+.perspective-head {
+    width: 100%;
+    height: 20px - 6px;
+    padding: 3px;
+    background-color: @blue;
+    margin-bottom: 10px;
+}
+
+.perspective-desc {
+    color: #fff;
+    margin-left: 5px;
+}
+
+
+.perspective {
+    height: 40px;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+.perspective:hover {
+    background-color: @blue;
+    cursor: pointer;
+}
+
+.perspective-icon {
+    position: relative;
+    height: 40px - ( 2 * @icon-border );
+    width: 160px - ( 2 * @icon-border );
+    margin-right: 10px;
+    float: left;
+    border: solid @icon-border @blue;
+}
+
+.perspective-icon-label {
+    position: absolute;
+    width: 100%;
+    top: 20px - @icon-border - 6px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.perspective-info {
+    float: right;
+    width: 330px;
 }
