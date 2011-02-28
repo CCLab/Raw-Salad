@@ -9,6 +9,7 @@ Technology used
 ---------------
 
 - MongoDB <http://mongodb.org/>
+- PostgreSQL <http://www.postgresql.org/>
 - Django Web Framework <http://djangoproject.com>
 - jQuery <http://jquery.com>
 - ProtoVis <http://vis.stanford.edu/protovis/>
@@ -17,6 +18,7 @@ Technology used
 The main contributors are (in alpha order):
 -------------------------------------------
 
+- Błażej Chwoła - UI architect
 - Denis Kolokol - DB developer
 - Jacek Malinowski - Information and graphic designer
 - Ignacy Morawski - Expert in economy

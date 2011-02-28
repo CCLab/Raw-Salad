@@ -13,8 +13,8 @@
    height="1080"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.0 r9654"
-   sodipodi:docname="reqests.svg">
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="Requests-architecture.svg">
   <defs
      id="defs4">
     <marker
@@ -81,16 +81,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="183.05099"
-     inkscape:cy="507.47532"
+     inkscape:zoom="1"
+     inkscape:cx="249.36394"
+     inkscape:cy="898.35214"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1274"
-     inkscape:window-height="948"
+     inkscape:window-width="1366"
+     inkscape:window-height="697"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1" />
@@ -109,7 +109,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="white background">
+     inkscape:label="white background"
+     style="display:none">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:none"
        id="rect3224"
@@ -125,42 +126,14 @@
      transform="translate(0,27.637817)"
      style="display:inline">
     <rect
-       y="873.36871"
-       x="318.86096"
-       height="14.849243"
-       width="115.4352"
-       id="rect7614"
-       style="fill:#97e3cd;fill-opacity:1;stroke:none" />
-    <rect
-       style="fill:#deab58;fill-opacity:1;stroke:none"
-       id="rect7616"
-       width="117.55653"
-       height="13.474243"
-       x="318.86096"
-       y="849.86871" />
-    <rect
-       style="fill:#97e3cd;fill-opacity:1;stroke:none"
-       id="rect7590"
-       width="115.4352"
-       height="14.849243"
-       x="318.86096"
-       y="811.36871" />
-    <rect
-       y="787.86871"
-       x="318.86096"
-       height="13.474243"
-       width="117.55653"
-       id="rect7592"
-       style="fill:#deab58;fill-opacity:1;stroke:none" />
-    <rect
-       y="619.86871"
+       y="581.86871"
        x="318.86096"
        height="13.474243"
        width="117.55653"
        id="rect7500"
        style="fill:#deab58;fill-opacity:1;stroke:none" />
     <rect
-       y="582.07581"
+       y="544.07581"
        x="318.86096"
        height="13.081476"
        width="115.4352"
@@ -172,42 +145,28 @@
        width="117.55653"
        height="13.474243"
        x="318.86096"
-       y="559.86871" />
+       y="521.86871" />
     <rect
        style="fill:#deab58;fill-opacity:1;stroke:none"
        id="rect7409"
        width="117.55653"
        height="13.474243"
        x="318.86096"
-       y="519.86871" />
+       y="481.86871" />
     <rect
        style="fill:#97e3cd;fill-opacity:1;stroke:none"
        id="rect7452"
        width="115.4352"
        height="13.081476"
        x="318.86096"
-       y="542.07581" />
+       y="504.07581" />
     <rect
        style="fill:#97e3cd;fill-opacity:1;stroke:none"
        id="rect7376"
        width="115.4352"
        height="13.081476"
        x="318.86096"
-       y="488.07581" />
-    <rect
-       y="461.86871"
-       x="318.86096"
-       height="13.474243"
-       width="117.55653"
-       id="rect7360"
-       style="fill:#deab58;fill-opacity:1;stroke:none" />
-    <rect
-       y="434.07581"
-       x="318.86096"
-       height="13.081476"
-       width="115.4352"
-       id="rect7358"
-       style="fill:#97e3cd;fill-opacity:1;stroke:none" />
+       y="434.07581" />
     <rect
        style="fill:#97e3cd;fill-opacity:1;stroke:none"
        id="rect7356"
@@ -258,9 +217,9 @@
        id="rect7344"
        style="fill:#deab58;fill-opacity:1;stroke:none" />
     <rect
-       y="74.46402"
+       y="87.459709"
        x="318.86096"
-       height="27.753942"
+       height="14.758253"
        width="115.4352"
        id="rect7342"
        style="fill:#97e3cd;fill-opacity:1;stroke:none" />
@@ -289,13 +248,6 @@
          id="tspan5972"
          x="61.593414"
          y="5.9845872">Local storage</tspan></text>
-    <rect
-       y="172.67599"
-       x="91.743446"
-       height="7.7908058"
-       width="20.777824"
-       id="rect2991"
-       style="fill:#c4e2ee;fill-opacity:1;stroke:none" />
     <g
        id="g7785"
        transform="translate(0,-28.500001)">
@@ -522,81 +474,6 @@
        width="87.030121"
        id="rect7578"
        style="fill:#ffffff;stroke:#646464;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path5130"
-       d="m 448.05149,87.34391 -142.06111,0"
-       style="fill:none;stroke:#000000;stroke-width:0.90740293px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)" />
-    <text
-       xml:space="preserve"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="376.86713"
-       y="83.552628"
-       id="text5132"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5134"
-         x="376.86713"
-         y="83.552628"
-         style="font-size:10px;text-align:center;text-anchor:middle">data-sets object</tspan></text>
-    <g
-       id="g6055"
-       transform="translate(-18,-83.4386)">
-      <rect
-         y="152.86218"
-         x="241.54146"
-         height="83.912971"
-         width="77.958542"
-         id="rect5136"
-         style="fill:#deab58;fill-opacity:1;stroke:#000000;stroke-width:1.17268085;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.17268083, 4.69072333;stroke-dashoffset:0" />
-      <text
-         xml:space="preserve"
-         style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-         x="247.54465"
-         y="165.32892"
-         id="text5138"
-         sodipodi:linespacing="125%"><tspan
-           id="tspan5142"
-           sodipodi:role="line"
-           x="247.54465"
-           y="165.32892"
-           style="font-size:10px;text-align:start;text-anchor:start">name</tspan><tspan
-           id="tspan5144"
-           sodipodi:role="line"
-           x="247.54465"
-           y="177.82892"
-           style="font-size:10px;text-align:start;text-anchor:start">blurb</tspan><tspan
-           id="tspan5150"
-           sodipodi:role="line"
-           x="247.54465"
-           y="190.32892"
-           style="font-size:10px;text-align:start;text-anchor:start">description</tspan><tspan
-           id="tspan5154"
-           sodipodi:role="line"
-           x="247.54465"
-           y="202.82892"
-           style="font-size:10px;text-align:start;text-anchor:start">perspectives:</tspan><tspan
-           id="tspan5156"
-           sodipodi:role="line"
-           x="247.54465"
-           y="215.32892"
-           style="font-size:10px;text-align:start;text-anchor:start">   name</tspan><tspan
-           id="tspan5158"
-           sodipodi:role="line"
-           x="247.54465"
-           y="227.82892"
-           style="font-size:10px;text-align:start;text-anchor:start">   description</tspan><tspan
-           id="tspan5152"
-           sodipodi:role="line"
-           x="247.54465"
-           y="240.32892"
-           style="font-size:10px;text-align:start;text-anchor:start" /><tspan
-           id="tspan5146"
-           sodipodi:role="line"
-           x="247.54465"
-           y="252.82892"
-           style="font-size:10px;text-align:start;text-anchor:start" /></text>
-    </g>
     <text
        sodipodi:linespacing="125%"
        id="text5162"
@@ -631,25 +508,6 @@
        d="m 448.05149,215.34391 -222.05149,0"
        id="path5197"
        inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 260.49911,153.92358 0,7.5 -158.99911,0 0,9.29029"
-       id="path5393"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
-    <rect
-       y="226.91879"
-       x="208.00014"
-       height="48.759537"
-       width="93.49987"
-       id="rect5964"
-       style="fill:none;stroke:#000000;stroke-width:1.66652644;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.66652637, 6.66610547;stroke-dashoffset:0" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path5951"
-       d="m 101.5,180.57056 0,7.5 158.7153,0 0,36.30832"
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       sodipodi:nodetypes="cccc" />
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -771,64 +629,6 @@
          x="377.14301"
          id="tspan6049"
          sodipodi:role="line">template</tspan></text>
-    <g
-       id="g6099"
-       transform="translate(0,-93.4386)">
-      <rect
-         style="fill:none;stroke:#000000;stroke-width:1.17268085;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.17268083, 4.69072333;stroke-dashoffset:0"
-         id="rect6069"
-         width="77.958542"
-         height="83.912971"
-         x="7.4891181"
-         y="227.81551" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text6071"
-         y="240.28224"
-         x="13.492308"
-         style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-         xml:space="preserve"><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="240.28224"
-           x="13.492308"
-           sodipodi:role="line"
-           id="tspan6073">name</tspan><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="252.78224"
-           x="13.492308"
-           sodipodi:role="line"
-           id="tspan6075">blurb</tspan><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="265.28223"
-           x="13.492308"
-           sodipodi:role="line"
-           id="tspan6077">description</tspan><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="277.78223"
-           x="13.492308"
-           sodipodi:role="line"
-           id="tspan6079">perspectives:</tspan><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="290.28223"
-           x="13.492308"
-           sodipodi:role="line"
-           id="tspan6081">   name</tspan><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="302.78223"
-           x="13.492308"
-           sodipodi:role="line"
-           id="tspan6083">   description</tspan><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="315.28223"
-           x="13.492308"
-           sodipodi:role="line"
-           id="tspan6085" /><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="327.78223"
-           x="13.492308"
-           sodipodi:role="line"
-           id="tspan6087" /></text>
-    </g>
     <rect
        y="377.42358"
        x="129.98186"
@@ -869,57 +669,7 @@
          id="tspan6133"
          x="377.10394"
          y="421.55261"
-         style="font-size:10px;text-align:center;text-anchor:middle">AJAX: basic snapshot</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.90740293px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 448.05149,447.34391 -142.06111,0"
-       id="path6143"
-       inkscape:connector-curvature="0" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text6145"
-       y="443.55261"
-       x="376.86713"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         style="font-size:10px;text-align:center;text-anchor:middle"
-         y="443.55261"
-         x="376.86713"
-         id="tspan6147"
-         sodipodi:role="line">snapshot object</tspan></text>
-    <g
-       transform="translate(-18,286.0614)"
-       id="g6149">
-      <rect
-         style="fill:none;stroke:#000000;stroke-width:1.86858153;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.86858142, 7.47432569;stroke-dashoffset:0"
-         id="rect6151"
-         width="94.186775"
-         height="44.877186"
-         x="225.31323"
-         y="152.86218" />
-      <text
-         sodipodi:linespacing="125%"
-         id="text6153"
-         y="165.32892"
-         x="247.54465"
-         style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-         xml:space="preserve"><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="165.32892"
-           x="247.54465"
-           sodipodi:role="line"
-           id="tspan6169">statistics</tspan><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="177.82892"
-           x="247.54465"
-           sodipodi:role="line"
-           id="tspan6206">basic data</tspan><tspan
-           style="font-size:10px;text-align:start;text-anchor:start"
-           y="190.32892"
-           x="247.54465"
-           sodipodi:role="line"
-           id="tspan6210">switch</tspan></text>
-    </g>
+         style="font-size:10px;text-align:center;text-anchor:middle">AJAX: all columns</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
@@ -933,38 +683,21 @@
          y="225.55261"
          style="font-size:10px;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1">template</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.90723348px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 305.99038,475.34391 142.00805,0"
-       id="path7362"
-       inkscape:connector-curvature="0" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text7364"
-       y="471.55261"
-       x="377.10394"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         style="font-size:10px;text-align:center;text-anchor:middle"
-         y="471.55261"
-         x="377.10394"
-         id="tspan7366"
-         sodipodi:role="line">AJAX: all columns</tspan></text>
-    <path
        inkscape:connector-curvature="0"
        id="path7378"
-       d="m 448.05149,501.34391 -142.06111,0"
+       d="m 448.05149,447.34391 -142.06111,0"
        style="fill:none;stroke:#000000;stroke-width:0.90740293px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)" />
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="376.86713"
-       y="497.55261"
+       y="443.55261"
        id="text7380"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7382"
          x="376.86713"
-         y="497.55261"
+         y="443.55261"
          style="font-size:10px;text-align:center;text-anchor:middle">snapshot all cols</tspan></text>
     <rect
        style="fill:none;stroke:#000000;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.7, 6.8;stroke-dashoffset:0"
@@ -972,64 +705,64 @@
        width="79.471741"
        height="18.251171"
        x="222.02826"
-       y="492.92358" />
+       y="438.92358" />
     <text
        sodipodi:linespacing="125%"
        id="text7388"
-       y="505.39032"
+       y="451.39032"
        x="229.54465"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px;text-align:start;text-anchor:start"
-         y="505.39032"
+         y="451.39032"
          x="229.54465"
          sodipodi:role="line"
          id="tspan7394">all cols data</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7411"
-       y="535.38843"
+       y="497.38843"
        x="219.41975"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px"
-         y="535.38843"
+         y="497.38843"
          x="219.41975"
          id="tspan7413"
          sodipodi:role="line">node click</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path7415"
-       d="m 226.46524,533.34391 221.50349,0"
+       d="m 226.46524,495.34391 221.50349,0"
        style="fill:none;stroke:#000000;stroke-width:1.00133169;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)" />
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="377.01361"
-       y="529.55261"
+       y="491.55261"
        id="text7417"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7419"
          x="377.01361"
-         y="529.55261"
+         y="491.55261"
          style="font-size:10px;text-align:center;text-anchor:middle">AJAX: {aX}</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path7454"
-       d="m 448.05149,555.34391 -142.06111,0"
+       d="m 448.05149,517.34391 -142.06111,0"
        style="fill:none;stroke:#000000;stroke-width:0.90740293px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)" />
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="376.86713"
-       y="551.55261"
+       y="513.55261"
        id="text7456"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7458"
          x="376.86713"
-         y="551.55261"
+         y="513.55261"
          style="font-size:10px;text-align:center;text-anchor:middle">aX object</tspan></text>
     <rect
        style="fill:none;stroke:#000000;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.7, 6.8;stroke-dashoffset:0"
@@ -1037,60 +770,60 @@
        width="94.186775"
        height="31.225407"
        x="207.31323"
-       y="546.92358" />
+       y="508.92358" />
     <text
        sodipodi:linespacing="125%"
        id="text7464"
-       y="559.39032"
+       y="521.39032"
        x="229.54465"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px;text-align:start;text-anchor:start"
-         y="559.39032"
+         y="521.39032"
          x="229.54465"
          sodipodi:role="line"
          id="tspan7466">statistics</tspan><tspan
          style="font-size:10px;text-align:start;text-anchor:start"
-         y="571.89032"
+         y="533.89032"
          x="229.54465"
          sodipodi:role="line"
          id="tspan7470">basic data</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path7472"
-       d="m 305.99038,573.34391 142.00805,0"
+       d="m 305.99038,535.34391 142.00805,0"
        style="fill:none;stroke:#000000;stroke-width:0.90723348px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)" />
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="377.10394"
-       y="569.55261"
+       y="531.55261"
        id="text7474"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7476"
          x="377.10394"
-         y="569.55261"
+         y="531.55261"
          style="font-size:10px;text-align:center;text-anchor:middle">AJAX: all columns</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.90740293px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 448.05149,595.34391 -142.06111,0"
+       d="m 448.05149,557.34391 -142.06111,0"
        id="path7478"
        inkscape:connector-curvature="0" />
     <text
        sodipodi:linespacing="125%"
        id="text7480"
-       y="591.55261"
+       y="553.55261"
        x="376.86713"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px;text-align:center;text-anchor:middle"
-         y="591.55261"
+         y="553.55261"
          x="376.86713"
          id="tspan7482"
          sodipodi:role="line">aX all columns</tspan></text>
     <rect
-       y="586.92358"
+       y="548.92358"
        x="222.02826"
        height="18.251171"
        width="79.471741"
@@ -1100,64 +833,64 @@
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="229.54465"
-       y="599.39032"
+       y="561.39032"
        id="text7486"
        sodipodi:linespacing="125%"><tspan
          id="tspan7488"
          sodipodi:role="line"
          x="229.54465"
-         y="599.39032"
+         y="561.39032"
          style="font-size:10px;text-align:start;text-anchor:start">all cols data</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="219.41975"
-       y="635.38843"
+       y="597.38843"
        id="text7504"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7506"
          x="219.41975"
-         y="635.38843"
+         y="597.38843"
          style="font-size:10px">save snapshot click</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1.00133169;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
-       d="m 226.46524,633.34391 221.50349,0"
+       d="m 226.46524,595.34391 221.50349,0"
        id="path7508"
        inkscape:connector-curvature="0" />
     <text
        sodipodi:linespacing="125%"
        id="text7510"
-       y="629.55261"
+       y="591.55261"
        x="377.01361"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px;text-align:center;text-anchor:middle"
-         y="629.55261"
+         y="591.55261"
          x="377.01361"
          id="tspan7512"
          sodipodi:role="line">AJAX: /spapshot/{...}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7546"
-       y="661.92712"
+       y="632.83569"
        x="219.41975"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px"
-         y="661.92712"
+         y="632.83569"
          x="219.41975"
          id="tspan7548"
          sodipodi:role="line">open snapshot click</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7550"
-       y="644.69684"
+       y="615.15112"
        x="229.54465"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#f4e3c6;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px;text-align:start;text-anchor:start;fill:#f4e3c6;fill-opacity:1"
-         y="644.69684"
+         y="615.15112"
          x="229.54465"
          sodipodi:role="line"
          id="tspan7552">JS work here</tspan></text>
@@ -1165,47 +898,47 @@
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#f4e3c6;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="229.54465"
-       y="671.23553"
+       y="650.59839"
        id="text7556"
        sodipodi:linespacing="125%"><tspan
          id="tspan7558"
          sodipodi:role="line"
          x="229.54465"
-         y="671.23553"
+         y="650.59839"
          style="font-size:10px;text-align:start;text-anchor:start;fill:#f4e3c6;fill-opacity:1">JS work here</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="219.41975"
-       y="689.43506"
+       y="669.2522"
        id="text7560"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7562"
          x="219.41975"
-         y="689.43506"
+         y="669.2522"
          style="font-size:10px">select data click</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7564"
-       y="697.77423"
+       y="686.04565"
        x="229.54465"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#f4e3c6;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px;text-align:start;text-anchor:start;fill:#f4e3c6;fill-opacity:1"
-         y="697.77423"
+         y="686.04565"
          x="229.54465"
          sodipodi:role="line"
          id="tspan7566">JS work here</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7568"
-       y="715.58069"
+       y="704.3064"
        x="219.41975"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px"
-         y="715.58069"
+         y="704.3064"
          x="219.41975"
          id="tspan7570"
          sodipodi:role="line">filter/sort data click</tspan></text>
@@ -1213,213 +946,121 @@
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#f4e3c6;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="229.54465"
-       y="724.31293"
+       y="721.49292"
        id="text7572"
        sodipodi:linespacing="125%"><tspan
          id="tspan7574"
          sodipodi:role="line"
          x="229.54465"
-         y="724.31293"
+         y="721.49292"
          style="font-size:10px;text-align:start;text-anchor:start;fill:#f4e3c6;fill-opacity:1">JS work here</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="219.41975"
-       y="769.05115"
+       y="740.14673"
        id="text7580"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7582"
          x="219.41975"
-         y="769.05115"
+         y="740.14673"
          style="font-size:10px">add column click</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7584"
-       y="777.39032"
+       y="756.94019"
        x="229.54465"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#f4e3c6;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px;text-align:start;text-anchor:start;fill:#f4e3c6;fill-opacity:1"
-         y="777.39032"
+         y="756.94019"
          x="229.54465"
          sodipodi:role="line"
          id="tspan7586">JS work here</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7594"
-       y="803.38843"
+       y="777.26367"
        x="219.41975"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px"
-         y="803.38843"
+         y="777.26367"
          x="219.41975"
          id="tspan7596"
          sodipodi:role="line">download click</tspan><tspan
          style="font-size:10px"
-         y="815.88843"
+         y="789.76367"
          x="219.41975"
          sodipodi:role="line"
          id="tspan7610">open<tspan
    style="fill:#000000;fill-opacity:0"
    id="tspan7612">........</tspan></tspan></text>
-    <path
-       inkscape:connector-curvature="0"
-       id="path7598"
-       d="m 226.46524,801.34391 221.50349,0"
-       style="fill:none;stroke:#000000;stroke-width:1.00133169;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)" />
-    <text
-       xml:space="preserve"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="377.17963"
-       y="797.55261"
-       id="text7600"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan7602"
-         x="377.17963"
-         y="797.55261"
-         style="font-size:10px;text-align:center;text-anchor:middle">/download/{...}</tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.00133169;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
-       d="m 448.05149,811.34391 -221.58625,0"
-       id="path7604"
-       inkscape:connector-curvature="0" />
-    <text
-       xml:space="preserve"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="377.01849"
-       y="821.55261"
-       id="text7606"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan7608"
-         x="377.01849"
-         y="821.55261"
-         style="font-size:10px;text-align:center;text-anchor:middle">{...}.zip</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="219.41975"
-       y="865.38843"
+       y="815.45795"
        id="text7618"
        sodipodi:linespacing="125%"><tspan
          id="tspan7622"
          sodipodi:role="line"
          x="219.41975"
-         y="865.38843"
+         y="815.45795"
          style="font-size:10px">download click</tspan><tspan
          sodipodi:role="line"
          x="219.41975"
-         y="877.88843"
+         y="827.95795"
          style="font-size:10px"
          id="tspan7640">selected<tspan
    style="fill:#000000;fill-opacity:0"
    id="tspan7642">........</tspan></tspan></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.00133169;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
-       d="m 226.46524,863.34391 221.50349,0"
-       id="path7626"
-       inkscape:connector-curvature="0" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text7628"
-       y="859.55261"
-       x="377.17963"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         style="font-size:10px;text-align:center;text-anchor:middle"
-         y="859.55261"
-         x="377.17963"
-         id="tspan7630"
-         sodipodi:role="line">/download/{...}</tspan></text>
-    <path
-       inkscape:connector-curvature="0"
-       id="path7632"
-       d="m 448.05149,873.34391 -221.58625,0"
-       style="fill:none;stroke:#000000;stroke-width:1.00133169;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text7634"
-       y="883.55261"
-       x="377.01849"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         style="font-size:10px;text-align:center;text-anchor:middle"
-         y="883.55261"
-         x="377.01849"
-         id="tspan7636"
-         sodipodi:role="line">{...}.zip</tspan></text>
     <rect
        style="fill:#deab58;fill-opacity:1;stroke:none"
        id="rect7644"
        width="117.55653"
        height="13.474243"
        x="318.86096"
-       y="905.86871" />
+       y="855.86871" />
     <text
        sodipodi:linespacing="125%"
        id="text7646"
-       y="921.38843"
+       y="871.38843"
        x="219.41975"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px"
-         y="921.38843"
+         y="871.38843"
          x="219.41975"
          id="tspan7648"
          sodipodi:role="line">visualize &gt; click</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path7650"
-       d="m 226.46524,919.3439 221.50349,0"
+       d="m 226.46524,869.3439 221.50349,0"
        style="fill:none;stroke:#000000;stroke-width:1.00133169;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)" />
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="377.01361"
-       y="915.55261"
+       y="865.55261"
        id="text7652"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7654"
          x="377.01361"
-         y="915.55261"
+         y="865.55261"
          style="font-size:10px;text-align:center;text-anchor:middle">/vis{...}</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="219.41975"
-       y="742.11938"
-       id="text7656"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan7658"
-         x="219.41975"
-         y="742.11938"
-         style="font-size:10px">filter/sort data click</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text7660"
-       y="750.85162"
-       x="229.54465"
-       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#f4e3c6;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         style="font-size:10px;text-align:start;text-anchor:start;fill:#f4e3c6;fill-opacity:1"
-         y="750.85162"
-         x="229.54465"
-         sodipodi:role="line"
-         id="tspan7662">JS work here</tspan></text>
     <rect
        style="fill:#c4e2ee;fill-opacity:1;stroke:none"
        id="rect7666"
        width="20.777824"
        height="7.7908058"
        x="91.743446"
-       y="638.78729" />
+       y="600.78729" />
     <g
-       transform="translate(0,397.67286)"
+       transform="translate(0,359.67286)"
        id="g7668">
       <g
          id="g7731">
@@ -1452,10 +1093,10 @@
     <path
        inkscape:connector-curvature="0"
        id="path7739"
-       d="m 227.35207,641.92358 -111.13583,0"
+       d="m 227.35207,603.92358 -111.13583,0"
        style="fill:none;stroke:#000000;stroke-width:1.10000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)" />
     <rect
-       y="951.36877"
+       y="901.36877"
        x="318.86096"
        height="13.788583"
        width="115.4352"
@@ -1463,20 +1104,20 @@
        style="fill:#97e3cd;fill-opacity:1;stroke:none" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.00133169;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
-       d="m 448.05149,951.3439 -221.58625,0"
+       d="m 448.05149,901.3439 -221.58625,0"
        id="path7743"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="377.14301"
-       y="961.55261"
+       y="911.55261"
        id="text7745"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7747"
          x="377.14301"
-         y="961.55261"
+         y="911.55261"
          style="font-size:10px;text-align:center;text-anchor:middle">template</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#646464;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0"
@@ -1484,18 +1125,47 @@
        width="87.030121"
        height="83.912971"
        x="129.98186"
-       y="933.42358" />
+       y="883.42358" />
     <text
        sodipodi:linespacing="125%"
        id="text7751"
-       y="979.02032"
+       y="929.02032"
        x="173.15268"
        style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#646464;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          style="font-size:10px;text-align:center;text-anchor:middle;fill:#646464;fill-opacity:1"
-         y="979.02032"
+         y="929.02032"
          x="173.15268"
          sodipodi:role="line"
          id="tspan7755">VISUALIZER</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path3535"
+       d="M 448.05149,87.84391 226,87.84391"
+       style="fill:#97e3cd;fill-opacity:1;stroke:#000000;stroke-width:0.89080244;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#Arrow1Mend)" />
+    <text
+       xml:space="preserve"
+       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#f4e3c6;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="229.54465"
+       y="792.16528"
+       id="text3537"
+       sodipodi:linespacing="125%"><tspan
+         id="tspan3539"
+         sodipodi:role="line"
+         x="229.54465"
+         y="792.16528"
+         style="font-size:10px;text-align:start;text-anchor:start;fill:#f4e3c6;fill-opacity:1">JS work here</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3541"
+       y="833.39032"
+       x="229.54465"
+       style="font-size:16.3817215px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#f4e3c6;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         style="font-size:10px;text-align:start;text-anchor:start;fill:#f4e3c6;fill-opacity:1"
+         y="833.39032"
+         x="229.54465"
+         sodipodi:role="line"
+         id="tspan3543">JS work here</tspan></text>
   </g>
 </svg>
