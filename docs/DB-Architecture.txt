@@ -1,0 +1,205 @@
+DATA STORAGE SETUP
+There are 2 storages used for different purposes:
+
+    1. PostgreSQL - used as a main storage for table-like raw data;
+    2. mongoDB - used as a storage of:
+        - site navigator - the scheme of the web-site navigation
+        - meta-data of the main raw data storage
+        - snapshots
+        - raw data, semi-structured (future use)
+
+POSTGRESQL
+The basic setup of the server:
+    server: PostgreSQL version 8.4
+    database name: rawsql00 
+        where "raw" is a project name ("Raw Salad"), 
+              "sql" tells about the database, 
+              "v00" is a version of the database
+    port: 5432
+    additional software:
+        Python interface: psycopg2
+        
+The database rawsql00 is a single storage for all the raw data of two different 
+models: Budget and Polls statistics. And despite the fact that all the domains,
+tables, cursors and constraints will be named differently due to the semantic 
+independence, every name should be preceded with a namespace: 
+
+    <model namespace>_<object name>
+
+The exceptions are domains that can be used in both models (e.g. long_descr 
+that would work both for the data unit "Granice obwodu" of Local Polls as well
+as "Cel" of Budget as unlimited varchar data type).
+
+    <model namespace>s are: "lp" for "Local Polls", "bt" for "Budget"
+
+Examples of tablenames in the Local Polls scheme: 
+    lp_kandydaci_urzad
+    lp_kandydaci_urzad, 
+    lp_obwody
+    lp_komitety
+    
+Examples of tablenames in the Budget scheme: 
+    bt_cel 
+    bt_main
+    bt_instytucja
+    
+Every table and every column of each table should be coded specially and those 
+codes should be stored in a special collection in the database of mongoDB
+(see description below).
+
+MONGODB - GENERAL SETUP
+All the data in mongoDB are stored in a single database, but separate 
+collections.
+The basic setup:
+    server: mongoDB version 1.6.5 64bit
+    database name: rawsdoc00
+        where "raws" is a project name ("Raw Salad")
+              "doc" refers to db type (document oriented)
+              "v00" is a version
+    port: 28017
+    additional software:
+        Python interface: pymongo 1.9
+
+MONGODB - NAVIGATOR
+This provides web framework with the objects with information about the scheme
+of hi level navigation of the web-site, such as:
+    1st step - selection of the data set (collection): 
+        "Budżet centralny"
+        "Wybory lokalne"
+    2nd step - selection of the perspective (view):
+        "Budżet centralny":
+            "Budżet zadaniowy"
+            "Budżet instytucjonalny"
+            "Budżet księgowy"
+        "Wybory lokalne": 
+            "Wybory wójtów, burmistrzów i prezydentów miast"
+            "Sejmiki wojewódzkie"
+            
+The structure is represented by the collection navigator with the items 
+arranged as follows:
+[
+    {
+    "pos": /position of the appearance 1, 2, ..., n/,
+    "func": /"collection" on the highest level/,
+    "name": /name as it appears on the web-page/,
+    "url": /relative URL as described in the paragraph "URLs"/,
+
+    "descr": /description as it appears on the web-page/,
+
+    "long_descr": /html code of the long description as it 
+                  appears on the web-page/,
+    "view": [ /array of views inside the collection/
+        {
+        "pos": /position of the appearance 1, 2, ..., n/,
+        "func": /"collection" on the highest level/,
+        "name": /name as it appears on the web-page/,
+        "url": /relative URL as described in the paragraph "URLs"/,
+        "descr": /description as it appears on the web-page/,
+        "long_descr": /html code of the long description as 
+                      it appears on the web-page/
+        }, 
+        { ... }
+        ]
+    },
+    { 
+    ... 
+    }
+]
+
+MONGODB - SCHEMES OF THE MAIN RAW DATA STORAGE
+The collections in mongoDB with meta-data should be named as follows:
+
+    meta_<model_name>, where:
+        "meta_" is a string constant;
+        <model_name> is a name of a larger scale data set (e.g. "bt" for budget 
+            and "lp" for Polls)
+
+Thus there should be as many of collections with meta-data as many models
+there's is in the project (in Raw-Salad it is 2).
+Meta-data should include information not only about the structure of the storage
+(such as column names, types, whether a column can be aggregated or not, etc.),
+but also the nature of the data ("table" - for SQL tables, and "document" - for
+non-SQL collections of documents).
+Every such scheme should map the column names of the table in the PostgreSQL
+database to a letter taken from the URL (a to x) as described in the document
+URL-structure, which would pass from client to the server sufficient information
+about the tables/collections and their columns/keys to extract.
+
+The form of the mapping is as follows:
+[
+    { // collection (table) lp_okregi 
+    "col_code": "g" //how collection appears in the URL 
+    "col_name": "lp_okregi",
+    "col_local_name": "okręgi",
+    "col_descr": "Electoral district",
+    "col_descr_full": "Okręgi wyborczy",
+
+    "col_keys": {
+
+       "a": {  //how key (column) appears in the URL
+             "key_name": "teryt",
+             "key_type": "string",
+             "key_aggr": False,
+             "key_label": "Kod terytorialny",
+
+       },
+        "xxxx": { ... },
+
+       "e": {
+             "key_name": "liczba_komitetow",
+             "key_type": "int",
+             "key_aggr": True,
+             "key_label": "Liczba komitetów"
+
+       },
+        { ... }
+    },
+
+    { // collection (table) lp_kandydaci_urzad
+    "col_code": "h" //how collection appears in the URL 
+    "col_name": "lp_kandydaci_urzad",
+    "col_local_name": "kandydaci_urząd",
+    "col_descr": "local governmental polls, Poland 2010",
+    "col_descr_full": "...",
+
+   "col_keys": {
+
+       "a": {
+             "key_name": "gmina",
+             "key_type": "string",
+             "key_aggr": False,
+             "key_label": "Gmina",
+
+       },
+
+       "b": {
+             "key_name": "szczebel",
+             "key_type": "string",
+             "key_aggr": False,
+             "key_label": "Szczebel",
+
+       },
+        "xxxx": { ... },
+
+       "t": {
+             "key_name": "l_glosow",
+             "key_type": "int",
+             "key_aggr": True,
+             "key_label": "Liczba głosów"
+
+       },
+
+       "u": {
+             "key_name": "proc_glosow",
+             "key_type": "float",
+             "key_aggr": True,
+             "key_label": "% głosów"
+
+       }
+    },
+
+    {
+    ... 
+    },
+]
+
