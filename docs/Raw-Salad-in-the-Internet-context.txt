@@ -28,6 +28,6 @@ For more information about Rich Download see: Functionality-documentation.txt
 in /Raw-Salad/docs
 
 OPEN SOURCE
-Raw Salad is an free and open source application published under BSD (3-clause)
+Raw Salad is a free and open source application published under BSD (3-clause)
 license. That means that everyone can join the project, use the software or 
-produce it's own version based on Raw Salad. 
+produce its own version based on Raw Salad. 

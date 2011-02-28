@@ -19,6 +19,9 @@ us to achieve two goals:
       the system more efficient and user experience much more responsive 
       (possibly no data download lags). 
 
+SNAPSHOTS
+// to be written
+
 RICH DOWNLOAD
 Another feature present across the application is rich download functionality. 
 In every step user can download the data of interest. This is split into three 
