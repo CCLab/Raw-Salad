@@ -161,34 +161,34 @@ presented below does not have prefix of the URL
 
     4)  Opens function number 1 (first level of data):
         http://example.pl/browser
-      [ http://example.pl/browser/col/1/view/2/f1 ]
+      [ http://example.pl/browser/col/1/view/2/-a1 ]
 
     5)  Opens task number 2(second level of data):
         http://example.pl/browser
-      [ http://example.pl/browser/col/1/view/2/f1t2 ]
+      [ http://example.pl/browser/col/1/view/2/-a1-b2 ]
 
     6)  Marks years number 1 and 3(only year 2 is not chosen)
         http://example.pl/browser
-      [ http://example.pl/browser/col/1/view/2/f1t2_y1y2_y3 ]
+      [ http://example.pl/browser/col/1/view/2/-a1-b2_y1_y3 ]
 
     7)  Opens task number 3:
         http://example.pl/browser 
-      [ http://example.pl/browser/col/1/view/2/f1t2_y1y2_y3t3 ]
+      [ http://example.pl/browser/col/1/view/2/-a1-b2_y1_y3-b3 ]
 
     8)  Chooses year number 2(years 1 and 3 are not chosen)
         http://example.pl/browser
-      [ http://example.pl/browser/col/1/view/2/f1t2_y1y2_y3t3y1_y2y3 ]
+      [ http://example.pl/browser/col/1/view/2/-a1-b2_y1_y3-b3_y2 ]
 
     9)  Presses ‘make a snapshot’ button.
         It creates snapshot with URL (which is a permalink):
         The user is still at http://example.pl/browser        
-      [ http://example.pl/snapshot/col/1/view/2/f1t2y1y3t3y2 ]
+      [ http://example.pl/snapshot/col/1/view/2/a1b2_y1_y3b3_y2 ]
     
     10) Presses ‘visualize’ button and chooses type of visualization:
         http://example.pl/vis
-      [ http://example.pl/vis/col/1/view/2/f1t2y1y3t3y2&type={type_of_vis} ]
+      [ http://example.pl/vis/col/1/view/2/a1b2_y1_y3b3_y2&type={type_of_vis} ]
 
     11) Presses button responsible for downloading data
         http://example.pl/browser
         Then a request is sent with URL:
-      [ http://example.pl/download/col/1/view/2/f1t2y1y3t3y2 ]
+      [ http://example.pl/download/col/1/view/2/a1b2_y1_y3b3_y2 ]

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/media/css/dataset_info_page.css" />
+{% endblock %}
+
+
+{% block content %}
+<div id="toolbar">
+  <div id="logo">
+    <a href="/">
+      <img src="/media/img/logo_0.png" />
+    </a>
+  </div>
+</div>
+
+<!--  L E F T   C O L U M N  -->
+<div id="left_column">
+
+  <!--  H E A D  -->
+  <div id="head">
+    <img src="/media/img/head_1.png" id="head-img" />
+  </div>
+
+  <!--  S T R U C T U R E S   H E A D  -->         
+  <div class="perspective-head">
+    Struktury <span class="perspective-desc">Podstawowy sposób przeglądania danych w kolekcji</span>
+  </div>
+
+  <!--  S T R U C T U R E S   L I S T  -->         
+  <div class="perspectives-list">
+
+    <!-- Tutaj wstaw djangowe contexty. Wazne jest by wstawic wartosci tak jak -->
+    <!-- są tu tagi - jak jest w komentarzu to efekt powinien byc w komentarzu -->
+    <!-- jak w cudyslowie to w cudzyslowie. Ten dlugi komentarz wywal z kodu! -->
+    {{ LOOP OVER STRUCTURES LIST }}                <!-- DJANGO -->
+
+    <!--  {{ structure_name }}  -->                <!-- DJANGO -->
+    <div class="perspective">
+      <a href="{{ URL_TO_STRUCTURE }}">            <!-- DJANGO -->
+        <div class="perspective-icon">
+          <div class="perspective-icon-label">
+            {{ structure_name }}                   <!-- DJANGO -->
+          </div>               
+        </div>
+        <div class="perspective-info">
+          {{ structure_description }}              <!-- DJANGO -->
+        </div>
+    </div>
+
+    {{ END OF LOOP }}                              <!-- DJANGO -->    
+  </div>
+
+  <!--  S T O R I E S   H E A D  -->         
+  <div class="perspective-head">
+    Pytania <span class="perspective-desc">Konkretne zagadnienia wyciągnięte z danych</span>
+  </div>
+
+  <!--  S T O R I E S   L I S T  -->         
+  <div class="perspectives-list">
+
+    <!-- Tutaj wstaw djangowe contexty. Wazne jest by wstawic wartosci tak jak -->
+    <!-- są tu tagi - jak jest w komentarzu to efekt powinien byc w komentarzu -->
+    <!-- jak w cudyslowie to w cudzyslowie. Ten dlugi komentarz wywal z kodu! -->
+    {{ LOOP OVER QUESTIONS LIST }}                 <!-- DJANGO -->
+
+    <!--  {{ question_name }}  -->                 <!-- DJANGO -->
+    <div class="perspective">
+      <a href="{{ URL_TO_QUESTION }}">             <!-- DJANGO -->
+        <div class="perspective-icon">
+          <div class="perspective-icon-label">
+            {{ question_name }}                    <!-- DJANGO -->
+          </div>               
+        </div>
+        <div class="perspective-info">
+          {{ question_description }}               <!-- DJANGO -->
+        </div>
+    </div>
+
+    {{ END OF LOOP }}                              <!-- DJANGO -->    
+  </div>
+</div>
+
+<!--  R I G H T   C O L U M N   -->
+<div id="right_column">
+  
+  <!--  A B O U T   T H E   D A T A - S E T  -->
+  <div id="blog" class="right-block">
+    <img src="/media/img/about.png" /><br />
+    {{ data-set_full_description }}                <!-- DJANGO -->
+  </div>
+
+</div>
+{% endblock %}
