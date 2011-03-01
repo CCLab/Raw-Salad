@@ -8,16 +8,20 @@
     <meta name="author" content="Centrum Cyfrowe" />
     
     <!-- Less CSS library for Rapid CSS Development-->
-    <link rel="stylesheet/less" href="/media/css/general.less" />
-    <script src="/media/js/less.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/media/css/base.css" />
+    {% block styles %}
+    <!-- template specific style sheets comes here -->
+    {% endblock %}
   </head>
   <body>
     <div id="wraper">
     {% block content %}
     {% endblock %}
     </div>
-    <script src="/media/js/jsAssert.js" type="text/javascript"></script>
-    <script src="/media/js/jquery.js" type="text/javascript"></script>
-    <script src="/media/js/databrowser.js" type="text/javascript"></script>
+    <script src="/media/js/jsAssert.js"></script>
+    <script src="/media/js/jquery.js"></script>
+    {% block javascripts %}
+    <!-- template specific javascript files come here -->
+    {% endblock %}   
   </body>
 </html>
