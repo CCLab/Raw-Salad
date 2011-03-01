@@ -111,11 +111,17 @@ view.
 To move on from the Choose view to the Browse view user has to choose one of
 the perspectives.
 
+
 BROWSE
 The BROWSE part is the view where user is provided with a direct access to data
 in the classic tabular way. The difference is that data in the table will be
-hierarchical and the dable itself will be a navigation tool for the data
-collection. (to be continued)
+hierarchical and the table itself will be a navigation tool for the data-set.
+Each raw in the table is interactive letting the user to nagivate down into the
+subtrees of the data-set. This way the Data On Demand is implemented in the
+Browse part.
+When user finally finds data of interest, s/he can select them (for latter use
+in Understand part), save a snapshot of the current view or download data using
+one of the Rich Download options.
 
 
 UNDERSTAND
