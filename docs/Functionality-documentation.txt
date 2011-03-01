@@ -1,98 +1,125 @@
 ﻿GENERAL WORKFLOW INFORMATION
 
-THREE VIEWS
-The basic work-flow of Raw Salad consists of three successive parts: Choose, 
-Browse and Use. This is the only way of working with the application and no 
-short-cuts omitting one of the parts are provided. Each of these parts is 
-represented by a single web page (the view) and with one more helper pop-up 
-these three web pages closes a collection of possible views in Raw Salad. This 
-will let us graphically and functionally separate these parts and make it clear
-and easy to learn for the users.
+Raw Salad is a web application aimed to enhance the every day work of public
+officers, journalists, NGOs etc. by providing a standard and simple access to
+public data. Design of the software is focused on providing a clear and
+effective workflow that can easily fit into a wider context of the user's actual
+work. In this sense Raw Salad is not meant as a place of work itself, but only
+as one of tools in everyday dutes of the end user. This perspective is
+represented by several machanisms like Rich Download, premalinks or IFrames -
+they all let the user take interesting information out of the application and
+use it efficiently on other platforms, be it spreadsheet, email, blog or a
+social network profile. In this sense Raw Salad helps to find and understand
+public data for users who want to use it everyday work.
+
+Website hosting a Raw Salad application is divided into two semanticaly
+different parts:
+    - portal containing a main page, experts blog, knowladge database,
+      documentation etc.
+    - application itself
+This documentation provides information only about the Raw Salad application.
+
+
+THREE PARTS OF THE WORKFLOW
+The basic workflow of Raw Salad is highly linear and consists of three
+successive parts: Choose, Browse and Understand. This is the only way of working
+with the application and no short-cuts omitting any of the parts are provided.
+However users can download or share interesting information (be it data itself
+or visualizations) on each stage without breaking the workflow. Each of these
+parts (Choose, Browse, Understand) is represented by a single web page
+simplifing interaction by keeping different parts of the workflow separate and
+reducing a number of web page reloads.
+
 
 DATA ON DEMAND
-One of the main ideas incorporated in the application design is the Data On 
-Demand approach. From the user point of view that means that no data are 
-provided to the user unless she or he directly asks for them. This will allow 
-us to achieve two goals: 
+One of the main ideas incorporated in the application design is the Data On
+Demand approach. From the user point of view that means that no data are
+provided to the user unless she or he directly demands it. E.g. if the user is
+interested in health-care part of the budget, military spends are not provided
+until s/he directly demands it. This will allow us to achieve two goals:
     * user is never overloaded with data s/he didn't want to see and work with
-    * the system can make a heavy use of asynchronous database requests making 
-      the system more efficient and user experience much more responsive 
-      (possibly no data download lags). 
+    * the system can make a heavy use of asynchronous database requests making
+      the web site more efficient and user experience much more responsive
+      (possibly no data download lags).
+Data On Demand approach is further on incorporated in Rich Download
+functionality (for details: see below) that lets the user choose exactly what
+part of data (all data in data-set or just some selected positions) s/he wants
+to download.
 
-SNAPSHOTS
-// to be written
+
+SNAPSHOTS/VIEWS
+One of the key functionalities in Raw Salad are snapshots (also called the
+views). It's mainly present in Browse and Understand parts of the application.
+Snapshots let the user save some view for a latter use. That means that when the
+user browse some data-set and finds some interesting parts of it, s/he can save
+this view as a snapshot, browse some more and come back to previous view with
+just one click. As there is no limit in number of snapshots, this become an
+effective way of dealing with data. What's more, snapshots is what the user
+take from Browse to Understand part of the application. All in all it gives
+the user a clear way of interacting with Raw Salad:
+    1. choose some data-set (e.g. National budget)
+    2. choose a perspective (e.g task-oriented budget) (see below: CHOOSE)
+    3. browse for some interesting data
+    4. select data of interest
+    5. save a snapshot
+    6. repeat 3-5 steps as many times you like
+    7. take the snapshots to visualizer to better understand data
+
 
 RICH DOWNLOAD
-Another feature present across the application is rich download functionality. 
-In every step user can download the data of interest. This is split into three 
-basic options:
+Another feature present across the application is Rich Download functionality.
+In every part of the workflow user can download the data of interest. This is
+split into three basic options:
+    * download all data in the data-set
+    * download selected data with its basic context i.e. the data being on
+      the same level of data structure, but not selected by the use
     * download only data of interest i.e. only data selected by user (see below
       in BROWSE section)
-    * download selected data with their basic context i.e. the data being on 
-      the same level of data structure, but not selected by the user
-    * download all data in the data-set
-Rich download will let the user to work off-line in her or his favourite 
-environment (e.g. spreadsheet application, statistic tool-kit) and choose, how 
-much data she or he needs for that. 
-
-TOOLBAR
-Raw Salad uses a special always present toolbar with some additional 
-functionality related to the current view. This functionality ranges from 
-different download options to managing snapshots (see below in BROWSE section).
-Special afford in the toolbar design is present in designing a functional 
-patterns for the user while interacting with toolbar (e.g. constant download 
-section behaviour for different views and download options). 
-
-STATUS BAR
-Toward all the views a special status bar is present at the bottom of the 
-browser. It gives the user a live feedback about all interactive elements in 
-the current view. After rolling mouse over some click-able element, the status 
-bar shows a simple human readable instruction what functionality is attached to
-the element (e.g. "Click here to see more details on National Budget data-set". 
-The status bar is armed with a hide button, which minimalizes it to a single 
-icon in the toolbar. To bring it back user has to click that icon.
+Rich download will let the user work off-line in her or his favorite environment
+ (e.g. spreadsheet application, statistic tool-kit) and choose, how much data
+she or he needs for that.
 
 
-THE VIEWS
+
+PARTS OF THE WORKFLOW
 
 CHOOSE
 In this view user is presented with a list of available data-sets. Each position
-in the list represents a single time independent data-set. That means that Raw 
-Salad works on the structures of the data-sets instead of specific data, 
+in the list represents a single time independent data-set. That means that Raw
+Salad works on the structures of the data-sets instead of specific data,
 allowing to combine different issues of data in the same data-set (e.g. national
-budget data-set contains budgets for years 2010, 2011 and 2012). 
-After choosing one of the data-sets more information and options are provided 
-without leaving a current view (accordion UI pattern). Additional information 
-include: data-set description, lnks to data sources (e.g. Ministry of Finance 
-for National Budget), legal status of data. Additional options include: download
-all button and perspective switch.
+budget data-set contains budgets for years 2010, 2011 and 2012).After choosing
+one of the data-sets more information and options are provided. Additional
+information include: data-set description, links to data sources (e.g. Ministry
+of Finance for National Budget), legal status of data etc. Additional options
+include: download button and perspective switch.
 The perspective switch allows user to choose the way data will be shown for her
-or him in the data browser. The switch consists of two lists of perspectives: 
-    * structures (obligatory for all data-sets): the basic raw data access point 
-      providing basic data structures as a browser. E.g. Nation Budget 
-      structures could be task-oriented budget or institutional budget, Local 
-      Elections structures could be territorial structure or party based 
-      structure. 
-    * questions (or stories about data): some predefined perspectives on a 
-      data-set that could be helpful to answer some questions (or to tell some 
+or him in the data browser. The switch consists of two lists of perspectives:
+    * structures (obligatory for all data-sets): the basic raw data access point
+      providing fundamental data structures as a browser. E.g. Nation Budget
+      structures could be task-oriented budget or institutional budget, Local
+      Elections structures could be territorial structure
+    * questions (or stories about data): some predefined perspectives on a
+      data-set that could be helpful to answer some questions (or to tell some
       story about data). E.g. National Budget questions could be "National to EU
-      money in the budget" Local Elections question could be "Women to men in 
-      local elections". All the questions are prepared by the experts. 
-Both structures and question (stories about data) give access to all the data 
-in the data-set. The main difference between them is that the questions give 
+      money in the budget", Local Elections question could be "Women to men in
+      local elections". All the questions are prepared by the experts.
+Both structures and question (stories about data) give access to all the data
+in the data-set. The main difference between them is that the questions give
 the user easy access to some aggregations of data not included in raw structural
-view by including them in the Basic Raw Data Table (see below in BROWSE 
-section).
-To move on from the Choose view to the Browse view user has to choose one of 
-the perspectives. 
+view.
+To move on from the Choose view to the Browse view user has to choose one of
+the perspectives.
 
 BROWSE
-The BROWSE view is the view where user is provided with a direct access to data.
+The BROWSE part is the view where user is provided with a direct access to data
+in the classic tabular way. The difference is that data in the table will be
+hierarchical and the dable itself will be a navigation tool for the data
+collection. (to be continued)
 
 
-USE
-// to be described
-
-POP-UP
-// to be described
-
+UNDERSTAND
+In this version of Raw Salad Understand part consists only of the visualizer.
+In future though a simple statistical tool will be incorporated. Both tools will
+implement only the basic functionality to let the users better understand data
+of they interest.
