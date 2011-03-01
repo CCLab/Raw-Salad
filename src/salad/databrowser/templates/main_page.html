@@ -35,26 +35,21 @@
   <!--  C O L L E C T I O N S   L I S T  -->         
   <div id="collections-list">
 
-<!-- Tutaj wstaw djangowe contexty. Wazne jest by wstawic wartosci tak jak -->
-<!-- są tu tagi - jak jest w komentarzu to efekt powinien byc w komentarzu -->
-<!-- jak w cudyslowie to w cudzyslowie. Ten dlugi komentarz wywal z kodu! -->
-    {{ LOOP OVER DATA-SETS LIST }}                 <!-- DJANGO -->
-
-    <!--  {{ data-set_name }}  -->                 <!-- DJANGO -->
+	{% for data_set in data %}
+    <!--  {{ dset.name }}  -->
     <div class="collection">
-      <a href="{{ URL_TO_DATA-SET }}">             <!-- DJANGO -->
+      <a href="{{ data_set.url }}">
         <div class="collection-icon">
           <div class="collection-icon-label">
-            {{ DATA-SET_NAME }}                    <!-- DJANGO -->
+			{{ data_set.name }}
           </div>               
         </div>
         <div class="collection-info">
-          {{ DATA-SET_SHORT_INFO }}                <!-- DJANGO -->
+          {{ data_set.descr|safe }}
         </div>
       </a>
     </div>
-
-    {{ END OF LOOP }}                              <!-- DJANGO -->
+	{% endfor %}
   </div>
 </div>
 

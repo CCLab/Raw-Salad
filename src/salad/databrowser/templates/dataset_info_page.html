@@ -30,25 +30,26 @@
   <!--  S T R U C T U R E S   L I S T  -->         
   <div class="perspectives-list">
 
-    <!-- Tutaj wstaw djangowe contexty. Wazne jest by wstawic wartosci tak jak -->
-    <!-- są tu tagi - jak jest w komentarzu to efekt powinien byc w komentarzu -->
-    <!-- jak w cudyslowie to w cudzyslowie. Ten dlugi komentarz wywal z kodu! -->
-    {{ LOOP OVER STRUCTURES LIST }}                <!-- DJANGO -->
+	{% for perspective in data %}
+	
+	  {% if perspective.func == "structure" %}
 
-    <!--  {{ structure_name }}  -->                <!-- DJANGO -->
-    <div class="perspective">
-      <a href="{{ URL_TO_STRUCTURE }}">            <!-- DJANGO -->
-        <div class="perspective-icon">
-          <div class="perspective-icon-label">
-            {{ structure_name }}                   <!-- DJANGO -->
-          </div>               
-        </div>
-        <div class="perspective-info">
-          {{ structure_description }}              <!-- DJANGO -->
-        </div>
-    </div>
+      <!--  {{ perspective.name }}  -->
+      <div class="perspective">
+        <a href="/{{ perspective.url }}">
+          <div class="perspective-icon">
+            <div class="perspective-icon-label">
+              {{ perspective.name }}
+            </div>               
+          </div>
+          <div class="perspective-info">
+            {{ perspective.descr|safe }}
+          </div>
+      </div>
+	
+	  {% endif %}
 
-    {{ END OF LOOP }}                              <!-- DJANGO -->    
+    {% endfor %}
   </div>
 
   <!--  S T O R I E S   H E A D  -->         
@@ -59,25 +60,26 @@
   <!--  S T O R I E S   L I S T  -->         
   <div class="perspectives-list">
 
-    <!-- Tutaj wstaw djangowe contexty. Wazne jest by wstawic wartosci tak jak -->
-    <!-- są tu tagi - jak jest w komentarzu to efekt powinien byc w komentarzu -->
-    <!-- jak w cudyslowie to w cudzyslowie. Ten dlugi komentarz wywal z kodu! -->
-    {{ LOOP OVER QUESTIONS LIST }}                 <!-- DJANGO -->
+	{% for perspective in data %}
+	
+	  {% if perspective.func == "story" %}
 
-    <!--  {{ question_name }}  -->                 <!-- DJANGO -->
-    <div class="perspective">
-      <a href="{{ URL_TO_QUESTION }}">             <!-- DJANGO -->
-        <div class="perspective-icon">
-          <div class="perspective-icon-label">
-            {{ question_name }}                    <!-- DJANGO -->
-          </div>               
-        </div>
-        <div class="perspective-info">
-          {{ question_description }}               <!-- DJANGO -->
-        </div>
-    </div>
+      <!--  {{ perspective.name }}  -->
+      <div class="perspective">
+        <a href="/{{ perspective.url }}">
+          <div class="perspective-icon">
+            <div class="perspective-icon-label">
+              {{ perspective.name }}
+            </div>               
+          </div>
+          <div class="perspective-info">
+            {{ perspective.descr|safe }}
+          </div>
+      </div>
+	  
+	  {% endif %}
 
-    {{ END OF LOOP }}                              <!-- DJANGO -->    
+	{% endfor %}
   </div>
 </div>
 
@@ -87,7 +89,7 @@
   <!--  A B O U T   T H E   D A T A - S E T  -->
   <div id="blog" class="right-block">
     <img src="/media/img/about.png" /><br />
-    {{ data-set_full_description }}                <!-- DJANGO -->
+    {{ long_descr|safe }}
   </div>
 
 </div>
