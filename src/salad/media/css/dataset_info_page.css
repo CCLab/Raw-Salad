@@ -35,7 +35,7 @@
     }
 
     .perspective {
-        height: 40px;
+        min-height: 40px;
         margin-bottom: 10px;
         clear: both;
     }
@@ -47,7 +47,7 @@
 
     .perspective-icon {
         position: relative;
-        height: 34px;
+        min-height: 34px;
         width: 154px;
         margin-right: 10px;
         float: left;
