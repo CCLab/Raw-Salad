@@ -1,0 +1,210 @@
+@bgcolor: #fff;
+@blue: #a9dbfe;
+@green: #6eff96;
+@yellow: #ffdd00;
+@grey: #d2d3d5;
+@icon-border: 3px;
+@height: 600px;
+
+.reset {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/*  C S S   D E C L A R A T I O N S  */
+* {
+    .reset;
+    font-size: 11px;
+    font-family: sans-serif;
+    color: #333
+}
+
+a {
+    text-decoration: none;
+}
+
+#wraper {
+    position: relative;
+    width: 960px;
+    height: @height;
+    margin: auto;
+    margin-top: 10px;
+    background-color: @bgcolor;
+}
+
+
+/*  T O O L B A R  */
+
+#toolbar {
+    background: @bgcolor;
+    position: absolute;
+    left: 0px;
+    width: 100px;
+    height: @height;
+}
+
+/*  L E F T   C O L U M N  */
+
+#left_column {
+    position: absolute;
+    left: 60px;
+    top: 0px;
+    width: 500px;
+    height: @height;
+}
+    #head {
+        width: 500px;
+        margin-bottom: 20px;
+    }
+    
+    #collections-head {
+        margin-bottom: 10px;
+    }
+
+    #collections-list {
+    }
+
+    #collections-list:after {
+        color: @bgcolor;
+        content: ".";
+    }
+    
+    .collection {
+        height: 100px;
+        margin-bottom: 10px;
+        clear: both;
+    }
+
+    .collection:hover {
+        background-color: @blue;
+        cursor: pointer;
+    }
+
+    .collection-icon {
+        position: relative;
+        height: 100px - ( 2 * @icon-border );
+        width: 160px - ( 2 * @icon-border );
+        margin-right: 10px;
+        float: left;
+        border: solid @icon-border @blue;
+    }
+
+    .collection-icon-label {
+        position: absolute;
+        width: 100%;
+        top: 50px - @icon-border - 7px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .collection-info {
+        float: right;
+        width: 330px;
+        height: 100px - 5px;
+        padding-top: 5px;
+    }
+
+    .collection-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+#right_column {
+    position: absolute;
+    left: 570px;
+    top: 0px;
+    width: 390px;
+    height: @height;   
+}
+
+    .right-block {
+        margin-bottom: 10px;
+    }
+
+/*    #about {
+        position: absolute;
+        top: 230px;
+    }
+
+    #tutorial {
+        position: absolute;
+        top: 420px;
+    }
+*/
+    ul {
+        margin-left: 20px;
+    }
+    li:hover {
+        color: silver;
+        cursor: pointer;
+    }
+
+    .right {
+        text-align: right;
+    }
+    .right:hover {
+        color: silver;
+        cursor: pointer;        
+    }
+
+#status-bar {
+    position: fixed;
+    width: 960px;
+    height: 15px;
+    padding: 5px;
+    bottom: 0px;
+    margin: auto;
+    background-color: #555;
+    color: #fff;
+}
+
+
+
+.perspective-head {
+    width: 100%;
+    height: 20px - 6px;
+    padding: 3px;
+    background-color: @blue;
+    margin-bottom: 10px;
+}
+
+.perspective-desc {
+    color: #fff;
+    margin-left: 5px;
+}
+
+
+.perspective {
+    height: 40px;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+.perspective:hover {
+    background-color: @blue;
+    cursor: pointer;
+}
+
+.perspective-icon {
+    position: relative;
+    height: 40px - ( 2 * @icon-border );
+    width: 160px - ( 2 * @icon-border );
+    margin-right: 10px;
+    float: left;
+    border: solid @icon-border @blue;
+}
+
+.perspective-icon-label {
+    position: absolute;
+    width: 100%;
+    top: 20px - @icon-border - 6px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.perspective-info {
+    float: right;
+    width: 330px;
+}
