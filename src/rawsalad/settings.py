@@ -49,7 +49,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'salad.urls'
+ROOT_URLCONF = 'rawsalad.urls'
 
 TEMPLATE_DIRS = (
     os.path.join( ROOT_PATH, 'templates' ),
@@ -61,5 +61,5 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'salad.databrowser',
+    'rawsalad.databrowser',
 )
