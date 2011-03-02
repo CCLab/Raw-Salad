@@ -1,20 +1,25 @@
 * {
-  margin: 0px;
-  padding: 0px;
-  font-size: 11px;
-  font-family: sans-serif;
-  color: #333333;
+    margin: 0px;
+    padding: 0px;
+    font-size: 11px;
+    font-family: sans-serif;
+    color: #333333;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 #wraper {
-  position: relative;
-  width: 960px;
-  height: 600px;
-  margin: auto;
-  margin-top: 10px;
-  background-color: #ffffff;
+    position: relative;
+    width: 960px;
+    height: 600px;
+    margin: auto;
+    margin-top: 10px;
+    background-color: #ffffff;
+}
+
+ul, ol {
+    margin-left: 25px;
+    margin-top: 5px;
 }
