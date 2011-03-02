@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="/media/css/dataset_info_page.css" />
 {% endblock %}
 
+{% block javascripts %}
+<script src="/media/js/data_info_page.js"></script>
+{% endblock %}
 
 {% block content %}
 <div id="toolbar">
@@ -30,9 +33,8 @@
   <!--  S T R U C T U R E S   L I S T  -->         
   <div class="perspectives-list">
 
-	{% for perspective in data %}
-	
-	  {% if perspective.func == "structure" %}
+    {% for perspective in data %}
+      {% if perspective.func == "structure" %}
 
       <!--  {{ perspective.name }}  -->
       <div class="perspective">
@@ -45,10 +47,10 @@
           <div class="perspective-info">
             {{ perspective.descr|safe }}
           </div>
+        </a>
       </div>
-	
-	  {% endif %}
-
+      
+      {% endif %}
     {% endfor %}
   </div>
 
@@ -60,9 +62,8 @@
   <!--  S T O R I E S   L I S T  -->         
   <div class="perspectives-list">
 
-	{% for perspective in data %}
-	
-	  {% if perspective.func == "story" %}
+    {% for perspective in data %}
+      {% if perspective.func == "story" %}
 
       <!--  {{ perspective.name }}  -->
       <div class="perspective">
@@ -75,11 +76,11 @@
           <div class="perspective-info">
             {{ perspective.descr|safe }}
           </div>
+        </a>
       </div>
-	  
-	  {% endif %}
-
-	{% endfor %}
+      
+      {% endif %}
+    {% endfor %}
   </div>
 </div>
 

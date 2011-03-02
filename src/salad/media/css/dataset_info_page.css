@@ -34,8 +34,10 @@
         margin-left: 5px;
     }
 
+    .perspectives-list {
+    }
+
     .perspective {
-        min-height: 40px;
         margin-bottom: 10px;
         clear: both;
     }
@@ -46,21 +48,20 @@
     }
 
     .perspective-icon {
-        position: relative;
-        min-height: 34px;
         width: 154px;
         margin-right: 10px;
         float: left;
-        border: solid 3px #a9dbfe;
+        border: solid #a9dbfe;
+        border-width: 3px;
     }
 
     .perspective-icon-label {
-        position: absolute;
         width: 100%;
-        top: 11px;
         text-align: center;
         font-size: 12px;
         font-weight: bold;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .perspective-info {
