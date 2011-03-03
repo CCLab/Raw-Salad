@@ -9,14 +9,14 @@ import pymongo
 
 def main_page( request ):
     #data is retrieved from db
-    nav_collection= get_connection("rawsdoc00", "site_zz_nav", "localhost", 27017)
+    nav_collection= get_connection("cecyf_rawsdoc00", "site_zz_nav", "guest:guestguest@85.10.210.123/cecyf_rawsdoc00", 27017)
     data = get_main_page_data(nav_collection)
     template = loader.get_template( "main_page.html" )
     context = Context( data )
     return HttpResponse( template.render( context ))
 
 def choose_page( request, col_nr ):
-    nav_collection= get_connection("rawsdoc00", "site_zz_nav", "localhost", 27017)
+    nav_collection= get_connection("cecyf_rawsdoc00", "site_zz_nav", "guest:guestguest@85.10.210.123/cecyf_rawsdoc00", 27017)
     data = get_choose_page_data( col_nr, nav_collection )
     template = loader.get_template( "dataset_info_page.html" )
     context = Context( data )
@@ -64,5 +64,5 @@ def get_choose_page_data( col_nr, collection ):
     return data
 
 def get_connection( dbname, collname, host, port ):
-    db= pymongo.Connection(host, port)[dbname]
+    db= pymongo.Connection("guest:guestguest@85.10.210.123/cecyf_rawsdoc00", port)[dbname]
     return db[collname]
