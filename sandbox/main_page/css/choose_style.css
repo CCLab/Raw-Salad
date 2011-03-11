@@ -56,8 +56,9 @@ a {
     padding: 10px 0px;
 }
 
-    #help-line > img {
-/*        margin-top: 10px;*/
+    #help-line-info:hover {
+        color: #aaa !important;
+        cursor: pointer;
     }
     
     #help-line-info {
@@ -65,8 +66,164 @@ a {
         color: #666;
         font-style: italic;
     }    
+    
+    .help-line-text {
+        font-size: 16px;
+        color: #666;
+        font-style: italic;    
+    }
+    
+    #more-help {
+        height: auto;
+        padding-bottom: 5px;
+        margin-top: 10px;
+    }
 
+#main-content {
+    margin-top: 5px;
+}
 
+#left-column {
+    float: left;
+    
+    width: 620px;
+    padding-right: 10px;
+}
+
+    #collection-header {
+        width: 100%;
+        height: auto;
+        background-color: #dadada;
+        padding-bottom: 5px;
+
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+            
+    }    
+    
+    #collection-name {
+        position: relative;
+        
+        height: auto;
+        color: #fff;
+        background-color: #000;
+        
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+        
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        
+        padding: 15px 0px;
+    }
+
+    #collection-source {
+        position: absolute;
+        right: 8px;
+        top: 5px;
+        
+        font-size: 13px;
+        font-style: italic;
+        font-weight: normal;
+        color: #888;
+    }
+    #collection-source:hover {
+        color: #ccc;
+        cursor: pointer;
+    }
+    
+    #collection-change {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        
+        width: 90px;
+        height: 15px;
+        
+        padding: 3px 0px;
+        
+        background-color: #87cff5;
+        text-align: center;
+        font-style: italic;
+        font-size: 11px;
+        color: white;
+        
+        border-radius: 4px;
+        -moz-border-radius: 4px;        
+    } 
+    #collection-change:hover {
+        cursor: pointer;
+        background-color: #b9e0f5;
+    }
+    
+    #collection-list {
+        position: absolute;
+        right: -4px;
+        top: 20px;
+        width: auto;
+        height: auto;
+        border: 3px dotted #555;
+        border-radius: 8px;
+        -moz-border-radius: 8px;        
+        padding: 10px;
+        padding-top: 35px;
+        font-size: 11px;
+        text-align: left;
+        font-style: italic;        
+    }
+    
+    #collection-list > ul > li {
+        list-style-type: none;
+    }
+    
+    #collection-list > ul > li:hover {
+        cursor: pointer;
+        color: #aaa;
+    }    
+    
+    #collection-desc {
+        padding-top: 8px;
+        padding-bottom: 4px;
+        font-size: 14px;
+        font-style: italic;
+        color: #666;
+        
+        text-align: center;
+    }
+
+    .perspective-count {
+        font-size: 16px;
+        color: #666;
+        font-style: italic;
+        text-align: center;
+    }
+    
+    .perspective {
+        width: 290px;
+        height: 150px;
+        padding: 5px;
+        background-color: #f5f5f5;
+        margin-top: 5px;
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+    }
+    #structures {
+        float: left;
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+    
+    #stories {
+        float: right;
+        margin: right: 5px;
+    }
+
+#right-column {
+    float: right;
+    
+    width: 330px;
+}
 
 
 
