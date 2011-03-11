@@ -1,30 +1,28 @@
 (function () {
 
-    $('#blog-extra').hide();
+    $('#knowladge-base-full').hide();
+    $('#help-full').hide();
+    $('#restore_session').hide();
 
-    $('#collections-list').hover(
-        function () {
-            $('#head-img').attr('src', './img/head_1.png');
-        },
-        function () {
-            $('#head-img').attr('src', './img/head_0.png');
-        }
-    );
-
-    $('#more').click( function () {
-        $(this).css('color', '#fff');
-        $('#blog-extra').slideDown( 500 );
-//        $('#about').toggle();
-//        $('#tutorial').toggle();
+    $('#knowladge-base').click( function () {
+        $(this).hide();
+        $('#knowladge-base-full').show();
     });
- 
-    $('#less').click( function () {
-        $('#blog-extra').slideUp( 500, function () {
-            $('#more').css('color', '#333');
-        });
-//        $('#about').toggle();
-//        $('#tutorial').toggle();
-    });
-      
 
+    $('#help').click( function () {
+        $(this).hide();
+        $('#help-full').show();
+    });
+
+    $('#saved_sessions').mouseover( function () {
+            $('#restore_session').show();            
+    });
+    
+    $('#restore_session').mouseover( function () {
+            $('#restore_session').show();            
+    });
+    
+    $('#restore_session').mouseout( function () {
+            $(this).hide();            
+    });
 })();

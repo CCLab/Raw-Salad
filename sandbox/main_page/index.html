@@ -1,117 +1,108 @@
 <!DOCTYPE html>
  <html>
    <head>
-     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />  
+     <meta charset="UTF-8" />
+     
      <link rel="stylesheet" href="./css/style.css" />
    </head>
    <body>
      <div id="wraper">
-       <div id="toolbar">
-         <div id="logo">
-           <a href="./index.html">
-           <img src="./img/logo_0.png" />
-           </a>
-         </div>
-       </div>
+        
+        <!-- H E A D E R -->
+        <div id="header">
+            <div id="logo" class="left">
+                <img src="./img/logo.png" />                
+            </div>
+            <div id="menu" class="right">
+                <img id="saved_sessions" src="./img/save_session.png" class="right" />                
+                <div class="menu-item right">Dokumentacja/API</div>                                
+                <div class="menu-item right">Baza wiedzy</div>
+                <div class="menu-item right">O portalu</div>
+                <img src="./img/search.png" class="right" />
+            </div>
+            <div id="restore_session">
+                <ul>
+                    <li>21.02.2011, 17:34</li>
+                    <li>23.02.2011, 09:52</li>
+                    <li>23.02.2011, 22:43</li>    
+                </ul>
+                
+            </div>            
+        </div>
+        
+        <!-- C O L L E C T I O N S -->
+        <div id="collections">
+            <div id="collections-header">
+                Dostępne kolekcje
+            </div>
+            
+            <!-- B U D Z E T   C E N T R A L N Y -->
+            <div id="collections-list">
+                <div class="collection active">
+                    <div class="collection-name">
+                        Budżet centralny
+                    </div>
+                    <div class="collection-desc">
+                        To jest kolekcja budżetu centralnego, który stanowi
+                        zaledwie jedną trzecią finansów pulicznych.
+                    </div>
+                </div>
+            
+            <!-- F U N D U S Z E   C E L O W E -->
+                <div class="collection active">
+                    <div class="collection-name">
+                        Fundusze celowe
+                    </div>
+                    <div class="collection-desc">
+                        To jest kolekcja budżetu centralnego, który stanowi
+                        zaledwie jedną trzecią finansów pulicznych.
+                    </div>
+                </div>
 
-       <!--  L E F T   C O L U M N  -->
-       <div id="left_column">
+            <!-- W Y B O R Y   S A M O R Z Ą D O W E -->
+                <div class="collection active">
+                    <div class="collection-name">
+                        Wybory lokalne
+                    </div>
+                    <div class="collection-desc">
+                        To jest kolekcja budżetu centralnego, który stanowi
+                        zaledwie jedną trzecią finansów pulicznych.
+                    </div>
+                </div>
 
-         <!--  H E A D  -->
-         <div id="head">
-           <img src="./img/head_0.png" id="head-img" />
-         </div>
+            <!-- M O R E   S O O N -->
+                <div class="collection dim">
+                    <div class="collection-name dim">
+                        kolejne niebawem
+                    </div>
+                    <div class="collection-desc dim">
+                        Kolekcja danych będzie się powiększała.
+                    </div>
+                </div>
+            </div>
 
-         <!--  C O L L E C T I O N S   H E A D  -->         
-         <div id="collections-head">
-           <img src="./img/collection_head.png" />
-         </div>
-
-         <!--  C O L L E C T I O N S   L I S T  -->         
-         <div id="collections-list">
-           <!--  B U D G E T  -->
-           <div class="collection">
-             <a href="./budget.html">
-             <div class="collection-icon">
-               <div class="collection-icon-label">
-                 Budżet centralny
-               </div>               
-             </div>
-             <div class="collection-info">
-               <p class="collection-name">
-                 Budżet centralny
-               </p>
-               Budżet centralny to kolekcja przedstawiająca budżet panstwa z kilku kluczowych perspektyw
-             </div>
-             </a>
-           </div>
-
-           <!--  W Y B O R Y  -->
-           <div class="collection">
-             <div class="collection-icon">
-               <div class="collection-icon-label">
-                 Wybory lokalne
-               </div>               
-             </div>
-             <div class="collection-info">
-               <p class="collection-name">
-                 Wybory loaklne
-               </p>
-               Kolekcja danych z wyborów samorządowych - do rad gmin, powiatów i sejmików oraz wójtów i prezydentów miast.
-             </div>
-           </div>
-
-           <!--  M E T E O  -->
-           <div class="collection">
-             <div class="collection-icon">
-               <div class="collection-icon-label">
-                 Meteorologia
-               </div>               
-             </div>
-             <div class="collection-info">
-               <p class="collection-name">
-                 Meteorologia
-               </p>
-               Dane meteorologiczne z ostanich pietnastu lat. 
-             </div>
-           </div>
-         </div>
-       </div>
-
-       <!--  R I G H T   C O L U M N   -->
-       <div id="right_column">
-         
-         <!--  B L O G  -->
-         <div id="blog" class="right-block">
-           <img src="./img/blog.png" />
-           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-           <p id="more" class="right">Czytaj więcej...</p>
-           <div id="blog-extra">
-             <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
-             <p id="less" class="right">Schowaj</p>
-           </div>             
-         </div>
-
-         <!--  A B O U T  -->
-         <div id="about" class="right-block">
-           <img src="./img/about.png" />
-           <ul>
-             <li>O portalu</li>
-             <li>Baza wiedzy</li>
-             <li>Dokumentacja</li>
-             <li>Blog ekspertów</li>
-             <li>API / dokumentacja</li>
-           </ul>
-           <br />
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-         </div>
-
-         <!--  T U T O R I A L  -->
-         <div id="tutorial" class="right-block">
-           <img src="./img/tutorial.png" />
-         </div>
-       </div>
-<!--       <div id="status-bar"></div>  -->
+        </div>
+        
+        <!-- H E L P   D E S K -->
+        <div id="help-desk">
+            <div id="help-desk-header">
+                Jak z nich skorzystać?
+            </div>
+            <div id="knowladge-base" class="left dim">
+                <img src="./img/baza_wiedzy.png" />
+            </div>
+            <div id="knowladge-base-full" class="left show">
+                <img src="./img/baza_wiedzy-full.png" alt="baza" title="baza" />
+            </div>            
+            <div id="help" class="right dim">
+                <img src="./img/help.png" />
+            </div>
+            <div id="help-full" class="left show">
+                <img src="./img/help-full.png" alt="baza" title="baza" />
+            </div>            
+            
+        </div>
+       
      </div>
      <script src="./js/jquery.js" type="text/javascript"></script>
      <script src="./js/main_page.js" type="text/javascript"></script>   
