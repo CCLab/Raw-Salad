@@ -91,6 +91,8 @@ a {
 }
 
     #collection-header {
+        position: relative;
+    
         width: 100%;
         height: auto;
         background-color: #dadada;
@@ -191,7 +193,14 @@ a {
         
         text-align: center;
     }
-
+    
+    #download-all {
+        position: absolute;
+        
+        right: 5px;
+        bottom: 5px;
+    }
+    
     .perspective-count {
         font-size: 16px;
         color: #666;
@@ -201,7 +210,7 @@ a {
     
     .perspective {
         width: 290px;
-        height: 150px;
+        height: auto;
         padding: 5px;
         background-color: #f5f5f5;
         margin-top: 5px;
@@ -218,7 +227,101 @@ a {
         float: right;
         margin: right: 5px;
     }
+    
+    .perspective-title {
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: #000;
+    }
+    
+    .perspective-title-desc {
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+        padding-top: 3px;
+        padding-bottom: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        border-bottom: 1px #aaa solid;    
+    }
+    
+    .angle {
+        position: relative;
+        margin-top: 10px;
+    }
+    
+    .angle-radio {
+        position: absolute;
+        left: 3px;
+        top: 2px;
+        width: 10px;
+        height: 10px;        
+        border: 1px #888 solid;
+        
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+    }
+    .angle-radio:hover {
+        background-color: #ccc;
+        cursor: pointer;
+    }
+    
+    .unselected {
+        background-color: #fff;
+    }
+        
+    .selected {
+        background-color: #33b8e1;
+        border: 1px #f8f8f8 solid !important;        
+    }
+    
+    .selected:hover {
+        background-color: #33b8e1 !important;
+    }
+    
+    .angle-name {
+        color: #33b8e1;
+        font-size: 14px;
+        font-weight: bold;
+        
+        padding-left: 20px;
+    }
 
+    .angle-desc {
+        color: #888;
+        font-size: 11px;
+        padding: 0px 20px;
+    }            
+    
+    div.angle > div.download {
+        width: 15px;
+        padding: 5px 20px;
+    }
+    
+    .download-img:hover {
+        cursor: pointer;        
+    }
+
+    #dataset-about {
+        margin-top: 90px;
+        border-left: 1px #888 solid;
+        padding: 5px 10px;;
+    }
+    
+    #dataset-about-header {
+        font-weight: bold;
+        font-size: 16px;
+        color: #888;
+        padding-bottom: 10px;
+        border-bottom: 1px #888 solid;        
+    }
+
+    #dataset-about-desc {
+        color: #555;
+        padding-top: 10px;
+    }
+    
 #right-column {
     float: right;
     

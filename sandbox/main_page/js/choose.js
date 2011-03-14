@@ -9,6 +9,25 @@
         }
     );
 
+    $('.download-img').hover( 
+        function () {
+            $(this).attr('src', './img/download_over.png');
+        },
+        function () {
+            $(this).attr('src', './img/download.png');        
+        }
+    );
+
+    $('.angle-radio').click( function () {
+        $('.angle-radio')
+            .addClass('unselected')
+            .removeClass('selected');
+                    
+        $(this)
+            .addClass('selected')
+            .removeClass('unselected');
+    });
+
     $('#collection-list').hide();
     
     $('#collection-change').click( function () {
