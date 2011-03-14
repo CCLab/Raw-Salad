@@ -1,0 +1,219 @@
+.reset {
+  margin: 0px;
+  padding: 0px;
+}
+
+/*  C S S   D E C L A R A T I O N S  */
+* {
+  margin: 0px;
+  padding: 0px;
+  font-size: 11px;
+  font-family: sans-serif;
+  color: #333333;
+}
+
+a {
+  text-decoration: none;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+#wraper {
+  position: relative;
+  width: 960px;
+  margin: auto;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+#header {
+    position: relative;
+    background: #fff;
+    min-height: 40px;
+    
+    margin-bottom: 10px;
+}
+    #menu > img {
+        margin-top: 5px;
+        margin-left: 15px;
+    }
+    #menu > img:hover {
+        cursor: pointer;    
+    }    
+    .menu-item {
+        color: #aaa;
+        font-size: 12px;
+        padding-top: 12px;
+        text-align: center;
+        font-weight: bold;
+        margin-left: 15px;
+    }
+    .menu-item:hover {
+        color: #555;
+        cursor: pointer;
+    }
+
+    #restore_session {
+        position: absolute;
+        right: -4px;
+        top: 0px;
+        width: auto;
+        height: auto;
+        border: 3px dotted #555;
+        border-radius: 8px;
+        -moz-border-radius: 8px;        
+        padding: 10px;
+        padding-top: 30px;
+        font-size: 11px;
+    }
+    
+    #restore_session > ul > li {
+        list-style-type: none;
+    }
+    
+    #restore_session > ul > li:hover {
+        cursor: pointer;
+        color: #aaa;
+    }
+
+#collections {
+    clear: both;
+    height: 126px;
+    
+    background: #f5f5f5;
+    padding-top: 5px;
+    margin-bottom: 10px;
+    
+    border-radius: 8px;
+    -moz-border-radius: 8px;    
+}
+
+    #collections-header {
+        text-align: center;
+        font-size: 17px;
+        color: #666;
+        
+        margin: 5px;
+    }
+
+    .collection {
+        width: 230px;
+        height: 85px;
+        
+        background-color: #aaddf8;
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+                
+        float: left;
+        margin: 5px;
+    }    
+    .active:hover {
+        background-color: #fff !important;
+        cursor: pointer;
+    }
+    
+    .collection-name {
+        width: 200px;
+        height: 24px;
+        
+        padding: 8px 15px;
+        
+        background-color: #000;
+        color: #aaddf8;
+        font-size: 20px;
+        font-style: italic;
+        
+        border-radius: 8px;
+        -moz-border-radius: 8px;        
+    }
+    
+    .collection-desc {
+        color: #888;
+        font-size: 8px;
+        padding: 8px 15px;
+    }
+    
+    .dim {
+        background: #cacaca;
+        color: #fff;
+    }
+    
+    
+#help-desk {
+    width: 960px;
+}
+
+    #help-desk-header {
+        text-align: center;
+        font-size: 17px;
+        color: #666;
+        
+        margin: 5px;        
+        margin-bottom: 10px;
+    }
+    
+    #help-desk > .dim {
+        border: 3px dotted #aaa;
+        border-radius: 8px;
+        -moz-border-radius: 8px; 
+        background-color: #fff;
+    }
+    
+    #help-desk > .show {
+        border: 3px solid #aaa;
+        border-radius: 8px;
+        -moz-border-radius: 8px; 
+        background-color: #fff;
+    }
+    
+    #knowladge-base {
+        width: 289px;
+        height: 190px;
+        margin-right: 10px;
+    }
+
+    #knowladge-base:hover {
+        cursor: pointer;
+        border-color: #ddd;        
+    }        
+    
+    #knowladge-base > img {
+        margin-top: 60px;
+        margin-left: 100px;    
+    }
+
+    #knowladge-base-full {
+        width: 279px;
+        height: auto;
+        margin-right: 10px;
+        padding: 5px;
+    }
+
+    
+    #help {
+        width: 649px;
+        height: 190px;
+    }
+    
+    #help:hover {
+        cursor: pointer;
+        border-color: #ddd;
+    }        
+        
+    #help > img {
+        margin-top: 67px;
+        margin-left: 250px;    
+    }
+    
+    #help-full {
+        width: 619px;
+        height: auto;
+        margin-right: 10px;
+        padding: 5px;
+    }

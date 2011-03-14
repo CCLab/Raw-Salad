@@ -1,89 +1,88 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<link rel="stylesheet" href="/media/css/main_page.css" />
+<link rel="stylesheet" href="/media/css/style.css" />
 {% endblock %}
 
 
 {% block javascripts %}
-<script src="/media/js/main_page.js"></script>
+<script src="/media/js/main_page.js" type="text/javascript"></script> 
 {% endblock %}
 
-
 {% block content %}
-<div id="toolbar">
-  <div id="logo">
-    <a href="/">
-      <img src="/media/img/logo_0.png" />
-    </a>
-  </div>
+<!-- H E A D E R -->
+<div id="header">
+	<div id="logo" class="left">
+		<img src="/media/img/logo.png" />                
+	</div>
+	<div id="menu" class="right">
+		<img id="saved_sessions" src="/media/img/save_session.png" class="right" />                
+		<div class="menu-item right">Dokumentacja/API</div>                                
+		<div class="menu-item right">Baza wiedzy</div>
+		<div class="menu-item right">O portalu</div>
+		<img src="/media/img/search.png" class="right" />
+	</div>
+	<div id="restore_session">
+		<ul>
+			<li>21.02.2011, 17:34</li>
+			<li>23.02.2011, 09:52</li>
+			<li>23.02.2011, 22:43</li>    
+		</ul>
+	</div>            
 </div>
 
-<!--  L E F T   C O L U M N  -->
-<div id="left_column">
+<!-- C O L L E C T I O N S -->
+<div id="collections">
+	<div id="collections-header">
+		Dostępne kolekcje
+	</div>
+	
+	<div id="collections-list">
+		{% for data_set in data %}
+		<!--  {{ data_set.name }}  -->
+		<a href="{{ data_set.url }}">
+		<div class="collection active">
+			<div class="collection-name">
+				{{ data_set.name }}
+			</div>
+			<div class="collection-desc">
+				{{ data_set.descr|safe }}
+			</div>
+		</div>
+		</a>
+		{% endfor %}
 
-  <!--  H E A D  -->
-  <div id="head">
-    <img src="/media/img/head_0.png" id="head-img" />
-  </div>
+		<!-- M O R E   S O O N -->
+		<div class="collection dim">
+			<div class="collection-name dim">
+				kolejne niebawem
+			</div>
+			<div class="collection-desc dim">
+				Kolekcja danych będzie się powiększała.
+			</div>
+		</div>
+	
+	</div>
 
-  <!--  C O L L E C T I O N S   H E A D  -->         
-  <div id="collections-head">
-    <img src="/media/img/collection_head.png" />
-  </div>
-
-  <!--  C O L L E C T I O N S   L I S T  -->         
-  <div id="collections-list">
-
-	{% for data_set in data %}
-    <!--  {{ dset.name }}  -->
-    <div class="collection">
-      <a href="{{ data_set.url }}">
-        <div class="collection-icon">
-          <div class="collection-icon-label">
-			{{ data_set.name }}
-          </div>               
-        </div>
-        <div class="collection-info">
-          {{ data_set.descr|safe }}
-        </div>
-      </a>
-    </div>
-	{% endfor %}
-  </div>
 </div>
 
-<!--  R I G H T   C O L U M N   -->
-<div id="right_column">
-  
-  <!--  B L O G  -->
-  <div id="blog" class="right-block">
-    <img src="/media/img/blog.png" />
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-    <p id="more" class="right">Czytaj więcej...</p>
-    <div id="blog-extra">
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
-      <p id="less" class="right">Schowaj</p>
-    </div>             
-  </div>
-
-  <!--  A B O U T  -->
-  <div id="about" class="right-block">
-    <img src="/media/img/about.png" />
-    <ul>
-      <li>O portalu</li>
-      <li>Baza wiedzy</li>
-      <li>Dokumentacja</li>
-      <li>Blog ekspertów</li>
-      <li>API / dokumentacja</li>
-    </ul>
-    <br />
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-  </div>
-
-  <!--  T U T O R I A L  -->
-  <div id="tutorial" class="right-block">
-    <img src="/media/img/tutorial.png" />
-  </div>
+<!-- H E L P   D E S K -->
+<div id="help-desk">
+	<div id="help-desk-header">
+		Jak z nich skorzystać?
+	</div>
+	<div id="knowladge-base" class="left dim">
+		<img src="/media/img/baza_wiedzy.png" />
+	</div>
+	<div id="knowladge-base-full" class="left show">
+		<img src="/media/img/baza_wiedzy-full.png" alt="baza" title="baza" />
+	</div>            
+	<div id="help" class="right dim">
+		<img src="/media/img/help.png" />
+	</div>
+	<div id="help-full" class="left show">
+		<img src="/media/img/help-full.png" alt="baza" title="baza" />
+	</div>            
+	
 </div>
 {% endblock %}

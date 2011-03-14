@@ -9,16 +9,26 @@ import pymongo
 
 def main_page( request ):
     #data is retrieved from db
+    """
     nav_collection= get_connection("cecyf_rawsdoc00", "site_zz_nav", "guest:guestguest@85.10.210.123/cecyf_rawsdoc00", 27017)
     data = get_main_page_data(nav_collection)
+    template = loader.get_template( "main_page.html" )
+    context = Context( data )
+    """
+    data = get_main_page_data_nodb()
     template = loader.get_template( "main_page.html" )
     context = Context( data )
     return HttpResponse( template.render( context ))
 
 def choose_page( request, col_nr ):
+    """
     nav_collection= get_connection("cecyf_rawsdoc00", "site_zz_nav", "guest:guestguest@85.10.210.123/cecyf_rawsdoc00", 27017)
     data = get_choose_page_data( col_nr, nav_collection )
-    template = loader.get_template( "dataset_info_page.html" )
+    template = loader.get_template( "choose_page.html" )
+    context = Context( data )
+    """
+    data = get_choose_page_data_nodb()
+    template = loader.get_template( "choose_page.html" )
     context = Context( data )
     return HttpResponse( template.render( context ))
 
@@ -43,7 +53,6 @@ def get_main_page_data(collection):
     data = { "data": data_list }
     return data
 
-# Warning: hell
 def get_choose_page_data( col_nr, collection ):
     print 'col_nr', col_nr
 
@@ -66,3 +75,32 @@ def get_choose_page_data( col_nr, collection ):
 def get_connection( dbname, collname, host, port ):
     db= pymongo.Connection("guest:guestguest@85.10.210.123/cecyf_rawsdoc00", port)[dbname]
     return db[collname]
+
+def get_main_page_data_nodb():
+    # to delete when data is in db
+    budget_data = { "pos": 1, "name": "Budżet centralny", "descr": "To jest kolekcja budżetu centralnego, który stanowi\
+                   zaledwie jedną trzecią finansów pulicznych.", "url": "/choose/col/1/" }
+    fun_data = { "pos": 2, "name": "Fundusze celowe", "descr": "To jest kolekcja budżetu centralnego, który stanowi\
+                zaledwie jedną trzecią finansów pulicznych.", "url": "/choose/fundusze_celowe/col/2/" }
+    wl_data = { "pos": 3, "name": "Wybory lokalne", "descr": "To jest kolekcja budżetu centralnego, który stanowi\
+               zaledwie jedną trzecią finansów pulicznych.", "url": "/choose/wybory_lokalne/col/3/" }
+    data_list = [budget_data, fun_data, wl_data]
+    data = { "data": data_list }
+    return data
+
+def get_choose_page_data_nodb():
+    # to delete when data is in db
+    task_budget = { "pos": 1, "name": "Budżet zadaniowy", "descr": "Budżet zadaniowy dzieli państwo na dwadzieścia dwie funkcje."}
+    ks_budget = { "pos": 2, "name": "Budżet księgowy", "descr": "Budżet księgowy dzieli państwo na dwadzieścia dwie funkcje."}
+    inst_budget = { "pos": 3, "name": "Budżet instytucjonalny", "descr": "Budżet instytucjonalny dzieli państwo na dwadzieścia dwie funkcje."}
+    structures = [ task_budget, ks_budget, inst_budget ]
+    wyn = { "pos": 1, "name": "Wynagrodzenia", "descr": "Przegląd środków budżetowych przeznaczonych na wynagrodzenia."}
+    sr = { "pos": 1, "name": "Środki ruchome", "descr": "Przegląd środków ruchomych i stałych w budżecie państwa."}
+    stories = [ wyn, sr ]
+    other_collections = [ { "pos": 1, "name": "Fundusze celowe" },
+                          { "pos": 2, "name": "Wybory samorządowe" },
+                          { "pos": 3, "name": "Meterologia" } ]
+    full_descr = "Budżet państwa jest najwyższej rangi planem finansowym polityki państwa oraz narzędziem polityki społecznej, uwzględniającym planowane dochody i wydatki państwa na następny rok budżetowy. Jako dochody uwzględnia się m.in.: wpływy z podatków pośrednich i bezpośrednich, dochody niepodatkowe (np. cła), dochody z prywatyzacji oraz dochody zagraniczne. Mianem wydatków określa się m.in. koszty dotacji, obsługi długu publicznego, obsługi strefy budżetowej, rozliczeń z bankami, subwencji dla gmin oraz rezerw ogólnych. Termin „budżet” pochodzi z łacińskiego bulga, oznaczającego skórzany mieszek przeznaczony do zbierania dochodów. Słowo to przyjęło się następnie w wielu językach (ang. budget, starofr. bougette, fr. la budget]. Dla historycznego rozwoju instytucji budżetu znaczenie miało kilka zdarzeń, które rozstrzygnęły o jej współczesnym kształcie, wśród których - poza oddzieleniem majątku publicznego od majątku królewskiego - wymienić należy rozwijanie stosunków towarowo-pieniężnych, parlamentaryzmu, funkcji socjalnych i gospodarczych państwa, rozwój międzynarodowych stosunków gospodarczych i finansowych oraz procesy integracyjne zachodzące we współczesnym świecie."
+    data = { "name": "Budżet centralny", "full_descr": full_descr, "other_collections": other_collections,
+             "all_pers": 5, "sys_pers": 3, "zag_pers": 2, "structures": structures, "stories": stories }
+    return data
