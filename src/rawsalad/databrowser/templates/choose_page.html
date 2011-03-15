@@ -14,7 +14,7 @@
 <div id="header">
   <div id="logo" class="left">
 	<img src="/media/img/choose/logo.png" />
-	<img id="navigation-img" src="/media/img/choose/navigation_01.png" />
+	<img id="navigation-img" src="/media/img/choose/navigation_01.png" onclick = "alert('Przechodzisz do tabeli z danymi');" title = "Zobacz dane" />
 	<img src="/media/img/choose/navigation_02_03.png" />
   </div>
 </div>
@@ -34,13 +34,13 @@
 		<div id="collection-header">
 			<div id="collection-name">
 				{{ name }}
-				<div id="collection-source">
+				<div id="collection-source" onclick = "alert('Pojawia się strona ze źródłem danych');" title = "Zobacz źródło danych">
 					źródło
 				</div>                    
-				<div id="collection-change">
+				<div id="collection-change" title = "Zmień kolekcję danych">
 					zmień
 				</div>
-				<div id="collection-list">
+				<div id="collection-list" onclick = "alert('Zmieniasz kolekcję danych');">
 					<ul>
 					{% for collection in other_collections %}
 						<li>{{ collection.name }}</li>
@@ -52,7 +52,7 @@
 				Dostępnych jest {{ all_pers }}  perspektyw
 			</div>
 			<div id="download-all" class="download">
-				<img class="download-img" src="/media/img/download.png" alt="download all" title="Download all" />
+				<img class="download-img" src="/media/img/download.png" alt="download all" title="Pobierz wszystkie dane" onclick = "alert('Pobierasz wszystkie dane');"/>
 			</div>
 		</div>
 		<div id="perspectives-mustache">
@@ -87,7 +87,7 @@
 								{{ structure.descr }}
 							</div>
 							<div class="download">
-								<img class="download-img" src="/media/img/download.png" title="Pobierz budżet zadaniowy" />
+								<img class="download-img" src="/media/img/download.png" title="Pobierz {{ structure.name }}" onclick = "alert('Pobierasz {{ structure.name }}');"/>
 							</div>                            
 						</div>
 					{% endfor %}
@@ -115,7 +115,7 @@
 								{{ story.descr }}
 							</div>
 							<div class="download">
-								<img class="download-img" src="/media/img/download.png" title="Pobierz budżet zadaniowy" />
+								<img class="download-img" src="/media/img/download.png" title="Pobierz {{ story.name }}" onclick = "alert('Pobierasz {{ story.name }}');" />
 							</div>                            
 						</div>
 					{% endfor %}                        
