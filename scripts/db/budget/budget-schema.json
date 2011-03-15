@@ -1,0 +1,23 @@
+{
+  "alias": {
+      "0":"numer",
+      "1":"funkcja_zadanie",
+      "2":"podzadanie",
+      "3":"dysponent",
+      "4":"czesc",
+      "5":"cel",
+      "6":"miernik_nazwa",
+      "7":"miernik_wartosc_bazowa",
+      "8": "miernik_wartosc_rok_obec",
+      "9": "ogolem",
+      "10": "budzet_panstwa",
+      "11": "budzet_srodkow_europejskich"
+  },
+    "type": {
+      "numer": "string",
+      "czesc": "string",
+      "miernik_wartosc_bazowa": "string",
+      "miernik_wartosc_rok_obec": "string",
+      "teryt": "string"
+  }
+}
