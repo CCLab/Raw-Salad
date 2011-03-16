@@ -37,7 +37,7 @@ def fill_p_dysp(db, collname, colltmp):
         #we already have 'idef' for all dysponents of zadanie - just look for it in the previously inserted data
         p_d_idef= cll.find_one({'node':1, 'level':'c', 'czesc':czesc_p_d, 'parent':curr_zd_idef, 'name':name_p_d}, {'idef':1, '_id':0}) # collecting the numbers of "zadanie"
         fpd['idef']= p_d_idef['idef']
-        fpd['type']= 'Podzadanie - dysponent'
+        fpd['type']= 'Dysponent'
         fpd['name']= name_p_d
         fpd['parent']= row['numer'] # idef of "podzadanie"
         fpd['node']= 2 # "dysponent" has a direction
@@ -46,10 +46,10 @@ def fill_p_dysp(db, collname, colltmp):
         fpd['cel']= row['cel']
         fpd['miernik_nazwa']= row['miernik_nazwa']
         fpd['miernik_wartosc_bazowa']= row['miernik_wartosc_bazowa']
-        fpd['miernik_wartosc_y2011']= row['miernik_wartosc_rok_obec']
-        fpd['y2011_total']= row['ogolem'] # this is the last object
-        fpd['y2011_state']= row['budzet_panstwa']
-        fpd['y2011_eu']= row['budzet_srodkow_europejskich']
+        fpd['miernik_wartosc_rb']= row['miernik_wartosc_rok_obec']
+        fpd['v_total']= row['ogolem'] # this is the last object
+        fpd['v_nation']= row['budzet_panstwa']
+        fpd['v_eu']= row['budzet_srodkow_europejskich']
         
         out.append(fpd)
 
@@ -71,9 +71,9 @@ def fill_podzadanie(db, clltmp):
         fpz['name']= name_tmp.strip()
         fpz['node']= 2 # "podzadanie" has a direction
         fpz['level']= 'c'
-        fpz['y2011_total']= row_p['ogolem'] # this is the last object
-        fpz['y2011_state']= row_p['budzet_panstwa']
-        fpz['y2011_eu']= row_p['budzet_srodkow_europejskich']
+        fpz['v_total']= row_p['ogolem'] # this is the last object
+        fpz['v_nation']= row_p['budzet_panstwa']
+        fpz['v_eu']= row_p['budzet_srodkow_europejskich']
         out.append(fpz)
 
     return out
@@ -113,16 +113,16 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['name']= row_z_m['miernik_nazwa']
                     full_cl_m_num= cl_curr + '.' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
-                    ffm['type']= 'Zadanie - miernik'
+                    ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
                     ffm['node']= 1 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
-                    ffm['miernik_wartosc_y2011']= row_z_m['miernik_wartosc_rok_obec']
-                    ffm['y2011_total']= None # no values on the level of "cel"
-                    ffm['y2011_state']= None
-                    ffm['y2011_eu']= None
+                    ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
+                    ffm['v_total']= None # no values on the level of "cel"
+                    ffm['v_nation']= None
+                    ffm['v_eu']= None
                     out.append(ffm)
                     check_id.append(row_z_m['_id'])
 
@@ -136,16 +136,16 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['name']= row_z_m['miernik_nazwa']
                     full_cl_m_num= cl_curr + '.' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
-                    ffm['type']= 'Zadanie - miernik'
+                    ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
                     ffm['node']= 1 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
-                    ffm['miernik_wartosc_y2011']= row_z_m['miernik_wartosc_rok_obec']
-                    ffm['y2011_total']= None # no values on the level of "cel"
-                    ffm['y2011_state']= None
-                    ffm['y2011_eu']= None
+                    ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
+                    ffm['v_total']= None # no values on the level of "cel"
+                    ffm['v_nation']= None
+                    ffm['v_eu']= None
                     out.append(ffm)
                     check_id.append(row_z_m['_id'])
 
@@ -159,26 +159,18 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['name']= row_z_m['miernik_nazwa']
                     full_cl_m_num= cl_curr + '.' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
-                    ffm['type']= 'Zadanie - miernik'
+                    ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
                     ffm['node']= 1 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
-                    ffm['miernik_wartosc_y2011']= row_z_m['miernik_wartosc_rok_obec']
-                    ffm['y2011_total']= None # no values on the level of "cel"
-                    ffm['y2011_state']= None
-                    ffm['y2011_eu']= None
+                    ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
+                    ffm['v_total']= None # no values on the level of "cel"
+                    ffm['v_nation']= None
+                    ffm['v_eu']= None
                     out.append(ffm)
                     check_id.append(row_z_m['_id'])
-
-
-        # BOOKMARK
-        # 3 levels processing here:
-        # 1) 'test_z_d'=True && 'test_z_c'=True && 'test_z_m'=True
-        # 2) 'test_z_d'=False && 'test_z_c'=True && 'test_z_m'=True (use zd_curr & ds_czesc_curr to identify 'miernik')
-        # 3) 'test_z_d'=False && 'test_z_c'=False && 'test_z_m'=True (use zd_curr & ds_czesc_curr to identify 'miernik')
-
     return out
 
 
@@ -203,14 +195,14 @@ def fill_z_d_cel(db, cllname, clltmp):
             cl_d_num += 1
             full_cl_d_num= ds_curr + '.' + str(cl_d_num)
             ffc['idef']= full_cl_d_num
-            ffc['type']= 'Zadanie - cel'
+            ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
             ffc['node']= 1 # "cel" follows the direction of "dysponent"
             ffc['level']= 'd'
             ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
-            ffc['y2011_total']= None # no values on the level of "cel"
-            ffc['y2011_state']= None
-            ffc['y2011_eu']= None
+            ffc['v_total']= None # no values on the level of "cel"
+            ffc['v_nation']= None
+            ffc['v_eu']= None
 
             out.append(ffc)
 
@@ -222,14 +214,14 @@ def fill_z_d_cel(db, cllname, clltmp):
             cl_d_num += 1
             full_cl_d_num= ds_curr + '.' + str(cl_d_num)
             ffc['idef']= full_cl_d_num
-            ffc['type']= 'Zadanie - cel'
+            ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
             ffc['node']= 1 # "cel" follows the direction of "dysponent"
             ffc['level']= 'd'
             ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
-            ffc['y2011_total']= None # no values on the level of "cel"
-            ffc['y2011_state']= None
-            ffc['y2011_eu']= None
+            ffc['v_total']= None # no values on the level of "cel"
+            ffc['v_nation']= None
+            ffc['v_eu']= None
 
             out.append(ffc)
 
@@ -249,15 +241,15 @@ def fill_z_dysponent(db, colltmp, objlst):
             zd_d_num += 1
             full_zd_d_num= row_z_d['numer'] + '.dt' + str(zd_d_num) # invent something smarter here (maybe 'a'-'z', 'aa'-'az', 'ba'-...?)
             fzd['idef']= full_zd_d_num
-            fzd['type']= 'Zadanie - dysponent'
+            fzd['type']= 'Dysponent'
             fzd['name']= row_z_d['dysponent']
             fzd['parent']= row_z_d['numer'] # idef of "zadanie"
             fzd['node']= 1 # "dysponent" has a direction
             fzd['level']= 'c'
             fzd['czesc']= row_z_d['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
-            fzd['y2011_total']= row_z_d['ogolem'] # this is the last object
-            fzd['y2011_state']= row_z_d['budzet_panstwa']
-            fzd['y2011_eu']= row_z_d['budzet_srodkow_europejskich']
+            fzd['v_total']= row_z_d['ogolem'] # this is the last object
+            fzd['v_nation']= row_z_d['budzet_panstwa']
+            fzd['v_eu']= row_z_d['budzet_srodkow_europejskich']
 
             out.append(fzd)
 
@@ -279,9 +271,9 @@ def fill_zadanie(db, colltmp, objlst):
         ffz['parent']= zd_type_name[0].strip() # idef of "zadanie"
         ffz['node']= None # "zadanie" is not a root, but it still doesn't have a 'direction'
         ffz['level']= 'b' # 2nd level in the hierarchy
-        ffz['y2011_total']= None # no info about money on that level, in case of necessity can be summarized via map/reduce in mongo
-        ffz['y2011_state']= None
-        ffz['y2011_eu']= None
+        ffz['v_total']= None # no info about money on that level, in case of necessity can be summarized via map/reduce in mongo
+        ffz['v_nation']= None
+        ffz['v_eu']= None
 
         out.append(ffz)
 
@@ -309,9 +301,9 @@ def fill_funkcja(db, colltmp):
         frr['parent']= None # "funkcja" is the root
         frr['node']= None # "funkcja" doesn't have a 'direction'
         frr['level']= 'a' # the highest level in the hierarchy
-        frr['y2011_total']= frr.pop('ogolem') # change "ogolem" to "total" of the current year
-        frr['y2011_state']= frr.pop('budzet_panstwa') # the same for state budget
-        frr['y2011_eu']= frr.pop('budzet_srodkow_europejskich') # the same for EU part in the budget
+        frr['v_total']= frr.pop('ogolem') # change "ogolem" to "total" of the current year
+        frr['v_nation']= frr.pop('budzet_panstwa') # the same for state budget
+        frr['v_eu']= frr.pop('budzet_srodkow_europejskich') # the same for EU part in the budget
         
         out.append(frr)
 
@@ -494,7 +486,6 @@ if __name__ == "__main__":
     mongo_connect= pymongo.Connection("localhost", 27017)
     work_db= mongo_connect[dbname]
     coll_tmp= collectname + 'temp'
-    coll_work= collectname + 'work'
 
     # insert the object parsed from csv to the temporary collection, get the num of records
     mongo_connect.start_request()
@@ -503,26 +494,23 @@ if __name__ == "__main__":
     mongo_connect.end_request()
     # create final dict
     mongo_connect.start_request()
-    obj_rep= fill_rep(work_db, coll_tmp, coll_work, clean_db)
-    #recs_ins= db_insert(obj_rep, work_db, collectname, clean_db)
+    obj_rep= fill_rep(work_db, coll_tmp, collectname, clean_db)
     mongo_connect.end_request()
 
     print 'temporary collection processed - dropping '+ dbname +'.'+ coll_tmp
     work_db[coll_tmp].drop()
 
-    print 'work collection processed - dropping '+ dbname +'.'+ coll_work
-    rows= [] # but first save the result into the list
-    for obj in obj_rep:
-        rows.append(obj)
-    work_db[coll_work].drop()
-
-    # DELETE AFTER FINISH - saving into file, just to check
+    # saving into json file
     if opts.json_filename is not None:
         try:
             json_write= open(opts.json_filename, 'w')
         except IOError as e:
             print 'Unable to open file:\n %s\n' % e
             print '\n %s\n Non fatal error - continuing processing'
+
+        rows= [] # first save the result into the list
+        for obj in obj_rep:
+            rows.append(obj)
 
         try:
             print >>json_write, json.dumps(rows, indent=4)
@@ -533,21 +521,14 @@ if __name__ == "__main__":
             json_write.close()
             print "File saved: " + opts.json_filename
 
-    # and finally fill the db
-
     #meta info
-    cll_num= 63 # whatever this means...
     meta_info= schema['meta']
     meta_name= meta_info['name']
     meta_perspective= meta_info['perspective']
-    data_set= dict(zip(('idef', 'name', 'perspective'), (cll_num, meta_name, meta_perspective)))
+    meta_collnum= meta_info['idef']
+    meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
+    meta_collection['columns']= schema['columns']
 
-    #columns
-    columns= []
-    # modify csv_parse() - create schema for columns' schema iterating through columns and their types
-
-    #collecting it all to one bulk of data
-    print 'inserting into the final collection '+ dbname +'.'+ collectname
-    bulk= dict(zip(('data-set', 'columns', 'rows'), (data_set, columns, rows)))
-    total_recs= db_insert(bulk, work_db, collectname, clean_db)
+    schema_coll= 'data_zz_schema'
+    print 'updating schema collection:', db_insert(meta_collection, work_db, schema_coll, False), 'records inserted into', schema_coll
     print 'Done'
