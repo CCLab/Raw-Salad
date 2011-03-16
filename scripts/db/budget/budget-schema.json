@@ -17,7 +17,11 @@
       "numer": "string",
       "czesc": "string",
       "miernik_wartosc_bazowa": "string",
-      "miernik_wartosc_rok_obec": "string",
+      "miernik_wartosc_y2011": "string",
       "teryt": "string"
+  },
+    "meta": {
+      "name": "Budżet",
+      "perspective": "Budżet zadaniowy"
   }
 }
