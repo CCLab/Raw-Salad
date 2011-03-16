@@ -6,22 +6,40 @@
         $( class_name ).find('.type').click( function () {
             var cell = $(this);
             var parent_id = cell.parent().attr('id');
-    
-            cell.toggleClass( 'closed' );
-            cell.toggleClass( 'open' );
+
             if( $('.' + parent_id).length === 0 ) {
                 add_new_data( parent_id );
             }
             else {
-                // it's stupid ---> shouldn't it be recursive
-                $('.' + parent_id ).each( function () {
-                    var tr = $(this);
-                    var children = $( '.' + tr.attr('id'));
-                    
-                    children.toggle();
-                    tr.toggle();
-                });
+                //  I T ' S   B U G G Y ! ! ! ! ! !
+                //  It will be reimplemented with snapshot-codes
+                //  It's just a prototype
+                var toggle_subtree = function ( id, state ) {
+                    var node = $('.' + id );
+
+                    if( node.length > 0 ) {
+                        
+                        node.each( function () {
+                            var node = $(this);
+                            var id = node.attr('id');
+                            var display = node.css( 'display');
+
+                            toggle_subtree( id, state );
+
+                            if( state === false ) {
+                                node.css( 'display', 'table-row' );
+                            }
+                            else {
+                                node.css( 'display', 'none' );                            
+                            }
+                        });
+                    }
+                };
+                
+                toggle_subtree( parent_id, cell.hasClass( 'open' ) );
             }
+            cell.toggleClass( 'closed' );
+            cell.toggleClass( 'open' );            
         });
     };
 
