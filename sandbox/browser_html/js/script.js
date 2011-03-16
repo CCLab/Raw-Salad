@@ -13,8 +13,14 @@
                 add_new_data( parent_id );
             }
             else {
-                // broken ---> it should be recursive
-                $('.' + parent_id ).toggle();
+                // it's stupid ---> shouldn't it be recursive
+                $('.' + parent_id ).each( function () {
+                    var tr = $(this);
+                    var children = $( '.' + tr.attr('id'));
+                    
+                    children.toggle();
+                    tr.toggle();
+                });
             }
         });
     };
@@ -72,6 +78,7 @@
     }
     create_table();
     
+    
     // this function uses globals, but it will be reimplemented
     // for ajax db connection!!
     var add_new_data = function ( parent_id ) {
@@ -99,7 +106,7 @@
             for( j = 0; j < schema.length; j += 1 ) {
                 col = schema[j];
                 html.push( '<td class="' );
-                if( col['key'] === 'type' ) {
+                if( col['key'] === 'type' && item['leaf'] == false ) {
                     html.push( 'closed ' );
                 }
                 html.push( col['key'], '" ' );     
@@ -114,7 +121,10 @@
             html.push( '</tr>' );                
         }
         parent.after( $( html.join('') ));
-        arm_cells( '.' + item['level'] + '-node');                                        
+
+        if( item['leaf'] === false ) {
+            arm_cells( '.' + item['level'] + '-node');                                        
+        }
     };
 
   

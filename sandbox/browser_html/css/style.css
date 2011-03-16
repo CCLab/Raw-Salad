@@ -45,6 +45,7 @@ table {
         padding-top: 2px;
         border: 1px solid #aaa;
         cursor: default;
+        color: #000 !important;
     }
     
     tr {
@@ -64,11 +65,15 @@ table {
     background: url('../img/niebieski jasny 20px.png') !important;
 }
 
-.type:hover {
+.open:hover {
     cursor: pointer;
 }
 
-.type {
+.closed:hover {
+    cursor: pointer;
+}
+
+a-node > .type {
     width: 150px;
 }
 
