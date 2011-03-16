@@ -13,15 +13,83 @@
       "10": "budzet_panstwa",
       "11": "budzet_srodkow_europejskich"
   },
-    "type": {
+  "type": {
       "numer": "string",
       "czesc": "string",
       "miernik_wartosc_bazowa": "string",
       "miernik_wartosc_y2011": "string",
       "teryt": "string"
   },
-    "meta": {
+  "meta": {
       "name": "Budżet",
-      "perspective": "Budżet zadaniowy"
-  }
+      "perspective": "Budżet zadaniowy",
+      "idef": 63
+  },
+  "columns": [
+    {
+      "key": "numer",
+      "label": "Numer",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "name",
+      "label": "Nazwa",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "czesc",
+      "label": "Część",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "cel",
+      "label": "Cel",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_nazwa",
+      "label": "Miernik",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_bazowa",
+      "label": "Wartość bazowa",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_rb",
+      "label": "Wartość br.",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "v_total",
+      "label": "OGÓŁEM",
+      "processable": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_nation",
+      "label": "Budżet Państwa",
+      "processable": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_eu",
+      "label": "Budżet Środków Europejskich",
+      "processable": true,
+      "type": "number",
+      "checkable": true
+    }
+  ]
 }
