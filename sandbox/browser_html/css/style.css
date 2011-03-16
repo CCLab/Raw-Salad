@@ -1,0 +1,178 @@
+body {
+    background-color: #444444;
+}
+
+#wraper {
+    width: 960px;
+    margin: 0px auto;
+
+    background-color: #666;
+
+    color: #555;
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+#table-container {
+    width: 900px;
+    margin: 0px auto;
+    padding-bottom: 25px;
+}
+
+table {
+    clear: both;
+
+    width: 900px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    border-collapse: collapse;
+    border: 1px solid #555;
+}
+
+    th {
+        color: #fff;
+        background-color: #000;
+        vertical-align: top; 
+        height: 17px;;    
+        text-align: center !important;
+        text-shadow: 0px 1px 0px rgba( 0, 0, 0, 0.8 );
+        padding-top: 3px;;
+    }
+    
+    td {
+        padding: 0px 10px;
+        padding-top: 2px;
+        border: 1px solid #aaa;
+        cursor: default;
+    }
+    
+    tr {
+        vertical-align: top; 
+        height: 18px;;    
+    }
+    
+    
+/*   F U N C T I O N   */
+.a-node {
+    background: url('../img/niebieski ciemny 20px.png') !important;
+    font-weight: bold;
+    color: #000;
+}
+
+.a-node:hover {
+    background: url('../img/niebieski jasny 20px.png') !important;
+}
+
+.type:hover {
+    cursor: pointer;
+}
+
+.type {
+    width: 150px;
+}
+
+.checkbox {
+    width: 8px;
+    height: 8px;
+    float: right;
+    margin-left: 10px;
+    margin-right: 5px;    
+    margin-top: 3px;
+    background-color: #fff;
+}
+
+.checkbox:hover {
+    background-color: #888;
+    cursor: pointer;
+}
+
+.b-node {
+    background: url('../img/oliwkowy ciemny 20px.png') !important;
+}
+
+.b-node:hover {
+    background: url('../img/oliwkowy jasny 20px.png') !important;
+}
+
+.b-node > .type {
+    padding-left: 20px;
+}
+
+.c-node {
+    background: url('../img/piaskowy ciemny 20px.png') !important;
+}
+
+.c-node:hover {
+    background: url('../img/piaskowy jasny 20px.png') !important;
+}
+
+.c-node > .type {
+    padding-left: 40px;
+}
+
+.checkable {
+    text-align: right;
+}
+
+.closed:before {
+    content: url(../img/arrow_left_grey.png);
+    margin-left: 2px;    
+    margin-right: 5px;
+}
+
+.open:before {
+    content: url(../img/arrow_down_grey.png);
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+
+/*  T O O L B A R  */
+
+#table-toolbar {
+    position: relative;
+    float: left;
+
+    width: 900px;
+    margin-top: 0px;
+
+    background-color: #444;
+}
+
+#table-toolbar > div {
+    color: #fff; 
+    padding: 3px 5px;
+    text-align: center;
+}
+
+#table-toolbar > .right {
+    background-color: white;
+    min-width: 15px;
+    color: black;
+    border: solid 1px #555;
+}
+
+#table-toolbar > .right:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.hi-lighted {
+/*    background-color: white !important;*/
+/*    color: #fff;*/
+/*    font-weight: bold;*/
+}
+
+
+td.2010, td.2011 {
+    text-align: right;
+}
