@@ -1,0 +1,110 @@
+* {
+    height: auto;
+}
+
+body {
+    background-color: #444444;
+}
+
+#wraper {
+    width: 960px;
+    height: auto;
+    margin: 0px auto;
+
+    background-color: #666;
+
+    color: #000;
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.data {
+    clear: both;
+}
+
+.data > div {
+    float: left;
+}
+
+.cell {
+    height: 12px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;    
+}
+
+#thead > .data > * {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+}
+
+#thead > .data > .type {
+    width: 150px;
+}
+#thead > div {
+    text-align: center;
+}
+
+.a-node.even > .data > * {
+    background: url('../img/niebieski ciemny 18px.png') repeat-x;
+}
+.a-node.odd > .data > * {
+    background: url('../img/niebieski jasny 18px.png') repeat-x;
+}
+
+.b-node.even > .data > * {
+    background: url('../img/zielony ciemny 18px.png') repeat-x;
+}
+.b-node.even.selected > .data > * {
+    background: #A4CEBC !important;
+}
+.b-node.odd > .data > * {
+    background: url('../img/zielony jasny 18px.png') repeat-x;
+}
+
+.c-node > .data > * {
+    background: url('../img/oliwkowy ciemny 18px.png') repeat-x;
+}
+
+.c-node.odd > .data > * {
+    background: url('../img/oliwkowy jasny 18px.png') repeat-x;
+}
+
+#tbody .type:hover {
+    cursor: pointer;
+    color: #888;
+}
+
+#tbody .data > div {
+    border-left: 1px #fff solid;
+}
+
+#tbody .data > .type {
+    border: 0px #fff solid !important;
+}
+
+.a-node > .data > .type {
+    width: 147px;
+}
+.b-node > .data > .type {
+    width: 132px;
+    padding-left: 20px;
+}
+.c-node > .data > .type {
+    width: 112px;
+    padding-left: 40px;    
+}
+.name {
+    width: 590px;
+}
+.value {
+    width: 90px;
+}
+
+.a-node, .b-node, .c-node {
+    clear: both;
+}
+
+

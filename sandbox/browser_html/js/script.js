@@ -14,32 +14,49 @@
                 //  I T ' S   B U G G Y ! ! ! ! ! !
                 //  It will be reimplemented with snapshot-codes
                 //  It's just a prototype
-                var toggle_subtree = function ( id, state ) {
+                var toggle_subtree = function ( id ) {
                     var node = $('.' + id );
-
+                    
                     if( node.length > 0 ) {
                         
                         node.each( function () {
                             var node = $(this);
                             var id = node.attr('id');
                             var display = node.css( 'display');
-
-                            toggle_subtree( id, state );
-
-                            if( state === false ) {
-                                node.css( 'display', 'table-row' );
+                            var state = node.hasClass('open');
+                            
+                            if( state === true ) {
+                                toggle_subtree( id );
                             }
-                            else {
-                                node.css( 'display', 'none' );                            
-                            }
+                            node.toggle();
+                            
+//                            if( state === false ) {
+//                                node.css( 'display', 'table-row' );
+//                            }
+//                            else {
+//                                node.css( 'display', 'none' );                            
+//                            }
                         });
                     }
                 };
                 
-                toggle_subtree( parent_id, cell.hasClass( 'open' ) );
+                toggle_subtree( parent_id );
             }
             cell.toggleClass( 'closed' );
-            cell.toggleClass( 'open' );            
+            cell.toggleClass( 'open' );  
+            
+            var raw = cell.parent().find('td');
+            if( cell.hasClass( 'open' ) ) {
+                raw.each( function () {
+                    $(this).addClass( 'selected' ); 
+                });          
+            }
+            else {
+                raw.each( function () {
+                    $(this).removeClass( 'selected' ); 
+                });                          
+            }
+            
         });
     };
 
@@ -95,6 +112,9 @@
         arm_cells('.a-node');        
     }
     create_table();
+    $('.checkbox').click( function () {
+        $(this).css('background-color', '#555');
+    });    
     
     
     // this function uses globals, but it will be reimplemented
@@ -143,7 +163,12 @@
         if( item['leaf'] === false ) {
             arm_cells( '.' + item['level'] + '-node');                                        
         }
+        
+        $('.checkbox').click( function () {
+            $(this).css('background-color', '#555');
+        });         
     };
+
 
   
 })();
