@@ -1,5 +1,37 @@
 #!/usr/bin/python
 
+"""
+import budzet zadaniowy to mongo db
+flat structure (each data unit is a separate doc in the collection)
+parenting is archieved through 'parent' key
+
+the structure:
+there are 2 'branches of the tree' of a budget structure, outlined in the
+collection as 'node':0 and 'node':1. first two levels are common, so
+they are labelled as 'node':null
+
+nodes are:
+0: [funkcja] 1-N [zadanie] 1-N [dysponent] 1-N [cel] 1-N [miernik]
+1: [funkcja] 1-N [zadanie] 1-N [podzadanie] 1-N [dysponent, cel, miernik]
+
+the lowest level in both nodes for which values (money) are given is 'dysponent'
+thus, if a= (total of funkcja[N].zadanie[M].dysponent[K].value where node= 0)
+and b= (total of funkcja[N].zadanie[M].podzadanie[NM]dysponent[K].value where node= 1)
+than a == b is True (a should be equal to b)
+
+
+the script also inserts a doc into the schema collection
+(warning! if there's already a schema for the budget collection, it should first
+be removed manually from the collection data_zz_schema)
+
+the files needed to upload the budget:
+- this file (budget.py)
+- data file CSV, produced from XLS (for example, budget.csv)
+- schema file JSON (for example, budget-schema.json)
+
+type python budget.py -h for instructions
+"""
+
 import optparse
 import csv
 import pymongo
@@ -18,7 +50,7 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 
 
 # FILL THE DATA
-# node 2
+# node 1
 
 def fill_p_dysp(db, collname, colltmp):
     out= []
@@ -35,12 +67,12 @@ def fill_p_dysp(db, collname, colltmp):
         curr_zd_idef_lst= row['numer'].split('.')
         curr_zd_idef= curr_zd_idef_lst[0] + '.' + curr_zd_idef_lst[1] # have to search in the scope of current 'zadanie'
         #we already have 'idef' for all dysponents of zadanie - just look for it in the previously inserted data
-        p_d_idef= cll.find_one({'node':1, 'level':'c', 'czesc':czesc_p_d, 'parent':curr_zd_idef, 'name':name_p_d}, {'idef':1, '_id':0}) # collecting the numbers of "zadanie"
+        p_d_idef= cll.find_one({'node':0, 'level':'c', 'czesc':czesc_p_d, 'parent':curr_zd_idef, 'name':name_p_d}, {'idef':1, '_id':0}) # collecting the numbers of "zadanie"
         fpd['idef']= p_d_idef['idef']
         fpd['type']= 'Dysponent'
         fpd['name']= name_p_d
         fpd['parent']= row['numer'] # idef of "podzadanie"
-        fpd['node']= 2 # "dysponent" has a direction
+        fpd['node']= 1 # "dysponent" has a direction
         fpd['level']= 'd'
         fpd['czesc']= czesc_p_d
         fpd['cel']= row['cel']
@@ -69,7 +101,7 @@ def fill_podzadanie(db, clltmp):
         fpz['parent']= fpz_zd_idef[0]+'.'+fpz_zd_idef[1] # idef of "zadanie"
         name_tmp= row_p['podzadanie'].lstrip(row_p['numer'])
         fpz['name']= name_tmp.strip()
-        fpz['node']= 2 # "podzadanie" has a direction
+        fpz['node']= 1 # "podzadanie" has a direction
         fpz['level']= 'c'
         fpz['v_total']= row_p['ogolem'] # this is the last object
         fpz['v_nation']= row_p['budzet_panstwa']
@@ -79,7 +111,7 @@ def fill_podzadanie(db, clltmp):
     return out
     
 
-# node 1
+# node 0
 def fill_z_d_c_mier(db, cllname, clltmp):
     out= []
     check_id= []
@@ -87,7 +119,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
     collmain= db[cllname]
     collmn= db[cllname]
     colltmp= db[clltmp]
-    collcrr_dysp= collmain.find({'level':'d', 'node':1}, {'idef':1, 'parent':1, 'czesc':1, 'name':1, '_id':0}) # first getting the list of "cel" and their parents
+    collcrr_dysp= collmain.find({'level':'d', 'node':0}, {'idef':1, 'parent':1, 'czesc':1, 'name':1, '_id':0}) # first getting the list of "cel" and their parents
     for row in collcrr_dysp:
         ds_curr= row['parent'] # current "dysponent" of "zadanie"
         collcrr_tmp= collmn.find_one({'idef':ds_curr}, {'name':1, '_id':0})
@@ -115,7 +147,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['idef']= full_cl_m_num
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
-                    ffm['node']= 1 # "miernik" follows the direction of "zadanie-dysponent-cel"
+                    ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
@@ -138,7 +170,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['idef']= full_cl_m_num
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
-                    ffm['node']= 1 # "miernik" follows the direction of "zadanie-dysponent-cel"
+                    ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
@@ -161,7 +193,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['idef']= full_cl_m_num
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
-                    ffm['node']= 1 # "miernik" follows the direction of "zadanie-dysponent-cel"
+                    ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
@@ -179,7 +211,7 @@ def fill_z_d_cel(db, cllname, clltmp):
 
     collmain= db[cllname]
     colltmp= db[clltmp]
-    collcrr_dysp= collmain.find({"level":"c", "node":1}, {"idef":1, "parent":1, "czesc":1, "name":1, "_id":0}) # first getting the list of "dysponent" and their parents
+    collcrr_dysp= collmain.find({"level":"c", "node":0}, {"idef":1, "parent":1, "czesc":1, "name":1, "_id":0}) # first getting the list of "dysponent" and their parents
     for row in collcrr_dysp:
         zd_curr= row['parent'] # current "zadanie"
         ds_curr= row['idef'] # current "dysponent"
@@ -197,7 +229,7 @@ def fill_z_d_cel(db, cllname, clltmp):
             ffc['idef']= full_cl_d_num
             ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
-            ffc['node']= 1 # "cel" follows the direction of "dysponent"
+            ffc['node']= 0 # "cel" follows the direction of "dysponent"
             ffc['level']= 'd'
             ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             ffc['v_total']= None # no values on the level of "cel"
@@ -216,7 +248,7 @@ def fill_z_d_cel(db, cllname, clltmp):
             ffc['idef']= full_cl_d_num
             ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
-            ffc['node']= 1 # "cel" follows the direction of "dysponent"
+            ffc['node']= 0 # "cel" follows the direction of "dysponent"
             ffc['level']= 'd'
             ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             ffc['v_total']= None # no values on the level of "cel"
@@ -244,7 +276,7 @@ def fill_z_dysponent(db, colltmp, objlst):
             fzd['type']= 'Dysponent'
             fzd['name']= row_z_d['dysponent']
             fzd['parent']= row_z_d['numer'] # idef of "zadanie"
-            fzd['node']= 1 # "dysponent" has a direction
+            fzd['node']= 0 # "dysponent" has a direction
             fzd['level']= 'c'
             fzd['czesc']= row_z_d['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             fzd['v_total']= row_z_d['ogolem'] # this is the last object
@@ -322,17 +354,17 @@ def fill_rep(db, colltmp, collname, cleandb):
     dict_zd_dysp= fill_z_dysponent(db, colltmp, dict_zadanie) # "dysponent"
       #and this is precisely the moment to insert the first bulk of data into the db,
       #'cause there are already docs with artificially created identifiers
-    print '-- node 1: funkcja-zadanie-dysponent:', len(dict_zd_dysp), '; total:', db_insert(dict_zd_dysp, db, collname, cleandb)
+    print '-- node 0: funkcja-zadanie-dysponent:', len(dict_zd_dysp), '; total:', db_insert(dict_zd_dysp, db, collname, cleandb)
     dict_zd_dysp_cel= fill_z_d_cel(db, collname, colltmp) # "cel"
-    print '-- node 1: funkcja-zadanie-dysponent-cel:', len(dict_zd_dysp_cel), '; total:', db_insert(dict_zd_dysp_cel, db, collname, False) # append, no db clean!
+    print '-- node 0: funkcja-zadanie-dysponent-cel:', len(dict_zd_dysp_cel), '; total:', db_insert(dict_zd_dysp_cel, db, collname, False) # append, no db clean!
     dict_zd_dysp_cel_mr= fill_z_d_c_mier(db, collname, colltmp) # "miernik"
-    print '-- node 1: funkcja-zadanie-dysponent-cel-miernik:', len(dict_zd_dysp_cel_mr), '; total:', db_insert(dict_zd_dysp_cel_mr, db, collname, False) # append, no db clean!
+    print '-- node 0: funkcja-zadanie-dysponent-cel-miernik:', len(dict_zd_dysp_cel_mr), '; total:', db_insert(dict_zd_dysp_cel_mr, db, collname, False) # append, no db clean!
 
-    # filling out node 2 (zadanie - podzadanie - dysponent (with cel and miernik at the same level))
+    # filling out node 1 (zadanie - podzadanie - dysponent (with cel and miernik at the same level))
     dict_podz= fill_podzadanie(db, colltmp) # "podzadanie"
-    print '-- node 2: podzadanie:', len(dict_podz), '; total:', db_insert(dict_podz, db, collname, False)
+    print '-- node 1: podzadanie:', len(dict_podz), '; total:', db_insert(dict_podz, db, collname, False)
     dict_podz_dysp= fill_p_dysp(db, collname, colltmp) # "dysponent" (we need both updated "collname" and "colltmp" here)
-    print '-- node 2: podzadanie-dysponent:', len(dict_podz_dysp), '; total:', db_insert(dict_podz_dysp, db, collname, False)
+    print '-- node 1: podzadanie-dysponent:', len(dict_podz_dysp), '; total:', db_insert(dict_podz_dysp, db, collname, False)
 
     # get the data from db and return for json file
     out= db[collname].find({}, {'_id':0}) # collecting everything
