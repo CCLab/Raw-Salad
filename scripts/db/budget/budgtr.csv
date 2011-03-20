@@ -1,0 +1,922 @@
+"czesc";"level";"czesc_orig";"dzial";"rozdzial";"tresc";"pozycja";"total";"dot_sub";"swiad_fiz";"wyd_jednostek";"wyd_majatk";"wyd_dlug";"sw_eu";"wspolfin_eu"
+"1";0;"1";;;"KANCELARIA PREZYDENTA RP";1;171524;42000;953;121721;6850;;;
+"1";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;129524;;953;121721;6850;;;
+"1";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;102181;;270;95361;6550;;;
+"1";2;;;75103;"Biuro Bezpieczeństwa  Narodowego";4;14800;;100;14400;300;;;
+"1";2;;;75106;"Odznaczenia państwowe";5;10153;;;10153;;;;
+"1";2;;;75195;"Pozostała działalność";6;2390;;583;1807;;;;
+"1";1;;921;;"Kultura i ochrona dziedzictwa narodowego";7;42000;42000;;;;;;
+"1";2;;;92123;"Narodowy Fundusz Rewaloryzacji Zabytków Krakowa";8;42000;42000;;;;;;
+"2";0;"2";;;"KANCELARIA SEJMU";1;430780;;80741;328763;21276;;;
+"2";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;430780;;80741;328763;21276;;;
+"2";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;430780;;80741;328763;21276;;;
+"3";0;"3";;;"KANCELARIA SENATU";1;176212;62000;17858;78454;17900;;;
+"3";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;176212;62000;17858;78454;17900;;;
+"3";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;101212;;17858;78454;4900;;;
+"3";2;;;75195;"Pozostała działalność (Opieka nad Polonią i Polakami za granicą)";4;75000;62000;;;13000;;;
+"4";0;"4";;;"SĄD NAJWYŻSZY";1;88161;;19459;66386;2316;;;
+"4";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;68885;;183;66386;2316;;;
+"4";2;;;75102;"Naczelne organy sądownictwa";3;68885;;183;66386;2316;;;
+"4";1;;753;;"Obowiązkowe ubezpieczenia społeczne";4;19276;;19276;;;;;
+"4";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";5;19276;;19276;;;;;
+"5";0;"5";;;"NACZELNY SĄD ADMINISTRACYJNY";1;373452;;20953;327736;24763;;;
+"5";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;352769;;270;327736;24763;;;
+"5";2;;;75102;"Naczelne organy sądownictwa";3;352769;;270;327736;24763;;;
+"5";1;;753;;"Obowiązkowe ubezpieczenia społeczne";4;20683;;20683;;;;;
+"5";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";5;20683;;20683;;;;;
+"6";0;"6";;;"TRYBUNAŁ KONSTYTUCYJNY";1;26840;;4730;21660;450;;;
+"6";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;22138;;28;21660;450;;;
+"6";2;;;75102;"Naczelne organy sądownictwa";3;22138;;28;21660;450;;;
+"6";1;;753;;"Obowiązkowe ubezpieczenia społeczne";4;4702;;4702;;;;;
+"6";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";5;4702;;4702;;;;;
+"7";0;"7";;;"NAJWYŻSZA IZBA KONTROLI";1;257802;;284;238722;18796;;;
+"7";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;257802;;284;238722;18796;;;
+"7";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;257802;;284;238722;18796;;;
+"8";0;"8";;;"RZECZNIK PRAW OBYWATELSKICH";1;35424;;46;34464;914;;;
+"8";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;35424;;46;34464;914;;;
+"8";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;35424;;46;34464;914;;;
+"9";0;"9";;;"KRAJOWA RADA RADIOFONII I TELEWIZJI";1;17890;;4;16432;1454;;;
+"9";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;17890;;4;16432;1454;;;
+"9";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;17890;;4;16432;1454;;;
+"10";0;"10";;;"GENERALNY INSPEKTOR OCHRONY DANYCH OSOBOWYCH";1;14700;;2;14298;400;;;
+"10";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;14700;;2;14298;400;;;
+"10";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;14700;;2;14298;400;;;
+"11";0;"11";;;"KRAJOWE BIURO WYBORCZE";1;45832;6354;77;38911;490;;;
+"11";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;45832;6354;77;38911;490;;;
+"11";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;45832;6354;77;38911;490;;;
+"12";0;"12";;;"PAŃSTWOWA INSPEKCJA PRACY";1;274479;;1289;263815;9350;;;25
+"12";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;274479;;1289;263815;9350;;;25
+"12";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;270939;;931;260633;9350;;;25
+"12";2;;;75195;"Pozostała działalność";4;3540;;358;3182;;;;
+"13";0;"13";;;"INSTYTUT PAMIĘCI NARODOWEJ – KOMISJA ŚCIGANIA ZBRODNI PRZECIWKO NARODOWI POLSKIEMU";1;223263;1870;3532;205442;12419;;;
+"13";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;221168;1870;1437;205442;12419;;;
+"13";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;98983;1870;783;84393;11937;;;
+"13";2;;;75112;"Jednostki podległe Instytutowi Pamięci Narodowej – Komisji Ścigania Zbrodni przeciwko Narodowi Polskiemu";4;122185;;654;121049;482;;;
+"13";1;;753;;"Obowiązkowe ubezpieczenia społeczne";5;2095;;2095;;;;;
+"13";2;;;75302;"Uposażenia prokuratorów w stanie spoczynku oraz uposażenia rodzinne";6;2095;;2095;;;;;
+"14";0;"14";;;"RZECZNIK PRAW DZIECKA";1;8540;3;8337;200;;;;
+"14";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;8540;3;8337;200;;;;
+"14";2;;;75101;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;8540;3;8337;200;;;;
+"15";0;"15";;;"SĄDY POWSZECHNE";1;5929826;;401437;5171604;356785;;;
+"15";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;189977;;189977;;;;;
+"15";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;189977;;189977;;;;;
+"15";1;;755;;"Wymiar sprawiedliwości";4;5694706;;211367;5126554;356785;;;
+"15";2;;;75502;"Jednostki sądownictwa powszechnego";5;5628438;;211367;5060286;356785;;;
+"15";2;;;75595;"Pozostała działalność";6;66268;;;66268;;;;
+"15";1;;801;;"Oświata i wychowanie";7;45143;;93;45050;;;;
+"15";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;45143;;93;45050;;;;
+"15/01";0;"15/01";;;"Ministerstwo Sprawiedliwości";1;193116;;6922;94694;91500;;;
+"15/01";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;6922;;6922;;;;;
+"15/01";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;6922;;6922;;;;;
+"15/01";1;;755;;"Wymiar sprawiedliwości";4;183796;;;92296;91500;;;
+"15/01";2;;;75502;"Jednostki sądownictwa powszechnego";5;183796;;;92296;91500;;;
+"15/01";1;;801;;"Oświata i wychowanie";6;2398;;;2398;;;;
+"15/01";2;;;80144;"Inne formy kształcenia osobno niewymienione";7;2398;;;2398;;;;
+"15/02";0;"15/02";;;"Sąd Apelacyjny w Warszawie";1;708561;;54163;640378;;;;
+"15/02";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;22743;;22743;;;;;
+"15/02";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;22743;;22743;;;;;
+"15/02";1;;755;;"Wymiar sprawiedliwości";4;680386;;31409;634957;;;;
+"15/02";2;;;75502;"Jednostki sądownictwa powszechnego";5;668840;;31409;623411;;;;
+"15/02";2;;;75595;"Pozostała działalność";6;11546;;;11546;;;;
+"15/02";1;;801;;"Oświata i wychowanie";7;5432;;11;5421;;;;
+"15/02";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;5432;;11;5421;;;;
+"15/03";0;"15/03";;;"Sąd Apelacyjny w Katowicach";1;683152;;46948;614095;22109;;;
+"15/03";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;19655;;19655;;;;;
+"15/03";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;19655;;19655;;;;;
+"15/03";1;;755;;"Wymiar sprawiedliwości";4;658370;;27285;608976;22109;;;
+"15/03";2;;;75502;"Jednostki sądownictwa powszechnego";5;652063;;27285;602669;22109;;;
+"15/03";2;;;75595;"Pozostała działalność";6;6307;;;6307;;;;
+"15/03";1;;801;;"Oświata i wychowanie";7;5127;;8;5119;;;;
+"15/03";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;5127;;8;5119;;;;
+"15/04";0;"15/04";;;"Sąd Apelacyjny w Gdańsku";1;708561;;54163;640378;14020;;;
+"15/04";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;22743;;22743;;;;;
+"15/04";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;22743;;22743;;;;;
+"15/04";1;;755;;"Wymiar sprawiedliwości";4;680386;;31409;634957;14020;;;
+"15/04";2;;;75502;"Jednostki sądownictwa powszechnego";5;668840;;31409;623411;14020;;;
+"15/04";2;;;75595;"Pozostała działalność";6;11546;;;11546;;;;
+"15/04";1;;801;;"Oświata i wychowanie";7;5432;;11;5421;;;;
+"15/04";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;5432;;11;5421;;;;
+"15/05";0;"15/05";;;"Sąd Apelacyjny w Poznaniu";1;508592;;31450;441585;35557;;;
+"15/05";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;16742;;16742;;;;;
+"15/05";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;16742;;16742;;;;;
+"15/05";1;;755;;"Wymiar sprawiedliwości";4;487465;;14700;437208;35557;;;
+"15/05";2;;;75502;"Jednostki sądownictwa powszechnego";5;479537;;14700;429280;35557;;;
+"15/05";2;;;75595;"Pozostała działalność";6;7928;;;7928;;;;
+"15/05";1;;801;;"Oświata i wychowanie";7;4385;;8;4377;;;;
+"15/05";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;4385;;8;4377;;;;
+"15/06";0;"15/06";;;"Sąd Apelacyjny w Krakowie";1;610610;;39966;547470;23174;;;
+"15/06";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;18776;;18776;;;;;
+"15/06";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;18776;;18776;;;;;
+"15/06";1;;755;;"Wymiar sprawiedliwości";4;587946;;21185;543587;23174;;;
+"15/06";2;;;75502;"Jednostki sądownictwa powszechnego";5;582479;;21185;538120;23174;;;
+"15/06";2;;;75595;"Pozostała działalność";6;5467;;;5467;;;;
+"15/06";1;;801;;"Oświata i wychowanie";7;3888;;5;3883;;;;
+"15/06";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;3888;;5;3883;;;;
+"15/06";0;"15/06";;;"Sąd Apelacyjny we Wrocławiu";1;612966;;43484;547769;21713;;;
+"15/06";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;21115;;21115;;;;;
+"15/06";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;21115;;21115;;;;;
+"15/06";1;;755;;"Wymiar sprawiedliwości";4;586887;;22351;542823;21713;;;
+"15/06";2;;;75502;"Jednostki sądownictwa powszechnego";5;579287;;22351;535223;21713;;;
+"15/06";2;;;75595;"Pozostała działalność";6;7600;;;7600;;;;
+"15/06";1;;801;;"Oświata i wychowanie";7;4964;;18;4946;;;;
+"15/06";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;4964;;18;4946;;;;
+"15/07";0;"15/07";;;"Sąd Apelacyjny w Łodzi";1;541916;;39758;483517;18641;;;
+"15/07";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;17859;;17859;;;;;
+"15/07";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;17859;;17859;;;;;
+"15/07";1;;755;;"Wymiar sprawiedliwości";4;519347;;21888;478818;18641;;;
+"15/07";2;;;75502;"Jednostki sądownictwa powszechnego";5;513750;;21888;473221;18641;;;
+"15/07";2;;;75595;"Pozostała działalność";6;5597;;;5597;;;;
+"15/07";1;;801;;"Oświata i wychowanie";7;4710;;11;4699;;;;
+"15/07";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;4710;;11;4699;;;;
+"15/08";0;"15/08";;;"Sąd Apelacyjny w Rzeszowie";1;255064;;17650;222668;14746;;;
+"15/08";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;8209;;8209;;;;;
+"15/08";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;8209;;8209;;;;;
+"15/08";1;;755;;"Wymiar sprawiedliwości";4;244723;;9436;220541;14746;;;
+"15/08";2;;;75502;"Jednostki sądownictwa powszechnego";5;242929;;9436;218747;14746;;;
+"15/08";2;;;75595;"Pozostała działalność";6;1794;;;1794;;;;
+"15/08";1;;801;;"Oświata i wychowanie";7;2132;;5;2127;;;;
+"15/08";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;2132;;5;2127;;;;
+"15/09";0;"15/09";;;"Sąd Apelacyjny w Białymstoku";1;360533;;28772;327552;4209;;;
+"15/09";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;10884;;10884;;;;;
+"15/09";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;10884;;10884;;;;;
+"15/09";1;;755;;"Wymiar sprawiedliwości";4;346322;;17881;324232;4209;;;
+"15/09";2;;;75502;"Jednostki sądownictwa powszechnego";5;342156;;17881;320066;4209;;;
+"15/09";2;;;75595;"Pozostała działalność";6;4166;;;4166;;;;
+"15/09";1;;801;;"Oświata i wychowanie";7;3327;;7;3320;;;;
+"15/09";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;3327;;7;3320;;;;
+"15/10";0;"15/10";;;"Sąd Apelacyjny w Lublinie";1;478018;;30579;411675;35764;;;
+"15/10";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;14337;;14337;;;;;
+"15/10";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;14337;;14337;;;;;
+"15/10";1;;755;;"Wymiar sprawiedliwości";4;460056;;16233;408059;35764;;;
+"15/10";2;;;75502;"Jednostki sądownictwa powszechnego";5;456582;;16233;404585;35764;;;
+"15/10";2;;;75595;"Pozostała działalność";6;3474;;;3474;;;;
+"15/10";1;;801;;"Oświata i wychowanie";7;3625;;9;3616;;;;
+"15/10";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;3625;;9;3616;;;;
+"15/11";0;"15/11";;;"Sąd Apelacyjny w Szczecinie";1;349424;;25643;319738;4043;;;
+"15/11";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;12044;;12044;;;;;
+"15/11";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;12044;;12044;;;;;
+"15/11";1;;755;;"Wymiar sprawiedliwości";4;334996;;13591;317362;4043;;;
+"15/11";2;;;75502;"Jednostki sądownictwa powszechnego";5;330748;;13591;313114;4043;;;
+"15/11";2;;;75595;"Pozostała działalność";6;4248;;;4248;;;;
+"15/11";1;;801;;"Oświata i wychowanie";7;2384;;8;2376;;;;
+"15/11";2;;;80144;"Inne formy kształcenia osobno niewymienione";8;2384;;8;2376;;;;
+"52";0;"52";;;"KRAJOWA RADA SĄDOWNICTWA";1;11188;;1670;9229;289;;;
+"52";1;;751;;"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;11188;;1670;9229;289;;;
+"52";2;;;75104;"Krajowa Rada Sądownictwa";3;11188;;1670;9229;289;;;
+"16";0;"16";;;"KANCELARIA PREZESA RADY MINISTRÓW";1;118586;12106;2440;95159;500;;;8381
+"16";1;;710;;"Działalność usługowa";2;3124;3124;;;;;;
+"16";2;;;71031;"Centrum Badania Opinii Społecznej";3;3124;3124;;;;;;
+"16";1;;750;;"Administracja publiczna";4;115439;8982;2440;95136;500;;;8381
+"16";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";5;88681;;100;82649;100;;;5832
+"16";2;;;75061;"Ośrodek Studiów Wschodnich";6;8431;;;8031;400;;;
+"16";2;;;75065;"Krajowa Szkoła Administracji Publicznej";7;8933;8832;;;;;;101
+"16";2;;;75068;"Rada do Spraw Uchodźców";8;630;;;630;;;;
+"16";2;;;75074;"Rada do Spraw Polaków na Wschodzie";9;150;;;150;;;;
+"16";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";10;3029;;;2459;;;;570
+"16";2;;;75095;"Pozostała działalność";11;5585;150;2340;1217;;;;1878
+"16";1;;752;;"Obrona narodowa";12;23;;;23;;;;
+"16";2;;;75212;"Pozostałe wydatki obronne";13;23;;;23;;;;
+"17";0;"17";;;"ADMINISTRACJA  PUBLICZNA";1;49056;;28;27505;312;;;21211
+"17";1;;710;;"Działalność usługowa";2;30281;;25;18943;180;;;11133
+"17";2;;;71013;"Prace geodezyjne i kartograficzne (nieinwestycyjne)";3;6744;;;6744;;;;
+"17";2;;;71021;"Główny Urząd Geodezji i Kartografii";4;23537;;25;12199;180;;;11133
+"17";1;;750;;"Administracja publiczna";5;18775;;3;8562;132;;;10078
+"17";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";6;18775;;3;8562;132;;;10078
+"18";0;"18";;;"BUDOWNICTWO,  GOSPODARKA  PRZESTRZENNA  I MIESZKANIOWA";1;1419401;1361884;173;56345;999;;;
+"18";1;;700;;"Gospodarka mieszkaniowa";2;1369084;1361884;;7200;;;;
+"18";2;;;70005;"Gospodarka gruntami i nieruchomościami";3;721;;;721;;;;
+"18";2;;;70015;"Refundacja premii gwarancyjnych oraz premii za systematyczne oszczędzanie";4;520000;520000;;;;;;
+"18";2;;;70017;"Wykup odsetek od kredytów mieszkaniowych";5;130000;124800;;5200;;;;
+"18";2;;;70020;"Fundusz Termomodernizacji i Remontów";6;200000;200000;;;;;;
+"18";2;;;70022;"Fundusz Dopłat";7;517084;517084;;;;;;
+"18";2;;;70095;"Pozostała działalność";8;1279;;;1279;;;;
+"18";1;;710;;"Działalność usługowa";9;18691;;163;18378;150;;;
+"18";2;;;71015;"Nadzór budowlany";10;17489;;3;17336;150;;;
+"18";2;;;71095;"Pozostała działalność";11;1202;;160;1042;;;;
+"18";1;;750;;"Administracja publiczna";12;31622;;10;30763;849;;;
+"18";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";13;31273;;10;30414;849;;;
+"18";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";14;287;;;287;;;;
+"18";2;;;75095;"Pozostała działalność";15;62;;;62;;;;
+"18";1;;752;;"Obrona narodowa";16;4;;;4;;;;
+"18";2;;;75212;"Pozostałe wydatki obronne";17;4;;;4;;;;
+"19";0;"19";;;"BUDŻET, FINANSE PUBLICZNE I INSTYTUCJE FINANSOWE";1;5792213;193782;57691;5218021;250086;;;72633
+"19";1;;150;;"Przetwórstwo przemysłowe";2;12000;;;5000;7000;;;
+"19";2;;;15018;"Rozliczenia związane z systemem dopłat do oprocentowania  kredytów eksportowych o stałych stopach procentowych";3;5000;;;5000;;;;
+"19";2;;;15019;"Wspieranie polskiego eksportu poprzez udzielanie przez Bank Gospodarstwa Krajowego kredytów eksportowych";4;7000;;;;7000;;;
+"19";1;;550;;"Hotele i restauracje";5;21000;21000;;;;;;
+"19";2;;;55003;"Bary mleczne";6;21000;21000;;;;;;
+"19";1;;750;;"Administracja publiczna";7;5338187;;57691;4964777;243086;;;72633
+"19";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";8;290098;;443;260743;;;;28912
+"19";2;;;75008;"Izby skarbowe";9;314696;;32;292064;22600;;;
+"19";2;;;75009;"Urzędy skarbowe";10;2575850;;802;2542128;32920;;;
+"19";2;;;75010;"Urzędy kontroli skarbowej";11;507535;;32;476542;2569;;;28392
+"19";2;;;75013;"Izby celne i urzędy celne";12;1522346;;56122;1299927;164937;;;1360
+"19";2;;;75046;"Komisje egzaminacyjne";13;1077;;200;877;;;;
+"19";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";14;2887;;;2887;;;;
+"19";2;;;75095;"Pozostała działalność";15;123698;;60;89609;20060;;;13969
+"19";1;;752;;"Obrona narodowa";16;116;;;116;;;;
+"19";2;;;75212;"Pozostałe wydatki obronne";17;116;;;116;;;;
+"19";1;;754;;"Bezpieczeństwo  publiczne i ochrona przeciwpożarowa";18;44;;;44;;;;
+"19";2;;;75414;"Obrona cywilna";19;44;;;44;;;;
+"19";1;;756;;"Dochody od osób prawnych, od osób fizycznych i od innych jednostek nieposiadających  osobowości prawnej oraz wydatki związane z ich poborem";20;247364;;;247364;;;;
+"19";2;;;75647;"Pobór podatków, opłat i niepodatkowych  należności budżetowych";21;247364;;;247364;;;;
+"19";1;;758;;"Różne rozliczenia";22;173502;172782;;720;;;;
+"19";2;;;75823;"Partie polityczne";23;173502;172782;;720;;;;
+"20";0;"20";;;"GOSPODARKA";1;1482848;859752;34045;246523;31681;;;310847
+"20";1;;100;;"Górnictwo i kopalnictwo";2;539064;538843;21;200;;;;
+"20";2;;;10001;"Górnictwo węgla kamiennego";3;438843;438843;;;;;;
+"20";2;;;10002;"Górnictwo węgla brunatnego";4;1;;1;;;;;
+"20";2;;;10005;"Produkcja soli";5;86000;86000;;;;;;
+"20";2;;;10095;"Pozostała działalność";6;14220;14000;20;200;;;;
+"20";1;;150;;"Przetwórstwo przemysłowe";7;482824;122649;1326;77201;22016;;;259632
+"20";2;;;15004;"Zadania w zakresie bezpiecznego wykorzystania energii atomowej";8;25096;;1326;23770;;;;
+"20";2;;;15006;"Hutnictwo";9;250;;;250;;;;
+"20";2;;;15011;"Rozwój przedsiębiorczości";10;6844;5104;;1180;;;;560
+"20";2;;;15012;"Polska Agencja Rozwoju Przedsiębiorczości";11;259881;66552;;;3668;;;189661
+"20";2;;;15014;"Wsparcie finansowe inwestycji";12;64891;46543;;;18348;;;
+"20";2;;;15095;"Pozostała działalność";13;125862;4450;;52001;;;;69411
+"20";1;;500;;"Handel";14;160133;124841;6300;11580;150;;;17262
+"20";2;;;50003;"Agencja Rezerw Materiałowych";15;110699;110699;;;;;;
+"20";2;;;50005;"Promocja eksportu";16;49434;14142;6300;11580;150;;;17262
+"20";1;;750;;"Administracja publiczna";17;221472;419;26398;157228;9495;;;27932
+"20";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";18;141082;;248;106345;6695;;;27794
+"20";2;;;75057;"Placówki zagraniczne";19;75892;;26150;46804;2800;;;138
+"20";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";20;4498;419;;4079;;;;
+"20";1;;752;;"Obrona narodowa";21;73305;73000;;285;20;;;
+"20";2;;;75212;"Pozostałe wydatki obronne";22;305;;;285;20;;;
+"20";2;;;75215;"Zadania związane z utrzymaniem mocy rezerwowych ze względu na potrzeby Sił Zbrojnych Rzeczypospolitej  Polskiej";23;73000;73000;;;;;;
+"20";1;;754;;"Bezpieczeństwo  publiczne i ochrona przeciwpożarowa";24;29;;;29;;;;
+"20";2;;;75417;"Organizacja Traktatu Północnoatlantyckiego";25;29;;;29;;;;
+"20";1;;900;;"Gospodarka komunalna i ochrona środowiska";26;6021;;;;;;;6021
+"20";2;;;90011;"Fundusz Ochrony Środowiska i Gospodarki Wodnej";27;6021;;;;;;;6021
+"21";0;"21";;;"GOSPODARKA  MORSKA";1;777075;101508;4948;312863;349179;;;8577
+"21";1;;600;;"Transport i łączność";2;600590;;4789;269881;322839;;;3081
+"21";2;;;60043;"Urzędy morskie";3;556639;;2299;228530;322729;;;3081
+"21";2;;;60044;"Ratownictwo morskie";4;29480;;2490;26880;110;;;
+"21";2;;;60095;"Pozostała działalność";5;14471;;;14471;;;;
+"21";1;;750;;"Administracja publiczna";6;12802;;5;12142;200;;;455
+"21";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";7;11911;;5;11251;200;;;455
+"21";2;;;75057;"Placówki zagraniczne";8;731;;;731;;;;
+"21";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";9;160;;;160;;;;
+"21";1;;752;;"Obrona narodowa";10;443;;;393;50;;;
+"21";2;;;75212;"Pozostałe wydatki obronne";11;443;;;393;50;;;
+"21";1;;755;;"Wymiar sprawiedliwości";12;1774;;42;1732;;;;
+"21";2;;;75504;"Izby morskie";13;1774;;42;1732;;;;
+"21";1;;803;;"Szkolnictwo wyższe";14;106661;101508;112;;;;;5041
+"21";2;;;80306;"Działalność dydaktyczna";15;94463;89378;44;;;;;5041
+"21";2;;;80309;"Pomoc materialna dla studentów i doktorantów";16;12198;12130;68;;;;;
+"21";1;;900;;"Gospodarka komunalna i ochrona środowiska";17;54805;;;28715;26090;;;
+"21";2;;;90018;"Ochrona brzegów morskich";18;54805;;;28715;26090;;;
+"22";0;"22";;;"GOSPODARKA  WODNA";1;329487;22550;1881;236111;820;;;68125
+"22";1;;710;;"Działalność usługowa";2;301526;22550;1881;208150;820;;;68125
+"22";2;;;71016;"Krajowy Zarząd Gospodarki Wodnej";3;13318;1930;5;11283;100;;;
+"22";2;;;71018;"Regionalne zarządy gospodarki wodnej";4;267588;;1876;196867;720;;;68125
+"22";2;;;71019;"Państwowa służba hydrologiczno-meteorologiczna";5;20620;20620;;;;;;
+"22";1;;750;;"Administracja publiczna";6;25025;;;25025;;;;
+"22";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";7;24794;;;24794;;;;
+"22";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";8;231;;;231;;;;
+"22";1;;752;;"Obrona narodowa";9;2936;;;2936;;;;
+"22";2;;;75212;"Pozostałe wydatki obronne";10;2936;;;2936;;;;
+"24";0;"24";;;"KULTURA I OCHRONA DZIEDZICTWA  NARODOWEGO";1;2470664;1323073;9363;815279;189385;;;133564
+"24";1;;750;;"Administracja publiczna";2;66872;9205;42;47931;3750;;;5944
+"24";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;54848;;42;45112;3750;;;5944
+"24";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;11539;9205;;2334;;;;
+"24";2;;;75095;"Pozostała działalność";5;485;;;485;;;;
+"24";1;;752;;"Obrona narodowa";6;92;;;92;;;;
+"24";2;;;75212;"Pozostałe wydatki obronne";7;92;;;92;;;;
+"24";1;;754;;"Bezpieczeństwo  publiczne i ochrona przeciwpożarowa";8;40;;;40;;;;
+"24";2;;;75414;"Obrona cywilna";9;10;;;10;;;;
+"24";2;;;75421;"Zarządzanie kryzysowe";10;30;;;30;;;;
+"24";1;;801;;"Oświata i wychowanie";11;667932;19345;2385;624842;11740;;;9620
+"24";2;;;80132;"Szkoły artystyczne";12;652665;19345;1975;610105;11620;;;9620
+"24";2;;;80143;"Jednostki pomocnicze szkolnictwa";13;5413;;5;5408;;;;
+"24";2;;;80146;"Dokształcanie i doskonalenie nauczycieli";14;5832;;1;5711;120;;;
+"24";2;;;80148;"Stołówki szkolne i przedszkolne";15;821;;4;817;;;;
+"24";2;;;80195;"Pozostała działalność";16;3201;;400;2801;;;;
+"24";1;;803;;"Szkolnictwo wyższe";17;491960;431882;2620;200;12600;;;44658
+"24";2;;;80306;"Działalność dydaktyczna";18;464505;407027;220;;12600;;;44658
+"24";2;;;80309;"Pomoc materialna dla studentów i doktorantów";19;26855;24855;2000;;;;;
+"24";2;;;80395;"Pozostała działalność";20;600;;400;200;;;;
+"24";1;;854;;"Edukacyjna opieka wychowawcza";21;26109;;103;26006;;;;
+"24";2;;;85410;"Internaty i bursy szkolne";22;26035;;103;25932;;;;
+"24";2;;;85446;"Dokształcanie i doskonalenie nauczycieli";23;74;;;74;;;;
+"24";1;;921;;"Kultura i ochrona dziedzictwa narodowego";24;1217659;862641;4213;116168;161295;;;73342
+"24";2;;;92101;"Instytucje kinematografii";25;1650;1000;;;650;;;
+"24";2;;;92102;"Polski Instytut Sztuki Filmowej";26;9781;9781;;;;;;
+"24";2;;;92105;"Pozostałe zadania w zakresie kultury";27;24343;12500;4000;3844;;;;3999
+"24";2;;;92106;"Teatry";28;148129;142454;;;1465;;;4210
+"24";2;;;92108;"Filharmonie, orkiestry, chóry i kapele";29;50544;50162;;;;;;382
+"24";2;;;92109;"Domy i ośrodki kultury, świetlice i kluby";30;2769;2613;;;;;;156
+"24";2;;;92110;"Galerie i biura wystaw artystycznych";31;10859;9259;;;1600;;;
+"24";2;;;92113;"Centra kultury i sztuki";32;141225;128842;;;11210;;;1173
+"24";2;;;92114;"Pozostałe instytucje kultury";33;92060;75486;;;13300;;;3274
+"24";2;;;92116;"Biblioteki";34;99691;86491;;;13200;;;
+"24";2;;;92117;"Archiwa";35;110744;;105;96668;13550;;;421
+"24";2;;;92118;"Muzea";36;333300;260470;;;37420;;;35410
+"24";2;;;92119;"Ośrodki ochrony i dokumentacji zabytków";37;22297;20992;;;500;;;805
+"24";2;;;92120;"Ochrona zabytków i opieka nad zabytkami";38;56765;37000;100;168;;;;19497
+"24";2;;;92122;"Rada Ochrony Pamięci Walk i Męczeństwa";39;16296;1000;8;15288;;;;
+"24";2;;;92195;"Pozostała działalność";40;97206;24591;;200;68400;;;4015
+"25";0;"25";;;"KULTURA FIZYCZNA";1;1010235;207454;21565;32148;749068;;;
+"25";1;;750;;"Administracja publiczna";2;24542;;5;24087;450;;;
+"25";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;23986;;5;23531;450;;;
+"25";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;556;;;556;;;;
+"25";1;;752;;"Obrona narodowa";5;10;;;10;;;;
+"25";2;;;75212;"Pozostałe wydatki obronne";6;10;;;10;;;;
+"25";1;;926;;"Kultura fizyczna";7;985683;207454;21560;8051;748618;;;
+"25";2;;;92601;"Obiekty sportowe";8;250000;;;;250000;;;
+"25";2;;;92603;"Komisja do Zwalczania Dopingu w Sporcie";9;1335;;;1325;10;;;
+"25";2;;;92604;"Instytucje kultury fizycznej";10;23101;20270;;;2831;;;
+"25";2;;;92605;"Zadania w zakresie kultury fizycznej";11;183704;183704;;;;;;
+"25";2;;;92695;"Pozostała działalność";12;527543;3480;21560;6726;495777;;;
+"26";0;"26";;;"ŁĄCZNOŚĆ";1;18922;1900;5;16983;;;;34
+"26";1;;600;;"Transport i łączność";2;2112;1900;;207;;;;5
+"26";2;;;60046;"Operatorzy pocztowi";3;1900;1900;;;;;;
+"26";2;;;60052;"Zadania w zakresie telekomunikacji";4;212;;;207;;;;5
+"26";1;;750;;"Administracja publiczna";5;15645;;5;15611;;;;29
+"26";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";6;15300;;5;15266;;;;29
+"26";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";7;345;;;345;;;;
+"26";1;;752;;"Obrona narodowa";8;1165;;;1165;;;;
+"26";2;;;75212;"Pozostałe wydatki obronne";9;1165;;;1165;;;;
+"27";0;"27";;;"INFORMATYZACJA";1;82378;;62;35853;390;;;46073
+"27";1;;150;;"Przetwórstwo przemysłowe";2;31336;;;;;;;31336
+"27";2;;;15012;"Polska Agencja Rozwoju Przedsiębiorczości";3;31336;;;;;;;31336
+"27";1;;720;;"Informatyka";4;3080;;30;1557;;;;1493
+"27";2;;;72095;"Pozostała działalność";5;3080;;30;1557;;;;1493
+"27";1;;750;;"Administracja publiczna";6;47962;;32;34296;390;;;13244
+"27";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";7;12500;;27;5995;240;;;6238
+"27";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";8;25220;;;25220;;;;
+"27";2;;;75095;"Pozostała działalność";9;10242;;5;3081;150;;;7006
+"28";0;"28";;;"NAUKA";1;4620913;2888498;3762;1203064;254248;;;271341
+"28";1;;730;;"Nauka";2;4386724;2880248;3692;1004778;240588;;;257418
+"28";2;;;73001;"Projekty badawcze i celowe w dziedzinie nauk przyrodniczych";3;273443;;;251536;;;;21907
+"28";2;;;73002;"Projekty badawcze i celowe w dziedzinie nauk technicznych";4;491599;19000;;440111;;;;32488
+"28";2;;;73003;"Projekty badawcze i celowe w dziedzinie nauk społecznych, humanistycznych  i ścisłych";5;138244;;;136441;;;;1803
+"28";2;;;73005;"Działalność statutowa i inwestycyjna jednostek naukowych oraz badania własne szkół wyższych";6;2238128;1932128;3000;2000;235000;;;66000
+"28";2;;;73006;"Działalność wspomagająca badania";7;64000;1000;192;62808;;;;
+"28";2;;;73007;"Współpraca naukowa i naukowo-techniczna z zagranicą";8;194914;1143;;108168;;;;85603
+"28";2;;;73008;"Narodowe Centrum Badań i Rozwoju";9;627600;627012;;;588;;;
+"28";2;;;73009;"Narodowe Centrum Nauki";10;304965;299965;;;5000;;;
+"28";2;;;73095;"Pozostała działalność";11;53831;;500;3714;;;;49617
+"28";1;;750;;"Administracja publiczna";12;58689;;70;43466;1230;;;13923
+"28";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";13;55424;;70;40201;1230;;;13923
+"28";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";14;3265;;;3265;;;;
+"28";1;;752;;"Obrona narodowa";15;154820;;;154820;;;;
+"28";2;;;75212;"Pozostałe wydatki obronne";16;20;;;20;;;;
+"28";2;;;75221;"Projekty badawcze i celowe w dziedzinie obronności";17;154800;;;154800;;;;
+"28";1;;921;;"Kultura i ochrona dziedzictwa narodowego";18;20680;8250;;;12430;;;
+"28";2;;;92114;"Pozostałe instytucje kultury";19;20680;8250;;;12430;;;
+"29";0;"29";;;"OBRONA NARODOWA";1;27259614;903582;6633985;13085339;6636708;;;
+"29";1;;700;;"Gospodarka mieszkaniowa";2;572135;572135;;;;;;
+"29";2;;;70013;"Wojskowa Agencja Mieszkaniowa";3;572135;572135;;;;;;
+"29";1;;710;;"Działalność usługowa";4;1491;1491;;;;;;
+"29";2;;;71032;"Agencja Mienia Wojskowego";5;1491;1491;;;;;;
+"29";1;;750;;"Administracja publiczna";6;248951;;15078;223272;10601;;;
+"29";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";7;204434;;406;194592;9436;;;
+"29";2;;;75057;"Placówki zagraniczne";8;43927;;14672;28090;1165;;;
+"29";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii";9;590;;;590;;;;
+"29";1;;752;;"Obrona narodowa";10;19887120;174175;907860;12340807;6464278;;;
+"29";2;;;75201;"Wojska Lądowe";11;2870457;;196360;2674097;;;;
+"29";2;;;75202;"Siły powietrzne";12;1360557;;78731;1281826;;;;
+"29";2;;;75203;"Marynarka Wojenna";13;605460;;37202;568258;;;;
+"29";2;;;75204;"Centralne wsparcie";14;8098217;;13899;2234970;5849348;;;
+"29";2;;;75207;"Żandarmeria Wojskowa";15;228304;;15534;212770;;;;
+"29";2;;;75208;"Ordynariat Polowy Wojska Polskiego Polskiego ";16;20530;;332;20198;;;;
+"29";2;;;75209;"Prawosławny Ordynariat Wojska";17;2682;;47;2635;;;;
+"29";2;;;75210;"Ewangelickie Duszpasterstwo  Wojskowe";18;1655;;37;1618;;;;
+"29";2;;;75213;"Dowodzenie i kierowanie Siłami Zbrojnymi Rzeczypospolitej  Polskiej";19;414508;;10895;403613;;;;
+"29";2;;;75215;"Zadania związane z utrzymaniem mocy rezerwowych ze względu na potrzeby Sił Zbrojnych Rzeczypospolitej  Polskiej";20;23000;23000;;;;;;
+"29";2;;;75216;"Wojskowe Misje Pokojowe";21;1224435;;393635;254360;576440;;;
+"29";2;;;75217;"Służba Wywiadu Wojskowego";22;106260;;2748;84975;18537;;;
+"29";2;;;75218;"Służba Kontrwywiadu Wojskowego";23;157503;;4910;132640;19953;;;
+"29";2;;;75219;"Wojska Specjalne";24;242448;;11278;231170;;;;
+"29";2;;;75220;"Zabezpieczenie  wojsk";25;3765284;;49684;3715600;;;;
+"29";2;;;75295;"Pozostała działalność";26;765820;151175;92568;522077;;;;
+"29";1;;753;;"Obowiązkowe ubezpieczenia społeczne";27;6019216;;705936;307545;5735;;;
+"29";2;;;75301;"Świadczenia pieniężne z zaopatrzenia emerytalnego ";28;6018897;;705617;307545;5735;;;
+"29";2;;;75302;"Uposażenia prokuratorów w stanie spoczynku oraz uposażenia rodzinne";29;319;;319;;;;;
+"29";1;;755;;"Wymiar sprawiedliwości";30;59565;;1327;56401;1837;;;
+"29";2;;;75503;"Sądy wojskowe";31;20289;;620;18852;817;;;
+"29";2;;;75506;"Wojskowe jednostki organizacyjne prokuratury";32;39276;;707;37549;1020;;;
+"29";1;;803;;"Szkolnictwo wyższe";33;155677;129534;70;;26073;;;
+"29";2;;;80302;"Uczelnie wojskowe";34;155677;129534;70;;26073;;;
+"29";1;;851;;"Ochrona zdrowia";35;260071;2549;3714;157314;96494;;;
+"29";2;;;85156;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";36;2113;;;2113;;;;
+"29";2;;;85157;"Staże i specjalizacje medyczne";37;282;;;282;;;;
+"29";2;;;85195;"Pozostała działalność";38;257676;2549;3714;154919;96494;;;
+"29";1;;921;;"Kultura i ochrona dziedzictwa narodowego";39;55388;23698;;;31690;;;
+"29";2;;;92114;"Pozostałe instytucje kultury";40;7173;7173;;;;;;
+"29";2;;;92118;"Muzea";41;48215;16525;;;31690;;;
+"30";0;"30";;;"OŚWIATA I WYCHOWANIE";1;409582;32385;11568;310719;5917;;;48993
+"30";1;;150;;"Przetwórstwo przemysłowe";2;1000;1000;;;;;;
+"30";2;;;15002;"Wydawanie podręczników szkolnych i akademickich";3;1000;1000;;;;;;
+"30";1;;750;;"Administracja publiczna";4;51714;;59;39270;2950;;;9435
+"30";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";5;50229;;59;37785;2950;;;9435
+"30";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";6;1485;;;1485;;;;
+"30";1;;752;;"Obrona narodowa";7;14;;;14;;;;
+"30";2;;;75212;"Pozostałe wydatki obronne";8;14;;;14;;;;
+"30";1;;754;;"Bezpieczeństwo  publiczne i ochrona przeciwpożarowa";9;15;;;15;;;;
+"30";2;;;75421;"Zarządzanie kryzysowe";10;15;;;15;;;;
+"30";1;;801;;"Oświata i wychowanie";11;345709;21335;10549;271300;2967;;;39558
+"30";2;;;80135;"Szkolnictwo polskie za granicą ";12;36507;;5308;30899;300;;;
+"30";2;;;80143;"Jednostki pomocnicze szkolnictwa";13;7214;;27;5274;374;;;1539
+"30";2;;;80145;"Komisje egzaminacyjne";14;195018;;65;186172;1698;;;7083
+"30";2;;;80146;"Dokształcanie i doskonalenie nauczycieli";15;33489;;98;26451;595;;;6345
+"30";2;;;80195;"Pozostała działalność";16;73481;21335;5051;22504;;;;24591
+"30";1;;854;;"Edukacyjna opieka wychowawcza";17;2880;1800;960;120;;;;
+"30";2;;;85412;"Kolonie i obozy oraz inne formy wypoczynku dzieci i młodzieży szkolnej, a także szkolenia młodzieży";18;1320;1200;;120;;;;
+"30";2;;;85413;"Kolonie i obozy dla młodzieży polonijnej w kraju";19;600;600;;;;;;
+"30";2;;;85415;"Pomoc materialna dla uczniów";20;960;;960;;;;;
+"30";1;;921;;"Kultura i ochrona dziedzictwa narodowego";21;8250;8250;;;;;;
+"30";2;;;92114;"Pozostałe instytucje kultury";22;8250;8250;;;;;;
+"31";0;"31";;;"PRACA";1;365495;;293;251437;6897;;;106868
+"31";1;;150;;"Przetwórstwo przemysłowe";2;66634;;42;3327;;;;63265
+"31";2;;;15001;"Drukarnie";3;3369;;42;3327;;;;
+"31";2;;;15011;"Rozwój przedsiębiorczości";4;10212;;;;;;;10212
+"31";2;;;15012;"Polska Agencja Rozwoju Przedsiębiorczości";5;53053;;;;;;;53053
+"31";1;;750;;"Administracja publiczna";6;122689;;101;79541;3647;;;39400
+"31";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";7;62058;;30;45694;3435;;;12899
+"31";2;;;75071;"Centrum Rozwoju Zasobów Ludzkich";8;32919;;24;6322;72;;;26501
+"31";2;;;75072;"Centrum Partnerstwa Społecznego „Dialog”";9;2236;;2;2094;140;;;
+"31";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";10;883;;;883;;;;
+"31";2;;;75095;"Pozostała działalność";11;24593;;45;24548;;;;
+"31";1;;752;;"Obrona narodowa";12;15;;;15;;;;
+"31";2;;;75212;"Pozostałe wydatki obronne";13;15;;;15;;;;
+"31";1;;853;;"Pozostałe zadania w zakresie polityki społecznej";14;174544;;150;166941;3250;;;4203
+"31";2;;;85336;"Ochotnicze Hufce Pracy";15;174544;;150;166941;3250;;;4203
+"31";1;;921;;"Kultura i ochrona dziedzictwa narodowego";16;1613;;;1613;;;;
+"31";2;;;92116;"Biblioteki";17;1613;;;1613;;;;
+"32";0;"32";;;"ROLNICTWO";1;748171;390291;4542;281845;12792;;;58701
+"32";1;;10;;"Rolnictwo i łowiectwo";2;422049;340278;152;80215;1379;;;25
+"32";2;;;1011;"Krajowa Stacja Chemiczno-Rolnicza";3;36734;;53;36531;150;;;
+"32";2;;;1013;"Centralny Ośrodek Badania Odmian Roślin Uprawnych";4;28119;28119;;;;;;
+"32";2;;;1015;"Postęp biologiczny w produkcji roślinnej";5;18594;18594;;;;;;
+"32";2;;;1017;"Ochrona roślin";6;2521;2521;;;;;;
+"32";2;;;1018;"Rolnictwo ekologiczne";7;5220;5220;;;;;;
+"32";2;;;1019;"Krajowe Centrum Hodowli Zwierząt";8;9805;;40;9765;;;;
+"32";2;;;1020;"Postęp biologiczny w produkcji zwierzęcej";9;98195;98195;;;;;;
+"32";2;;;1021;"Główny Inspektorat Weterynarii";10;10482;;;10482;;;;
+"32";2;;;1026;"Dopłaty do ubezpieczeń upraw rolnych i zwierząt gospodarskich";11;100000;100000;;;;;;
+"32";2;;;1032;"Inspekcja Ochrony Roślin i Nasiennictwa";12;10254;;8;10246;;;;
+"32";2;;;1035;"Graniczne inspektoraty weterynarii";13;9410;;11;9384;15;;;
+"32";2;;;1095;"Pozostała działalność";14;92715;87629;40;3807;1214;;;25
+"32";1;;730;;"Nauka";15;44000;44000;;;;;;
+"32";2;;;73095;"Pozostała działalność";16;44000;44000;;;;;;
+"32";1;;750;;"Administracja publiczna";17;115256;;97;56063;5787;;;53309
+"32";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";18;111381;;97;52188;5787;;;53309
+"32";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";19;3875;;;3875;;;;
+"32";1;;752;;"Obrona narodowa";20;35;;;35;;;;
+"32";2;;;75212;"Pozostałe wydatki obronne";21;35;;;35;;;;
+"32";1;;801;;"Oświata i wychowanie";22;142116;620;3908;126744;5626;;;5218
+"32";2;;;80130;"Szkoły zawodowe";23;139945;;3903;125322;5626;;;5094
+"32";2;;;80146;"Dokształcanie i doskonalenie nauczycieli";24;1551;;5;1422;;;;124
+"32";2;;;80195;"Pozostała działalność";25;620;620;;;;;;
+"32";1;;854;;"Edukacyjna opieka wychowawcza";26;19322;;385;18788;;;;149
+"32";2;;;85410;"Internaty i bursy szkolne";27;19322;;385;18788;;;;149
+"32";1;;921;;"Kultura i ochrona dziedzictwa narodowego";28;5393;5393;;;;;;
+"32";2;;;92116;"Biblioteki";29;3905;3905;;;;;;
+"32";2;;;92118;"Muzea";30;1488;1488;;;;;;
+"33";0;"33";;;"ROZWÓJ WSI";1;5155677;1887470;45;14032;197700;;;3056430
+"33";1;;10;;"Rolnictwo i łowiectwo";2;5142306;1887432;10;734;197700;;;3056430
+"33";2;;;1001;"Centrum Doradztwa Rolniczego";3;12133;11433;;;700;;;
+"33";2;;;1027;"Agencja Restrukturyzacji  i Modernizacji Rolnictwa";4;5129429;1875999;;;197000;;;3056430
+"33";2;;;1095;"Pozostała działalność";5;744;;10;734;;;;
+"33";1;;750;;"Administracja publiczna";6;13361;38;35;13288;;;;
+"33";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";7;13126;;35;13091;;;;
+"33";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";8;235;38;;197;;;;
+"33";1;;752;;"Obrona narodowa";9;10;;;10;;;;
+"33";2;;;75212;"Pozostałe wydatki obronne";10;10;;;10;;;;
+"34";0;"34";;;"ROZWÓJ REGIONALNY";1;1496535;;435;34837;2314;;;1458949
+"34";1;;150;;"Przetwórstwo przemysłowe";2;51198;;;;;;;51198
+"34";2;;;15012;"Polska Agencja Rozwoju Przedsiębiorczości";3;38144;;;;;;;38144
+"34";2;;;15095;"Pozostała działalność";4;13054;;;;;;;13054
+"34";1;;750;;"Administracja publiczna";5;437538;;435;34829;2314;;;399960
+"34";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";6;276666;;170;31626;2314;;;242556
+"34";2;;;75018;"Urzędy marszałkowskie";7;101090;;;;;;;101090
+"34";2;;;75057;"Placówki zagraniczne";8;824;;256;568;;;;
+"34";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";9;1295;;;1295;;;;
+"34";2;;;75095;"Pozostała działalność";10;57663;;9;1340;;;;56314
+"34";1;;752;;"Obrona narodowa";11;8;;;8;;;;
+"34";2;;;75212;"Pozostałe wydatki obronne";12;8;;;8;;;;
+"34";1;;755;;"Wymiar sprawiedliwości";13;337;;;;;;;337
+"34";2;;;75514;"Krajowa Szkoła Sądownictwa i Prokuratury";14;337;;;;;;;337
+"34";1;;758;;"Różne rozliczenia";15;909534;;;;;;;909534
+"34";2;;;75861;"Regionalne Programy Operacyjne 2007-2013";16;632235;;;;;;;632235
+"34";2;;;75862;"Program Operacyjny Kapitał Ludzki";17;277299;;;;;;;277299
+"34";1;;852;;"Pomoc społeczna";18;2299;;;;;;;2299
+"34";2;;;85217;"Regionalne ośrodki polityki społecznej";19;2299;;;;;;;2299
+"34";1;;853;;"Pozostałe zadania w zakresie polityki społecznej";20;95621;;;;;;;95621
+"34";2;;;85332;"Wojewódzkie urzędy pracy";21;95621;;;;;;;95621
+"35";0;"35";;;"RYNKI ROLNE";1;524329;309482;122;26979;10220;;;177526
+"35";1;;10;;"Rolnictwo i łowiectwo";2;20124;;120;19884;120;;;
+"35";2;;;1023;"Inspekcja Jakości Handlowej Artykułów Rolno-Spożywczych";3;17160;;110;16930;120;;;
+"35";2;;;1095;"Pozostała działalność";4;2964;;10;2954;;;;
+"35";1;;500;;"Handel";5;496812;309186;;;10100;;;177526
+"35";2;;;50002;"Agencja Rynku Rolnego";6;496812;309186;;;10100;;;177526
+"35";1;;750;;"Administracja publiczna";7;7383;296;2;7085;;;;
+"35";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";8;6964;;2;6962;;;;
+"35";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";9;419;296;;123;;;;
+"35";1;;752;;"Obrona narodowa";10;10;;;10;;;;
+"35";2;;;75212;"Pozostałe wydatki obronne";11;10;;;10;;;;
+"36";0;"36";;;"SKARB PAŃSTWA";1;82897;9514;121;67012;6250;;;
+"36";1;;150;;"Przetwórstwo przemysłowe";2;7879;7014;;;865;;;
+"36";2;;;15095;"Pozostała działalność";3;7879;7014;;;865;;;
+"36";1;;750;;"Administracja publiczna";4;71183;;121;65677;5385;;;
+"36";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";5;70932;;121;65426;5385;;;
+"36";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";6;251;;;251;;;;
+"36";1;;752;;"Obrona narodowa";7;335;;;335;;;;
+"36";2;;;75212;"Pozostałe wydatki obronne";8;335;;;335;;;;
+"36";1;;758;;"Różne rozliczenia";9;1000;;;1000;;;;
+"36";2;;;75820;"Prywatyzacja";10;1000;;;1000;;;;
+"36";1;;921;;"Kultura i ochrona dziedzictwa narodowego";11;2500;2500;;;;;;
+"36";2;;;92115;"Polska Agencja Prasowa";12;2500;2500;;;;;;
+"37";0;"37";;;"SPRAWIEDLIWOŚĆ";1;3870487;40310;1170739;2541196;109904;;;8338
+"37";1;;750;;"Administracja publiczna";2;63222;;;62579;;;;643
+"37";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;61424;;;60781;;;;643
+"37";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;1798;;;1798;;;;
+"37";1;;752;;"Obrona narodowa";5;309;;;309;;;;
+"37";2;;;75212;"Pozostałe wydatki obronne";6;309;;;309;;;;
+"37";1;;753;;"Obowiązkowe ubezpieczenia społeczne";7;1051716;;1044676;7040;;;;
+"37";2;;;75301;"Świadczenia pieniężne z zaopatrzenia emerytalnego";8;1045640;;1038600;7040;;;;
+"37";2;;;75312;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";9;6076;;6076;;;;;
+"37";1;;755;;"Wymiar sprawiedliwości";10;2630902;40310;124401;2348614;109904;;;7673
+"37";2;;;75501;"Centralne administracyjne  jednostki wymiaru sprawiedliwości  i prokuratury";11;100460;;35;77783;18154;;;4488
+"37";2;;;75507;"Instytuty naukowe resortu sprawiedliwości";12;17951;;31;17270;650;;;
+"37";2;;;75512;"Więziennictwo";13;2373267;;122655;2168248;80000;;;2364
+"37";2;;;75513;"Zakłady dla nieletnich";14;98914;;1680;85313;11100;;;821
+"37";2;;;75514;"Krajowa Szkoła Sądownictwa i Prokuratury";15;40310;40310;;;;;;
+"37";1;;801;;"Oświata i wychowanie";16;123142;;;121458;;;;22
+"37";2;;;80144;"Inne formy kształcenia osobno niewymienione";17;123142;;;121458;;;;22
+"37";1;;851;;"Ochrona zdrowia";18;1196;;;1196;;;;
+"37";2;;;85156;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";19;1196;;;1196;;;;
+"38";0;"38";;;"SZKOLNICTWO  WYśSZE";1;9594987;8894344;134143;47008;410349;;;109143
+"38";1;;150;;"Przetwórstwo przemysłowe";2;8605;8605;;;;;;
+"38";2;;;15002;"Wydawanie podręczników szkolnych i akademickich";3;8605;8605;;;;;;
+"38";1;;750;;"Administracja publiczna";4;19180;;10;10986;760;;;7424
+"38";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";5;18917;;10;10723;760;;;7424
+"38";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";6;263;;;263;;;;
+"38";1;;752;;"Obrona narodowa";7;24;;;24;;;;
+"38";2;;;75212;"Pozostałe wydatki obronne";8;24;;;24;;;;
+"38";1;;803;;"Szkolnictwo wyższe";9;9557047;8885739;134133;25867;409589;;;101719
+"38";2;;;80306;"Działalność dydaktyczna";10;7841406;7423620;3685;;357357;;;56744
+"38";2;;;80307;"Jednostki pomocnicze szkolnictwa wyższego";11;3025;;15;3010;;;;
+"38";2;;;80309;"Pomoc materialna dla studentów i doktorantów";12;1520268;1453324;14782;;52162;;;
+"38";2;;;80310;"Fundusz Pożyczek i Kredytów Studenckich";13;87300;;87300;;;;;
+"38";2;;;80395;"Pozostała działalność";14;105048;8795;28351;22857;70;;;44975
+"38";1;;851;;"Ochrona zdrowia";15;10131;;;10131;;;;
+"38";2;;;85156;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";16;10131;;;10131;;;;
+"39";0;"39";;;"TRANSPORT";1;5876766;1638151;4559;2404084;1521929;;;308043
+"39";1;;600;;"Transport i łączność";2;5734356;1628178;;2345015;1502212;;;254417
+"39";2;;;60001;"Krajowe pasażerskie przewozy kolejowe";3;620000;620000;4534;;;;;
+"39";2;;;60002;"Infrastruktura kolejowa";4;2011867;1000000;;;905257;;;106610
+"39";2;;;60004;"Lokalny transport zbiorowy";5;7566;;;;;;;7566
+"39";2;;;60005;"Autostrady płatne";6;186819;;;117542;68431;;;846
+"39";2;;;60011;"Drogi publiczne krajowe";7;2188953;;;1661166;479399;;;48388
+"39";2;;;60012;"Generalna Dyrekcja Dróg Krajowych i Autostrad";8;618652;;4336;489745;37347;;;87224
+"39";2;;;60041;"Infrastruktura portowa";9;172;;;;;;;172
+"39";2;;;60042;"Urzędy żeglugi śródlądowej ";10;10691;;70;5313;5308;;;
+"39";2;;;60055;"Inspekcja Transportu Drogowego";11;19944;;78;17765;2101;;;
+"39";2;;;60056;"Urząd Lotnictwa Cywilnego";12;53364;;50;48945;4369;;;
+"39";2;;;60061;"Polska Agencja śeglugi Powietrznej";13;8178;8178;;;;;;
+"39";2;;;60095;"Pozostała działalność";14;8150;;;4539;;;;3611
+"39";1;;750;;"Administracja publiczna";15;110801;;25;51533;5617;;;53626
+"39";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";16;107423;;25;48155;5617;;;53626
+"39";2;;;75057;"Placówki zagraniczne";17;2000;;;2000;;;;
+"39";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";18;1378;;;1378;;;;
+"39";1;;752;;"Obrona narodowa";19;21636;;;7536;14100;;;
+"39";2;;;75212;"Pozostałe wydatki obronne";20;21636;;;7536;14100;;;
+"39";1;;803;;"Szkolnictwo wyższe";21;9973;9973;;;;;;
+"39";2;;;80306;"Działalność dydaktyczna";22;9973;9973;;;;;;
+"40";0;"40";;;"TURYSTYKA";1;48313;39900;25;8218;170;;;
+"40";1;;630;;"Turystyka";2;43188;39900;23;3265;;;;
+"40";2;;;63002;"Polska Organizacja Turystyczna";3;38100;38100;;;;;;
+"40";2;;;63003;"Zadania w zakresie upowszechniania  turystyki";4;1800;1800;;;;;;
+"40";2;;;63095;"Pozostała działalność";5;3288;;23;3265;;;;
+"40";1;;750;;"Administracja publiczna";6;5115;;2;4943;170;;;
+"40";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";7;4453;;2;4281;170;;;
+"40";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";8;662;;;662;;;;
+"40";1;;752;;"Obrona narodowa";9;10;;;10;;;;
+"40";2;;;75212;"Pozostałe wydatki obronne";10;10;;;10;;;;
+"41";0;"41";;;"ŚRODOWISKO";1;480045;4220;3610;287548;3913;;;180754
+"41";1;;20;;"Leśnictwo";2;8843;4220;5;1242;183;;;3193
+"41";2;;;2003;"Biuro Nasiennictwa Leśnego";3;1430;;5;1242;183;;;
+"41";2;;;2095;"Pozostała działalność";4;7413;4220;;;;;;3193
+"41";1;;710;;"Działalność usługowa";5;2818;;;2818;;;;
+"41";2;;;71005;"Prace geologiczne (nieinwestycyjne)";6;960;;;960;;;;
+"41";2;;;71095;"Pozostała działalność";7;1858;;;1858;;;;
+"41";1;;750;;"Administracja publiczna";8;62973;;22;52122;1000;;;9829
+"41";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";9;60658;;15;49814;1000;;;9829
+"41";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";10;2208;;;2208;;;;
+"41";2;;;75095;"Pozostała działalność";11;107;;7;100;;;;
+"41";1;;752;;"Obrona narodowa";12;182;;;182;;;;
+"41";2;;;75212;"Pozostałe wydatki obronne";13;182;;;182;;;;
+"41";1;;801;;"Oświata i wychowanie";14;30754;;711;28815;1228;;;
+"41";2;;;80130;"Szkoły zawodowe";15;26621;;515;24897;1209;;;
+"41";2;;;80146;"Dokształcanie i doskonalenie nauczycieli";16;49;;;49;;;;
+"41";2;;;80148;"Stołówki szkolne i przedszkolne";17;3427;;139;3276;12;;;
+"41";2;;;80195;"Pozostała działalność";18;657;;57;593;7;;;
+"41";1;;854;;"Edukacyjna opieka wychowawcza";19;13514;;260;12768;486;;;
+"41";2;;;85410;"Internaty i bursy szkolne";20;13484;;260;12738;486;;;
+"41";2;;;85446;"Dokształcanie i doskonalenie nauczycieli";21;30;;;30;;;;
+"41";1;;900;;"Gospodarka komunalna i ochrona środowiska";22;277162;;206;117309;396;;;159251
+"41";2;;;90008;"Ochrona różnorodności biologicznej i krajobrazu";23;49;;;49;;;;
+"41";2;;;90011;"Fundusz Ochrony Środowiska i Gospodarki Wodnej";24;152244;;;;;;;152244
+"41";2;;;90014;"Inspekcja Ochrony Środowiska";25;19459;;20;16395;40;;;3004
+"41";2;;;90022;"Generalna Dyrekcja Ochrony Środowiska";26;18109;;8;16755;;;;1346
+"41";2;;;90023;"Regionalne dyrekcje ochrony środowiska";27;85321;;177;82648;326;;;2170
+"41";2;;;90095;"Pozostała działalność";28;1980;;1;1462;30;;;487
+"41";1;;925;;"Ogrody botaniczne i zoologiczne oraz naturalne obszary i obiekty chronionej przyrody";29;83799;;2406;72292;620;;;8481
+"41";2;;;92501;"Parki narodowe";30;83783;;2395;72287;620;;;8481
+"41";2;;;92595;"Pozostała działalność";31;16;;11;5;;;;
+"42";0;"42";;;"SPRAWY WEWNĘTRZNE";1;17102013;188947;6943288;9489936;401561;;;78281
+"42";1;;710;;"Działalność usługowa";2;10;10;;;;;;
+"42";2;;;71032;"Agencja Mienia Wojskowego";3;10;10;;;;;;
+"42";1;;750;;"Administracja publiczna";4;489674;400;152;392224;35369;;;61529
+"42";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";5;133470;400;118;125428;5893;;;1631
+"42";2;;;75070;"Centrum Personalizacji Dokumentów";6;219949;;27;203885;16037;;;
+"42";2;;;75073;"Urząd do Spraw Cudzoziemców";7;26228;;7;24405;1300;;;516
+"42";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";8;36499;;;24909;11590;;;
+"42";2;;;75095;"Pozostała działalność";9;73528;;;13597;549;;;59382
+"42";1;;753;;"Obowiązkowe ubezpieczenia społeczne";10;6608070;;6541775;59951;6344;;;
+"42";2;;;75301;"Świadczenia pieniężne z zaopatrzenia emerytalnego";11;6608070;;6541775;59951;6344;;;
+"42";1;;754;;"Bezpieczeństwo  publiczne i ochrona przeciwpożarowa";12;9811699;99010;385354;8997103;313480;;;16752
+"42";2;;;75402;"Komenda Główna Policji";13;503693;;14334;453297;36007;;;55
+"42";2;;;75403;"Jednostki terenowe Policji ";14;462796;;2234;332353;128209;;;
+"42";2;;;75404;"Komendy wojewódzkie Policji ";15;1818989;;62821;1732437;15541;;;8190
+"42";2;;;75405;"Komendy powiatowe Policji ";16;5317463;;230697;5005494;75430;;;5842
+"42";2;;;75406;"Straż Graniczna";17;1244913;;64045;1164370;13845;;;2653
+"42";2;;;75408;"Biuro Ochrony Rządu";18;189775;;5533;177042;7200;;;
+"42";2;;;75409;"Komenda Główna Państwowej Straży Pożarnej";19;165312;56981;4379;84321;19619;;;12
+"42";2;;;75412;"Ochotnicze straże pożarne";20;28247;12000;;;16247;;;
+"42";2;;;75414;"Obrona cywilna";21;116;;;116;;;;
+"42";2;;;75415;"Zadania ratownictwa górskiego i wodnego";22;12249;11140;;;1109;;;
+"42";2;;;75421;"Zarządzanie kryzysowe";23;6831;;10;6709;112;;;
+"42";2;;;75495;"Pozostała działalność";24;61315;18889;1301;40964;161;;;
+"42";1;;803;;"Szkolnictwo wyższe";25;87564;87317;247;;;;;
+"42";2;;;80303;"Uczelnie służb państwowych";26;85825;85825;;;;;;
+"42";2;;;80309;"Pomoc materialna dla studentów i doktorantów";27;1695;1492;203;;;;;
+"42";2;;;80395;"Pozostała działalność";28;44;;44;;;;;
+"42";1;;851;;"Ochrona zdrowia";29;57083;2210;84;8421;46368;;;
+"42";2;;;85132;"Inspekcja Sanitarna";30;6437;;;6427;10;;;
+"42";2;;;85141;"Ratownictwo medyczne";31;982;;;982;;;;
+"42";2;;;85143;"Publiczna służba krwi";32;1175;1175;;;;;;
+"42";2;;;85149;"Programy polityki zdrowotnej";33;5985;825;;;5160;;;
+"42";2;;;85195;"Pozostała działalność";34;42504;210;84;1012;41198;;;
+"42";1;;852;;"Pomoc społeczna";35;47913;;15676;32237;;;;
+"42";2;;;85231;"Pomoc dla cudzoziemców";36;47913;;15676;32237;;;;
+"43";0;"43";;;"WYZNANIA RELIGIJNE ORAZ MNIEJSZOŚCI NARODOWE I ETNICZNE";1;113264;103440;2;7623;1182;;;1017
+"43";1;;750;;"Administracja publiczna";2;9997;1275;2;7623;80;;;1017
+"43";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;8860;1155;2;7623;80;;;
+"43";2;;;75095;"Pozostała działalność";4;1137;120;;;;;;1017
+"43";1;;758;;"Różne rozliczenia";5;89185;89185;;;;;;
+"43";2;;;75822;"Fundusz Kościelny";6;89185;89185;;;;;;
+"43";1;;801;;"Oświata i wychowanie";7;881;160;;;721;;;
+"43";2;;;80120;"Licea ogólnokształcące ";8;721;;;;721;;;
+"43";2;;;80195;"Pozostała działalność";9;160;160;;;;;;
+"43";1;;803;;"Szkolnictwo wyższe";10;345;345;;;;;;
+"43";2;;;80395;"Pozostała działalność";11;345;345;;;;;;
+"43";1;;921;;"Kultura i ochrona dziedzictwa narodowego";12;12856;12475;;;381;;;
+"43";2;;;92104;"Działalność radiowa i telewizyjna";13;870;870;;;;;;
+"43";2;;;92105;"Pozostałe zadania w zakresie kultury";14;11986;11605;;;381;;;
+"44";0;"44";;;"ZABEZPIECZENIE SPOŁECZNE";1;806217;760035;136;44771;;;;1275
+"44";1;;750;;"Administracja publiczna";2;34185;;136;33555;;;;494
+"44";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;32045;;36;31515;;;;494
+"44";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;1486;;;1486;;;;
+"44";2;;;75095;"Pozostała działalność";5;654;;100;554;;;;
+"44";1;;752;;"Obrona narodowa";6;15;;;15;;;;
+"44";2;;;75212;"Pozostałe wydatki obronne";7;15;;;15;;;;
+"44";1;;852;;"Pomoc społeczna";8;24331;12349;;11201;;;;781
+"44";2;;;85295;"Pozostała działalność";9;24331;12349;;11201;;;;781
+"44";1;;853;;"Pozostałe zadania w zakresie polityki społecznej";10;747686;747686;;;;;;
+"44";2;;;85324;"Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych";11;747686;747686;;;;;;
+"45";0;"45";;;"SPRAWY ZAGRANICZNE  I CZŁONKOSTWO  RZECZYPOSPOLITEJ POLSKIEJ W UNII EUROPEJSKIEJ";1;1823536;12235;250060;1358443;168877;;;33921
+"45";1;;750;;"Administracja publiczna";2;1788021;12235;247018;1325970;168877;;;33921
+"45";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;299649;;129;242995;56401;;;124
+"45";2;;;75057;"Placówki zagraniczne";4;925763;;246889;567438;111436;;;
+"45";2;;;75058;"Działalność informacyjna i kulturalna prowadzona za granicą";5;46627;;;46627;;;;
+"45";2;;;75062;"Polski Instytut Spraw Międzynarodowych";6;9107;9107;;;;;;
+"45";2;;;75063;"Polski Komitet do spraw UNESCO";7;1228;1228;;;;;;
+"45";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";8;111483;;;110443;1040;;;
+"45";2;;;75095;"Pozostała działalność";9;394164;1900;;358467;;;;33797
+"45";1;;752;;"Obrona narodowa";10;710;;;710;;;;
+"45";2;;;75212;"Pozostałe wydatki obronne";11;710;;;710;;;;
+"45";1;;801;;"Oświata i wychowanie";12;4405;;;4405;;;;
+"45";2;;;80135;"Szkolnictwo polskie za granicą";13;4405;;;4405;;;;
+"45";1;;853;;"Pozostałe zadania w zakresie polityki społecznej";14;3542;;3042;500;;;;
+"45";2;;;85330;"Opieka i pomoc dla Polonii i Polaków za granicą";15;3542;;3042;500;;;;
+"45";1;;854;;"Edukacyjna opieka wychowawcza";16;614;;;614;;;;
+"45";2;;;85413;"Kolonie i obozy dla młodzieży polonijnej w kraju";17;614;;;614;;;;
+"45";1;;921;;"Kultura i ochrona dziedzictwa narodowego";18;26244;;;26244;;;;
+"45";2;;;92104;"Działalność radiowa i telewizyjna";19;21815;;;21815;;;;
+"45";2;;;92195;"Pozostała działalność";20;4429;;;4429;;;;
+"46";0;"46";;;"ZDROWIE";1;3686516;1727346;3915;1023354;843222;;;88679
+"46";1;;750;;"Administracja publiczna";2;58053;;220;48953;1500;;;7380
+"46";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;55496;;220;46396;1500;;;7380
+"46";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;2557;;;2557;;;;
+"46";1;;752;;"Obrona narodowa";5;11395;;;11395;;;;
+"46";2;;;75212;"Pozostałe wydatki obronne";6;11395;;;11395;;;;
+"46";1;;803;;"Szkolnictwo wyższe";7;1364173;1317256;2752;27;35000;;;9138
+"46";2;;;80306;"Działalność dydaktyczna";8;1269489;1224818;533;;35000;;;9138
+"46";2;;;80309;"Pomoc materialna dla studentów i doktorantów";9;94657;92438;2219;;;;;
+"46";2;;;80395;"Pozostała działalność";10;27;;;27;;;;
+"46";1;;851;;"Ochrona zdrowia";11;2244190;401385;943;962979;806722;;;72161
+"46";2;;;85112;"Szpitale kliniczne";12;534316;;;;531097;;;3219
+"46";2;;;85117;"Zakłady opiekuńczo-lecznicze i pielęgnacyjno-opiekuńcze";13;7544;;;7344;200;;;
+"46";2;;;85120;"Lecznictwo psychiatryczne";14;36887;;23;36514;350;;;
+"46";2;;;85132;"Inspekcja Sanitarna ";15;32949;;29;32055;865;;;
+"46";2;;;85133;"Inspekcja Farmaceutyczna";16;12454;;5;12449;;;;
+"46";2;;;85134;"Inspekcja do Spraw Substancji i Preparatów Chemicznych";17;3931;;;3931;;;;
+"46";2;;;85137;"Urząd Rejestracji Produktów Leczniczych, Wyrobów Medycznych i Produktów Biobójczych";18;46673;;40;46033;600;;;
+"46";2;;;85138;"Dopłaty do oprocentowania  kredytów udzielanych lekarzom, lekarzom dentystom, pielęgniarkom i położnym oraz umorzenia tych kredytów";19;1000;1000;;;;;;
+"46";2;;;85141;"Ratownictwo medyczne";20;79335;75409;;;3926;;;
+"46";2;;;85143;"Publiczna służba krwi";21;86968;83560;23;2324;1000;;;61
+"46";2;;;85148;"Medycyna pracy";22;1125;;;1125;;;;
+"46";2;;;85149;"Programy polityki zdrowotnej";23;617956;;;352821;265135;;;
+"46";2;;;85151;"Świadczenia wysokospecjalistyczne";24;309545;;;309545;;;;
+"46";2;;;85152;"Zapobieganie i zwalczanie AIDS";25;5704;1336;95;4123;150;;;
+"46";2;;;85153;"Zwalczanie narkomanii ";26;9220;5553;;3607;60;;;
+"46";2;;;85154;"Przeciwdziałanie  alkoholizmowi";27;5885;997;;4888;;;;
+"46";2;;;85156;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";28;207812;207812;;;;;;
+"46";2;;;85195;"Pozostała działalność";29;244886;25718;728;146220;3339;;;68881
+"46";1;;921;;"Kultura i ochrona dziedzictwa narodowego";30;8705;8705;;;;;;
+"46";2;;;92116;"Biblioteki";31;8705;8705;;;;;;
+"49";0;"49";;;"URZĄD ZAMÓWIEŃ PUBLICZNYCH";1;20626;;9;18720;150;;;1747
+"49";1;;750;;"Administracja publiczna";2;20626;;9;18720;150;;;1747
+"49";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;20586;;9;18680;150;;;1747
+"49";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;40;;;40;;;;
+"50";0;"50";;;"URZĄD REGULACJI ENERGETYKI";1;34330;;5;34079;246;;;
+"50";1;;750;;"Administracja publiczna";2;34330;;5;34079;246;;;
+"50";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;34330;;5;34079;246;;;
+"53";0;"53";;;"URZĄD OCHRONY KONKURENCJI  I KONSUMENTÓW";1;52476;1700;63;46423;3330;;;960
+"53";1;;750;;"Administracja publiczna";2;52472;1700;63;46419;3330;;;960
+"53";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;50336;;63;45983;3330;;;960
+"53";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;436;;;436;;;;
+"53";2;;;75095;"Pozostała działalność";5;1700;1700;;;;;;
+"53";1;;752;;"Obrona narodowa";6;4;;;4;;;;
+"53";2;;;75212;"Pozostałe wydatki obronne";7;4;;;4;;;;
+"54";0;"54";;;"URZĄD DO SPRAW KOMBATANTÓW  I OSÓB REPRESJONOWANYCH";1;29148;1800;9505;17743;100;;;
+"54";1;;750;;"Administracja publiczna";2;14309;;5;14204;100;;;
+"54";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;14309;;5;14204;100;;;
+"54";1;;752;;"Obrona narodowa";4;1;;;1;;;;
+"54";2;;;75212;"Pozostałe wydatki obronne";5;1;;;1;;;;
+"54";1;;851;;"Ochrona zdrowia";6;16;;;16;;;;
+"54";2;;;85156;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";7;16;;;16;;;;
+"54";1;;853;;"Pozostałe zadania w zakresie polityki społecznej";8;14022;1000;9500;3522;;;;
+"54";2;;;85323;"Państwowy Fundusz Kombatantów";9;14022;1000;9500;3522;;;;
+"54";1;;921;;"Kultura i ochrona dziedzictwa narodowego";10;800;800;;;;;;
+"54";2;;;92195;"Pozostała działalność";11;800;800;;;;;;
+"56";0;"56";;;"CENTRALNE BIURO ANTYKORUPCYJNE";1;106971;;1822;94041;11108;;;
+"56";1;;752;;"Obrona narodowa";2;10;;;10;;;;
+"56";2;;;75212;"Pozostałe wydatki obronne";3;10;;;10;;;;
+"56";1;;754;;"Bezpieczeństwo  publiczne i ochrona przeciwpożarowa";4;106961;;1822;94031;11108;;;
+"56";2;;;75420;"Centralne Biuro Antykorupcyjne";5;106961;;1822;94031;11108;;;
+"57";0;"57";;;"AGENCJA BEZPIECZEŃSTWA WEWNĘTRZNEGO";1;502307;;20177;469049;13000;;;81
+"57";1;;750;;"Administracja publiczna";2;4592;;;4592;;;;
+"57";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";3;4592;;;4592;;;;
+"57";1;;752;;"Obrona narodowa";4;33;;;33;;;;
+"57";2;;;75212;"Pozostałe wydatki obronne";5;33;;;33;;;;
+"57";1;;754;;"Bezpieczeństwo  publiczne i ochrona przeciwpożarowa";6;497682;;20177;464424;13000;;;81
+"57";2;;;75418;"Agencja Bezpieczeństwa  Wewnętrznego";7;497682;;20177;464424;13000;;;81
+"58";0;"58";;;"GŁÓWNY URZĄD STATYSTYCZNY";1;694382;87500;94117;473384;32820;;;6561
+"58";1;;150;;"Przetwórstwo przemysłowe";2;8635;;24;8551;60;;;
+"58";2;;;15001;"Drukarnie";3;8635;;24;8551;60;;;
+"58";1;;720;;"Informatyka";4;180289;;216;180030;43;;;
+"58";2;;;72001;"Zakłady techniki obliczeniowej";5;19432;;39;19393;;;;
+"58";2;;;72002;"Inne jednostki usług informatycznych";6;160857;;177;160637;43;;;
+"58";1;;750;;"Administracja publiczna";7;505448;87500;93877;284793;32717;;;6561
+"58";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";8;72524;;420;65020;1629;;;5455
+"58";2;;;75007;"Jednostki terenowe podległe naczelnym i centralnym organom administracji rządowej";9;104338;;138;103319;881;;;
+"58";2;;;75056;"Spis powszechny i inne";10;326706;87500;93305;114628;30167;;;1106
+"58";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";11;419;;;419;;;;
+"58";2;;;75095;"Pozostała działalność";12;1461;;14;1407;40;;;
+"58";1;;752;;"Obrona narodowa";13;10;;;10;;;;
+"58";2;;;75212;"Pozostałe wydatki obronne";14;10;;;10;;;;
+"59";0;"59";;;"AGENCJA WYWIADU";1;155726;;4799;128047;22880;;;
+"59";1;;754;;"Bezpieczeństwo  publiczne i ochrona przeciwpożarowa";2;155726;;4799;128047;22880;;;
+"59";2;;;75419;"Agencja Wywiadu";3;155726;;4799;128047;22880;;;
+"60";0;"60";;;"WYŻSZY URZĄD GÓRNICZY";1;52754;;43;51811;900;;;
+"60";1;;750;;"Administracja publiczna";2;52754;;43;51811;900;;;
+"60";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;20162;;43;19219;900;;;
+"60";2;;;75007;"Jednostki terenowe podległe naczelnym i centralnym organom administracji rządowej";4;32578;;;32578;;;;
+"60";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";5;14;;;14;;;;
+"61";0;"61";;;"URZĄD PATENTOWY RZECZYPOSPOLITEJ POLSKIEJ";1;47084;;100;46684;300;;;
+"61";1;;750;;"Administracja publiczna";2;47083;;100;46683;300;;;
+"61";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;46655;;100;46255;300;;;
+"61";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;428;;;428;;;;
+"61";1;;752;;"Obrona narodowa";5;1;;;1;;;;
+"61";2;;;75212;"Pozostałe wydatki obronne";6;1;;;1;;;;
+"62";0;"62";;;"RYBOŁÓWSTWO";1;177102;5650;189;24573;3436;;;143254
+"62";1;;50;;"Rybołówstwo i rybactwo";2;151451;5650;180;17295;416;;;127910
+"62";2;;;5004;"Inspektoraty rybołówstwa morskiego";3;12976;;170;11015;416;;;1375
+"62";2;;;5006;"Zarybianie polskich obszarów morskich";4;4864;;;4864;;;;
+"62";2;;;5011;"Program Operacyjny Zrównoważony rozwój sektora rybołówstwa i nadbrzeżnych obszarów rybackich 2007-2013";5;126535;;;;;;;126535
+"62";2;;;5095;"Pozostała działalność";6;7076;5650;10;1416;;;;
+"62";1;;750;;"Administracja publiczna";7;25646;;9;7273;3020;;;15344
+"62";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";8;25393;;9;7020;3020;;;15344
+"62";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";9;253;;;253;;;;
+"62";1;;752;;"Obrona narodowa";10;5;;;5;;;;
+"62";2;;;75212;"Pozostałe wydatki obronne";11;5;;;5;;;;
+"63";0;"63";;;"RODZINA";1;13247;8100;6;5141;;;;
+"63";1;;750;;"Administracja publiczna";2;5447;300;6;5141;;;;
+"63";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;4531;;6;4525;;;;
+"63";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";4;366;;;366;;;;
+"63";2;;;75095;"Pozostała działalność";5;550;300;;250;;;;
+"63";1;;852;;"Pomoc społeczna";6;7800;7800;;;;;;
+"63";2;;;85295;"Pozostała działalność";7;7800;7800;;;;;;
+"64";0;"64";;;"GŁÓWNY URZĄD MIAR";1;126631;;324;122999;3308;;;
+"64";1;;750;;"Administracja publiczna";2;126629;;324;122997;3308;;;
+"64";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;34173;;62;32552;1559;;;
+"64";2;;;75007;"Jednostki terenowe podległe naczelnym i centralnym organom administracji rządowej";4;92456;;262;90445;1749;;;
+"64";1;;752;;"Obrona narodowa";5;2;;;2;;;;
+"64";2;;;75212;"Pozostałe wydatki obronne";6;2;;;2;;;;
+"65";0;"65";;;"POLSKI KOMITET NORMALIZACYJNY";1;33524;;34;28178;5312;;;
+"65";1;;750;;"Administracja publiczna";2;33520;;34;28174;5312;;;
+"65";2;;;75002;"Polski Komitet Normalizacyjny";3;33520;;34;28174;5312;;;
+"65";1;;752;;"Obrona narodowa";4;4;;;4;;;;
+"65";2;;;75212;"Pozostałe wydatki obronne";5;4;;;4;;;;
+"66";0;"66";;;"RZECZNIK PRAW PACJENTA";1;6591;;2;6439;150;;;
+"66";1;;750;;"Administracja publiczna";2;6591;;2;6439;150;;;
+"66";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;6591;;2;6439;150;;;
+"67";0;"67";;;"POLSKA AKADEMIA NAUK";1;80110;79924;;;186;;;
+"67";1;;730;;"Nauka";2;80110;79924;;;186;;;
+"67";2;;;73010;"Działalność organów i korporacji uczonych Polskiej Akademii Nauk";3;13020;13020;;;;;;
+"67";2;;;73011;"Działalność pomocniczych jednostek naukowych i innych jednostek organizacyjnych  Polskiej Akademii Nauk";4;45823;45773;;;50;;;
+"67";2;;;73095;"Pozostała działalność";5;21267;21131;;;136;;;
+"68";0;"68";;;"PAŃSTWOWA AGENCJA ATOMISTYKI";1;100697;8129;390;91774;404;;;
+"68";1;;150;;"Przetwórstwo przemysłowe";2;8691;8129;335;3;224;;;
+"68";2;;;15004;"Zadania w zakresie bezpiecznego wykorzystania energii atomowej";3;8353;8129;;;224;;;
+"68";2;;;15095;"Pozostała działalność";4;338;;335;3;;;;
+"68";1;;750;;"Administracja publiczna";5;92001;;55;91766;180;;;
+"68";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";6;91695;;55;91460;180;;;
+"68";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";7;106;;;106;;;;
+"68";2;;;75095;"Pozostała działalność";8;200;;;200;;;;
+"68";1;;752;;"Obrona narodowa";9;5;;;5;;;;
+"68";2;;;75212;"Pozostałe wydatki obronne";10;5;;;5;;;;
+"70";0;"70";;;"KOMISJA NADZORU FINANSOWEGO";1;203144;;30;184944;17700;;;470
+"70";1;;758;;"Różne rozliczenia";2;203144;;30;184944;17700;;;470
+"70";2;;;75821;"Komisja Nadzoru Finansowego";3;203144;;30;184944;17700;;;470
+"71";0;"71";;;"URZĄD TRANSPORTU  KOLEJOWEGO";1;18008;;30;17632;346;;;
+"71";1;;750;;"Administracja publiczna";2;18008;;30;17632;346;;;
+"71";2;;;75001;"Urzędy naczelnych i centralnych organów administracji rządowej";3;18008;;30;17632;346;;;
+"72";0;"72";;;"KASA ROLNICZEGO UBEZPIECZENIA  SPOŁECZNEGO";1;15811660;15137384;652157;22119;;;;
+"72";1;;752;;"Obrona narodowa";2;10;;;10;;;;
+"72";2;;;75212;"Pozostałe wydatki obronne";3;10;;;10;;;;
+"72";1;;753;;"Obowiązkowe ubezpieczenia społeczne";4;15789481;15137384;652097;;;;;
+"72";2;;;75305;"Fundusz Emerytalno-Rentowy";5;15120037;15120037;;;;;;
+"72";2;;;75306;"Fundusz Prewencji i Rehabilitacji";6;1000;1000;;;;;;
+"72";2;;;75313;"Świadczenia finansowane z budżetu państwa zlecone do wypłaty Zakładowi Ubezpieczeń Społecznych i Kasie Rolniczego Ubezpieczenia Społecznego";7;668444;16347;652097;;;;;
+"72";1;;851;;"Ochrona zdrowia";8;22109;;;22109;;;;
+"72";2;;;85156;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";9;22109;;;22109;;;;
+"72";1;;853;;"Pozostałe zadania w zakresie polityki społecznej";10;60;;60;;;;;
+"72";2;;;85335;"Refundacja ulg dla inwalidów wojennych i wojskowych z tytułu ubezpieczenia OC i AC";11;60;;60;;;;;
+"73";0;"73";;;"ZAKŁAD UBEZPIECZEŃ  SPOŁECZNYCH";1;44577087;37210598;5359003;2007486;;;;
+"73";1;;753;;"Obowiązkowe ubezpieczenia społeczne";2;42410858;37161745;3507851;1741262;;;;
+"73";2;;;75303;"Fundusz Ubezpieczeń Społecznych";3;37134406;37134406;;;;;;
+"73";2;;;75309;"Składki na ubezpieczenia społeczne";4;1741206;;;1741206;;;;
+"73";2;;;75313;"Świadczenia finansowane z budżetu państwa zlecone do wypłaty Zakładowi Ubezpieczeń Społecznych i Kasie Rolniczego Ubezpieczenia Społecznego";5;3534624;27339;3507232;53;;;;
+"73";2;;;75395;"Pozostała działalność";6;622;;619;3;;;;
+"73";1;;851;;"Ochrona zdrowia";7;266192;;;266192;;;;
+"73";2;;;85156;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";8;266192;;;266192;;;;
+"73";1;;853;;"Pozostałe zadania w zakresie polityki społecznej";9;1900037;48853;1851152;32;;;;
+"73";2;;;85335;"Refundacja ulg dla inwalidów wojennych i wojskowych z tytułu ubezpieczenia OC i AC";10;651;;651;;;;;
+"73";2;;;85347;"Renta socjalna";11;1899386;48853;1850501;32;;;;
+"74";0;"74";;;"PROKURATORIA  GENERALNA SKARBU PAŃSTWA";1;40604;;5;40354;245;;;
+"74";1;;750;;"Administracja publiczna";2;40600;;5;40350;245;;;
+"74";2;;;75003;"Prokuratoria Generalna Skarbu Państwa";3;40600;;5;40350;245;;;
+"74";1;;752;;"Obrona narodowa";4;4;;;4;;;;
+"74";2;;;75212;"Pozostałe wydatki obronne";5;4;;;4;;;;
+"75";0;"75";;;"RZĄDOWE CENTRUM LEGISLACJI";1;24744;;4;22709;2000;;;31
+"75";1;;750;;"Administracja publiczna";2;24744;;4;22709;2000;;;31
+"75";2;;;75006;"Rządowe Centrum Legislacji";3;24744;;4;22709;2000;;;31
+"76";0;"76";;;"URZĄD KOMUNIKACJI  ELEKTRONICZNEJ";1;88554;;130;79745;6204;;;2475
+"76";1;;600;;"Transport i łączność";2;88353;;130;79544;6204;;;2475
+"76";2;;;60047;"Urząd Komunikacji Elektronicznej";3;88353;;130;79544;6204;;;2475
+"76";1;;750;;"Administracja publiczna";4;133;;;133;;;;
+"76";2;;;75076;"Przygotowanie i sprawowanie przewodnictwa w Radzie Unii Europejskiej";5;133;;;133;;;;
+"76";1;;752;;"Obrona narodowa";6;68;;;68;;;;
+"76";2;;;75212;"Pozostałe wydatki obronne";7;68;;;68;;;;
+"78";0;"78";;;"OBSŁUGA ZADŁUśENIA ZAGRANICZNEGO";1;8812800;;;;;8812800;;
+"78";1;;757;;"Obsługa długu publicznego";2;8812800;;;;;8812800;;
+"78";2;;;75701;"Obsługa zadłużenia zagranicznego,  należności i innych operacji";3;8779284;;;;;8779284;;
+"78";2;;;75704;"Rozliczenia z tytułu poręczeń i gwarancji udzielonych przez Skarb Państwa lub jednostkę samorządu terytorialnego";4;33516;;;;;33516;;
+"79";0;"79";;;"OBSŁUGA DŁUGU KRAJOWEGO";1;29621700;;;;;29621700;;
+"79";1;;757;;"Obsługa długu publicznego";2;29621700;;;;;29621700;;
+"79";2;;;75703;"Obsługa skarbowych papierów wartościowych oraz innych instrumentów finansowych na rynku krajowym";3;28825700;;;;;28825700;;
+"79";2;;;75704;"Rozliczenia z tytułu poręczeń i gwarancji udzielonych przez Skarb Państwa lub jednostkę samorządu terytorialnego";4;796000;;;;;796000;;
+"80";0;"80";;;"REGIONALNE IZBY OBRACHUNKOWE";1;102751;;59;100808;1829;;;55
+"80";1;;750;;"Administracja publiczna";2;102751;;59;100808;1829;;;55
+"80";2;;;75015;"Regionalne izby obrachunkowe";3;102751;;59;100808;1829;;;55
+"81";0;"81";;;"REZERWA OGÓLNA";1;95000;;;95000;;;;
+"81";1;;758;;"Różne rozliczenia";2;95000;;;95000;;;;
+"81";2;;;75817;"Ogólna rezerwa budżetowa Rady Ministrów";3;95000;;;95000;;;;
+"82";0;"82";;;"SUBWENCJE OGÓLNE DLA JEDNOSTEK SAMORZĄDU TERYTORIALNEGO";1;48357658;48357658;;;;;;
+"82";1;;758;;"Różne rozliczenia";2;48357658;48357658;;;;;;
+"82";2;;;75801;"Część oświatowa subwencji ogólnej dla jednostek samorządu terytorialnego";3;36924829;36924829;;;;;;
+"82";2;;;75802;"Uzupełnienie subwencji ogólnej dla jednostek samorządu terytorialnego";4;335999;335999;;;;;;
+"82";2;;;75803;"Część wyrównawcza subwencji ogólnej dla powiatów";5;1583843;1583843;;;;;;
+"82";2;;;75804;"Część wyrównawcza subwencji ogólnej dla województw";6;1112103;1112103;;;;;;
+"82";2;;;75805;"Część rekompensująca  subwencji ogólnej dla gmin ";7;25000;25000;;;;;;
+"82";2;;;75807;"Część wyrównawcza subwencji ogólnej dla gmin";8;5991329;5991329;;;;;;
+"82";2;;;75831;"Część równoważąca subwencji ogólnej dla gmin";9;619427;619427;;;;;;
+"82";2;;;75832;"Część równoważąca subwencji ogólnej dla powiatów";10;1137235;1137235;;;;;;
+"82";2;;;75833;"Część regionalna subwencji ogólnej dla województw";11;627893;627893;;;;;;

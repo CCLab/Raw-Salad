@@ -1,0 +1,120 @@
+{
+  "alias": {
+      "0":"czesc",
+      "1":"level",
+      "2":"czesc_orig",
+      "3":"dzial",
+      "4":"rozdzial",
+      "5":"tresc",
+      "6":"pozycja",
+      "7":"total",
+      "8": "dot_sub",
+      "9": "swiad_fiz",
+      "10": "wyd_jednostek",
+      "11": "wyd_majatk",
+      "12": "wyd_dlug",
+      "13": "sw_eu",
+      "14": "wspolfin_eu"
+  },
+  "type": {
+      "czesc": "string",
+      "level": "int",
+      "dzial": "string",
+      "rozdzial": "string",
+      "total": "int",
+      "dot_sub": "int",
+      "swiad_fiz": "int",
+      "wyd_jednostek": "int",
+      "wyd_majatk": "int",
+      "wyd_dlug": "int",
+      "sw_eu": "int",
+      "wspolfin_eu": "int"
+  },
+  "meta": {
+      "name": "budzet_tradycijny",
+      "perspective": "Budżet tradycijny",
+      "idef": 65
+  },
+  "columns": [
+    {
+      "key": "idef",
+      "label": "ID",
+      "type": "string"
+    },
+    {
+      "key": "czesc",
+      "label": "Część",
+      "type": "number",
+      "processable": true
+    },
+    {
+      "key": "typ",
+      "label": "Typ",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "tresc",
+      "label": "Treść",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "total",
+      "label": "Plan na rok",
+      "type": "number",
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "dot_sub",
+      "label": "Dotacje i subwencje",
+      "type": "number",
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "swiad_fiz",
+      "label": "Świadczenia na rzecz osób fizycznych",
+      "type": "number",
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "wyd_jednostek",
+      "label": "Wydatki bieżące jednostek budżetowych",
+      "type": "number",
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "wyd_majatk",
+      "label": "Wydatki majątkowe",
+      "type": "number",
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "wyd_dlug",
+      "label": "Wydatki na obsługę długu Skarbu Państwa",
+      "type": "number",
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "sw_eu",
+      "label": "Środki własne Unii Europejskiej",
+      "type": "number",
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "wspolfin_eu",
+      "label": "Współfinansowanie projektów z udziałem środków Unii Europejskiej",
+      "type": "number",
+      "processable": true,
+      "checkable": true
+    }
+  ]
+}
