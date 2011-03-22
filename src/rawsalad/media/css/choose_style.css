@@ -50,8 +50,8 @@ a {
     clear: both;
     
     height: auto;
-    border-top: #555 dashed 1px;
-    border-bottom: #555 dashed 1px;        
+    border-top: #888 solid 1px;
+    border-bottom: #888 solid 1px;        
 
     padding: 10px 0px;
 }

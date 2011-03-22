@@ -7,7 +7,7 @@
 		var col, col_type;
 		var i;
 		
-		// iterate through columns definiosion
+		// iterate through columns definitions
 		for ( i = 0; i < columns.length; i += 1 ) {
 			col = columns[i];
 			
@@ -27,13 +27,14 @@
 		$('#table').append( $( html.join('') ));
 		add_node();
 	};
+	
 
     // add action listener to newly created nodes
     var arm_nodes = function( id ) {
         var node;
         
         if( id === undefined ) {      
-            node = $('.a-node');
+            node = $('.a');
         } else {
             node = $('#'+id+'> .nodes');
         }
@@ -45,11 +46,21 @@
      
             if( nodes.find('div').length === 0 ) {
           		add_node( id );
+          		highlight( $(this).parent().parent() );
             } else {
                 nodes.toggle();
+          		highlight( $(this).parent().parent() );                
             }
         });	                             
+        
+        node.find('.checkbox').click( function () {
+            $(this).toggleClass( 'selected' );
+        });
     }
+    
+    var highlight = function( node ) {
+        // highlight previously clicked group
+    }    
 
 
 	// add nodes to table
@@ -73,16 +84,15 @@
             }, rows );
             container = $('#' + id + '> .nodes');
         }
-        
-		// for each a-node
+
 		for ( i = 0; i < data.length; i += 1 ) {
 			item = data[i];
 			html.push( '<div id="', item['id'], '"' );
-			html.push( 'class="', item['level'], '-node ' );
+			html.push( 'class="', item['level'], ' ' );
+			html.push( item['leaf'] === true ? 'leaf ' : 'node ' );
 			html.push( i % 2 ? 'odd">' : 'even">' );
 			html.push( '<div class="data">' );
 			
-			// for each column of a a-node
 			for ( j = 0; j < schema.length; j += 1 ) {
 				col = schema[j];
 			
@@ -92,8 +102,13 @@
 			        col_type = 'value cell';
 		        }				
 			    
-				html.push('<div class="', col_type, '">' );
+				html.push( '<div class="', col_type, '" ' );
+				html.push( 'data-processable="', !!col['processable'], '" ' );				
+				html.push( 'data-checkable="', !!col['checkable'], '">' );
 				html.push( item[col['key']] );
+				if( col['checkable'] === true ) {
+				    html.push( '<div class="checkbox"></div>' );
+				}
     			html.push( '</div>' );
 			}
 			html.push( '</div>' );

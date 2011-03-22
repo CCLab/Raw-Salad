@@ -13,7 +13,7 @@ body {
 
     background-color: #666;
 
-    color: #000;
+    color: #717171;
     font-family: sans-serif;
     font-size: 11px;
 }
@@ -27,11 +27,12 @@ body {
 }
 
 .cell {
-    height: 12px;
-    padding-top: 2px;
+    height: 16px;
+    padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 5px;
     padding-right: 5px;    
+    border: 1px #fff solid;
 }
 
 #thead > .data > * {
@@ -41,70 +42,99 @@ body {
 }
 
 #thead > .data > .type {
-    width: 150px;
+    width: 138px;
 }
 #thead > div {
     text-align: center;
 }
 
-.a-node.even > .data > * {
-    background: url('../img/niebieski ciemny 18px.png') repeat-x;
-}
-.a-node.odd > .data > * {
-    background: url('../img/niebieski jasny 18px.png') repeat-x;
+#table div {
+    cursor: default;
 }
 
-.b-node.even > .data > * {
-    background: url('../img/zielony ciemny 18px.png') repeat-x;
+.even > .data > * {
+    background-color: #fafafa;
 }
-.b-node.even.selected > .data > * {
-    background: #A4CEBC !important;
-}
-.b-node.odd > .data > * {
-    background: url('../img/zielony jasny 18px.png') repeat-x;
+.odd > .data > * {
+    background-color: #e0e0e0;
 }
 
-.c-node > .data > * {
-    background: url('../img/oliwkowy ciemny 18px.png') repeat-x;
+.node > .data > .type {
+    color: #11a8f7;
+    font-weight: bold;
 }
 
-.c-node.odd > .data > * {
-    background: url('../img/oliwkowy jasny 18px.png') repeat-x;
-}
-
-#tbody .type:hover {
-    cursor: pointer;
+.node > .data > .type:hover {
+    cursor: pointer !important;
     color: #888;
 }
 
-#tbody .data > div {
-    border-left: 1px #fff solid;
+.a > .data > .type {
+    width: 138px;
 }
-
-#tbody .data > .type {
-    border: 0px #fff solid !important;
-}
-
-.a-node > .data > .type {
-    width: 147px;
-}
-.b-node > .data > .type {
-    width: 132px;
+.b > .data > .type {
+    width: 123px;
     padding-left: 20px;
 }
-.c-node > .data > .type {
-    width: 112px;
+.c > .data > .type {
+    width: 103px;
     padding-left: 40px;    
 }
 .name {
-    width: 590px;
+    width: 598px;
 }
 .value {
-    width: 90px;
+    width: 88px;
 }
 
-.a-node, .b-node, .c-node {
+.a, .b, .c {
     clear: both;
 }
+
+.checkbox {
+    float: right;
+    
+    width: 5px;
+    height: 5px;
+
+    padding: 3px; 
+ 
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+.checkbox:hover {
+    cursor: pointer !important;
+    background-color: #fff;
+    border: 1px solid #fbf55f;
+}
+
+.checkbox.selected {
+    background-color: #fbf55f;    
+    border: 1px solid #fbf55f;    
+}
+
+.checkbox.selected:hover {
+    background-color: #fbf55f !important;    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
