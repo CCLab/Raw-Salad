@@ -32,6 +32,13 @@ def choose_page( request, col_nr ):
     context = Context( data )
     return HttpResponse( template.render( context ))
 
+
+def browse_page( request ):
+    template = loader.get_template( "browse_page.html" )
+    context = Context( {} )
+    return HttpResponse( template.render( context ))
+
+
 def other_page( request ):
     # shows chosen url for sites not ready yet,
     # only temporary solution to avoid getting 500 error
@@ -98,7 +105,7 @@ def get_choose_page_data_nodb( col_nr ):
         wyn = { "pos": 1, "name": "Wynagrodzenia", "descr": "Przegląd środków budżetowych przeznaczonych na wynagrodzenia."}
         sr = { "pos": 1, "name": "Środki ruchome", "descr": "Przegląd środków ruchomych i stałych w budżecie państwa."}
         stories = [ wyn, sr ]
-        other_collections = [ { "pos": 1, "name": "Fundusze celowe" },
+        other_collections = [ { "pos": 1, "name": "Fundusze celowe i agencje" },
                               { "pos": 2, "name": "Wybory samorządowe" } ]
         full_descr = "Budżet państwa jest najwyższej rangi planem finansowym polityki państwa oraz narzędziem polityki społecznej, uwzględniającym planowane dochody i wydatki państwa na następny rok budżetowy. Jako dochody uwzględnia się m.in.: wpływy z podatków pośrednich i bezpośrednich, dochody niepodatkowe (np. cła), dochody z prywatyzacji oraz dochody zagraniczne. Mianem wydatków określa się m.in. koszty dotacji, obsługi długu publicznego, obsługi strefy budżetowej, rozliczeń z bankami, subwencji dla gmin oraz rezerw ogólnych. Termin „budżet” pochodzi z łacińskiego bulga, oznaczającego skórzany mieszek przeznaczony do zbierania dochodów. Słowo to przyjęło się następnie w wielu językach (ang. budget, starofr. bougette, fr. la budget]. Dla historycznego rozwoju instytucji budżetu znaczenie miało kilka zdarzeń, które rozstrzygnęły o jej współczesnym kształcie, wśród których - poza oddzieleniem majątku publicznego od majątku królewskiego - wymienić należy rozwijanie stosunków towarowo-pieniężnych, parlamentaryzmu, funkcji socjalnych i gospodarczych państwa, rozwój międzynarodowych stosunków gospodarczych i finansowych oraz procesy integracyjne zachodzące we współczesnym świecie."
         data = { "name": "Budżet centralny", "full_descr": full_descr, "other_collections": other_collections,

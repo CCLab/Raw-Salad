@@ -311,6 +311,36 @@ var rows = [
         name: "Edukacja, wychowanie i opieka",
         y2010: 925878,
         y2011: 154068
-    }        
+    },
+    {
+        id: 10201,
+        level: 'c',
+        parent: 102,
+        leaf: true,
+        type: "Podzadanie 1.2.1",
+        name: "Zarządzanie państwem",
+        y2010: 192067,
+        y2011: 955848
+    },
+    {
+        id: 10202,
+        level: 'c',
+        parent: 102,
+        leaf: true,
+        type: "Podzadanie 1.2.2",
+        name: "Bezpieczeństwo wewnętrzne i porządek publiczny",
+        y2010: 837689,
+        y2011: 101529
+    },
+    {
+        id: 10203,
+        level: 'c',
+        parent: 102,
+        leaf: true,
+        type: "Podzadanie 1.2.3",
+        name: "Edukacja, wychowanie i opieka",
+        y2010: 925878,
+        y2011: 154068
+    }            
 ];   
 

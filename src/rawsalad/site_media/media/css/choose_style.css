@@ -39,7 +39,7 @@ a {
 }
 
     #logo > img {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
     
     #navigation-img:hover {
@@ -48,39 +48,59 @@ a {
     
 #help-line {
     clear: both;
-    
-    height: auto;
-    border-top: #555 dashed 1px;
-    border-bottom: #555 dashed 1px;        
+    min-height: 21px;
 
-    padding: 10px 0px;
+    padding: 2px 0px;
 }
-
-    #help-line-info:hover {
-        color: #aaa !important;
-        cursor: pointer;
+    #help-icon {
+        float: left;
+        margin-right: 5px;
     }
-    
+   
     #help-line-info {
-        font-size: 16px;
-        color: #666;
+        float: left;
+        margin-bottom: 5px;
+        font-size: 13px;
+        color: #bbb;
         font-style: italic;
     }    
     
+    #help-line-info:hover {
+        color: #555 !important;
+        cursor: pointer;
+    }
+
     .help-line-text {
-        font-size: 16px;
-        color: #666;
+        font-size: 13px;
+        color: #555;
         font-style: italic;    
     }
     
     #more-help {
+        clear: both;
         height: auto;
         padding-bottom: 5px;
         margin-top: 10px;
+        margin-left: 23px;
     }
 
 #main-content {
-    margin-top: 5px;
+    position: relative;
+    min-height: 654px;
+    margin-top: 2px;
+    padding: 0px;
+
+    background: /*url('../img/toolbar.png') no-repeat*/ #eaeaea;
+
+    border: 1px solid #a1a09e;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+}
+
+#big-one {
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 
 #left-column {
@@ -88,6 +108,8 @@ a {
     
     width: 620px;
     padding-right: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
     #collection-header {
@@ -98,9 +120,8 @@ a {
         background-color: #dadada;
         padding-bottom: 5px;
 
-        border-radius: 8px;
-        -moz-border-radius: 8px;
-            
+        border-radius: 5px;
+        -moz-border-radius: 5px;           
     }    
     
     #collection-name {
@@ -110,8 +131,8 @@ a {
         color: #fff;
         background-color: #000;
         
-        border-radius: 8px;
-        -moz-border-radius: 8px;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
         
         text-align: center;
         font-size: 18px;
@@ -219,7 +240,7 @@ a {
     }
     #structures {
         float: left;
-        margin-left: 5px;
+        margin-left: 0px;
         margin-right: 10px;
     }
     
@@ -249,6 +270,7 @@ a {
     .angle {
         position: relative;
         margin-top: 10px;
+        margin-bottom: 25px;
     }
     
     .angle-radio {
@@ -303,8 +325,23 @@ a {
         cursor: pointer;        
     }
 
+#right-column {
+    float: right;
+    
+    width: 316px;
+}
+
+    #toolbar > img {
+        float: left;
+    }
+
+    #toolbar > img:hover {
+        cursor: pointer;
+    }
+
     #dataset-about {
         margin-top: 90px;
+        margin-left: 8px;
         border-left: 1px #888 solid;
         padding: 5px 10px;;
     }
@@ -322,11 +359,3 @@ a {
         padding-top: 10px;
     }
     
-#right-column {
-    float: right;
-    
-    width: 330px;
-}
-
-
-
