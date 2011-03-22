@@ -32,6 +32,13 @@ def choose_page( request, col_nr ):
     context = Context( data )
     return HttpResponse( template.render( context ))
 
+
+def browse_page( request ):
+    template = loader.get_template( "browse_page.html" )
+    context = Context( {} )
+    return HttpResponse( template.render( context ))
+
+
 def other_page( request ):
     # shows chosen url for sites not ready yet,
     # only temporary solution to avoid getting 500 error

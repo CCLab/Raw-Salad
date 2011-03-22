@@ -47,18 +47,22 @@ body {
 #thead > div {
     text-align: center;
 }
+#tbody {
+    background: url('../img/background_02.png') repeat-y;
+}
 
 #table div {
     cursor: default;
 }
 
+/*
 .even > .data > * {
     background-color: #fafafa;
 }
 .odd > .data > * {
     background-color: #e0e0e0;
 }
-
+*/
 .node > .data > .type {
     color: #11a8f7;
     font-weight: bold;

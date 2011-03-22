@@ -2,21 +2,49 @@
     
     $('#navigation-img').hover( 
         function () {
-            $(this).attr('src', '/media/img/choose/navigation_01_over.png');
+            $(this).attr('src', '/media/img/navigation/01_02_over.png');
         },
         function () {
-            $(this).attr('src', '/media/img/choose/navigation_01.png');        
+            $(this).attr('src', '/media/img/navigation/01_02.png');
         }
     );
 
-    $('.download-img').hover( 
+    $('#base-button').hover( 
         function () {
-            $(this).attr('src', '/media/img/download_over.png');
+            $(this).attr('src', '/media/img/buttons/base_over.png');
         },
         function () {
-            $(this).attr('src', '/media/img/download.png');        
+            $(this).attr('src', '/media/img/buttons/base.png');
         }
     );
+
+    $('#download-button').hover( 
+        function () {
+            $(this).attr('src', '/media/img/buttons/download_over.png');
+        },
+        function () {
+            $(this).attr('src', '/media/img/buttons/download.png');
+        }
+    );
+
+    $('#sessions-button').hover( 
+        function () {
+            $(this).attr('src', '/media/img/buttons/sessions_over.png');
+        },
+        function () {
+            $(this).attr('src', '/media/img/buttons/sessions.png');
+        }
+    );
+
+    $('#snapshots-button').hover( 
+        function () {
+            $(this).attr('src', '/media/img/buttons/snapshots_over.png');
+        },
+        function () {
+            $(this).attr('src', '/media/img/buttons/snapshots.png');
+        }
+    );
+
 
     $('.angle-radio').click( function () {
         $('.angle-radio')
@@ -44,8 +72,10 @@
     });
     
     $('#more-help').hide();
+    $('#big-one').hide();
     $('#help-line-info').click( function () {
         $('#more-help').toggle();
+        $('#big-one').toggle();
     });
     
 })();
