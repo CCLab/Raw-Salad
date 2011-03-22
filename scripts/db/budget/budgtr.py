@@ -99,6 +99,10 @@ def csv_parse(csv_read, schema):
 
     dbkey_alias= schema["alias"] # dict of aliases -> document keys in db
     dbval_types= schema["type"] # dict of types -> values types in db
+    dbkeys_summ= list(v['key'] for v in schema['columns'] if v.get('checkable')) # the keys whose value should be summarized for grand total
+    total_dict= {} # this will become 'total' doc in the collection
+    for kk in dbkeys_summ:
+        total_dict[kk]= 0
 
     for row in csv_read:
         keys= tuple(row)
@@ -140,10 +144,21 @@ def csv_parse(csv_read, schema):
 
             if dict_row['level'] == 0:
                 level0.append(dict_row)
+                for k in dbkeys_summ: #totalling here all the summarizable values
+                    total_dict[k]= total_dict[k] + dict_row[k]
             elif dict_row['level'] == 1:
                 level1.append(dict_row)
             else:
                 level2.append(dict_row)
+
+    #complete 'total' dict (some of the keys will anyway be deleted on the 2nd pass)
+    total_dict['czesc']= '999999'
+    total_dict['pozycja']= 0
+    total_dict['level0']= 0
+    total_dict['czesc_orig']= None
+    total_dict['dzial']= 0
+    total_dict['rozdzial']= 0
+    level0.append(total_dict)
 
     out= dict({'level0': level0, 'level1': level1, 'level2': level2})
     return out
