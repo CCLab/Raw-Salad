@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     pprompt = getpass.getpass()
     try:
-        connect_postgres = psycopg2.connect(host= opts.host, port= opts.port, user= opts.user, password= pprompt)
+        connect_postgres = psycopg2.connect(host= opts.host, port= opts.port, database=opts.dbname, user= opts.user, password= pprompt)
         print "... connected"
     except Exception, e:
         print 'Unable to connect to the PostgreSQL database:\n %s\n' % e
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         print "... database", dbname, "successfully created"
     except Exception, e:
         print 'Cannot create database!:\n %s\n' % e
-        exit()
+        #exit()
 
     bkfile= opts.backup
     if bkfile is None:
