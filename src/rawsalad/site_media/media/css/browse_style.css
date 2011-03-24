@@ -1,8 +1,3 @@
-.reset {
-  margin: 0px;
-  padding: 0px;
-}
-
 /*  C S S   D E C L A R A T I O N S  */
 * {
   margin: 0px;
@@ -34,7 +29,7 @@ a {
 
 #header {
     position: relative;
-    background: #fff;
+    background-color: #fff;
     height: auto;
 }
 
@@ -88,14 +83,17 @@ a {
 #main-panel {
     width: 958px;
     height: auto;
+    overflow: auto;
+
     padding: 0px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
 
     background: url("/site_media/media/img/panel_header.png") no-repeat #eaeaea;
     border: 1px solid #a1a09e;
-    border-bottom: 0px;
 
-    border-radius: 8px 8px 0px 0px;
-    -moz-border-radius: 8px 8px 0px 0px;
+    border-radius: 8px 8px 8px 8px;
+    -moz-border-radius: 8px 8px 8px 8px;
 }
 
     #panel-header {
@@ -143,24 +141,48 @@ a {
 
     #panel-columns {
         height: auto;
-        width: auto;
 
         background-color: #eaeaea;
-        border: 1px solid #a1a09e;
-        border-top: 0px;
-        
-        border-radius: 0px 0px 8px 8px;
-        -moz-border-radius: 0px 0px 8px 8px;        
     }
 
-    #panel-columns:after {
-        content: ".";
-    }    
         #left-column {
             float: left;
             width: 918px;
         }
 
+            #table-toolbar {
+                margin-left: 8px;
+                height: 20px;
+                width: 906px;
+                padding-right: 2px;
+                background-color: black;
+                border-left: 1px #fff solid;
+                border-right: 1px #fff solid;
+            }
+            
+            .table-tool {
+                float: right;
+                height: 12px;
+                
+                margin-top: 2px;
+                font-size: 8px;
+                font-style: italic;
+                color: #888;
+
+                padding: 2px 8px;
+                background-color: white;
+                border-left: 1px solid #555;
+            }
+            .table-tool:hover {
+                background-color: #ddd;
+                color: #000;
+                cursor: pointer;
+            }
+
+            #statistics {
+                margin-left: 12px;
+                height: 20px;
+            }
 
         #right-column {
             float: right;
