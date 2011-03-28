@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.utils import simplejson as json
 
-# to be replaced with Denis' db interface
 import pymongo 
 
 def main_page( request ):
@@ -80,7 +79,7 @@ def get_choose_page_data( col_nr, collection ):
     return data
 
 def get_connection( dbname, collname, host, port ):
-    db= pymongo.Connection("guest:guestguest@85.10.210.123/cecyf_rawsdoc00", port)[dbname]
+    #db= pymongo.Connection("guest:guestguest@85.10.210.123/cecyf_rawsdoc00", port)[dbname]
     return db[collname]
 
 def get_main_page_data_nodb():

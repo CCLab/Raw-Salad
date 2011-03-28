@@ -1,4 +1,4 @@
-DATA STORAGE SETUP
+﻿DATA STORAGE SETUP
 There are 2 storages used for different purposes:
 
     1. PostgreSQL - used as a main storage for table-like raw data;
@@ -11,10 +11,10 @@ There are 2 storages used for different purposes:
 POSTGRESQL
 The basic setup of the server:
     server: PostgreSQL version 8.4
-    database name: rawsql00 
+    database name: rawstbl00 
         where "raw" is a project name ("Raw Salad"), 
-              "sql" tells about the database, 
-              "v00" is a version of the database
+              "tbl" tells about the database type (table), 
+              "00" is a version of the database
     port: 5432
     additional software:
         Python interface: psycopg2
@@ -48,17 +48,59 @@ codes should be stored in a special collection in the database of mongoDB
 (see description below).
 
 MONGODB - GENERAL SETUP
-All the data in mongoDB are stored in a single database, but separate 
-collections.
 The basic setup:
     server: mongoDB version 1.6.5 64bit
     database name: rawsdoc00
         where "raws" is a project name ("Raw Salad")
               "doc" refers to db type (document oriented)
-              "v00" is a version
+              "00" is a version
     port: 28017
     additional software:
         Python interface: pymongo 1.9
+
+MONGODB - COLLECTIONS NAMESPACES
+All the data in mongoDB are stored in a single database, but separate
+collections.
+There are 2 kinds of collections:
+- actual data
+- meta data
+
+Any collection which stores the data for site navigation or any other
+site-specific task is being considered as of 'meta data' kind
+
+Naming collections:
+<KK>_<TTTT><YYYY>_<descr>, where:
+- <KK> (2 symbols) describes the kind of a collection: 'dd' (data),
+'dr' (reference), 'md' (meta-data),  'ms' (meta-site), 'zz'
+(collections for auxilar purposes)
+- <TTTT> (4 symbols) indicates to what data-set a collection
+belong (examples: 'budg' - 'budget', 'poll' - local polls, etc.). A
+special data-set 'aaaa' is for references that can be used in different
+data-sets
+- <YYYY> (4 symbols) - year (if it makes sense for a collection, if
+not - 'XXXX')
+- <descr> - description
+
+In the names of the meta-data collections ('md') the year is absent:
+<KK>_<TTTT>_<descr>
+
+In the names of the collections connected to site structure ('ms') the
+year and and the code of the data-set are absent:
+<KK>_<descr>
+
+Symbols allowed: Latin alphabet letters (ASCII), numbers and symbol '_'
+
+Examples:
+dd_budg2011_go - goal oriented budget 2011
+dd_budg2011_tr - traditional budget 2011
+dd_budg2012_fc - budget 'Funduszy celowe' 2011
+dd_poll2010_kandydaci_rady - local polls 2010: Kandydaci Rady
+dr_aaaaXXXX_teryt - territory code TERYT
+md_budg_scheme
+md_poll_scheme
+ms_nav - site navigation
+
+
 
 MONGODB - NAVIGATOR
 This provides web framework with the objects with information about the scheme
@@ -75,8 +117,8 @@ of hi level navigation of the web-site, such as:
             "Wybory wójtów, burmistrzów i prezydentów miast"
             "Sejmiki wojewódzkie"
             
-The structure is represented by the collection navigator with the items 
-arranged as follows:
+The structure is represented by the collection m_site_nav (navigator) 
+with the items arranged as follows:
 [
     {
     "pos": /position of the appearance 1, 2, ..., n/,
@@ -107,14 +149,7 @@ arranged as follows:
 ]
 
 MONGODB - SCHEMES OF THE MAIN RAW DATA STORAGE
-The collections in mongoDB with meta-data should be named as follows:
-
-    meta_<model_name>, where:
-        "meta_" is a string constant;
-        <model_name> is a name of a larger scale data set (e.g. "bt" for budget 
-            and "lp" for Polls)
-
-Thus there should be as many of collections with meta-data as many models
+There should be as many of collections with meta-data as many models
 there's is in the project (in Raw-Salad it is 2).
 Meta-data should include information not only about the structure of the storage
 (such as column names, types, whether a column can be aggregated or not, etc.),

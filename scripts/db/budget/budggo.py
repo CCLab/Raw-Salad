@@ -561,6 +561,6 @@ if __name__ == "__main__":
     meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
     meta_collection['columns']= schema['columns']
 
-    schema_coll= 'data_zz_schema'
+    schema_coll= 'md_budg_scheme'
     print 'updating schema collection:', db_insert(meta_collection, work_db, schema_coll, False), 'records inserted into', schema_coll
     print 'Done'
