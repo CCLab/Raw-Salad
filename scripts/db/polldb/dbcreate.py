@@ -81,12 +81,12 @@ if __name__ == "__main__":
 
     print "\nExample of imported data:"
     cur.execute("""
-        SELECT k.plec AS "kand_plec", k.typ AS "kand_typ", k.jednostka AS "kand_jednostka", k.szczebel AS "kand_szczebel", mm.typ AS "kom_typ", 
+        SELECT k.plec AS "kand_plec", k.typ AS "kand_typ", tt.region AS "kand_jednostka", mm.typ AS "kom_typ", 
         SUM(k.l_glosow) AS "kand_glosow_total"
-        FROM kandydaci_rady k, komitety mm
-        WHERE k.sygnatura = mm.sygnatura
-        GROUP BY k.plec, k.typ, k.jednostka, k.szczebel, mm.typ
-        ORDER BY k.plec, k.typ, k.jednostka, k.szczebel, mm.typ
+        FROM kandydaci_rady k, komitety mm, teryt tt
+        WHERE k.sygnatura = mm.sygnatura AND k.teryt = tt.teryt
+        GROUP BY k.plec, k.typ, tt.region, mm.typ
+        ORDER BY k.plec, k.typ, tt.region, mm.typ
         LIMIT 10
     """)
     for record in cur:
