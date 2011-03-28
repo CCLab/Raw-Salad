@@ -114,12 +114,18 @@
 
 
 
+.open{
+	background-color: #000000;
+}
+
+.watched {
+	background-color: #ffffff;
+}
 
 
-
-
-
-
+.forgotten {
+	background-color: #666666;
+}
 
 
 

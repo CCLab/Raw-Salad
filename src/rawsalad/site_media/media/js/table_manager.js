@@ -45,13 +45,24 @@
             var nodes = $(this).parent().next();
             var id = $(this).parent().parent().attr('id');
             var len = nodes.find('div').length;
+			var this_node;
+			var children;
+			var style;
             
             if( nodes.find('div').length === 0 ) {
-          	add_node( id );
-          	highlight( $(this).parent().parent() );
+				add_node( id );
+				highlight( $(this).parent().parent() );
             } else {
-                nodes.toggle();
-          	highlight( $(this).parent().parent() );                
+				this_node = $(this).parent().parent().children('div.data').children();
+				children = $(this).parent().parent().children();
+				style = $(this).parent().parent().children('div.nodes').attr('style');
+				
+				// if this node isn't watched and forgotten or has hidden children
+				if ( ((!this_node.hasClass( 'forgotten' )) && (!this_node.hasClass( 'watched' )) ) ||
+					((children.length > 1) && (style === "display: none;")) ) {
+					nodes.toggle();
+				}
+				highlight( $(this).parent().parent() );                
             }
             make_zebra();
         });	                             
@@ -66,9 +77,71 @@
     }
     
     var highlight = function( node ) {
+		var opened_earlier = $(".open");
+		var watched_earlier = $(".watched");
+		var children;
+		var parent;
+		var siblings;
+		var this_node;
+		var descendants;
+		
         // highlight previously clicked group
-    }    
+		
+		/*	algorithm of colouring nodes		
+		if (was_recently_open) {
+			his_children_lost_colors;
+			if (is a-node) {
+				it_loses_his_color;
+			} else {
+				his_parent_becomes_open;
+				he_his_brothers_and_their_children_become_watched;
+			}
+		} else {
+			recently_open_become_forgotten;
+			recently_watched_become_forgotten;
+			this_node_becomes_open;
+			his_descendants_become_watched;
+		}
+		*/
+		if (node.children().length > 1 &&
+			node.children('div.data').children().hasClass( 'open' ))
+		{
+			children = node.children('div.nodes').find('div.data').children();
+			children.removeClass( 'forgotten' );
+			children.removeClass( 'watched' );
+			
+			if (node.hasClass('a')) {
+				node.children('div.data').children().removeClass( 'open' );
+			} else {
+				parent = node.parent().parent().children('div.data').children();
+				parent.removeClass( 'forgotten' );
+				parent.addClass( 'open' );
+				
+				node.children('div.data').children().removeClass( 'open' );
+				
+				siblings = node.parent().children().find('div.data').children();
+				siblings.removeClass( 'forgotten' );
+				siblings.addClass( 'watched' );
+			}
+			
+		} else {
+			opened_earlier.removeClass( 'open' );
+			opened_earlier.addClass( 'forgotten' );
+			watched_earlier.removeClass( 'watched' );
+			watched_earlier.addClass( 'forgotten' );
+			
+			this_node = node.children('div.data').children();
+			this_node.removeClass( 'watched' );
+			this_node.removeClass( 'forgotten' );
+			this_node.addClass( 'open' );
+			
+			descendants = node.children('div.nodes').children().find('div.data').children();
+			descendants.removeClass( 'forgotten' );
+			descendants.removeClass( 'open' );
+			descendants.addClass( 'watched' );
+		}
 
+    }
 
     // add nodes to table
     var add_node = function( id ) {
