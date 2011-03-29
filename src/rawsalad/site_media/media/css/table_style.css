@@ -111,29 +111,23 @@
     background-color: #fbf55f !important;    
 }
 
-
-
-
-.open{
-	background-color: #000000;
+.marked {
+    background-color: #000;
+    color: #6666ff;
 }
 
-.watched {
-	background-color: #ffffff;
+.darkened {
+    background-color: #999999;
 }
 
-
-.forgotten {
-	background-color: #666666;
+.leftborder {
+    border-left: 1px solid #000;
 }
 
+.rightborder {
+    border-right: 1px solid #000;
+}
 
-
-
-
-
-
-
-
-
-
+.bottomborder {
+    border-bottom: 1px solid #000;
+}
