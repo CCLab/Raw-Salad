@@ -83,10 +83,11 @@ if __name__ == "__main__":
     cur.execute("""
         SELECT k.plec AS "kand_plec", k.typ AS "kand_typ", tt.region AS "kand_jednostka", mm.typ AS "kom_typ", 
         SUM(k.l_glosow) AS "kand_glosow_total"
-        FROM kandydaci_rady k, komitety mm, teryt tt
+        FROM poll_kandydaci_rady k, poll_komitety mm, teryt tt
         WHERE k.sygnatura = mm.sygnatura AND k.teryt = tt.teryt
+        AND k.l_glosow IS NOT NULL
         GROUP BY k.plec, k.typ, tt.region, mm.typ
-        ORDER BY k.plec, k.typ, tt.region, mm.typ
+        ORDER BY kand_glosow_total DESC, k.plec, k.typ, tt.region, mm.typ
         LIMIT 10
     """)
     for record in cur:

@@ -30,18 +30,18 @@ The exceptions are domains that can be used in both models (e.g. long_descr
 that would work both for the data unit "Granice obwodu" of Local Polls as well
 as "Cel" of Budget as unlimited varchar data type).
 
-    <model namespace>s are: "lp" for "Local Polls", "bt" for "Budget"
+    <model namespace>s are: "poll" for "Local Polls", "budg" for "Budget"
 
 Examples of tablenames in the Local Polls scheme: 
-    lp_kandydaci_urzad
-    lp_kandydaci_urzad, 
-    lp_obwody
-    lp_komitety
+    poll_kandydaci_urzad
+    poll_kandydaci_urzad, 
+    poll_obwody
+    poll_komitety
     
 Examples of tablenames in the Budget scheme: 
-    bt_cel 
-    bt_main
-    bt_instytucja
+    budg_cel 
+    budg_main
+    budg_instytucja
     
 Every table and every column of each table should be coded specially and those 
 codes should be stored in a special collection in the database of mongoDB
