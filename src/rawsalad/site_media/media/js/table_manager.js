@@ -2,31 +2,31 @@
 
     // creates a table with header and a-level data
     var create_table = function() {
-	var columns = perspective['columns'];
-	var html = [ '<div id="thead"><div class="data">' ];
-	var col, col_type;
-	var i;
-	
-	// iterate through columns definitions
-	for ( i = 0; i < columns.length; i += 1 ) {
-	    col = columns[i];
-	    
-	    if ( col['key'] === 'type' || col['key'] === 'name' ) {
-		col_type = col['key'] + ' cell';
-	    } else {
-		col_type = 'value cell';
-	    }	
-	    
-	    html.push( '<div class="', col_type, '">' );
-	    html.push( col['label'] );
-	    html.push( '</div>' );
-	}
-	html.push( '</div></div>' );
-	html.push( '<div id="tbody"></div>' );
+    var columns = perspective['columns'];
+    var html = [ '<div id="thead"><div class="data">' ];
+    var col, col_type;
+    var i;
+    
+    // iterate through columns definitions
+    for ( i = 0; i < columns.length; i += 1 ) {
+        col = columns[i];
+        
+        if ( col['key'] === 'type' || col['key'] === 'name' ) {
+        col_type = col['key'] + ' cell';
+        } else {
+        col_type = 'value cell';
+        }	
+        
+        html.push( '<div class="', col_type, '">' );
+        html.push( col['label'] );
+        html.push( '</div>' );
+    }
+    html.push( '</div></div>' );
+    html.push( '<div id="tbody"></div>' );
         html.push( '<div style="overflow: hidden; height: 1px;">.</div>')
 
-	$('#table').append( $( html.join('') ));
-	add_node();
+    $('#table').append( $( html.join('') ));
+    add_node();
         make_zebra();
     };
     
@@ -45,24 +45,16 @@
             var nodes = $(this).parent().next();
             var id = $(this).parent().parent().attr('id');
             var len = nodes.find('div').length;
-			var this_node;
-			var children;
-			var style;
+            var this_node;
+            var children;
+            var style;
             
             if( nodes.find('div').length === 0 ) {
-				add_node( id );
-				highlight( $(this).parent().parent() );
+                add_node( id );
+                highlight( $(this).parent().parent() );
             } else {
-				this_node = $(this).parent().parent().children('div.data').children();
-				children = $(this).parent().parent().children();
-				style = $(this).parent().parent().children('div.nodes').attr('style');
-				
-				// if this node isn't watched and forgotten or has hidden children
-				if ( ((!this_node.hasClass( 'forgotten' )) && (!this_node.hasClass( 'watched' )) ) ||
-					((children.length > 1) && (style === "display: none;")) ) {
-					nodes.toggle();
-				}
-				highlight( $(this).parent().parent() );                
+                nodes.toggle();
+                highlight( $(this).parent().parent() );                
             }
             make_zebra();
         });	                             
@@ -76,85 +68,109 @@
         // makes zebra in table
     }
     
-    var highlight = function( node ) {
-		var opened_earlier = $(".open");
-		var watched_earlier = $(".watched");
-		var children;
-		var parent;
-		var siblings;
-		var this_node;
-		var descendants;
-		
+    var highlight = function( node ) {        
         // highlight previously clicked group
-		
-		/*	algorithm of colouring nodes		
-		if (was_recently_open) {
-			his_children_lost_colors;
-			if (is a-node) {
-				it_loses_his_color;
-			} else {
-				his_parent_becomes_open;
-				he_his_brothers_and_their_children_become_watched;
-			}
-		} else {
-			recently_open_become_forgotten;
-			recently_watched_become_forgotten;
-			this_node_becomes_open;
-			his_descendants_become_watched;
-		}
-		*/
-		if (node.children().length > 1 &&
-			node.children('div.data').children().hasClass( 'open' ))
-		{
-			children = node.children('div.nodes').find('div.data').children();
-			children.removeClass( 'forgotten' );
-			children.removeClass( 'watched' );
-			
-			if (node.hasClass('a')) {
-				node.children('div.data').children().removeClass( 'open' );
-			} else {
-				parent = node.parent().parent().children('div.data').children();
-				parent.removeClass( 'forgotten' );
-				parent.addClass( 'open' );
-				
-				node.children('div.data').children().removeClass( 'open' );
-				
-				siblings = node.parent().children().find('div.data').children();
-				siblings.removeClass( 'forgotten' );
-				siblings.addClass( 'watched' );
-			}
-			
-		} else {
-			opened_earlier.removeClass( 'open' );
-			opened_earlier.addClass( 'forgotten' );
-			watched_earlier.removeClass( 'watched' );
-			watched_earlier.addClass( 'forgotten' );
-			
-			this_node = node.children('div.data').children();
-			this_node.removeClass( 'watched' );
-			this_node.removeClass( 'forgotten' );
-			this_node.addClass( 'open' );
-			
-			descendants = node.children('div.nodes').children().find('div.data').children();
-			descendants.removeClass( 'forgotten' );
-			descendants.removeClass( 'open' );
-			descendants.addClass( 'watched' );
-		}
-
+        
+        var node_marked_earlier = $('.marked');
+        var i;
+        var par;
+        
+        if ( node.hasClass('a') ) { // a-node clicked
+            if ( node.children( 'div.data' ).children().eq(0).hasClass( 'marked' ) ) { // marked a-node clicked
+                unmark_a_node( node );
+            } else { // not marked a-node clicked
+                if ( node_marked_earlier.length > 0 ) { // there is another marked node
+                    unmark_a_node( node_marked_earlier.parent().parent() );
+                }
+                mark_a_node( node );
+                add_side_border( node );
+                add_bottom_border( node );
+            }
+        } else { // not a-node clicked
+            par = node.parent().parent();
+            while ( !par.hasClass( 'a' ) ) {
+                par = par.parent().parent(); // find a-node parent of this node
+            }
+            
+            if ( par.children( 'div.data' ).children().eq(0).hasClass( 'marked' ) ) { // node is a descendant of marked a-node
+                if ( par.children( 'div.nodes' ).find( '.node' ).last().attr( 'id' ) === node.attr( 'id' ) ) { // it is the last node
+                
+                    par.find( 'div.data' ).children().removeClass( 'bottomborder' );
+                    add_side_border( node );
+                    add_bottom_border( node );
+                } else { // node is not the last node
+                    add_side_border( node );
+                }
+            } else { // node is not a descendant of marked a-node
+                if ( node_marked_earlier.length > 0 ) { // there is another marked node
+                    unmark_a_node( node_marked_earlier.parent().parent() );
+                }
+                
+                mark_a_node( par );
+                add_side_border( par );
+                
+                if ( par.children( 'div.nodes' ).find( '.node' ).last().attr( 'id' ) === node.attr( 'id' ) ) { // it is the last node
+                    par.find( 'div.data' ).children().removeClass( 'bottomborder' );
+                    add_bottom_border( par );
+                }
+            }
+        }
+    }
+    
+    // unmark a-node, shade its nodes
+    var unmark_a_node = function( node ) {
+        node.children( 'div.data' ).children().removeClass( 'marked' );
+        node.children( 'div.nodes' ).find( 'div.data' ).children().removeClass( 'leftborder' );
+        node.children( 'div.nodes' ).find( 'div.data' ).children().removeClass( 'rightborder' );
+        node.children( 'div.nodes' ).find( 'div.data' ).children().removeClass( 'bottomborder' );
+        node.children( 'div.data' ).children().addClass( 'darkened' );
+        node.children( 'div.nodes' ).find( 'div.data' ).children().addClass( 'darkened' );
+    }
+    
+    // mark a-node, shade other nodes
+    var mark_a_node = function( node ) {
+        node.children( 'div.data' ).children().removeClass( 'darkened' );
+        node.children( 'div.nodes' ).find( 'div.data' ).children().removeClass( 'darkened' );
+        node.children( 'div.data' ).children().addClass( 'marked' );        
+        node.siblings().find( 'div.data' ).children().addClass( 'darkened' );
+    }
+    
+    // draw left and right borders
+    var add_side_border = function( node ) {
+        var data = node.children( 'div.nodes' ).find( 'div.data' ).children();
+        var columns_number = perspective['columns'].length;
+        var rows = data.length / columns_number;
+        var i;
+        var cell;
+        for ( i = 0; i < rows; i += 1 ) {
+            data.eq( i * columns_number ).addClass( 'leftborder' );
+            data.eq( i * columns_number + columns_number - 1 ).addClass( 'rightborder' )
+        }
+    }
+    
+    // draw bottom border
+    var add_bottom_border = function( node ) {
+        var data = node.children( 'div.nodes' ).find( 'div.data' ).children();
+        var columns_number = perspective['columns'].length;
+        var rows = data.length / columns_number;
+        var i;
+        for (i = (rows - 1) * columns_number; i < rows * columns_number; i += 1) {
+            data.eq(i).addClass( 'bottomborder' );
+        }
     }
 
     // add nodes to table
     var add_node = function( id ) {
-	var data;
-	var schema = perspective['columns'];
-	var html = [];
-	var item;
-	var col, col_type = [];
-	var i, j;
-	var container;
-	
-	if( arguments.length === 0 ) {
-    	    data = filter( function ( element ) {
+    var data;
+    var schema = perspective['columns'];
+    var html = [];
+    var item;
+    var col, col_type = [];
+    var i, j;
+    var container;
+    
+    if( arguments.length === 0 ) {
+            data = filter( function ( element ) {
                 return element['level'] === 'a';
             }, rows );
             container = $('#tbody');
@@ -165,41 +181,41 @@
             container = $('#' + id + '> .nodes');
         }
 
-	for ( i = 0; i < data.length; i += 1 ) {
-	    item = data[i];
-	    html.push( '<div id="', item['id'], '"' );
-	    html.push( 'class="', item['level'], ' ' );
-	    html.push( item['leaf'] === true ? 'leaf ' : 'node ' );
-	    html.push( i % 2 ? 'odd">' : 'even">' );
-	    html.push( '<div class="data">' );
-	    
-	    for ( j = 0; j < schema.length; j += 1 ) {
-		col = schema[j];
-		
-		if ( col['key'] === 'type' || col['key'] === 'name' ) {
-		    col_type = col['key'] + ' cell';
-		} else {
-		    col_type = 'value cell';
-		}				
-		
-		html.push( '<div class="', col_type, '" ' );
-		html.push( 'data-processable="', !!col['processable'], '" ' );				
-		html.push( 'data-checkable="', !!col['checkable'], '">' );
-		html.push( item[col['key']] );
-		if( col['checkable'] === true ) {
-		    html.push( '<div class="checkbox"></div>' );
-		}
-    		html.push( '</div>' );
-	    }
-	    html.push( '</div>' );
-	    if( item['leaf'] === false ) {
-		html.push( '<div class="nodes"></div>' );
-	    }
-	    html.push( '</div>' );
-	}
-	
-	container.append( $( html.join('') ));
-	arm_nodes( id );
+    for ( i = 0; i < data.length; i += 1 ) {
+        item = data[i];
+        html.push( '<div id="', item['id'], '"' );
+        html.push( 'class="', item['level'], ' ' );
+        html.push( item['leaf'] === true ? 'leaf ' : 'node ' );
+        html.push( i % 2 ? 'odd">' : 'even">' );
+        html.push( '<div class="data">' );
+        
+        for ( j = 0; j < schema.length; j += 1 ) {
+        col = schema[j];
+        
+        if ( col['key'] === 'type' || col['key'] === 'name' ) {
+            col_type = col['key'] + ' cell';
+        } else {
+            col_type = 'value cell';
+        }				
+        
+        html.push( '<div class="', col_type, '" ' );
+        html.push( 'data-processable="', !!col['processable'], '" ' );				
+        html.push( 'data-checkable="', !!col['checkable'], '">' );
+        html.push( item[col['key']] );
+        if( col['checkable'] === true ) {
+            html.push( '<div class="checkbox"></div>' );
+        }
+            html.push( '</div>' );
+        }
+        html.push( '</div>' );
+        if( item['leaf'] === false ) {
+        html.push( '<div class="nodes"></div>' );
+        }
+        html.push( '</div>' );
+    }
+    
+    container.append( $( html.join('') ));
+    arm_nodes( id );
     };
 
     create_table();
