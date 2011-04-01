@@ -18,6 +18,9 @@ the files needed to upload the budget:
 
 type python budgtr.py -h for instructions
 """
+
+import getpass
+import os
 import optparse
 import csv
 import pymongo
@@ -37,7 +40,7 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 
 
 #-----------------------------
-def fill_rbt(budg_data, db, coll, cleandb):
+def fill_rbt(budg_data, type_label, db, coll, cleandb):
     
     budg_list= []
 
@@ -46,11 +49,11 @@ def fill_rbt(budg_data, db, coll, cleandb):
     for row_doc in curr_level:
         row_doc['idef']= row_doc['czesc'] # move 'czesc' key to 'idef'
         if '/' in row_doc['czesc']: # correcting czesc
-            row_doc['idef']= row_doc['idef'].replace('/', '.')
+            row_doc['idef']= row_doc['idef'].replace('/', '-')
             row_doc['czesc']= row_doc['czesc'].partition('/')[0]
         row_doc['czesc']= int(row_doc['czesc']) #should be int for the possibility to be compared against 'budzet zadaniowy'
-        row_doc['typ']= 'czesc'
-
+        row_doc['level']= 'a'
+        row_doc['typ']= type_label[row_doc['level']] + ' ' + row_doc['idef']
         del row_doc['czesc_orig'] #delete useless keys
         del row_doc['dzial']
         del row_doc['rozdzial']
@@ -60,14 +63,14 @@ def fill_rbt(budg_data, db, coll, cleandb):
     # level 1
     curr_level= budg_data['level1']
     for row_doc in curr_level:
-        row_doc['idef']= row_doc.pop('dzial') # 'idef' is 'dzial' on the level 1
+        row_doc['idef']= row_doc.pop('dzial').replace('.','-') # 'idef' is 'dzial' on the level 1
         row_doc['parent']= row_doc['czesc']
         if '/' in row_doc['czesc']:
             row_doc['parent']= row_doc['czesc'].replace('/', '.')
             row_doc['czesc']= row_doc['czesc'].partition('/')[0]
         row_doc['czesc']= int(row_doc['czesc']) #should be int for the possibility to be compared against 'budzet zadaniowy'
-        row_doc['typ']= 'dzial'
-
+        row_doc['level']= 'b'
+        row_doc['typ']= type_label[row_doc['level']] + ' ' + row_doc['idef']
         del row_doc['czesc_orig'] #delete useless keys
         del row_doc['rozdzial']
 
@@ -77,12 +80,12 @@ def fill_rbt(budg_data, db, coll, cleandb):
     curr_level= budg_data['level2']
     for row_doc in curr_level:
         row_doc['parent']= row_doc['rozdzial'][0:len(row_doc['rozdzial'])-2] #parent is 'dzial', which is the first 2 or 3 digits of 'rozdzial'
-        row_doc['idef']= row_doc.pop('rozdzial') # 'idef' is 'rozdzial' on the level 1
+        row_doc['idef']= row_doc.pop('rozdzial').replace('.', '-') # 'idef' is 'rozdzial' on the level 1
         if '/' in row_doc['czesc']:
             row_doc['czesc']= row_doc['czesc'].partition('/')[0]
         row_doc['czesc']= int(row_doc['czesc']) #should be int for the possibility to be compared against 'budzet zadaniowy'
-        row_doc['typ']= 'rozdzial'
-
+        row_doc['level']= 'c'
+        row_doc['typ']= type_label[row_doc['level']] + ' ' + row_doc['idef']
         del row_doc['czesc_orig'] #delete useless keys
         del row_doc['dzial']
 
@@ -171,6 +174,7 @@ if __name__ == "__main__":
     cmdparser.add_option("-v", "--csv", action="store", dest="csv_filename", help="input file (CSV)")
     cmdparser.add_option("-s", "--schema", action="store",help="schema for CSV file (if none than SRC_FILE-SCHEMA.JSON is used)")
     cmdparser.add_option("-d", "--dbconnect", action="store", help="database and collection to insert to, given as db.collect (no update if not specified!)")
+    cmdparser.add_option("-u", "--usr", action="store", help="database admin login")
     cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean before insert (ignored if db is not being updated)")
 
     opts, args = cmdparser.parse_args()
@@ -206,7 +210,6 @@ if __name__ == "__main__":
     # create temporary dict
     obj_parsed= csv_parse(csv_read, schema)
 
-
     #database settings
     work_db= None #no update if it remain None
     str_dbconnect= opts.dbconnect # database connection string
@@ -220,20 +223,41 @@ if __name__ == "__main__":
 
             mongo_connect= pymongo.Connection("localhost", 27017)
             work_db= mongo_connect[dbname]
+        #try to connect and authenticate
+            try:
+                mongo_connect= pymongo.Connection("localhost", 27017)
+                work_db= mongo_connect[dbname]
+            except Exception as e:
+                print 'Unable to connect to the database:\n %s\n' % e
+                exit()
         else:
             print 'Unable to parse dbconnect - wrong format: \n %s\n' % str_dbconnect
 
     if work_db is not None:
+        #username - ask for password
+        usrname= opts.usr
+        pprompt = getpass.getpass()
+
+        try:
+            work_db.authenticate(usrname, pprompt)
+        except Exception as e:
+            print 'Unable to authenticate to the database:\n %s\n' % e
+            exit()
+
+        #meta info - just the labels for types
+        meta_info= schema['meta']
+        meta_level_label= meta_info['level_label']
+
         print '-- inserting data into '+ dbname +'.'+ dbname
         mongo_connect.start_request()
-        obj_rep= fill_rbt(obj_parsed, work_db, collectname, clean_db) # processing and inserting the data
+        obj_rep= fill_rbt(obj_parsed, meta_level_label, work_db, collectname, clean_db) # processing and inserting the data
 
         #meta info
-        meta_info= schema['meta']
         meta_name= meta_info['name']
         meta_perspective= meta_info['perspective']
         meta_collnum= meta_info['idef']
-        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
+        meta_leaf= meta_info['leaf']
+        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'leaf'), (meta_collnum, meta_name, meta_perspective, collectname, meta_leaf)))
         meta_collection['columns']= schema['columns']
 
         schema_coll= 'md_budg_scheme'
