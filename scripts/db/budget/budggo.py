@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 """
-import budzet zadaniowy to mongo db
+import Budzet Zadaniowy to mongo db
 flat structure (each data unit is a separate doc in the collection)
 parenting is archieved through 'parent' key
 
@@ -31,12 +31,12 @@ the files needed to upload the budget:
 
 type python budget.py -h for instructions
 """
-
+import getpass
+import os
 import optparse
 import csv
 import pymongo
 import simplejson as json
-
 
 def db_insert(data_bulk, db, collname, clean_first=False):
     collect= db[collname]
@@ -65,13 +65,13 @@ def fill_p_dysp(db, collname, colltmp):
         name_p_d= row['dysponent'].strip()
         czesc_p_d= row['czesc']
         curr_zd_idef_lst= row['numer'].split('.')
-        curr_zd_idef= curr_zd_idef_lst[0] + '.' + curr_zd_idef_lst[1] # have to search in the scope of current 'zadanie'
+        curr_zd_idef= curr_zd_idef_lst[0] + '-' + curr_zd_idef_lst[1] # have to search in the scope of current 'zadanie'
         #we already have 'idef' for all dysponents of zadanie - just look for it in the previously inserted data
-        p_d_idef= cll.find_one({'node':0, 'level':'c', 'czesc':czesc_p_d, 'parent':curr_zd_idef, 'name':name_p_d}, {'idef':1, '_id':0}) # collecting the numbers of "zadanie"
+        p_d_idef= cll.find_one({'node':0, 'level':'c', 'czesc':czesc_p_d, 'parent':curr_zd_idef, 'name':name_p_d}, {'idef':1, '_id':0})
         fpd['idef']= p_d_idef['idef']
         fpd['type']= 'Dysponent'
         fpd['name']= name_p_d
-        fpd['parent']= row['numer'] # idef of "podzadanie"
+        fpd['parent']= row['numer'].replace('.', '-') # idef of "podzadanie"
         fpd['node']= 1 # "dysponent" has a direction
         fpd['level']= 'd'
         fpd['czesc']= czesc_p_d
@@ -95,10 +95,10 @@ def fill_podzadanie(db, clltmp):
     collcrr_p= collect.find({'test_p':True}, {'_id':0}) # getting "dysponent" of current "zadanie"
     for row_p in collcrr_p:
         fpz= {}
-        fpz['idef']= row_p['numer']
+        fpz['idef']= row_p['numer'].replace('.', '-')
         fpz['type']= 'Podzadanie '+row_p['numer']
         fpz_zd_idef= row_p['numer'].split('.', 3)
-        fpz['parent']= fpz_zd_idef[0]+'.'+fpz_zd_idef[1] # idef of "zadanie"
+        fpz['parent']= fpz_zd_idef[0]+'-'+fpz_zd_idef[1] # idef of "zadanie"
         name_tmp= row_p['podzadanie'].lstrip(row_p['numer'])
         fpz['name']= name_tmp.strip()
         fpz['node']= 1 # "podzadanie" has a direction
@@ -124,8 +124,8 @@ def fill_z_d_c_mier(db, cllname, clltmp):
         ds_curr= row['parent'] # current "dysponent" of "zadanie"
         collcrr_tmp= collmn.find_one({'idef':ds_curr}, {'name':1, '_id':0})
         ds_name= collcrr_tmp['name'] # "dysponent" name
-        zd_curr_str= ds_curr.split('.', 3)
-        zd_curr= zd_curr_str[0]+'.'+zd_curr_str[1] # current "zadanie"
+        zd_curr_str= ds_curr.split('-', 3)
+        zd_curr= zd_curr_str[0]+'.'+zd_curr_str[1] # current "zadanie" ('.' is just to look through temp table, where all the codes separated by '.')
         cl_curr= row['idef'] # current "cel"
         cl_name= row['name'] # current "cel" name
         ds_czesc_curr= row['czesc'] # current "czesc"
@@ -143,7 +143,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm= {}
                     cl_m_num += 1
                     ffm['name']= row_z_m['miernik_nazwa']
-                    full_cl_m_num= cl_curr + '.' + str(cl_m_num)
+                    full_cl_m_num= cl_curr + '-' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
@@ -166,7 +166,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm= {}
                     cl_m_num += 1
                     ffm['name']= row_z_m['miernik_nazwa']
-                    full_cl_m_num= cl_curr + '.' + str(cl_m_num)
+                    full_cl_m_num= cl_curr + '-' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
@@ -189,7 +189,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm= {}
                     cl_m_num += 1
                     ffm['name']= row_z_m['miernik_nazwa']
-                    full_cl_m_num= cl_curr + '.' + str(cl_m_num)
+                    full_cl_m_num= cl_curr + '-' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
@@ -213,7 +213,7 @@ def fill_z_d_cel(db, cllname, clltmp):
     colltmp= db[clltmp]
     collcrr_dysp= collmain.find({"level":"c", "node":0}, {"idef":1, "parent":1, "czesc":1, "name":1, "_id":0}) # first getting the list of "dysponent" and their parents
     for row in collcrr_dysp:
-        zd_curr= row['parent'] # current "zadanie"
+        zd_curr= row['parent'].replace('-','.') # current "zadanie" (replace '-' to '.' for search in temp table)
         ds_curr= row['idef'] # current "dysponent"
         ds_name= row['name'] # current "dysponent" name
         ds_czesc_curr= row['czesc'] # current "czesc"
@@ -225,7 +225,7 @@ def fill_z_d_cel(db, cllname, clltmp):
             ffc= {}
             ffc['name']= row_z_c['cel']
             cl_d_num += 1
-            full_cl_d_num= ds_curr + '.' + str(cl_d_num)
+            full_cl_d_num= ds_curr + '-' + str(cl_d_num)
             ffc['idef']= full_cl_d_num
             ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
@@ -244,7 +244,7 @@ def fill_z_d_cel(db, cllname, clltmp):
             ffc= {}
             ffc['name']= row_z_c['cel']
             cl_d_num += 1
-            full_cl_d_num= ds_curr + '.' + str(cl_d_num)
+            full_cl_d_num= ds_curr + '-' + str(cl_d_num)
             ffc['idef']= full_cl_d_num
             ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
@@ -263,28 +263,37 @@ def fill_z_dysponent(db, colltmp, objlst):
     out= objlst[:]
 
     collect= db[colltmp]
-    collcrr_zdnum= collect.find({"test_z":True}, {"numer":1,"_id":0}) # collecting the numbers of "zadanie"
+    collcrr_zdnum= collect.find({"test_z":True}, {"numer":1, "_id":0}) # collecting the numbers of "zadanie"
     for row in collcrr_zdnum:
         zd_curr= row['numer'] # current "zadanie"
-        zd_d_num= 0
+        zd_d_num, zd_v_eu, zd_v_nation, zd_v_total = 0, 0, 0, 0
         collcrr_z_d= collect.find({'numer':zd_curr, "test_z_d":True}, {"_id":0}) # getting "dysponent" of current "zadanie"
         for row_z_d in collcrr_z_d:
             fzd= {}
             zd_d_num += 1
-            full_zd_d_num= row_z_d['numer'] + '.dt' + str(zd_d_num) # invent something smarter here (maybe 'a'-'z', 'aa'-'az', 'ba'-...?)
+            full_zd_d_num= row_z_d['numer'].replace('.','-') + '-dt' + str(zd_d_num) # invent something smarter here (maybe 'a'-'z', 'aa'-'az', 'ba'-...?)
             fzd['idef']= full_zd_d_num
             fzd['type']= 'Dysponent'
             fzd['name']= row_z_d['dysponent']
-            fzd['parent']= row_z_d['numer'] # idef of "zadanie"
+            fzd['parent']= row_z_d['numer'].replace('.', '-') # idef of "zadanie"
             fzd['node']= 0 # "dysponent" has a direction
             fzd['level']= 'c'
             fzd['czesc']= row_z_d['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             fzd['v_total']= row_z_d['ogolem'] # this is the last object
             fzd['v_nation']= row_z_d['budzet_panstwa']
             fzd['v_eu']= row_z_d['budzet_srodkow_europejskich']
+            zd_v_eu += fzd['v_eu']
+            zd_v_nation += fzd['v_nation']
+            zd_v_total += fzd['v_total']
 
             out.append(fzd)
 
+        for elem in out: # update totals of current zadanie
+            if elem['idef'] == zd_curr:
+                elem['v_total'], elem['v_nation'], elem['v_eu'] = zd_v_total, zd_v_nation, zd_v_eu
+                break
+
+    
     return out
 
 
@@ -296,7 +305,7 @@ def fill_zadanie(db, colltmp, objlst):
     for row in colltmpcrr:
         tmpdict= dict(row)
         ffz= {}
-        ffz['idef']= tmpdict['numer']
+        ffz['idef']= tmpdict['numer'].replace('.','-')
         zd_type_name= tmpdict['funkcja_zadanie'].rsplit('.', 2) # extract "funkcja_zadanie"
         ffz['type']= 'Zadanie ' + zd_type_name[0].strip() + '.' + zd_type_name[1].strip()
         ffz['name']= zd_type_name[2].strip()
@@ -322,7 +331,7 @@ def fill_funkcja(db, colltmp):
         for k, v in row.iteritems():
             if v is None or k.startswith('test_'): # delete records with empty values and keys of test matrix
                 frr.pop(k)
-        frr['idef']= frr.pop('numer') # change "numer" to "identifier"
+        frr['idef']= frr.pop('numer').replace('.', '-') # change "numer" to "identifier" replaceing dots with dashes
         funk_type_name= frr.pop('funkcja_zadanie').split('.', 2) # extract "funkcja_zadanie"
         if frr['idef'] == '999999':
             frr['type']= 'total'
@@ -365,7 +374,6 @@ def fill_rep(db, colltmp, collname, cleandb):
     print '-- node 1: podzadanie:', len(dict_podz), '; total:', db_insert(dict_podz, db, collname, False)
     dict_podz_dysp= fill_p_dysp(db, collname, colltmp) # "dysponent" (we need both updated "collname" and "colltmp" here)
     print '-- node 1: podzadanie-dysponent:', len(dict_podz_dysp), '; total:', db_insert(dict_podz_dysp, db, collname, False)
-
     # get the data from db and return for json file
     out= db[collname].find({}, {'_id':0}) # collecting everything
     return out
@@ -398,7 +406,7 @@ def csv_parse(csv_read, schema):
                     elif new_type == "int":
                         dict_row[new_key] = int(field)
                     elif new_type == "float":
-                        if '.' in field:
+                        if ',' in field:
                             field= field.replace(',', '.')
                         dict_row[new_key]= float(field)
                     elif new_type == None:
@@ -460,6 +468,7 @@ if __name__ == "__main__":
     cmdparser.add_option("-v", "--csv", action="store", dest="csv_filename", help="input file (CSV)")
     cmdparser.add_option("-s", "--schema", action="store",help="schema for CSV file (if none than SRC_FILE-SCHEMA.JSON is used)")
     cmdparser.add_option("-d", "--dbconnect", action="store", help="mongodb database and collection in a format db.collect (no update if not specified)")
+    cmdparser.add_option("-u", "--usr", action="store", help="database admin login")
     cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean db before insert (ignored if db is not updated)")
     cmdparser.add_option("-j", "--json", action="store", dest="json_filename", help="store to json file (CSV)")
     cmdparser.add_option("-i", "--indent", action="store", dest="jsindent", help="indent in JSON file")
@@ -510,14 +519,28 @@ if __name__ == "__main__":
     collectname= dbparam[1]
     clean_db= opts.dbact # False - insert() data, True - remove() and then insert()
 
-
     # create temporary dict
     obj_parsed= csv_parse(csv_read, schema)
 
-    #create and fulfill temporary collection
-    mongo_connect= pymongo.Connection("localhost", 27017)
-    work_db= mongo_connect[dbname]
-    coll_tmp= collectname + 'temp'
+    #username - ask for password
+    usrname= opts.usr
+    pprompt = getpass.getpass()
+
+    #try to connect and authenticate
+    try:
+        mongo_connect= pymongo.Connection("localhost", 27017)
+        work_db= mongo_connect[dbname]
+    except Exception as e:
+        print 'Unable to connect to the database:\n %s\n' % e
+        exit()
+
+    try:
+        work_db.authenticate(usrname, pprompt)
+    except Exception as e:
+        print 'Unable to authenticate to the database:\n %s\n' % e
+        exit()
+    
+    coll_tmp= collectname + 'temp' # collection for temporary results
 
     # insert the object parsed from csv to the temporary collection, get the num of records
     mongo_connect.start_request()
@@ -558,7 +581,8 @@ if __name__ == "__main__":
     meta_name= meta_info['name']
     meta_perspective= meta_info['perspective']
     meta_collnum= meta_info['idef']
-    meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
+    meta_leaf= meta_info['leaf']
+    meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'leaf'), (meta_collnum, meta_name, meta_perspective, collectname, meta_leaf)))
     meta_collection['columns']= schema['columns']
 
     schema_coll= 'md_budg_scheme'
