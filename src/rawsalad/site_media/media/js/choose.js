@@ -26,7 +26,7 @@
     });
     
     $('#selected-items').hide();    
-
+   
     $('#collection-list').hide();
     
     $('#change-dataset').click( function () {
@@ -53,6 +53,11 @@
     });
     $('#help-button').click( function () {
         $('#more-help').toggle();
+
+        if( $('body').css('background-position') === '0% 0%' )
+            $('body').css('background-position', '0px '+(10+$('#more-help').height())+'px' );
+        else
+            $('body').css('background-position', '0% 0%' );        
     });
 
     
