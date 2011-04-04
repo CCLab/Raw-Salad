@@ -45,11 +45,14 @@
     $('#big-one').hide();
     $('#help-line').click( function () {
         $('#more-help').toggle();
-        $('#big-one').toggle();
+
+        if( $('body').css('background-position') === '0% 0%' )
+            $('body').css('background-position', '0px '+(10+$('#more-help').height())+'px' );
+        else
+            $('body').css('background-position', '0% 0%' );        
     });
     $('#help-button').click( function () {
         $('#more-help').toggle();
-        $('#big-one').toggle();
     });
 
     
