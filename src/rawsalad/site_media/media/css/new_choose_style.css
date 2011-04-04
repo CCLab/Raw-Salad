@@ -2,9 +2,9 @@ body {
     background: url('../img/background.png') repeat-x #fff;
     color: #333;
     
-    
     font-size: 11px;
     font-family: sans-serif;
+    cursor: default;
 } 
 
 #wraper {
@@ -46,7 +46,7 @@ body {
     }
 
     .grey:hover {
-        background-color: #a0a0a0;
+        background-color: #c0c0c0;
     }
     .blue {
         background-color: #29abe2;
@@ -122,8 +122,11 @@ body {
 
 #navigation {
     float: left;
-    
     width: 600px;
+}
+
+#navigation > img {
+    float: left;
 }
 
 
@@ -161,9 +164,10 @@ body {
     #more-help {
         clear: both;
         height: auto;
-        padding-bottom: 5px;
+        padding: 5px 15px;
         margin-top: 10px;
-        margin-left: 23px;
+        color: #fff;
+        font-weight: bold;
     }
         
     #help-base {
@@ -212,6 +216,34 @@ body {
                 border-radius: 8px 0px 8px 8px !important;        
                 -moz-border-radius: 0px 0px 8px 8px !important;  
             }
+            
+            #collection-list {
+                position: absolute;
+                right: 15px;
+                top: 0px;
+                
+                width: auto;
+                height: auto;
+                
+                background-color: #29abe2;
+                border-radius: 8px 0px 8px 8px !important;        
+                -moz-border-radius: 8px 0px 8px 8px !important;
+                      
+                padding: 10px;
+                font-size: 11px;
+                text-align: left;
+                font-style: italic;       
+                color: #fff; 
+            }
+            
+            #collection-list > ul > li {
+                list-style-type: none;
+            }
+            
+            #collection-list > ul > li:hover {
+                cursor: pointer;
+                color: #aaa;
+            }              
         
             #data-source {
                 position: absolute;
