@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<link rel="stylesheet" href="/site_media/media/css/choose_style.css" />
+<link rel="stylesheet" href="/site_media/media/css/new_choose_style.css" />
 {% endblock %}
 
 
@@ -12,126 +12,157 @@
 {% block content %}
 <!-- H E A D E R -->
 <div id="header">
-  <div id="logo" class="left">
-    <img src="/site_media/media/img/choose/logo.png" class="left" />
-
-    <img src="/site_media/media/img/navigation/01_01.png" class="left" />
-    <a href="/browse/"><img id="navigation-img" src="/site_media/media/img/navigation/01_02.png" class="left" border="0" "Zobacz dane" /></a>
-    <img src="/site_media/media/img/navigation/01_03.png" class="left" />
-  </div>
+    <div id="toolbar">
+        <div id="upper-toolbar">
+            <div id="back-to-main" class="button">
+                <img id="back-to-main-arrow" src="/site_media/media/img/back-to-main-arrow.png" />
+                powrót na główną
+            </div>
+            <div id="saved-sessions" class="button grey">
+                zapisane sesje
+            </div>
+        </div>
+        <div id="lower-toolbar">
+            <div id="selected-items" class="button grey">
+                <img id="selected-items-icon" src="/site_media/media/img/arrow.open.lista.png" />                    
+                lista wybranych pozycji
+            </div>
+            <div id="download" class="button grey">
+                zapisz na dysk
+            </div>
+        </div>
+    </div>
+    <div id="navigation">
+        <img src="/site_media/media/img/navigation_01_01.png" alt="Belka nawigacyjna" />
+    </div>
+    <div id="logo">
+        <img src="/site_media/media/img/logo.png" alt="Logo portalu" />                
+    </div>
 </div>
 
 <!-- H E L P  L I N E -->
-<div id="help-line">
-  <img id="help-icon" src="/site_media/media/img/help_icon.png" alt="help" title="help" />
-  <div id="help-line-info" class="help-line-text">Wybierz jedną z perspektyw i przejdź do etapu 2 (zielony guzik na górze strony)</div>
-  <div id="more-help" class="help-line-text">
-    Na tym etapie prac wybierasz z jakiej perspektywy chciałbyś przeglądać wybraną kolekcję. Dostępne perspektywy podzieliliśmy na strukturalne (te, które prezentują surowe dane) i zagadnieniowe (te, które zawierają efekty pewnej agregacji danych i pomagają odpowiedzieć na określone pytania). 
-  </div>
+<div id="help">
+    <div id="help-button" class="button pink">
+        pomocy!
+    </div>
+    <div id="help-line">
+        Wybierz perspektywę i naciśnij guzik "Przeglądaj"
+    </div>
+    <div id="help-base" class="button grey">
+        baza wiedzy
+    </div>
+    <div id="more-help" class="help-line-text">
+        Na tym etapie prac wybierasz z jakiej perspektywy chciałbyś przeglądać wybraną kolekcję. Dostępne perspektywy podzieliliśmy na strukturalne (te, które prezentują surowe dane) i zagadnieniowe (te, które zawierają efekty pewnej agregacji danych i pomagają odpowiedzieć na określone pytania). 
+    </div>    
 </div>
 
 <!-- M A I N   C O N T E N T -->
-<div id="main-content">
-  <div id="left-column">
-    <div id="collection-header">
-      <div id="collection-name">
-	{{ name }}
-	<div id="collection-source" onclick="alert('Pojawia się strona ze źródłem danych');" title="Zobacz źródło danych">
-	  źródło
-	</div>                    
-	<div id="collection-change" title="Zmień kolekcję danych">
-	  zmień
-	</div>
-	<div id="collection-list">
-	  <ul>
-	    {% for collection in other_collections %}
-	    <li onclick="alert('Zmieniasz kolekcję danych');">{{ collection.name }}</li>
-	    {% endfor %}
-	  </ul>
-	</div>            
+
+<div id="application">
+  <div id="content">
+      <div id="dataset-name">
+          {{ name }}
+          <div id="change-dataset" class="button blue">
+              zmień
+          </div>
+          <div id="data-source" class="button grey">
+              źródło
+          </div>
+          <div id="collection-list">
+            <ul>
+              {% for collection in other_collections %}
+              <li onclick="alert('Zmieniasz kolekcję danych');">{{ collection.name }}</li>
+              {% endfor %}
+            </ul>
+          </div>            
       </div>
-      <div id="collection-desc">
-	Dostępnych jest {{ all_pers }}  perspektyw
+      <div id="perspectives-count">
+          Dostępnych jest {{ all_pers }} perspektyw
       </div>
-    </div>
-    <div id="perspectives-mustache">
-      <img src="/site_media/media/img/choose/perspectives-mustache.png" />
-    </div>
-    <div id="perspectives">
-      <div id="structures">
-	<div class="perspective-count">{{ sys_pers }}  perspektywy systemowe</div>
-	<div class="perspective">
-	  <div class="perspective-title">
-	    Struktury
-	  </div>
-	  <div class="perspective-title-desc">
-	    Podstawowy sposób ogrganizacji danych
-	  </div>
-	  
-	  
-	  {% for structure in structures %}
-	  <!--  {{ structure.name }}  -->
-	  <div class="angle">
-	    {% if structure.pos == 1 %}
-	    <div class="angle-radio selected">
-	    </div>
-	    {% else %}
-	    <div class="angle-radio unselected">
-	    </div>
-	    {% endif %}
-	    <div class="angle-name">
-	      {{ structure.name }}
-	    </div>
-	    <div class="angle-desc">
-	      {{ structure.descr }}
-	    </div>
-	  </div>
-	  {% endfor %}
-	</div>
+      <div id="perspectives-panel">
+          <div id="structures">
+            <div class="perspective-triangle">
+                <img src="/site_media/media/img/perspective-triangle.png" />
+            </div>
+            <div class="perspectives-header">
+                <img src="/site_media/media/img/blue-triangle-big.png" />                    
+                <div class="perspectives-header-title">
+                    {{ sys_pers }} struktury
+                </div>
+            </div>
+            <div class="perspectives-text">
+                Podstawowy sposób przeglądania danych
+            </div>
+            <div class="perspectives-list">
+               
+         	  {% for structure in structures %}
+              <!--  {{ structure.name }}  -->
+                <div class="perspective">
+                    <div class="perspective-header">
+                        <img src="/site_media/media/img/blue-triangle-small.png" />                    
+                        <div class="perspective-header-title">
+	                      {{ structure.name }}
+                        </div>
+                        <div class="radio-button">
+                            <div class="radio-inside"></div>
+                        </div>
+                    </div>
+                    <div class="perspective-text">
+                        {{ structure.descr }}
+                    </div>
+                  </div>
+              {% endfor %}
+                
+            </div>
+          </div>
+          
+          <!-- S T O R I E S   A B O U T   D A T A -->
+          <div id="questions">
+            <div class="perspectives-triangle">
+                <img src="/site_media/media/img/perspective-triangle.png" />
+            </div>
+            <div class="perspectives-header">
+                <img src="/site_media/media/img/blue-triangle-big.png" />                    
+                <div class="perspectives-header-title">
+                    {{ zag_pers }} zagadnienia
+                </div>
+            </div>
+            <div class="perspectives-text">
+                Konkretne zagadnienia wydobyte z danych
+            </div>
+
+            <div class="perspectives-list">
+                
+         	  {% for story in stories %}
+              <!--  {{ story.name }}  -->
+                <div class="perspective">
+                    <div class="perspective-header">
+                        <img src="/site_media/media/img/blue-triangle-small.png" />                    
+                        <div class="perspective-header-title">
+	                      {{ story.name }}
+                        </div>
+                        <div class="radio-button">
+                            <div class="radio-inside"></div>
+                        </div>
+                    </div>
+                    <div class="perspective-text">
+                        {{ story.descr }}
+                    </div>
+                  </div>
+              {% endfor %}
+                
+            </div>                    
+          </div>                  
       </div>
-      <div id="stories">
-	<div class="perspective-count">{{ zag_pers }} perspektywy zagadnieniowe</div>
-	<div class="perspective">
-	  <div class="perspective-title">
-	    Pytania
-	  </div>
-	  <div class="perspective-title-desc">
-	    Konkretne zagadnienia wyjęte z danych
-	  </div>
-	  
-	  {% for story in stories %}
-	  <!--  {{ story.name }}  -->
-	  <div class="angle">
-	    <div class="angle-radio unselected">
-	    </div>
-	    <div class="angle-name">
-	      {{ story.name }}
-	    </div>
-	    <div class="angle-desc">
-	      {{ story.descr }}
-	    </div>
-	  </div>
-	  {% endfor %}                        
-	</div>
+  </div>
+  <div id="about">
+      <div id="about-header" class="button">
+          {{ name }}
       </div>
-    </div>
-  </div>  
-  <div id="right-column">
-    <div id="toolbar">
-      <img src="/site_media/media/img/buttons/base.png" id="base-button" />
-      <img src="/site_media/media/img/buttons/download.png" id="download-button" />
-      <img src="/site_media/media/img/buttons/sessions.png" id="sessions-button" />
-      <img src="/site_media/media/img/buttons/snapshots.png" id="snapshots-button" />
-    </div>
-    <div id="dataset-about">
-      <div id="dataset-about-header">
-	{{ name }}
+      <div id="about-text">
+    	{{ full_descr|safe }}
       </div>
-      <div id="dataset-about-desc">
-	{{ full_descr|safe }}
-      </div>
-    </div>
-  </div>      
+  </div>
   <div id="big-one">
     <img src="/site_media/media/img/1.png" />
   </div>
