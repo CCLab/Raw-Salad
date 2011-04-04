@@ -25,7 +25,7 @@
             .removeClass('unselected');
     });
     
-    
+    $('#selected-items').hide();    
 
     $('#collection-list').hide();
     
