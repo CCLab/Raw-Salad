@@ -60,6 +60,25 @@
         });	                             
 
         node.find('.checkbox').click( function () {
+            var nav_plain = '/site_media/media/img/navigation/02_03.png';
+            var nav_active = '/site_media/media/img/navigation/02_03_active.png';
+            var nav_over = '/site_media/media/img/navigation/02_03_over.png';
+
+            var nav_img = $('#nav-03');                    
+            var nav_current = nav_img.attr('src');
+
+            if( nav_current === nav_plain )
+            {
+                nav_img.attr('src', nav_active )
+                       .hover( 
+                           function () {
+                               nav_img.attr('src', nav_over ); 
+                               nav_img.css('cursor', 'pointer');
+                           },                     
+                           function () {
+                               nav_img.attr('src', nav_active );                            
+                           });
+            }
             $(this).toggleClass( 'selected' );
         });
     }

@@ -1,0 +1,47 @@
+#help {
+    clear: both;
+    height: 100%;
+    overflow: auto;
+    margin-bottom: 5px;
+}
+
+    #help-button {
+        float: left;
+        width: 80px;
+        
+        border-radius: 10px 10px 0px 0px !important;        
+        -moz-border-radius: 10px 10px 0px 0px !important;        
+        
+        margin-right: 5px;
+        text-shadow: #999 1px 1px 3px;        
+    }
+
+    #help-line {
+        float: left;
+        
+        padding: 4px 5px;
+        color: #ccc;
+    }
+
+    #help-line:hover {
+        color: #7f7f7f;
+        cursor: pointer;
+    }
+    
+    #more-help {
+        clear: both;
+        height: auto;
+        padding: 5px 15px;
+        padding-right: 85px;
+        margin-top: 10px;
+        color: #555;
+    }
+        
+    #help-base {
+        float: right;
+        width: 74px;
+
+        border-radius: 10px 10px 0px 0px !important;        
+        -moz-border-radius: 10px 10px 0px 0px !important;        
+    }
+    

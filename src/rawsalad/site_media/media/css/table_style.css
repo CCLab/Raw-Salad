@@ -112,17 +112,17 @@
 
 .checkbox:hover {
     cursor: pointer !important;
-    background-color: #fff;
-    border: 1px solid #fbf55f;
+    background-color: #fbf55f;    
+    border: 2px solid #f6d64b;    
 }
 
 .checkbox.selected {
-    background-color: #f6d64b;    
+    background-color: #f9e281;    
     border: 2px solid #f6d64b;    
 }
 
 .checkbox.selected:hover {
-    background-color: #fbf55f !important;    
+    background-color: #f9e281 !important;    
 }
 
 .marked {
