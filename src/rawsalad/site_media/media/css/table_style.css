@@ -1,6 +1,9 @@
 /*  T A B L E  */
 #table {
-    margin-left: 8px;
+    width: 900px;
+    margin-left: 0px;
+    background-color: #fff;
+    overflow: auto;
 }
 
 #table div {
@@ -11,7 +14,7 @@
 
 /*  T A B L E   H E A D  */
 #thead > .data > * {
-    background-color: #000;
+    background-color: #808080;
     color: #fff;
     font-weight: bold;
 }
@@ -19,6 +22,14 @@
 #thead > .data > .type {
     width: 138px;
 }
+
+#thead > .data {
+    overflow: auto;
+    border-right: 1px solid #808080;    
+    border-left: 1px solid #808080;  
+    border-top: 1px solid #ccc;      
+}
+
 #thead > div {
     text-align: center;
 }
@@ -27,7 +38,7 @@
 /*  T A B L E   B O D Y  */
 #tbody {
     height: 100%;
-    background: url('/site_media/media/img/background.png');
+/*    background: url('/site_media/media/img/background.png');*/
     clear: both;
 }
 
@@ -48,7 +59,7 @@
 }
 
 .name {
-    width: 548px;
+    width: 530px;
 }
 .value {
     width: 88px;
@@ -58,6 +69,7 @@
 .node > .data > .type {
     color: #11a8f7;
     font-weight: bold;
+    border-left: 1px solid #ccc;
 }
 
 .node > .data > .type:hover {
@@ -79,7 +91,7 @@
     padding-bottom: 4px;
     padding-left: 5px;
     padding-right: 5px;    
-    border: 1px #fff solid;
+    border-right: 1px #ccc solid;
 }
 
 
@@ -87,13 +99,15 @@
 .checkbox {
     float: right;
     
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
 
     padding: 3px; 
  
     background-color: #fff;
-    border: 1px solid #000;
+    border: 2px solid #000;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 
 .checkbox:hover {
@@ -113,19 +127,22 @@
 
 .marked {
     background-color: #000;
-    color: #6666ff;
+    color: #fff;
+}
+.type.marked {
+    border-left: 1px solid #000 !important;
 }
 
 .darkened {
-    background-color: #999999;
+    background-color: #ddd;
 }
 
 .leftborder {
-    border-left: 1px solid #000;
+    border-left: 1px solid #000 !important;
 }
 
 .rightborder {
-    border-right: 1px solid #000;
+    border-right: 1px solid #000 !important;
 }
 
 .bottomborder {

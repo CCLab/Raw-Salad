@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<link rel="stylesheet" href="/site_media/media/css/browse_style.css" />
+<link rel="stylesheet" href="/site_media/media/css/new_browse_style.css" />
 <link rel="stylesheet" href="/site_media/media/css/table_style.css" />
 {% endblock %}
 
@@ -16,78 +16,119 @@
 {% block content %}
 <!-- H E A D E R -->
 <div id="header">
-  <div id="logo" class="left">
-    <img src="/site_media/media/img/choose/logo.png" class="left" />
-
-    <img id="nav-01" src="/site_media/media/img/navigation/02_01.png" class="left" border="0" />
-    <img id="nav-02" src="/site_media/media/img/navigation/02_02.png" class="left" border="0" />
-    <img id="nav-03" src="/site_media/media/img/navigation/02_03.png" class="left" border="0" onclick="alert('Przejdź do etapu wizualizacji');" />
-
-  </div>
+    <div id="toolbar">
+        <div id="upper-toolbar">
+            <div id="back-to-main" class="button">
+                <img id="back-to-main-arrow" src="/site_media/media/img/back-to-main-arrow.png" />
+                <a href="/">powrót na główną</a>
+            </div>
+            <div id="saved-sessions" class="button grey">
+                zapisane sesje
+            </div>
+        </div>
+        <div id="lower-toolbar">
+            <div id="selected-items" class="button grey">
+                <img id="selected-items-icon" src="/site_media/media/img/arrow.open.lista.png" />                    
+                lista wybranych pozycji
+            </div>
+            <div id="download" class="button grey">
+                zapisz na dysk
+            </div>
+        </div>
+    </div>
+    <div id="navigation">
+        <a href="/choose/col/1/" border="0">
+            <img id="nav-01" src="/site_media/media/img/navigation/02_01.png" border="0" alt="Belka nawigacyjna" />
+        </a>
+        <img id="nav-02" src="/site_media/media/img/navigation/02_02.png" border="0" alt="Belka nawigacyjna" />
+        <img id="nav-03" src="/site_media/media/img/navigation/02_03.png" border="0" alt="Belka nawigacyjna" />                        
+    </div>
+    <div id="logo">
+        <img src="/site_media/media/img/logo.png" alt="Logo portalu" />                
+    </div>
 </div>
 
 <!-- H E L P  L I N E -->
-<div id="help-line">
-  <img id="help-icon" src="/site_media/media/img/help_icon.png" alt="help" title="help" />
-  <div id="help-line-info" class="help-line-text">Przejrzyj dane, zapisz je w zakładkach i przejdź do wizualizacji</div>
-  <div id="more-help" class="help-line-text">
-    Na tym etapie prac wybierasz z jakiej perspektywy chciałbyś przeglądać wybraną kolekcję. Dostępne perspektywy podzieliliśmy na strukturalne (te, które prezentują surowe dane) i zagadnieniowe (te, które zawierają efekty pewnej agregacji danych i pomagają odpowiedzieć na określone pytania). 
-  </div>
+<div id="help">
+    <div id="help-button" class="button pink">
+        pomocy!
+    </div>
+    <div id="help-line">
+        Eksplorując tabelę zaznacz interesujące cię pozyje i zapisz je w arkuszach, następnie pobierz dane lub zobacz wizualizacje
+    </div>
+    <div id="help-base" class="button grey">
+        baza wiedzy
+    </div>
+    <div id="more-help" class="help-line-text">
+Na tym etapie prac wybierasz z jakiej <b>perspektywy</b> chciałbyś przeglądać wybraną kolekcję. Dostępne perspektywy podzieliliśmy na strukturalne (te, które prezentują surowe dane) i zagadnieniowe (te, które zawierają efekty pewnej agregacji danych i pomagają odpowiedzieć na określone pytania). Na tym etapie prac wybierasz z jakiej <i>perspektywy chciałbyś przeglądać</i> wybraną kolekcję. Dostępne perspektywy podzieliliśmy na strukturalne (te, które prezentują surowe dane) i zagadnieniowe (te, które zawierają efekty pewnej agregacji danych i pomagają odpowiedzieć na określone pytania). <br />
+Na tym etapie prac wybierasz z jakiej perspektywy chciałbyś przeglądać wybraną kolekcję. Dostępne perspektywy podzieliliśmy na strukturalne (te, które prezentują surowe dane) i zagadnieniowe (te, które zawierają efekty pewnej agregacji danych i pomagają odpowiedzieć na <b>określone pytania</b>). Na tym etapie prac wybierasz z jakiej perspektywy chciałbyś przeglądać wybraną kolekcję. Dostępne perspektywy podzieliliśmy na strukturalne (te, które prezentują surowe dane) i zagadnieniowe (te, które zawierają efekty pewnej agregacji danych i pomagają odpowiedzieć na określone pytania).  
+    </div>    
 </div>
 
 <!-- M A I N   C O N T E N T -->
-<div id="main-panel">
-
-  <!-- P A N E L   H E A D E R -->
-  <div id="panel-header">
-    <div id="left-head">
-      <div id="info-pane">
-        INFO
-      </div>
+<div id="application">
+  <div id="content">
+    
+    <!-- C O N T E N T   H E A D E R -->
+    <div id="content-header">
+        <div id="collection-name">
+            Budżet centralny > Budżet zadaniowy
+        </div>
+        <div id="share-button">
+            podziel się
+        </div>
+        <div id="bread-crumb">
+            Bread-crumb > Bread-crumb > Bread-crumb  
+        </div>
+        <div id="table-toolbar">
+            <div id="statistics">
+                Statystyki: 123 Statystyki: 456
+            </div>
+            <div id="tools">
+                Narzędzia
+            </div>
+        </div>
     </div>
-    <div id="right-head">
-      <div id="toolbar">
-        <div onclick="alert('Przejdź do bazy wiedzy');">
-          <img src="/site_media/media/img/baza_wiedzy_icon.png" title="Baza wiedzy">
-        </div>
-        <div onclick="alert('Pobierz dane');">
-          <img src="/site_media/media/img/download.png" title="Pobierz">
-        </div>
-        <div onclick="alert('Zobacz zapisane sesje lub zapisz bieżącą');">
-          <img src="/site_media/media/img/sessions.png" title="Zapisane sesje">
-        </div>
-        <div onclick="alert('Przejrzyj zakładki');">
-          <img src="/site_media/media/img/snapshots.png" title="Zakładki">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- C O L U M N S  -->
-  <div id="panel-columns">
-    <div id="left-column">
-      <div id="statistics">Największa wartość: 84364630 | Najmniejsza wartość: 287192 | Średnia wartość: 2383478</div>
-      <div id="table-toolbar">
-        <div class="table-tool">
-          filtruj
-        </div>
-        <div class="table-tool">
-          sortuj
-        </div>
-        <div class="table-tool">
-          +/-
-        </div>
-        <div class="table-tool">
-          v
-        </div>
-      </div>
-
+  
+  
+      <!-- T A B L E   C O N T A I N E R   F O R   J A V A S C R I P T -->
       <div id="table"> </div>
 
-    </div>
-    <div id="right-column">
+  </div>
+  <div id="snapshots">
 
-    </div>      
   </div>
 </div>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

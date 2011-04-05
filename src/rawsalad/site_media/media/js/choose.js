@@ -1,19 +1,25 @@
 (function () {
  
     $('.radio-button').click( function () {
-        var navigation_img = $('#nav-02').attr('src');
-        if( navigation_img === '/site_media/media/img/navigation/01_02.png' )
+        var nav_plain = '/site_media/media/img/navigation/01_02.png';
+        var nav_active = '/site_media/media/img/navigation/01_02_active.png';
+        var nav_over = '/site_media/media/img/navigation/01_02_over.png';
+
+        var nav_img = $('#nav-02');                    
+        var nav_current = nav_img.attr('src');
+
+        if( nav_current === nav_plain )
         {
-            $('#nav-02').attr('src', '/site_media/media/img/navigation/01_02_active.png' )
-                        .hover( 
-                            function () {
-                                $('#nav-02').attr('src', '/site_media/media/img/navigation/01_02_over.png' ); 
-                                $('#nav-02').css('cursor', 'pointer');
-                            },                     
-                            function () {
-                                $('#nav-02').attr('src', '/site_media/media/img/navigation/01_02_active.png' );                            
-                            });
-            
+            nav_img.attr('src', nav_active )
+                   .hover( 
+                       function () {
+                           nav_img.attr('src', nav_over ); 
+                           nav_img.css('cursor', 'pointer');
+                           $('#nav-02-anchor').attr('href', '/browse/');
+                       },                     
+                       function () {
+                           nav_img.attr('src', nav_active );                            
+                       });
         }
         
         $('.radio-inside')
@@ -26,24 +32,23 @@
     });
     
     $('#selected-items').hide();    
-   
     $('#collection-list').hide();
     
     $('#change-dataset').click( function () {
-            $('#collection-list').show();            
+        $('#collection-list').show();            
     });
     
     $('#collection-list').mouseover( function () {
-            $('#collection-list').show();            
+        $('#collection-list').show();            
     });
     
     $('#collection-list').mouseout( function () {
-            $(this).hide();            
+        $(this).hide();            
     });
     
     $('#more-help').hide();
     $('#big-one').hide();
-    $('#help-line').click( function () {
+    $('#help-line, #help-button').click( function () {
         $('#more-help').toggle();
 
         if( $('body').css('background-position') === '0% 0%' )
@@ -51,14 +56,5 @@
         else
             $('body').css('background-position', '0% 0%' );        
     });
-    $('#help-button').click( function () {
-        $('#more-help').toggle();
-
-        if( $('body').css('background-position') === '0% 0%' )
-            $('body').css('background-position', '0px '+(10+$('#more-help').height())+'px' );
-        else
-            $('body').css('background-position', '0% 0%' );        
-    });
-
     
 })();

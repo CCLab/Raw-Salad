@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<link rel="stylesheet" href="/site_media/media/css/new_choose_style.css" />
+<link rel="stylesheet" href="/site_media/media/css/choose_style.css" />
 {% endblock %}
 
 
@@ -16,7 +16,7 @@
         <div id="upper-toolbar">
             <div id="back-to-main" class="button">
                 <img id="back-to-main-arrow" src="/site_media/media/img/back-to-main-arrow.png" />
-                powrót na główną
+                <a href="/">powrót na główną</a>
             </div>
             <div id="saved-sessions" class="button grey">
                 zapisane sesje
@@ -34,7 +34,9 @@
     </div>
     <div id="navigation">
         <img id="nav-01" src="/site_media/media/img/navigation/01_01.png" border="0" alt="Belka nawigacyjna" />
-        <img id="nav-02" src="/site_media/media/img/navigation/01_02.png" border="0" alt="Belka nawigacyjna" />
+        <a id="nav-02-anchor">
+            <img id="nav-02" src="/site_media/media/img/navigation/01_02.png" border="0" alt="Belka nawigacyjna" />
+        </a>
         <img id="nav-03" src="/site_media/media/img/navigation/01_03.png" border="0" alt="Belka nawigacyjna" />                        
     </div>
     <div id="logo">
@@ -168,3 +170,5 @@ Na tym etapie prac wybierasz z jakiej perspektywy chciałbyś przeglądać wybra
 
 </div>
 {% endblock %}
+
+
