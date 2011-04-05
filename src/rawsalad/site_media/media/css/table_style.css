@@ -105,7 +105,7 @@
     padding: 3px; 
  
     background-color: #fff;
-    border: 2px solid #000;
+    border: 2px solid #f6d64b;
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
@@ -117,8 +117,8 @@
 }
 
 .checkbox.selected {
-    background-color: #fbf55f;    
-    border: 1px solid #fbf55f;    
+    background-color: #f6d64b;    
+    border: 2px solid #f6d64b;    
 }
 
 .checkbox.selected:hover {
