@@ -256,8 +256,7 @@ if __name__ == "__main__":
         meta_name= meta_info['name']
         meta_perspective= meta_info['perspective']
         meta_collnum= meta_info['idef']
-        meta_leaf= meta_info['leaf']
-        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'leaf'), (meta_collnum, meta_name, meta_perspective, collectname, meta_leaf)))
+        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
         meta_collection['columns']= schema['columns']
 
         schema_coll= 'md_budg_scheme'

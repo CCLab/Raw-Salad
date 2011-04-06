@@ -34,9 +34,6 @@
       "name": "budzet_tradycijny",
       "perspective": "Budżet tradycijny",
       "idef": 2,
-      "leaf":[ 
-          {"node": null, "level": "c"}
-      ],
       "level_label": {"a": "Część", "b": "Dział", "c": "Rozdział"}
   },
   "columns": [

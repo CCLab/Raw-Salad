@@ -50,42 +50,72 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 
 
 # FILL THE DATA
-# node 1
 
-def fill_p_dysp(db, collname, colltmp):
+# copy dysponent from node 0 to 1:
+# if there is no 'podzadanie' in some function in node 1,
+# list of 'dysponents' should be copied as (!!!)child elements of zadanie(!!!)
+def copy_dysp(db, collname, func_num):
     out= []
-
-    collect= db[colltmp]
-    collcrr_p_d= collect.find({'test_p_d':True}, {'_id':0}) # collecting all 'dysponents' of all 'podzadanie'
-    cll= db[collname]
-    tmp=0
+    collect= db[collname]
+    collcrr_p_d= collect.find({'node':0 ,'level':'c','idef':{'$regex':func_num+'.'}},{'_id':0}) # collecting all 'dysponents' of specified function
     for row in collcrr_p_d:
-        fpd= {}
-        tmp += 1
-        name_p_d= row['dysponent'].strip()
-        czesc_p_d= row['czesc']
-        curr_zd_idef_lst= row['numer'].split('.')
-        curr_zd_idef= curr_zd_idef_lst[0] + '-' + curr_zd_idef_lst[1] # have to search in the scope of current 'zadanie'
-        #we already have 'idef' for all dysponents of zadanie - just look for it in the previously inserted data
-        p_d_idef= cll.find_one({'node':0, 'level':'c', 'czesc':czesc_p_d, 'parent':curr_zd_idef, 'name':name_p_d}, {'idef':1, '_id':0})
-        fpd['idef']= p_d_idef['idef']
-        fpd['type']= 'Dysponent'
-        fpd['name']= name_p_d
-        fpd['parent']= row['numer'].replace('.', '-') # idef of "podzadanie"
-        fpd['node']= 1 # "dysponent" has a direction
-        fpd['level']= 'd'
-        fpd['czesc']= czesc_p_d
-        fpd['cel']= row['cel']
-        fpd['miernik_nazwa']= row['miernik_nazwa']
-        fpd['miernik_wartosc_bazowa']= row['miernik_wartosc_bazowa']
-        fpd['miernik_wartosc_rb']= row['miernik_wartosc_rok_obec']
-        fpd['v_total']= row['ogolem'] # this is the last object
-        fpd['v_nation']= row['budzet_panstwa']
-        fpd['v_eu']= row['budzet_srodkow_europejskich']
-        
-        out.append(fpd)
+        new_row= row.copy()
+        new_row['leaf']= True # changing just a bit
+        new_row['node']= 1
+        out.append(new_row)
 
     return out
+
+
+# node 1
+def fill_p_dysp(db, collname, colltmp, objlst):
+    out= objlst[:] # copy of list containing 'podzadanie'
+
+    clltmp= db[colltmp]
+    cllact= db[collname]
+
+    for podz in objlst: # iterating through podzadanie
+        podz_curr= podz['idef'].replace('-','.') # have to look through old codes with '.' separator
+        collcrr_p_d= clltmp.find({'test_p_d':True, 'numer':podz_curr}, {'_id':0}) # collecting all 'dysponents' of all 'podzadanie'
+        tmp, podz_v_eu, podz_v_nation, podz_v_total = 0, 0, 0, 0
+        for row in collcrr_p_d:
+            fpd= {}
+            tmp += 1
+            name_p_d= row['dysponent'].strip()
+            czesc_p_d= row['czesc']
+            curr_zd_idef_lst= row['numer'].split('.')
+            curr_zd_idef= curr_zd_idef_lst[0] + '-' + curr_zd_idef_lst[1] # have to search in the scope of current 'zadanie'
+            #we already have 'idef' for all dysponents of zadanie - just look for it in the previously inserted data
+            p_d_idef= cllact.find_one({'node':0, 'level':'c', 'czesc':czesc_p_d, 'parent':curr_zd_idef, 'name':name_p_d}, {'idef':1, '_id':0})
+            fpd['idef']= p_d_idef['idef']
+            fpd['type']= 'Dysponent'
+            fpd['name']= name_p_d
+            fpd['parent']= row['numer'].replace('.', '-') # idef of "podzadanie"
+            fpd['node']= 1 # "dysponent" has a direction
+            fpd['level']= 'd'
+            fpd['leaf']= True # this level is the deepest one in node 1
+            fpd['czesc']= czesc_p_d
+            fpd['cel']= row['cel']
+            fpd['miernik_nazwa']= row['miernik_nazwa']
+            fpd['miernik_wartosc_bazowa']= row['miernik_wartosc_bazowa']
+            fpd['miernik_wartosc_rb']= row['miernik_wartosc_rok_obec']
+            fpd['v_total']= row['ogolem'] # this is the last object
+            fpd['v_nation']= row['budzet_panstwa']
+            fpd['v_eu']= row['budzet_srodkow_europejskich']
+            podz_v_eu += fpd['v_eu'] # calculating totals for current podzadanie
+            podz_v_nation += fpd['v_nation']
+            podz_v_total += fpd['v_total']
+        
+            out.append(fpd)
+
+        podz_curr= podz_curr.replace('.','-') # changing back - now we look through updated codes
+        for elem in out: # update totals of current podzadanie
+            if elem['idef'] == podz_curr:
+                elem['v_total'], elem['v_nation'], elem['v_eu'] = podz_v_total, podz_v_nation, podz_v_eu
+                break
+
+    return out
+
 
 
 def fill_podzadanie(db, clltmp):
@@ -103,13 +133,14 @@ def fill_podzadanie(db, clltmp):
         fpz['name']= name_tmp.strip()
         fpz['node']= 1 # "podzadanie" has a direction
         fpz['level']= 'c'
-        fpz['v_total']= row_p['ogolem'] # this is the last object
-        fpz['v_nation']= row_p['budzet_panstwa']
-        fpz['v_eu']= row_p['budzet_srodkow_europejskich']
+        fpz['leaf']= False
+        fpz['v_total']= None # no data on this level
+        fpz['v_nation']= None
+        fpz['v_eu']= None
         out.append(fpz)
 
     return out
-    
+
 
 # node 0
 def fill_z_d_c_mier(db, cllname, clltmp):
@@ -149,6 +180,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['parent']= cl_curr # idef of "cel"
                     ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
+                    ffm['leaf']= True # now - this level is the deepest in node 0
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
                     ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
@@ -172,6 +204,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['parent']= cl_curr # idef of "cel"
                     ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
+                    ffm['leaf']= True # now - this level is the deepest in node 0
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
                     ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
@@ -195,6 +228,7 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['parent']= cl_curr # idef of "cel"
                     ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
+                    ffm['leaf']= True # now - this level is the deepest in node 0
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
                     ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
@@ -229,9 +263,10 @@ def fill_z_d_cel(db, cllname, clltmp):
             ffc['idef']= full_cl_d_num
             ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
+            ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             ffc['node']= 0 # "cel" follows the direction of "dysponent"
             ffc['level']= 'd'
-            ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
+            ffc['leaf']= False # it isn't the deepest level
             ffc['v_total']= None # no values on the level of "cel"
             ffc['v_nation']= None
             ffc['v_eu']= None
@@ -248,9 +283,10 @@ def fill_z_d_cel(db, cllname, clltmp):
             ffc['idef']= full_cl_d_num
             ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
+            ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             ffc['node']= 0 # "cel" follows the direction of "dysponent"
             ffc['level']= 'd'
-            ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
+            ffc['leaf']= False # it isn't the deepest level
             ffc['v_total']= None # no values on the level of "cel"
             ffc['v_nation']= None
             ffc['v_eu']= None
@@ -271,14 +307,15 @@ def fill_z_dysponent(db, colltmp, objlst):
         for row_z_d in collcrr_z_d:
             fzd= {}
             zd_d_num += 1
-            full_zd_d_num= row_z_d['numer'].replace('.','-') + '-dt' + str(zd_d_num) # invent something smarter here (maybe 'a'-'z', 'aa'-'az', 'ba'-...?)
+            full_zd_d_num= row_z_d['numer'].replace('.','-') + '-dt' + str(zd_d_num) # 'dysponent' code becomes N-M-dtK
             fzd['idef']= full_zd_d_num
             fzd['type']= 'Dysponent'
             fzd['name']= row_z_d['dysponent']
             fzd['parent']= row_z_d['numer'].replace('.', '-') # idef of "zadanie"
+            fzd['czesc']= row_z_d['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             fzd['node']= 0 # "dysponent" has a direction
             fzd['level']= 'c'
-            fzd['czesc']= row_z_d['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
+            fzd['leaf']= False # it isn't the deepest level
             fzd['v_total']= row_z_d['ogolem'] # this is the last object
             fzd['v_nation']= row_z_d['budzet_panstwa']
             fzd['v_eu']= row_z_d['budzet_srodkow_europejskich']
@@ -288,11 +325,11 @@ def fill_z_dysponent(db, colltmp, objlst):
 
             out.append(fzd)
 
+        zd_curr= zd_curr.replace('.','-') # now we look through updated codes
         for elem in out: # update totals of current zadanie
             if elem['idef'] == zd_curr:
                 elem['v_total'], elem['v_nation'], elem['v_eu'] = zd_v_total, zd_v_nation, zd_v_eu
                 break
-
     
     return out
 
@@ -312,7 +349,8 @@ def fill_zadanie(db, colltmp, objlst):
         ffz['parent']= zd_type_name[0].strip() # idef of "zadanie"
         ffz['node']= None # "zadanie" is not a root, but it still doesn't have a 'direction'
         ffz['level']= 'b' # 2nd level in the hierarchy
-        ffz['v_total']= None # no info about money on that level, in case of necessity can be summarized via map/reduce in mongo
+        ffz['leaf']= False # it isn't the deepest level
+        ffz['v_total']= None # no info about money on that level
         ffz['v_nation']= None
         ffz['v_eu']= None
 
@@ -342,6 +380,7 @@ def fill_funkcja(db, colltmp):
         frr['parent']= None # "funkcja" is the root
         frr['node']= None # "funkcja" doesn't have a 'direction'
         frr['level']= 'a' # the highest level in the hierarchy
+        frr['leaf']= False # not the deepest level
         frr['v_total']= frr.pop('ogolem') # change "ogolem" to "total" of the current year
         frr['v_nation']= frr.pop('budzet_panstwa') # the same for state budget
         frr['v_eu']= frr.pop('budzet_srodkow_europejskich') # the same for EU part in the budget
@@ -371,9 +410,12 @@ def fill_rep(db, colltmp, collname, cleandb):
 
     # filling out node 1 (zadanie - podzadanie - dysponent (with cel and miernik at the same level))
     dict_podz= fill_podzadanie(db, colltmp) # "podzadanie"
-    print '-- node 1: podzadanie:', len(dict_podz), '; total:', db_insert(dict_podz, db, collname, False)
-    dict_podz_dysp= fill_p_dysp(db, collname, colltmp) # "dysponent" (we need both updated "collname" and "colltmp" here)
+    print '-- node 1: podzadanie:', len(dict_podz) # no insert here, because it's necessary to calculate totals for podzadanie
+    dict_podz_dysp= fill_p_dysp(db, collname, colltmp, dict_podz) # "dysponent" (we need both updated "collname" and "colltmp" here)
     print '-- node 1: podzadanie-dysponent:', len(dict_podz_dysp), '; total:', db_insert(dict_podz_dysp, db, collname, False)
+    # VERY SPECIFIC - FOR TASK 22 ONLY
+    dict_copy_dysp= copy_dysp(db, collname, '22') # "dysponent" (we need both updated "collname" and "colltmp" here)
+    print '-- node 0 to 1: copy dysponent:', len(dict_copy_dysp), '; total:', db_insert(dict_copy_dysp, db, collname, False)
     # get the data from db and return for json file
     out= db[collname].find({}, {'_id':0}) # collecting everything
     return out
@@ -581,8 +623,7 @@ if __name__ == "__main__":
     meta_name= meta_info['name']
     meta_perspective= meta_info['perspective']
     meta_collnum= meta_info['idef']
-    meta_leaf= meta_info['leaf']
-    meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'leaf'), (meta_collnum, meta_name, meta_perspective, collectname, meta_leaf)))
+    meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
     meta_collection['columns']= schema['columns']
 
     schema_coll= 'md_budg_scheme'
