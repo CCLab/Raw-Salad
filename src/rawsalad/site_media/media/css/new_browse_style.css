@@ -82,6 +82,16 @@ a, a:hover, a:visited {
                 padding: 5px 15px;
             }
             
+            .bread-link {
+                display: inline;
+                color: #11a8f7;
+            }
+            
+            .bread-link:hover {
+                cursor: pointer;
+                color: #ccc;
+            }
+            
             #table-toolbar {
                 position: relative;
                 

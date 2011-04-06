@@ -1,20 +1,22 @@
 (function () {
 
-    // creates a table with header and a-level data
+    // initialize a table with header and a-level data
     var create_table = function() {
         var columns;
         var html = [ '<div id="thead"><div class="data">' ];
         var col, col_type;
         var i;
-        
+
+        // get all the basic view columns definitions        
         columns = filter( function ( element ) {
-            return element['basic'] === true;
-        }, perspective['columns'] );
+                    return element['basic'] === true;
+                }, perspective['columns'] );
 
         // iterate through columns definitions
         for ( i = 0; i < columns.length; i += 1 ) {
             col = columns[i];
             
+            // distinguish between type/key and values columns
             if ( col['key'] === 'type' || col['key'] === 'name' ) {
                 col_type = col['key'] + ' cell';
             } else {
@@ -26,12 +28,16 @@
             html.push( '</div>' );
         }
         html.push( '</div></div>' );
+
+        // create empty table body
         html.push( '<div id="tbody"></div>' );
         html.push( '<div style="overflow: hidden; height: 1px;">.</div>')
 
+        // add new table to the table container
         $('#table').append( $( html.join('') ));
+        
+        // add a-level rows
         add_node();
-        make_zebra();
     };
     
 
@@ -39,29 +45,33 @@
     var arm_nodes = function( id ) {
         var node;
         
+        // no parameters for a-level nodes
         if( id === undefined ) {      
             node = $('.a');
         } else {
             node = $('#'+id+'> .nodes');
         }
         
+        // add action listener to the cell
         node.find('.data').find('.type').click( function () {
+            // get subtree of this level
             var nodes = $(this).parent().next();
+            // get level's id
             var id = $(this).parent().parent().attr('id');
-            var len = nodes.find('div').length;
-            var this_node;
-            var children;
-            var style;
-            
+            var current_level = $(this).parent().parent();
+
+            // if the subtree not loaded yet --> load it
             if( nodes.find('div').length === 0 ) {
                 add_node( id );
-                highlight( $(this).parent().parent() );
-            } else {
-                nodes.toggle();
-                highlight( $(this).parent().parent() );                
             }
+            // if there is a subtree already --> toggle it
+            else {
+                nodes.toggle();
+            }
+            highlight( current_level );
         });	                             
 
+        // TODO: refactor it with 'selected' class objects list length
         node.find('.checkbox').click( function () {
             var nav_plain = '/site_media/media/img/navigation/02_03.png';
             var nav_active = '/site_media/media/img/navigation/02_03_active.png';
@@ -108,6 +118,7 @@
             }
 
             $(this).toggleClass( 'selected' );
+            
         });
         
         node.find( '.data' ).each( function () {
@@ -116,18 +127,26 @@
     }
 
 
+    // make light/dark background for rows in table
     var make_zebra = function () {
+        
+        // get all visible rows
         var visible_list = $('.data').not( ':hidden' );
+        
+        // change background for each row
         visible_list.each( function ( i, e ) {
-            var parents = $(this).parents()
-                                 .filter('.a')
-                                 .children('.data')
-                                 .hasClass('darkened');
+            // does row belongs to darkened grounp?
+            var darkened = $(this).parents()
+                                  .filter('.a')
+                                  .children('.data')
+                                  .hasClass('darkened');
 
             if( i % 2 === 0 ) {
-                if( parents === true ) {
+                // if darkened, darken
+                if( darkened === true ) {
                     $(this).css('background-color', '#f8f8f8');                    
                 }
+                // or keep it white
                 else {
                     $(this).css('background-color', '#fff');                
                 }
@@ -274,9 +293,9 @@
                 html.push( 'data-processable="', !!col['processable'], '" ' );				
                 html.push( 'data-checkable="', !!col['checkable'], '">' );
                 if( col['checkable'] === true ) {
-                    html.push( '<div class="checkbox"></div>' );
+                    html.push( '<div class="checkbox"></div>');
                 }
-                if( col_type === 'value' )
+                if( col_type === 'value cell' )
                 {
                     html.push( '<span>' );
                     html.push( item[col['key']] );
@@ -296,6 +315,7 @@
         html_result = $( html.join('') );
         container.append( html_result );
         arm_nodes( id );
+        make_zebra();
     };
 
     create_table();
