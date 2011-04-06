@@ -101,6 +101,10 @@
                     
                     $('#selected-items-list').html('').append( $(html.join(''))).show();
                 }).show();                           
+                
+                $('#add-snapshot').click( function () {
+                    $('#snapshot-1').show();
+                }).show();                
             }
 
             $(this).toggleClass( 'selected' );

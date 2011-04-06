@@ -46,10 +46,7 @@
     });    
 
     $('#snapshot-1').hide();
-    $('#add-snapshot').click( function () {
-        $('#snapshot-1').show();
-    });
-
+    $('#add-snapshot').hide();
 })();
 
 
