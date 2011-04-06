@@ -114,6 +114,7 @@ a, a:hover, a:visited {
                     padding: 3px 10px;
                     margin-right: 5px;
                     background-color: #999;
+                    color: #fff;
                     
                     border-radius: 8px 8px 0px 0px;
                     -moz-border-radius: 8px 8px 0px 0px;
