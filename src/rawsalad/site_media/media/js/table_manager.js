@@ -277,7 +277,7 @@
             item = data[i];
             html.push( '<div id="', item['idef'], '"' );
             html.push( 'class="', item['level'], ' ' );
-            html.push( item['level'] === leaf ? 'leaf">' : 'node">' );
+            html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
             html.push( '<div class="data">' );
             
             for ( j = 0; j < schema.length; j += 1 ) {
@@ -307,7 +307,7 @@
                 html.push( '</div>' );
             }
             html.push( '</div>' );
-            if( item['level'] !== leaf ) {
+            if( item['leaf'] !== true ) {
                 html.push( '<div class="nodes"></div>' );
             }
             html.push( '</div>' );
