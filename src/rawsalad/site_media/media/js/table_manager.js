@@ -98,10 +98,13 @@
     var make_zebra = function () {
         var visible_list = $('.data').not( ':hidden' );
         visible_list.each( function ( i, e ) {
-            var parents = $(this).parents().filter('.a').children('.data').hasClass('marked');
-            console.log( parents );
+            var parents = $(this).parents()
+                                 .filter('.a')
+                                 .children('.data')
+                                 .hasClass('darkened');
+
             if( i % 2 === 0 ) {
-                if( parents !== true ) {
+                if( parents === true ) {
                     $(this).css('background-color', '#f8f8f8');                    
                 }
                 else {
