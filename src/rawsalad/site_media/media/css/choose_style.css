@@ -188,6 +188,7 @@ a, a:hover, a:visited {
                 font-weight: bold;    
                 padding-right: 35px;                            
             }
+            
             .radio-button {
                 float: right !important;
                 width: 8px;
@@ -195,6 +196,8 @@ a, a:hover, a:visited {
                 
                 padding: 3px 3px;                
                 margin-right: 15px;
+            
+                background-color: #fff; 
                 
                 border: 2px solid #3fa9f6;
                 border-radius: 10px 10px 10px 10px;        
