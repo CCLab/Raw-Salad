@@ -150,6 +150,9 @@
                 }
             }
         }
+        $('.top-border').removeClass('top-border');
+        $('.marked').parent().next().children('.data').addClass('top-border');
+        debugger;
     }
     
     // unmark a-node, shade its nodes

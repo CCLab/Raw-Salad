@@ -178,3 +178,7 @@
 /*.bottomborder {*/
 /*    border-bottom: 1px solid #000;*/
 /*}*/
+
+.top-border {
+    border-top: 1px solid #000;
+}
