@@ -60,7 +60,6 @@
                 nodes.toggle();
                 highlight( $(this).parent().parent() );                
             }
-            make_zebra();                
         });	                             
 
         node.find('.checkbox').click( function () {
@@ -95,8 +94,25 @@
         });
     }
 
+
     var make_zebra = function () {
-        // makes zebra in table
+        var visible_list = $('.data').not( ':hidden' );
+        visible_list.each( function ( i, e ) {
+            var parents = $(this).parents().filter('.a').children('.data').hasClass('marked');
+            console.log( parents );
+            if( i % 2 === 0 ) {
+                if( parents !== true ) {
+                    $(this).css('background-color', '#f8f8f8');                    
+                }
+                else {
+                    $(this).css('background-color', '#fff');                
+                }
+            }
+            else {
+                $(this).css('background-color', '#eee');            
+            }
+        });
+        
     }
     
     
@@ -149,10 +165,10 @@
                     add_bottom_border( par );
                 }
             }
-        }
+        } 
         $('.top-border').removeClass('top-border');
         $('.marked').parent().next().children('.data').addClass('top-border');
-        debugger;
+        make_zebra();                        
     }
     
     // unmark a-node, shade its nodes

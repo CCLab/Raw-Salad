@@ -73,11 +73,8 @@
     width: 88px;    
 }
 
-
-.value > span {
-    float:right;
+#tbody .value {
     text-align: right;
-    padding-right: 5px;
 }
 
 
@@ -98,7 +95,7 @@
 }
 
 .data:hover {
-    background-color: #ffeeee;
+    background-color: #ffeeee !important;
 }
 
 .data > div {
@@ -131,6 +128,7 @@
     width: 4px;
     height: 4px;
 
+    margin-left: 5px;
     padding: 3px; 
  
     background-color: #fff;
@@ -158,6 +156,12 @@
     background-color: #000 !important;
     color: #fff;
 }
+
+.marked:hover {
+    background-color: #000 !important;
+    color: #fff;
+}
+
 .type.marked {
     border-left: 1px solid #000 !important;
 }
