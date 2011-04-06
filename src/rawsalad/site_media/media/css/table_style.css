@@ -38,7 +38,6 @@
 /*  T A B L E   B O D Y  */
 #tbody {
     height: 100%;
-/*    background: url('/site_media/media/img/background.png');*/
     clear: both;
 }
 
@@ -49,27 +48,42 @@
 .a > .data > .type {
     width: 138px;
 }
+
 .b > .data > .type {
     width: 123px;
-    padding-left: 20px;
+    padding-left: 20px !important;
 }
+
 .c > .data > .type {
+    width: 113px;
+    padding-left: 30px !important;    
+}
+
+.d > .data > .type {
     width: 103px;
-    padding-left: 40px;    
+    padding-left: 40px !important;    
 }
 
 .name {
-    width: 530px;
+    width: 441px;;
 }
+
 .value {
-    width: 88px;
+    float: right !important;
+    width: 88px;    
+}
+
+
+.value > span {
+    float:right;
+    text-align: right;
+    padding-right: 5px;
 }
 
 
 .node > .data > .type {
     color: #11a8f7;
     font-weight: bold;
-    border-left: 1px solid #ccc;
 }
 
 .node > .data > .type:hover {
@@ -79,14 +93,29 @@
 
 .data {
     clear: both;
+    overflow: auto;
+    min-height: 16px;    
+}
+
+.data:hover {
+    background-color: #ffeeee;
 }
 
 .data > div {
     float: left;
 }
 
-.cell {
-    height: 16px;
+#tbody .cell {
+    min-height: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;    
+    border-right: 1px #ccc solid;
+}
+
+#thead .cell {
+    height: 30px !important;
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 5px;
@@ -126,7 +155,7 @@
 }
 
 .marked {
-    background-color: #000;
+    background-color: #000 !important;
     color: #fff;
 }
 .type.marked {
@@ -134,17 +163,18 @@
 }
 
 .darkened {
-    background-color: #ddd;
+    color: #aaa;
+    background-color: #f8f8f8;
 }
 
-.leftborder {
-    border-left: 1px solid #000 !important;
-}
+/*.leftborder {*/
+/*    border-left: 1px solid #000 !important;*/
+/*}*/
 
-.rightborder {
-    border-right: 1px solid #000 !important;
-}
+/*.rightborder {*/
+/*    border-right: 1px solid #000 !important;*/
+/*}*/
 
-.bottomborder {
-    border-bottom: 1px solid #000;
-}
+/*.bottomborder {*/
+/*    border-bottom: 1px solid #000;*/
+/*}*/

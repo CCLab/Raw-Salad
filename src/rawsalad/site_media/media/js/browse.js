@@ -10,7 +10,8 @@
            nav_01.attr('src', '/site_media/media/img/navigation/02_01.png' );
         });
 
-    $('#selected-items').hide();    
+    $('#selected-items').hide();  
+    $('#selected-items-list').hide();        
     $('#collection-list').hide();
     
     $('#change-dataset').click( function () {
@@ -25,6 +26,14 @@
         $(this).hide();            
     });
     
+    $('#selected-items-list').mouseover( function () {
+        $('#selected-items-list').show();            
+    });
+    $('#selected-items-list').mouseout( function () {
+        $(this).hide();            
+    });
+
+
     $('#more-help').hide();
     $('#big-one').hide();
     $('#help-line, #help-button').click( function () {

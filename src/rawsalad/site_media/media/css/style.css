@@ -12,6 +12,10 @@
   color: #333333;
 }
 
+body {
+    background-color: white;
+}
+
 a {
   text-decoration: none;
 }

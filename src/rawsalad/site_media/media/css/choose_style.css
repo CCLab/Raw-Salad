@@ -42,6 +42,8 @@ a, a:hover, a:visited {
             font-size: 34px;
             font-weight: bold;
             text-align: center;
+            
+            background: url('/site_media/media/img/marur_pattern.png');
         }
         
             #change-dataset {
@@ -124,7 +126,7 @@ a, a:hover, a:visited {
                 width: 345px;
                 overflow: auto;
 
-                background-color: #fff;
+            background: url('/site_media/media/img/marur_pattern.png');            
             }
             
             #questions {
@@ -132,8 +134,7 @@ a, a:hover, a:visited {
                 float: right;
                 width: 345px;         
                 overflow: auto;
-                
-                background-color: #fff;
+                background: url('/site_media/media/img/marur_pattern.png');                            
             }
             
             .perspectives-header {

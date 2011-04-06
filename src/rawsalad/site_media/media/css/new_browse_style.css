@@ -15,6 +15,7 @@ a, a:hover, a:visited {
 #wraper {
     width: 960px;
     margin: 0px auto;
+    position: relative;
 }
 
 
@@ -105,23 +106,18 @@ a, a:hover, a:visited {
                 right: 0px;
                 width: 305px;
             }
-
-                #tools-list {
-                    position: absolute;
-                    bottom: 0px;    
-                    height: 20px;                   
-                }
                 
-                #tools-list > li {         
-                    display: inline;
-                    vertical-align: bottom;
-                    padding: 3px 5px;
+                #tools > div {         
+                    float: left;
+                    padding: 3px 10px;
+                    margin-right: 5px;
                     background-color: #999;
+                    
                     border-radius: 8px 8px 0px 0px;
                     -moz-border-radius: 8px 8px 0px 0px;
                 }
                 
-                #tools-list > li:hover {
+                #tools > div:hover {
                     cursor: pointer;
                     background-color: #b7b7b7;
                 }                         

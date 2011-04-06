@@ -103,6 +103,27 @@
         margin-right: 3px;        
     }
     
+    #selected-items-list {
+        position: absolute;
+        top: 45px;
+        left: 8px;
+        min-width: 117px;
+        min-height: 117px;
+        padding: 5px 15px;
+        background-color: #f4c200;
+        color: #ffffff;
+        border-radius: 0px 0px 8px 8px;
+        -moz-border-radius: 0px 0px 8px 8px;
+    }
+    
+    #selected-items-list > ul {
+        padding: 0px;
+    }
+    
+    #selected-items-list > ul > li {
+        display: block;
+    }
+    
     #download {
         float: right;
         width: 94px;
