@@ -21,13 +21,9 @@
       "teryt": "string"
   },
   "meta": {
-      "name": "Budżet",
+      "name": "budzet_zadaniowy",
       "perspective": "Budżet zadaniowy",
-      "idef": 1,
-      "leaf":[ 
-          {"node": 0, "level": "e"},
-          {"node": 1, "level": "d"}
-      ]
+      "idef": 1
   },
   "columns": [
     {
