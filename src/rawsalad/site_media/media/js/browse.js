@@ -45,4 +45,17 @@
             $('body').css('background-position', '0% 0%' );        
     });    
 
+    $('#snapshot-1').hide();
+    $('#add-snapshot').click( function () {
+        $('#snapshot-1').show();
+    });
+
 })();
+
+
+
+
+
+
+
+

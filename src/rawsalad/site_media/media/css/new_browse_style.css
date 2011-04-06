@@ -33,6 +33,8 @@ a, a:hover, a:visited {
     #content {
         float: left;
         width: 900px;
+        
+        box-shadow: 3px 0px 2px #888;
     }
 
         #content-header {
@@ -125,9 +127,48 @@ a, a:hover, a:visited {
     #snapshots {
         float: right;
         width: 58px;
-        background-color: #fff;
+        margin-top: 130px;
     }
+        #empty-snapshot {
+            width: 50px !important;
+        }
+        
+        #empty-snapshot:hover {
+            cursor: default;
+            background-color: #fff !important;
+        }        
+        
+        .snapshot {
+            width: 35px;
+            height: 22px;
 
+            padding-top: 8px;
+            margin-bottom: 10px;
+
+            background-color: #fff;
+            text-align: center;
+
+            color: #5e5e5e;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 0px 8px 8px 0px;
+            -moz-border-radius: 0px 8px 8px 0px;
+        }
+        
+        .snapshot:hover {
+            cursor: pointer;
+            background-color: #eee;
+        }
+
+        #add-snapshot {
+            background-color: #f4c200;
+            font-weight: normal !important;
+        }
+        
+        #add-snapshot:hover {
+            cursor: pointer;
+            background-color: #f7d44c !important;
+        }
 
 
 
