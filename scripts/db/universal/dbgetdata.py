@@ -59,6 +59,6 @@ if __name__ == "__main__":
     filename_json= 'budggofill.json'
     json_write= open(filename_json, 'w')
     print '...writing data to JSON file', filename_json
-    print >>json_write, json.dumps(full_data, indent=4, ensure_ascii= False)
+    print >>json_write, json.dumps(full_data, indent=4)
     json_write.close()
     print 'Done'

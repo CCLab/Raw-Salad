@@ -1,87 +1,5 @@
-var perspective = {
-    "name": "budzet_zadaniowy", 
-    "idef": 1, 
-    "collection": "dd_budg2011_go", 
-    "perspective": "Bud\u017cet zadaniowy", 
-    "columns": [
-        {
-            "type": "string", 
-            "processable": true, 
-            "key": "idef", 
-            "label": "Numer"
-        }, 
-        {
-            "type": "string", 
-            "label": "Typ", 
-            "processable": true, 
-            "key": "type", 
-            "basic": true
-        }, 
-        {
-            "type": "string", 
-            "label": "Nazwa", 
-            "processable": true, 
-            "key": "name", 
-            "basic": true
-        }, 
-        {
-            "type": "string", 
-            "processable": true, 
-            "key": "czesc", 
-            "label": "Cz\u0119\u015b\u0107"
-        }, 
-        {
-            "type": "string", 
-            "processable": true, 
-            "key": "cel", 
-            "label": "Cel"
-        }, 
-        {
-            "type": "string", 
-            "processable": true, 
-            "key": "miernik_nazwa", 
-            "label": "Miernik"
-        }, 
-        {
-            "type": "string", 
-            "processable": true, 
-            "key": "miernik_wartosc_bazowa", 
-            "label": "Warto\u015b\u0107 bazowa"
-        }, 
-        {
-            "type": "string", 
-            "processable": true, 
-            "key": "miernik_wartosc_rb", 
-            "label": "Warto\u015b\u0107 br."
-        }, 
-        {
-            "label": "OG\u00d3\u0141EM", 
-            "processable": true, 
-            "key": "v_total", 
-            "basic": true, 
-            "checkable": true, 
-            "type": "number"
-        }, 
-        {
-            "label": "Bud\u017cet Pa\u0144stwa", 
-            "processable": true, 
-            "key": "v_nation", 
-            "basic": true, 
-            "checkable": true, 
-            "type": "number"
-        }, 
-        {
-            "label": "Środki Europejskie", 
-            "processable": true, 
-            "key": "v_eu", 
-            "basic": true, 
-            "checkable": true, 
-            "type": "number"
-        }
-    ]
-};
-
-var rows = [
+{
+    "rows": [
         {
             "leaf": false, 
             "name": "System odwo\u0142a\u0144", 
@@ -3493,17 +3411,17 @@ var rows = [
             "v_nation": 141083, 
             "type": "Dysponent"
         }, 
-//        {
-//            "leaf": false, 
-//            "name": "Og\u00f3\u0142em", 
-//            "parent": null, 
-//            "level": "a", 
-//            "idef": "999999", 
-//            "v_eu": 84004046, 
-//            "v_total": 397504708, 
-//            "v_nation": 313500662, 
-//            "type": "total"
-//        }, 
+        {
+            "leaf": false, 
+            "name": "Og\u00f3\u0142em", 
+            "parent": null, 
+            "level": "a", 
+            "idef": "999999", 
+            "v_eu": 84004046, 
+            "v_total": 397504708, 
+            "v_nation": 313500662, 
+            "type": "total"
+        }, 
         {
             "leaf": false, 
             "name": "ZARZ\u0104DZANIE PA\u0143STWEM", 
@@ -25246,4 +25164,85 @@ var rows = [
             "miernik_wartosc_bazowa": "-", 
             "miernik_wartosc_rb": 15
         }
-    ];
+    ], 
+    "name": "budzet_zadaniowy", 
+    "idef": 1, 
+    "collection": "dd_budg2011_go", 
+    "perspective": "Bud\u017cet zadaniowy", 
+    "columns": [
+        {
+            "type": "string", 
+            "processable": true, 
+            "key": "idef", 
+            "label": "Numer"
+        }, 
+        {
+            "type": "string", 
+            "label": "Typ", 
+            "processable": true, 
+            "key": "type", 
+            "basic": true
+        }, 
+        {
+            "type": "string", 
+            "label": "Nazwa", 
+            "processable": true, 
+            "key": "name", 
+            "basic": true
+        }, 
+        {
+            "type": "string", 
+            "processable": true, 
+            "key": "czesc", 
+            "label": "Cz\u0119\u015b\u0107"
+        }, 
+        {
+            "type": "string", 
+            "processable": true, 
+            "key": "cel", 
+            "label": "Cel"
+        }, 
+        {
+            "type": "string", 
+            "processable": true, 
+            "key": "miernik_nazwa", 
+            "label": "Miernik"
+        }, 
+        {
+            "type": "string", 
+            "processable": true, 
+            "key": "miernik_wartosc_bazowa", 
+            "label": "Warto\u015b\u0107 bazowa"
+        }, 
+        {
+            "type": "string", 
+            "processable": true, 
+            "key": "miernik_wartosc_rb", 
+            "label": "Warto\u015b\u0107 br."
+        }, 
+        {
+            "label": "OG\u00d3\u0141EM", 
+            "processable": true, 
+            "key": "v_total", 
+            "basic": true, 
+            "checkable": true, 
+            "type": "number"
+        }, 
+        {
+            "label": "Bud\u017cet Pa\u0144stwa", 
+            "processable": true, 
+            "key": "v_nation", 
+            "basic": true, 
+            "checkable": true, 
+            "type": "number"
+        }, 
+        {
+            "label": "Bud\u017cet \u015arodk\u00f3w Europejskich", 
+            "processable": true, 
+            "key": "v_eu", 
+            "basic": true, 
+            "checkable": true, 
+            "type": "number"
+        }
+    ]
+}

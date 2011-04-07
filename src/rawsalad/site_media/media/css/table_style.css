@@ -50,18 +50,18 @@
 }
 
 .b > .data > .type {
-    width: 123px;
-    padding-left: 20px !important;
+    width: 133px;
+    padding-left: 10px !important;
 }
 
 .c > .data > .type {
-    width: 113px;
-    padding-left: 30px !important;    
+    width: 123px;
+    padding-left: 20px !important;    
 }
 
 .d > .data > .type {
-    width: 103px;
-    padding-left: 40px !important;    
+    width: 113px;
+    padding-left: 30px !important;    
 }
 
 .name {
@@ -71,12 +71,16 @@
 .value {
     float: right !important;
     width: 88px;    
+    position: relative;
+}
+
+.value > span {
+    margin-right: 22px;
 }
 
 #tbody .value {
     text-align: right;
 }
-
 
 .node > .data > .type {
     color: #11a8f7;
@@ -86,6 +90,7 @@
 .node > .data > .type:hover {
     color: #888;
     cursor: pointer !important;
+
 }
 
 .data {
@@ -123,33 +128,33 @@
 
 /*  C H E C K B O X  */
 .checkbox {
-    float: right;
-    
-    width: 4px;
-    height: 4px;
+    position: absolute;
 
-    margin-left: 5px;
-    padding: 3px; 
- 
-    background-color: #fff;
-    border: 2px solid #f6d64b;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
+    top: 2px;
+    right: 3px;
+    width: 20px;
+    height: 20px;
+
+    background: url('/site_media/media/img/checkbox.off.png') no-repeat; 
 }
 
 .checkbox:hover {
     cursor: pointer !important;
-    background-color: #fbf55f;    
-    border: 2px solid #f6d64b;    
 }
 
 .checkbox.selected {
-    background-color: #f9e281;    
-    border: 2px solid #f6d64b;    
+    position: absolute;
+
+    top: 2px;
+    right: 3px;
+    width: 20px;
+    height: 20px;
+
+    background: url('/site_media/media/img/checkbox.on.png') no-repeat; 
 }
 
 .checkbox.selected:hover {
-    background-color: #f9e281 !important;    
+    cursor: pointer;
 }
 
 .marked {

@@ -412,6 +412,7 @@ def fill_funkcja(db, colltmp):
         frr['parent']= None # "funkcja" is the root
         frr['node']= None # "funkcja" doesn't have a 'direction'
         frr['level']= 'a' # the highest level in the hierarchy
+        frr['leaf']= False # not the deepest level
         frr['v_total']= frr.pop('ogolem') # change "ogolem" to "total" of the current year
         frr['v_nation']= frr.pop('budzet_panstwa') # the same for state budget
         frr['v_eu']= frr.pop('budzet_srodkow_europejskich') # the same for EU part in the budget
