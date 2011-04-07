@@ -102,7 +102,7 @@
     },
     {
       "key": "v_proc_eu",
-      "label": "Procent Środków Europejskich",
+      "label": "Procent Środków EU",
       "processable": true,
       "basic": false,
       "type": "number",
