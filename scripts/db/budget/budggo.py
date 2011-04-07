@@ -145,8 +145,6 @@ def fill_podzadanie(db, clltmp):
         fpz['v_proc_eu']= None
         fpz['v_proc_nation']= None
 
-        out.append(fpz)
-
     return out
 
 
