@@ -48,7 +48,6 @@ def db_insert(data_bulk, db, collname, clean_first=False):
     return collect.find().count()
 
 
-
 # FILL THE DATA
 
 # copy dysponent from node 0 to 1:
@@ -102,6 +101,9 @@ def fill_p_dysp(db, collname, colltmp, objlst):
             fpd['v_total']= row['ogolem'] # this is the last object
             fpd['v_nation']= row['budzet_panstwa']
             fpd['v_eu']= row['budzet_srodkow_europejskich']
+            if fpd['v_total'] != 0:
+                fpd['v_proc_eu']= round(float(fpd['v_eu']) / float(fpd['v_total']) * 100, 2) # persentage
+                fpd['v_proc_nation']= round(float(fpd['v_nation']) / float(fpd['v_total']) * 100, 2)
             podz_v_eu += fpd['v_eu'] # calculating totals for current podzadanie
             podz_v_nation += fpd['v_nation']
             podz_v_total += fpd['v_total']
@@ -112,6 +114,9 @@ def fill_p_dysp(db, collname, colltmp, objlst):
         for elem in out: # update totals of current podzadanie
             if elem['idef'] == podz_curr:
                 elem['v_total'], elem['v_nation'], elem['v_eu'] = podz_v_total, podz_v_nation, podz_v_eu
+                if elem['v_total'] != 0:
+                    elem['v_proc_eu']= round(float(elem['v_eu']) / float(elem['v_total']) * 100, 2) # persentage
+                    elem['v_proc_nation']= round(float(elem['v_nation']) / float(elem['v_total']) * 100, 2)
                 break
 
     return out
@@ -137,6 +142,9 @@ def fill_podzadanie(db, clltmp):
         fpz['v_total']= None # no data on this level
         fpz['v_nation']= None
         fpz['v_eu']= None
+        fpz['v_proc_eu']= None
+        fpz['v_proc_nation']= None
+
         out.append(fpz)
 
     return out
@@ -184,9 +192,12 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
                     ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
-                    ffm['v_total']= None # no values on the level of "cel"
+                    ffm['v_total']= None # no values on the level of "miernik"
                     ffm['v_nation']= None
                     ffm['v_eu']= None
+                    ffm['v_proc_eu']= None
+                    ffm['v_proc_nation']= None
+
                     out.append(ffm)
                     check_id.append(row_z_m['_id'])
 
@@ -208,9 +219,12 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
                     ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
-                    ffm['v_total']= None # no values on the level of "cel"
+                    ffm['v_total']= None # no values on the level of "miernik"
                     ffm['v_nation']= None
                     ffm['v_eu']= None
+                    ffm['v_proc_eu']= None
+                    ffm['v_proc_nation']= None
+
                     out.append(ffm)
                     check_id.append(row_z_m['_id'])
 
@@ -232,9 +246,12 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['czesc']= row_z_m['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
                     ffm['miernik_wartosc_bazowa']= row_z_m['miernik_wartosc_bazowa']
                     ffm['miernik_wartosc_rb']= row_z_m['miernik_wartosc_rok_obec']
-                    ffm['v_total']= None # no values on the level of "cel"
+                    ffm['v_total']= None # no values on the level of "miernik"
                     ffm['v_nation']= None
                     ffm['v_eu']= None
+                    ffm['v_proc_eu']= None
+                    ffm['v_proc_nation']= None
+
                     out.append(ffm)
                     check_id.append(row_z_m['_id'])
     return out
@@ -270,6 +287,9 @@ def fill_z_d_cel(db, cllname, clltmp):
             ffc['v_total']= None # no values on the level of "cel"
             ffc['v_nation']= None
             ffc['v_eu']= None
+            ffc['v_proc_eu']= None
+            ffc['v_proc_nation']= None
+
 
             out.append(ffc)
 
@@ -290,6 +310,8 @@ def fill_z_d_cel(db, cllname, clltmp):
             ffc['v_total']= None # no values on the level of "cel"
             ffc['v_nation']= None
             ffc['v_eu']= None
+            ffc['v_proc_eu']= None
+            ffc['v_proc_nation']= None
 
             out.append(ffc)
 
@@ -319,6 +341,9 @@ def fill_z_dysponent(db, colltmp, objlst):
             fzd['v_total']= row_z_d['ogolem'] # this is the last object
             fzd['v_nation']= row_z_d['budzet_panstwa']
             fzd['v_eu']= row_z_d['budzet_srodkow_europejskich']
+            if fzd['v_total'] != 0:
+                fzd['v_proc_eu']= round(float(fzd['v_eu']) / float(fzd['v_total']) * 100, 2) # persentage
+                fzd['v_proc_nation']= round(float(fzd['v_nation']) / float(fzd['v_total']) * 100, 2)
             zd_v_eu += fzd['v_eu']
             zd_v_nation += fzd['v_nation']
             zd_v_total += fzd['v_total']
@@ -328,7 +353,10 @@ def fill_z_dysponent(db, colltmp, objlst):
         zd_curr= zd_curr.replace('.','-') # now we look through updated codes
         for elem in out: # update totals of current zadanie
             if elem['idef'] == zd_curr:
-                elem['v_total'], elem['v_nation'], elem['v_eu'] = zd_v_total, zd_v_nation, zd_v_eu
+                elem['v_total'], elem['v_nation'], elem['v_eu'] = zd_v_total, zd_v_nation, zd_v_eu # values
+                if elem['v_total'] != 0:
+                    elem['v_proc_eu']= round(float(elem['v_eu']) / float(elem['v_total']) * 100, 2) # persentages
+                    elem['v_proc_nation']= round(float(elem['v_nation']) / float(elem['v_total']) * 100, 2)
                 break
     
     return out
@@ -353,6 +381,8 @@ def fill_zadanie(db, colltmp, objlst):
         ffz['v_total']= None # no info about money on that level
         ffz['v_nation']= None
         ffz['v_eu']= None
+        ffz['v_proc_eu']= None
+        ffz['v_proc_nation']= None
 
         out.append(ffz)
 
@@ -374,17 +404,20 @@ def fill_funkcja(db, colltmp):
         if frr['idef'] == '999999':
             frr['type']= 'total'
             frr['name']= funk_type_name[0].strip()
+            frr['leaf']= True # in case of grand total it's the last level (no children)
         else:
             frr['type']= funk_type_name[0].strip()
             frr['name']= funk_type_name[1].strip()
+            frr['leaf']= False # not the deepest level
         frr['parent']= None # "funkcja" is the root
         frr['node']= None # "funkcja" doesn't have a 'direction'
         frr['level']= 'a' # the highest level in the hierarchy
-        frr['leaf']= False # not the deepest level
         frr['v_total']= frr.pop('ogolem') # change "ogolem" to "total" of the current year
         frr['v_nation']= frr.pop('budzet_panstwa') # the same for state budget
         frr['v_eu']= frr.pop('budzet_srodkow_europejskich') # the same for EU part in the budget
-        
+        if frr['v_total'] != 0:
+            frr['v_proc_eu']= round(float(frr['v_eu']) / float(frr['v_total']) * 100, 2) # persentage
+            frr['v_proc_nation']= round(float(frr['v_nation']) / float(frr['v_total']) * 100, 2)
         out.append(frr)
 
     return out

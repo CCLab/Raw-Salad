@@ -99,6 +99,22 @@
       "basic": true,
       "type": "number",
       "checkable": true
+    },
+    {
+      "key": "v_proc_eu",
+      "label": "Procent Środków Europejskich",
+      "processable": true,
+      "basic": false,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_proc_nation",
+      "label": "Procent Środków Państwa",
+      "processable": true,
+      "basic": false,
+      "type": "number",
+      "checkable": true
     }
   ]
 }
