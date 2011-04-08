@@ -2,7 +2,7 @@
 
 1. Repositories diagram.
 
-The following diagram will show what does when we do git push all:
+The following diagram will show what happens when we do git push all:
 
 local machine               github             server/repo/rawsalad.git                    server/projects/rawsalad       server
 
@@ -60,4 +60,4 @@ there should be an information about it, so look at what git says:). It will mak
 To do this, go to projects/rawsalad directory and write in a console: git status.
 The files that will be listed there are the differences, so the only files that appear, should be files that are
 consciously made different on server than on github.
-So now, only src/rawsalad/settings.py should be on this list.
+So, now only src/rawsalad/settings.py should be on this list.
