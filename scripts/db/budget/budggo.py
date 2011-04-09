@@ -413,9 +413,9 @@ def fill_funkcja(db, colltmp):
         frr['leaf']= False # not the deepest level
         frr['v_total']= frr.pop('ogolem') # change "ogolem" to "total" of the current year
         frr['v_nation']= frr.pop('budzet_panstwa') # the same for state budget
-        frr['v_eu']= frr.pop('budzet_srodkow_europejskich') # the same for EU part in the budget
+        frr['v_eu']= frr.pop('budzet_srodkow_europejskich') #the same for EU part in the budget
         if frr['v_total'] != 0:
-            frr['v_proc_eu']= round(float(frr['v_eu']) / float(frr['v_total']) * 100, 2) # persentage
+            frr['v_proc_eu']= round(float(frr['v_eu']) / float(frr['v_total']) * 100, 2) #persentage
             frr['v_proc_nation']= round(float(frr['v_nation']) / float(frr['v_total']) * 100, 2)
         out.append(frr)
 
