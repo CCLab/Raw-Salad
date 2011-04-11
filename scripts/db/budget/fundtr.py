@@ -204,7 +204,8 @@ if __name__ == "__main__":
         meta_name= meta_info['name']
         meta_perspective= meta_info['perspective']
         meta_collnum= meta_info['idef']
-        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
+        meta_explore= meta_info['explorable']
+        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'explorable'), (meta_collnum, meta_name, meta_perspective, collectname, meta_explore)))
         meta_collection['columns']= schema['columns']
 
         schema_coll= 'md_fund_scheme'
