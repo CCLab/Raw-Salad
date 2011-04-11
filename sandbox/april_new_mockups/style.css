@@ -1,0 +1,25 @@
+body {
+    color: #333;
+    background-color: #a3a3a3;    
+    
+    font-size: 11px;
+    font-family: sans-serif;
+} 
+
+#wraper {
+    width: 960px;
+    margin: 0px auto;
+}
+
+#header {
+}
+
+
+#upper-menu {
+    background-color: #747474;
+}
+
+#lower-menu {
+    background-color: #e3e3e3;
+}
+
