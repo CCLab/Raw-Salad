@@ -207,7 +207,7 @@ if __name__ == "__main__":
         meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
         meta_collection['columns']= schema['columns']
 
-        schema_coll= 'md_budg_scheme'
+        schema_coll= 'md_fund_scheme'
         print '-- inserting meta-data into '+ dbname +'.'+ schema_coll
         mongo_connect.start_request()
         print '-- updating schema collection', db_insert(meta_collection, work_db, schema_coll, False)

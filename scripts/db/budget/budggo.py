@@ -102,7 +102,7 @@ def fill_p_dysp(db, collname, colltmp, objlst):
             fpd['v_nation']= row['budzet_panstwa']
             fpd['v_eu']= row['budzet_srodkow_europejskich']
             if fpd['v_total'] != 0:
-                fpd['v_proc_eu']= round(float(fpd['v_eu']) / float(fpd['v_total']) * 100, 2) # persentage
+                fpd['v_proc_eu']= round(float(fpd['v_eu']) / float(fpd['v_total']) * 100, 2) # percentage
                 fpd['v_proc_nation']= round(float(fpd['v_nation']) / float(fpd['v_total']) * 100, 2)
             podz_v_eu += fpd['v_eu'] # calculating totals for current podzadanie
             podz_v_nation += fpd['v_nation']
@@ -115,7 +115,7 @@ def fill_p_dysp(db, collname, colltmp, objlst):
             if elem['idef'] == podz_curr:
                 elem['v_total'], elem['v_nation'], elem['v_eu'] = podz_v_total, podz_v_nation, podz_v_eu
                 if elem['v_total'] != 0:
-                    elem['v_proc_eu']= round(float(elem['v_eu']) / float(elem['v_total']) * 100, 2) # persentage
+                    elem['v_proc_eu']= round(float(elem['v_eu']) / float(elem['v_total']) * 100, 2) # percentage
                     elem['v_proc_nation']= round(float(elem['v_nation']) / float(elem['v_total']) * 100, 2)
                 break
 
@@ -127,7 +127,7 @@ def fill_podzadanie(db, clltmp):
     out= []
 
     collect= db[clltmp]
-    collcrr_p= collect.find({'test_p':True}, {'_id':0}) # getting "dysponent" of current "zadanie"
+    collcrr_p= collect.find({'test_p':True}, {'_id':0}) # getting list of "podzadanie"
     for row_p in collcrr_p:
         fpz= {}
         fpz['idef']= row_p['numer'].replace('.', '-')
@@ -144,6 +144,8 @@ def fill_podzadanie(db, clltmp):
         fpz['v_eu']= None
         fpz['v_proc_eu']= None
         fpz['v_proc_nation']= None
+
+        out.append(fpz)
 
     return out
 
@@ -340,7 +342,7 @@ def fill_z_dysponent(db, colltmp, objlst):
             fzd['v_nation']= row_z_d['budzet_panstwa']
             fzd['v_eu']= row_z_d['budzet_srodkow_europejskich']
             if fzd['v_total'] != 0:
-                fzd['v_proc_eu']= round(float(fzd['v_eu']) / float(fzd['v_total']) * 100, 2) # persentage
+                fzd['v_proc_eu']= round(float(fzd['v_eu']) / float(fzd['v_total']) * 100, 2) # percentage
                 fzd['v_proc_nation']= round(float(fzd['v_nation']) / float(fzd['v_total']) * 100, 2)
             zd_v_eu += fzd['v_eu']
             zd_v_nation += fzd['v_nation']
@@ -353,7 +355,7 @@ def fill_z_dysponent(db, colltmp, objlst):
             if elem['idef'] == zd_curr:
                 elem['v_total'], elem['v_nation'], elem['v_eu'] = zd_v_total, zd_v_nation, zd_v_eu # values
                 if elem['v_total'] != 0:
-                    elem['v_proc_eu']= round(float(elem['v_eu']) / float(elem['v_total']) * 100, 2) # persentages
+                    elem['v_proc_eu']= round(float(elem['v_eu']) / float(elem['v_total']) * 100, 2) # percentages
                     elem['v_proc_nation']= round(float(elem['v_nation']) / float(elem['v_total']) * 100, 2)
                 break
     
@@ -415,7 +417,7 @@ def fill_funkcja(db, colltmp):
         frr['v_nation']= frr.pop('budzet_panstwa') # the same for state budget
         frr['v_eu']= frr.pop('budzet_srodkow_europejskich') #the same for EU part in the budget
         if frr['v_total'] != 0:
-            frr['v_proc_eu']= round(float(frr['v_eu']) / float(frr['v_total']) * 100, 2) #persentage
+            frr['v_proc_eu']= round(float(frr['v_eu']) / float(frr['v_total']) * 100, 2) #percentage
             frr['v_proc_nation']= round(float(frr['v_nation']) / float(frr['v_total']) * 100, 2)
         out.append(frr)
 
@@ -655,9 +657,10 @@ if __name__ == "__main__":
     meta_name= meta_info['name']
     meta_perspective= meta_info['perspective']
     meta_collnum= meta_info['idef']
-    meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
+    meta_explore= meta_info['explorable']
+    meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'explorable'), (meta_collnum, meta_name, meta_perspective, collectname, meta_explore)))
     meta_collection['columns']= schema['columns']
 
     schema_coll= 'md_budg_scheme'
-    print 'updating schema collection:', db_insert(meta_collection, work_db, schema_coll, False), 'records inserted into', schema_coll
+    print 'updating schema collection:', db_insert(meta_collection, work_db, schema_coll, False), 'records in', schema_coll
     print 'Done'

@@ -18,7 +18,8 @@
   "meta": {
       "name": "funduszy_tradycijny",
       "perspective": "Plany finansowe państwowych Funduszy Celowych w układzie tradycyjnym",
-      "idef": 3
+      "idef": 5,
+      "explorable": "name"
   },
   "columns": [
     {
@@ -29,6 +30,7 @@
     {
       "key": "numer",
       "label": "Numer",
+      "basic": true,
       "type": "string",
       "processable": true
     },
@@ -49,6 +51,7 @@
       "key": "frst_popr",
       "label": "Przewidywane wykonanie r. poprzedni",
       "type": "number",
+      "basic": true,
       "processable": true,
       "checkable": true
     },
@@ -56,6 +59,7 @@
       "key": "plan_nast",
       "label": "Plan na r. następny",
       "type": "number",
+      "basic": true,
       "processable": true,
       "checkable": true
     }

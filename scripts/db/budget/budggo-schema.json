@@ -17,21 +17,15 @@
       "numer": "string",
       "czesc": "string",
       "miernik_wartosc_bazowa": "string",
-      "miernik_wartosc_y2011": "string",
-      "teryt": "string"
+      "miernik_wartosc_y2011": "string"
   },
   "meta": {
       "name": "budzet_zadaniowy",
       "perspective": "Budżet zadaniowy",
-      "idef": 1
+      "idef": 1,
+      "explorable": "type"
   },
   "columns": [
-    {
-      "key": "idef",
-      "label": "Numer",
-      "type": "string",
-      "processable": true
-    },
     {
       "key": "type",
       "label": "Typ",
@@ -104,7 +98,7 @@
       "key": "v_proc_eu",
       "label": "Procent Środków EU",
       "processable": true,
-      "basic": false,
+      "basic": true,
       "type": "number",
       "checkable": true
     },
@@ -112,7 +106,7 @@
       "key": "v_proc_nation",
       "label": "Procent Środków Państwa",
       "processable": true,
-      "basic": false,
+      "basic": true,
       "type": "number",
       "checkable": true
     }
