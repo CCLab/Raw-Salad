@@ -7,7 +7,7 @@
       "4":"rozdzial",
       "5":"name",
       "6":"pozycja",
-      "7":"total",
+      "7":"v_total",
       "8": "dot_sub",
       "9": "swiad_fiz",
       "10": "wyd_jednostek",
@@ -31,9 +31,10 @@
       "wspolfin_eu": "int"
   },
   "meta": {
-      "name": "budzet_tradycijny",
-      "perspective": "Budżet tradycijny",
-      "idef": 2,
+      "name": "budzet_ksiegowy",
+      "perspective": "Budżet księgowy",
+      "idef": 3,
+      "explorable": "type",
       "level_label": {"a": "Część", "b": "Dział", "c": "Rozdział"}
   },
   "columns": [
@@ -49,8 +50,9 @@
       "processable": true
     },
     {
-      "key": "typ",
+      "key": "type",
       "label": "Typ",
+      "basic": true,
       "type": "string",
       "processable": true
     },
@@ -62,16 +64,10 @@
       "processable": true
     },
     {
-      "key": "total",
-      "label": "Plan na rok",
-      "type": "number",
-      "processable": true,
-      "checkable": true
-    },
-    {
       "key": "dot_sub",
       "label": "Dotacje i subwencje",
       "type": "number",
+      "basic": false,
       "processable": true,
       "checkable": true
     },
@@ -79,6 +75,7 @@
       "key": "swiad_fiz",
       "label": "Świadczenia na rzecz osób fizycznych",
       "type": "number",
+      "basic": false,
       "processable": true,
       "checkable": true
     },
@@ -86,6 +83,7 @@
       "key": "wyd_jednostek",
       "label": "Wydatki bieżące jednostek budżetowych",
       "type": "number",
+      "basic": false,
       "processable": true,
       "checkable": true
     },
@@ -93,6 +91,7 @@
       "key": "wyd_majatk",
       "label": "Wydatki majątkowe",
       "type": "number",
+      "basic": false,
       "processable": true,
       "checkable": true
     },
@@ -100,6 +99,7 @@
       "key": "wyd_dlug",
       "label": "Wydatki na obsługę długu Skarbu Państwa",
       "type": "number",
+      "basic": false,
       "processable": true,
       "checkable": true
     },
@@ -107,6 +107,7 @@
       "key": "sw_eu",
       "label": "Środki własne Unii Europejskiej",
       "type": "number",
+      "basic": false,
       "processable": true,
       "checkable": true
     },
@@ -114,7 +115,48 @@
       "key": "wspolfin_eu",
       "label": "Współfinansowanie projektów z udziałem środków Unii Europejskiej",
       "type": "number",
+      "basic": false,
       "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "v_total",
+      "label": "OGÓŁEM",
+      "type": "number",
+      "basic": true,
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "v_nation",
+      "label": "Budżet Państwa",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_eu",
+      "label": "Budżet Środków Europejskich",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_proc_eu",
+      "label": "Procent Środków EU",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_proc_nation",
+      "label": "Procent Środków Państwa",
+      "processable": true,
+      "basic": true,
+      "type": "number",
       "checkable": true
     }
   ]

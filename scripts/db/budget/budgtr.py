@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 """
 import budzet tradycijny to mongo db
@@ -53,7 +54,14 @@ def fill_rbt(budg_data, type_label, db, coll, cleandb):
             row_doc['czesc']= row_doc['czesc'].partition('/')[0]
         row_doc['czesc']= int(row_doc['czesc']) #should be int for the possibility to be compared against 'budzet zadaniowy'
         row_doc['level']= 'a'
-        row_doc['typ']= type_label[row_doc['level']] + ' ' + row_doc['idef']
+        row_doc['type']= type_label[row_doc['level']] + ' ' + row_doc['idef']
+        if row_doc['idef'] == '999999':
+            row_doc['type']= 'Ogółem' # specific type
+            del row_doc['level0'] # delete useless key
+        row_doc['v_nation']= row_doc['dot_sub'] + row_doc['swiad_fiz'] + row_doc['wyd_jednostek'] + row_doc['wyd_majatk'] + row_doc['wyd_dlug'] # recalculate v_nation
+        row_doc['v_eu']= row_doc['sw_eu'] + row_doc['wspolfin_eu'] # recalculate v_eu
+        row_doc['v_proc_eu']= round(float(row_doc['v_eu']) / float(row_doc['v_total']) * 100, 2) # percentage
+        row_doc['v_proc_nation']= round(float(row_doc['v_nation']) / float(row_doc['v_total']) * 100, 2)
         del row_doc['czesc_orig'] #delete useless keys
         del row_doc['dzial']
         del row_doc['rozdzial']
@@ -70,7 +78,11 @@ def fill_rbt(budg_data, type_label, db, coll, cleandb):
             row_doc['czesc']= row_doc['czesc'].partition('/')[0]
         row_doc['czesc']= int(row_doc['czesc']) #should be int for the possibility to be compared against 'budzet zadaniowy'
         row_doc['level']= 'b'
-        row_doc['typ']= type_label[row_doc['level']] + ' ' + row_doc['idef']
+        row_doc['type']= type_label[row_doc['level']] + ' ' + row_doc['idef']
+        row_doc['v_nation']= row_doc['dot_sub'] + row_doc['swiad_fiz'] + row_doc['wyd_jednostek'] + row_doc['wyd_majatk'] + row_doc['wyd_dlug'] # recalculate v_nation
+        row_doc['v_eu']= row_doc['sw_eu'] + row_doc['wspolfin_eu'] # recalculate v_eu
+        row_doc['v_proc_eu']= round(float(row_doc['v_eu']) / float(row_doc['v_total']) * 100, 2) # percentage
+        row_doc['v_proc_nation']= round(float(row_doc['v_nation']) / float(row_doc['v_total']) * 100, 2)
         del row_doc['czesc_orig'] #delete useless keys
         del row_doc['rozdzial']
 
@@ -85,7 +97,12 @@ def fill_rbt(budg_data, type_label, db, coll, cleandb):
             row_doc['czesc']= row_doc['czesc'].partition('/')[0]
         row_doc['czesc']= int(row_doc['czesc']) #should be int for the possibility to be compared against 'budzet zadaniowy'
         row_doc['level']= 'c'
-        row_doc['typ']= type_label[row_doc['level']] + ' ' + row_doc['idef']
+        row_doc['leaf']= True
+        row_doc['type']= type_label[row_doc['level']] + ' ' + row_doc['idef']
+        row_doc['v_nation']= row_doc['dot_sub'] + row_doc['swiad_fiz'] + row_doc['wyd_jednostek'] + row_doc['wyd_majatk'] + row_doc['wyd_dlug'] # recalculate v_nation
+        row_doc['v_eu']= row_doc['sw_eu'] + row_doc['wspolfin_eu'] # recalculate v_eu
+        row_doc['v_proc_eu']= round(float(row_doc['v_eu']) / float(row_doc['v_total']) * 100, 2) # percentage
+        row_doc['v_proc_nation']= round(float(row_doc['v_nation']) / float(row_doc['v_total']) * 100, 2)
         del row_doc['czesc_orig'] #delete useless keys
         del row_doc['dzial']
 
@@ -100,8 +117,8 @@ def csv_parse(csv_read, schema):
     level1= []
     level2= []
 
-    dbkey_alias= schema["alias"] # dict of aliases -> document keys in db
-    dbval_types= schema["type"] # dict of types -> values types in db
+    dbkey_alias= schema['alias'] # dict of aliases -> document keys in db
+    dbval_types= schema['type'] # dict of types -> values types in db
     dbkeys_summ= list(v['key'] for v in schema['columns'] if v.get('checkable')) # the keys whose value should be summarized for grand total
     total_dict= {} # this will become 'total' doc in the collection
     for kk in dbkeys_summ:
@@ -141,7 +158,13 @@ def csv_parse(csv_read, schema):
                 #additional fields
                 dict_row['parent']= None
                 dict_row['idef']= None
-                dict_row['typ']= None
+                dict_row['type']= None
+                dict_row['leaf']= False
+                dict_row['v_nation']= 0
+                dict_row['v_eu']= 0
+                dict_row['v_proc_eu']= 0
+                dict_row['v_proc_nation']= 0
+                
 
                 i += 1
 
@@ -157,10 +180,18 @@ def csv_parse(csv_read, schema):
     #complete 'total' dict (some of the keys will anyway be deleted on the 2nd pass)
     total_dict['czesc']= '999999'
     total_dict['pozycja']= 0
+    total_dict['name']= ''
+    total_dict['parent']= None
     total_dict['level0']= 0
+    total_dict['leaf']= True
     total_dict['czesc_orig']= None
     total_dict['dzial']= 0
     total_dict['rozdzial']= 0
+    total_dict['v_nation']= 0
+    total_dict['v_eu']= 0
+    total_dict['v_proc_eu']= 0
+    total_dict['v_proc_nation']= 0
+
     level0.append(total_dict)
 
     out= dict({'level0': level0, 'level1': level1, 'level2': level2})
@@ -223,7 +254,7 @@ if __name__ == "__main__":
 
             mongo_connect= pymongo.Connection("localhost", 27017)
             work_db= mongo_connect[dbname]
-        #try to connect and authenticate
+            #try to connect and authenticate
             try:
                 mongo_connect= pymongo.Connection("localhost", 27017)
                 work_db= mongo_connect[dbname]
@@ -256,7 +287,8 @@ if __name__ == "__main__":
         meta_name= meta_info['name']
         meta_perspective= meta_info['perspective']
         meta_collnum= meta_info['idef']
-        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection'), (meta_collnum, meta_name, meta_perspective, collectname)))
+        meta_explore= meta_info['explorable']
+        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'explorable'), (meta_collnum, meta_name, meta_perspective, collectname, meta_explore)))
         meta_collection['columns']= schema['columns']
 
         schema_coll= 'md_budg_scheme'
@@ -264,4 +296,4 @@ if __name__ == "__main__":
 
         mongo_connect.end_request()
 
-    print 'Done'
+        print 'Done'
