@@ -245,20 +245,64 @@ body {
 
     #snapshots {
         background-color: #fff;
-        padding: 2px 5px;
+        padding: 0px 5px;
+        padding-top: 15px;
         clear: both;
-        height: 26px;
+        height: 20px;
         border-bottom: 2px #555 solid;
     }
     
-            #table-toolbar {
-                position: relative;
-                
-                height: 30px;
-                padding-bottom: 5px;
-                background-color: #c8c8c8;
-            }
-            
+    #snapshots > div {
+        display: inline;
+    }
+        .snapshot {
+            padding: 5px 5px;
+            color: #4abff7;
+            margin-right: 5px;
+            text-align: center;
+
+            border: 1px solid #ccc;
+            border-bottom: 0px solid #ccc;
+            border-radius: 3px 3px 0px 0px;
+            -moz-border-radius: 3px 3px 0px 0px;
+        }
+
+        .snapshot:hover {
+            color: #555;
+            border-color: #4abff7;
+            cursor: pointer;
+        }
+
+        .snapshot.active {
+            background-color: #767676;
+            color: #fff;
+            border: 0px;
+            border-radius: 3px 3px 0px 0px;
+            -moz-border-radius: 3px 3px 0px 0px;
+        }
+        
+        #save-snapshot {
+            font-size: 10px;
+            background-color: #4abff7;
+            color: white;
+            padding: 3px 5px;
+            border-radius: 3px 3px 3px 3px;
+            -moz-border-radius: 3px 3px 3px 3px;
+        }
+        #save-snapshot:hover {
+            background-color: #4cbceb;
+            color: #555;
+            cursor: pointer;
+        }
+    
+    #table-toolbar {
+        position: relative;
+        
+        height: 30px;
+        padding-bottom: 5px;
+        background-color: #c8c8c8;
+    }
+    
             #statistics {
                 position: absolute;
                 bottom: 8px;

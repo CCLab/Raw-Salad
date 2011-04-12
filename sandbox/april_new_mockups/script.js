@@ -72,4 +72,15 @@
             $('#application').fadeIn(400).animate({ opacity: 1 }, 300 );
             $('#open-close-choose-panel').show().html('zmień dane');
         });
+
+    $('#snap-1').hide();
+    $('#snap-2').hide();
+    $('#save-snapshot').click( function () {
+        if( $('#snap-1:hidden').length > 0 ) {
+            $('#snap-1').show();
+        }
+        else {
+            $('#snap-2').show();
+        }
+    });
 })();
