@@ -48,6 +48,8 @@ there is a script that does this thing automatically on every update).
 There is 1 drawback to this method: when we want to change such file, we can't do it by pushing to git, but it must be done
 manually.
 
+The second way is desctribed in 6.
+
 In our case, there is one file that is different in projects/rawsalad than in github: it's src/rawsalad/settings.py.
 
 4. How to recognize when git on server didn't update?
@@ -61,3 +63,11 @@ To do this, go to projects/rawsalad directory and write in a console: git status
 The files that will be listed there are the differences, so the only files that appear, should be files that are
 consciously made different on server than on github.
 So, now only src/rawsalad/settings.py should be on this list.
+
+6. Adding a new file to the repo on server without adding to it to github.
+
+To do this, we have to tell git that this file should be ignored locally(only on this repo), but
+(!!) this will work if the file will not be added to github in the future.
+To add such a file( e.g. abc.xyz ) open: projects/rawsalad/.git/info/exclude
+and append a new line with the name of the file to exclude.
+For example, now there are four such files: dd_budg2011_go.json, dd_budg2011_tr.json, dd_fund2011_tr.json and  fundtr.json.
