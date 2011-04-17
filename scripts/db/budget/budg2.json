@@ -1,0 +1,95 @@
+{
+  "name": "budzet_zadaniowy_dysp",
+  "perspective": "Budżet zadaniowy - dysponenty",
+  "ns": "dd_budg2011_go",
+  "idef": 2,
+  "explorable": "type",
+  "batchsize": 100,
+  "columns": [
+    {
+      "key": "type",
+      "label": "Typ",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "name",
+      "label": "Nazwa",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "czesc",
+      "label": "Część",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_bazowa",
+      "label": "Wartość bazowa",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_rb",
+      "label": "Wartość br.",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "v_total",
+      "label": "OGÓŁEM",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_nation",
+      "label": "Budżet Państwa",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_eu",
+      "label": "Budżet Środków Europejskich",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_proc_eu",
+      "label": "Procent Środków EU",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_proc_nation",
+      "label": "Procent Środków Państwa",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    }
+  ],
+  "aux": {
+      "leaf": 1,
+      "parent": 1,
+      "level": 1,
+      "idef": 1
+  },
+  "query": {
+      "node": { "$in" : [ null, 0 ] }
+  },
+  "sort": {
+      "0": {"level": 1},
+      "1": {"idef": 1}
+  }
+}
