@@ -1,8 +1,225 @@
+/*****************************************************************************
+ *                                                                           *
+ *                             SORTING                                       *
+ *                                                                           *
+ *****************************************************************************/
+
+
+/*
+  General sorting interface is:
+     
+     - for whole collection:
+         type_of_sort( data, settings )
+
+     - for range of the collection:
+         type_of_sort( data, settings, start, end )
+
+     - settings object is a list of prefferences each containing two fields:
+         name - a key to be used as a base for sorting
+         pref - sorting order (1 - ascending, -1 - descending)
+
+         [{
+             pref: 1,
+             name: "age"
+          },
+          {
+             pref: -1,
+             name: "name"
+          }]
+*/
+
+// B U B B L E   S O R T
+// TODO: Merge the bubble_srt functions into one using:
+//
+//     function bubble_sort( data, settings, start, end ) {
+//        var start = start || 0;
+//        var end = end || data.lenght;
+//      
+
+// sorts data with bubble_sort algorithm with given settings,
+// which decides when an object is bigger than another
+// data - collection to sort
+// settings - setting deciding how to compare two objects
+function bubble_sort( data, settings ) {
+    var i;
+    var j;
+    var length = data.length;
+    
+    for ( i = 0; i < length - 1; i += 1 ) {
+        for ( j = 0; j < length - i - 1; j += 1 ) {
+            // obiekt o mniejszym numerze jest lepszy, wiersze lepsze na górze
+            /*print( 'test: ' );
+            print( j );
+            print( ' vs ' );
+            println( j+1 );*/
+            if ( compare_obj( data[j], data[j+1], settings ) === -1 ) {
+                swap( data, j, j+1 );
+                /*print( j );
+                print( ' <-> ' );
+                println( j+1 );*/
+            }
+        }
+    }
+};
+
+// sorts data in range [start; end] with bubble_sort algorithm
+// with settings, which decides when an object is bigger than another
+// data - collection to sort
+// settings - setting deciding how to compare two objects
+// start - index of the first element of data to sort
+// end - index of the last element of data to sort
+function bubble_sort_r( data, settings, start, end ) {
+    var i;
+    var j;
+    var k;
+    
+    for ( i = start, k = 0; i < end; i += 1, k+= 1 ) {
+        for ( j = start; j < end - k; j += 1 ) {
+            // obiekt o mniejszym numerze jest lepszy, wiersze lepsze na górze
+            /*print( 'test: ' );
+            print( j );
+            print( ' vs ' );
+            println( j+1 );*/
+            if ( compare_obj( data[j], data[j+1], settings ) == -1 ) {
+                swap( data, j, j+1 );
+                /*print( j );
+                print( ' <-> ' );
+                println( j+1 );*/
+            }
+        }
+    }
+};
+
+// M E R G E   S O R T 
+
+// TODO: merge two merge_sort functions into one
+//       just like bubble sort - JS doesn't need delegation in this case
+//  
+// sorts part of an array data with merge sort algorithm using setting settings
+// data - collection to sort
+// settings - decides how objects are compared
+// first index = start, last index = end
+function merge_sort_r( data, settings, start, end ) {
+    if ( start > end - 1 )
+        return;
+
+    // TODO: 
+    // var middle = get_middle( start, end );
+    var middle = int_div( (start + end), 2);
+    
+    // sort two arrays separately
+    merge_sort_r( data, settings, start, middle );
+    merge_sort_r( data, settings, middle + 1, end );
+    
+    // merge sorted arrays
+    merge( data, settings, start, middle, end);
+};
+
+// sorts the whole array with merge sort algorithm using setting sett
+// data - collection to sort
+// settings - decides how objects are compared
+function merge_sort( data, settings ) {
+    merge_sort_r( data, settings, 0, data.length - 1 );
+};
+
+// merges two subarrays, 1st: data[start, middle], 2nd: data[middle+1, end]
+// result is that data[start, end] is sorted
+// data - collection to sort
+// settings - decides how objects are compared
+function merge( data, settings, start, middle, end) {
+    var i = 0;
+    var j = 0;
+    var index = start;
+    
+    var array1 = data.slice(start, middle + 1);
+    var array2 = data.slice(middle + 1, end + 1);
+    
+    // put the smallest actually element in the first available place in data
+    //print('MERGE: ['); print(start); print('--'); print(end); println(']');
+    while ( i < array1.length && j < array2.length ) {
+        //print( 'i: '); print( i ); print( 'j: '); print( j ); print('| ');
+        if ( compare_obj( array1[i], array2[j], settings ) == 1 ) {
+            data[index] = array1[i];
+            i += 1;
+        } else {
+            data[index] = array2[j];
+            j += 1;
+        }
+        index += 1;
+    }
+    
+    if ( i < array1.length ) {
+        // put last elements from array1 in the last spots in data
+        while ( i < array1.length ) {
+            data[index] = array1[i];
+            index += 1;
+            i += 1;
+        }
+    } else {
+        // put last elements from array2 in the last spots in data
+        while ( j < array2.length ) {
+            data[index] = array2[j];
+            index += 1;
+            j += 1;
+        }
+    }
+    //println('');
+};
+
+
+
+// H Y B R I D   S O R T
+
+// TODO: call it sort as we a general purpose interface
+//       make border automatic depending on the data and settings length
+ 
+// sorts part of an array data with a hybrid sorting algorithm
+// which uses merge sort for dividing big part of an array and mergin them
+// and bubble sort for sorting small arrays. Uses settings.
+// data - collection to sort
+// settings - decides how objects are compared
+// first index = start, last index = end
+// border - value indicating when bubble_sort should be used
+function hybrid_sort_r( data, settings, start, end, border ) {
+    if ( start > end - border ) // an array is small enough to use bubble sort
+        bubble_sort_r( data, settings, start, end);
+    else {
+        // TODO: 
+        // var middle = get_middle( start, end );
+        var middle = int_div( (start + end), 2);
+        
+        // sort two arrays separately
+        hybrid_sort_r( data, settings, start, middle, border );
+        hybrid_sort_r( data, settings, middle + 1, end, border );
+        
+        // merge sorted arrays
+        merge( data, settings, start, middle, end);
+    }
+};
+
+// TODO: merge two hybrid_sorts into one function
+//
+// sorts the whole array with hybrid sort(merge sort + bubble sort)
+// algorithm using setting sett
+// data - collection to sort
+// sett - decides how objects are compared
+// border - value indicating when bubble sort should be used
+function hybrid_sort( data, sett, border ) {
+    hybrid_sort_r( data, sett, 0, data.length - 1, border);
+};
+
+
+
+// S O R T I N G   H E L P E R   F U N C T I O N S
+
+// TODO: Use jQuery extend method instead:
+//       http://api.jquery.com/jQuery.extend/
+// 
 // function used to deep copying objects
 // obj - object to copy
 // returns copy of that object
 function clone_obj( obj ) {
-    if ( typeof obj !== 'object' || obj == null ) {
+    if ( typeof obj !== 'object' || obj === null ) {
         return obj;
     }
  
@@ -122,13 +339,27 @@ function swap( data, i, j) {
     data[j] = tmp;
 };
 
+
+// TODO: why not to make:
+//
+//       function get_middle( start, end ) ??
+//
+// instead of int_div - get_middle means sth at least...
+function get_middle( start, end ) {
+    var length = start + end;
+    var rest = length % 2;
+    var temp = length - rest;
+
+    return ( temp / 2 );
+}
+// TODO - use the one above instead of int_div
 // division for integers
 // returns ( big div small)
 function int_div( big, small ) {
     var rest = big % small;
     var tmp = big - rest;
     return ( tmp / small );
-};
+}
 
 // compares values of specified attribute of two objects, returned value depends on preference
 // ob1, ob2 - objects to compare
@@ -140,6 +371,7 @@ function int_div( big, small ) {
 // if pref. = 0, then returns 0
 function compare_atr( ob1, ob2, attr, pref ) {
     var compare_value;
+
     if ( ob1[attr] < ob2[attr] ) {
         compare_value = -1;
     } else if ( ob1[attr] > ob2[attr] ) {
@@ -149,9 +381,8 @@ function compare_atr( ob1, ob2, attr, pref ) {
     }
     
     // changes value to return basing on value of pref
-    compare_value = compare_value * pref;
-    return compare_value;
-};
+    return compare_value * pref;
+}
 
 // compares two objects, compares their attributes mentioned in sett
 // ob1, ob2 - objects to compare
@@ -161,7 +392,7 @@ function compare_atr( ob1, ob2, attr, pref ) {
 //          1 -> ob1 > ob2
 function compare_obj( ob1, ob2, sett ) {
     var i;
-    var res = 0;
+    var result = 0;
     var key;
     var pref;
     
@@ -169,173 +400,17 @@ function compare_obj( ob1, ob2, sett ) {
     for ( i = 0; i < sett.length; i += 1 ) {
         key = sett[i].name;
         pref = sett[i].pref;
-        res = compare_atr( ob1, ob2, key, pref );
-        if ( res != 0 ) {
+
+        result = compare_atr( ob1, ob2, key, pref );
+        if ( result !== 0 ) {
             break;
         }
     }
-    return res;
+
+    return result;
 };
 
 
-/*****************************************************************************
- *                                                                           *
- *                             SORTING                                       *
- *                                                                           *
- *****************************************************************************/
-
-// sorts data with bubble_sort algorithm with setting sett,
-// which decides when an object is bigger than another
-// data - collection to sort
-// sett - setting deciding how to compare two objects
-function bubble_sort( data, sett ) {
-    var i;
-    var j;
-    var length = data.length;
-    
-    for ( i = 0; i < length - 1; i += 1 ) {
-        for ( j = 0; j < length - i - 1; j += 1 ) {
-            // obiekt o mniejszym numerze jest lepszy, wiersze lepsze na górze
-            /*print( 'test: ' );
-            print( j );
-            print( ' vs ' );
-            println( j+1 );*/
-            if ( compare_obj( data[j], data[j+1], sett ) == -1 ) {
-                swap( data, j, j+1 );
-                /*print( j );
-                print( ' <-> ' );
-                println( j+1 );*/
-            }
-        }
-    }
-};
-
-// sorts data in range [start; end] with bubble_sort algorithm
-// with setting sett, which decides when an object is bigger than another
-// data - collection to sort
-// sett - setting deciding how to compare two objects
-// start - index of the first element of data to sort
-// end - index of the last element of data to sort
-function bubble_sort_r( data, sett, start, end ) {
-    var i;
-    var j;
-    var k;
-    
-    for ( i = start, k = 0; i < end; i += 1, k+= 1 ) {
-        for ( j = start; j < end - k; j += 1 ) {
-            // obiekt o mniejszym numerze jest lepszy, wiersze lepsze na górze
-            /*print( 'test: ' );
-            print( j );
-            print( ' vs ' );
-            println( j+1 );*/
-            if ( compare_obj( data[j], data[j+1], sett ) == -1 ) {
-                swap( data, j, j+1 );
-                /*print( j );
-                print( ' <-> ' );
-                println( j+1 );*/
-            }
-        }
-    }
-};
-
-// merges two subarrays, 1st: data[start, middle], 2nd: data[middle+1, end]
-// result is that data[start, end] is sorted
-// data - collection to sort
-// sett - decides how objects are compared
-function merge( data, sett, start, middle, end) {
-    var i = 0;
-    var j = 0;
-    var ind = start;
-    
-    var array1 = data.slice(start, middle + 1);
-    var array2 = data.slice(middle + 1, end + 1);
-    
-    // put the smallest actually element in the first available place in data
-    //print('MERGE: ['); print(start); print('--'); print(end); println(']');
-    while ( i < array1.length && j < array2.length ) {
-        //print( 'i: '); print( i ); print( 'j: '); print( j ); print('| ');
-        if ( compare_obj( array1[i], array2[j], sett ) == 1 ) {
-            data[ind] = array1[i];
-            i += 1;
-        } else {
-            data[ind] = array2[j];
-            j += 1;
-        }
-        ind += 1;
-    }
-    
-    if ( i < array1.length ) {
-        // put last elements from array1 in the last spots in data
-        while ( i < array1.length ) {
-            data[ind] = array1[i];
-            ind += 1;
-            i += 1;
-        }
-    } else {
-        // put last elements from array2 in the last spots in data
-        while ( j < array2.length ) {
-            data[ind] = array2[j];
-            ind += 1;
-            j += 1;
-        }
-    }
-    //println('');
-};
-
-// sorts part of an array data with merge sort algorithm using setting sett
-// data - collection to sort
-// sett - decides how objects are compared
-// first index = start, last index = end
-function merge_sort_r( data, sett, start, end ) {
-    if ( start > end - 1 )
-        return;
-    var middle = int_div( (start + end), 2);
-    
-    // sort two arrays separately
-    merge_sort_r( data, sett, start, middle );
-    merge_sort_r( data, sett, middle + 1, end );
-    
-    // merge sorted arrays
-    merge( data, sett, start, middle, end);
-};
-
-// sorts the whole array with merge sort algorithm using setting sett
-// data - collection to sort
-// sett - decides how objects are compared
-function merge_sort( data, sett ) {
-    merge_sort_r( data, sett, 0, data.length - 1 );
-};
-
-// sorts part of an array data with a hybrid sorting algorithm
-// which uses merge sort for dividing big part of an array and mergin them
-// and bubble sort for sorting small arrays. Uses setting sett.
-// data - collection to sort
-// sett - decides how objects are compared
-// first index = start, last index = end
-// border - value indicating when bubble_sort should be used
-function hybrid_sort_r( data, sett, start, end, border ) {
-    if ( start > end - border ) // an array is small enough to use bubble sort
-        bubble_sort_r( data, sett, start, end);
-    else {
-        var middle = int_div( (start + end), 2);
-        
-        // sort two arrays separately
-        hybrid_sort_r( data, sett, start, middle, border );
-        hybrid_sort_r( data, sett, middle + 1, end, border );
-        
-        // merge sorted arrays
-        merge( data, sett, start, middle, end);
-    }
-};
-
-// sorts the whole array with hybrid sort(merge sort + bubble sort)
-// algorithm using setting sett
-// data - collection to sort
-// sett - decides how objects are compared
-// border - value indicating when bubble sort should be used
-function hybrid_sort( data, sett, border ) {
-    hybrid_sort_r( data, sett, 0, data.length - 1, border);
-};
 
 /*****************************************************************************
  *                                                                           *
@@ -343,6 +418,8 @@ function hybrid_sort( data, sett, border ) {
  *                                                                           *
  *****************************************************************************/
 
+// TODO: let's talk about it before you code :D
+//
 // name: name of attribute which will be checked during filtering,
 // pref: preference 1 means -> bigger values are good, -1 -> lower values are good
 // value - border value of the attribute
@@ -353,12 +430,12 @@ function hybrid_sort( data, sett, border ) {
 
 // checks if specfied attribute of an object passes a filter
 // obj - object to check
-// atr - name of the attribute to check
+// attr - name of the attribute to check
 // pref - decides if value of the attribute should be higher or lower
 // value - border value
 // returns true if yes, false if not
-function check_atr( obj, atr, pref, value ) {
-    var obj_val = obj[atr];
+function check_attr( obj, attr, pref, value ) {
+    var obj_val = obj[attr];
     
     if ( pref == -1 && obj_val < value) {
         return true;
