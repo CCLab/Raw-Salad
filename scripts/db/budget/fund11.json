@@ -86,7 +86,7 @@
       "parent": 1,
       "level": 1
   },
-  "query": {},
+  "query": {"node": null},
   "sort": {
       "0": {"idef_sort": 1},
       "1": {"parent_sort": 1},
