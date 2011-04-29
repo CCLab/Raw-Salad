@@ -629,7 +629,7 @@ if __name__ == "__main__":
     mongo_connect.end_request()
 
     print 'temporary collection processed - dropping '+ dbname +'.'+ coll_tmp
-    work_db[coll_tmp].drop()
+    #work_db[coll_tmp].drop()
 
     # saving into json file
     if opts.json_filename is not None:

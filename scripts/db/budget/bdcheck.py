@@ -72,7 +72,23 @@ if __name__ == "__main__":
     for row in cursor_data:
         rows.append(row)
 
-    cursor_data= db[conn_schema].find_one({'idef':5},{'_id':0})
+    cursor_data= db[conn_schema].find_one({'idef':10},{'_id':0})
+    full_data= {}
+    full_data= cursor_data.copy()
+    full_data['rows']= rows
+
+    save2json(conn_coll+'.json',full_data)
+
+    print '\n...extracting data - Funduszy Celowe w ukladzie zadaniowym'
+    #extracting data from Funduszy Celowe - zadaniowy
+    conn_coll= 'dd_fund2011_go' #data
+    conn_schema= 'md_fund_scheme' #metadata
+    cursor_data= db[conn_coll].find({},{'_id':0}).batch_size(100)
+    rows= []
+    for row in cursor_data:
+        rows.append(row)
+
+    cursor_data= db[conn_schema].find_one({'idef':11},{'_id':0})
     full_data= {}
     full_data= cursor_data.copy()
     full_data['rows']= rows
