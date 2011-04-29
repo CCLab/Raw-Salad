@@ -1,0 +1,108 @@
+{
+  "alias": {
+      "0": "idef",
+      "1": "level",
+      "2": "fundusz",
+      "3": "dzial",
+      "4": "zadanie",
+      "5": "podzadanie",
+      "6": "cel",
+      "7": "miernik",
+      "8": "miernik_wartosc_bazowa",
+      "9": "miernik_wartosc_2011",
+      "10":"miernik_wartosc_2012",
+      "11":"miernik_wartosc_2013",
+      "12":"val_2011",
+      "13":"val_2012",
+      "14":"val_2013"
+  },
+  "type": {
+      "idef": "string",
+      "miernik_wartosc_bazowa": "string",
+      "miernik_wartosc_2011": "string",
+      "miernik_wartosc_2012": "string",
+      "miernik_wartosc_2013": "string"
+  },
+  "meta": {
+      "name": "funduszy_zadaniowy",
+      "perspective": "Plany finansowe państwowych Funduszy Celowych w układzie tradycyjnym",
+      "idef": 2,
+      "explorable": "name"
+  },
+  "columns": [
+    {
+      "key": "type",
+      "label": "Typ",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "name",
+      "label": "Nazwa",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "cel",
+      "label": "Cel",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_nazwa",
+      "label": "Miernik",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_bazowa",
+      "label": "Miernik - Wartość bazowa",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_2011",
+      "label": "Miernik - Wartość w 2011 r.",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_2012",
+      "label": "Miernik - Wartość w 2012 r.",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_2012",
+      "label": "Miernik - Wartość w 2013 r.",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "val_2011",
+      "label": "Wydatki (w tys. zł) 2011 r.",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "val_2012",
+      "label": "Wydatki (w tys. zł) 2012 r.",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "val_2013",
+      "label": "Wydatki (w tys. zł) 2013 r.",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    }
+  ]
+}
