@@ -83,14 +83,24 @@ if __name__ == "__main__":
     #extracting data from Funduszy Celowe - zadaniowy
     conn_coll= 'dd_fund2011_go' #data
     conn_schema= 'md_fund_scheme' #metadata
-    cursor_data= db[conn_coll].find({},{'_id':0}).batch_size(100)
-    rows= []
-    for row in cursor_data:
-        rows.append(row)
 
     cursor_data= db[conn_schema].find_one({'idef':11},{'_id':0})
     full_data= {}
     full_data= cursor_data.copy()
+    if 'batchsize' in full_data:
+        batch= full_data.pop('batchsize')
+    if 'query' in full_data:
+        query= full_data.pop('query')
+    if 'sort' in full_data:
+        del full_data['sort']
+    if 'aux' in full_data:
+        del full_data['aux']
+
+    cursor_data= db[conn_coll].find(query,{'_id':0}, sort=[('idef_sort',1), ('parent_sort',1), ('level',1)]).batch_size(100)
+    rows= []
+    for row in cursor_data:
+        rows.append(row)
+
     full_data['rows']= rows
 
     save2json(conn_coll+'.json',full_data)
