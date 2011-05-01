@@ -1,18 +1,17 @@
 (function () {
-
-    // initialize a table with header and a-level data
-    var create_table = function() {
+    
+    // tworzy tabele przy pomocy obiektu json
+    var generate_table_header = function( table_data_object ) {
         var columns;
         var html = [ '<div id="thead"><div class="data">' ];
         var col, col_type;
         var i;
-
+        
         // get all the basic view columns definitions        
         columns = filter( function ( element ) {
                     return element['basic'] === true;
-                }, perspective['columns'] );
-
-        // iterate through columns definitions
+                }, table_data_object.perspective['columns'] );
+                
         for ( i = 0; i < columns.length; i += 1 ) {
             col = columns[i];
             
@@ -28,21 +27,77 @@
             html.push( '</div>' );
         }
         html.push( '</div></div>' );
-
+        
         // create empty table body
         html.push( '<div id="tbody"></div>' );
-        html.push( '<div style="overflow: hidden; height: 1px;">.</div>')
-
-        // add new table to the table container
-        $('#table').append( $( html.join('') ));
+        html.push( '<div style="overflow: hidden; height: 1px;">.</div>');
         
-        // add a-level rows
-        add_node();
+        return html;
     };
     
+    var generate_table_data = function( table_data_object ) {
+        var data;
+        var schema;
+        var html = [];
+        var item;
+        var col, col_type = [];
+        var i, j;
+        var container;
+        var leaf = perspective['leaf'];
+        var html_result;
+        
+        data = table_data_object.rows;
+        
+        schema = filter( function ( element ) {
+            return element['basic'] === true;
+        }, table_data_object.perspective['columns'] );
 
+
+        for ( i = 0; i < data.length; i += 1 ) {
+            item = data[i];
+            html.push( '<div id="', item['idef'], '"' );
+            html.push( 'class="', item['level'], ' ' );
+            html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
+            html.push( '<div class="data">' );
+            
+            for ( j = 0; j < schema.length; j += 1 ) {
+                col = schema[j];
+                
+                if ( col['key'] === 'type' || col['key'] === 'name' ) {
+                    col_type = col['key'] + ' cell';
+                } else {
+                    col_type = 'value cell';
+                }				
+                
+                html.push( '<div class="', col_type, '" ' );
+                html.push( 'data-processable="', !!col['processable'], '" ' );				
+                html.push( 'data-checkable="', !!col['checkable'], '">' );
+                if( col['checkable'] === true ) {
+                    html.push( '<div class="checkbox"></div>');
+                }
+                if( col_type === 'value cell' )
+                {
+                    html.push( '<span>' );
+                    html.push( item[col['key']] );
+                    html.push( '</span>' );
+                }
+                else {
+                    html.push( item[col['key']] );
+                }    
+                html.push( '</div>' );
+            }
+            html.push( '</div>' );
+            if( item['leaf'] !== true ) {
+                html.push( '<div class="nodes"></div>' );
+            }
+            html.push( '</div>' );
+        }
+
+        return html;
+    };
+    
     // add action listener to newly created nodes
-    var arm_nodes = function( id ) {
+    var arm_nodes = function( table_data_object, id ) {
         var node;
         
         // no parameters for a-level nodes
@@ -62,13 +117,13 @@
 
             // if the subtree not loaded yet --> load it
             if( nodes.find('div').length === 0 ) {
-                add_node( id );
+                download_node( table_data_object, id );
             }
             // if there is a subtree already --> toggle it
             else {
                 nodes.toggle();
             }
-            highlight( current_level );
+                highlight( current_level );
         });	                             
 
         // TODO: refactor it with 'selected' class objects list length
@@ -124,12 +179,9 @@
         node.find( '.data' ).each( function () {
             $(this).children( '.cell' ).equalize_heights();
         });
-    }
-
-
-    // make light/dark background for rows in table
+    };    
+    
     var make_zebra = function () {
-        
         // get all visible rows
         var visible_list = $('.data').not( ':hidden' );
         
@@ -155,8 +207,7 @@
                 $(this).css('background-color', '#eee');            
             }
         });
-    }
-    
+    };
     
     // TODO refactor it not to involve children
     var highlight = function( node ) {        
@@ -241,11 +292,9 @@
     var add_bottom_border = function( node ) {
         node.find('.data').last().addClass( 'bottomborder' );
     }
-
-
-
+    
     // add nodes to table
-    var add_node = function( id ) {
+    var add_node = function( table_data_object, id ) {
         var data;
         var schema;
         var html = [];
@@ -259,18 +308,18 @@
         if( arguments.length === 0 ) {
             data = filter( function ( element ) {
                 return element['level'] === 'a';
-            }, rows );
+            }, table_data_object.rows );
             container = $('#tbody');
         } else {
             data = filter( function ( element ) {
                 return element['parent'] === id;
-            }, rows );
+            }, table_data_object.rows );
             container = $('#' + id + '> .nodes');
         }
         
         schema = filter( function ( element ) {
             return element['basic'] === true;
-        }, perspective['columns'] );
+        }, table_data_object.perspective['columns'] );
 
 
         for ( i = 0; i < data.length; i += 1 ) {
@@ -314,22 +363,215 @@
         }
         html_result = $( html.join('') );
         container.append( html_result );
-        arm_nodes( id );
+        arm_nodes( table_data_object, id );
         make_zebra();
     };
-
-    create_table();
+    
+    var reset_table = function( table_data_object ) {
+        var i;
+        var not_leaf_nodes = filter( function ( element ) {
+                return !!element['leaf'];
+            }, table_data_object.rows );
+            
+        $('#tbody').empty();
+        add_node( table_data_object );
+        
+            
+        for ( i = 0; i < not_leaf_nodes.length; i += 1 ) {
+            add_node( table_data_object, not_leaf_nodes[ i ] );
+        }
+    };
+    
+    // downloads requested nodes, appends them to object with other nodes
+    // and adds html code for new nodes
+    var download_node = function ( table_data_object, id ) {
+        var node_to_download_data = {
+            "action": "get_node",
+            "col_nr": "1",
+            "per_nr": "1",
+            "par_id": id,
+            "add_columns": []
+        };
+        
+        $.ajaxSetup({ 
+            beforeSend: function(xhr, settings) {
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie != '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = jQuery.trim(cookies[i]);
+                            // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+                }
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                    // Only send the token to relative URLs i.e. locally.
+                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                }
+            } 
+        });
+        
+        $.ajax({
+            type: "POST",
+            data: node_to_download_data,
+            dataType: "json",
+            success: function( received_data ) {                        
+                        var data = table_data_object.rows;
+                        var i;
+                        var start;
+                        for ( i = 0; i < data.length; i += 1 ) {
+                            if ( data[ i ].idef === id ) {
+                                start = i + 1;
+                                break;
+                            }
+                        }
+                        
+                        for ( i = 0; i < received_data.length; i += 1 ) {
+                            data.splice( start + i, 0, received_data[ i ] );
+                        }
+                        add_node( table_data_object, id );
+                    }
+            });        
+    };
+    
+    var td_object = {
+        "perspective": {
+            "name": "budzet_zadaniowy", 
+            "idef": 1, 
+            "collection": "dd_budg2011_go", 
+            "perspective": "Bud\u017cet zadaniowy", 
+            "columns": [
+                {
+                    "type": "string", 
+                    "processable": true, 
+                    "key": "idef", 
+                    "label": "Numer"
+                }, 
+                {
+                    "type": "string", 
+                    "label": "Typ", 
+                    "processable": true, 
+                    "key": "type", 
+                    "basic": true
+                }, 
+                {
+                    "type": "string", 
+                    "label": "Nazwa", 
+                    "processable": true, 
+                    "key": "name", 
+                    "basic": true
+                }, 
+                {
+                    "type": "string", 
+                    "processable": true, 
+                    "key": "czesc", 
+                    "label": "Cz\u0119\u015b\u0107"
+                }, 
+                {
+                    "type": "string", 
+                    "processable": true, 
+                    "key": "cel", 
+                    "label": "Cel"
+                }, 
+                {
+                    "type": "string", 
+                    "processable": true, 
+                    "key": "miernik_nazwa", 
+                    "label": "Miernik"
+                }, 
+                {
+                    "type": "string", 
+                    "processable": true, 
+                    "key": "miernik_wartosc_bazowa", 
+                    "label": "Warto\u015b\u0107 bazowa"
+                }, 
+                {
+                    "type": "string", 
+                    "processable": true, 
+                    "key": "miernik_wartosc_rb", 
+                    "label": "Warto\u015b\u0107 br."
+                }, 
+                {
+                    "label": "OG\u00d3\u0141EM", 
+                    "processable": true, 
+                    "key": "v_total", 
+                    "basic": true, 
+                    "checkable": true, 
+                    "type": "number"
+                }, 
+                {
+                    "label": "Bud\u017cet Pa\u0144stwa", 
+                    "processable": true, 
+                    "key": "v_nation", 
+                    "basic": true, 
+                    "checkable": true, 
+                    "type": "number"
+                }, 
+                {
+                    "label": "Środki Europejskie", 
+                    "processable": true, 
+                    "key": "v_eu", 
+                    "basic": true, 
+                    "checkable": true, 
+                    "type": "number"
+                }
+            ]
+        },
+        
+        "rows": [
+            {
+                "leaf": false, 
+                "name": "ZARZ\u0104DZANIE PA\u0143STWEM", 
+                "parent": null, 
+                "level": "a", 
+                "idef": "1", 
+                "v_eu": 25140, 
+                "v_total": 1561521, 
+                "v_nation": 1536381, 
+                "type": "FUNKCJA 1"
+            },
+            {
+                "leaf": false, 
+                "name": "BEZPIECZE\u0143STWO WEWN\u0118TRZNE I PORZ\u0104DEK PUBLICZNY", 
+                "parent": null, 
+                "level": "a", 
+                "idef": "2", 
+                "v_eu": 58779, 
+                "v_total": 14170616, 
+                "v_nation": 14111837, 
+                "type": "FUNKCJA 2"
+            }, 
+            {
+                "leaf": false, 
+                "name": "EDUKACJA, WYCHOWANIE I OPIEKA", 
+                "parent": null, 
+                "level": "a", 
+                "idef": "3", 
+                "v_eu": 1016384, 
+                "v_total": 14379196, 
+                "v_nation": 13362812, 
+                "type": "FUNKCJA 3"
+            }
+        ]
+    };
+    
+    var show_header = function( html_code ) {
+        $('#table').append( $( html_code.join('') ));
+    };
+    var show_rows = function( html_code, id ) {
+        $('#tbody').append( $( html_code.join('') ));
+        arm_nodes( td_object, id );
+        make_zebra();
+    };
+    
+    show_header( generate_table_header( td_object ) );
+    show_rows( generate_table_data( td_object ) );
     
 })();
-
-
-
-
-
-
-
-
-
-
-
 

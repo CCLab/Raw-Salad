@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from django.template import Context, loader
 from django.utils import simplejson as json
 
+# should be removed after data is imported from db
+from data import new_rows
+
 import pymongo
 
 def get_page( data ):
@@ -68,9 +71,14 @@ def get_node( data ):
     par_id = data["par_id"]
     add_columns = data["add_columns"]
     # getting data from db
-    return_data = {}
+    return_data = []
+    for row in new_rows:
+        if row["parent"] == par_id:
+            return_data.append(row)
+            
     json_data = json.dumps( return_data )
-    return json_data
+
+    return HttpResponse(json_data)
 
 func_dict = {
               "choose_collection": choose_collection,
@@ -83,13 +91,14 @@ func_dict = {
             }
             
 def app_page( request ):
+    #c = {}
+    #c.update(csrf(request))
     if request.method == "GET":
         return get_page( request )
     else:
-        #request.method == "POST":
-        function_id = request.POST( "action" )
-        data = request.POST( "data" )
-        return func_dict( func_dict( function_id(data) ) )
+        data = request.POST
+        function_id = data["action"]
+        return func_dict[function_id]( data )
 
 def redirect( request ):
     return HttpResponseRedirect('/app')
