@@ -1,6 +1,122 @@
 ﻿# -*- coding: utf-8 -*-
 
+perspective = {
+    "name": "budzet_zadaniowy", 
+    "idef": 1, 
+    "collection": "dd_budg2011_go", 
+    "perspective": "Budżet zadaniowy", 
+    "columns": [
+        {
+            "type": "string", 
+            "processable": True, 
+            "key": "idef", 
+            "label": "Numer"
+        }, 
+        {
+            "type": "string", 
+            "label": "Typ", 
+            "processable": True, 
+            "key": "type", 
+            "basic": True
+        }, 
+        {
+            "type": "string", 
+            "label": "Nazwa", 
+            "processable": True, 
+            "key": "name", 
+            "basic": True
+        }, 
+        {
+            "type": "string", 
+            "processable": True, 
+            "key": "czesc", 
+            "label": "Część"
+        }, 
+        {
+            "type": "string", 
+            "processable": True, 
+            "key": "cel", 
+            "label": "Cel"
+        }, 
+        {
+            "type": "string", 
+            "processable": True, 
+            "key": "miernik_nazwa", 
+            "label": "Miernik"
+        }, 
+        {
+            "type": "string", 
+            "processable": True, 
+            "key": "miernik_wartosc_bazowa", 
+            "label": "Wartość bazowa"
+        }, 
+        {
+            "type": "string", 
+            "processable": True, 
+            "key": "miernik_wartosc_rb", 
+            "label": "Wartość br."
+        }, 
+        {
+            "label": "OGÓŁEM", 
+            "processable": True, 
+            "key": "v_total", 
+            "basic": True, 
+            "checkable": True, 
+            "type": "number"
+        }, 
+        {
+            "label": "Budżet Państwa", 
+            "processable": True, 
+            "key": "v_nation", 
+            "basic": True, 
+            "checkable": True, 
+            "type": "number"
+        }, 
+        {
+            "label": "Środki Europejskie", 
+            "processable": True, 
+            "key": "v_eu", 
+            "basic": True, 
+            "checkable": True, 
+            "type": "number"
+        }
+    ]
+}
+
 new_rows = [
+        {
+            "leaf": False, 
+            "name": "ZARZĄDZANIE PAŃSTWEM", 
+            "parent": None, 
+            "level": "a", 
+            "idef": "1", 
+            "v_eu": 25140, 
+            "v_total": 1561521, 
+            "v_nation": 1536381, 
+            "type": "FUNKCJA 1"
+        },
+        {
+            "leaf": False, 
+            "name": "BEZPIECZEŃSTWO WEWNĘTRZNE I PORZĄDEK PUBLICZNY", 
+            "parent": None, 
+            "level": "a", 
+            "idef": "2", 
+            "v_eu": 58779, 
+            "v_total": 14170616, 
+            "v_nation": 14111837, 
+            "type": "FUNKCJA 2"
+        }, 
+        {
+            "leaf": False, 
+            "name": "EDUKACJA, WYCHOWANIE I OPIEKA", 
+            "parent": None, 
+            "level": "a", 
+            "idef": "3", 
+            "v_eu": 1016384, 
+            "v_total": 14379196, 
+            "v_nation": 13362812, 
+            "type": "FUNKCJA 3"
+        },
     {
         "leaf": False, 
         "name": "Obsługa merytoryczna i kancelaryjno-biurowa Prezydenta Rzeczypospolitej Polskiej", 

@@ -7,6 +7,7 @@ from django.utils import simplejson as json
 
 # should be removed after data is imported from db
 from data import new_rows
+from data import perspective
 
 import pymongo
 
@@ -79,6 +80,21 @@ def get_node( data ):
     json_data = json.dumps( return_data )
 
     return HttpResponse(json_data)
+    
+def get_init_data( data ):
+    col_nr = data["col_nr"]
+    per_nr = data["per_nr"]
+    
+    return_data = {}
+    return_data["perspective"] = perspective
+    return_data["rows"] = []
+    for row in new_rows:
+        if row["level"] == "a":
+            return_data["rows"].append(row)
+            
+    json_data = json.dumps( return_data )
+    
+    return HttpResponse(json_data)
 
 func_dict = {
               "choose_collection": choose_collection,
@@ -87,16 +103,15 @@ func_dict = {
               "change_perspective": change_perspective,
               "add_columns": add_columns,
               "find_data": find_data,
-              "get_node": get_node
+              "get_node": get_node,
+              "get_init_data": get_init_data,
             }
             
 def app_page( request ):
-    #c = {}
-    #c.update(csrf(request))
-    if request.method == "GET":
+    data = request.GET
+    if data == {}:
         return get_page( request )
     else:
-        data = request.POST
         function_id = data["action"]
         return func_dict[function_id]( data )
 
