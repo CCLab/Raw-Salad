@@ -3,6 +3,8 @@
 
 import getpass
 import pymongo
+import psycopg2
+import psycopg2.extras
 import json
 
 import optparse
@@ -16,64 +18,266 @@ def db_insert(data_bulk, db, collname, clean_first=False):
     if clean_first:
         collect.remove()
 
-    collect.insert(data_bulk)
-    return collect.find().count()
+    success= True
+    try:
+        collect.insert(data_bulk)
+    except Exception as e:
+        success= False
+        print 'Cannot insert data:\n %s\n' % e
+
+    return success
 
 
 #-----------------------------
-def getMongoConnect(fullpath):
+def get_db_connect(fullpath, dbtype):
     connect_dict= {}
 
     defaults= {
-        'basedir': fullpath # at the moment - fictional dir, will be used later for locating log file
+        'basedir': fullpath
     }
 
     cfg= ConfigParser(defaults)
     cfg.read(fullpath)
-    connect_dict['host']= cfg.get('mongodb','host')
-    connect_dict['port']= int(cfg.get('mongodb','port'))
-    connect_dict['database']= cfg.get('mongodb','database')
-    connect_dict['username']= cfg.get('mongodb','username')
+    connect_dict['host']= cfg.get(dbtype,'host')
+    connect_dict['port']= cfg.getint(dbtype,'port')
+    connect_dict['database']= cfg.get(dbtype,'database')
+    connect_dict['username']= cfg.get(dbtype,'username')
     try:
-        connect_dict['password']= cfg.get('mongodb','password')
+        connect_dict['password']= cfg.get(dbtype,'password')
     except:
         connect_dict['password']= None
 
     return connect_dict
 
-
 #-----------------------------
-def sort_format(src):
-    """
-    format 1-2-3... to 001-002-003...
-    src should be convertable to int
-    """
+def clean_format(src):
+    #format 001-002-003... to 1-2-3...
     src_list= src.split('-')
     res_list= []
     for elm in src_list:
-        res_list.append('%03d' % int(elm))
+        try:
+            res_list.append('%d' % int(elm))
+        except:
+            res_list.append(elm)
     res= '-'.join(res_list)
     return res
 
 
 #-----------------------------
-def fill_dysp_parent0(dysp_parent0, czesc, database, collection):
-    level_dysp_parent0= database[collection].find({'idef': dysp_parent0, 'node':{ '$in':[None,1]}}, {'_id':0}) # the record of dysponent itself
-    for ldp0_row in level_dysp_parent0:
-        print "%10s %20s %05s %05s %-100r" % (ldp0_row['idef'], ldp0_row['type'], czesc, ldp0_row['level'], ldp0_row['name'].encode('utf-8'))
-
+def sort_format(src):
+    #format 1-2-3... to 001-002-003...
+    src_list= src.split('-')
+    res_list= []
+    for elm in src_list:
+        try:
+            res_list.append('%03d' % int(elm))
+        except:
+            res_list.append(elm)
+    res= '-'.join(res_list)
+    return res
 
 
 #-----------------------------
-def fill_dysp(dysponent_name, dysponent_idef, database, collection):
-    level_dysponent= database[collection].find({'name': dysponent_name, 'node': 1}, {'_id':0}) # the record of dysponent itself
-    for ld_row in level_dysponent:
-        fill_dysp_parent0(ld_row['parent'], ld_row['czesc'], database, collection)
-        
-        
-        # BOOKMARK
-        # summarize values here
-        # and go 'upper' in the hierarchy every time checking the level
+def fetch_elem(tbl, conn, elem_idef):
+    #extracting basic information about the element
+    st= "SELECT idef, idef_sort, elem_type, elem_name FROM %s WHERE (node IS NULL OR node = 1) AND idef= '%s'" % (tbl, elem_idef)
+    curs= conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    curs.execute(st)
+    return curs.fetchone()
+
+
+#-----------------------------
+def work_cursor(work_tbl, connection):
+    out= []
+    print '...quering database'
+    select_statement= """
+        SELECT DISTINCT elem_name, substring(parent_sort from '...') as parent2, substring(parent_sort from '...-...') as parent1, parent_sort as parent0, parent, czesc,
+        SUM(v_total) AS sum_v_total, SUM(v_nation) as sum_v_nation, SUM(v_eu) as sum_v_eu
+        from
+    """ + work_tbl + """
+        WHERE ((node IS NULL OR node = 1) AND (elem_level = 'd') AND (idef NOT LIKE '22%'))
+        OR ((node IS NULL OR node = 0) AND (elem_level = 'c') AND (idef LIKE '22%'))
+        GROUP BY elem_name, parent, parent_sort, czesc
+        ORDER BY elem_name, parent_sort, czesc
+    """
+    dict_cur= connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    dict_cur.execute(select_statement)
+    rows = dict_cur.fetchall()
+    dysp_idef_count= 0
+    curr_dysp= None
+    dysp_dict= {}
+    parent2_dict= {}
+    parent1_dict= {}
+    parent0_dict= {}
+
+    grand_total_nation, grand_total_eu, grand_total= 0,0,0
+
+#     print "%-100s %10s %10s %15s %15s %10s %10s %10s %10s" % (
+#         'elem_name', 'parent2', 'parent1', 'parent0', 'parent', 'czesc', 'sum_v_total', 'sum_v_nation', 'sum_v_eu'
+#         )
+    print '...processing cursor data'
+    for row in rows:
+        # creating dysponent dict
+        if curr_dysp != row['elem_name']:
+            curr_dysp= row['elem_name'] # current dysponent - highest level 'a'
+            dysp_idef_count += 1
+            if len(dysp_dict) != 0: out.append(dysp_dict)
+            dysp_dict= {}
+            dysp_dict['name']= row['elem_name']
+            dysp_dict['idef']= 'dt-'+str(dysp_idef_count)
+            dysp_dict['idef_sort']= 'dt-'+sort_format(str(dysp_idef_count))
+            dysp_dict['parent']= None
+            dysp_dict['parent_sort']= None
+            dysp_dict['leaf']= False
+            dysp_dict['level']= 'a'
+            dysp_dict['type']= 'DYSPONENT'
+            dysp_dict['v_nation']= row['sum_v_nation']
+            dysp_dict['v_eu']= row['sum_v_eu']
+            dysp_dict['v_total']= row['sum_v_total']
+            # loop control values
+            curr_dysp_idef, curr_dysp_idef_sort= dysp_dict['idef'], dysp_dict['idef_sort']
+            curr_parent2= None # reset - new dysponent always means new funkcja
+#             print "%10s; %10s; %-10s; %s; %-50s;" % (dysp_dict['idef'], '', dysp_dict['level'], dysp_dict['type'], dysp_dict['name'])
+        else:
+            dysp_dict['v_nation'] += row['sum_v_nation']
+            dysp_dict['v_eu'] += row['sum_v_eu']
+            dysp_dict['v_total'] += row['sum_v_total']
+
+
+        # creating funkcja dict - level of parent2, 'b'
+        if curr_parent2 != row['parent2']:
+            curr_parent2= row['parent2'] # current funkcja
+            if len(parent2_dict) != 0: out.append(parent2_dict)
+            parent2_dict= {}
+            funk_row = fetch_elem(work_tbl, connection, str(int(row['parent2'])))
+            parent2_dict['idef']= funk_row['idef']
+            parent2_dict['idef_sort']= funk_row['idef_sort']
+            parent2_dict['parent']= curr_dysp_idef
+            parent2_dict['parent_sort']= curr_dysp_idef_sort
+            parent2_dict['name']= funk_row['elem_name']
+            parent2_dict['type']= funk_row['elem_type']
+            parent2_dict['leaf']= False
+            parent2_dict['level']= 'b'
+            parent2_dict['v_nation']= row['sum_v_nation']
+            parent2_dict['v_eu']= row['sum_v_eu']
+            parent2_dict['v_total']= row['sum_v_total']
+            # loop control values
+            curr_funk_idef, curr_funk_idef_sort= parent2_dict['idef'], parent2_dict['idef_sort']
+            curr_parent1= None # reset - new funkcja always means new zadanie
+#             print "%10s; %10s; %-10s; %8s %s; %-50s" % (parent2_dict['idef'], parent2_dict['parent'], parent2_dict['level'], '', parent2_dict['type'], parent2_dict['name'])
+        else:
+            parent2_dict['v_nation'] += row['sum_v_nation']
+            parent2_dict['v_eu'] += row['sum_v_eu']
+            parent2_dict['v_total'] += row['sum_v_total']
+
+        # creating zadanie dict - level of parent1, 'c'
+        if curr_parent1 != row['parent1']:
+            curr_parent1= row['parent1'] # current zadanie
+            if len(parent1_dict) != 0: out.append(parent1_dict)
+            parent1_dict= {}
+            zadn_row = fetch_elem(work_tbl, connection, clean_format(row['parent1']))
+            parent1_dict['idef']= zadn_row['idef']
+            parent1_dict['idef_sort']= zadn_row['idef_sort']
+            parent1_dict['parent']= curr_funk_idef
+            parent1_dict['parent_sort']= curr_funk_idef_sort
+            parent1_dict['name']= zadn_row['elem_name']
+            parent1_dict['type']= zadn_row['elem_type']
+            parent1_dict['leaf']= False
+            parent1_dict['level']= 'c'
+            parent1_dict['v_nation']= row['sum_v_nation']
+            parent1_dict['v_eu']= row['sum_v_eu']
+            parent1_dict['v_total']= row['sum_v_total']
+            # loop control values
+            curr_zadn_idef, curr_zadn_idef_sort= parent1_dict['idef'], parent1_dict['idef_sort']
+            curr_parent0= None # reset - new zadanie always means new podzadanie
+#             print "%10s; %10s; %-10s; %16s %s; %-50s" % (parent1_dict['idef'], parent1_dict['parent'], parent1_dict['level'], '', parent1_dict['type'], parent1_dict['name'])
+        else:
+            parent1_dict['v_nation'] += row['sum_v_nation']
+            parent1_dict['v_eu'] += row['sum_v_eu']
+            parent1_dict['v_total'] += row['sum_v_total']
+
+        # creating podzadanie dict - level of parent1, 'd'
+        if curr_parent0 != row['parent0']:
+            if row['parent1'] != row['parent0']: # there is at least 1 podzadanie, creating a dict
+                if len(parent0_dict) != 0: out.append(parent0_dict)
+                parent0_dict= {}
+                podz_row = fetch_elem(work_tbl, connection, row['parent'])
+                parent0_dict['idef']= podz_row['idef']
+                parent0_dict['idef_sort']= podz_row['idef_sort']
+                parent0_dict['parent']= curr_zadn_idef
+                parent0_dict['parent_sort']= curr_zadn_idef_sort
+                parent0_dict['name']= podz_row['elem_name']
+                parent0_dict['type']= podz_row['elem_type']
+                parent0_dict['leaf']= False
+                parent0_dict['level']= 'd'
+                parent0_dict['v_nation']= row['sum_v_nation']
+                parent0_dict['v_eu']= row['sum_v_eu']
+                parent0_dict['v_total']= row['sum_v_total']
+                # loop control values
+                curr_podz_idef, curr_podz_idef_sort= parent0_dict['idef'], parent0_dict['idef_sort']
+#                 print "%10s; %10s; %-10s; %20s %s; %-50s" % (row['parent'], parent0_dict['parent'], parent0_dict['level'], '', parent0_dict['type'], parent0_dict['name'])
+        else:
+            if row['parent1'] != row['parent0']: # there is at least 1 podzadanie, summarizing podzadanie
+                parent0_dict['v_nation'] += row['sum_v_nation']
+                parent0_dict['v_eu'] += row['sum_v_eu']
+                parent0_dict['v_total'] += row['sum_v_total']
+
+        # creating czesc dict - level below parent, 'e' or 'd' (in case of funk 22 where there is no podzadanie leve)
+        czesc_dict= {}
+        if row['parent1'] == row['parent0']: # czesc is a child of Zadanie
+            czesc_dict['idef']= '-'.join([curr_zadn_idef, row['czesc']])
+            czesc_dict['parent']= curr_zadn_idef
+            czesc_dict['level']= 'd'
+        else: # czesc is a child of Podzadanie
+            czesc_dict['idef']= '-'.join([curr_podz_idef, row['czesc']])
+            czesc_dict['parent']= curr_podz_idef
+            czesc_dict['level']= 'e'
+        czesc_dict['idef_sort']= sort_format(czesc_dict['idef'])
+        czesc_dict['parent_sort']= sort_format(czesc_dict['parent'])
+        czesc_dict['leaf']= True
+        czesc_dict['type']= 'Część'
+        czesc_dict['name']= row['czesc']
+        czesc_dict['v_nation'], czesc_dict['v_eu'], czesc_dict['v_total']= row['sum_v_nation'], row['sum_v_eu'], row['sum_v_total']
+        out.append(czesc_dict)
+        # summarizing grand totals only on the level of czesc
+        grand_total_nation += row['sum_v_nation']
+        grand_total_eu += czesc_dict['v_eu']
+        grand_total += row['sum_v_total']
+
+#         if row['parent1'] == row['parent0']: # czesc is a child of Zadanie
+#             print "%10s; %10s; %-10s; %20s %s; %-50s" % (czesc_dict['idef'], czesc_dict['parent'], czesc_dict['level'], '', czesc_dict['type'], czesc_dict['name'])
+#         else:
+#             print "%10s; %10s; %-10s; %24s %s; %-50s" % (czesc_dict['idef'], czesc_dict['parent'], czesc_dict['level'], '', czesc_dict['type'], czesc_dict['name'])
+
+    # and now append last filled dicts
+    out.append(dysp_dict)
+    out.append(parent2_dict)
+    out.append(parent1_dict)
+    out.append(parent0_dict)
+
+    total_dict= {}
+    total_dict['idef']= '999999'
+    total_dict['idef_sort']= '999999'
+    total_dict['parent']= None
+    total_dict['parent_sort']= None
+    total_dict['level']= 'a'
+    total_dict['leaf']= True
+    total_dict['type']= 'total'
+    total_dict['name']= 'Ogółem'
+    total_dict['v_nation']= grand_total_nation
+    total_dict['v_eu']= grand_total_eu
+    total_dict['v_total']= grand_total
+    out.append(total_dict)
+
+    # counting percentage
+    for doc_in in out:
+        if doc_in['v_total'] != 0:
+            doc_in['v_proc_eu']= round(float(doc_in['v_eu']) / float(doc_in['v_total']) * 100, 2)
+            doc_in['v_proc_nation']= round(float(doc_in['v_nation']) / float(doc_in['v_total']) * 100, 2)
+
+    print '..data processed: total recs %d' % len(out)
+    return out
+
 
 #-----------------------------
 if __name__ == "__main__":
@@ -94,110 +298,62 @@ if __name__ == "__main__":
         print 'Cannot open .conf file:\n %s\n' % e
         exit()
 
-    clean_db= opts.dbact # False - insert() data, True - remove() and then insert()
-
     # get connection details
-    conn= getMongoConnect(conf_filename)
+    conn= get_db_connect(conf_filename, 'postgresql')
     conn_host= conn['host']
     conn_port= conn['port']
     conn_db= conn['database']
+    conn_username= conn['username']
+    conn_password= conn['password']
+    #username - ask for password
+    if conn_password is None:
+        conn_password = getpass.getpass('Password for '+conn_username+': ')
 
     try:
-        connection= pymongo.Connection(conn_host, conn_port)
-        db= connection[conn_db]
-        print '...connected to the database', db
+        connect_postgres = psycopg2.connect(host= conn_host, port= conn_port, database=conn_db, user= conn_username, password= conn_password)
+        print "... connected to db", conn_db
+    except Exception, e:
+        print 'Unable to connect to the PostgreSQL database:\n %s\n' % e
+        exit() #no connection to the database - no data processing
+
+    wrk_table= "budg_go"
+    obj_parsed= work_cursor(wrk_table, connect_postgres)
+
+    print "...no errors so far - inserting data into mongo collection"
+
+    # get mongo connection details
+    conn_mongo= get_db_connect(conf_filename, 'mongodb')
+    conn_mongo_host= conn_mongo['host']
+    conn_mongo_port= conn_mongo['port']
+    conn_mongo_db= conn_mongo['database']
+
+    try:
+        connect= pymongo.Connection(conn_mongo_host, conn_mongo_port)
+        mongo_db= connect[conn_mongo_db]
+        print '...connected to the database', mongo_db
     except Exception as e:
         print 'Unable to connect to the mongodb database:\n %s\n' % e
         exit()
 
     # authentication
-    conn_username= conn['username']
-    conn_password= conn['password']
-    if conn_password is None:
-        conn_password = getpass.getpass()
-    if db.authenticate(conn_username, conn_password) != 1:
+    conn_mongo_username= conn_mongo['username']
+    conn_mongo_password= conn_mongo['password']
+    if conn_mongo_password is None:
+        conn_mongo_password = getpass.getpass()
+    if mongo_db.authenticate(conn_mongo_username, conn_mongo_password) != 1:
         print 'Cannot authenticate to db, exiting now'
         exit()
 
-    conn_schema= 'md_budg_scheme'
-    conn_coll= 'dd_budg2011_go'
-    conn_insert= args[0] # 'dd_budg2011_in'
+    clean_db= opts.dbact # False - insert() data, True - remove() and then insert()
 
-    # 1. getting the list of dysponents
-    distinct_dysponent= {"distinct": conn_coll, "key":"name", "query": {"node":1, "type":"Dysponent", "level":{"$in":["c","d"]}}}
-    dysponents= db.command(distinct_dysponent)['values']
+    # data & meta-data collections
+    coll_schm= 'md_fund_scheme'
+    coll_data= args[0] #'dd_bugd2011_in'
 
-    # 2. getting all the records for each dysponent, summarizing them and re-arranging for a new collection
-    grand_v_nation, grand_v_eu, grand_v_total= 0,0,0
-    dysp_idef_count= 0
-    out_dict= []
-    for dysp in dysponents:
-        dysp_idef_count += 1 # must begin from 1
-        dysp_dict= {} # dysponent - initial values
-        dysp_dict['name']= dysp
-        dysp_dict['idef']= str(dysp_idef_count)
-        dysp_dict['idef_sort']= sort_format(dysp_dict['idef'])
-        dysp_dict['parent']= None
-        dysp_dict['parent_sort']= None
-        dysp_dict['leaf']= False
-        dysp_dict['level']= 'a'
-        dysp_dict['type']= 'Dysponent '+ dysp_dict['idef']
-        dysp_dict['v_nation'], dysp_dict['v_eu'], dysp_dict['v_total']= 0,0,0
+    if db_insert(obj_parsed, mongo_db, coll_data, clean_db):
+        print '...the data successfully inserted to the collection %s' % coll_data
+    else:
+        print '...something went wrong during insert, exiting now'
+        exit()
 
-        #print dysp_dict['idef'], dysp_dict['name'].encode('utf-8')
-
-        # 2.1. gathering 'Część' for current 'Dysponent'
-        dysp_rows= db[conn_coll].find({'name': dysp, 'node': 1}, {'_id':0}) # send query
-        czesc_idef_count= 0
-        for row in dysp_rows:
-            czesc_idef_count += 1 # must begin from 1
-            czesc_dict= {} # this - for the case we need to save Część in the collection. but then change above to - dysp_dict['leaf']= False
-            czesc_dict['idef']= dysp_dict['idef'] + '-' + str(czesc_idef_count)
-            czesc_dict['parent']= dysp_dict['idef']
-            czesc_dict['leaf']= True
-            czesc_dict['level']= 'b'
-            czesc_dict['type']= u'Część '+ row['czesc']
-            czesc_dict['name']= row['czesc']
-            czesc_dict['v_nation']= row['v_nation']
-            czesc_dict['v_eu']= row['v_eu']
-            czesc_dict['v_total']= row['v_total']
-
-            dysp_dict['v_nation'] += czesc_dict['v_nation']
-            dysp_dict['v_eu'] += czesc_dict['v_eu']
-            dysp_dict['v_total'] += czesc_dict['v_total']
-
-            #out_dict.append(czesc_dict) # adding to the list - only in case we need to save Część in the collection!
-
-        dysp_dict['v_proc_nation']= round(float(dysp_dict['v_nation']) / float(dysp_dict['v_total']) * 100, 2)
-        dysp_dict['v_proc_eu']= round(float(dysp_dict['v_eu']) / float(dysp_dict['v_total']) * 100, 2)
-        out_dict.append(dysp_dict) # adding to the list only after all calculations
-
-        print "%030s %05s %-100r" % (dysp_dict['idef'], dysp_dict['level'], dysp.encode('utf-8'))
-        dp= fill_dysp(dysp, dysp_dict['idef'], db, conn_coll)
-        print '\n'{"distinct": conn_coll, "key":"name", "query": {"node":1, "type":"Dysponent", "level":{"$in":["c","d"]}}}
-        
-        grand_v_nation += dysp_dict['v_nation']
-        grand_v_eu += dysp_dict['v_eu']
-        grand_v_total += dysp_dict['v_total']
-
-    # 3. Grand Total
-    total_dict= {} # dysponent - initial values
-    total_dict['name']= u'Ogółem'
-    total_dict['idef']= '999999'
-    total_dict['parent']= None
-    total_dict['leaf']= True
-    total_dict['level']= 'a'
-    total_dict['type']= u'Ogółem'
-    total_dict['v_nation']= grand_v_nation
-    total_dict['v_eu']= grand_v_eu
-    total_dict['v_total']= grand_v_total
-    total_dict['v_proc_nation']= round(float(grand_v_nation) / float(grand_v_total) * 100, 2)
-    total_dict['v_proc_eu']= round(float(grand_v_eu) / float(grand_v_total) * 100, 2)
-
-    out_dict.append(total_dict) # adding to the list only after summarizing the totals
-
-    print '-- inserting data into '+ conn_db +'.'+ conn_insert
-    connection.start_request()
-    print '-- ', db_insert(out_dict, db, conn_insert, clean_db), 'records inserted'
-    connection.end_request()
-    print 'Done'
+    print "Done (don't forget about the schema!)"
