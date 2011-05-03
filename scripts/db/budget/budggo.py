@@ -371,7 +371,7 @@ def fill_zadanie(db, colltmp, objlst):
         tmpdict= dict(row)
         ffz= {}
         ffz['idef']= tmpdict['numer'].replace('.','-')
-        zd_type_name= tmpdict['funkcja_zadanie'].rsplit('.', 2) # extract "funkcja_zadanie"
+        zd_type_name= tmpdict['funkcja_zadanie'].split('.', 2)
         ffz['type']= 'Zadanie ' + zd_type_name[0].strip() + '.' + zd_type_name[1].strip()
         ffz['name']= zd_type_name[2].strip()
         ffz['parent']= zd_type_name[0].strip() # idef of "zadanie"
