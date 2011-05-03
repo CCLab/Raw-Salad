@@ -1,0 +1,50 @@
+{
+    "temp": {
+        "name": "budg_temp00",
+        "columns": {
+            "0": {"name": "numer", "type": "character varying"},
+            "1": {"name": "funkcja_zadanie", "type": "character varying"},
+            "2": {"name": "podzadanie", "type": "character varying"},
+            "3": {"name": "dysponent", "type": "character varying"},
+            "4": {"name": "czesc", "type": "character varying"},
+            "5": {"name": "cel", "type": "character varying"},
+            "6": {"name": "miernik_nazwa", "type": "character varying"},
+            "7": {"name": "miernik_wartosc_bazowa", "type": "character varying"},
+            "8": {"name": "miernik_wartosc_rok_obec", "type": "character varying"},
+            "9": {"name": "ogolem", "type": "integer"},
+            "10":{"name": "budzet_panstwa", "type": "integer"},
+            "11":{"name": "budzet_srodkow_europejskich", "type": "integer"},
+            "12":{"name": "test_f", "type": "boolean"},
+            "13":{"name": "test_z", "type": "boolean"},
+            "14":{"name": "test_z_d", "type": "boolean"},
+            "15":{"name": "test_z_c", "type": "boolean"},
+            "16":{"name": "test_z_m", "type": "boolean"},
+            "17":{"name": "test_p", "type": "boolean"},
+            "18":{"name": "test_p_d", "type": "boolean"},
+            "19":{"name": "_id", "type": "serial"}
+        }
+    },
+    "work": {
+        "name": "budg_go",
+        "columns": {
+            "0": {"name": "idef", "type": "character varying(20)"},
+            "1": {"name": "idef_sort", "type": "character varying(30)"},
+            "2": {"name": "parent", "type": "character varying(20)"},
+            "3": {"name": "parent_sort", "type": "character varying(30)"},
+            "4": {"name": "node", "type": "integer"},
+            "5": {"name": "leaf", "type": "boolean"},
+            "6": {"name": "elem_level", "type": "character(1)"},
+	    "7": {"name": "elem_type", "type": "character varying(100)"},
+            "8": {"name": "elem_name", "type": "character varying(380)"},
+            "9": {"name": "czesc", "type": "character varying(3)"},
+            "10":{"name": "wartosc_bazowa", "type": "character varying"},
+            "11":{"name": "wartosc_rok_obec", "type": "character varying"},
+            "12":{"name": "v_total", "type": "integer"},
+            "13":{"name": "v_nation", "type": "integer"},
+            "14":{"name": "v_eu", "type": "integer"},
+            "15":{"name": "v_proc_nation", "type": "numeric(10,2)"},
+            "16":{"name": "v_proc_eu", "type": "numeric(10,2)"},
+            "17":{"name": "budg_year", "type": "integer"}
+        }
+    }
+}
