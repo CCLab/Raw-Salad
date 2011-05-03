@@ -7,28 +7,29 @@ from ConfigParser import ConfigParser
 from time import time
 
 #-----------------------------
-def getMongoConnect(fullpath):
+def get_db_connect(fullpath, dbtype):
     connect_dict= {}
 
     defaults= {
-        'basedir': fullpath # at the moment - fictional dir, will be used later for locating log file
+        'basedir': fullpath
     }
 
     cfg= ConfigParser(defaults)
     cfg.read(fullpath)
-    connect_dict['host']= cfg.get('mongodb','host')
-    connect_dict['port']= int(cfg.get('mongodb','port'))
-    connect_dict['database']= cfg.get('mongodb','database')
-    connect_dict['username']= cfg.get('mongodb','username')
+    connect_dict['host']= cfg.get(dbtype,'host')
+    connect_dict['port']= cfg.getint(dbtype,'port')
+    connect_dict['database']= cfg.get(dbtype,'database')
+    connect_dict['username']= cfg.get(dbtype,'username')
+    try:
+        connect_dict['password']= cfg.get(dbtype,'password')
+    except:
+        connect_dict['password']= None
 
     return connect_dict
     
 
 #-----------------------------
 if __name__ == "__main__":
-    # WARNING!!!
-    # ADD CMD LINE OPTIONS - SEE budgin.py !!!
-    # .conf file, conn_schema, perspective_id
     cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] schema_collection") 
     cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file (CSV)")
     cmdparser.add_option("-i", "--id", action="store", dest="persp_id", help="perspective id")
@@ -47,11 +48,14 @@ if __name__ == "__main__":
         exit()
 
     # get connection details
-    conn= getMongoConnect(conf_filename)
+    conn= get_db_connect(conf_filename, 'mongodb')
     conn_host= conn['host']
     conn_port= conn['port']
     conn_db= conn['database']
     conn_user= conn['username']
+    conn_pswd= conn['password']
+    if conn_pswd is None:
+        conn_pswd= '' # password must be an instance of basestring
 
     try:
         conn= pymongo.Connection(conn_host, conn_port)
@@ -62,12 +66,21 @@ if __name__ == "__main__":
         exit()
 
     # authentication
-    if db.authenticate(conn_user, '') != 1:
+    if db.authenticate(conn_user, conn_pswd) != 1:
         print 'Error when trying to authenticate, exiting now...'
         exit()
 
-    conn_schema= args[0] #'md_budg_scheme'
     # django should give me these parameters
+    try:
+        conn_schema= args[0]
+    except Exception as e:
+        print 'Unable to open meta-data collection:\n %s\n' % e
+        exit()
+
+    if opts.persp_id is None:
+        print 'Error opening data collection: perspective idef is not given'
+        exit()
+
     perspective_id= int(opts.persp_id)
 
     full_data= {}
