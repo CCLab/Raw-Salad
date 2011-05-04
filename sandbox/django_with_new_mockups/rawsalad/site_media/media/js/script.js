@@ -59,7 +59,6 @@
     $('#choose-collections')
         .find('.position')
         .click( function () {
-            debugger;
             $('#choose-collection-name').html('Budżet centralny');
             $('#info-text').html('Każda pozycja na liście udostępnia te same dane, lecz inaczej zorgranizowane.');
             $('#choose-collections').toggle();

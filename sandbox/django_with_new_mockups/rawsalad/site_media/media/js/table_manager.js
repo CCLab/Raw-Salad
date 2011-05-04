@@ -40,48 +40,50 @@
         $('#table').append( $( html.join('') ));
     };
     
-    var generate_table_body = function( table_data_object, id_table, nr) {
+    var generate_table_body = function( table_data_object ) {
         var container;
         var html_row;
         var id;
         var item;
         var schema;
+        var level;
+        var rows;
         
-        if ( !id_table ) {
-            id_table = [];
-            nr = 0;
-        }
-        
-        if ( table_data_object.rows.length === nr ) {
-            arm_nodes( table_data_object );
-            make_zebra();
-            return;
-        }
-        
-        item = table_data_object.rows[ nr ];
-        if ( !item[ 'leaf' ] ) {
-            id_table[ item[ 'idef' ] ] = $( item[ 'idef' ] );
-        }
-        
-        if ( !item[ 'parent' ] ) {
-            container = $('#tbody');
-        } else {
-            container = id_table[ item[ 'parent' ] ];
-        }
+        var nextLetter = function( letter ) {
+            var number = letter.charCodeAt( 0 );
+            return String.fromCharCode( number + 1 );
+        };
         
         schema = filter( function ( element ) {
             return element['basic'] === true;
         }, table_data_object.perspective['columns'] );
-        
-        html_row = generate_row( item, schema );
-        container.append( html_row.join('') );
-        
-        if ( !!item[ 'parent' ] ) {
-            id = item[ 'parent' ];
-            arm_nodes( table_data_object, id );
+                
+        for ( level = 'a'; level != 'w'; level = nextLetter( level ) ) {
+            rows = filter( function ( element ) {
+                return element['level'] === level;
+            }, table_data_object['rows'] );
+            
+            for ( i = 0; i < rows.length; i += 1 ) {
+                item = rows[ i ];
+                if ( !item[ 'parent' ] ) {
+                    container = $('#tbody');
+                } else {
+                    container = $('#'+ item[ 'parent' ] + '> .nodes');
+                }
+                
+                html_row = generate_row( item, schema );
+                container.append( html_row.join('') );
+                
+                if ( !!item[ 'parent' ] ) {
+                    id = item[ 'parent' ];
+                    arm_nodes( table_data_object, id );
+                }
+            }
         }
         
-        generate_table_body( table_data_object, id_table, nr + 1);
+        arm_nodes( table_data_object );
+        make_zebra();
+        
     };
     
     var generate_row = function( item, schema ) {
@@ -482,8 +484,36 @@
                     }
                 });
         });
-    
+        
+    var sort = function ( table_data_object, sett ) {
+        
+        var new_table_data_object = {};
+        $.extend( true, new_table_data_object, table_data_object );
+        
+        Utilities.sort( new_table_data_object[ 'rows' ], sett );
+
+        table_data_object[ 'rows' ] = new_table_data_object[ 'rows' ];
+    };
+
+    $('#sort-button')
+        .click( function () {
+
+            // setting that should be obtained from popup window
+            var sett = [
+                {
+                    "pref": 1,
+                    "name": "v_eu"
+                }
+            ];
+            
+            sort( tab_data_object, sett );
+            
+            $('#table').empty();
+            generate_header( tab_data_object );
+            generate_table_body( tab_data_object );
+        });
+
     init_data_object( tab_data_object );
-    
+
 })();
 
