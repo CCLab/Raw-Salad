@@ -40,7 +40,7 @@
         $('#table').append( $( html.join('') ));
     };
     
-    var generate_table_body = function( table_data_object ) {
+    var generate_table_body = function( table_data_object, simple_mode ) {
         var container;
         var html_row;
         var id;
@@ -65,7 +65,7 @@
             
             for ( i = 0; i < rows.length; i += 1 ) {
                 item = rows[ i ];
-                if ( !item[ 'parent' ] ) {
+                if ( !item[ 'parent' ] || simple_mode ) {
                     container = $('#tbody');
                 } else {
                     container = $('#'+ item[ 'parent' ] + '> .nodes');
@@ -511,6 +511,23 @@
             $('#table').empty();
             generate_header( tab_data_object );
             generate_table_body( tab_data_object );
+        });
+        
+    $('#filter-button')
+        .click( function () {
+            
+            var mask = [
+                //{ name: 'v_nation', pref: 1, value: 100000 },
+                { name: 'v_eu', pref: -1, value: 50000 }
+            ];
+            
+            debugger;
+            
+            tab_data_object[ 'rows' ] = Utilities.filter( tab_data_object[ 'rows' ], mask );
+            
+            $('#table').empty();
+            generate_header( tab_data_object );
+            generate_table_body( tab_data_object, true );
         });
 
     init_data_object( tab_data_object );

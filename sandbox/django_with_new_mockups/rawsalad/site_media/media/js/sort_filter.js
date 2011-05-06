@@ -184,12 +184,15 @@ var Utilities = (function () {
     that.filter = function ( data, filter_mask ) {
         var i;
         var result = [ ];
+        var passed_filter_object = {};
         
         // for each element in collection
         for ( i = 0; i < data.length; i += 1 ) {
             // checks if the object passes through the filter
             if ( check_obj( data[i], filter_mask ) ) {
-                $.extend( true, result[ result.length ], data[ i ] );
+                $.extend( true, passed_filter_object, data[ i ] );
+                result.push( passed_filter_object );
+                passed_filter_object = {};
             }
         }
         return result;
@@ -211,7 +214,7 @@ var Utilities = (function () {
             pref = filter_mask[i].pref;
             value = filter_mask[i].value;
             // one of attributes does not pass through a filter
-            if ( !check_atr( obj, key, pref, value ) ) {
+            if ( !check_attr( obj, key, pref, value ) ) {
                 return false;
             }
         }
@@ -227,7 +230,7 @@ var Utilities = (function () {
     function check_attr( obj, attr, pref, value ) {
         var obj_val = obj[attr];
         
-        if ( is_number( obj, attr) ) {
+        if ( typeof( obj_val ) === 'number' ) { //is_numeric( obj, attr) ) {
             if ( pref === -1 && obj_val < value) {
                 return true;
             } else if ( pref === 1 && obj_val > value ) {
