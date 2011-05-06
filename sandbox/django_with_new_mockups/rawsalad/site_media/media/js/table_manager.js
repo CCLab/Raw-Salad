@@ -521,8 +521,6 @@
                 { name: 'v_eu', pref: -1, value: 50000 }
             ];
             
-            debugger;
-            
             tab_data_object[ 'rows' ] = Utilities.filter( tab_data_object[ 'rows' ], mask );
             
             $('#table').empty();
