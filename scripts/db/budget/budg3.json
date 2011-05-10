@@ -1,6 +1,6 @@
 {
-  "name": "budzet_ksiegowy",
-  "perspective": "Budżet księgowy",
+  "name": "budzet_ksiegowy_2011",
+  "perspective": "Budżet księgowy 2011",
   "ns": "dd_budg2011_tr",
   "idef": 3,
   "explorable": "type",
@@ -10,6 +10,12 @@
       "key": "idef",
       "label": "ID",
       "type": "string"
+    },
+    {
+      "key": "numer",
+      "label": "Numer",
+      "type": "string",
+      "processable": true
     },
     {
       "key": "czesc",
@@ -25,10 +31,16 @@
       "processable": true
     },
     {
-      "key": "tresc",
+      "key": "name",
       "label": "Treść",
       "type": "string",
       "basic": true,
+      "processable": true
+    },
+    {
+      "key": "pozycja",
+      "label": "Pozycja",
+      "type": "string",
       "processable": true
     },
     {
@@ -135,7 +147,7 @@
   },
   "query": {},
   "sort": {
-      "0": {"level": 1},
-      "1": {"idef": 1}
+      "0": {"idef": 1},
+      "1": {"level": 1}
   }
 }
