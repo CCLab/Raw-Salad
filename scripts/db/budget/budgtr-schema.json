@@ -1,10 +1,10 @@
 {
   "alias": {
-      "0":"czesc",
-      "1":"level",
-      "2":"czesc_orig",
-      "3":"dzial",
-      "4":"rozdzial",
+      "0":"numer",
+      "1":"parent",
+      "2":"idef",
+      "3":"czesc",
+      "4":"level",
       "5":"name",
       "6":"pozycja",
       "7":"v_total",
@@ -17,10 +17,10 @@
       "14": "wspolfin_eu"
   },
   "type": {
+      "parent": "string",
+      "idef": "string",
       "czesc": "string",
       "level": "int",
-      "dzial": "string",
-      "rozdzial": "string",
       "total": "int",
       "dot_sub": "int",
       "swiad_fiz": "int",
@@ -31,11 +31,11 @@
       "wspolfin_eu": "int"
   },
   "meta": {
-      "name": "budzet_ksiegowy",
-      "perspective": "Budżet księgowy",
+      "name": "budzet_ksiegowy_2011",
+      "perspective": "Budżet księgowy 2011",
       "idef": 3,
       "explorable": "type",
-      "level_label": {"a": "Część", "b": "Dział", "c": "Rozdział"}
+      "level_label": {"a": "Część", "b": "Dział", "c": "Rozdział", "d":"Podrozdział"}
   },
   "columns": [
     {
@@ -57,10 +57,16 @@
       "processable": true
     },
     {
-      "key": "tresc",
+      "key": "name",
       "label": "Treść",
       "type": "string",
       "basic": true,
+      "processable": true
+    },
+    {
+      "key": "pozycja",
+      "label": "Pozycja",
+      "type": "string",
       "processable": true
     },
     {
