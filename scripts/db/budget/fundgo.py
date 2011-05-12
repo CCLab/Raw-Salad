@@ -7,12 +7,12 @@ flat structure (each data unit is a separate doc in the collection)
 parenting is archieved through 'parent' key
 
 the structure:
-there are 2 'branches of the tree' of a budget structure, outlined in the
-collection as 'node':null and 'node':0
+there are 2 'branches of the tree' of a budget structure, 
+outlined in the collection as 'node':null and 'node':0
 
 nodes are:
 null: [fundusz] 1-N [dzial] 1-N [zadanie] 1-N [podzadanie]
-1: ...[zadanie] 1-N [miernik]
+0: ...[zadanie] 1-N [miernik]
 
 Warning! No schema create or update!
 
