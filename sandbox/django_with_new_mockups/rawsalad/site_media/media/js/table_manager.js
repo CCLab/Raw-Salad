@@ -520,8 +520,8 @@
         .click( function () {
             
             var mask = [
-                //{ name: 'v_nation', pref: 1, value: 100000 },
-                { name: 'v_eu', pref: -1, value: 50000 }
+                //{ name: 'v_eu', pref: -1, value: 50000 },
+                { name: 'name', pref: 1, value: 'gospod' }
             ];
             
             tab_data_object[ 'rows' ] = Utilities.filter( tab_data_object[ 'rows' ], mask );
