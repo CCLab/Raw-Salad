@@ -186,6 +186,8 @@ var Utilities = (function () {
         var result = [ ];
         var passed_filter_object = {};
         
+        prepare_mask( filter_mask );
+        
         // for each element in collection
         for ( i = 0; i < data.length; i += 1 ) {
             // checks if the object passes through the filter
@@ -196,6 +198,24 @@ var Utilities = (function () {
             }
         }
         return result;
+    };
+    
+    // looks for every criterion that is string value and
+    // changes is to lower case
+    // mask - filtering mask to be changed
+    function prepare_mask( mask ) {
+        var i;
+        var attr;
+        var value;
+        var type;
+        
+        for ( i = 0; i < mask.length; i += 1 ) {
+            type = mask[ i ].type;
+            if ( type === "string" ) {
+                value = mask[ i ].value;
+                mask[ i ].value = value.toLowerCase();
+            }
+        }
     };
     
     // checks if an object passes through a filter
@@ -213,6 +233,7 @@ var Utilities = (function () {
             key = filter_mask[i].name;
             pref = filter_mask[i].pref;
             value = filter_mask[i].value;
+            debugger;
             // one of attributes does not pass through a filter
             if ( !check_attr( obj, key, pref, value ) ) {
                 return false;
@@ -229,8 +250,9 @@ var Utilities = (function () {
     // returns true if yes, false if not
     function check_attr( obj, attr, pref, value ) {
         var obj_val = obj[attr];
+        var type = obj[ "type" ];
         
-        if ( typeof( obj_val ) === 'number' ) { //is_numeric( obj, attr) ) {
+        if ( type === "number" ) {
             if ( pref === -1 && obj_val < value) {
                 return true;
             } else if ( pref === 1 && obj_val > value ) {
@@ -238,7 +260,7 @@ var Utilities = (function () {
             }
         } else {
             // is string
-            var str = obj[attr];
+            var str = obj[attr].toLowerCase();
             
             if ( pref === -2 && !starts_with( str, value ) ||
                  pref === -1 && !contains( str, value ) ||
