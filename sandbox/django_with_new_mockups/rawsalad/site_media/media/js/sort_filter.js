@@ -276,6 +276,18 @@ var Utilities = (function () {
     
     
     // S O R T I N G   H E L P E R   F U N C T I O N S
+    
+    // adds hidden parameter to sorting setting to avoid a situation,
+    // when two rows are equal
+    // sett - setting to be modified
+    that.prepare_sorting_setting = function( sett ) {
+        var hidden_attribute = {
+            "pref": -1,
+            "name": "idef"
+        };
+        
+        sett.push( hidden_attribute );
+    };
 
 
     // prints an element using given schema

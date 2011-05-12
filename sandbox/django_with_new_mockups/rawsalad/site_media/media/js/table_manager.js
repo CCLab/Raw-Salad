@@ -490,6 +490,7 @@
         var new_table_data_object = {};
         $.extend( true, new_table_data_object, table_data_object );
         
+        Utilities.prepare_sorting_setting( sett );
         Utilities.sort( new_table_data_object[ 'rows' ], sett );
 
         table_data_object[ 'rows' ] = new_table_data_object[ 'rows' ];
@@ -505,6 +506,8 @@
                     "name": "v_eu"
                 }
             ];
+            
+            
             
             sort( tab_data_object, sett );
             
