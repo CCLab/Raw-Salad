@@ -1,0 +1,37 @@
+{
+  "alias": {
+      "0": "idef",
+      "1": "idef_sort",
+      "2": "parent",
+      "3": "parent_sort",
+      "4": "node",
+      "5": "leaf",
+      "6": "level",
+      "7": "type",
+      "8": "name",
+      "9": "czesc",
+      "10":"wartosc_bazowa",
+      "11":"wartosc_rok_obec",
+      "12":"v_total",
+      "13":"v_nation",
+      "14":"v_eu",
+      "15":"v_proc_nation",
+      "16":"v_proc_eu"
+  },
+  "type": {
+      "idef": "string",
+      "idef_sort": "string",
+      "parent": "string",
+      "parent_sort": "string",
+      "node": "int",
+      "leaf": "boolean",
+      "czesc": "string",
+      "wartosc_bazowa": "string",
+      "wartosc_rok_obec": "string",
+      "v_total": "int",
+      "v_nation": "int",
+      "v_eu": "int",
+      "v_proc_nation": "float",
+      "v_proc_eu": "float"
+  }
+}
