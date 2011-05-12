@@ -10,31 +10,58 @@ Required: MongoDB 1.6.5 or higher, server should be started (./mongod)
 Please, consult >>python csv2mongo.py --help
 """
 
+import getpass
+import os
 import optparse
 import csv
 import simplejson as json
 import itertools
 import pymongo
-from pymongo.son_manipulator import NamespaceInjector
+from ConfigParser import ConfigParser
 
-#-----------------------------------------------
-# insert data into specified mongo db and collection
-def mongo_update(data_bulk, dbname, collname, clean_first=False):
-    db= pymongo.Connection("localhost", 27017)[dbname]
+#-----------------------------
+def get_db_connect(fullpath, dbtype):
+    connect_dict= {}
+
+    defaults= {
+        'basedir': fullpath
+    }
+
+    cfg= ConfigParser(defaults)
+    cfg.read(fullpath)
+    connect_dict['host']= cfg.get(dbtype,'host')
+    connect_dict['port']= cfg.getint(dbtype,'port')
+    connect_dict['database']= cfg.get(dbtype,'database')
+    connect_dict['username']= cfg.get(dbtype,'username')
+    try:
+        connect_dict['password']= cfg.get(dbtype,'password')
+    except:
+        connect_dict['password']= None
+
+    return connect_dict
+
+
+#-----------------------------
+def db_insert(data_bulk, db, collname, clean_first=False):
     collect= db[collname]
 
-    db.add_son_manipulator(NamespaceInjector())
-
     if clean_first:
-        collect.remove()
+        try:
+            collect.remove()
+        except Exception as e:
+            print 'Unable to remove data from the collection:\n %s\n' % e
 
-    collect.insert(data_bulk)
+    try:
+        collect.insert(data_bulk)
+    except Exception as e:
+        print 'Unable to remove data from the collection:\n %s\n' % e
+        
     return collect.find().count()
 
 
 #-----------------------------------------------
 # parse CSV, convert it to JSON and save to file
-def csv_parse(filename_csv, filename_schema, delimit, quote, jsindent):
+def csv_parse(filename_csv, filename_schema, delimit, quote):
     out= []
 
     if filename_schema == None:
@@ -76,6 +103,11 @@ def csv_parse(filename_csv, filename_schema, delimit, quote, jsindent):
                             if ',' in field:
                                 field= field.replace(',', '.')
                             row_dict[new_key]= float(field)
+                        elif new_type == "boolean":
+                            if field in ['t', 'T', 'true', 'TRUE', 1]:
+                                row_dict[new_key]= True
+                            elif field in ['f', 'F', 'false', 'FALSE', 0]:
+                                row_dict[new_key]= False
                         elif new_type == None:
                             try:
                                 row_dict[new_key]= float(field) # then if it is a number
@@ -91,64 +123,84 @@ def csv_parse(filename_csv, filename_schema, delimit, quote, jsindent):
 #-----------------------------
 if __name__ == "__main__":
     # process command line options
-    cmdparser = optparse.OptionParser() 
-    cmdparser.add_option("--src",action="store",help="input CSV file (required)")
-    cmdparser.add_option("--sch",action="store",help="schema for CSV file (if none than SRC_FILE-SCHEMA.JSON is used)")
-    cmdparser.add_option("--dbconnect",action="store",help="mongodb database and collection in a format db.collect (test.src_file if not specified)")
-    cmdparser.add_option("--c",action="store_true",dest='dbact',help="clean db before insert")
-    cmdparser.add_option("--json",action="store",help="output JSON filename (use --json=1 for SRC_FILE.JSON)")
-    cmdparser.add_option("--i",action="store",dest='indent',help="indent in JSON file (number of spaces)")
+    cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] src_filename.csv src_schema.json")
+    cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
+    cmdparser.add_option("-t", "--collt", action="store", dest="collect_name", help="collection name")
+    cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean db before insert (ignored if db is not updated)")
 
     opts, args = cmdparser.parse_args()
 
-    if opts.src is not None:
-        filename_csv= opts.src
+    if len(args) == 0:
+        print 'No parameters specified! Type python budgnfz.py -h for help'
+        exit()
 
-        if opts.json is None or opts.json == '1':
-            filename_json= filename_csv.rstrip('.csv')+'.json'
-        else:
-            filename_json= opts.json
+    try:
+        src_file= open(args[0], 'rb')
+    except IOError as e:
+        print 'Unable to open file:\n %s\n' % e
+        exit()
 
-        indt= opts.indent
-        if indt is not None:
-            indt= int(indt)
+    try: #read schema file
+        filename_schema= args[1]
+    except:
+        filename_schema= None
+    if filename_schema is None:
+        filename_schema= args[0].rstrip('.csv')+'-schema.json'
 
-        #database settings
-        str_dbconnect= opts.dbconnect # database connection string
-        dbparam= []
-        if str_dbconnect is not None: #parse it
-            if '.' in str_dbconnect:
-                dbparam= str_dbconnect.split('.', 2)
-            else:
-                print 'Interrupting script: unable to parse dbconnect - wrong format:\n %s\n' % str_dbconnect
-        else:
-            dbparam= 'test', filename_csv.rstrip('.csv') #use defaults
+    conf_filename= opts.conf_filename
+    if conf_filename is None:
+        print 'No configuration file is specified, exiting now'
+        exit()        
+
+    # get mongo connection details
+    conn_mongo= get_db_connect(conf_filename, 'mongodb')
+    conn_mongo_host= conn_mongo['host']
+    conn_mongo_port= conn_mongo['port']
+    conn_mongo_db= conn_mongo['database']
+
+    try:
+        connect= pymongo.Connection(conn_mongo_host, conn_mongo_port)
+        mongo_db= connect[conn_mongo_db]
+        print '...connected to the database', mongo_db
+    except Exception as e:
+        print 'Unable to connect to the mongodb database:\n %s\n' % e
+        exit()
+
+    # authentication
+    conn_mongo_username= conn_mongo['username']
+    conn_mongo_password= conn_mongo['password']
+    if conn_mongo_password is None:
+        conn_mongo_password = getpass.getpass()
+    if mongo_db.authenticate(conn_mongo_username, conn_mongo_password) != 1:
+        print 'Cannot authenticate to db, exiting now'
+        exit()
+
+    clean_db= opts.dbact # False - insert() data, True - remove() and then insert()
+
+    try:
+        collect_name= opts.collect_name
+    except:
+        print 'WARNING! No collection name specified!'
+        exit()
+
+    csv_delim= ';' #read CSV file with data
+    csv_quote= '"'
     
-        clean_db_first= opts.dbact # False - insert() data, True - remove() and then insert()
+    print '... Processing CSV file'
+    csv_data_parsed= csv_parse(args[0], filename_schema, csv_delim, csv_quote) #parse CSV and save it to dict
 
-        csv_delim= ';'
-        csv_quote= '"'
-    
-        print '... Processing CSV file'
-        csv_data_parsed= csv_parse(filename_csv, opts.sch, csv_delim, csv_quote, indt) #parse CSV and save it to dict
+    if len(csv_data_parsed) == 0:
+        print "The file %s is empty" % src_file
+        exit()
 
-        if len(csv_data_parsed) > 0:
-            if opts.json is not None: # json file write
-                print '... Creating JSON file'
-                json_write= open(filename_json, 'w')
-                print '... Writing data to JSON file'
-                print >>json_write, json.dumps(csv_data_parsed, indent=indt, ensure_ascii= False)
-                json_write.close()
-                print "JSON file saved:", filename_json
-                
-            if len(dbparam) > 0: # insert to db
-                print '... Writing data to the database'
-                try:
-                    rec_count= mongo_update(csv_data_parsed, dbparam[0], dbparam[1], clean_db_first)
-                except:
-                    print 'Interrupting script: something went wrong while db insert! Check your db settings:\n %s\n' % str_dbconnect
-                finally:
-                    print 'Database', dbparam[0]+'.'+dbparam[1], 'updated:', str(rec_count) +' records inserted'
-            print 'Done'
-        else:
-            print 'The file is empty'
+    print '... Writing data to the database'
+    print db_insert(csv_data_parsed, mongo_db, collect_name, clean_db), 'records inserted'
+#     try:
+#         #rec_count= mongo_update(csv_data_parsed, dbparam[0], dbparam[1], clean_db_first)
+#         print '...inserting into db...\n ', db_insert(csv_data_parsed, mongo_db, collect_name, clean_db), 'records inserted'
+#     except:
+#         print 'Interrupting script: something went wrong while db insert! Check your db settings:'
+#         exit()
+
+    print 'Done'
+        
