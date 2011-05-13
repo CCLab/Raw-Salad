@@ -506,7 +506,13 @@
             for( i = 1; i < len; ++i ) {
                 column = $('.key-'+i+' option:selected').val();
                 if( column === "null" ) {
-                    break;
+                    if( i === 1 ) {
+                        $(this).hide();
+                        return false;
+                    }
+                    else {
+                        break;
+                    }
                 }
                 order = parseInt($('.key-'+i+':radio:checked').val());                 
 
