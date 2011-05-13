@@ -340,4 +340,26 @@ body {
                     cursor: pointer;
                     background-color: #b7b7b7;
                     color: #fff;
-                }                         
+                }
+
+#sort-popup {
+    background-color: #C8C8C8;
+    padding: 5px 20px;
+}                     
+                        
+    select {
+      width: 150px;
+    }
+
+    input {
+      width: 100px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+    }                
+
+    input.radio {
+      width: 50px;
+    }
+
+

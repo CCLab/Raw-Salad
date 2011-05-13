@@ -267,9 +267,26 @@
             </div>
         </div>
 
+        <div id="sort-popup">
+           <form id="sort-form" action="">
+            <select name="columns">
+              <option value="name">Nazwa</option>
+              <option value="v_eu">Środki europejskie</option>
+              <option value="v_nation">Środki własne</option>
+              <option value="v_total">Wartość ogółem</option>              
+            </select>
+
+            Rosnąco <input class="radio" checked type="radio" name="order" value="-1" /> 
+            Malejąco <input class="radio" type="radio" name="order" value="1" /> 
+
+            <input type="submit" value="Sortuj" />
+          </form>
+
+        </div>
         <!-- T A B E L -->
         <div id="table" style="clear: both">
         </div>
+       
       </div>
     </div>
     <script src="/site_media/media/js/jquery.js"></script>

@@ -496,24 +496,33 @@
         table_data_object[ 'rows' ] = new_table_data_object[ 'rows' ];
     };
 
-    $('#sort-button')
-        .click( function () {
-
-            // setting that should be obtained from popup window
+    $('#sort-form')
+        .submit( function () {
+            
+            var column = $('option:selected').val();
+            var order = $(':radio:checked').val();
+            
             var sett = [
                 {
-                    "pref": 1,
-                    "name": "v_eu"
+                    "pref": order,
+                    "name": column
                 }
             ];
-            
-            
-            
+
             sort( tab_data_object, sett );
             
             $('#table').empty();
             generate_header( tab_data_object );
             generate_table_body( tab_data_object );
+            
+            $(this).hide();
+            
+            return false;
+        });
+
+    $('#sort-button')
+        .click( function () {
+            $('#sort-form').show();
         });
         
     $('#filter-button')
@@ -531,6 +540,7 @@
             generate_table_body( tab_data_object, true );
         });
 
+    $('#sort-form').hide();
     init_data_object( tab_data_object );
 
 })();
