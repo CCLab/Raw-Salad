@@ -233,7 +233,6 @@ var Utilities = (function () {
             key = filter_mask[i].name;
             pref = filter_mask[i].pref;
             value = filter_mask[i].value;
-            debugger;
             // one of attributes does not pass through a filter
             if ( !check_attr( obj, key, pref, value ) ) {
                 return false;
@@ -421,18 +420,59 @@ var Utilities = (function () {
     // if pref. = 0, then returns 0
     function compare_atr( ob1, ob2, attr, pref ) {
         var compare_value;
-
-        if ( ob1[attr] < ob2[attr] ) {
-            compare_value = -1;
-        } else if ( ob1[attr] > ob2[attr] ) {
-            compare_value = 1;
+        var alphabet;
+        var compare_strings;
+        
+        if ( ob1[attr].type === "number" ) {
+            if ( ob1[attr] < ob2[attr] ) {
+                compare_value = -1;
+            } else if ( ob1[attr] > ob2[attr] ) {
+                compare_value = 1;
+            } else {
+                return 0;
+            }
         } else {
-            return 0;
+            alphabet = "0123456789a\u0105bc\u0107de\u0119fghijkl\u0142mn\u0144o\u00f3pqrs\u015btuvwxyz\u017a\u017c";
+            return alpha( alphabet, pref, false )( ob1[ attr ], ob2[ attr ] );
         }
         
         // changes value to return basing on value of pref
         return compare_value * pref;
     }
+    
+    // alpha is slighlty modified function from
+    // http://stackoverflow.com/questions/3630645/how-to-compare-utf-8-strings-in-javascript/3633725#3633725
+    // written by Mic and Tomasz Wysocki
+    function alpha( alphabet, dir, case_sensitive ) {
+        dir = dir || 1;
+        function compare_letters( a, b ) {
+            var ia = alphabet.indexOf( a );
+            var ib = alphabet.indexOf( b );
+            if ( ia === -1 || ib === -1 ) {
+                if ( ib !== -1 )
+                    return a > 'a';
+                if ( ia !== -1 )
+                    return 'a' > b;
+                return a > b;
+            }
+            return ia > ib;
+        }
+  
+        return function( a, b ) {
+            var pos = 0;
+            var min = Math.min( a.length, b.length );
+            case_sensitive = case_sensitive || false;
+            if ( !case_sensitive ) {
+                a = a.toLowerCase();
+                b = b.toLowerCase();
+            }
+            while( a.charAt( pos ) === b.charAt( pos ) && pos < min ) {
+                pos++;
+            }
+            
+            return compare_letters( a.charAt(pos), b.charAt(pos)) ? dir : -dir;
+        };
+    };
 
     // compares two objects, compares their attributes mentioned in sett
     // ob1, ob2 - objects to compare
