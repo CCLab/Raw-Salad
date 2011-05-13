@@ -505,6 +505,9 @@
             
             for( i = 1; i < len; ++i ) {
                 column = $('.key-'+i+' option:selected').val();
+                if( column === "null" ) {
+                    break;
+                }
                 order = parseInt($('.key-'+i+':radio:checked').val());                 
 
                 settings.push(
