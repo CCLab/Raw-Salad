@@ -423,7 +423,7 @@ var Utilities = (function () {
         var alphabet;
         var compare_strings;
         
-        if ( ob1[attr].type === "number" ) {
+        if ( typeof ob1[attr] === "number" ) {
             if ( ob1[attr] < ob2[attr] ) {
                 compare_value = -1;
             } else if ( ob1[attr] > ob2[attr] ) {

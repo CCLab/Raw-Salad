@@ -498,7 +498,7 @@
 
     $('#sort-form')
         .submit( function () {
-            debugger;
+
             var column = $('option:selected').val();
             var order = parseInt($(':radio:checked').val());
             
