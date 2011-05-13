@@ -538,6 +538,7 @@
     $('#sort-button')
         .click( function () {
             $('#sort-form').toggle();
+            $('#filter-form').hide();            
         });
 
     $('#filter-form')
@@ -583,7 +584,8 @@
         
     $('#filter-button')
         .click( function () {
-            $('#filter-form').toggle();                
+            $('#filter-form').toggle(); 
+            $('#sort-form').hide();               
         });
 
     $('#sort-form').hide();

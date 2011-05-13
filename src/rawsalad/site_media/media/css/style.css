@@ -362,4 +362,9 @@ body {
       width: 50px;
     }
 
+#filter-popup {
+    background-color: #C8C8C8;
+    padding: 5px 20px;
+}                     
+
 
