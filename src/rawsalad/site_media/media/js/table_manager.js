@@ -499,17 +499,23 @@
     $('#sort-form')
         .submit( function () {
 
-            var column = $('option:selected').val();
-            var order = parseInt($(':radio:checked').val());
+            var column, order;
+            var settings = [];
+            var i, len = $('#sort-form select').length;
             
-            var sett = [
-                {
-                    "pref": order,
-                    "name": column
-                }
-            ];
+            for( i = 1; i < len; ++i ) {
+                column = $('.key-'+i+' option:selected').val();
+                order = parseInt($('.key-'+i+':radio:checked').val());                 
 
-            sort( tab_data_object, sett );
+                settings.push(
+                    {
+                        "pref": order,
+                        "name": column
+                    }
+                );
+            }
+
+            sort( tab_data_object, settings );
             
             $('#table').empty();
             generate_header( tab_data_object );
