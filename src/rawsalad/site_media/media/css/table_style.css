@@ -1,6 +1,6 @@
 /*  T A B L E  */
 #table {
-    width: 900px;
+    width: 960px;
     margin-left: 0px;
     background-color: #fff;
     overflow: auto;
@@ -14,7 +14,7 @@
 
 /*  T A B L E   H E A D  */
 #thead > .data > * {
-    background-color: #808080;
+    background-color: #808080 !important; 
     color: #fff;
     font-weight: bold;
 }
@@ -65,7 +65,7 @@
 }
 
 .name {
-    width: 441px;;
+    width: 501px;;
 }
 
 .value {
