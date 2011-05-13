@@ -210,7 +210,7 @@ var Utilities = (function () {
         var type;
         
         for ( i = 0; i < mask.length; i += 1 ) {
-            type = mask[ i ].type;
+            type = typeof mask[ i ];
             if ( type === "string" ) {
                 value = mask[ i ].value;
                 mask[ i ].value = value.toLowerCase();
@@ -249,12 +249,14 @@ var Utilities = (function () {
     // returns true if yes, false if not
     function check_attr( obj, attr, pref, value ) {
         var obj_val = obj[attr];
-        var type = obj[ "type" ];
-        
+        var type = typeof obj_val;
+
         if ( type === "number" ) {
-            if ( pref === -1 && obj_val < value) {
+            if ( pref === 'lt' && obj_val < value) {
                 return true;
-            } else if ( pref === 1 && obj_val > value ) {
+            } else if ( pref === 'gt' && obj_val > value ) {
+                return true;
+            } else if ( pref === 'eq' && obj_val === value ) {
                 return true;
             }
         } else {

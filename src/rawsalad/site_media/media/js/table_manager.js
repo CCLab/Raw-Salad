@@ -537,25 +537,57 @@
 
     $('#sort-button')
         .click( function () {
-            $('#sort-form').show();
+            $('#sort-form').toggle();
         });
-        
-    $('#filter-button')
-        .click( function () {
+
+    $('#filter-form')
+        .submit( function () {
+
+            var column, operation, query;
+            var mask = [];
+            var i, len = $('#filter-form select').length / 2;
             
-            var mask = [
-                //{ name: 'v_eu', pref: -1, value: 50000 },
-                { name: 'name', pref: 1, value: 'gospod' }
-            ];
+            for( i = 1; i < len; ++i ) {
+                column = $('#filter-'+i+'-columns option:selected').val();
+                if( column === "null" ) {
+                    if( i === 1 ) {
+                        $(this).hide();
+                        return false;
+                    }
+                    else {
+                        break;
+                    }
+                }                
+                operation = $('#filter-'+i+'-operations option:selected').val();;
+                query = $('#filter-'+i+'-query').val();
             
-            tab_data_object[ 'rows' ] = Utilities.filter( tab_data_object[ 'rows' ], mask );
+                mask.push(
+                    {
+                       name: column, 
+                       pref: operation, 
+                       value: parseInt( query )
+                    }
+                );
+            }
+            
+            tab_data_object['rows'] = Utilities.filter( tab_data_object['rows'], mask );
             
             $('#table').empty();
             generate_header( tab_data_object );
             generate_table_body( tab_data_object, true );
+
+            $(this).hide();
+                        
+            return false;
+       });
+        
+    $('#filter-button')
+        .click( function () {
+            $('#filter-form').toggle();                
         });
 
     $('#sort-form').hide();
+    $('#filter-form').hide();    
     init_data_object( tab_data_object );
 
 })();
