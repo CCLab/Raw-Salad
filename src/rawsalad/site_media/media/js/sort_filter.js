@@ -303,10 +303,10 @@ var Utilities = (function () {
     // adds hidden parameter to sorting setting to avoid a situation,
     // when two rows are equal
     // sett - setting to be modified
-    that.prepare_sorting_setting = function( sett ) {
+    that.prepare_sorting_setting = function( sett, key ) {
         var hidden_attribute = {
             "pref": -1,
-            "name": "idef"
+            "name": key
         };
         
         sett.push( hidden_attribute );
@@ -492,8 +492,13 @@ var Utilities = (function () {
         for ( i = 0; i < sett.length; i += 1 ) {
             key = sett[i].name;
             pref = sett[i].pref;
-
-            result = compare_atr( ob1, ob2, key, pref );
+            
+            if ( i !== sett.length - 1 ) {
+                result = compare_atr( ob1, ob2, key, pref );
+            } else {
+                result = id_comparison( ob1, ob2, sett );
+            }
+            
             if ( result !== 0 ) {
                 break;
             }
@@ -501,6 +506,43 @@ var Utilities = (function () {
 
         return result;
     };
+    
+    function id_comparison( ob1, ob2, sett ) {
+        debugger;
+        var key;
+        var pref;
+        var sett_length = sett.length;
+        var id1_tokenized;
+        var id2_tokenized;
+        var min_length;
+        var i;
+        var result;
+        var value1;
+        var value2;
+        
+        key = sett[ sett_length - 1 ].name;
+        pref = sett[ sett_length - 1 ].pref;
+        
+        id1_tokenized = ob1[key].split("-");
+        id2_tokenized = ob2[key].split("-");
+        
+        min_length = (id1_tokenized.length < id2_tokenized.length) ?
+                            id1_tokenized.length : id2_tokenized.length;
+                
+        result = 1;
+        for ( i = 0; i < min_length; i += 1 ) {
+            value1 = parseInt( id1_tokenized[i] );
+            value2 = parseInt( id2_tokenized[i] );
+            
+            if ( value1 < value2 ) {
+                result = -1;
+            } else if ( value1 > value2 ) {
+                result = 1;
+            }
+        }
+        
+        return result * pref;
+    }
     
     
 
