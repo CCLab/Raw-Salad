@@ -1,5 +1,5 @@
 (function () {
-
+    var i;
     var tab_data_object = {};
     
     var init_data_object = function( table_data_object ) {
@@ -496,6 +496,7 @@
         table_data_object[ 'rows' ] = new_table_data_object[ 'rows' ];
     };
 
+
     $('#sort-form')
         .submit( function () {
 
@@ -503,7 +504,7 @@
             var settings = [];
             var i, len = $('#sort-form select').length;
             
-            for( i = 1; i < len; ++i ) {
+            for( i = 1; i <= len; ++i ) {
                 column = $('.key-'+i+' option:selected').val();
                 if( column === "null" ) {
                     if( i === 1 ) {
@@ -587,6 +588,22 @@
             $('#filter-form').toggle(); 
             $('#sort-form').hide();               
         });
+
+
+ 
+    for( i = 1; i <= $('#sort-form select').length; ++i ) {
+        if( i > 1 ) {
+            $('#key-'+i).hide();
+        }
+
+        (function (i) {
+            $('#sort-form select.key-'+i).change( function () {    
+                if( $('.key-'+i+' option:selected').val() !== "null" ) {
+                    $('#key-'+(i+1)).show();
+                }
+            });
+        })(i);
+    }
 
     $('#sort-form').hide();
     $('#filter-form').hide();    
