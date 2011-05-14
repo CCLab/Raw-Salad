@@ -349,6 +349,7 @@ body {
                         
     select {
       width: 150px;
+      margin-right: 5px;
     }
 
     input {
@@ -366,5 +367,27 @@ body {
     background-color: #C8C8C8;
     padding: 5px 20px;
 }                     
+
+#add-sort-key {
+    width: 5px;
+    height: 1px;
+    padding: 5px;
+    margin: 0px 5px;
+    display: inline;
+    
+    background-color: #fffdfa;
+    border-radius: 5px;    
+    -moz-border-radius: 5px;    
+}
+
+#add-sort-key:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}
+
+
+
+
+
 
 

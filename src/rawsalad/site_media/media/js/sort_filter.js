@@ -508,7 +508,6 @@ var Utilities = (function () {
     };
     
     function id_comparison( ob1, ob2, sett ) {
-        debugger;
         var key;
         var pref;
         var sett_length = sett.length;

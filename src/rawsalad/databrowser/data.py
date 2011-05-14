@@ -8,14 +8,12 @@ perspective = {
     "columns": [
         {
             "type": "string", 
-            "processable": True, 
             "key": "idef", 
             "label": "Numer"
         }, 
         {
             "type": "string", 
             "label": "Typ", 
-            "processable": True, 
             "key": "type", 
             "basic": True
         }, 
@@ -57,13 +55,13 @@ perspective = {
             "label": "Wartość br."
         }, 
         {
-            "label": "OGÓŁEM", 
+            "label": "Środki Europejskie", 
             "processable": True, 
-            "key": "v_total", 
+            "key": "v_eu", 
             "basic": True, 
             "checkable": True, 
             "type": "number"
-        }, 
+        },        
         {
             "label": "Budżet Państwa", 
             "processable": True, 
@@ -73,13 +71,13 @@ perspective = {
             "type": "number"
         }, 
         {
-            "label": "Środki Europejskie", 
+            "label": "OGÓŁEM", 
             "processable": True, 
-            "key": "v_eu", 
+            "key": "v_total", 
             "basic": True, 
             "checkable": True, 
             "type": "number"
-        }
+        }         
     ]
 }
 

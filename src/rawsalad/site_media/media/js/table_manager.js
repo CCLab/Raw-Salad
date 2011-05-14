@@ -15,7 +15,7 @@
         // get all the basic view columns definitions        
         columns = filter( function ( element ) {
                     return element['basic'] === true;
-                }, table_data_object.perspective['columns'] );
+                }, table_data_object['perspective']['columns'] );
                 
         for ( i = 0; i < columns.length; i += 1 ) {
             col = columns[i];
@@ -498,6 +498,13 @@
     };
 
 
+    $('#sort-button')
+        .click( function () {
+            $('#filter-form').hide();        
+            $('#sort-form').html('').toggle();  
+            add_sort_key();                      
+        });
+
     $('#sort-form')
         .submit( function () {
 
@@ -505,7 +512,7 @@
             var settings = [];
             var i, len = $('#sort-form select').length;
             
-            for( i = 1; i <= len; ++i ) {
+            for( i = 0; i < len; ++i ) {
                 column = $('.key-'+i+' option:selected').val();
                 if( column === "null" ) {
                     if( i === 1 ) {
@@ -537,11 +544,65 @@
             return false;
         });
 
-    $('#sort-button')
-        .click( function () {
-            $('#sort-form').toggle();
-            $('#filter-form').hide();            
-        });
+
+    function add_sort_key( ) {
+        var i, key;
+        var perspective = tab_data_object['perspective']['columns'];
+        var columns = [];
+        var html = [];
+
+        key = $('#sort-form > div').length;
+
+        for( i = 0; i < perspective.length; ++i ) {
+            if( perspective[i]['basic'] === true && 
+                perspective[i]['processable'] === true ) {
+                columns.push( 
+                    {
+                        name: perspective[i]['key'],
+                        label: perspective[i]['label']
+                    }
+                );
+            }
+        }
+
+        if( key === 2 ) {
+            $('#add-sort-key' ).remove();
+        }
+
+        html.push( '<div id="key-', key, '">' );
+        // columns select list
+        html.push( '<select name="columns" class="key-', key, '">' );
+        html.push( '<option value="null" class="key-', key, '" selected>' );
+        html.push( 'Wybierz kolumnę</option>' );
+        
+        // TODO don't include already selected colmuns
+        for( i = 0; i < columns.length; ++i ) {
+            html.push( '<option value="', columns[i]['name'], '" class="key-', key, '">' );
+            html.push( columns[i]['label'], '</option>' );
+        }
+        
+        html.push( '</select>' );
+        // ascending/descending radio buttons
+        html.push( 'Rosnąco <input class="radio key-', key, '" type="radio" ' );
+        html.push( 'name="key-', key, '-order" value="-1" checked />' );
+        html.push( 'Malejąco <input class="radio key-', key, '" type="radio" ' );
+        html.push( 'name="key-', key, '-order" value="1" />' );
+
+        if( key === 0 ) {
+            html.push( '<div id="add-sort-key">+</div>' );
+            html.push( '<input type="submit" value="Sortuj" />' );
+        }
+        html.push( '</div>' );
+
+        $('#sort-form').append( $(html.join('')) );
+
+        if( key === 0 ) {
+            $('#add-sort-key').click( function () {
+                add_sort_key();   
+            });
+        }
+    }
+
 
     $('#filter-form')
         .submit( function () {
@@ -611,4 +672,3 @@
     init_data_object( tab_data_object );
 
 })();
-
