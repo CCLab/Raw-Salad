@@ -48,6 +48,22 @@ def db_insert(data_bulk, db, collname, clean_first=False):
     return collect.find().count()
 
 
+def sort_format(src):
+    """
+    format 1-2-3... to 001-002-003...
+    src should be convertable to int
+    """
+    src_list= src.split('-')
+    res_list= []
+    for elm in src_list:
+        try:
+            res_list.append('%03d' % int(elm))
+        except:
+            res_list.append(elm)
+    res= '-'.join(res_list)
+    return res
+
+
 # FILL THE DATA
 
 # copy dysponent from node 0 to 1:
@@ -87,9 +103,11 @@ def fill_p_dysp(db, collname, colltmp, objlst):
             #we already have 'idef' for all dysponents of zadanie - just look for it in the previously inserted data
             p_d_idef= cllact.find_one({'node':0, 'level':'c', 'czesc':czesc_p_d, 'parent':curr_zd_idef, 'name':name_p_d}, {'idef':1, '_id':0})
             fpd['idef']= p_d_idef['idef']
+            fpd['idef_sort']= sort_format(fpd['idef'])
             fpd['type']= 'Dysponent'
             fpd['name']= name_p_d
             fpd['parent']= row['numer'].replace('.', '-') # idef of "podzadanie"
+            fpd['parent_sort']= sort_format(fpd['parent'])
             fpd['node']= 1 # "dysponent" has a direction
             fpd['level']= 'd'
             fpd['leaf']= True # this level is the deepest one in node 1
@@ -131,9 +149,11 @@ def fill_podzadanie(db, clltmp):
     for row_p in collcrr_p:
         fpz= {}
         fpz['idef']= row_p['numer'].replace('.', '-')
+        fpz['idef_sort']= sort_format(fpz['idef'])
         fpz['type']= 'Podzadanie '+row_p['numer']
         fpz_zd_idef= row_p['numer'].split('.', 3)
         fpz['parent']= fpz_zd_idef[0]+'-'+fpz_zd_idef[1] # idef of "zadanie"
+        fpz['parent_sort']= sort_format(fpz['parent'])
         name_tmp= row_p['podzadanie'].lstrip(row_p['numer'])
         fpz['name']= name_tmp.strip()
         fpz['node']= 1 # "podzadanie" has a direction
@@ -184,8 +204,10 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['name']= row_z_m['miernik_nazwa']
                     full_cl_m_num= cl_curr + '-' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
+                    ffm['idef_sort']= sort_format(ffm['idef'])
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
+                    ffm['parent_sort']= sort_format(ffm['parent']) # idef of "cel"
                     ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['leaf']= True # now - this level is the deepest in node 0
@@ -211,8 +233,10 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['name']= row_z_m['miernik_nazwa']
                     full_cl_m_num= cl_curr + '-' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
+                    ffm['idef_sort']= sort_format(ffm['idef'])
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
+                    ffm['parent_sort']= sort_format(ffm['parent'])
                     ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['leaf']= True # now - this level is the deepest in node 0
@@ -238,8 +262,10 @@ def fill_z_d_c_mier(db, cllname, clltmp):
                     ffm['name']= row_z_m['miernik_nazwa']
                     full_cl_m_num= cl_curr + '-' + str(cl_m_num)
                     ffm['idef']= full_cl_m_num
+                    ffm['idef_sort']= sort_format(ffm['idef'])
                     ffm['type']= 'Miernik'
                     ffm['parent']= cl_curr # idef of "cel"
+                    ffm['parent_sort']= sort_format(ffm['parent'])
                     ffm['node']= 0 # "miernik" follows the direction of "zadanie-dysponent-cel"
                     ffm['level']= 'e'
                     ffm['leaf']= True # now - this level is the deepest in node 0
@@ -278,8 +304,10 @@ def fill_z_d_cel(db, cllname, clltmp):
             cl_d_num += 1
             full_cl_d_num= ds_curr + '-' + str(cl_d_num)
             ffc['idef']= full_cl_d_num
+            ffc['idef_sort']= sort_format(ffc['idef'])
             ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
+            ffc['parent_sort']= sort_format(ffc['parent'])
             ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             ffc['node']= 0 # "cel" follows the direction of "dysponent"
             ffc['level']= 'd'
@@ -301,8 +329,10 @@ def fill_z_d_cel(db, cllname, clltmp):
             cl_d_num += 1
             full_cl_d_num= ds_curr + '-' + str(cl_d_num)
             ffc['idef']= full_cl_d_num
+            ffc['idef_sort']= sort_format(ffc['idef'])
             ffc['type']= 'Cel'
             ffc['parent']= ds_curr # idef of "dysponent"
+            ffc['parent_sort']= sort_format(ffc['parent'])
             ffc['czesc']= row_z_c['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             ffc['node']= 0 # "cel" follows the direction of "dysponent"
             ffc['level']= 'd'
@@ -331,9 +361,11 @@ def fill_z_dysponent(db, colltmp, objlst):
             zd_d_num += 1
             full_zd_d_num= row_z_d['numer'].replace('.','-') + '-dt' + str(zd_d_num) # 'dysponent' code becomes N-M-dtK
             fzd['idef']= full_zd_d_num
+            fzd['idef_sort']= sort_format(fzd['idef'])
             fzd['type']= 'Dysponent'
             fzd['name']= row_z_d['dysponent']
             fzd['parent']= row_z_d['numer'].replace('.', '-') # idef of "zadanie"
+            fzd['parent_sort']= sort_format(fzd['parent'])
             fzd['czesc']= row_z_d['czesc'] # technical key for connecting 'parent-child' links dysponent-cel and cel-miernik
             fzd['node']= 0 # "dysponent" has a direction
             fzd['level']= 'c'
@@ -371,10 +403,12 @@ def fill_zadanie(db, colltmp, objlst):
         tmpdict= dict(row)
         ffz= {}
         ffz['idef']= tmpdict['numer'].replace('.','-')
+        ffz['idef_sort']= sort_format(ffz['idef'])
         zd_type_name= tmpdict['funkcja_zadanie'].split('.', 2)
         ffz['type']= 'Zadanie ' + zd_type_name[0].strip() + '.' + zd_type_name[1].strip()
         ffz['name']= zd_type_name[2].strip()
         ffz['parent']= zd_type_name[0].strip() # idef of "zadanie"
+        ffz['parent_sort']= sort_format(ffz['parent'])
         ffz['node']= None # "zadanie" is not a root, but it still doesn't have a 'direction'
         ffz['level']= 'b' # 2nd level in the hierarchy
         ffz['leaf']= False # it isn't the deepest level
@@ -400,6 +434,7 @@ def fill_funkcja(db, colltmp):
             if v is None or k.startswith('test_'): # delete records with empty values and keys of test matrix
                 frr.pop(k)
         frr['idef']= frr.pop('numer').replace('.', '-') # change "numer" to "identifier" replaceing dots with dashes
+        frr['idef_sort']= sort_format(frr['idef'])
         funk_type_name= frr.pop('funkcja_zadanie').split('.', 2) # extract "funkcja_zadanie"
         if frr['idef'] == '999999':
             frr['type']= 'total'
@@ -410,6 +445,7 @@ def fill_funkcja(db, colltmp):
             frr['name']= funk_type_name[1].strip()
             frr['leaf']= False # not the deepest level
         frr['parent']= None # "funkcja" is the root
+        frr['parent_sort']= None # "funkcja" is the root
         frr['node']= None # "funkcja" doesn't have a 'direction'
         frr['level']= 'a' # the highest level in the hierarchy
         frr['leaf']= False # not the deepest level
