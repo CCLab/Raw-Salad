@@ -734,7 +734,6 @@
             var i, len = $('#filter-form select').length / 2;
             var tmp, type;
             var new_data_object, new_sheet_nr;
-            
             for( i = 1; i < len; ++i ) {
                 column = $('#filter-'+i+'-columns option:selected').val();
                 if( column === "null" ) {
@@ -758,7 +757,7 @@
                 // if the column if numeric - check if the query is so
                 if( type === 'number' ) {
                     // crazy way to check if tmp is a number!
-                    if( !!tmp === true ) {
+                    if( !!tmp === true || tmp === 0 ) {
                         query = tmp;
                     }
                     else {
