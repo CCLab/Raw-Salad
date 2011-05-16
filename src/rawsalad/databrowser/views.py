@@ -19,9 +19,9 @@ def get_page( data ):
 def choose_collection( data ):
     col_nr = data["col_nr"]
     # getting data from db using col_nr
-    return_data = {}
+    return_data = get_perspectives( col_nr )
     json_data = json.dumps( return_data )
-    return json_data
+    return HttpResponse( json_data )
     
 def choose_perspective( data ):
     col_nr = data["col_nr"]
@@ -94,17 +94,20 @@ def get_init_data( data ):
             
     json_data = json.dumps( return_data )
     
-    return HttpResponse(json_data)
+    return HttpResponse( json_data )
 
 func_dict = {
+              # get a list of perspectives after choosing a certain collection
               "choose_collection": choose_collection,
-              "choose_perspective": choose_perspective,
-              "change_collection": change_collection,
-              "change_perspective": change_perspective,
+
+              # get data from DB when the first time a perspective is chosen
+              "get_init_data": get_init_data,
+
+              # get a sub-level data from DB
+              "get_node": get_node,
+              
               "add_columns": add_columns,
               "find_data": find_data,
-              "get_node": get_node,
-              "get_init_data": get_init_data,
             }
             
 def app_page( request ):
@@ -128,34 +131,71 @@ def get_meta_data():
                         'description': 'Ustawa budżetowa w kilku odsłonach'
                     },
                     {
-                        'title': 'Budżet centralny',
-                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                        'title': 'Budżet środków europejskich',
+                        'description': 'Udział środków europejskich w budżecie centralnym Polski'
                     },
                     {
-                        'title': 'Budżet centralny',
-                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                        'title': 'Fundusze celowe i agencje narodowe',
+                        'description': 'Części kosztowe budżetów wszystkich funduszy celowych i agencji narodowych'
                     },
                     {
-                        'title': 'Budżet centralny',
-                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                        'title': 'Narodowy Fundusz Zdrowia',
+                        'description': 'Budżet Narodowego Funduszu Zdrowia z rozbiciem na ośrodki wojewódzkie'
                     },
                     {
-                        'title': 'Budżet centralny',
-                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                        'title': 'Krajowy Fundusz Drogowy',
+                        'description': 'Dane finansowe Krajowego Funduszu Drogowego'
                     }                                        
                 ]
             }
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+def get_perspectives( col_nr ):
+    if col_nr == '0':
+        return {
+            'collection': {
+                'name': 'Budżet centralny',
+                'number': 1
+                },
+            'perspectives': [
+                {
+                    'title': 'Budżet tradycyjny',
+                    'description': 'Ustawa budżetowa as such'
+                    },
+                {
+                    'title': 'Budżet zadaniowy',
+                    'description': 'Dwadzieścia dwie funkcje państwa'
+                    },
+                {
+                    'title': 'Budżet instytucjonalny',
+                    'description': 'Wszyscy dysponenci ustawy budżetowej'
+                    }
+                ]
+            }
+    else:
+        return {
+            'collection': {
+                'name': 'Fundusze celowe i agencje',
+                'number': 3
+                },
+            'perspectives': [
+                {
+                    'title': 'Dane budżetowe w układzie zadaniowym',
+                    'description': 'Z podziałem na funkcje, zadania i podzadania'
+                    },
+                {
+                    'title': 'Dane budżetowe w układzie tradycyjnym',
+                    'description': 'Odpowiadające klasycznemu układowi budżetu państwa'
+                    }
+                ]
+            }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

@@ -460,30 +460,81 @@
             }
         }
     };
-    
-    // when new perspective is opened, initial data
-    // (perspective info + schema + a-nodes) is downloaded
-    $('#choose-perspectives')
+
+    $('#choose-collections')
         .find('.position')
         .click( function () {
             var init_data_info = {
-                "action": "get_init_data",
-                "col_nr": "1",
-                "per_nr": "1",
+                action: "choose_collection",
+                col_nr: $(this).attr('data-collection-number')
             };
-            
+
             $.ajax({
                 data: init_data_info,
                 dataType: "json",
                 success: function( received_data ) {
-                        tab_data_object.perspective = received_data.perspective;
-                        tab_data_object.rows = received_data.rows;
-                        
-                        generate_header( tab_data_object );
-                        generate_table_body( tab_data_object );
+                    var html = [];
+
+                    $('#choose-collection-name').html(received_data.collection.name);
+
+                    for( i = 0; i < received_data.perspectives.length; ++i ) {
+                        html.push( '<div class="position" data-index="', i, '" ');
+                        html.push( 'data-collection="', received_data.collection.number, '">' );
+                        html.push( '<div class="position-title">' );
+                        html.push( received_data.perspectives[i].title );
+                        html.push( '</div>' );
+                        html.push( '<div class="position-desc">' );
+                        html.push( received_data.perspectives[i].description );
+                        html.push( '</div>' );
+                        html.push( '<div class="position-more">' );
+                        html.push( 'Zobacz dane' );
+                        html.push( '</div></div>' );
                     }
-                });
+                    $('#info-text').html('Każda pozycja na liście udostępnia te same dane, lecz inaczej zorgranizowane.');
+                    $('#choose-collections').toggle();
+                    $('#choose-perspectives-list').append( $(html.join('')) );
+                    $('#choose-perspectives-list')
+                        .find('.position')
+                        .click( function () {
+                            var init_data_info = {
+                                "action": "get_init_data",
+                                "col_nr": $(this).attr('data-collection'),
+                                "per_nr": $(this).attr('data-index'),
+                            };
+
+                            $.ajax({
+                                data: init_data_info,
+                                dataType: "json",
+                                success: function( received_data ) {
+                                    tab_data_object.perspective = received_data.perspective;
+                                    tab_data_object.rows = received_data.rows;
+                                    
+                                    generate_header( tab_data_object );
+                                    generate_table_body( tab_data_object );
+                                    
+                                    $('#choose-panel').slideUp(400);
+                                    $('#application').fadeIn(400).animate({ opacity: 1 }, 300 );
+                                    $('#open-close-choose-panel').show().html('zmień dane');
+                                }
+                            });
+                        })
+                        .hover( 
+                            function () {
+                                $(this).css('background-color', '#4abff7').css('cursor', 'pointer');
+                                $(this).find('.position-title').css('color', '#fff');
+                                $(this).find('.position-more').css('color', '#fff');
+                            },
+                            function () {
+                                $(this).css('background-color', '#fff');
+                                $(this).find('.position-title').css('color', '#009fe3');
+                                $(this).find('.position-more').css('color', '#009fe3');
+                            }
+                        );
+                    $('#choose-perspectives').toggle();                        
+                }
+            });
         });
+
         
     var sort = function ( table_data_object, sett ) {
         var id = "idef";

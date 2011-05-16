@@ -1,5 +1,5 @@
 (function () {
-    $('#choose-collections').hide();
+    $('#choose-perspectives').hide();
     $('#application').hide();
 
     $('#open-close-choose-panel')
@@ -40,38 +40,10 @@
             $('#info-text').html('Wybierz jedną z dostępnych w systemie kolekcji danych.');
             $('#choose-collections').toggle();            
             $('#choose-perspectives').toggle();
+            $('#choose-perspectives-list').html('');
         });
 
-
-    $('.position').hover( 
-        function () {
-            $(this).css('background-color', '#4abff7').css('cursor', 'pointer');
-            $(this).find('.position-title').css('color', '#fff');
-            $(this).find('.position-more').css('color', '#fff');
-        },
-        function () {
-            $(this).css('background-color', '#fff');
-            $(this).find('.position-title').css('color', '#009fe3');
-            $(this).find('.position-more').css('color', '#009fe3');
-        }
-    );
-
-    $('#choose-collections')
-        .find('.position')
-        .click( function () {
-            $('#choose-collection-name').html('Budżet centralny');
-            $('#info-text').html('Każda pozycja na liście udostępnia te same dane, lecz inaczej zorgranizowane.');
-            $('#choose-collections').toggle();
-            $('#choose-perspectives').toggle();                        
-        });
-
-    $('#choose-perspectives')
-        .find('.position')
-        .click( function () {
-            $('#choose-panel').slideUp(400);
-            $('#application').fadeIn(400).animate({ opacity: 1 }, 300 );
-            $('#open-close-choose-panel').show().html('zmień dane');
-        });
+            
 
     $('#snap-1').hide();
     $('#snap-2').hide();
