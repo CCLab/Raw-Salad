@@ -3,7 +3,9 @@
     var tab_data_object;
     var sheet_list = {
         'active_sheet': 0,
-        'sheets': [ { } ]
+        'sheets': [ { } ],
+        'basic_sheet': {},
+        'basic_pure': true
     };
     
     tab_data_object = sheet_list['sheets'][sheet_list['active_sheet']];
@@ -434,6 +436,10 @@
                         }
                         add_node( table_data_object, id );
                         remove_pending_node( table_data_object, id );
+                        
+                        if ( sheet_list["active_sheet"] === 0 ) {
+                            sheet_list["basic_pure"] = false;
+                        }
                     }
             });
     };
@@ -517,6 +523,9 @@
                                     tab_data_object["col_nr"] = init_data_info["col_nr"];
                                     tab_data_object["per_nr"] = init_data_info["per_nr"];
                                     tab_data_object["name"] = "szit " + sheet_list["sheets"].length.toString();
+                                    
+                                    $.extend( true, sheet_list["basic_sheet"], tab_data_object );
+                                    sheet_list["basic_pure"] = true;
                                     
                                     generate_header( tab_data_object );
                                     generate_table_body( tab_data_object );
@@ -671,6 +680,14 @@
         new_sheet["name"] = "szit " + new_sheet_nr.toString();
         sheet_list["sheets"].push( new_sheet );
         
+        if ( sheet_list["active_sheet"] === 0 && !sheet_list["basic_pure"] ) {
+            sheet_list["sheets"][0] = {};
+            $.extend( true, sheet_list["sheets"][0], sheet_list["basic_sheet"] );
+            sheet_list["basic_pure"] = true;
+        }
+        
+        sheet_list["active_sheet"] = new_sheet_nr;
+        
         html.push('<div id="snap-' + new_sheet_nr.toString() + '" class="snapshot">');
         html.push(new_sheet["name"]);
         html.push('</div>');
@@ -688,6 +705,7 @@
             .find('#snap-' + new_sheet_nr.toString())
             .click( function () {
                 if ( sheet_list["active_sheet"] !== new_sheet_nr ) {
+                    sheet_list["active_sheet"] = new_sheet_nr;
                     tab_data_object = sheet_list["sheets"][new_sheet_nr];
                     $('#table').empty();
                     generate_header( tab_data_object );
@@ -796,6 +814,18 @@
     $('#save-snapshot')
         .click( function () {
             create_new_sheet( tab_data_object );
+        });
+        
+    $('#basic-snapshot')
+        .click( function () {
+            if ( sheet_list["active_sheet"] !== 0 ) {
+                sheet_list["active_sheet"] = 0;
+                tab_data_object = sheet_list["sheets"][0];
+                
+                $('#table').empty();
+                generate_header( tab_data_object );
+                generate_table_body( tab_data_object );
+            }
         });
 
     $('#sort-form').hide();
