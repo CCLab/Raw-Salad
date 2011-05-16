@@ -122,6 +122,7 @@ if __name__ == "__main__":
         list_sort.sort()
         for sort_key in list_sort:
             cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
+    print cursor_sort
 
     # EXTRACT data (rows)
     if cursor_batchsize in ['default', None]:
