@@ -1,6 +1,14 @@
 (function () {
     var i;
-    var tab_data_object = {};
+    var tab_data_object;
+    var sheet_list = {
+        'active_sheet': 0,
+        'sheets': [ { } ],
+        'basic_sheet': {},
+        'basic_pure': true
+    };
+    
+    tab_data_object = sheet_list['sheets'][sheet_list['active_sheet']];
     
     var init_data_object = function( table_data_object ) {
         tab_data_object[ 'pending_nodes' ] = [];
@@ -428,6 +436,10 @@
                         }
                         add_node( table_data_object, id );
                         remove_pending_node( table_data_object, id );
+                        
+                        if ( sheet_list["active_sheet"] === 0 ) {
+                            sheet_list["basic_pure"] = false;
+                        }
                     }
             });
     };
@@ -508,6 +520,12 @@
                                 success: function( received_data ) {
                                     tab_data_object.perspective = received_data.perspective;
                                     tab_data_object.rows = received_data.rows;
+                                    tab_data_object["col_nr"] = init_data_info["col_nr"];
+                                    tab_data_object["per_nr"] = init_data_info["per_nr"];
+                                    tab_data_object["name"] = "szit " + sheet_list["sheets"].length.toString();
+                                    
+                                    $.extend( true, sheet_list["basic_sheet"], tab_data_object );
+                                    sheet_list["basic_pure"] = true;
                                     
                                     generate_header( tab_data_object );
                                     generate_table_body( tab_data_object );
@@ -540,12 +558,9 @@
         var id = "idef";
         
         var new_table_data_object = {};
-        $.extend( true, new_table_data_object, table_data_object );
         
         Utilities.prepare_sorting_setting( sett, id );
-        Utilities.sort( new_table_data_object[ 'rows' ], sett );
-
-        table_data_object[ 'rows' ] = new_table_data_object[ 'rows' ];
+        Utilities.sort( table_data_object[ 'rows' ], sett );
     };
 
 
@@ -653,6 +668,57 @@
             });
         }
     }
+    
+    function create_new_sheet( data_object, filtered_sheet ) {
+        var html = [];
+        var new_sheet_nr = sheet_list["sheets"].length;
+        var new_sheet = { };
+        
+        $.extend( true, new_sheet, data_object );
+        new_sheet["col_nr"] = data_object["col_nr"];
+        new_sheet["per_nr"] = data_object["per_nr"];
+        new_sheet["name"] = "szit " + new_sheet_nr.toString();
+        sheet_list["sheets"].push( new_sheet );
+        
+        if ( sheet_list["active_sheet"] === 0 && !sheet_list["basic_pure"] ) {
+            sheet_list["sheets"][0] = {};
+            $.extend( true, sheet_list["sheets"][0], sheet_list["basic_sheet"] );
+            sheet_list["basic_pure"] = true;
+        }
+        
+        sheet_list["active_sheet"] = new_sheet_nr;
+        
+        html.push('<div id="snap-' + new_sheet_nr.toString() + '" class="snapshot">');
+        html.push(new_sheet["name"]);
+        html.push('</div>');
+        html.push('<div id="save-snapshot">');
+        html.push('Zapisz arkusz');
+        html.push('</div>');
+        
+        $('#snapshots')
+            .find('#save-snapshot')
+            .remove();
+            
+        $('#snapshots').append( $( html.join('') ));
+        
+        $('#snapshots')
+            .find('#snap-' + new_sheet_nr.toString())
+            .click( function () {
+                if ( sheet_list["active_sheet"] !== new_sheet_nr ) {
+                    sheet_list["active_sheet"] = new_sheet_nr;
+                    tab_data_object = sheet_list["sheets"][new_sheet_nr];
+                    $('#table').empty();
+                    generate_header( tab_data_object );
+                    generate_table_body( tab_data_object, filtered_sheet );
+                }                
+            });
+        $('#save-snapshot')
+        .click( function () {
+            create_new_sheet( tab_data_object );
+        });
+        
+        return new_sheet_nr;
+    }
 
     $('#filter-button')
         .click( function () {
@@ -667,7 +733,7 @@
             var mask = [];
             var i, len = $('#filter-form select').length / 2;
             var tmp, type;
-            
+            var new_data_object, new_sheet_nr;
             for( i = 1; i < len; ++i ) {
                 column = $('#filter-'+i+'-columns option:selected').val();
                 if( column === "null" ) {
@@ -691,7 +757,7 @@
                 // if the column if numeric - check if the query is so
                 if( type === 'number' ) {
                     // crazy way to check if tmp is a number!
-                    if( !!tmp === true ) {
+                    if( !!tmp === true || tmp === 0 ) {
                         query = tmp;
                     }
                     else {
@@ -710,7 +776,12 @@
                 );
             }
             
-            tab_data_object['rows'] = Utilities.filter( tab_data_object['rows'], mask );
+            new_data_object = {};
+            $.extend( true, new_data_object, tab_data_object );
+            new_data_object['rows'] = Utilities.filter( tab_data_object['rows'], mask );
+            new_sheet_nr = create_new_sheet( new_data_object, true );
+            
+            tab_data_object = sheet_list["sheets"][new_sheet_nr];
             
             $('#table').empty();
             generate_header( tab_data_object );
@@ -738,6 +809,23 @@
             });
         })(i);
     }
+    
+    $('#save-snapshot')
+        .click( function () {
+            create_new_sheet( tab_data_object );
+        });
+        
+    $('#basic-snapshot')
+        .click( function () {
+            if ( sheet_list["active_sheet"] !== 0 ) {
+                sheet_list["active_sheet"] = 0;
+                tab_data_object = sheet_list["sheets"][0];
+                
+                $('#table').empty();
+                generate_header( tab_data_object );
+                generate_table_body( tab_data_object );
+            }
+        });
 
     $('#sort-form').hide();
     $('#filter-form').hide();    
