@@ -669,7 +669,7 @@
         }
     }
     
-    function create_new_sheet( data_object ) {
+    function create_new_sheet( data_object, filtered_sheet ) {
         var html = [];
         var new_sheet_nr = sheet_list["sheets"].length;
         var new_sheet = { };
@@ -709,7 +709,7 @@
                     tab_data_object = sheet_list["sheets"][new_sheet_nr];
                     $('#table').empty();
                     generate_header( tab_data_object );
-                    generate_table_body( tab_data_object, true );
+                    generate_table_body( tab_data_object, filtered_sheet );
                 }                
             });
         $('#save-snapshot')
@@ -780,7 +780,7 @@
             new_data_object = {};
             $.extend( true, new_data_object, tab_data_object );
             new_data_object['rows'] = Utilities.filter( tab_data_object['rows'], mask );
-            new_sheet_nr = create_new_sheet( new_data_object );
+            new_sheet_nr = create_new_sheet( new_data_object, true );
             
             tab_data_object = sheet_list["sheets"][new_sheet_nr];
             
