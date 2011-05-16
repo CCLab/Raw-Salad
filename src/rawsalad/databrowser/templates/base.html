@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/site_media/media/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/site_media/media/css/table_style.css" />
+  </head>
+  <body>
+    <div id="wraper">
+      <div id="header">
+        <div id="upper-header" class="header">
+          <div id="logo">
+            poukładane
+          </div>
+          <div id="upper-menu">
+            <div class="menu-position">
+              pomoc
+            </div>
+            <div class="menu-position">
+              baza wiedzy
+            </div>
+            <div class="menu-position">
+              drukuj
+            </div>
+            <div class="menu-position">
+              API
+            </div>
+            <div class="menu-position">
+              napisz do nas
+            </div>
+          </div>
+        </div>
+        <div id="lower-header" class="header">
+          <div id="back-to-main" class="left">
+            powrót do portalu
+          </div>
+          <div id="search" class="left">
+            <img src="/site_media/media/img/search.png" />
+          </div>
+          <div id="lower-menu">
+            <div class="menu-position">
+              pobież na dysk
+            </div>
+            <div class="menu-position">
+              podziel się
+            </div>
+            <div class="menu-position">
+              wczytaj sesję
+            </div>
+            <div class="menu-position">
+              lista wybranych pozycji
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {% block app %}
+    {% endblock %}
+
+    </div>
+    <script src="/site_media/media/js/jquery.js"></script>
+    <script src="/site_media/media/js/script.js"></script>
+    <script src="/site_media/media/js/tools.js"></script>
+    <script src="/site_media/media/js/budget_data.js"></script>
+    <script src="/site_media/media/js/table_manager.js"></script>
+    <script src="/site_media/media/js/sort_filter.js"></script>
+  </body>
+</html>

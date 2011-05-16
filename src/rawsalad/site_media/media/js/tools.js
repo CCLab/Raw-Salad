@@ -23,4 +23,23 @@ var filter = function ( fn, list ) {
 Math.randint = function ( x ) {
     return Math.floor( Math.random() * x );
 };
+
+
+var money = function ( value ) {
+        var result = [];
+        var value = "" + value;
+
+        var cut = function ( value ) {
+            if( value.length <= 3 ) {
+                result.push( value );
+            }
+            else {
+                result.push( value.slice( value.length - 3 ));
+                cut( value.slice( 0, value.length - 3 ));
+            }
+        }
+        cut( value );
+        return value === '0' ? '0' : result.reverse().join(' ') + " 000";
+    };
+
  

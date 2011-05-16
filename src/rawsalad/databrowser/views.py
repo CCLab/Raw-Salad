@@ -12,8 +12,8 @@ from data import perspective
 import pymongo
 
 def get_page( data ):
-    template = loader.get_template( "index.html" )
-    context = Context( )
+    template = loader.get_template( "app.html" )
+    context = Context( get_meta_data() )
     return HttpResponse( template.render( context ))
 
 def choose_collection( data ):
@@ -117,3 +117,45 @@ def app_page( request ):
 
 def redirect( request ):
     return HttpResponseRedirect('/app')
+    
+    
+    
+def get_meta_data():
+    return { 
+              'collections': [
+                    {
+                        'title': 'Budżet centralny',
+                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                    },
+                    {
+                        'title': 'Budżet centralny',
+                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                    },
+                    {
+                        'title': 'Budżet centralny',
+                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                    },
+                    {
+                        'title': 'Budżet centralny',
+                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                    },
+                    {
+                        'title': 'Budżet centralny',
+                        'description': 'Ustawa budżetowa w kilku odsłonach'
+                    }                                        
+                ]
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            

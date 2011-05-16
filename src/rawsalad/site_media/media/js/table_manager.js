@@ -108,14 +108,14 @@
             html.push( '<div class="', col_type, '" ' );
             html.push( 'data-processable="', !!col['processable'], '" ' );				
             html.push( 'data-checkable="', !!col['checkable'], '">' );
-            if( col['checkable'] === true ) {
-                html.push( '<div class="checkbox"></div>');
-            }
+//            if( col['checkable'] === true ) {
+//                html.push( '<div class="checkbox"></div>');
+//            }
             if( col_type === 'value cell' )
             {
-                html.push( '<span>' );
-                html.push( item[col['key']] );
-                html.push( '</span>' );
+//                html.push( '<span>' );
+                html.push( money( item[col['key']] ) );
+//                html.push( '</span>' );
             }
             else {
                 html.push( item[col['key']] );
@@ -378,14 +378,14 @@
                 html.push( '<div class="', col_type, '" ' );
                 html.push( 'data-processable="', !!col['processable'], '" ' );				
                 html.push( 'data-checkable="', !!col['checkable'], '">' );
-                if( col['checkable'] === true ) {
-                    html.push( '<div class="checkbox"></div>');
-                }
+//                if( col['checkable'] === true ) {
+//                    html.push( '<div class="checkbox"></div>');
+//                }
                 if( col_type === 'value cell' )
                 {
-                    html.push( '<span>' );
-                    html.push( item[col['key']] );
-                    html.push( '</span>' );
+//                    html.push( '<span>' );
+                    html.push( money( item[col['key']] ));
+//                    html.push( '</span>' );
                 }
                 else {
                     html.push( item[col['key']] );
@@ -603,6 +603,11 @@
         }
     }
 
+    $('#filter-button')
+        .click( function () {
+            $('#filter-form').toggle(); 
+            $('#sort-form').hide();               
+        });
 
     $('#filter-form')
         .submit( function () {
@@ -610,6 +615,7 @@
             var column, operation, query;
             var mask = [];
             var i, len = $('#filter-form select').length / 2;
+            var tmp, type;
             
             for( i = 1; i < len; ++i ) {
                 column = $('#filter-'+i+'-columns option:selected').val();
@@ -622,14 +628,33 @@
                         break;
                     }
                 }                
+                
+                type = filter( function ( e ) {
+                    return e['key'] === column;
+                }, tab_data_object['perspective']['columns'] )[0]['type'];
+                
                 operation = $('#filter-'+i+'-operations option:selected').val();;
                 query = $('#filter-'+i+'-query').val();
-            
+
+                tmp = parseInt( query, 10 ) / 1000;
+                // if the column if numeric - check if the query is so
+                if( type === 'number' ) {
+                    // crazy way to check if tmp is a number!
+                    if( !!tmp === true ) {
+                        query = tmp;
+                    }
+                    else {
+                        // characters for numeric column -- do nothing & quit
+                        $(this).hide();            
+                        return false;
+                    }
+                }
+                
                 mask.push(
                     {
                        name: column, 
                        pref: operation, 
-                       value: parseInt( query )
+                       value: query
                     }
                 );
             }
@@ -645,11 +670,7 @@
             return false;
        });
         
-    $('#filter-button')
-        .click( function () {
-            $('#filter-form').toggle(); 
-            $('#sort-form').hide();               
-        });
+
 
 
  

@@ -65,12 +65,12 @@
 }
 
 .name {
-    width: 501px;;
+    width: 441px;;
 }
 
 .value {
     float: right !important;
-    width: 88px;    
+    width: 108px;    
     position: relative;
 }
 

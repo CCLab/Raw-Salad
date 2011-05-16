@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block app %}
+
+    {% include 'choose.html' %}
+
+      <div id="application">
+        <!-- T A B S -->
+        <div id="tabs">
+
+          <div class="tab active">
+            tabela
+          </div>
+          <div class="tab inactive">
+            wizualizacja
+          </div>
+          <div class="tab inactive">
+            statystyki
+          </div>
+
+        </div>
+
+        <div id="snapshots">
+          <div class="snapshot active">
+            Arkusz podstawowy
+          </div>
+          <div id="snap-1" class="snapshot">
+            Zdrowie i kultura
+          </div>
+          <div id="snap-2" class="snapshot">
+            Mój arkusz
+          </div>
+          <div id="save-snapshot">
+            Zapisz arkusz
+          </div>
+        </div>
+
+        <div id="table-toolbar">
+            <div id="statistics">
+                Budżet centralny > Budżet zadaniowy
+            </div>
+            <div id="tools">
+                <div>zaznaczanie</div>
+                <div>kolumny</div>
+                <div id="sort-button">sortuj</div>
+                <div id="filter-button">filtruj</div>
+            </div>
+        </div>
+
+        <!-- S O R T   P O P U P  -->
+        <div id="sort-popup">
+          <form id="sort-form" action="">
+          </form>
+        </div>
+        
+        <!-- F I L T E R   P O P U P -->
+        <div id="filter-popup">
+          <form id="filter-form" action="">
+                
+            <select id="filter-1-columns" name="columns">
+              <option value="null" class="filter-1" selected>Wybierz kolumnę</option>                        
+              <option value="name" class="filter-1" >Nazwa</option>
+              <option value="v_eu" class="filter-1" >Środki europejskie</option>
+              <option value="v_nation" class="filter-1" >Środki własne</option>
+              <option value="v_total" class="filter-1" >Wartość ogółem</option>              
+            </select>
+            
+            <select id="filter-1-operations" name="number-operation">
+              <option value="null" class="filter-1" selected>Wybierz operację</option>                        
+              <option value="gt" class="filter-1" >></option>
+              <option value="eq" class="filter-1" >=</option>              
+              <option value="lt" class="filter-1" ><</option>
+            </select>
+            
+            <input type="text" name="query" id="filter-1-query" />
+
+            <input type="submit" value="Filtruj" />
+            
+            <br />
+            
+            <select id="filter-2-columns" name="columns">
+              <option value="null" class="filter-2" selected>Wybierz kolumnę</option>                        
+              <option value="name" class="filter-2" >Nazwa</option>
+              <option value="v_eu" class="filter-2" >Środki europejskie</option>
+              <option value="v_nation" class="filter-2" >Środki własne</option>
+              <option value="v_total" class="filter-2" >Wartość ogółem</option>              
+            </select>
+            
+            <select id="filter-2-operations" name="number-operation">
+              <option value="null" class="filter-2" selected>Wybierz operację</option>                        
+              <option value="gt" class="filter-2" >></option>
+              <option value="eq" class="filter-2" >=</option>              
+              <option value="lt" class="filter-2" ><</option>
+            </select>
+            
+            <input type="text" name="query" id="filter-2-query" />
+
+            <br />
+
+            <select id="filter-2-columns" name="columns">
+              <option value="null" class="filter-3" selected>Wybierz kolumnę</option>                        
+              <option value="name" class="filter-3" >Nazwa</option>
+              <option value="v_eu" class="filter-3" >Środki europejskie</option>
+              <option value="v_nation" class="filter-3" >Środki własne</option>
+              <option value="v_total" class="filter-3" >Wartość ogółem</option>              
+            </select>
+            
+            <select id="filter-2-operations" name="number-operation">
+              <option value="null" class="filter-3" selected>Wybierz operację</option>                        
+              <option value="gt" class="filter-3" >></option>
+              <option value="eq" class="filter-3" >=</option>              
+              <option value="lt" class="filter-3" ><</option>
+            </select>
+            
+            <input type="text" name="query" id="filter-3-query" />
+            
+          </form>
+        </div>
+        
+        <!-- T A B E L -->
+        <div id="table" style="clear: both">
+        </div>
+       
+       </div>
+{% endblock %}       
