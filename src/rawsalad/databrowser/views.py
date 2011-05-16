@@ -6,8 +6,9 @@ from django.template import Context, loader
 from django.utils import simplejson as json
 
 # should be removed after data is imported from db
-from data import new_rows
-from data import perspective
+# from data import new_rows
+# from data import perspective
+import rawsdbapi
 
 import pymongo
 
@@ -73,10 +74,12 @@ def get_node( data ):
     add_columns = data["add_columns"]
     # getting data from db
     return_data = []
-    for row in new_rows:
-        if row["parent"] == par_id:
-            return_data.append(row)
-            
+#     for row in new_rows:
+#         if row["parent"] == par_id:
+#             return_data.append(row)
+    parent_data_query= { 'parent': par_id }
+    return_data= rawsdbapi.extract_docs(col_nr, per_nr, parent_data_query)
+
     json_data = json.dumps( return_data )
 
     return HttpResponse(json_data)
@@ -86,12 +89,16 @@ def get_init_data( data ):
     per_nr = data["per_nr"]
     
     return_data = {}
-    return_data["perspective"] = perspective
-    return_data["rows"] = []
-    for row in new_rows:
-        if row["level"] == "a":
-            return_data["rows"].append(row)
-            
+#     return_data["perspective"] = perspective
+#     return_data["rows"] = []
+#     for row in new_rows:
+#         if row["level"] == "a":
+#             return_data["rows"].append(row)
+
+    return_data["perspective"]= rawsdbapi.get_metadata(col_nr, per_nr)
+    initial_data_query= { 'level': 'a' }
+    return_data["rows"]= rawsdbapi.extract_docs(col_nr, per_nr, initial_data_query)
+
     json_data = json.dumps( return_data )
     
     return HttpResponse( json_data )
