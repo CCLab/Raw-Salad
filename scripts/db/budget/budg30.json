@@ -1,0 +1,96 @@
+{
+  "name": "funduszy_zadaniowy",
+  "perspective": "Plany finansowe państwowych Funduszy Celowych w układzie zadaniowym",
+  "ns": "dd_fund2011_go",
+  "dataset": 3,
+  "idef": 0,
+  "explorable": "type",
+  "batchsize": null,
+  "columns": [
+    {
+      "key": "type",
+      "label": "Typ",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "name",
+      "label": "Nazwa",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "cel",
+      "label": "Cel",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik",
+      "label": "Miernik",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_bazowa",
+      "label": "Miernik - Wartość bazowa",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_2011",
+      "label": "Miernik - Wartość w 2011 r.",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_2012",
+      "label": "Miernik - Wartość w 2012 r.",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "miernik_wartosc_2012",
+      "label": "Miernik - Wartość w 2013 r.",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "val_2011",
+      "label": "Wydatki (w tys. zł) 2011 r.",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "val_2012",
+      "label": "Wydatki (w tys. zł) 2012 r.",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "val_2013",
+      "label": "Wydatki (w tys. zł) 2013 r.",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    }
+  ],
+  "aux": {
+      "leaf": 1,
+      "parent": 1,
+      "level": 1
+  },
+  "query": {"node": null},
+  "sort": {
+      "0": {"idef_sort": 1},
+      "1": {"parent_sort": 1},
+      "2": {"level": 1}
+  }
+}

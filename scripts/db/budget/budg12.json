@@ -1,0 +1,81 @@
+{
+  "name": "budzet_instytucjonalny",
+  "perspective": "Budżet Instytucjonalny",
+  "ns": "dd_budg2011_in",
+  "dataset": 1,
+  "idef": 2,
+  "explorable": "type",
+  "batchsize": 40,
+  "columns": [
+    {
+      "key": "idef",
+      "label": "ID",
+      "type": "string"
+    },
+    {
+      "key": "type",
+      "label": "Typ",
+      "basic": true,
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "name",
+      "label": "Treść",
+      "type": "string",
+      "basic": true,
+      "processable": true
+    },
+    {
+      "key": "v_total",
+      "label": "OGÓŁEM",
+      "type": "number",
+      "basic": true,
+      "processable": true,
+      "checkable": true
+    },
+    {
+      "key": "v_nation",
+      "label": "Budżet Państwa",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_eu",
+      "label": "Budżet Środków Europejskich",
+      "processable": true,
+      "basic": true,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_proc_eu",
+      "label": "Procent Środków EU",
+      "processable": true,
+      "basic": false,
+      "type": "number",
+      "checkable": true
+    },
+    {
+      "key": "v_proc_nation",
+      "label": "Procent Środków Państwa",
+      "processable": true,
+      "basic": false,
+      "type": "number",
+      "checkable": true
+    }
+  ],
+  "aux": {
+      "leaf": 1,
+      "parent": 1,
+      "level": 1
+  },
+  "query": {},
+  "sort": {
+      "2": {"level": 1},
+      "1": {"parent_sort": 1},
+      "0": {"idef_sort": 1}
+  }
+}
