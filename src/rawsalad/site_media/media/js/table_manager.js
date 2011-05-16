@@ -694,6 +694,10 @@
                     generate_table_body( tab_data_object, true );
                 }                
             });
+        $('#save-snapshot')
+        .click( function () {
+            create_new_sheet( tab_data_object );
+        });
         
         return new_sheet_nr;
     }
@@ -788,6 +792,11 @@
             });
         })(i);
     }
+    
+    $('#save-snapshot')
+        .click( function () {
+            create_new_sheet( tab_data_object );
+        });
 
     $('#sort-form').hide();
     $('#filter-form').hide();    
