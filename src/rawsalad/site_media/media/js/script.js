@@ -22,10 +22,7 @@
             });
         });
 
-    var offset = $('#choose-main-panel').height() / 2 - 28;
-
     $('#back-to-collections')
-        .css( 'margin-top', offset+'px' )
         .hover(
             function () {
                 $(this).attr( 'src', '/site_media/media/img/collections_over.png' )

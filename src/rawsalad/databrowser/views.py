@@ -6,11 +6,11 @@ from django.template import Context, loader
 from django.utils import simplejson as json
 
 # should be removed after data is imported from db
-# from data import new_rows
-# from data import perspective
-import rawsdbapi
+from data import new_rows
+from data import perspective
+#import rawsdbapi
 
-import pymongo
+#import pymongo
 
 def get_page( data ):
     template = loader.get_template( "app.html" )
@@ -74,11 +74,11 @@ def get_node( data ):
     add_columns = data["add_columns"]
     # getting data from db
     return_data = []
-#     for row in new_rows:
-#         if row["parent"] == par_id:
-#             return_data.append(row)
-    parent_data_query= { 'parent': par_id }
-    return_data= rawsdbapi.extract_docs(col_nr, per_nr, parent_data_query)
+    for row in new_rows:
+        if row["parent"] == par_id:
+            return_data.append(row)
+#    parent_data_query= { 'parent': par_id }
+#    return_data= rawsdbapi.extract_docs(col_nr, per_nr, parent_data_query)
 
     json_data = json.dumps( return_data )
 
@@ -89,15 +89,15 @@ def get_init_data( data ):
     per_nr = data["per_nr"]
     
     return_data = {}
-#     return_data["perspective"] = perspective
-#     return_data["rows"] = []
-#     for row in new_rows:
-#         if row["level"] == "a":
-#             return_data["rows"].append(row)
-
-    return_data["perspective"]= rawsdbapi.get_metadata(col_nr, per_nr)
-    initial_data_query= { 'level': 'a' }
-    return_data["rows"]= rawsdbapi.extract_docs(col_nr, per_nr, initial_data_query)
+    return_data["perspective"] = perspective
+    return_data["rows"] = []
+    for row in new_rows:
+        if row["level"] == "a":
+            return_data["rows"].append(row)
+            
+#    return_data["perspective"]= rawsdbapi.get_metadata(col_nr, per_nr)
+#    initial_data_query= { 'level': 'a' }
+#    return_data["rows"]= rawsdbapi.extract_docs(col_nr, per_nr, initial_data_query)
 
     json_data = json.dumps( return_data )
     
@@ -158,6 +158,7 @@ def get_meta_data():
             
             
 def get_perspectives( col_nr ):
+
     if col_nr == '0':
         return {
             'collection': {
@@ -179,7 +180,24 @@ def get_perspectives( col_nr ):
                     }
                 ]
             }
-    else:
+    elif col_nr == '1':
+        return {
+            'collection': {
+                'name': 'Środki europejskie',
+                'number': 2
+                },
+            'perspectives': [
+                {
+                    'title': 'Budżet środków europejskich',
+                    'description': 'Dane dotyczące środków europejskich na szczeblu centralnym'
+                    },
+                {
+                    'title': 'Środki europejskie a ustawa budżetowa ',
+                    'description': 'Przegląd relacji między środkami europejskimi a ustawą budżetową'
+                    }
+                ]
+            }    
+    elif col_nr == '2':
         return {
             'collection': {
                 'name': 'Fundusze celowe i agencje',
@@ -196,7 +214,37 @@ def get_perspectives( col_nr ):
                     }
                 ]
             }
-    
+    elif col_nr == '3':
+        return {
+            'collection': {
+                'name': 'Narodowy Fundusz Zdrowia',
+                'number': 4
+                },
+            'perspectives': [
+                {
+                    'title': 'Dane zagregowane',
+                    'description': 'Dane szczebla centralnego'
+                    },
+                {
+                    'title': 'Dane ośrodków regionalnych',
+                    'description': 'Dane budżetowe ośrodków regionalnych NFZ'
+                    }
+                ]
+            }
+    else:
+        return {
+            'collection': {
+                'name': 'Krajowy Fundusz Drogowy',
+                'number': 5
+                },
+            'perspectives': [
+                {
+                    'title': 'Dane zagregowane',
+                    'description': 'Ogólne dane o wydatkach KFD'
+                    }
+                ]
+            }
+        
     
     
     

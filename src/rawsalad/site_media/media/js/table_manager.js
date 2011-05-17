@@ -475,6 +475,17 @@
 
     $('#choose-collections')
         .find('.position')
+        .hover( 
+            function () {
+                $(this).css('background-color', '#4abff7').css('cursor', 'pointer');
+                $(this).find('.position-title').css('color', '#fff');
+                $(this).find('.position-more').css('color', '#fff');
+            },
+            function () {
+                $(this).css('background-color', '#fff');
+                $(this).find('.position-title').css('color', '#009fe3');
+                $(this).find('.position-more').css('color', '#009fe3');
+            })
         .click( function () {
             var init_data_info = {
                 action: "choose_collection",
@@ -522,11 +533,11 @@
                                     tab_data_object.rows = received_data.rows;
                                     tab_data_object["col_nr"] = init_data_info["col_nr"];
                                     tab_data_object["per_nr"] = init_data_info["per_nr"];
-                                    tab_data_object["name"] = "szit " + sheet_list["sheets"].length.toString();
+                                    tab_data_object["name"] = "Arkusz " + sheet_list["sheets"].length.toString();
                                     
                                     $.extend( true, sheet_list["basic_sheet"], tab_data_object );
                                     sheet_list["basic_pure"] = true;
-                                    
+
                                     generate_header( tab_data_object );
                                     generate_table_body( tab_data_object );
                                     
@@ -677,7 +688,7 @@
         $.extend( true, new_sheet, data_object );
         new_sheet["col_nr"] = data_object["col_nr"];
         new_sheet["per_nr"] = data_object["per_nr"];
-        new_sheet["name"] = "szit " + new_sheet_nr.toString();
+        new_sheet["name"] = "Arkusz " + new_sheet_nr.toString();
         sheet_list["sheets"].push( new_sheet );
         
         if ( sheet_list["active_sheet"] === 0 && !sheet_list["basic_pure"] ) {
@@ -688,22 +699,24 @@
         
         sheet_list["active_sheet"] = new_sheet_nr;
         
-        html.push('<div id="snap-' + new_sheet_nr.toString() + '" class="snapshot">');
+        html.push('<div id="snap-' + new_sheet_nr.toString() + '" class="snapshot active">');
         html.push(new_sheet["name"]);
         html.push('</div>');
         html.push('<div id="save-snapshot">');
         html.push('Zapisz arkusz');
         html.push('</div>');
         
-        $('#snapshots')
-            .find('#save-snapshot')
-            .remove();
-            
+        $('#save-snapshot').remove();
         $('#snapshots').append( $( html.join('') ));
-        
         $('#snapshots')
             .find('#snap-' + new_sheet_nr.toString())
+            .each( function () {
+                $('.snapshot').removeClass('active');
+                $(this).addClass('active');
+            })
             .click( function () {
+                $('.snapshot').removeClass('active');
+                $(this).addClass('active');
                 if ( sheet_list["active_sheet"] !== new_sheet_nr ) {
                     sheet_list["active_sheet"] = new_sheet_nr;
                     tab_data_object = sheet_list["sheets"][new_sheet_nr];
@@ -713,9 +726,9 @@
                 }                
             });
         $('#save-snapshot')
-        .click( function () {
-            create_new_sheet( tab_data_object );
-        });
+            .click( function () {
+                create_new_sheet( tab_data_object );
+            });
         
         return new_sheet_nr;
     }
@@ -817,6 +830,9 @@
         
     $('#basic-snapshot')
         .click( function () {
+            $('.snapshot').removeClass('active');
+            $(this).addClass('active');
+
             if ( sheet_list["active_sheet"] !== 0 ) {
                 sheet_list["active_sheet"] = 0;
                 tab_data_object = sheet_list["sheets"][0];
