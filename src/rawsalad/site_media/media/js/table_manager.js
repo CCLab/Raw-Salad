@@ -45,7 +45,8 @@
         html.push( '<div id="tbody"></div>' );
         html.push( '<div style="overflow: hidden; height: 1px;">.</div>');
         
-        $('#table').append( $( html.join('') ));
+        $('#table')
+            .append( $( html.join('') ));
     };
     
     var generate_table_body = function( table_data_object, simple_mode ) {
@@ -151,26 +152,28 @@
         }
         
         // add action listener to the cell
-        node.find('.data').find('.type').click( function () {
-            // get subtree of this level
-            var nodes = $(this).parent().next();
-            // get level's id
-            var id = $(this).parent().parent().attr('id');
-            var current_level = $(this).parent().parent();
-
-            // if the subtree not loaded yet --> load it
-            if( nodes.find('div').length === 0 ) {
-                if ( add_pending_node( table_data_object, id ) ) {
-                    download_node( table_data_object, id );
+        node.find('.data')
+            .find('.type')
+            .click( function () {
+                // get subtree of this level
+                var nodes = $(this).parent().next();
+                // get level's id
+                var id = $(this).parent().parent().attr('id');
+                var current_level = $(this).parent().parent();
+            
+                // if the subtree not loaded yet --> load it
+                if( nodes.find('div').length === 0 ) {
+                    if ( add_pending_node( table_data_object, id ) ) {
+                        download_node( table_data_object, id );
+                    }
                 }
-            }
-            // if there is a subtree already --> toggle it
-            else {
-                nodes.toggle();
-            }
+                // if there is a subtree already --> toggle it
+                else {
+                    nodes.toggle();
+                }
                 highlight( current_level );
-        });	                             
-
+            });	                             
+        
         // TODO: refactor it with 'selected' class objects list length
         node.find('.checkbox').click( function () {
             var nav_plain = '/site_media/media/img/navigation/02_03.png';
@@ -417,12 +420,13 @@
     var download_node = function ( table_data_object, id ) {
         var node_to_download_data = {
             "action": "get_node",
-            "col_nr": "1",
-            "per_nr": "1",
+            "col_nr": table_data_object.col_nr, 
+            "per_nr": table_data_object.per_nr,
             "par_id": id,
             "add_columns": []
         };
         
+        console.log( node_to_download_data );
         $.ajax({
             data: node_to_download_data,
             dataType: "json",
