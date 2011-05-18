@@ -506,9 +506,10 @@
 
                     for( i = 0; i < received_data.perspectives.length; ++i ) {
                         html.push( '<div class="position" data-index="', i, '" ');
+                      
                         html.push( 'data-collection="', received_data.collection.number, '">' );
                         html.push( '<div class="position-title">' );
-                        html.push( received_data.perspectives[i].title );
+                        html.push( received_data.perspectives[i].name );
                         html.push( '</div>' );
                         html.push( '<div class="position-desc">' );
                         html.push( received_data.perspectives[i].description );
@@ -527,6 +528,7 @@
                                 "action": "get_init_data",
                                 "col_nr": $(this).attr('data-collection'),
                                 "per_nr": $(this).attr('data-index'),
+                                "issue": $(this).attr('data-issue')
                             };
 
                             $.ajax({

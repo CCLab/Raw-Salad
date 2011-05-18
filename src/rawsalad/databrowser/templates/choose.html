@@ -22,9 +22,9 @@
           {% if forloop.counter0 < 3 %}
           <div class="position" data-collection-number="{{ forloop.counter0 }}">
             <div class="position-title">
-              {{ collection.title }}
+              {{ collection.name }}
             </div>
-            <div class="position-desc">
+            <div class="position-description">
               {{ collection.description }}
             </div>
             <div class="position-more">
@@ -40,9 +40,9 @@
           {% if forloop.counter0 >= 3 %}
             <div class="position" data-collection-number="{{ forloop.counter0 }}">
               <div class="position-title">
-                {{ collection.title }}
+                {{ collection.name }}
               </div>
-              <div class="position-desc">
+              <div class="position-description">
                 {{ collection.description }}
               </div>
               <div class="position-more">

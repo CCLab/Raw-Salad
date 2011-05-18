@@ -134,23 +134,23 @@ def get_meta_data():
     return { 
               'collections': [
                     {
-                        'title': 'Budżet centralny',
+                        'name': 'Budżet centralny',
                         'description': 'Ustawa budżetowa w kilku odsłonach'
                     },
                     {
-                        'title': 'Budżet środków europejskich',
+                        'name': 'Budżet środków europejskich',
                         'description': 'Udział środków europejskich w budżecie centralnym Polski'
                     },
                     {
-                        'title': 'Fundusze celowe i agencje narodowe',
+                        'name': 'Fundusze celowe i agencje narodowe',
                         'description': 'Części kosztowe budżetów wszystkich funduszy celowych i agencji narodowych'
                     },
                     {
-                        'title': 'Narodowy Fundusz Zdrowia',
+                        'name': 'Narodowy Fundusz Zdrowia',
                         'description': 'Budżet Narodowego Funduszu Zdrowia z rozbiciem na ośrodki wojewódzkie'
                     },
                     {
-                        'title': 'Krajowy Fundusz Drogowy',
+                        'name': 'Krajowy Fundusz Drogowy',
                         'description': 'Dane finansowe Krajowego Funduszu Drogowego'
                     }                                        
                 ]
@@ -167,16 +167,19 @@ def get_perspectives( col_nr ):
                 },
             'perspectives': [
                 {
-                    'title': 'Budżet tradycyjny',
-                    'description': 'Ustawa budżetowa as such'
+                    'name': 'Budżet tradycyjny',
+                    'description': 'Ustawa budżetowa as such',
+                    'issue': [ 2011 ]
                     },
                 {
-                    'title': 'Budżet zadaniowy',
-                    'description': 'Dwadzieścia dwie funkcje państwa'
+                    'name': 'Budżet zadaniowy',
+                    'description': 'Dwadzieścia dwie funkcje państwa',
+                    'issue': [ 2011, 2012 ]
                     },
                 {
-                    'title': 'Budżet instytucjonalny',
-                    'description': 'Wszyscy dysponenci ustawy budżetowej'
+                    'name': 'Budżet instytucjonalny',
+                    'description': 'Wszyscy dysponenci ustawy budżetowej',
+                    'issue': [ 2011, 2012 ]
                     }
                 ]
             }
@@ -188,12 +191,14 @@ def get_perspectives( col_nr ):
                 },
             'perspectives': [
                 {
-                    'title': 'Budżet środków europejskich',
-                    'description': 'Dane dotyczące środków europejskich na szczeblu centralnym'
+                    'name': 'Budżet środków europejskich',
+                    'description': 'Dane dotyczące środków europejskich na szczeblu centralnym',
+                    'issue': [ 2011 ]
                     },
                 {
-                    'title': 'Środki europejskie a ustawa budżetowa ',
-                    'description': 'Przegląd relacji między środkami europejskimi a ustawą budżetową'
+                    'name': 'Środki europejskie a ustawa budżetowa ',
+                    'description': 'Przegląd relacji między środkami europejskimi a ustawą budżetową',
+                    'issue': [ 2011 ]
                     }
                 ]
             }    
@@ -205,12 +210,14 @@ def get_perspectives( col_nr ):
                 },
             'perspectives': [
                 {
-                    'title': 'Dane budżetowe w układzie zadaniowym',
-                    'description': 'Z podziałem na funkcje, zadania i podzadania'
+                    'name': 'Dane budżetowe w układzie zadaniowym',
+                    'description': 'Z podziałem na funkcje, zadania i podzadania',
+                    'issue': [ 2011 ]
                     },
                 {
-                    'title': 'Dane budżetowe w układzie tradycyjnym',
-                    'description': 'Odpowiadające klasycznemu układowi budżetu państwa'
+                    'name': 'Dane budżetowe w układzie tradycyjnym',
+                    'description': 'Odpowiadające klasycznemu układowi budżetu państwa',
+                    'issue': [ 2011 ]
                     }
                 ]
             }
@@ -222,12 +229,14 @@ def get_perspectives( col_nr ):
                 },
             'perspectives': [
                 {
-                    'title': 'Dane zagregowane',
-                    'description': 'Dane szczebla centralnego'
+                    'name': 'Dane zagregowane',
+                    'description': 'Dane szczebla centralnego',
+                    'issue': [ 2011 ]
                     },
                 {
-                    'title': 'Dane ośrodków regionalnych',
-                    'description': 'Dane budżetowe ośrodków regionalnych NFZ'
+                    'name': 'Dane ośrodków regionalnych',
+                    'description': 'Dane budżetowe ośrodków regionalnych NFZ',
+                    'issue': [ 2011 ]
                     }
                 ]
             }
@@ -239,8 +248,9 @@ def get_perspectives( col_nr ):
                 },
             'perspectives': [
                 {
-                    'title': 'Dane zagregowane',
-                    'description': 'Ogólne dane o wydatkach KFD'
+                    'name': 'Dane zagregowane',
+                    'description': 'Ogólne dane o wydatkach KFD',
+                    'issue': [ 2011 ]
                     }
                 ]
             }
