@@ -6,23 +6,34 @@ var _store = (function () {
 
     //  P U B L I C   I N T E R F A C E
     var that = {};
+    
+    that.add_new_sheet = function ( new_sheet ) {
+        var max_sheet_number = _store.sheets_number();
+        sheet_list['sheets'][ max_sheet_number ] = new_sheet;
+    };
+    
+    that.clean_basic_sheet = function ( ) {
+        sheet_list[0] = {};
+        $.extend( true, sheet_list['sheets'][0], sheet_list['basic_sheet'] );
+        that.basic_pure_state( true );
+    };
 
     // setters/getters: sheet_list
     that.colums = function ( value ) {
         if( arguments === 0 ) {
-            return sheet['columns'];
+            return sheet_data['columns'];
         }
         
-        sheet['columns'] = value;
+        sheet_data['columns'] = value;
     };
     
         
     that.rows = function ( value ) {
         if( arguments === 0 ) {
-            return sheet['rows'];
+            return sheet_data['rows'];
         }
         
-        sheet['rows'] = value;
+        sheet_data['rows'] = value;
     };
 
 
@@ -99,7 +110,7 @@ var _store = (function () {
      
      
     that.sheets_number = function () {
-        return sheet_list['shhets'].length;
+        return sheet_list['sheets'].length;
     }; 
     
     
@@ -112,7 +123,7 @@ var _store = (function () {
     
     
     that.active_sheet = function () {
-        return sheet_list['sheets'][ thst.active_sheet_number ];
+        return sheet_list['sheets'][ that.active_sheet_number ];
     };
 
 

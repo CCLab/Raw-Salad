@@ -190,6 +190,41 @@ var _gui = (function () {
         that.make_zebra();                        
     }
     
+    that.create_sheet_tab( sheet_name, new_sheet_nr, filtered_sheet ) {
+        var html = [];
+        
+        html.push('<div id="snap-' + new_sheet_nr.toString() + '" class="snapshot active">');
+        html.push(sheet_name);
+        html.push('</div>');
+        
+        html.push('<div id="save-snapshot">');
+        html.push('Zapisz arkusz');
+        html.push('</div>');
+        
+        //TODO: change it so that adding a new sheet does not involve
+        //      removing and adding New sheet button
+        $('#save-snapshot').remove();
+        $('#snapshots').append( $( html.join('') ));
+        $('#snapshots')
+            .find('#snap-' + new_sheet_nr.toString())
+            .each( function () {
+                $('.snapshot').removeClass('active');
+                $(this).addClass('active');
+            })
+            .click( function () {
+                $('.snapshot').removeClass('active');
+                $(this).addClass('active');
+                if ( _store.active_sheet_nr() !== new_sheet_nr ) {
+                    _sheet.change_active_sheet( new_sheet_nr );
+                }
+            });
+            
+        $('#save-snapshot')
+            .click( function () {
+                _sheet.create_new_sheet( _store.active_sheet(), "Nowy arkusz" );
+            });
+    };
+    
     
     // P R I V A T E   I N T E R F A C E
     

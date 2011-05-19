@@ -6,9 +6,13 @@ var _table = (function () {
     var that = {};
 
 
-    that.init_table = function () {
+    that.clean_table = function () {
+        $('#table').empty();
+    };
+
+    that.init_table = function ( generation_mode ) {
         generate_header( _store.active_sheet() );
-        generate_table_body( _store.active_sheet() );
+        generate_table_body( _store.active_sheet(), generation_mode );
         
     };
     
