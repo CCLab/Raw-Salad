@@ -1,3 +1,6 @@
+//
+//    Table creation functionality
+//
 var _table = (function () {
 
     var that = {};

@@ -69,8 +69,7 @@ var _gui = (function () {
     }
 
 
-    that.close_choose_panel = function () {
-        
+    that.close_choose_panel = function () {   
         $('#choose-panel')
             .slideUp( 400 );
             
@@ -83,7 +82,6 @@ var _gui = (function () {
     
     
     that.open_choose_panel = function () {
-    
         $('#choose-panel')
             .slideDown(400);
             
@@ -99,6 +97,7 @@ var _gui = (function () {
         // get all visible rows
         var visible_list = $('.data').not( ':hidden' );
         
+        // TODO >> each is told to be slow - will we need it to be fast?!
         // change background for each row
         visible_list.each( function ( i, e ) {
             // does row belongs to darkened grounp?
@@ -137,15 +136,15 @@ var _gui = (function () {
         if ( node.hasClass('a') ) { 
             // it's a marked a-node
             if ( node.children( '.marked' ).length !== 0 ) {
-                unmark_a_node( node );
+                that.unmark_a_node( node );
             } 
             else { // not marked a-node clicked
                 if ( already_marked.length > 0 ) { // there is another marked node
-                    unmark_a_node( already_marked );
+                    that.unmark_a_node( already_marked );
                 }
-                mark_a_node( node );
-                add_side_border( node );
-                add_bottom_border( node );
+                that.mark_a_node( node );
+                that.add_side_border( node );
+                that.add_bottom_border( node );
             }
         } 
         else { // not a-node clicked
@@ -162,25 +161,25 @@ var _gui = (function () {
                 if ( par.children( 'div.nodes' ).find( '.node' ).last().attr( 'id' ) === node.attr( 'id' ) ) { 
                     
                     par.find( '.bottomborder' ).removeClass( 'bottomborder' );
-                    add_side_border( node );
-                    add_bottom_border( node );
+                    that.add_side_border( node );
+                    that.add_bottom_border( node );
                 } 
                 else { 
-                    add_side_border( node );
+                    that.add_side_border( node );
                 }
             } else { 
                 // there is another marked node
                 if ( already_marked.length > 0 ) { 
-                    unmark_a_node( already_marked );
+                    that.unmark_a_node( already_marked );
                 }
                 
-                mark_a_node( par );
-                add_side_border( par );
+                that.mark_a_node( par );
+                that.add_side_border( par );
                 
                 // it is the last node
                 if ( par.children( 'div.nodes' ).find( '.node' ).last().attr( 'id' ) === node.attr( 'id' ) ) { 
                     par.find( 'div.data' ).children().removeClass( 'bottomborder' );
-                    add_bottom_border( par );
+                    that.add_bottom_border( par );
                 }
             }
         } 

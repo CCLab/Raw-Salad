@@ -1,11 +1,6 @@
 var _utils = (function () {
     var that = {};
     
-    // this function cames from jQuery API example
-    $.fn.equalize_heights = function() {
-      return this.height( Math.max.apply(this, $(this).map(function(i,e){ return $(e).height() }).get() ) )
-    }
-
     that.filter = function ( fn, list ) {
         var result = [];
         var element;
@@ -37,6 +32,16 @@ var _utils = (function () {
         cut( value );
         return value === '0' ? '0' : result.reverse().join(' ') + " 000";
     };
+
+
+    // this function cames from jQuery API example
+    $.fn.equalize_heights = function() {
+        return this.height( Math.max.apply (
+            this, $(this).map( function ( i, e ) { 
+                return $(e).height() 
+        }).get()
+    ))};
+    
 
     return that;
     
