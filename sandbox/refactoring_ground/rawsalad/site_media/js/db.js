@@ -8,13 +8,13 @@ var _db = (function () {
 
     // downloads requested nodes, appends them to object with other nodes
     // and adds html code for new nodes
-    that.download_node = function ( table_data, parent_id ) {
+    that.download_node = function ( parent_id ) {
         // ajax call data object
         var download_data = {
             action: 'get_node',
-            dataset: table_data['col_nr'], 
-            perspective: table_data['per_nr'],
-            issue: table_data['issue'],
+            dataset: _store.dataset(), 
+            perspective: _store.perspective(),
+            issue: _store.issue(),
             parent: parent_id,
             // >> what is it for?!
             add_columns: []
@@ -25,15 +25,15 @@ var _db = (function () {
             dataType: 'json',
             success: function( received_data ) {                        
                 var i;            
-                var data = table_data.rows;
+                var data = _store.rows;
                 
                 for ( i = 0; i < received_data.length; i += 1 ) {
                     data.push( received_data[ i ] );
                 }
                 
                 // add recieved data to the table and render html
-                _table.add_node( table_data, parent_id );
-                that.remove_pending_node( table_data, parent_id );
+                _table.add_node( parent_id );
+                that.remove_pending_node( parent_id );
                 
                 // if it was a basic sheet sign it changed
                 if ( _store.active_sheet_number() === 0 ) {
@@ -46,9 +46,9 @@ var _db = (function () {
     
     // adds a node id to list of nodes waiting to be downloaded
     // and inserted in the table
-    that.add_pending_node = function ( table_data, id ) {
+    that.add_pending_node = function ( id ) {
         var i;
-        var pending_nodes = table_data[ 'pending_nodes' ];
+        var pending_nodes = _store.pending_nodes();
         
         for ( i = 0; i < pending_nodes.length; i += 1 ) {
             if ( pending_nodes[ i ] === id ) {
@@ -62,9 +62,9 @@ var _db = (function () {
     
     
     // removes a node id from the list of nodes waiting to be downloaded
-    that.remove_pending_node = function ( table_data, id ) {
+    that.remove_pending_node = function ( id ) {
         var i;
-        var pending_nodes = table_data[ 'pending_nodes' ];
+        var pending_nodes = _store.pending_nodes();        
         
         for ( i = 0; i < pending_nodes.length; i += 1 ) {
             if ( pending_nodes[ i ] === id ) {

@@ -52,6 +52,15 @@ var _store = (function () {
         sheet_data['issue'] = value;
     };        
 
+    that.pending_nodes = function ( value ) {
+        if( arguments === 0 ) {
+            return sheet_data['pending_nodes'];
+        }
+        
+        sheet_data['pending_nodes'] = value;
+    };
+    
+
     that.sheet_name = function ( value ) {
         if( arguments === 0 ) {
             return sheet_data['name'];
@@ -100,6 +109,11 @@ var _store = (function () {
         
         that.basic_pure_state( true );
     };
+    
+    
+    that.active_sheet = function () {
+        return sheet_list['sheets'][ thst.active_sheet_number ];
+    };
 
 
     // P R I V A T E   D A T A 
@@ -111,7 +125,8 @@ var _store = (function () {
         'issue': null,
 
         'columns': null,
-        'rows': null,    
+        'rows': null,  
+        'pending_nodes': [],  
 
         'name': ''
     };
@@ -119,7 +134,7 @@ var _store = (function () {
     // list of all sheets of the table
     var sheet_list = {
         'active_sheet_number': 0,
-        'sheets': [{}],
+        'sheets': [ sheet_data ],
         'basic_sheet': {},
         'basic_pure_state': true
     };

@@ -1,3 +1,1 @@
-download_node ( table_data, parent_id ) 
-add_pending_node ( table_data_object, id ) 
-remove_pending_node ( table_data_object, id ) 
+for f in *js; do echo $f; grep 'that\..*{$' $f | sed 's/^\ *that\.//;s/\ =\ function//;s/\ {//'; done
