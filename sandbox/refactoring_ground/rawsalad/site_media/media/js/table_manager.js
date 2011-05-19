@@ -350,7 +350,7 @@
         var col, col_type = [];
         var i, j;
         var container;
-        var leaf = table_data_object.perspective['leaf'];
+        var leaf = perspective['leaf'];
         var html_result;
         
         if( arguments.length === 0 ) {
@@ -495,7 +495,6 @@
                 col_nr: $(this).attr('data-collection-number')
             };
 
-            debugger;
             $.ajax({
                 data: init_data_info,
                 dataType: "json",

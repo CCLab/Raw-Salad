@@ -1,0 +1,394 @@
+body {
+    color: #333;
+    background-color: #a3a3a3;    
+    
+    font-size: 12px;
+    font-family: sans-serif;
+} 
+
+#wraper {
+    width: 960px;
+    margin: 0px auto;
+}
+
+.header {
+    overflow: auto;
+    height: 18px;
+    padding: 5px 12px;
+}
+
+
+.left {
+    float: left;
+}
+
+#upper-header {
+    background-color: #747474;
+    border-radius: 4px 4px 0px 0px;    
+    -moz-border-radius: 4px 4px 0px 0px;     
+}
+    
+    #logo {
+        float: left;
+        color: #fff;
+    }
+    
+    #upper-menu, #lower-menu {
+        float: right;
+    }
+    
+    #upper-menu > .menu-position {
+        color: #b4b4b4;
+    }
+
+#lower-header {
+    clear: both;
+    background-color: #e3e3e3;
+    overflow: auto;  
+
+    border-radius: 0px 0px 4px 4px;    
+    -moz-border-radius: 0px 0px 4px 4px;  
+}
+
+    #back-to-main {
+        color: #8f8f8f;
+    }
+    
+    #back-to-main:hover {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    #search {
+        margin-left: 65px;
+    }
+        
+    #lower-menu > .menu-position {
+        color: #8f8f8f;
+    }
+    #lower-menu > .menu-position:hover {
+        color: #009fe3 !important;
+    }
+
+.menu-position {
+    display: inline;
+    margin-left: 36px;
+}
+
+.menu-position:hover {
+    color: #4abff7 !important;
+    cursor: pointer;
+}
+
+
+
+#choose-panel {
+    background-color: #fff;
+    margin: 15px 0px;    
+
+    -moz-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+}
+
+    #choose-header {
+        height: 38px;
+        padding-top: 3px;
+        padding-left: 4px;
+        border-bottom: solid #767676 2px;
+
+        -moz-border-radius: 3px 3px 0px 0px;
+        border-radius: 3px 3px 0px 0px;
+    }
+
+        #choose-collection-name {
+            background-color: #767676;
+            height: 14px;
+            padding: 12px 10px;
+            width: 235px;
+
+            color: #fff;
+            font-weight: bold;
+            font-size: 15px;
+            -moz-border-radius: 3px 3px 0px 0px;
+            border-radius: 3px 3px 0px 0px;
+        }
+
+        #info-icon {
+            margin: 8px 7px;
+        }
+
+        #info-text {
+            font-weight: bold;
+            margin: 11px 0px;
+        }
+
+    #choose-main-panel {
+        overflow: auto;
+        background-color: #fff;
+        padding-top: 10px;
+        padding-bottom: 20px;
+
+        -moz-border-radius: 0px 0px 3px 3px;
+        border-radius: 0px 0px 3px 3px;
+    }
+        #choose-collections {
+            width: 855px;
+            padding-left: 105px;
+        }
+
+
+        #choose-perspectives {
+            width: 960px;
+        }
+
+        
+        #choose-perspectives-back-image {
+            margin-right: 35px;
+        }
+
+        .position {
+            width: 320px;
+            padding: 0px 5px;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            overflow: auto;
+        }
+
+        .position-title {
+            border-bottom: #ccc 1px solid;
+            color: #009fe3;
+            font-size: 15px;
+            font-weight: bold;
+
+            padding-bottom: 5px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .position-desc {
+        }
+
+        .position-more {
+            float: right;
+            color: #4abff7;
+            font-size: 10px;
+            margin-top: 3px;
+            margin-bottom: 10px;
+        }
+
+        .position-more:hover {
+            cursor: pointer;
+            color: #4cbceb;
+        }
+
+#open-close-choose-panel {
+    margin-top: 10px;
+
+    height: 14px;
+    padding: 3px 0px;
+
+    text-align: center;
+    color: #4abff7;
+    background-color: #fff;
+    font-size: 12px;
+    font-weight: bold;bold
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;    
+}
+#open-close-choose-panel:hover {
+    cursor: pointer;
+    color: #555;
+}
+
+#application {
+    height: 200px;
+    width: 960px;;
+
+    oveflow: auto;
+
+    margin-top: 10px;
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+}
+
+
+    .tab {
+        float: left;
+        width: 260px;
+        text-align: center;
+        font-size: 14px;
+        margin-right: 5px;
+        border-radius: 3px 3px 0px 0px;
+        -moz-border-radius: 3px 3px 0px 0px;    
+        font-weight: bold;
+    }
+
+    .tab.active {
+        height: 18px;
+        padding: 4px 0px;
+        background-color: white;
+    }
+
+    .tab.inactive {
+        margin-top: 6px;
+        height: 18px;
+        padding: 1px 0px;
+        background-color: #c8c8c8;
+        color: #4cbceb;
+    }
+
+    .tab.inactive:hover {
+        margin-top: 0px;
+        height: 18px;
+        padding: 4px 0px;
+        background-color: #c8c8c8;
+        cursor: pointer;
+    }
+
+    #snapshots {
+        background-color: #fff;
+        padding: 0px 5px;
+        padding-top: 15px;
+        clear: both;
+        height: 20px;
+        border-bottom: 2px #555 solid;
+    }
+    
+    #snapshots > div {
+        display: inline;
+    }
+        .snapshot {
+            padding: 5px 5px;
+            color: #4abff7;
+            margin-right: 5px;
+            text-align: center;
+
+            border: 1px solid #ccc;
+            border-bottom: 0px solid #ccc;
+            border-radius: 3px 3px 0px 0px;
+            -moz-border-radius: 3px 3px 0px 0px;
+        }
+
+        .snapshot:hover {
+            color: #555;
+            border-color: #4abff7;
+            cursor: pointer;
+        }
+
+        .snapshot.active {
+            background-color: #767676;
+            color: #fff;
+            border: 0px;
+            border-radius: 3px 3px 0px 0px;
+            -moz-border-radius: 3px 3px 0px 0px;
+        }
+        
+        #save-snapshot {
+            font-size: 10px;
+            background-color: #4abff7;
+            color: white;
+            padding: 3px 5px;
+            border-radius: 3px 3px 3px 3px;
+            -moz-border-radius: 3px 3px 3px 3px;
+        }
+        #save-snapshot:hover {
+            background-color: #4cbceb;
+            color: #555;
+            cursor: pointer;
+        }
+    
+    #table-toolbar {
+        position: relative;
+        
+        height: 30px;
+        padding-bottom: 5px;
+        background-color: #c8c8c8;
+    }
+    
+            #statistics {
+                position: absolute;
+                bottom: 8px;
+                left: 0px;
+                width: 595px;
+                padding: 3px 15px;
+                font-weight: bold;
+                color: #fff;
+            }
+            
+            #tools {
+                position: absolute;
+                bottom: 7px;
+                right: 10px;
+                width: auto;
+                background-color: #fff;
+                padding-left: 5px;
+                border-bottom: solid 1px #555;
+                border-radius: 3px 3px 0px 0px;
+                -moz-border-radius: 3px 3px 0px 0px;                
+            }
+                
+                #tools > div {         
+                    float: left;
+                    padding: 3px 10px;
+                    margin-right: 5px;
+                    background-color: #fff;
+                    color: #4cbceb;
+                    
+                    border-radius: 3px 3px 0px 0px;
+                    -moz-border-radius: 3px 3px 0px 0px;
+                }
+                
+                #tools > div:hover {
+                    cursor: pointer;
+                    background-color: #b7b7b7;
+                    color: #fff;
+                }
+
+#sort-popup {
+    background-color: #C8C8C8;
+    padding: 5px 20px;
+}                     
+                        
+    select {
+      width: 150px;
+      margin-right: 5px;
+    }
+
+    input {
+      width: 100px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+    }                
+
+    input.radio {
+      width: 50px;
+    }
+
+#filter-popup {
+    background-color: #C8C8C8;
+    padding: 5px 20px;
+}                     
+
+#add-sort-key {
+    width: 5px;
+    height: 1px;
+    padding: 5px;
+    margin: 0px 5px;
+    display: inline;
+    
+    background-color: #fffdfa;
+    border-radius: 5px;    
+    -moz-border-radius: 5px;    
+}
+
+#add-sort-key:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}
+
+
+
+
+
+
