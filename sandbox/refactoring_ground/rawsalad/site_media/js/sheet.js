@@ -59,7 +59,6 @@ var _sheet = (function () {
         _store.active_sheet_number( active_sheet_number );
     };
     
-    //TODO: rename, it's not basic sheet, it's sheet nr 0
     var clean_basic_sheet = function ( ) {
         var active_sheet_number;
         var basic_sheet;

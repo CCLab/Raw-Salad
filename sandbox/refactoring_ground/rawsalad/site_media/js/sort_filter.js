@@ -256,7 +256,6 @@ var Utilities = (function () {
     
     // S O R T I N G   H E L P E R   F U N C T I O N S
     
-    //TODO: make sure it is used
     // adds hidden parameter to sorting setting to avoid a situation,
     that.prepare_sorting_setting = function( sorting_setting, key ) {
         var hidden_attribute = {
