@@ -2,8 +2,9 @@
   "name": "nfz",
   "perspective": "Narodowy Fundusz Zdrowia 2011",
   "ns": "dd_fund2011_nfz",
-  "dataset": 4,
-  "idef": 0,
+  "dataset": 3,
+  "idef": 1,
+  "issue": 2011,
   "explorable": "numer",
   "batchsize": null,
   "columns": [

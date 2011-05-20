@@ -2,10 +2,10 @@
     "name": "budzet_zadaniowy_podzadania_2011",
     "perspective": "Budżet zadaniowy 2011 - Podzadanie",
     "ns": "dd_budg2011_go",
-    "dataset": 1,
+    "dataset": 0,
     "idef": 1,
+    "issue": 2011,
     "explorable": "type",
-    "batchsize": 1000,
     "columns": [
         {
             "key": "type",

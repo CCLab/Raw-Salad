@@ -1,9 +1,10 @@
 {
-  "name": "funduszy_tradycijny",
-  "perspective": "Plany finansowe państwowych Funduszy Celowych w układzie tradycyjnym",
+  "name": "funduszy_tradycijny_2011",
+  "perspective": "Plany finansowe państwowych Funduszy Celowych w układzie tradycyjnym 2011 - 2013",
   "ns": "dd_fund2011_tr",
-  "dataset": 3,
+  "dataset": 2,
   "idef": 1,
+  "issue": 2011,
   "explorable": "name",
   "batchsize": 40,
   "columns": [

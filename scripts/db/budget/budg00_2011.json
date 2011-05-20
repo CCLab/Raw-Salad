@@ -2,10 +2,10 @@
   "name": "budzet_ksiegowy_2011",
   "perspective": "Budżet księgowy 2011",
   "ns": "dd_budg2011_tr",
-  "dataset": 1,
+  "dataset": 0,
   "idef": 0,
+  "issue": 2011,
   "explorable": "type",
-  "batchsize": 40,
   "columns": [
     {
       "key": "idef",
