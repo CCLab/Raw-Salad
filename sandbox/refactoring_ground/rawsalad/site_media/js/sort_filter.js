@@ -276,19 +276,6 @@ var Utilities = (function () {
         return false;
     };
     
-    function is_number( obj, attr ) {
-        var i;
-        var cols = data[columns];
-        var numeric = false;
-        for ( i = 0; i < cols.length; i += 1 ) {
-            if ( cols[i].key === attr && cols[i].type === "number") {
-                numeric = true;
-                break;
-            }
-        }
-        return numeric;
-    };
-    
     function starts_with( str, value ) {
         return ( str.indexOf( value ) === 0 );
     };
@@ -310,86 +297,6 @@ var Utilities = (function () {
         };
         
         sett.push( hidden_attribute );
-    };
-
-
-    // prints an element using given schema
-    // el - element to print
-    // sch - schema containing attributes of the element to print
-    function printEl( el, sch ) {
-        document.writeln( '{ ' );
-        var i;
-        var key;
-        
-        // for each attribute in a schema
-        for ( i = 0; i < sch.length; i += 1 ) {
-            key = sch[i].key;
-            document.writeln( key + ': ' + el[key] + ' ');
-        }
-        document.writeln( '} <br>' );
-    };
-
-    // prints elements of a collection using given schema of those elements
-    // coll - collection of objects to print
-    // sch - schema containing attributes of elements to print
-    function printColl( coll, sch ) {
-        var i;
-        
-        // for each element in a collection
-        for ( i = 0; i < coll.length; i += 1 ) {
-            printEl( coll[i], sch );
-        }
-    };
-
-    // prints short version of elements belonging to a collection after sorting
-    // using setting, which tells which parameters should be printed
-    // coll - collection of objects to print
-    // sett - setting that specifies which attributes will be printed
-    function printShort( coll, sett ) {
-        var i, j;
-        var key1, key2;
-        var value;
-        var ch;
-        var pref;
-        
-        // for each element in a collection
-        for ( i = 0; i < coll.length; i += 1 ) {
-            print( '{ ' );
-            // for each attribute that should be printed
-            for ( j = 0; j < sett.length; j += 1 ) {
-                key = sett[j].name;
-                pref = sett[j].pref;
-                value = coll[i][key];
-                
-                // special letters: R - attr. should rise, M - should lower
-                // O - doesn't matter
-                if ( pref == 1 ) {
-                    print( '(R)' );
-                } else if ( pref == 0 ) {
-                    print( '(O)' );
-                } else if ( pref == -1 ) {
-                    print( '(M)' );
-                }
-                
-                print( key );
-                print( '=' );
-                print( value );
-                print( ',' );
-            }
-            println( '}' );
-        }
-    };
-
-    // prints argument, shorter version, used for convenience
-    // arg - object to print
-    function print( arg ) {
-        document.writeln( arg );
-    };
-
-    // the same as print plus prints end line after the argument
-    // arg - object to print
-    function println( arg ) {
-        document.writeln( arg + '<br>' );
     };
 
     // changes elements in array
