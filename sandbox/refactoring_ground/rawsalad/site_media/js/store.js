@@ -6,17 +6,6 @@ var _store = (function () {
 
     //  P U B L I C   I N T E R F A C E
     var that = {};
-    
-    that.add_new_sheet = function ( new_sheet ) {
-        var max_sheet_number = _store.sheets_number();
-        sheet_list['sheets'][ max_sheet_number ] = new_sheet;
-    };
-    
-    that.clean_basic_sheet = function ( ) {
-        sheet_list[0] = {};
-        $.extend( true, sheet_list['sheets'][0], sheet_list['basic_sheet'] );
-        that.basic_pure_state( true );
-    };
 
     // setters/getters: sheet_list
     that.colums = function ( value ) {
@@ -88,6 +77,7 @@ var _store = (function () {
         }
         
         sheet_list['active_sheet_number'] = value;
+        sheet_data = sheet_list['sheets'][ value ];
     };
     
     

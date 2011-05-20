@@ -33,119 +33,100 @@ var Utilities = (function () {
 
     // sorts part of an array data with a hybrid sorting algorithm
     // which uses merge sort for dividing big part of an array and mergin them
-    // and bubble sort for sorting small arrays. Uses setting sett.
-    // data - collection to sort
-    // sett - decides how objects are compared
-    // optional arguments:
-    // start - first index; default -> start = 0
-    // end - last index; default -> end = data.length - 1
-    // border - value indicating when bubble_sort should be used
-    that.sort = function ( data, sett, start, end, border ) {
+    // and bubble sort for sorting small arrays. Uses setting sorting_setting.
+    that.sort = function ( data, sorting_setting, start, end, border ) {
         var start = start || 0;
         var end = end || data.length - 1;
         var border = border || 2;
+        var middle;
         
         if ( start > end - border ) // an array is small enough to use bubble sort
-            bubble_sort( data, sett, start, end);
+            bubble_sort( data, sorting_setting, start, end);
         else {
-            var middle = get_middle( start, end );
+            middle = get_middle( start, end );
             
             // sort two arrays separately
-            that.sort( data, sett, start, middle, border );
-            that.sort( data, sett, middle + 1, end, border );
+            that.sort( data, sorting_setting, start, middle, border );
+            that.sort( data, sorting_setting, middle + 1, end, border );
             
             // merge sorted arrays
-            merge( data, sett, start, middle, end);
+            merge( data, sorting_setting, start, middle, end);
         }
     };
-     
-
-    // B U B B L E   S O R T
-
+    
     // sorts data in range [start; end] with bubble_sort algorithm
-    // with setting sett, which decides when an object is bigger than another
-    // data - collection to sort
-    // sett - setting deciding how to compare two objects
-    // optional arguments:
-    // start - index of the first element of data to sort; default -> start = 0
-    // end - index of the last element of data to sort; default -> end = data.length - 1
-    function bubble_sort( data, sett, start, end ) {
+    // with setting sorting_setting, which decides when an object is bigger than another
+    function bubble_sort( data, sorting_setting, start, end ) {
         var start = start || 0;
         var end = end || data.length - 1;
         
         var i;
         var j;
-        var k;
+        var sorted;
         
-        for ( i = start, k = 0; i < end; i += 1, k+= 1 ) {
-            for ( j = start; j < end - k; j += 1 ) {
-                if ( compare_obj( data[j], data[j+1], sett ) == -1 ) {
+        for ( i = start, sorted = 0; i < end; i += 1, sorted += 1 ) {
+            for ( j = start; j < end - sorted; j += 1 ) {
+                if ( compare_obj( data[j], data[j+1], sorting_setting ) == -1 ) {
                     swap( data, j, j+1 );
                 }
             }
         }
     };
 
-    // M E R G E   S O R T 
-
     // sorts part of an array data with merge sort algorithm using setting sett
-    // data - collection to sort
-    // sett - decides how objects are compared
-    // optional arguments:
-    // start - first index; default -> start = 0
-    // end - last index; default -> end = data.length - 1
-    function merge_sort( data, sett, start, end ) {
+    function merge_sort( data, sorting_setting, start, end ) {
         var start = start || 0;
         var end = end || data.lenght - 1;
+        var middle;
         
-        if ( start > end - 1 )
+        if ( start > end - 1 ) {
             return;
-        var middle = get_middle( start, end );
+        }
+        
+        middle = get_middle( start, end );
         
         // sort two arrays separately
-        merge_sort( data, sett, start, middle );
-        merge_sort( data, sett, middle + 1, end );
+        merge_sort( data, sorting_setting, start, middle );
+        merge_sort( data, sorting_setting, middle + 1, end );
         
         // merge sorted arrays
-        merge( data, sett, start, middle, end);
+        merge( data, sorting_setting, start, middle, end);
     };
 
     // merges two subarrays, 1st: data[start, middle], 2nd: data[middle+1, end]
     // result is that data[start, end] is sorted
-    // data - collection to sort
-    // sett - decides how objects are compared
-    function merge( data, sett, start, middle, end ) {    
+    function merge( data, sorting_setting, start, middle, end ) {    
         var i = 0;
         var j = 0;
         var ind = start;
         
-        var array1 = data.slice(start, middle + 1);
-        var array2 = data.slice(middle + 1, end + 1);
+        var subarray1 = data.slice(start, middle + 1);
+        var subarray2 = data.slice(middle + 1, end + 1);
         
         // put the smallest actually element in the first available place in data
-        while ( i < array1.length && j < array2.length ) {
+        while ( i < subarray1.length && j < subarray2.length ) {
 
-            if ( compare_obj( array1[i], array2[j], sett ) == 1 ) {
-                data[ind] = array1[i];
+            if ( compare_obj( subarray1[i], subarray2[j], sorting_setting ) == 1 ) {
+                data[ind] = subarray1[i];
                 i += 1;
             } else {
-                data[ind] = array2[j];
+                data[ind] = subarray2[j];
                 j += 1;
             }
             ind += 1;
         }
         
-        if ( i < array1.length ) {
-            // put last elements from array1 in the last spots in data
-            while ( i < array1.length ) {
-                data[ind] = array1[i];
+        if ( i < subarray1.length ) {
+            // put last elements from subarray1 in the last spots in data
+            while ( i < subarray1.length ) {
+                data[ind] = subarray1[i];
                 ind += 1;
                 i += 1;
             }
         } else {
-            // put last elements from array2 in the last spots in data
-            while ( j < array2.length ) {
-                data[ind] = array2[j];
+            // put last elements from subarray2 in the last spots in data
+            while ( j < subarray2.length ) {
+                data[ind] = subarray2[j];
                 ind += 1;
                 j += 1;
             }
@@ -178,9 +159,6 @@ var Utilities = (function () {
     ];*/
     
     // filters collection
-    // data - collection to filter
-    // filter_mask - filter(array of filters)
-    // returns array of elements that passed through the filter
     that.filter = function ( data, filter_mask ) {
         var i;
         var result = [ ];
@@ -202,7 +180,6 @@ var Utilities = (function () {
     
     // looks for every criterion that is string value and
     // changes is to lower case
-    // mask - filtering mask to be changed
     function prepare_mask( mask ) {
         var i;
         var attr;
@@ -219,9 +196,6 @@ var Utilities = (function () {
     };
     
     // checks if an object passes through a filter
-    // obj - object to check
-    // filter_mask - filter(array of filters)
-    // returns true if yes, false if not
     function check_obj( obj, filter_mask ) {
         var i;
         var key;
@@ -242,11 +216,6 @@ var Utilities = (function () {
     };
 
     // checks if specfied attribute of an object passes a filter
-    // obj - object to check
-    // attr - name of the attribute to check
-    // pref - decides if value of the attribute should be higher or lower
-    // value - border value
-    // returns true if yes, false if not
     function check_attr( obj, attr, pref, value ) {
         var obj_val = obj[attr];
         var type = typeof obj_val;
@@ -276,19 +245,6 @@ var Utilities = (function () {
         return false;
     };
     
-    function is_number( obj, attr ) {
-        var i;
-        var cols = data[columns];
-        var numeric = false;
-        for ( i = 0; i < cols.length; i += 1 ) {
-            if ( cols[i].key === attr && cols[i].type === "number") {
-                numeric = true;
-                break;
-            }
-        }
-        return numeric;
-    };
-    
     function starts_with( str, value ) {
         return ( str.indexOf( value ) === 0 );
     };
@@ -300,102 +256,18 @@ var Utilities = (function () {
     
     // S O R T I N G   H E L P E R   F U N C T I O N S
     
+    //TODO: make sure it is used
     // adds hidden parameter to sorting setting to avoid a situation,
-    // when two rows are equal
-    // sett - setting to be modified
-    that.prepare_sorting_setting = function( sett, key ) {
+    that.prepare_sorting_setting = function( sorting_setting, key ) {
         var hidden_attribute = {
             "pref": -1,
             "name": key
         };
         
-        sett.push( hidden_attribute );
-    };
-
-
-    // prints an element using given schema
-    // el - element to print
-    // sch - schema containing attributes of the element to print
-    function printEl( el, sch ) {
-        document.writeln( '{ ' );
-        var i;
-        var key;
-        
-        // for each attribute in a schema
-        for ( i = 0; i < sch.length; i += 1 ) {
-            key = sch[i].key;
-            document.writeln( key + ': ' + el[key] + ' ');
-        }
-        document.writeln( '} <br>' );
-    };
-
-    // prints elements of a collection using given schema of those elements
-    // coll - collection of objects to print
-    // sch - schema containing attributes of elements to print
-    function printColl( coll, sch ) {
-        var i;
-        
-        // for each element in a collection
-        for ( i = 0; i < coll.length; i += 1 ) {
-            printEl( coll[i], sch );
-        }
-    };
-
-    // prints short version of elements belonging to a collection after sorting
-    // using setting, which tells which parameters should be printed
-    // coll - collection of objects to print
-    // sett - setting that specifies which attributes will be printed
-    function printShort( coll, sett ) {
-        var i, j;
-        var key1, key2;
-        var value;
-        var ch;
-        var pref;
-        
-        // for each element in a collection
-        for ( i = 0; i < coll.length; i += 1 ) {
-            print( '{ ' );
-            // for each attribute that should be printed
-            for ( j = 0; j < sett.length; j += 1 ) {
-                key = sett[j].name;
-                pref = sett[j].pref;
-                value = coll[i][key];
-                
-                // special letters: R - attr. should rise, M - should lower
-                // O - doesn't matter
-                if ( pref == 1 ) {
-                    print( '(R)' );
-                } else if ( pref == 0 ) {
-                    print( '(O)' );
-                } else if ( pref == -1 ) {
-                    print( '(M)' );
-                }
-                
-                print( key );
-                print( '=' );
-                print( value );
-                print( ',' );
-            }
-            println( '}' );
-        }
-    };
-
-    // prints argument, shorter version, used for convenience
-    // arg - object to print
-    function print( arg ) {
-        document.writeln( arg );
-    };
-
-    // the same as print plus prints end line after the argument
-    // arg - object to print
-    function println( arg ) {
-        document.writeln( arg + '<br>' );
+        sorting_setting.push( hidden_attribute );
     };
 
     // changes elements in array
-    // data - collection with elements
-    // i - index of the first element
-    // j - index of the second element
     function swap( data, i, j) {
         var tmp = data[i];
         data[i] = data[j];
@@ -413,13 +285,6 @@ var Utilities = (function () {
     }
 
     // compares values of specified attribute of two objects, returned value depends on preference
-    // ob1, ob2 - objects to compare
-    // attr - attribute that will be checked
-    // pref - preference
-    // if pref. = 1, then returns 1, if attribute of the first object is higher than the second one,
-    // 0 if values are equal, otherwise -1
-    // if pref. = -1, then reurns opposite values than if pref = 1
-    // if pref. = 0, then returns 0
     function compare_atr( ob1, ob2, attr, pref ) {
         var compare_value;
         var alphabet;
@@ -476,27 +341,22 @@ var Utilities = (function () {
         };
     };
 
-    // compares two objects, compares their attributes mentioned in sett
-    // ob1, ob2 - objects to compare
-    // sett - setting deciding how objects will be compared
-    // returns -1 -> ob1 < ob2
-    //          0 -> ob1 == ob2
-    //          1 -> ob1 > ob2
-    function compare_obj( ob1, ob2, sett ) {
+    // compares two objects, compares their attributes mentioned in sorting_setting
+    function compare_obj( ob1, ob2, sorting_setting ) {
         var i;
         var result = 0;
         var key;
         var pref;
         
-        // for each attribute in sett
-        for ( i = 0; i < sett.length; i += 1 ) {
-            key = sett[i].name;
-            pref = sett[i].pref;
+        // for each attribute in sorting_setting
+        for ( i = 0; i < sorting_setting.length; i += 1 ) {
+            key = sorting_setting[i].name;
+            pref = sorting_setting[i].pref;
             
-            if ( i !== sett.length - 1 ) {
+            if ( i !== sorting_setting.length - 1 ) {
                 result = compare_atr( ob1, ob2, key, pref );
             } else {
-                result = id_comparison( ob1, ob2, sett );
+                result = id_comparison( ob1, ob2, sorting_setting );
             }
             
             if ( result !== 0 ) {
@@ -507,20 +367,20 @@ var Utilities = (function () {
         return result;
     };
     
-    function id_comparison( ob1, ob2, sett ) {
+    function id_comparison( ob1, ob2, sorting_setting ) {
         var key;
         var pref;
-        var sett_length = sett.length;
+        var sett_length = sorting_setting.length;
         var id1_tokenized;
         var id2_tokenized;
         var min_length;
         var i;
         var result;
-        var value1;
-        var value2;
+        var token_to_int1;
+        var token_to_int2;
         
-        key = sett[ sett_length - 1 ].name;
-        pref = sett[ sett_length - 1 ].pref;
+        key = sorting_setting[ sett_length - 1 ].name;
+        pref = sorting_setting[ sorting_setting_length - 1 ].pref;
         
         id1_tokenized = ob1[key].split("-");
         id2_tokenized = ob2[key].split("-");
@@ -530,12 +390,12 @@ var Utilities = (function () {
                 
         result = 1;
         for ( i = 0; i < min_length; i += 1 ) {
-            value1 = parseInt( id1_tokenized[i] );
-            value2 = parseInt( id2_tokenized[i] );
+            token_to_int1 = parseInt( id1_tokenized[i] );
+            token_to_int2 = parseInt( id2_tokenized[i] );
             
-            if ( value1 < value2 ) {
+            if ( token_to_int1 < token_to_int2 ) {
                 result = -1;
-            } else if ( value1 > value2 ) {
+            } else if ( token_to_int1 > token_to_int2 ) {
                 result = 1;
             }
         }
