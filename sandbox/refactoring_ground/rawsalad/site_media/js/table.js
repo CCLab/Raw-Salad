@@ -22,11 +22,10 @@ var _table = (function () {
         var schema;
         var html = [];
         var item;
-        var col, col_type = [];
-        var i, j;
+        var i;
         var container;
-        var leaf;
         var html_result;
+        var row_html = [];
         
         // if it's the first time, prepare the top-level data
         if( arguments.length === 0 ) {
@@ -46,38 +45,10 @@ var _table = (function () {
             return element['basic'] === true;
         }, _store.columns() );
 
-        // TODO >> refactor to make it work with all the datasets
         for ( i = 0; i < data.length; i += 1 ) {
             item = data[i];
-            html.push( '<div id="', item['idef'], '"' );
-            html.push( 'class="', item['level'], ' ' );
-            html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
-            html.push( '<div class="data">' );
-            
-            for ( j = 0; j < schema.length; j += 1 ) {
-                col = schema[j];
-                
-                if ( col['key'] === 'type' || col['key'] === 'name' ) {
-                    col_type = col['key'] + ' cell';
-                } else {
-                    col_type = 'value cell';
-                }				
-                
-                html.push( '<div class="', col_type, '">' );
-                if( col_type === 'value cell' )
-                {
-                    html.push( money( item[col['key']] ));
-                }
-                else {
-                    html.push( item[col['key']] );
-                }    
-                html.push( '</div>' );
-            }
-            html.push( '</div>' );
-            if( item['leaf'] !== true ) {
-                html.push( '<div class="nodes"></div>' );
-            }
-            html.push( '</div>' );
+            row_html = generate_row( item, schema );
+            html.push( row_html );
         }
         
         html_result = $( html.join('') );
@@ -85,50 +56,6 @@ var _table = (function () {
         
         that.arm_nodes( id );
         _gui.make_zebra();
-    };
-    
-    
-    // generates the html code for a single row
-    that.generate_row = function( item, schema ) {
-        var i;
-        var col;
-        var col_type;
-        var html = [];
-    
-        html.push( '<div id="', item['idef'], '"' );
-        html.push( 'class="', item['level'], ' ' );
-        html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
-        html.push( '<div class="data">' );
-        
-        // TODO >> refactor to make it work with all the datasets
-        for ( i = 0; i < schema.length; i += 1 ) {
-            col = schema[i];
-            
-            if ( col['key'] === 'type' || col['key'] === 'name' ) {
-                col_type = col['key'] + ' cell';
-            } else {
-                col_type = 'value cell';
-            }				
-            
-            html.push( '<div class="', col_type, '">' );
-
-            if( col_type === 'value cell' )
-            {
-                html.push( _utils.money( item[col['key']] ) );
-            }
-            else {
-                html.push( item[col['key']] );
-            }    
-            html.push( '</div>' );
-        }
-        html.push( '</div>' );
-
-        if( item['leaf'] !== true ) {
-            html.push( '<div class="nodes"></div>' );
-        }
-        html.push( '</div>' );
-        
-        return html;
     };
 
 
@@ -178,6 +105,49 @@ var _table = (function () {
 
 
     // P R I V A T E   I N T E R F A C E
+    
+    // generates the html code for a single row
+    var generate_row = function( item, schema ) {
+        var i;
+        var col;
+        var col_type;
+        var html = [];
+    
+        html.push( '<div id="', item['idef'], '"' );
+        html.push( 'class="', item['level'], ' ' );
+        html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
+        html.push( '<div class="data">' );
+        
+        // TODO >> refactor to make it work with all the datasets
+        for ( i = 0; i < schema.length; i += 1 ) {
+            col = schema[i];
+            
+            if ( col['key'] === 'type' || col['key'] === 'name' ) {
+                col_type = col['key'] + ' cell';
+            } else {
+                col_type = 'value cell';
+            }				
+            
+            html.push( '<div class="', col_type, '">' );
+
+            if( col_type === 'value cell' )
+            {
+                html.push( _utils.money( item[col['key']] ) );
+            }
+            else {
+                html.push( item[col['key']] );
+            }    
+            html.push( '</div>' );
+        }
+        html.push( '</div>' );
+
+        if( item['leaf'] !== true ) {
+            html.push( '<div class="nodes"></div>' );
+        }
+        html.push( '</div>' );
+        
+        return html;
+    };
 
 
     // TODO >> merge these two functions!!
@@ -261,8 +231,7 @@ var _table = (function () {
         that.arm_nodes();
         _gui.make_zebra();
         
-    };
-    
+    };    
     
     return that;
 
