@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns( 'databrowser.views',
-    (r'^$', 'redirect' ),
-    (r'^app/$', 'app_page' ),
+urlpatterns = patterns( '',
+    (r'^$', 'databrowser.views.redirect' ),
+    (r'^app/$', 'databrowser.views.app_page' ),
     (r'^api/$', include('papi.urls')),
 )
