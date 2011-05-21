@@ -198,55 +198,61 @@ def get_issues_meta(dataset_idef, view_idef, db=None):
 
 #-----------------------------
 def get_data(dataset_idef, view_idef, issue, db=None):
-    if db is None:    
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])        
+    return {}
+#     if db is None:
+#         # connection details
+#         dsn= get_db_connect('mongodb')
+#         connect= pymongo.Connection(dsn['host'], dsn['port'])
+#         db= connect[dsn['database']]
+#         db.authenticate(dsn['username'], dsn['password'])        
 
-    # EXTRACT metadata
-    metadata_full= get_metadata_full(ds, ps, db)
-    conn_coll= metadata_full['ns'] # collection name
+#     # EXTRACT metadata
+#     metadata_full= get_metadata_full(ds, ps, db)
+#     conn_coll= metadata_full['ns'] # collection name
 
-    md_select_columns= {'_id':0} # _id is never returned
-    cond_aux= metadata_full['aux'] # list of aux columns to be returned
-    md_select_columns.update(cond_aux)
-    md_columns= metadata_full['columns'] # list of main columns to be returned
-    for clm in md_columns:
-        md_select_columns[clm['key']]= 1
+#     md_select_columns= {'_id':0} # _id is never returned
+#     cond_aux= metadata_full['aux'] # list of aux columns to be returned
+#     md_select_columns.update(cond_aux)
+#     md_columns= metadata_full['columns'] # list of main columns to be returned
+#     for clm in md_columns:
+#         md_select_columns[clm['key']]= 1
 
-    try: # batch size
-        cursor_batchsize= metadata_full['batchsize']
-    except:
-        cursor_batchsize= 'default'
+#     try: # batch size
+#         cursor_batchsize= metadata_full['batchsize']
+#     except:
+#         cursor_batchsize= 'default'
 
-    cursor_sort= [] # sort
-    try:
-        cond_sort= metadata_full['sort']
-    except:
-        cond_sort= None
+#     cursor_sort= [] # sort
+#     try:
+#         cond_sort= metadata_full['sort']
+#     except:
+#         cond_sort= None
 
-    if cond_sort is not None:
-        list_sort= [int(k) for k, v in cond_sort.iteritems()]
-        list_sort.sort()
-        for sort_key in list_sort:
-            cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
+#     if cond_sort is not None:
+#         list_sort= [int(k) for k, v in cond_sort.iteritems()]
+#         list_sort.sort()
+#         for sort_key in list_sort:
+#             cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
 
-    cond_query= metadata_full['query'] # query conditions
-    cond_query.update(query_aux) # additional query, depends on the call
+#     cond_query= metadata_full['query'] # query conditions
+#     cond_query.update(query_aux) # additional query, depends on the call
 
-    # EXTRACT data (rows)
-    if cursor_batchsize in ['default', None]:
-        cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
-    else:
-        cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
+#     # EXTRACT data (rows)
+#     if cursor_batchsize in ['default', None]:
+#         cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
+#     else:
+#         cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
 
-    out= []
-    for row in cursor_data:
-        out.append(row)
+#     out= []
+#     for row in cursor_data:
+#         out.append(row)
 
-    return out
+#     return out
+
+
+#-----------------------------
+def get_metadata(dataset_idef, view_idef, issue, db=None):
+    return {}
 
 
 # print get_issues(0, 2)
