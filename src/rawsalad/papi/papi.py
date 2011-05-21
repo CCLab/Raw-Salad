@@ -199,7 +199,7 @@ def get_issues_meta(request, dataset_idef, view_idef, db=None):
 
 #-----------------------------
 def get_data(request, dataset_idef, view_idef, issue, path, db=None):
-    return {}
+    return HttpResponse( json.dumps( {} ))
 #     if db is None:
 #         # connection details
 #         dsn= get_db_connect('mongodb')
