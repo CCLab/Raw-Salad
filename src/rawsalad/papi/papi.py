@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.utils import simplejson as json
+from django.core import serializers
 
-import pymongo
 from ConfigParser import ConfigParser
+import pymongo
 
 conn_schema= "md_budg_scheme"
 nav_schema= "ms_nav"
@@ -53,7 +54,7 @@ def get_metadata_full(ds_id, ps_id, iss, dbase):
     return metadata_full
 
 #-----------------------------
-def get_datasets(request, db=None):
+def get_datasets(request, serializer, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -73,10 +74,10 @@ def get_datasets(request, db=None):
     for row in cursor_data:
         out.append(row)
 
-    return out
+    return HttpResponse( json.dumps( out ))
 
 #-----------------------------
-def get_datasets_meta(request, db=None):
+def get_datasets_meta(request, serializer, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -95,7 +96,7 @@ def get_datasets_meta(request, db=None):
     return HttpResponse( json.dumps( out ))
 
 #-----------------------------
-def get_views(request, dataset_idef, db=None):
+def get_views(request, serializer, dataset_idef, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -123,7 +124,7 @@ def get_views(request, dataset_idef, db=None):
     return HttpResponse( json.dumps( out ))
 
 #-----------------------------
-def get_views_meta(request, dataset_idef, db=None):
+def get_views_meta(request, serializer, dataset_idef, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -151,7 +152,7 @@ def get_views_meta(request, dataset_idef, db=None):
     return HttpResponse( json.dumps( out ))
 
 #-----------------------------
-def get_issues(request, dataset_idef, view_idef, db=None):
+def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -174,7 +175,7 @@ def get_issues(request, dataset_idef, view_idef, db=None):
     return HttpResponse( json.dumps( out ))
 
 #-----------------------------
-def get_issues_meta(request, dataset_idef, view_idef, db=None):
+def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -198,7 +199,7 @@ def get_issues_meta(request, dataset_idef, view_idef, db=None):
     return HttpResponse( json.dumps( out ))
 
 #-----------------------------
-def get_data(request, dataset_idef, view_idef, issue, path='', db=None):
+def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
         # connection details
         dsn= get_db_connect('mongodb')
@@ -258,13 +259,13 @@ def get_data(request, dataset_idef, view_idef, issue, path='', db=None):
     if len(dt) == 0:
         out= { 'data': None, 'response': 'No such data' }
     else:
-        out= { 'data': dt, 'metadata': metadata_full, 'responce': 'OK' }
+        out= { 'data': dt, 'metadata': metadata_full, 'response': 'OK' }
 
     return HttpResponse( json.dumps( out ))
 
 
 #-----------------------------
-def get_metadata(request, dataset_idef, view_idef, issue, path, db=None):
+def get_metadata(request, serializer, dataset_idef, view_idef, issue, path, db=None):
     if db is None:
         # connection details
         dsn= get_db_connect('mongodb')
@@ -284,7 +285,6 @@ def get_metadata(request, dataset_idef, view_idef, issue, path, db=None):
             if curr in metadata_full:
                 del metadata_full[curr]
 
-        out= { 'metadata': metadata_full, 'responce': 'OK' }
+        out= { 'metadata': metadata_full, 'response': 'OK' }
 
     return HttpResponse( json.dumps( out ))
-
