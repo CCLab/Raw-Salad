@@ -51,7 +51,7 @@ def get_metadata_full(ds_id, ps_id, dbase):
     return metadata_full
 
 #-----------------------------
-def get_datasets(db=None):
+def get_datasets(request, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -74,7 +74,7 @@ def get_datasets(db=None):
     return out
 
 #-----------------------------
-def get_datasets_meta(db=None):
+def get_datasets_meta(request, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -93,7 +93,7 @@ def get_datasets_meta(db=None):
     return out
 
 #-----------------------------
-def get_views(dataset_idef, db=None):
+def get_views(request, dataset_idef, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -121,7 +121,7 @@ def get_views(dataset_idef, db=None):
     return out
 
 #-----------------------------
-def get_views_meta(dataset_idef, db=None):
+def get_views_meta(request, dataset_idef, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -149,7 +149,7 @@ def get_views_meta(dataset_idef, db=None):
     return out
 
 #-----------------------------
-def get_issues(dataset_idef, view_idef, db=None):
+def get_issues(request, dataset_idef, view_idef, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -172,7 +172,7 @@ def get_issues(dataset_idef, view_idef, db=None):
     return out
 
 #-----------------------------
-def get_issues_meta(dataset_idef, view_idef, db=None):
+def get_issues_meta(request, dataset_idef, view_idef, db=None):
     if db is None:    
         # connection details
         dsn= get_db_connect('mongodb')
@@ -196,7 +196,7 @@ def get_issues_meta(dataset_idef, view_idef, db=None):
     return out
 
 #-----------------------------
-def get_data(dataset_idef, view_idef, issue, path, db=None):
+def get_data(request, dataset_idef, view_idef, issue, path, db=None):
     return {}
 #     if db is None:
 #         # connection details
@@ -250,11 +250,7 @@ def get_data(dataset_idef, view_idef, issue, path, db=None):
 
 
 #-----------------------------
-def get_metadata(dataset_idef, view_idef, issue, db=None):
+def get_metadata(request, dataset_idef, view_idef, issue, db=None):
     return {}
 
 
-print get_datasets()
-# print get_views("0")
-# print get_issues(0, 2)
-# print get_issues_meta(0, 2)
