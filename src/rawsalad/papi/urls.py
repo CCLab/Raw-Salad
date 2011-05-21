@@ -18,5 +18,5 @@ urlpatterns = patterns( 'papi.papi',
     
     (r'dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>\.*)/meta/$', 'get_metadata' ),
     (r'dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/$', 'get_data' ),
-    (r'dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>\.*)/$', 'get_data' ),
+    (r'dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>[0-9a-zA-Z/]*)/$', 'get_data' ),
 )
