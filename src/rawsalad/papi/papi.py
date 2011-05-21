@@ -198,7 +198,7 @@ def get_issues_meta(request, dataset_idef, view_idef, db=None):
     return HttpResponse( json.dumps( out ))
 
 #-----------------------------
-def get_data(request, dataset_idef, view_idef, issue, path, db=None):
+def get_data(request, dataset_idef, view_idef, issue, path='', db=None):
     return HttpResponse( json.dumps( {} ))
 #     if db is None:
 #         # connection details
