@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.http import HttpResponse
+from django.utils import simplejson as json
 
 import pymongo
 from ConfigParser import ConfigParser
@@ -48,7 +50,7 @@ def get_metadata_full(ds_id, ps_id, dbase):
         { 'dataset': ds_id, 'idef' : ps_id },
         { '_id' : 0 }
         )
-    return metadata_full
+    return HttpResponse( json.dumps( metadata_full ))
 
 #-----------------------------
 def get_datasets(request, db=None):
@@ -71,7 +73,7 @@ def get_datasets(request, db=None):
     for row in cursor_data:
         out.append(row)
 
-    return out
+    return HttpResponse( json.dumps( out ))
 
 #-----------------------------
 def get_datasets_meta(request, db=None):
@@ -90,7 +92,7 @@ def get_datasets_meta(request, db=None):
 
     cursor_data= db[nav_schema].find(cond_query, nav_select_columns)
     out= { 'count': cursor_data.count() }
-    return out
+    return HttpResponse( json.dumps( out ))
 
 #-----------------------------
 def get_views(request, dataset_idef, db=None):
@@ -118,7 +120,7 @@ def get_views(request, dataset_idef, db=None):
 
     out= cursor_data['perspectives']
 
-    return out
+    return HttpResponse( json.dumps( out ))
 
 #-----------------------------
 def get_views_meta(request, dataset_idef, db=None):
@@ -146,7 +148,7 @@ def get_views_meta(request, dataset_idef, db=None):
 
     out= { 'count': len(cursor_data['perspectives']) }
 
-    return out
+    return HttpResponse( json.dumps( out ))
 
 #-----------------------------
 def get_issues(request, dataset_idef, view_idef, db=None):
@@ -169,7 +171,7 @@ def get_issues(request, dataset_idef, view_idef, db=None):
 
     out= cursor_data['perspectives'][int(view_idef)]
 
-    return out
+    return HttpResponse( json.dumps( out ))
 
 #-----------------------------
 def get_issues_meta(request, dataset_idef, view_idef, db=None):
@@ -193,7 +195,7 @@ def get_issues_meta(request, dataset_idef, view_idef, db=None):
     out= {}
     out['count']= len(cursor_data['perspectives'][int(view_idef)]['issue'])
 
-    return out
+    return HttpResponse( json.dumps( out ))
 
 #-----------------------------
 def get_data(request, dataset_idef, view_idef, issue, path, db=None):
@@ -246,11 +248,11 @@ def get_data(request, dataset_idef, view_idef, issue, path, db=None):
 #     for row in cursor_data:
 #         out.append(row)
 
-#     return out
+#     return HttpResponse( json.dumps( out ))
 
 
 #-----------------------------
 def get_metadata(request, dataset_idef, view_idef, issue, db=None):
-    return {}
+    return HttpResponse( json.dumps( {} ))
 
 
