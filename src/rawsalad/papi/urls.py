@@ -17,6 +17,6 @@ urlpatterns = patterns( '',
     (r'dataset/(?P<dataset>\d+)/view/(?P<view>\d+)/issue/$', 'get_issues' ),
     (r'dataset/(?P<dataset>\d+)/view/(?P<view>\d+)/issue/meta/$', 'get_issues_meta' ),
     
-    (r'dataset/(?P<dataset>\d+)/view/(?P<view>\d+)/issue/(?P<issue>\d+)/(?P<path>\.*)/meta/$', 'get_data_meta' ),
+    (r'dataset/(?P<dataset>\d+)/view/(?P<view>\d+)/issue/(?P<issue>\d+)/(?P<path>\.*)/meta/$', 'get_metadata' ),
     (r'dataset/(?P<dataset>\d+)/view/(?P<view>\d+)/issue/(?P<issue>\d+)/(?P<path>\.*)/$', 'get_data' ),
 )
