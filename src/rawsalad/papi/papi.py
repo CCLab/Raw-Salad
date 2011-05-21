@@ -58,7 +58,6 @@ def get_datasets(db=None):
         connect= pymongo.Connection(dsn['host'], dsn['port'])
         db= connect[dsn['database']]
         db.authenticate(dsn['username'], dsn['password'])
-        
 
     # initial params
     nav_select_columns= {'_id':0} # _id is never returned
@@ -197,7 +196,7 @@ def get_issues_meta(dataset_idef, view_idef, db=None):
     return out
 
 #-----------------------------
-def get_data(dataset_idef, view_idef, issue, db=None):
+def get_data(dataset_idef, view_idef, issue, path, db=None):
     return {}
 #     if db is None:
 #         # connection details
@@ -207,7 +206,7 @@ def get_data(dataset_idef, view_idef, issue, db=None):
 #         db.authenticate(dsn['username'], dsn['password'])        
 
 #     # EXTRACT metadata
-#     metadata_full= get_metadata_full(ds, ps, db)
+#     metadata_full= get_metadata_full(ds, ps, db, issue)
 #     conn_coll= metadata_full['ns'] # collection name
 
 #     md_select_columns= {'_id':0} # _id is never returned
@@ -255,5 +254,7 @@ def get_metadata(dataset_idef, view_idef, issue, db=None):
     return {}
 
 
+print get_datasets()
+# print get_views("0")
 # print get_issues(0, 2)
 # print get_issues_meta(0, 2)
