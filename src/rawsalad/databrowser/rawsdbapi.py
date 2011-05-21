@@ -17,7 +17,7 @@ def get_db_connect(dbtype):
     cfg= ConfigParser(defaults)
 
     cfg.read(conf_filename)
-    
+
     success= True
     try: # check if we can read conf file
         connect_dict['host']= cfg.get(dbtype,'host')
@@ -31,13 +31,14 @@ def get_db_connect(dbtype):
         try:
             connect_dict['password']= cfg.get(dbtype,'password')
         except:
-            connect_dict['password']= '' # password must be instance of basestring
+            # password must be instance of basestring
+            connect_dict['password']= ''
     else: # can't read conf file - filling defaults
         connect_dict['host']= 'localhost'
         connect_dict['port']= 27017
         connect_dict['database']= 'rawsdoc00'
         connect_dict['username']= 'readonly'
-        connect_dict['password']= ''        
+        connect_dict['password']= ''
 
     return connect_dict
 
@@ -48,7 +49,10 @@ def get_metadata_full(ds_id, ps_id, dbase):
     """
     returns complete set of metadata (with "sort", "aux" and "query")
     """
-    metadata_full= dbase[conn_schema].find_one({ 'dataset': ds_id, 'idef' : ps_id }, { '_id' : 0 })
+    metadata_full= dbase[conn_schema].find_one(
+        { 'dataset': ds_id, 'idef' : ps_id },
+        { '_id' : 0 }
+        )
     return metadata_full
 
 
