@@ -62,4 +62,5 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'rawsalad.databrowser',
+    'rawsalad.papi',
 )
