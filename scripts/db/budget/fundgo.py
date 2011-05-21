@@ -186,7 +186,10 @@ def csv_parse(csv_read, schema, database, datacoll):
             # check the role and create an element of according type
             if dict_row['level'] == 'a': # FUNDUSZ
                 dict_row['name']= dict_row['fundusz']
-                dict_row['type']= 'FUNDUSZ '+str(dict_row['idef'])
+                if int(dict_row['idef']) <= 28:
+                    dict_row['type']= 'FUNDUSZ '+str(dict_row['idef'])
+                else:
+                    dict_row['type']= 'AGENCJA '+str(dict_row['idef'])
                 dict_row['parent']= None
                 dict_row['leaf']= False
                 dict_row['node']= None
