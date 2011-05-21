@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.utils import simplejson as json
 from django.core import serializers
 
+import xml.etree.cElementTree as ET
+
 from ConfigParser import ConfigParser
 import pymongo
 
@@ -10,6 +12,37 @@ conn_schema= "md_budg_scheme"
 nav_schema= "ms_nav"
 conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/rawsdata.conf"
 
+
+#-----------------------------
+def dict2et(xmldict, roottag='data', listnames=None):
+    if not listnames:
+        listnames = {}
+    root = ET.Element(roottag)
+    _convert_dict_to_xml_recurse(root, xmldict, listnames)
+
+    return root
+
+#-----------------------------
+def _convert_dict_to_xml_recurse(parent, dictitem, listnames):
+    """Helper Function for XML conversion."""
+    # we can't convert bare lists
+    assert not isinstance(dictitem, list)
+
+    if isinstance(dictitem, dict):
+        for (tag, child) in sorted(dictitem.iteritems()):
+            if isinstance(child, list):
+                listelem = ET.Element(tag)
+                parent.append(listelem)
+                for listchild in child:
+                    elem = ET.Element(listnames.get(tag, 'item'))
+                    listelem.append(elem)
+                    _convert_dict_to_xml_recurse(elem, listchild, listnames)
+            else:
+                elem = ET.Element(tag)
+                parent.append(elem)
+                _convert_dict_to_xml_recurse(elem, child, listnames)
+    elif not dictitem is None:
+        parent.text = unicode(dictitem)
 
 #-----------------------------
 def get_db_connect(dbtype):
@@ -209,59 +242,70 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 
     # EXTRACT metadata
     metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), int(issue), db)
-    conn_coll= metadata_full.pop('ns') # collection name
-
-    md_select_columns= {'_id':0} # _id is never returned
-    cond_aux= metadata_full.pop('aux') # list of aux columns to be returned
-    md_select_columns.update(cond_aux)
-    md_columns= metadata_full['columns'] # list of main columns to be returned
-    for clm in md_columns:
-        md_select_columns[clm['key']]= 1
-
-    try: # batch size
-        cursor_batchsize= metadata_full.pop('batchsize')
-    except:
-        cursor_batchsize= 'default'
-
-    cursor_sort= [] # sort
-    try:
-        cond_sort= metadata_full.pop('sort')
-    except:
-        cond_sort= None
-
-    if cond_sort is not None:
-        list_sort= [int(k) for k, v in cond_sort.iteritems()]
-        list_sort.sort()
-        for sort_key in list_sort:
-            cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
-
-    cond_query= metadata_full.pop('query') # query conditions
-    if path == '':
-        query_aux= { 'level': 'a' }
+    if metadata_full is None:
+        dt= []
     else:
-        path_list= path.rsplit('/', 1)
-        parent_idef= path_list[1] # last idef in the call
-        query_aux= { 'parent': parent_idef }
+        conn_coll= metadata_full.pop('ns') # collection name
 
-    cond_query.update(query_aux) # additional query, depends on the path argument
-    out= {'query':cond_query, 'columns':md_select_columns, 'sort':cursor_sort}
+        md_select_columns= {'_id':0} # _id is never returned
+        cond_aux= metadata_full.pop('aux') # list of aux columns to be returned
+        md_select_columns.update(cond_aux)
+        md_columns= metadata_full['columns'] # list of main columns to be returned
+        for clm in md_columns:
+            md_select_columns[clm['key']]= 1
 
-    # EXTRACT data (rows)
-    if cursor_batchsize in ['default', None]:
-        cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
-    else:
-        cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
+        try: # batch size
+            cursor_batchsize= metadata_full.pop('batchsize')
+        except:
+            cursor_batchsize= 'default'
 
-    dt= []
-    for row in cursor_data:
-        dt.append(row)
+        cursor_sort= [] # sort
+        try:
+            cond_sort= metadata_full.pop('sort')
+        except:
+            cond_sort= None
+
+        if cond_sort is not None:
+            list_sort= [int(k) for k, v in cond_sort.iteritems()]
+            list_sort.sort()
+            for sort_key in list_sort:
+                cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
+
+        cond_query= metadata_full.pop('query') # query conditions
+        if path == '':
+            query_aux= { 'level': 'a' }
+        else:
+            path_list= path.rsplit('/', 1)
+            parent_idef= path_list[1] # last idef in the call
+            query_aux= { 'parent': parent_idef }
+
+        cond_query.update(query_aux) # additional query, depends on the path argument
+        out= {'query':cond_query, 'columns':md_select_columns, 'sort':cursor_sort}
+
+        # EXTRACT data (rows)
+        if cursor_batchsize in ['default', None]:
+            cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
+        else:
+            cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
+
+        dt= []
+        for row in cursor_data:
+            dt.append(row)
 
     if len(dt) == 0:
         out= { 'data': None, 'response': 'No such data' }
     else:
         out= { 'data': dt, 'metadata': metadata_full, 'response': 'OK' }
 
-    return HttpResponse( json.dumps( out ))
+    if serializer == 'json':
+        result= json.dumps( out )
+        mime_tp= "text/json"
+    elif serializer == 'xml':
+        result= ET.tostring(dict2et(out))
+        mime_tp= "text/xml"
+    resp = HttpResponse()
+
+    return HttpResponse( result, mimetype=mime_tp )
 
 
 #-----------------------------
@@ -288,3 +332,9 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path, db=N
         out= { 'metadata': metadata_full, 'response': 'OK' }
 
     return HttpResponse( json.dumps( out ))
+
+
+
+#examples:
+# http://localhost:8000/api/json/dataset/0/view/1/issue/2011/
+# http://localhost:8000/api/xml/dataset/0/view/1/issue/2011/
