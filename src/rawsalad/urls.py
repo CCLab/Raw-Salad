@@ -5,4 +5,5 @@ from django.conf import settings
 urlpatterns = patterns('',
     (r'^site_media/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^', include('rawsalad.databrowser.urls')),
+    (r'^api', include('rawsalad.papi.urls')),
 )
