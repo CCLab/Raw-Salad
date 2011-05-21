@@ -45,12 +45,12 @@ def get_db_connect(dbtype):
     return connect_dict
 
 #-----------------------------
-def get_metadata_full(ds_id, ps_id, dbase):
+def get_metadata_full(ds_id, ps_id, iss, dbase):
     metadata_full= dbase[conn_schema].find_one(
-        { 'dataset': ds_id, 'idef' : ps_id },
+        { 'dataset': ds_id, 'idef' : ps_id, 'issue': iss },
         { '_id' : 0 }
         )
-    return HttpResponse( json.dumps( metadata_full ))
+    return metadata_full
 
 #-----------------------------
 def get_datasets(request, db=None):
@@ -73,7 +73,7 @@ def get_datasets(request, db=None):
     for row in cursor_data:
         out.append(row)
 
-    return HttpResponse( json.dumps( out ))
+    return out
 
 #-----------------------------
 def get_datasets_meta(request, db=None):
@@ -199,60 +199,92 @@ def get_issues_meta(request, dataset_idef, view_idef, db=None):
 
 #-----------------------------
 def get_data(request, dataset_idef, view_idef, issue, path='', db=None):
-    return HttpResponse( json.dumps( {} ))
-#     if db is None:
-#         # connection details
-#         dsn= get_db_connect('mongodb')
-#         connect= pymongo.Connection(dsn['host'], dsn['port'])
-#         db= connect[dsn['database']]
-#         db.authenticate(dsn['username'], dsn['password'])        
+    if db is None:
+        # connection details
+        dsn= get_db_connect('mongodb')
+        connect= pymongo.Connection(dsn['host'], dsn['port'])
+        db= connect[dsn['database']]
+        db.authenticate(dsn['username'], dsn['password'])        
 
-#     # EXTRACT metadata
-#     metadata_full= get_metadata_full(ds, ps, db, issue)
-#     conn_coll= metadata_full['ns'] # collection name
+    # EXTRACT metadata
+    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), int(issue), db)
+    conn_coll= metadata_full.pop('ns') # collection name
 
-#     md_select_columns= {'_id':0} # _id is never returned
-#     cond_aux= metadata_full['aux'] # list of aux columns to be returned
-#     md_select_columns.update(cond_aux)
-#     md_columns= metadata_full['columns'] # list of main columns to be returned
-#     for clm in md_columns:
-#         md_select_columns[clm['key']]= 1
+    md_select_columns= {'_id':0} # _id is never returned
+    cond_aux= metadata_full.pop('aux') # list of aux columns to be returned
+    md_select_columns.update(cond_aux)
+    md_columns= metadata_full['columns'] # list of main columns to be returned
+    for clm in md_columns:
+        md_select_columns[clm['key']]= 1
 
-#     try: # batch size
-#         cursor_batchsize= metadata_full['batchsize']
-#     except:
-#         cursor_batchsize= 'default'
+    try: # batch size
+        cursor_batchsize= metadata_full.pop('batchsize')
+    except:
+        cursor_batchsize= 'default'
 
-#     cursor_sort= [] # sort
-#     try:
-#         cond_sort= metadata_full['sort']
-#     except:
-#         cond_sort= None
+    cursor_sort= [] # sort
+    try:
+        cond_sort= metadata_full.pop('sort')
+    except:
+        cond_sort= None
 
-#     if cond_sort is not None:
-#         list_sort= [int(k) for k, v in cond_sort.iteritems()]
-#         list_sort.sort()
-#         for sort_key in list_sort:
-#             cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
+    if cond_sort is not None:
+        list_sort= [int(k) for k, v in cond_sort.iteritems()]
+        list_sort.sort()
+        for sort_key in list_sort:
+            cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
 
-#     cond_query= metadata_full['query'] # query conditions
-#     cond_query.update(query_aux) # additional query, depends on the call
+    cond_query= metadata_full.pop('query') # query conditions
+    if path == '':
+        query_aux= { 'level': 'a' }
+    else:
+        path_list= path.rsplit('/', 1)
+        parent_idef= path_list[1] # last idef in the call
+        query_aux= { 'parent': parent_idef }
 
-#     # EXTRACT data (rows)
-#     if cursor_batchsize in ['default', None]:
-#         cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
-#     else:
-#         cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
+    cond_query.update(query_aux) # additional query, depends on the path argument
+    out= {'query':cond_query, 'columns':md_select_columns, 'sort':cursor_sort}
 
-#     out= []
-#     for row in cursor_data:
-#         out.append(row)
+    # EXTRACT data (rows)
+    if cursor_batchsize in ['default', None]:
+        cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
+    else:
+        cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
 
-#     return HttpResponse( json.dumps( out ))
+    dt= []
+    for row in cursor_data:
+        dt.append(row)
+
+    if len(dt) == 0:
+        out= { 'data': None, 'response': 'No such data' }
+    else:
+        out= { 'data': dt, 'metadata': metadata_full, 'responce': 'OK' }
+
+    return HttpResponse( json.dumps( out ))
 
 
 #-----------------------------
-def get_metadata(request, dataset_idef, view_idef, issue, db=None):
-    return HttpResponse( json.dumps( {} ))
+def get_metadata(request, dataset_idef, view_idef, issue, path, db=None):
+    if db is None:
+        # connection details
+        dsn= get_db_connect('mongodb')
+        connect= pymongo.Connection(dsn['host'], dsn['port'])
+        db= connect[dsn['database']]
+        db.authenticate(dsn['username'], dsn['password'])        
 
+    # EXTRACT metadata
+    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), int(issue), db)
+
+    if metadata_full is None:
+        out= { 'metadata': None, 'response': 'No such data' }
+    else:
+        # delete useless columns
+        useless_keys= ['ns', 'aux', 'batchsize', 'sort', 'query', 'explorable']
+        for curr in useless_keys:
+            if curr in metadata_full:
+                del metadata_full[curr]
+
+        out= { 'metadata': metadata_full, 'responce': 'OK' }
+
+    return HttpResponse( json.dumps( out ))
 
