@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import *
-import papi
 
-urlpatterns = patterns( '',
+urlpatterns = patterns( 'papi.papi',
     (r'^$', 'get_datasets' ),
     (r'^meta/$', 'get_datasets_meta' ),
     (r'^dataset/$', 'get_datasets' ),
