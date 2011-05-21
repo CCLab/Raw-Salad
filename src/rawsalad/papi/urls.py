@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-import pubapi
+import papi
 
 urlpatterns = patterns( '',
     (r'^api/$', 'get_datasets' ),
