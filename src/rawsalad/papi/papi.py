@@ -356,11 +356,8 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         result= { 'data': dt, 'metadata': metadata_full, 'response': 'OK' }
 
     if serializer == 'json':
-<<<<<<< HEAD
         out= json.dumps( result, ensure_ascii=False, indent=4 )
-=======
-        result= json.dumps( out )
->>>>>>> a3f1017af968f3bfba57e7eb8fc3081f6b6a93a0
+        # result= json.dumps( out )
         mime_tp= "application/json"
     elif serializer == 'xml':
         out= ET.tostring(dict2et(result, root_tag=metadata_full['name']))
