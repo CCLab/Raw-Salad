@@ -299,7 +299,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 
     if serializer == 'json':
         result= json.dumps( out )
-        mime_tp= "text/json"
+        mime_tp= "application/json"
     elif serializer == 'xml':
         result= ET.tostring(dict2et(out))
         mime_tp= "text/xml"
