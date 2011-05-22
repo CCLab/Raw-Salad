@@ -29,6 +29,7 @@ var _sheet = (function () {
         return new_sheet_nr;
     }
     
+    
     that.change_active_sheet( sheet_nr ) {
         if ( _store.active_sheet_nr() !== sheet_nr ) {
             _store.active_sheet_nr( sheet_nr );
@@ -58,7 +59,8 @@ var _sheet = (function () {
         
         _store.active_sheet_number( active_sheet_number );
     };
-    
+
+
     var clean_basic_sheet = function ( ) {
         var active_sheet_number;
         var basic_sheet;

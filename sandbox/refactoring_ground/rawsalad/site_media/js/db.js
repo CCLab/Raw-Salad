@@ -16,8 +16,6 @@ var _db = (function () {
             perspective: _store.perspective(),
             issue: _store.issue(),
             parent: parent_id,
-            // >> what is it for?!
-            add_columns: []
         };
         
         $.ajax({
@@ -73,8 +71,9 @@ var _db = (function () {
             }
         }
     };
+    
 
-
+    // TODO >> rename it!!
     // arms the perspectives buttons
     that.arm_perspective = function ( object ) {
         // ajax call data object
@@ -99,7 +98,6 @@ var _db = (function () {
                 // store received data
                 _store.columns( received_data.perspective );
                 _store.rows( received_data.rows );
-                // >> what is it for?!
                 _store.sheet_name( "Arkusz " + _store.sheets_number() );
                 
                 _store.init_basic_sheet();
