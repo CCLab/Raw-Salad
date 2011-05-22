@@ -1,4 +1,17 @@
 # -*- coding: utf-8 -*-
+"""
+project: Raw Salad
+function: public API to data and meta-data
+requirements: mongod, conf file (see conf_filename)
+
+to-do:
+- standartization of the headers for both XML and JSON
+- stardatization of the errors and processing
+- bare list conversion to XML instead of converting them to dict
+"""
+
+
+
 from django.http import HttpResponse
 from django.utils import simplejson as json
 from django.core import serializers
@@ -12,37 +25,37 @@ conn_schema= "md_budg_scheme"
 nav_schema= "ms_nav"
 conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/rawsdata.conf"
 
-
 #-----------------------------
-def dict2et(xmldict, roottag='data', listnames=None):
-    if not listnames:
-        listnames = {}
-    root = ET.Element(roottag)
-    _convert_dict_to_xml_recurse(root, xmldict, listnames)
+def dict2et(xml_dict, root_tag='result', list_names=None):
+    if not list_names:
+        list_names = {}
+    root = ET.Element(root_tag)
+    _convert_dict_to_xml_recurse(root, xml_dict, list_names)
 
     return root
 
 #-----------------------------
-def _convert_dict_to_xml_recurse(parent, dictitem, listnames):
-    """Helper Function for XML conversion."""
-    # we can't convert bare lists
-    assert not isinstance(dictitem, list)
+def _convert_dict_to_xml_recurse(parent, dict_item, list_names):
+    # XML conversion
+    # WARNING! can't convert bare lists (yet)
 
-    if isinstance(dictitem, dict):
-        for (tag, child) in sorted(dictitem.iteritems()):
+    assert not isinstance(dict_item, list)
+
+    if isinstance(dict_item, dict):
+        for (tag, child) in sorted(dict_item.iteritems()):
             if isinstance(child, list):
-                listelem = ET.Element(tag)
-                parent.append(listelem)
+                list_elem = ET.Element(tag)
+                parent.append(list_elem)
                 for listchild in child:
-                    elem = ET.Element(listnames.get(tag, 'item'))
-                    listelem.append(elem)
-                    _convert_dict_to_xml_recurse(elem, listchild, listnames)
+                    elem = ET.Element(list_names.get(tag, 'item'))
+                    list_elem.append(elem)
+                    _convert_dict_to_xml_recurse(elem, listchild, list_names)
             else:
                 elem = ET.Element(tag)
                 parent.append(elem)
-                _convert_dict_to_xml_recurse(elem, child, listnames)
-    elif not dictitem is None:
-        parent.text = unicode(dictitem)
+                _convert_dict_to_xml_recurse(elem, child, list_names)
+    elif not dict_item is None:
+        parent.text = unicode(dict_item)
 
 #-----------------------------
 def get_db_connect(dbtype):
@@ -103,11 +116,19 @@ def get_datasets(request, serializer, db=None):
 
     cursor_data= db[nav_schema].find(cond_query, nav_select_columns)
 
-    out= []
+    res= []
     for row in cursor_data:
-        out.append(row)
+        res.append(row)
+    result= {'datasets':res}
 
-    return HttpResponse( json.dumps( out ))
+    if serializer == 'json':
+        out= json.dumps( result, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
+    elif serializer == 'xml':
+        out= ET.tostring(dict2et(result, root_tag='data'))
+        mime_tp= "text/xml"
+
+    return HttpResponse( out, mimetype=mime_tp )
 
 #-----------------------------
 def get_datasets_meta(request, serializer, db=None):
@@ -125,8 +146,16 @@ def get_datasets_meta(request, serializer, db=None):
     nav_select_columns.update({ 'perspectives':0 })
 
     cursor_data= db[nav_schema].find(cond_query, nav_select_columns)
-    out= { 'count': cursor_data.count() }
-    return HttpResponse( json.dumps( out ))
+    result= { 'count': cursor_data.count() }
+
+    if serializer == 'json':
+        out= json.dumps( {'datasets': result }, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
+    elif serializer == 'xml':
+        out= ET.tostring(dict2et(result, root_tag='datasets'))
+        mime_tp= "text/xml"
+
+    return HttpResponse( out, mimetype=mime_tp )
 
 #-----------------------------
 def get_views(request, serializer, dataset_idef, db=None):
@@ -152,9 +181,16 @@ def get_views(request, serializer, dataset_idef, db=None):
 
     cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
 
-    out= cursor_data['perspectives']
+    result= { 'views': cursor_data['perspectives'] }
 
-    return HttpResponse( json.dumps( out ))
+    if serializer == 'json':
+        out= json.dumps( result, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
+    elif serializer == 'xml':
+        out= ET.tostring(dict2et(result, root_tag='dataset'))
+        mime_tp= "text/xml"
+
+    return HttpResponse( out, mimetype=mime_tp )
 
 #-----------------------------
 def get_views_meta(request, serializer, dataset_idef, db=None):
@@ -180,9 +216,16 @@ def get_views_meta(request, serializer, dataset_idef, db=None):
 
     cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
 
-    out= { 'count': len(cursor_data['perspectives']) }
+    result= {'count': len(cursor_data['perspectives']) }
 
-    return HttpResponse( json.dumps( out ))
+    if serializer == 'json':
+        out= json.dumps( {'views': result}, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
+    elif serializer == 'xml':
+        out= ET.tostring(dict2et(result, root_tag='views'))
+        mime_tp= "text/xml"
+
+    return HttpResponse( out, mimetype=mime_tp )
 
 #-----------------------------
 def get_issues(request, serializer, dataset_idef, view_idef, db=None):
@@ -203,9 +246,17 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
 
     cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
 
-    out= cursor_data['perspectives'][int(view_idef)]
+    result= cursor_data['perspectives'][int(view_idef)]
 
-    return HttpResponse( json.dumps( out ))
+    if serializer == 'json':
+        result['issues']= result.pop('issue')
+        out= json.dumps( result, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
+    elif serializer == 'xml':
+        out= ET.tostring(dict2et(result, root_tag='issues'))
+        mime_tp= "text/xml"
+
+    return HttpResponse( out, mimetype=mime_tp )
 
 #-----------------------------
 def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
@@ -226,10 +277,17 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
 
     cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
 
-    out= {}
-    out['count']= len(cursor_data['perspectives'][int(view_idef)]['issue'])
+    result= {}
+    result['count']= len(cursor_data['perspectives'][int(view_idef)]['issue'])
 
-    return HttpResponse( json.dumps( out ))
+    if serializer == 'json':
+        out= json.dumps( { 'issues': result }, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
+    elif serializer == 'xml':
+        out= ET.tostring(dict2et(result, root_tag='issues'))
+        mime_tp= "text/xml"
+
+    return HttpResponse( out, mimetype=mime_tp )
 
 #-----------------------------
 def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
@@ -293,23 +351,21 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
             dt.append(row)
 
     if len(dt) == 0:
-        out= { 'data': None, 'response': 'No such data' }
+        result= { 'data': None, 'response': 'No such data' }
     else:
-        out= { 'data': dt, 'metadata': metadata_full, 'response': 'OK' }
+        result= { 'data': dt, 'metadata': metadata_full, 'response': 'OK' }
 
     if serializer == 'json':
-        result= json.dumps( out )
-        mime_tp= "text/json"
+        out= json.dumps( result, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
     elif serializer == 'xml':
-        result= ET.tostring(dict2et(out))
+        out= ET.tostring(dict2et(result, root_tag=metadata_full['name']))
         mime_tp= "text/xml"
-    resp = HttpResponse()
 
-    return HttpResponse( result, mimetype=mime_tp )
-
+    return HttpResponse( out, mimetype=mime_tp )
 
 #-----------------------------
-def get_metadata(request, serializer, dataset_idef, view_idef, issue, path, db=None):
+def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
         # connection details
         dsn= get_db_connect('mongodb')
@@ -321,7 +377,7 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path, db=N
     metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), int(issue), db)
 
     if metadata_full is None:
-        out= { 'metadata': None, 'response': 'No such data' }
+        result= { 'metadata': None, 'response': 'No such data' }
     else:
         # delete useless columns
         useless_keys= ['ns', 'aux', 'batchsize', 'sort', 'query', 'explorable']
@@ -329,12 +385,13 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path, db=N
             if curr in metadata_full:
                 del metadata_full[curr]
 
-        out= { 'metadata': metadata_full, 'response': 'OK' }
+        result= { 'metadata': metadata_full, 'response': 'OK' }
 
-    return HttpResponse( json.dumps( out ))
+    if serializer == 'json':
+        out= json.dumps( result, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
+    elif serializer == 'xml':
+        out= ET.tostring(dict2et(result, root_tag=metadata_full['name']))
+        mime_tp= "text/xml"
 
-
-
-#examples:
-# http://localhost:8000/api/json/dataset/0/view/1/issue/2011/
-# http://localhost:8000/api/xml/dataset/0/view/1/issue/2011/
+    return HttpResponse( out, mimetype=mime_tp )
