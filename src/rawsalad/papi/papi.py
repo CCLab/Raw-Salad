@@ -99,6 +99,12 @@ def get_metadata_full(ds_id, ps_id, iss, dbase):
         )
     return metadata_full
 
+
+#-----------------------------
+def get_formats(request):
+    return HttpResponse( json.dumps( {'formats': ['json', 'xml']} ), 'application/json' )
+
+
 #-----------------------------
 def get_datasets(request, serializer, db=None):
     if db is None:    
@@ -357,6 +363,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 
     if serializer == 'json':
         out= json.dumps( result, ensure_ascii=False, indent=4 )
+        # result= json.dumps( out )
         mime_tp= "application/json"
     elif serializer == 'xml':
         out= ET.tostring(dict2et(result, root_tag=metadata_full['name']))
