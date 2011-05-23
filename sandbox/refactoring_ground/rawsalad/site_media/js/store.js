@@ -7,6 +7,124 @@ var _store = (function () {
     //  P U B L I C   I N T E R F A C E
     var that = {};
 
+    // meta_data setter/getter
+    that.meta_data = function ( value ) {
+        if( arguments === 0 ) {
+            return meta_data;
+        }
+        
+        meta_data( value );    
+    };
+    
+
+    that.dataset = function ( value ) { 
+        if( arguments === 0 ) {
+            return active_group()['dataset'];
+        }
+        
+        active_group()['dataset'] = value;
+    };
+     
+      
+    that.perspective = function ( value ) { 
+        if( arguments === 0 ) {
+            return active_group()['perspecive'];
+        }
+        
+        active_group()['perspective'] = value;
+    };        
+
+
+    that.issue = function ( value ) { 
+        if( arguments === 0 ) {
+            return active_group()['issue'];
+        }
+        
+        return active_group()['issue'];
+    };        
+
+
+    that.active_group_number = function ( value ) { 
+        if( arguments === 0 ) {
+            return group_container['active_group_list'];
+        }
+        
+        group_container['active_group_list'] = value;
+    };        
+
+
+    that.active_sheet_number = function ( value ) { 
+        if( arguments === 0 ) {
+            return groups['active_sheet_number'];
+        }
+        
+        sheets_group['active_sheet_number'] = value;
+    };
+
+
+    that.active_sheet = function () {
+        return active_group()[ 'active_sheet_number' ];
+    };
+
+
+
+    // P R I V A T E   D A T A 
+    var groups_container = {
+        'active_group_number': 0,
+        'groups': [ sheet_list() ],
+    };
+    
+    // data about available datasets and their perspectives
+    var meta_data = [];
+
+
+    var active_group = function () {
+        return groups_conainer[ 'groups'][ that.active_group_number() ];
+    }
+
+
+    var sheet_data = function () {  
+        return {
+            'columns': null,
+            'rows': null,  
+            'pending_nodes': [],  
+
+            'name': ''
+        };
+    };
+    
+    // list of all sheets of the table
+    var sheets_group = function () {
+        return {
+            'dataset': null,
+            'perspective': null,
+            'issue': null,
+        
+            'active_sheet_number': 0,
+            'sheets': [ sheet_data() ],
+            'basic_sheet': {},
+            'basic_pure_state': true
+        };
+    };
+
+
+    return that;
+
+}) ();
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     // setters/getters: sheet_list
     that.colums = function ( value ) {
         if( arguments === 0 ) {
@@ -26,31 +144,7 @@ var _store = (function () {
     };
 
 
-    that.dataset = function ( value ) { 
-        if( arguments === 0 ) {
-            return sheet_data['dataset'];
-        }
-        
-        sheet_data['dataset'] = dataset;
-    };
-     
-      
-    that.perspective = function ( value ) { 
-        if( arguments === 0 ) {
-            return sheet_data['perspective'];
-        }
-        
-        sheet_data['perspective'] = value;
-    };        
 
-
-    that.issue = function ( value ) { 
-        if( arguments === 0 ) {
-            return sheet_data['issue'];
-        }
-        
-        sheet_data['issue'] = value;
-    };        
 
     that.pending_nodes = function ( value ) {
         if( arguments === 0 ) {
@@ -117,50 +211,9 @@ var _store = (function () {
     };
 
 
-    // P R I V A T E   D A T A 
-    
-    // current object shown in the table
-    var sheet_data = {
-        'dataset': null,
-        'perspective': null,
-        'issue': null,
-
-        'columns': null,
-        'rows': null,  
-        'pending_nodes': [],  
-
-        'name': ''
-    };
-    
-    // list of all sheets of the table
-    var sheet_list = {
-        'active_sheet_number': 0,
-        'sheets': [ sheet_data ],
-        'basic_sheet': {},
-        'basic_pure_state': true
-    };
 
 
-    // data about available datasets and their perspectives
-    var meta_data = [];
-
-    return that;
-
-}) ();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 
 

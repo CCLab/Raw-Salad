@@ -66,9 +66,11 @@
     <script src="/site_media/media/js/sort_filter.js"></script>
     <script type="text/javascript" language="javascript" charset="utf-8">
     // <![CDATA[
-        _store.meta_all_datasets( {{ meta_data|safe }} );
+        _store.meta_data( {{ meta_data|safe }} );
     // ]]>
     </script>
+    <script src="/site_media/js/main.js"></script>
+    
     {% block js %}    
     {% endblock %}
     
