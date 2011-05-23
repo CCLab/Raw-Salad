@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns( 'papi.papi',
+    (r'^$', 'get_formats' ),
     (r'^(?P<serializer>[a-z]+)/$', 'get_datasets' ),
     (r'^(?P<serializer>[a-z]+)/meta/$', 'get_datasets_meta' ),
     (r'^(?P<serializer>[a-z]+)/dataset/$', 'get_datasets' ),

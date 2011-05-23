@@ -99,6 +99,12 @@ def get_metadata_full(ds_id, ps_id, iss, dbase):
         )
     return metadata_full
 
+
+#-----------------------------
+def get_formats(request):
+    return HttpResponse( json.dumps( {'formats': ['json', 'xml']} ), 'application/json' )
+
+
 #-----------------------------
 def get_datasets(request, serializer, db=None):
     if db is None:    
