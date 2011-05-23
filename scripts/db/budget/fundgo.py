@@ -11,7 +11,7 @@ there are 2 'branches of the tree' of a budget structure,
 outlined in the collection as 'node':null and 'node':0
 
 nodes are:
-null: [fundusz] 1-N [dzial] 1-N [zadanie] 1-N [podzadanie]
+null: [fundusz] 1-N [zadanie] 1-N [podzadanie]
 0: ...[zadanie] 1-N [miernik]
 
 Warning! No schema create or update!
@@ -196,17 +196,17 @@ def csv_parse(csv_read, schema, database, datacoll):
                 dict_row['idef_sort']= sort_format(dict_row['idef'])
                 dict_row['parent_sort']= None
 
-            elif dict_row['level'] == 'b': # Dzial
-                dict_row['name']= dict_row['dzial']
-                dict_row['type']= 'Dział '+str(dict_row['idef'])
-                idef_list= dict_row['idef'].split('-')
-                dict_row['parent']= idef_list[0]
-                dict_row['leaf']= False
-                dict_row['node']= None
-                dict_row['idef_sort']= sort_format(dict_row['idef'])
-                dict_row['parent_sort']= sort_format(dict_row['parent'])
+#             elif dict_row['level'] == 'b': # Dzial
+#                 dict_row['name']= dict_row['dzial']
+#                 dict_row['type']= 'Dział '+str(dict_row['idef'])
+#                 idef_list= dict_row['idef'].split('-')
+#                 dict_row['parent']= idef_list[0]
+#                 dict_row['leaf']= False
+#                 dict_row['node']= None
+#                 dict_row['idef_sort']= sort_format(dict_row['idef'])
+#                 dict_row['parent_sort']= sort_format(dict_row['parent'])
 
-            elif dict_row['level'] == 'c': # Zadanie
+            elif dict_row['level'] == 'b': # Zadanie
                 dict_row['name']= dict_row['zadanie']
                 dict_row['type']= 'Zadanie '+str(dict_row['idef'])
                 idef_list= dict_row['idef'].rsplit('-', 1)
@@ -215,16 +215,16 @@ def csv_parse(csv_read, schema, database, datacoll):
                 dict_row['node']= None
                 dict_row['idef_sort']= sort_format(dict_row['idef'])
                 dict_row['parent_sort']= sort_format(dict_row['parent'])
-                # create here another node for Miernik (of Cel which belongs to Zadanie), which is coded as '...-...-...-m...'
+                # create here another node for Miernik (of Cel which belongs to Zadanie), which is coded as '...-...-...-d...'
                 if dict_row['cel'] is not None:
                     dict_row_miernik= dict_row.copy()
-                    dict_row_miernik['idef']= dict_row['idef']+'-m01'
+                    dict_row_miernik['idef']= dict_row['idef']+'-d01'
                     dict_row_miernik['name']= dict_row['miernik']
                     dict_row_miernik['type']= 'Miernik '+str(dict_row_miernik['idef'])
                     dict_row_miernik['parent']= dict_row['idef'] # current Zadanie is a parent of Miernik
                     dict_row_miernik['leaf']= True # we now it's a leaf
-                    dict_row_miernik['level']= 'd'
-                    dict_row_miernik['cel']= None # we have cel on the level of Zadanie
+                    dict_row_miernik['level']= 'c' # miernik of Zadanie is at level "c"
+                    dict_row_miernik['cel']= None # Cel is on the level of Zadanie
                     dict_row_miernik['miernik']= None # 'miernik' becomes 'name'
                     dict_row_miernik['node']= 0 # Zadanie - Miernik is node 0
                     dict_row_miernik['idef_sort']= sort_format(dict_row_miernik['idef'])
@@ -239,7 +239,7 @@ def csv_parse(csv_read, schema, database, datacoll):
                     dict_row['miernik_wartosc_2013']= None
                     dict_row['leaf']= False # now we know it's not a leaf
 
-            elif dict_row['level'] == 'd': # Podzadanie
+            elif dict_row['level'] == 'c': # Podzadanie
                 dict_row['name']= dict_row['podzadanie']
                 dict_row['type']= 'Podzadanie '+str(dict_row['idef'])
                 idef_list= dict_row['idef'].rsplit('-', 1)
@@ -249,14 +249,16 @@ def csv_parse(csv_read, schema, database, datacoll):
                 dict_row['idef_sort']= sort_format(dict_row['idef'])
                 dict_row['parent_sort']= sort_format(dict_row['parent'])
 
-            elif dict_row['level'] == 'd0': # Miernik
+            elif dict_row['level'] == 'd': # Miernik
+                # the level actually can be 'c', if it's Miernik for Zadanie
+                if dict_row['idef'].count('-') == 2:
+                    dict_row['level']= 'c'
                 dict_row['name']= dict_row['miernik']
                 dict_row['type']= 'Miernik '+str(dict_row['idef'])
                 idef_list= dict_row['idef'].rsplit('-', 1)
                 dict_row['parent']= idef_list[0]
                 dict_row['leaf']= True
                 dict_row['node']= 0
-                dict_row['level']= 'd'
                 dict_row['idef_sort']= sort_format(dict_row['idef'])
                 dict_row['parent_sort']= sort_format(dict_row['parent'])
                 dict_row['val_2011'], dict_row['val_2012'], dict_row['val_2013']= 0,0,0 # no money on the level of miernik
@@ -313,7 +315,7 @@ if __name__ == "__main__":
         exit()
 
     # data & meta-data collections
-    coll_schm= 'md_fund_scheme'
+    coll_schm= 'md_budg_scheme'
     coll_data= 'dd_fund2011_go'
 
     # CSV file
