@@ -53,7 +53,8 @@
   "aux": {
       "leaf": 1,
       "parent": 1,
-      "level": 1
+      "level": 1,
+      "idef": 1
   },
   "query": {},
   "sort": {

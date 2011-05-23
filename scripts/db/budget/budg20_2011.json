@@ -1,8 +1,9 @@
 {
   "name": "funduszy_zadaniowy_2011",
-  "perspective": "Plany finansowe państwowych Funduszy Celowych w układzie zadaniowym 2011-2013",
+  "perspective": "Koszty Funduszy Celowych i Agencij 2011-2013 w układzie zadaniowym",
   "ns": "dd_fund2011_go",
   "dataset": 2,
+  "max_level": "d",
   "idef": 0,
   "issue": 2011,
   "explorable": "type",
@@ -86,7 +87,8 @@
   "aux": {
       "leaf": 1,
       "parent": 1,
-      "level": 1
+      "level": 1,
+      "idef": 1
   },
   "query": {"node": null},
   "sort": {
