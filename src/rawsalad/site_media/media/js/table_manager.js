@@ -57,6 +57,7 @@
         var schema;
         var level;
         var rows;
+        var is_hidden;
         
         var nextLetter = function( letter ) {
             var number = letter.charCodeAt( 0 );
@@ -85,12 +86,15 @@
                 
                 if ( !!item[ 'parent' ] ) {
                     id = item[ 'parent' ];
-                    arm_nodes( table_data_object, id );
+                    is_hidden = item[ 'hidden' ];
+                    arm_nodes( table_data_object, id, is_hidden );
                 }
             }
         }
         
         arm_nodes( table_data_object );
+        hide_hidden_nodes( table_data_object );
+        
         make_zebra();
         
     };
@@ -141,7 +145,7 @@
     };
     
     // add action listener to newly created nodes
-    var arm_nodes = function( table_data_object, id ) {
+    var arm_nodes = function( table_data_object, id, is_hidden ) {
         var node;
         
         // no parameters for a-level nodes
@@ -170,6 +174,7 @@
                 // if there is a subtree already --> toggle it
                 else {
                     nodes.toggle();
+                    toggle_hidden_param( table_data_object, id );
                 }
                 highlight( current_level );
             });	                             
@@ -227,7 +232,40 @@
         node.find( '.data' ).each( function () {
             $(this).children( '.cell' ).equalize_heights();
         });
-    };    
+    };
+    
+    var toggle_hidden_param = function( table_data_object, id ) {
+        var parent = filter( function ( element ) {
+                return element['idef'] === id;
+            }, table_data_object.rows );
+        //Assert.assert( !parent['leaf'], 
+        //               "cant hide leaf's children!!!" );
+            
+        parent[0]['hidden'] = !parent[0]['hidden'];
+    };
+    
+    var hide_hidden_nodes = function( table_data_object ) {
+        var parents_with_hidden_children;
+        var node;
+        var i;
+        var id;
+        var hidden_children;
+        
+        parents_with_hidden_children = filter( function ( element ) {
+                return !!element['hidden'];
+            }, table_data_object.rows );
+            
+        for ( i = 0; i < parents_with_hidden_children.length; i += 1 ) {
+            id = parents_with_hidden_children[i]['idef'];
+            node = $('#'+id);
+            hidden_children = node.find('.data')
+                                  .find('.type')
+                                  .parent()
+                                  .next();
+                           
+           hidden_children.toggle();
+        }
+    }
     
     var make_zebra = function () {
         // get all visible rows
@@ -495,7 +533,6 @@
                 col_nr: $(this).attr('data-collection-number')
             };
 
-            debugger;
             $.ajax({
                 data: init_data_info,
                 dataType: "json",
