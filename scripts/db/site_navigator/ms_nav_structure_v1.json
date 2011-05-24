@@ -58,14 +58,28 @@
         "perspectives": [
             {
                 "idef": 0,
-                "name": "Dane budżetowe w układzie zadaniowym",
+                "name": "Fundusze celowe w układzie zadaniowym",
                 "description": "Z podziałem na funkcje, zadania i podzadania",
                 "long_description": null,
                 "issue": [ 2011 ]
                 },
             {
                 "idef": 1,
-                "name": "Dane budżetowe w układzie tradycyjnym",
+                "name": "Fundusze celowe w układzie tradycyjnym",
+                "description": "Odpowiadające klasycznemu układowi budżetu państwa",
+                "long_description": null,
+                "issue": [ 2011 ]
+                },
+            {
+                "idef": 2,
+                "name": "Agencje narodowe w układzie zadaniowym",
+                "description": "Z podziałem na funkcje, zadania i podzadania",
+                "long_description": null,
+                "issue": [ 2011 ]
+                },
+            {
+                "idef": 3,
+                "name": "Agencje narodowe w układzie tradycyjnym",
                 "description": "Odpowiadające klasycznemu układowi budżetu państwa",
                 "long_description": null,
                 "issue": [ 2011 ]
