@@ -1,0 +1,16 @@
+{
+  "alias": {
+      "0":"type",
+      "1":"idef",
+      "2":"name",
+      "3":"frst_popr",
+      "4":"plan_nast"
+  },
+  "type": {
+      "type": "string",
+      "idef": "string",
+      "name": "string",
+      "frst_popr": "int",
+      "plan_nast": "int"
+  }
+}
