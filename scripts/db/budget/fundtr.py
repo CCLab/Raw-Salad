@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 """
 import:
@@ -26,7 +27,44 @@ import optparse
 import csv
 import pymongo
 import simplejson as json
-from bson.code import Code
+from ConfigParser import ConfigParser
+
+#-----------------------------
+def get_db_connect(fullpath, dbtype):
+    connect_dict= {}
+
+    defaults= {
+        'basedir': fullpath
+    }
+
+    cfg= ConfigParser(defaults)
+    cfg.read(fullpath)
+    connect_dict['host']= cfg.get(dbtype,'host')
+    connect_dict['port']= cfg.getint(dbtype,'port')
+    connect_dict['database']= cfg.get(dbtype,'database')
+    connect_dict['username']= cfg.get(dbtype,'username')
+    try:
+        connect_dict['password']= cfg.get(dbtype,'password')
+    except:
+        connect_dict['password']= None
+
+    return connect_dict
+
+#-----------------------------
+def sort_format(src):
+    """
+    format 1-2-3... to 001-002-003...
+    src should be convertable to int
+    """
+    src_list= src.split('-')
+    res_list= []
+    for elm in src_list:
+        try:
+            res_list.append('%03d' % int(elm))
+        except:
+            res_list.append(elm)
+    res= '-'.join(res_list)
+    return res
 
 
 #-----------------------------
@@ -41,37 +79,73 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 
 
 #-----------------------------
-def fill_docs(fund_data, type_label, db, coll, cleandb):
-    
-    fund_list= []
-    for row_doc in fund_data:
-        if row_doc['leaf']: #change leaf to boolean
-            row_doc['leaf']= True
-        else:
-            row_doc['leaf']= False
+def fill_docs(fund_data):
+    print '-- filling out missing information'
 
+    level_label= ['a','b','c','d','e','f','g']
+    deepest_level= 0
+
+    total_frst_popr= 0
+    total_plan_nast= 0
+
+
+    for row_doc in fund_data:
+        row_doc['idef_sort']= sort_format(row_doc['idef'])
+        row_doc['leaf']= True # for a while, will fill correctly later
         curr_level= row_doc['idef'].count('-') # count of '-' in idef tells about the level
-        row_doc['level']= type_label[curr_level]
+        row_doc['level']= level_label[curr_level]
+        if curr_level > deepest_level:
+           deepest_level= curr_level
+
+        if row_doc['frst_popr'] is None: # numeric values shouldn't be null
+            row_doc['frst_popr']= 0
+        if row_doc['plan_nast'] is None:
+            row_doc['plan_nast']= 0
 
         if curr_level > 0: # fill parent
             row_doc['parent']= row_doc['idef'].rpartition('-')[0]
-            if row_doc['frst_popr'] is None: # numeric values on the lover levels shouldn't be null
-                row_doc['frst_popr']= 0
-            if row_doc['plan_nast'] is None:
-                row_doc['plan_nast']= 0
+            row_doc['parent_sort']= sort_format(row_doc['parent'])
         else:
             row_doc['parent']= None # no parent at the level a
-            row_doc['frst_popr']= None # numeric values on the highest level should be null
-            row_doc['plan_nast']= None
+            row_doc['parent_sort']= None
+            total_frst_popr += row_doc['frst_popr'] # calculating totals
+            total_plan_nast += row_doc['plan_nast']
 
-        fund_list.append(row_doc)
+        # cleaning names
+        row_doc['name']= row_doc['name'].replace('\n', ' ')
+        row_doc['name']= row_doc['name'].replace('Ŝ', 'ż')
+        
+    print '-- !!! deepest_level is', level_label[deepest_level]
+    print '-- filling out totals'
+    total_doc= {}
+    total_doc['idef']= '999999'
+    total_doc['idef_sort']= '999999'
+    total_doc['parent']= None
+    total_doc['parent_sort']= None
+    total_doc['level']= 'a'
+    total_doc['leaf']= True
+    total_doc['type']= 'Total'
+    total_doc['name']= 'Ogółem'
+    total_doc['paragrafy']= None
+    total_doc['frst_popr']= total_frst_popr
+    total_doc['plan_nast']= total_plan_nast
+    fund_data. append(total_doc)
 
-    print '-- ', db_insert(fund_list, db, coll, cleandb), 'records inserted'
-    return fund_list
+    # filling leaves
+    print '-- correcting leaves'
+    fund_data_children= fund_data[:]
+    for fund_data_row in fund_data:
+        for fund_data_child in fund_data_children:
+            if fund_data_row['idef'] == fund_data_child['parent']:
+                fund_data_row['leaf']= False
+                break
+
+    return fund_data
 
 
 #-----------------------------
 def csv_parse(csv_read, schema):
+    print '-- parsing csv file'
     out= []
 
     dbkey_alias= schema["alias"] # dict of aliases -> document keys in db
@@ -108,8 +182,6 @@ def csv_parse(csv_read, schema):
                             dict_row[new_key] = int(field)
                     except:
                         dict_row[new_key] = field # no, it is a string
-                #additional fields
-                dict_row['parent']= None
 
                 i += 1
 
@@ -121,129 +193,95 @@ def csv_parse(csv_read, schema):
 #-----------------------------
 if __name__ == "__main__":
     # process command line options
-    cmdparser = optparse.OptionParser() 
-    cmdparser.add_option("-v", "--csv", action="store", dest="csv_filename", help="input file (CSV)")
-    cmdparser.add_option("-s", "--schema", action="store",help="schema for CSV file (if none than SRC_FILE-SCHEMA.JSON is used)")
-    cmdparser.add_option("-d", "--dbconnect", action="store", help="database and collection to insert to, given as db.collect (no update if not specified!)")
-    cmdparser.add_option("-u", "--usr", action="store", help="database admin login")
-    cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean before insert (ignored if db is not being updated)")
-    cmdparser.add_option("-j", "--json", action="store", dest="json_filename", help="store to json file (CSV)")
+    cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] source_file.csv source_schema.json") 
+    cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
+    cmdparser.add_option("-l", "--collect", action="store",dest='collection_name',help="collection name")
+    cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean db before insert (ignored if db is not updated)")
 
     opts, args = cmdparser.parse_args()
 
+    conf_filename= opts.conf_filename
+    if conf_filename is None:
+        print 'No configuratuion file specified!'
+        exit()
+
     try:
-        src_file= open(opts.csv_filename, 'rb')
+        f_temp= open(conf_filename, 'rb')
+    except Exception as e:
+        print 'Cannot open .conf file:\n %s\n' % e
+        exit()
+
+    clean_db= opts.dbact # False - insert() data, True - remove() and then insert()
+
+    # get connection details
+    conn= get_db_connect(conf_filename, 'mongodb')
+    conn_host= conn['host']
+    conn_port= conn['port']
+    conn_db= conn['database']
+
+    try:
+        connection= pymongo.Connection(conn_host, conn_port)
+        db= connection[conn_db]
+        print '...connected to the database', db
+    except Exception as e:
+        print 'Unable to connect to the mongodb database:\n %s\n' % e
+        exit()
+
+    # authentication
+    conn_username= conn['username']
+    conn_password= conn['password']
+    if conn_password is None:
+        conn_password = getpass.getpass()
+    if db.authenticate(conn_username, conn_password) != 1:
+        print 'Cannot authenticate to db, exiting now'
+        exit()
+
+    # data collection
+    if opts.collection_name is None:
+        print 'Collection name not given - the name dd_xxxxyyyy_xx will be used'
+        collectname= 'dd_xxxxyyyy_xx'
+    else:
+        collectname= opts.collection_name
+
+    # CSV file
+    try:
+        src_file= open(args[0], 'rb')
     except IOError as e:
         print 'Unable to open file:\n %s\n' % e
         exit()
 
     csv_delim= ';'
     csv_quote= '"'
-
-    #read CSV file with data
     try:
         csv_read= csv.reader(src_file, delimiter= csv_delim, quotechar= csv_quote)
     except Exception as e:
         print 'Unable to read CSV file:\n %s\n' % e
+        exit()
 
-    #read schema file
-    filename_schema= opts.schema
-    if filename_schema is None:
-        filename_schema= opts.csv_filename.rstrip('.csv')+'-schema.json'
-    #deserialize it into the object
+    # schema file
     try:
+        filename_schema= args[1]
+    except:
+        filename_schema= None
+    if filename_schema is None:
+        filename_schema= args[0].rstrip('.csv')+'-schema.json'
+    try: #deserialize it into the object
         sch_src= open(filename_schema, 'rb')
         schema= json.load(sch_src, encoding='utf-8') # schema file
     except Exception as e:
         print 'Error in processing schema file:\n %s\n' % e
         exit()
 
-
     # create temporary dict
     obj_parsed= csv_parse(csv_read, schema)
 
-    #database settings
-    work_db= None #no update if it remain None
-    str_dbconnect= opts.dbconnect # database connection string
-    dbparam= []
-    if str_dbconnect is not None: #parse it
-        if '.' in str_dbconnect:
-            dbparam= str_dbconnect.split('.', 2)
-            dbname= dbparam[0]
-            collectname= dbparam[1]
-            clean_db= opts.dbact # False - insert() data, True - remove() and then insert()
+    # fill it out with real data
+    obj_rep= fill_docs(obj_parsed) # processing and inserting the data
+    for ii in obj_rep:
+        print "%-15s %-20s %-15s %-20s %5s %-7s %-10s %-50s %10d %10d" % (
+            ii['idef'], ii['idef_sort'], ii['parent'], ii['parent_sort'], ii['level'], ii['leaf'], ii['type'], ii['name'], ii['plan_nast'], ii['frst_popr']
+            )
+    print '-- inserting into the db'
+    print '-- ', db_insert(obj_rep, db, collectname, clean_db), 'records inserted'
 
-            mongo_connect= pymongo.Connection("localhost", 27017)
-            work_db= mongo_connect[dbname]
-        #try to connect and authenticate
-            try:
-                mongo_connect= pymongo.Connection("localhost", 27017)
-                work_db= mongo_connect[dbname]
-            except Exception as e:
-                print 'Unable to connect to the database:\n %s\n' % e
-                exit()
-        else:
-            print 'Unable to parse dbconnect - wrong format: \n %s\n' % str_dbconnect
-
-    if work_db is not None:
-        #username - ask for password
-        usrname= opts.usr
-        pprompt = getpass.getpass()
-
-        if not work_db.authenticate(usrname, pprompt):
-            print 'Fatal error: Unable to authenticate to the db \nExiting now'
-            exit()
-
-        level_label= ['a','b','c','d','e','f','g']
-        obj_rep= fill_docs(obj_parsed, level_label, work_db, collectname, clean_db) # processing and inserting the data
-
-        #meta info - just the labels for types
-        meta_info= schema['meta']
-
-        #meta info
-        meta_name= meta_info['name']
-        meta_perspective= meta_info['perspective']
-        meta_collnum= meta_info['idef']
-        meta_explore= meta_info['explorable']
-        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'explorable'), (meta_collnum, meta_name, meta_perspective, collectname, meta_explore)))
-        meta_collection['columns']= schema['columns']
-
-        schema_coll= 'md_fund_scheme'
-        print '-- inserting meta-data into '+ dbname +'.'+ schema_coll
-        mongo_connect.start_request()
-        print '-- updating schema collection', db_insert(meta_collection, work_db, schema_coll, False)
-
-        mongo_connect.end_request()
-
-        # saving into json file
-        if opts.json_filename is not None:
-            try:
-                json_write= open(opts.json_filename, 'w')
-            except IOError as e:
-                print 'Unable to open file:\n %s\n' % e
-                exit()
-
-            full_data= {}
-
-            cursor_data= work_db[collectname].find({},{'_id':0})
-            rows= [] # first save the result into the list
-            for row in cursor_data:
-                rows.append(row)
-
-            full_data['rows']= rows
-
-            meta_data= work_db[schema_coll].find_one({'idef':meta_collnum},{'_id':0})
-            for k in meta_data:
-                full_data[k]= meta_data[k]
-
-            try:
-                print >>json_write, json.dumps(full_data, indent=4)
-            except IOError as writerr:
-                print 'Unable to save out_file:\n %s\n' % writerr
-                exit()
-
-            src_file.close()
-            json_write.close()
-            print "File saved: " + opts.json_filename
-
-        print 'Done'
+    print 'Done'

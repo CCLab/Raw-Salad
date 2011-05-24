@@ -141,12 +141,14 @@ def clean_dict(src_dict):
 
 
 #-----------------------------
-def csv_parse(csv_read, schema, database, datacoll):
+def csv_parse(csv_read, schema, type_str):
     # parse csv data and put in into the dictionary
     out= []
 
     dbkey_alias= schema["alias"] # dict of aliases -> document keys in db
     dbval_types= schema["type"] # dict of types -> values types in db
+
+    total_val_2011, total_val_2012, total_val_2013= 0,0,0 # for totals
 
     for row in csv_read:
         keys= tuple(row)
@@ -186,15 +188,15 @@ def csv_parse(csv_read, schema, database, datacoll):
             # check the role and create an element of according type
             if dict_row['level'] == 'a': # FUNDUSZ
                 dict_row['name']= dict_row['fundusz']
-                if int(dict_row['idef']) <= 28:
-                    dict_row['type']= 'FUNDUSZ '+str(dict_row['idef'])
-                else:
-                    dict_row['type']= 'AGENCJA '+str(dict_row['idef'])
+                dict_row['type']= type_str+str(dict_row['idef'])
                 dict_row['parent']= None
                 dict_row['leaf']= False
                 dict_row['node']= None
                 dict_row['idef_sort']= sort_format(dict_row['idef'])
                 dict_row['parent_sort']= None
+                total_val_2011 += dict_row['val_2011']
+                total_val_2012 += dict_row['val_2012']
+                total_val_2013 += dict_row['val_2013']
 
 #             elif dict_row['level'] == 'b': # Dzial
 #                 dict_row['name']= dict_row['dzial']
@@ -265,6 +267,28 @@ def csv_parse(csv_read, schema, database, datacoll):
 
             out.append(clean_dict(dict_row))
 
+    # total doc
+    total_dict= {}
+    total_dict['idef']= '999999'
+    total_dict['idef_sort']= '999999'
+    total_dict['parent']= None
+    total_dict['parent_sort']= None
+    total_dict['level']= 'a'
+    total_dict['leaf']= True
+    total_dict['node']= None
+    total_dict['type']= 'Total'
+    total_dict['name']= 'Ogółem'
+    total_dict['cel']= None
+    total_dict['miernik']= None
+    total_dict['miernik_wartosc_bazowa']= None
+    total_dict['miernik_wartosc_2011']= None
+    total_dict['miernik_wartosc_2012']= None
+    total_dict['miernik_wartosc_2013']= None
+    total_dict['val_2011']= total_val_2011
+    total_dict['val_2012']= total_val_2012
+    total_dict['val_2013']= total_val_2013
+    out.append(total_dict)
+
     return out
 
     
@@ -274,6 +298,7 @@ if __name__ == "__main__":
     # process command line options
     cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] source_file.csv source_schema.json") 
     cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
+    cmdparser.add_option("-l", "--collect", action="store",dest='collection_name',help="collection name")
     cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean db before insert (ignored if db is not updated)")
 
     opts, args = cmdparser.parse_args()
@@ -315,8 +340,19 @@ if __name__ == "__main__":
         exit()
 
     # data & meta-data collections
-    coll_schm= 'md_budg_scheme'
-    coll_data= 'dd_fund2011_go'
+    # data collection
+    if opts.collection_name is None:
+        print 'Collection name not given - the name dd_xxxxyyyy_xx will be used'
+        coll_data= 'dd_xxxxyyyy_xx'
+    else:
+        coll_data= opts.collection_name
+
+    if coll_data.find('agnc') <> -1:
+        type_str= 'AGENCJA '
+    elif coll_data.find('fund') <> -1:
+        type_str= 'FUNDUSZ '
+    else:
+        type_str= 'ELEMENT '
 
     # CSV file
     try:
@@ -347,7 +383,7 @@ if __name__ == "__main__":
         print 'Error in processing schema file:\n %s\n' % e
         exit()
 
-    obj_parsed= csv_parse(csv_read, schema, db, coll_data) # fill data table
+    obj_parsed= csv_parse(csv_read, schema, type_str) # fill data table
 
     if db_insert(obj_parsed, db, coll_data, clean_db):
         print '...the data successfully inserted to the collection %s' % coll_data

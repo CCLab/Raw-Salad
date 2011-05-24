@@ -1,67 +1,18 @@
 {
   "alias": {
-      "0":"idef",
-      "1":"leaf",
-      "2":"numer",
-      "3":"name",
-      "4":"paragrafy",
-      "5":"frst_popr",
-      "6":"plan_nast"
+      "0":"type",
+      "1":"idef",
+      "2":"name",
+      "3":"paragrafy",
+      "4":"frst_popr",
+      "5":"plan_nast"
   },
   "type": {
+      "type": "string",
       "idef": "string",
-      "numer": "string",
+      "name": "string",
       "paragrafy": "string",
       "frst_popr": "int",
       "plan_nast": "int"
-  },
-  "meta": {
-      "name": "funduszy_tradycijny",
-      "perspective": "Plany finansowe państwowych Funduszy Celowych w układzie tradycyjnym",
-      "idef": 5,
-      "explorable": "name"
-  },
-  "columns": [
-    {
-      "key": "idef",
-      "label": "ID",
-      "type": "string"
-    },
-    {
-      "key": "numer",
-      "label": "Numer",
-      "basic": true,
-      "type": "string",
-      "processable": true
-    },
-    {
-      "key": "name",
-      "label": "Treść",
-      "type": "string",
-      "basic": true,
-      "processable": true
-    },
-    {
-      "key": "paragrafy",
-      "label": "Paragrafy",
-      "type": "string",
-      "processable": true
-    },
-    {
-      "key": "frst_popr",
-      "label": "Przewidywane wykonanie r. poprzedni",
-      "type": "number",
-      "basic": true,
-      "processable": true,
-      "checkable": true
-    },
-    {
-      "key": "plan_nast",
-      "label": "Plan na r. następny",
-      "type": "number",
-      "basic": true,
-      "processable": true,
-      "checkable": true
-    }
-  ]
+  }
 }
