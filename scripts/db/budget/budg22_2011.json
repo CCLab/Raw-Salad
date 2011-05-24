@@ -1,13 +1,13 @@
 {
-  "name": "funduszy_zadaniowy_2011",
-  "perspective": "Koszty Funduszy Celowych 2011-2013 (w układzie zadaniowym)",
-  "ns": "dd_fund2011_go",
+  "name": "agencji_zadaniowy_2011",
+  "perspective": "Wydatky i koszty państwowych Agencij 2011 - 2013 (w układzie zadaniowym)",
+  "ns": "dd_agnc2011_go",
   "dataset": 2,
-  "max_level": "d",
-  "idef": 0,
+  "idef": 2,
   "issue": 2011,
   "explorable": "type",
-  "batchsize": null,
+  "max_level": "e",
+  "batchsize": 40,
   "columns": [
     {
       "key": "type",
@@ -92,8 +92,8 @@
   },
   "query": {"node": null},
   "sort": {
-      "0": {"idef_sort": 1},
-      "1": {"parent_sort": 1},
-      "2": {"level": 1}
+        "0": {"idef_sort": 1},
+        "1": {"parent_sort": 1},
+        "2": {"level": 1}
   }
 }

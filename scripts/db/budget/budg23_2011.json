@@ -1,12 +1,12 @@
 {
-  "name": "funduszy_tradycijny_2011",
-  "perspective": "Wydatky i koszty państwowych Funduszy Celowych 2011 - 2013 (w układzie tradycyjnym)",
-  "ns": "dd_fund2011_tr",
+  "name": "agencji_tradycijny_2011",
+  "perspective": "Wydatky i koszty państwowych Agencij 2011 - 2013 (w układzie tradycyjnym)",
+  "ns": "dd_agnc2011_tr",
   "dataset": 2,
-  "idef": 1,
+  "idef": 3,
   "issue": 2011,
   "explorable": "type",
-  "max_level": "e",
+  "max_level": "d",
   "batchsize": 40,
   "columns": [
     {
@@ -21,13 +21,6 @@
       "label": "Treść",
       "type": "string",
       "basic": true,
-      "processable": true
-    },
-    {
-      "key": "paragrafy",
-      "label": "Paragrafy",
-      "basic": true,
-      "type": "string",
       "processable": true
     },
     {
