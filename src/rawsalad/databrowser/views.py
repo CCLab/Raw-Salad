@@ -98,6 +98,7 @@ def redirect( request ):
 
 def download_data( request ):
     json = request.GET['sheet']
+    print json
     return HttpResponse( json, mimetype='text/csv' )
 
 

@@ -894,7 +894,7 @@
 
         $.ajax({
             url: '/download/',
-            data: sheet_list["sheets"][sheet_list["active_sheet"]],
+            data: { sheet: sheet_list["sheets"][sheet_list["active_sheet"]] },
             dataType: 'json',
             success: function () {
                 console.log( "Works fine" );
