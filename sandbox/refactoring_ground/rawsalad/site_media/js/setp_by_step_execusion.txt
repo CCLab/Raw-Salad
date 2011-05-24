@@ -1,0 +1,14 @@
+001     base.html       _store.meta_data( {{ meta_data|safe }} )
+002     main.js         _gui.init()
+003     gui.js          jQuery magic
+004     gui.js          (gui) init_choose_panel()
+005     gui.js          _store.meta_datasets()
+006     gui.js          (gui) create_perspectives_panel()
+007     gui.js          _store.meta_perspectives( dataset_id )
+008     gui.js          _store.dataset( dataset_id );
+009     gui.js          _store.perspective( perspective_id ) )
+010     gui.js          _store.issue( issue )
+011     gui.js          _db.get_init_data()
+012     db.js           _store.dataset()
+013     db.js           _store.perspective()
+014     db.js           _store.issue()

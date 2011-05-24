@@ -13,20 +13,21 @@ var _gui = (function () {
         $('#filter-form').hide();    
         $('#application').hide();    
         
+        // arm open/close button and hide it!
         $('#open-close-choose-panel')
             .click( function () {
                 // if choose panel is open
                 if( $('#choose-panel:visible').length > 0 ) {
-                    that.close_choose_panel();
+                    that.hide_choose_panel();
                 }
                 else {
-                    that.open_choose_panel();                
+                    that.show_choose_panel();                
                 }    
             })
             .hide();
         
-        $('#choose-perspectives').hide();            
-        $('#back-to-collections')
+        // arm back-to-datasets button
+        $('#back-to-datasets')
             .hover(
                 function () {
                     $(this)
@@ -38,24 +39,118 @@ var _gui = (function () {
                 }
             )
             .click( function () {
-                $('#choose-collection-name')
+                $('#info-title')
                     .html('Dostępne kolekcje');
                 $('#info-text')
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
 
-                $('#choose-collections')
-                    .toggle();            
                 $('#choose-perspectives')
-                    .toggle();
+                    .hide();
+                $('#choose-datasets')
+                    .show();            
 
                 // clear the perspectives list
-                $('#choose-perspectives-list')
+                $('#choose-perspectives')
                     .html('');
+            })
+            .hide();
+            
+        $('#choose-perspectives').hide();            
+        init_choose_panel();
+    };
+    
+
+    var init_choose_panel = function () {
+        var i;
+        var html = [];
+        var datasets = _store.meta_datasets();
+        
+        for( i = 0; i < datasets.length; i += 1 ) {
+            html.push( '<div class="position" ' );
+            html.push( 'data-set-id="', dataset[i]['idef'], '">' );            
+            html.push( '<div class="title">' );
+            html.push( dataset[i]['name'] );
+            html.push( '</div'> );
+            html.push( '<div class="description">' );
+            html.push( dataset[i]['description'] );
+            html.push( '</div'> );            
+            html.push( '<div class="more">Zobacz dane</div>' );
+            html.push( '</div>' );
+        }
+        
+        $('#choose-datasets')
+            .append( $( html.join('') ))
+            .find( '.position' )
+            .click( function () {
+                var dataset_id = $(this).attr( 'data-set-id' );
+                
+                create_perspectives_panel( dataset_id );
+                
+                $('#choose-datasets')
+                    .hide();
             });
     };
+    
+    var create_perspectives_panel = function ( dataset_id ) {
+        var i, j;
+        var html = [];
+        var perspectives = _store.meta_perspectives( dataset_id );
+        var issues;        
 
-    // TODO Create choose panel!!!!
-    // TODO 
+        for( i = 0; i < perspectives.length; i += 1 ) {
+            issues = perspectives[i]['issues'];
+            
+            html.push( '<div class="position" ' );
+            html.push( 'data-set-id="', dataset_id, ' ' );            
+            html.push( 'data-per-id="', perspectives[i]['idef'], '">' );            
+            html.push( '<div class="title">' );
+            html.push( perspectives[i]['name'] );
+            html.push( '</div'> );
+            html.push( '<div class="description">' );
+            html.push( perspectives[i]['description'] );
+            html.push( '</div'> );          
+            // iterates in revers order because of CSS "float: right"
+            for( j = issues.length-1; j >= 0; j -= 1 ) {
+                html.push( '<div class="more" ' );
+                html.push( 'data-issue="', issues[j], '">' );                            
+                html.push( issues[j] );
+                html.push( '</div>' );
+            }
+            html.push( '</div>' );
+        }
+
+        $('#choose-perspectives')
+            .append( $( html.join('') ))
+            .find( '.position' )
+            .find('.more' )
+            .click( function () {
+                var id = {
+                    dataset: $(this).parent().attr( 'data-set-id' ),
+                    perspective: $(this).parent().attr( 'data-per-id' ),
+                    issue: $(this).attr( 'issue' )
+                };
+                                    
+                // if new group is created, get data and show table   
+                if( _store.create_new_group( id ) ) {
+                    
+                    // get top-level data from db                
+                    _db.get_init_data();     
+                    
+                    
+                    // TODO >>> It's refactored up till this moment
+                    // create a table
+                    _table.init_table();
+                    
+                    // initialize an application
+                    that.init_app();           
+                } 
+                else {
+                    // go back to application with focus on requested sheet
+                    that.hide_choose_panel();
+                }
+            });
+    };
+    
 
     // used once when some perspective is chosen for the very first time
     that.init_app = function () {
@@ -65,11 +160,23 @@ var _gui = (function () {
         $('#application')
             .fadeIn( 400 );
             
-        that.close_choose_panel();
+        that.hide_choose_panel();
     }
 
+    
+    that.show_choose_panel = function () {
+        $('#choose-panel')
+            .slideDown(400);
+            
+        $('#application')
+            .animate({ opacity: 0.25 }, 300 );
+            
+        $('#open-close-choose-panel')
+            .html('zwiń'); 
+    }
+    
 
-    that.close_choose_panel = function () {   
+    that.hide_choose_panel = function () {   
         $('#choose-panel')
             .slideUp( 400 );
             
@@ -80,17 +187,7 @@ var _gui = (function () {
             .html('zmień dane');
     };
     
-    
-    that.open_choose_panel = function () {
-        $('#choose-panel')
-            .slideDown(400);
-            
-        $('#application')
-            .animate({ opacity: 0.25 }, 300 );
-            
-        $('#open-close-choose-panel')
-            .html('zwiń'); 
-    }
+
 
    
     that.make_zebra = function () {

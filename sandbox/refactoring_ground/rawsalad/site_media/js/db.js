@@ -6,6 +6,32 @@ var _db = (function () {
 
     var that = {};
 
+    // gets the top-level from db
+    that.get_init_data = function () {
+        // ajax call data object
+        var init_data_info = {
+            "action": "get_init_data",
+            "dataset": _store.dataset(),
+            "perspective": _store.perspective(),
+            "issue": _store.issue()
+        };
+
+        $.ajax({
+            data: init_data_info,
+            dataType: "json",
+            success: function( received_data ) {
+                var data = {
+                    columns: received_data.perspective,
+                    rows: received_data.rows,
+                    name: received_data.name
+                };
+                
+                _store.init_basic_sheet( data );
+            }
+        });
+    });
+
+
     // downloads requested nodes, appends them to object with other nodes
     // and adds html code for new nodes
     that.download_node = function ( parent_id ) {
@@ -72,47 +98,5 @@ var _db = (function () {
         }
     };
     
-
-    // TODO >> rename it!!
-    // arms the perspectives buttons
-    that.arm_perspective = function ( object ) {
-        // ajax call data object
-        var init_data_info
-    
-        // store chosen perspective and issue
-        _store.perspective( object.attr( 'data-perspective' ));
-        _store.issue( object.attr( 'data-issue' ));                
-        
-        init_data_info = {
-            "action": "get_init_data",
-            "dataset": _store.dataset(),
-            "perspective": _store.perspective(),
-            "issue": _store.issue()
-        };
-
-        $.ajax({
-            data: init_data_info,
-            dataType: "json",
-            success: function( received_data ) {
-            
-                // store received data
-                _store.columns( received_data.perspective );
-                _store.rows( received_data.rows );
-                _store.sheet_name( "Arkusz " + _store.sheets_number() );
-                
-                _store.init_basic_sheet();
-
-                _table.init_table();
-                
-                if( _store.sheets_number() === 0 ) {
-                    _gui.init_app();
-                }
-                else {
-                    _gui.close_choose_panel();                
-                }
-            }
-        });
-    });
-
     return that;
 })();       

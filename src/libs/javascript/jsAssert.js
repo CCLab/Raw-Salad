@@ -98,6 +98,8 @@ var Assert = (function () {
                 error.innerHTML = msg;
 
                 body.appendChild( error );
+                
+                throw new that.AssertException( type );
             }
             else {
                 msg =  ">> AssertException ";
@@ -105,6 +107,8 @@ var Assert = (function () {
                 msg += ">> Message: " + message;
                            
                 print( msg );
+                
+                throw new that.AssertException( type );                
             }
         }
     };

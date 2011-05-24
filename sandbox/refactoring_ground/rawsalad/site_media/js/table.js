@@ -10,10 +10,9 @@ var _table = (function () {
         $('#table').empty();
     };
 
-    that.init_table = function ( generation_mode ) {
-        generate_header( _store.active_sheet() );
-        generate_table_body( _store.active_sheet(), generation_mode );
-        
+    that.init_table = function () {
+        generate_header();
+        generate_table_body();
     };
     
     
@@ -150,7 +149,6 @@ var _table = (function () {
     };
 
 
-    // TODO >> merge these two functions!!
     var generate_header = function() {
         var i;
         var columns;
@@ -160,7 +158,7 @@ var _table = (function () {
         // get all the basic view columns definitions        
         columns = filter( function ( element ) {
                     return element['basic'] === true;
-                }, _store.columns() );
+                }, _store.active_columns() );
                 
         for ( i = 0; i < columns.length; i += 1 ) {
             col = columns[i];
@@ -187,6 +185,7 @@ var _table = (function () {
     };
     
     
+    // TODO >> what is "simple_mode"
     var generate_table_body = function( simple_mode ) {
         var container;
         var html_row;
@@ -203,12 +202,13 @@ var _table = (function () {
         
         schema = filter( function ( element ) {
             return element['basic'] === true;
-        }, _store.columns() );
+        }, _store.active_columns() );
                 
-        for ( level = 'a'; level != 'w'; level = next_letter( level ) ) {
+/// TODO >>> UP TILL THIS MOMENT                
+        for ( level = 'a'; level != 'z'; level = next_letter( level ) ) {
             rows = filter( function ( element ) {
                 return element['level'] === level;
-            }, _store.rows() );
+            }, _store.active_rows() );
             
             for ( i = 0; i < rows.length; i += 1 ) {
                 item = rows[ i ];
