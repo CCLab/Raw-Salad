@@ -59,7 +59,7 @@ var _table = (function () {
 
 
     // add action listener to newly created nodes
-    that.arm_nodes = function( id ) {
+    that.arm_nodes = function ( id ) {
         var node;
         
         // no parameters for a-level nodes
@@ -99,57 +99,8 @@ var _table = (function () {
     };    
 
 
-
-
-
-
     // P R I V A T E   I N T E R F A C E
-    
-    // generates the html code for a single row
-    var generate_row = function( item, schema ) {
-        var i;
-        var col;
-        var col_type;
-        var html = [];
-    
-        html.push( '<div id="', item['idef'], '"' );
-        html.push( 'class="', item['level'], ' ' );
-        html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
-        html.push( '<div class="data">' );
-        
-        // TODO >> refactor to make it work with all the datasets
-        for ( i = 0; i < schema.length; i += 1 ) {
-            col = schema[i];
-            
-            if ( col['key'] === 'type' || col['key'] === 'name' ) {
-                col_type = col['key'] + ' cell';
-            } else {
-                col_type = 'value cell';
-            }				
-            
-            html.push( '<div class="', col_type, '">' );
-
-            if( col_type === 'value cell' )
-            {
-                html.push( _utils.money( item[col['key']] ) );
-            }
-            else {
-                html.push( item[col['key']] );
-            }    
-            html.push( '</div>' );
-        }
-        html.push( '</div>' );
-
-        if( item['leaf'] !== true ) {
-            html.push( '<div class="nodes"></div>' );
-        }
-        html.push( '</div>' );
-        
-        return html;
-    };
-
-
-    var generate_header = function() {
+    var generate_header = function () {
         var i;
         var columns;
         var html = [ '<div id="thead"><div class="data">' ];
@@ -204,8 +155,8 @@ var _table = (function () {
             return element['basic'] === true;
         }, _store.active_columns() );
                 
-/// TODO >>> UP TILL THIS MOMENT                
-        for ( level = 'a'; level != 'z'; level = next_letter( level ) ) {
+
+        for ( level = 'a'; level != 'z'; level = next_letter( level )) {
             rows = filter( function ( element ) {
                 return element['level'] === level;
             }, _store.active_rows() );
@@ -215,9 +166,10 @@ var _table = (function () {
                 if ( !item[ 'parent' ] || simple_mode ) {
                     container = $('#tbody');
                 } else {
-                    container = $('#'+ item[ 'parent' ] + '> .nodes');
+                    container = $('#'+ item[ 'parent' ] +' > .nodes');
                 }
                 
+// TODO >>> UP TILL THIS MOMENT
                 html_row = generate_row( item, schema );
                 container.append( html_row.join('') );
                 
@@ -230,8 +182,52 @@ var _table = (function () {
         
         that.arm_nodes();
         _gui.make_zebra();
-        
     };    
+    
+
+    // generates the html code for a single row
+    var generate_row = function( item, schema ) {
+        var i;
+        var col;
+        var col_type;
+        var html = [];
+    
+        html.push( '<div id="', item['idef'], '"' );
+        html.push( 'class="', item['level'], ' ' );
+        html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
+        html.push( '<div class="data">' );
+        
+        // TODO >> refactor to make it work with all the datasets
+        for ( i = 0; i < schema.length; i += 1 ) {
+            col = schema[i];
+            
+            if ( col['key'] === 'type' || col['key'] === 'name' ) {
+                col_type = col['key'] + ' cell';
+            } else {
+                col_type = 'value cell';
+            }				
+            
+            html.push( '<div class="', col_type, '">' );
+
+            if( col_type === 'value cell' )
+            {
+                html.push( _utils.money( item[col['key']] ) );
+            }
+            else {
+                html.push( item[col['key']] );
+            }    
+            html.push( '</div>' );
+        }
+        html.push( '</div>' );
+
+        if( item['leaf'] !== true ) {
+            html.push( '<div class="nodes"></div>' );
+        }
+        html.push( '</div>' );
+        
+        return html;
+    };    
+    
     
     return that;
 

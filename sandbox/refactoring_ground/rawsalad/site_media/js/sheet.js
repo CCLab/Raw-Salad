@@ -24,7 +24,7 @@ var _sheet = (function () {
         
         _store.active_sheet_number = new_sheet_nr;
         
-        gui.create_sheet_tab( sheet_name, new_sheet_nr, filtered_sheet );
+        _gui.create_sheet_tab( sheet_name, new_sheet_nr, filtered_sheet );
         
         return new_sheet_nr;
     }

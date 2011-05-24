@@ -96,6 +96,10 @@ def redirect( request ):
     return HttpResponseRedirect('/app')
 
 
+def download_data( request ):
+    json = request.GET['sheet']
+    return HttpResponse( json, mimetype='text/csv' )
+
 
 # is that ever used?!
 def get_meta_data():
