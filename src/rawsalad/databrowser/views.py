@@ -97,9 +97,8 @@ def redirect( request ):
 
 
 def download_data( request ):
-    json = request.POST['sheet']
-    print json
-    return HttpResponse( json, mimetype='text/csv' )
+    data = request.POST.get( 'csv' )
+    return HttpResponse( data, mimetype='text/csv' )
 
 
 # is that ever used?!
