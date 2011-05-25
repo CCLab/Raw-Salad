@@ -73,23 +73,75 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 
 
 #-----------------------------
+def fill_detail(fund_aggr, schema):
+    levels= ['a', 'b', 'c', 'd', 'e', 'f']
+    node_1= []
+    teryt_list= schema['teryt']
+    for teryt in teryt_list.items():
+#         print teryt[0], teryt[1].keys()[0]
+        woj_dict= {}
+        woj_dict['node']= 1 # node:1 is for data drill down to TERYTs
+        woj_dict['leaf']= False
+        woj_dict['level']= levels[0] # the highest, the rest will have to move 1 level deeper
+        woj_dict['parent']= None
+        woj_dict['parent_sort']= None
+        curr_teryt= teryt[0]
+        curr_woj_key= teryt[1].keys()[0]
+        woj_dict['idef']= curr_teryt
+        woj_dict['idef_sort']= curr_teryt
+        woj_dict['type']= curr_teryt
+        woj_dict['name']= teryt[1].values()[0]
+        woj_dict['val']= 0 # until we find a proper total
+        for aggr_row in fund_aggr:
+            if aggr_row['idef'] == 'I': # total
+                woj_dict['val']= aggr_row[curr_woj_key]
+                continue
+            new_dict= {}
+            new_dict['idef']= curr_teryt + '-' + aggr_row['idef']
+            new_dict['idef_sort']= curr_teryt + '-' + aggr_row['idef_sort']
+            if aggr_row['parent'] is None:
+                new_dict['parent']= curr_teryt
+                new_dict['parent_sort']= curr_teryt
+            else:
+                new_dict['parent']= curr_teryt + '-' + aggr_row['parent']
+                new_dict['parent_sort']= curr_teryt + '-' + aggr_row['parent_sort']
+            new_dict['node']= 1
+            new_dict['leaf']= aggr_row['leaf'] # leaves remain unchanged
+            new_dict['level']= levels[levels.index(aggr_row['level'])+1] # 1 level deeper
+            new_dict['type']= aggr_row['type']
+            new_dict['name']= aggr_row['name']
+            new_dict['val']= aggr_row[curr_woj_key]
+            node_1.append(new_dict)
+
+        node_1.append(woj_dict)
+
+    return node_1
+
+#-----------------------------
 def fill_docs(fund_data):
     # format parsed data (dict) for upload
 
-    # add keys: idef, idef_sort, parent, parent_sort, level, leaf
+    # add keys: idef, idef_sort, parent, parent_sort, level, leaf, node, osrodki_wojewodzkie (count total)
     work_dict= fund_data[:]
     levels= ['a', 'b', 'c', 'd', 'e', 'f']
+    max_level= 0
     for row_doc in work_dict:
-        row_doc['idef']= row_doc['numer'].replace('.', '-')
+        row_doc['node']= 0 # node:0 is for aggregated data
+        row_doc['idef']= row_doc['type'].replace('.', '-')
         row_doc['idef_sort']= sort_format(row_doc['idef'])
         dash_count= row_doc['idef'].count('-')
         row_doc['leaf']= True # default, being filled below
         row_doc['level']= levels[dash_count]
+        if dash_count > max_level:
+            max_level= dash_count
         row_doc['parent']= None
         row_doc['parent_sort']= None
         if dash_count != 0:
             row_doc['parent']= row_doc['idef'].rsplit('-', 1)[0]
             row_doc['parent_sort']= sort_format(row_doc['parent'])
+        row_doc['osrodki_wojewodzkie']= row_doc['dolnoslaskie']+row_doc['kujawskopomorskie']+row_doc['lubelski']+row_doc['lubuski']+row_doc['lodzki']+row_doc['malopolski']+row_doc['mazowiecki']+row_doc['opolski']+row_doc['podkarpacki']+row_doc['podlaski']+row_doc['pomorski']+row_doc['slaski']+row_doc['swietokrzyski']+row_doc['warminskomazurski']+row_doc['wielkopolski']+row_doc['zachodniopomorski']
+
+    print '...info: aggregated data - max level is', levels[max_level]
 
     # filling 'leaf'
     leaf_dict= work_dict[:]
@@ -113,7 +165,7 @@ def csv_parse(csv_read, schema):
     for row in csv_read:
         keys= tuple(row)
         keys_len= len(keys)
-        row= iter(row)        
+        row= iter(row)
         for row in csv_read:
             i= 0
             dict_row= {} # this holds the data of the current row
@@ -156,7 +208,7 @@ if __name__ == "__main__":
     # process command line options
     cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] src_filename.csv src_schema.json")
     cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
-    cmdparser.add_option("-t", "--collt", action="store", dest="collect_name", help="collection name")
+    cmdparser.add_option("-l", "--collt", action="store", dest="collect_name", help="collection name")
     cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean db before insert (ignored if db is not updated)")
 
     opts, args = cmdparser.parse_args()
@@ -231,7 +283,9 @@ if __name__ == "__main__":
     print "...parsing source file"
     obj_parsed= csv_parse(csv_read, schema)
     print "...formatting documents"
-    obj_upload= fill_docs(obj_parsed)
+    obj_aggr= fill_docs(obj_parsed)
+    obj_detl= fill_detail(obj_aggr, schema)
 
-    print '...inserting into db/n... ', db_insert(obj_upload, mongo_db, collect_name, clean_db), 'records inserted'
+    print '...inserting into db aggregated data -', db_insert(obj_aggr, mongo_db, collect_name, clean_db), 'records total'
+    print '...inserting into db detailed data -', db_insert(obj_detl, mongo_db, collect_name, False), 'records total'
     print "Done (don't forget about the schema!)"
