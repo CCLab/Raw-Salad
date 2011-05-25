@@ -152,19 +152,28 @@ def tmp_solution_for_metadata():
                     "idef": 0, 
                     "description": "Ustawa budżetowa as such", 
                     "long_description": None, 
-                    "name": "Budżet tradycyjny"
+                    "name": "Budżet tradycyjny",
+                    "issues": [
+                        2011
+                    ]
                 }, 
                 {
                     "idef": 1, 
                     "description": "Dwadzieścia dwie funkcje państwa", 
                     "long_description": None, 
-                    "name": "Budżet zadaniowy"
+                    "name": "Budżet zadaniowy",
+                    "issues": [
+                        2011, 2012
+                    ]
                 }, 
                 {
                     "idef": 2, 
                     "description": "Wszyscy dysponenci ustawy budżetowej", 
                     "long_description": None, 
-                    "name": "Budżet instytucjonalny"
+                    "name": "Budżet instytucjonalny",
+                    "issues": [
+                        2011
+                    ]
                 }
             ]
         }, 
@@ -184,25 +193,37 @@ def tmp_solution_for_metadata():
                     "idef": 0, 
                     "description": "Z podziałem na funkcje, zadania i podzadania", 
                     "long_description": None, 
-                    "name": "Fundusze celowe w układzie zadaniowym"
+                    "name": "Fundusze celowe w układzie zadaniowym",
+                    "issues": [
+                        2011
+                    ]
                 }, 
                 {
                     "idef": 1, 
                     "description": "Odpowiadające klasycznemu układowi budżetu państwa", 
                     "long_description": None, 
-                    "name": "Fundusze celowe w układzie tradycyjnym"
+                    "name": "Fundusze celowe w układzie tradycyjnym",
+                    "issues": [
+                        2011
+                    ]
                 }, 
                 {
                     "idef": 2, 
                     "description": "Z podziałem na funkcje, zadania i podzadania", 
                     "long_description": None, 
-                    "name": "Agencje narodowe w układzie zadaniowym"
+                    "name": "Agencje narodowe w układzie zadaniowym",
+                    "issues": [
+                        2011
+                    ]
                 }, 
                 {
                     "idef": 3, 
                     "description": "Odpowiadające klasycznemu układowi budżetu państwa", 
                     "long_description": None, 
-                    "name": "Agencje narodowe w układzie tradycyjnym"
+                    "name": "Agencje narodowe w układzie tradycyjnym",
+                    "issues": [
+                        2011
+                    ]
                 }
             ]            
         }, 
