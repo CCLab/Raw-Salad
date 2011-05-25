@@ -67,12 +67,12 @@ var _gui = (function () {
         
         for( i = 0; i < datasets.length; i += 1 ) {
             html.push( '<div class="position" ' );
-            html.push( 'data-set-id="', dataset[i]['idef'], '">' );            
+            html.push( 'data-set-id="', datasets[i]['idef'], '">' );            
             html.push( '<div class="title">' );
-            html.push( dataset[i]['name'] );
+            html.push( datasets[i]['name'] );
             html.push( '</div>' );
             html.push( '<div class="description">' );
-            html.push( dataset[i]['description'] );
+            html.push( datasets[i]['description'] );
             html.push( '</div>' );            
             html.push( '<div class="more">Zobacz dane</div>' );
             html.push( '</div>' );
