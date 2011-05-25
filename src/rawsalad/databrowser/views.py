@@ -146,19 +146,65 @@ def tmp_solution_for_metadata():
             "idef": 0, 
             "long_description": None, 
             "name": "Budżet centralny", 
-            "description": "Ustawa budżetowa w kilku odsłonach"
+            "description": "Ustawa budżetowa w kilku odsłonach",
+            "perspectives": [
+                {
+                    "idef": 0, 
+                    "description": "Ustawa budżetowa as such", 
+                    "long_description": None, 
+                    "name": "Budżet tradycyjny"
+                }, 
+                {
+                    "idef": 1, 
+                    "description": "Dwadzieścia dwie funkcje państwa", 
+                    "long_description": None, 
+                    "name": "Budżet zadaniowy"
+                }, 
+                {
+                    "idef": 2, 
+                    "description": "Wszyscy dysponenci ustawy budżetowej", 
+                    "long_description": None, 
+                    "name": "Budżet instytucjonalny"
+                }
+            ]
         }, 
         {
             "idef": 1, 
             "long_description": None, 
             "name": "Środki europejskie", 
-            "description": "Udział środków europejskich w budżecie centralnym Polski"
+            "description": "Udział środków europejskich w budżecie centralnym Polski"            
         }, 
         {
             "idef": 2, 
             "long_description": None, 
             "name": "Fundusze celowe i agencje narodowe", 
-            "description": "Części kosztowe budżetów wszystkich funduszy celowych i agencji narodowych"
+            "description": "Części kosztowe budżetów wszystkich funduszy celowych i agencji narodowych",
+            "perspectives": [
+                {
+                    "idef": 0, 
+                    "description": "Z podziałem na funkcje, zadania i podzadania", 
+                    "long_description": None, 
+                    "name": "Fundusze celowe w układzie zadaniowym"
+                }, 
+                {
+                    "idef": 1, 
+                    "description": "Odpowiadające klasycznemu układowi budżetu państwa", 
+                    "long_description": None, 
+                    "name": "Fundusze celowe w układzie tradycyjnym"
+                }, 
+                {
+                    "idef": 2, 
+                    "description": "Z podziałem na funkcje, zadania i podzadania", 
+                    "long_description": None, 
+                    "name": "Agencje narodowe w układzie zadaniowym"
+                }, 
+                {
+                    "idef": 3, 
+                    "description": "Odpowiadające klasycznemu układowi budżetu państwa", 
+                    "long_description": None, 
+                    "name": "Agencje narodowe w układzie tradycyjnym"
+                }
+            ]            
         }, 
         {
             "idef": 3, 
