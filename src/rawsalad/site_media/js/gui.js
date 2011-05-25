@@ -287,7 +287,7 @@ var _gui = (function () {
     
     
     
-    that.create_sheet_tab( sheet_name, new_sheet_nr, filtered_sheet ) {
+    that.create_sheet_tab = function ( sheet_name, new_sheet_nr, filtered_sheet ) {
         var html = [];
         
         html.push('<div id="snap-' + new_sheet_nr.toString() + '" class="snapshot active">');
