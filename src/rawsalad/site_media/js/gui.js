@@ -135,15 +135,14 @@ var _gui = (function () {
                                     
                 // if new group is created, get data and show table   
                 if( _store.create_new_group( id ) ) {
-                    
+                    debugger;                    
                     // get top-level data from db                
                     _db.get_init_data();     
                     
-                    debugger;
+
                     // create a table
                     _table.init_table();
 
-                    debugger;
                     // initialize an application
                     that.init_app();           
                 } 

@@ -45,9 +45,7 @@ var _store = (function () {
         }
  
         groups.push( new_group( data ));
-        debugger;               
         active_group( groups.length - 1 );
-        debugger;       
                 
         return true;
     };
