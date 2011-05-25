@@ -107,7 +107,7 @@ var _store = (function () {
 
     // active group getter / setter
     var active_group = function ( value ) {
-        var calee = arguments.callee;
+        var calee = arguments.callee.name;
     
         debugger;
     
