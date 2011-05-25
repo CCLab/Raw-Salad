@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-#from django.views.decorators.csrf import csrf_protect
+from django.core.context_processors import csrf
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import Context, loader
 from django.utils import simplejson as json
-# DK
+
 import rawsdbapi as rawdb
 import csv, codecs, cStringIO
 
@@ -97,9 +97,11 @@ def app_page( request ):
 def redirect( request ):
     return HttpResponseRedirect('/app')
 
-#@csrf_protect
+
 def download_data( request ):
-    data = request.POST.get( 'sheet' ).split( '|' )
+    c = {}
+    c.update( csrf( request ))
+    data = c.POST.get( 'sheet' ).split( '|' )
     response = HttpResponse( mimetype='text/csv' )
     response['Content-Disposition'] = 'attachment; filename=data.csv'
 

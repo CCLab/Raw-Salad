@@ -40,7 +40,7 @@
           <div id="lower-menu">
             <div id="download-button" class="menu-position">
               pobież na dysk
-		<form id="download-form" name="input" action="/download/" method="post">
+		<form id="download-form" name="input" action="/download/" method="post">{% csrf_token %}
 		  <input type="text" name="sheet" />
 		</form> 
             </div>
