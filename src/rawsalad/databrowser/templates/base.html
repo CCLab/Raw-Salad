@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="/site_media/media/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/site_media/media/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="/site_media/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/site_media/css/table_style.css" />
   </head>
   <body>
     <div id="wraper">
@@ -20,9 +20,6 @@
               baza wiedzy
             </div>
             <div class="menu-position">
-              drukuj
-            </div>
-            <div class="menu-position">
               API
             </div>
             <div class="menu-position">
@@ -35,23 +32,14 @@
             powrót do portalu
           </div>
           <div id="search" class="left">
-            <img src="/site_media/media/img/search.png" />
+            <img src="/site_media/img/search.png" />
           </div>
           <div id="lower-menu">
-            <div id="download-button" class="menu-position">
-              pobież na dysk
-		<form id="download-form" name="input" action="/download/" method="post">{% csrf_token %}
-		  <input type="text" name="sheet" />
-		</form> 
-            </div>
             <div class="menu-position">
-              podziel się
-            </div>
+              drukuj
+            </div>          
             <div class="menu-position">
               wczytaj sesję
-            </div>
-            <div class="menu-position">
-              lista wybranych pozycji
             </div>
           </div>
         </div>
@@ -61,10 +49,25 @@
     {% endblock %}
 
     </div>
-    <script src="/site_media/media/js/jquery.js"></script>
-    <script src="/site_media/media/js/tools.js"></script>
-    <script src="/site_media/media/js/table_manager.js"></script>
-    <script src="/site_media/media/js/script.js"></script>
-    <script src="/site_media/media/js/sort_filter.js"></script>
+
+    <script src="/site_media/js/jquery.js"></script>
+    <script src="/site_media/js/store.js"></script>
+    <script src="/site_media/js/db.js"></script>
+    <script src="/site_media/js/gui.js"></script>
+    <script src="/site_media/js/table.js"></script>
+    <script src="/site_media/js/sheet.js"></script>
+    <script src="/site_media/js/utils.js"></script>
+    <script src="/site_media/js/ttools.js"></script>    
+    <script src="/site_media/js/sort_filter.js"></script>
+    <script type="text/javascript" language="javascript" charset="utf-8">
+    // <![CDATA[
+        _store.meta_data( {{ meta_data|safe }} );
+    // ]]>
+    </script>
+    <script src="/site_media/js/main.js"></script>
+    
+    {% block js %}    
+    {% endblock %}
+    
   </body>
 </html>
