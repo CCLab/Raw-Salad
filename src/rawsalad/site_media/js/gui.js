@@ -99,6 +99,8 @@ var _gui = (function () {
 
         for( i = 0; i < perspectives.length; i += 1 ) {
             issues = perspectives[i]['issues'];
+
+            debugger;
             
             html.push( '<div class="position" ' );
             html.push( 'data-set-id="', dataset_id, ' ' );            
