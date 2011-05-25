@@ -236,7 +236,7 @@ def tmp_solution_for_metadata():
                 {
                     "idef": 0, 
                     "description": "Dane szczebla centralnego", 
-                    "long_description": null, 
+                    "long_description": None, 
                     "name": "Dane zagregowane",
                     "issues": [
                         2011
@@ -245,7 +245,7 @@ def tmp_solution_for_metadata():
                 {
                     "idef": 1, 
                     "description": "Dane budżetowe ośrodków regionalnych NFZ", 
-                    "long_description": null, 
+                    "long_description": None, 
                     "name": "Dane ośrodków regionalnych",
                     "issues": [
                         2011
