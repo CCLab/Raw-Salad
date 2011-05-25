@@ -139,9 +139,11 @@ var _gui = (function () {
                     // get top-level data from db                
                     _db.get_init_data();     
                     
+                    debugger;
                     // create a table
                     _table.init_table();
 
+                    debugger;
                     // initialize an application
                     that.init_app();           
                 } 
