@@ -899,7 +899,10 @@
 
 	for( i = 0; i < sheet['rows'].length; ++i ) {
             data += sheet['rows'][i]['type'] + ';';
-	    data += sheet['rows'][i]['name'] + ';\n';
+	    data += sheet['rows'][i]['name'] + ';';
+            data += sheet['rows'][i]['v_eu'] + ';';
+	    data += sheet['rows'][i]['v_nation'] + ';';
+            data += sheet['rows'][i]['v_total'] + '|';
 	}	
 	
 	$('#download-form')

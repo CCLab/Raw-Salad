@@ -7,7 +7,7 @@ from django.template import Context, loader
 from django.utils import simplejson as json
 # DK
 import rawsdbapi as rawdb
-import csv
+import csv, codecs, cStringIO
 
 
 # to be removed soon
@@ -99,10 +99,13 @@ def redirect( request ):
 
 #@csrf_protect
 def download_data( request ):
-   
-    data = request.POST.get( 'sheet' )
-    response = HttpResponse( content=data, mimetype='text/csv' )
+    data = request.POST.get( 'sheet' ).split( '|' )
+    response = HttpResponse( mimetype='text/csv' )
     response['Content-Disposition'] = 'attachment; filename=data.csv'
+
+    writer = UnicodeWriter( response )
+    for row in data:
+        writer.writerow( row.split(';') )
 
     return response
 
@@ -132,3 +135,34 @@ def get_perspectives( col_nr ):
     dataset_coll.update(persp_dict)
 
     return dataset_coll
+
+
+
+class UnicodeWriter:
+    """
+    A CSV writer which will write rows to CSV file "f",
+    which is encoded in the given encoding.
+    """
+
+    def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
+        # Redirect output to a queue
+        self.queue = cStringIO.StringIO()
+        self.writer = csv.writer(self.queue, dialect=dialect, delimiter=';', **kwds)
+        self.stream = f
+        self.encoder = codecs.getincrementalencoder(encoding)()
+
+    def writerow(self, row):
+        self.writer.writerow([s.encode("utf-8") for s in row])
+        # Fetch UTF-8 output from the queue ...
+        data = self.queue.getvalue()
+        data = data.decode("utf-8")
+        # ... and reencode it into the target encoding
+        data = self.encoder.encode(data)
+        # write to the target stream
+        self.stream.write(data)
+        # empty queue
+        self.queue.truncate(0)
+
+    def writerows(self, rows):
+        for row in rows:
+            self.writerow(row)
