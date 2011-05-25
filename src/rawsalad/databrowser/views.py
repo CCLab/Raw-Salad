@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from django.core.context_processors import csrf
+#from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import Context, loader
@@ -97,11 +98,9 @@ def app_page( request ):
 def redirect( request ):
     return HttpResponseRedirect('/app')
 
-
+@csrf_exempt
 def download_data( request ):
-    c = {}
-    c.update( csrf( request ))
-    data = c.POST.get( 'sheet' ).split( '|' )
+    data = request.POST.get( 'sheet' ).split( '|' )
     response = HttpResponse( mimetype='text/csv' )
     response['Content-Disposition'] = 'attachment; filename=data.csv'
 
