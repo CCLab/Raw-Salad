@@ -130,7 +130,7 @@ var _gui = (function () {
                 var id = {
                     dataset: $(this).parent().attr( 'data-set-id' ),
                     perspective: $(this).parent().attr( 'data-per-id' ),
-                    issue: $(this).attr( 'issue' )
+                    issue: $(this).attr( 'data-issue' )
                 };
                                     
                 // if new group is created, get data and show table   
