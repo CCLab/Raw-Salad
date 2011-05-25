@@ -107,10 +107,6 @@ var _store = (function () {
 
     // active group getter / setter
     var active_group = function ( value ) {
-        var calee = arguments.callee.toString();
-    
-        debugger;
-    
         if( arguments.length === 0 ) {
             return groups[ active_group_number ];
         }
