@@ -141,7 +141,7 @@ def get_perspectives( col_nr ):
 
 
 def tmp_solution_for_metadata():
-    return { meta_data: [
+    return { "meta_data": [
         {
             "idef": 0, 
             "long_description": None, 
