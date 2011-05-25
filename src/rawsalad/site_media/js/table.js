@@ -40,7 +40,7 @@ var _table = (function () {
             container = $('#' + id + '> .nodes');
         }
         
-        schema = filter( function ( element ) {
+        schema = _utils.filter( function ( element ) {
             return element['basic'] === true;
         }, _store.active_columns() );
 
@@ -107,7 +107,7 @@ var _table = (function () {
         var col, col_type;
         
         // get all the basic view columns definitions        
-        columns = filter( function ( element ) {
+        columns = _utils.filter( function ( element ) {
                     return element['basic'] === true;
                 }, _store.active_columns() );
                 
@@ -151,13 +151,13 @@ var _table = (function () {
             return String.fromCharCode( number + 1 );
         };
         
-        schema = filter( function ( element ) {
+        schema = _utils.filter( function ( element ) {
             return element['basic'] === true;
         }, _store.active_columns() );
                 
 
         for ( level = 'a'; level != 'z'; level = next_letter( level )) {
-            rows = filter( function ( element ) {
+            rows = _utils.filter( function ( element ) {
                 return element['level'] === level;
             }, _store.active_rows() );
             

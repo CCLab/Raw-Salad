@@ -16,7 +16,6 @@ var _db = (function () {
             "issue": _store.issue()
         };
 
-                    debugger;
         $.ajax({
             data: init_data_info,
             dataType: "json",
@@ -26,7 +25,8 @@ var _db = (function () {
                     rows: received_data.rows,
                     name: received_data.name
                 };
-                
+
+                debugger;                
                 _store.init_basic_sheet( data );
             }
         });
