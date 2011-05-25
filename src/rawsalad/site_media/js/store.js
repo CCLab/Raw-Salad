@@ -38,12 +38,12 @@ var _store = (function () {
     that.create_new_group = function ( data ) {
 
         var found = find_group( data );
-        debugger;
-        if( found !== null ) {
+
+        if( found !== -1 ) {
             active_group( found );
             return false;
         }
-        
+        debugger;        
         groups.push( new_group( data ));
         active_group( groups.length - 1 );
         
@@ -139,7 +139,7 @@ var _store = (function () {
             }
         }
         
-        return null;
+        return -1;
     };
     
 
