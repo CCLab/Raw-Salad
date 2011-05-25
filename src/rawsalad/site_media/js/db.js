@@ -29,7 +29,7 @@ var _db = (function () {
                 _store.init_basic_sheet( data );
             }
         });
-    });
+    };
 
 
     // downloads requested nodes, appends them to object with other nodes

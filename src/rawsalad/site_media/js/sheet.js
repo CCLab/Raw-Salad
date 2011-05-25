@@ -7,7 +7,7 @@ var _sheet = (function () {
     //  P U B L I C   I N T E R F A C E
     var that = {};
 
-    that.create_new_sheet( sheet_data, sheet_name, filtered_sheet ) {
+    that.create_new_sheet = function ( sheet_data, sheet_name, filtered_sheet ) {
         var new_sheet_nr = _store.sheets_number();
         var new_sheet = { };
         
@@ -30,7 +30,7 @@ var _sheet = (function () {
     }
     
     
-    that.change_active_sheet( sheet_nr ) {
+    that.change_active_sheet = function ( sheet_nr ) {
         if ( _store.active_sheet_nr() !== sheet_nr ) {
             _store.active_sheet_nr( sheet_nr );
             _table.clean_table();
@@ -61,7 +61,7 @@ var _sheet = (function () {
     };
 
 
-    var clean_basic_sheet = function ( ) {
+    var clean_basic_sheet = function () {
         var active_sheet_number;
         var basic_sheet;
         var basic_sheet_rows = [];
