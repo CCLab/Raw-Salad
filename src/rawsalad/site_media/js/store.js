@@ -39,7 +39,7 @@ var _store = (function () {
 
         var found = find_group( data );
         debugger;
-        if( found !== -1 ) {
+        if( found !== null ) {
             active_group( found );
             return false;
         }
@@ -139,7 +139,7 @@ var _store = (function () {
             }
         }
         
-        return -1;
+        return null;
     };
     
 
