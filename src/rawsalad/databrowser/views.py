@@ -141,7 +141,7 @@ def get_perspectives( col_nr ):
 
 
 def tmp_solution_for_metadata():
-    return { "meta_data": [
+    return { "meta_data": json.dumps( [
         {
             "idef": 0, 
             "long_description": None, 
@@ -172,7 +172,7 @@ def tmp_solution_for_metadata():
             "name": "Krajowy Fundusz Drogowy", 
             "description": "Dane finansowe Krajowego Funduszu Drogowego"
         }
-    ]}
+    ])}
 
 
 class UnicodeWriter:
