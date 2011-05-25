@@ -16,6 +16,7 @@ var _db = (function () {
             "issue": _store.issue()
         };
 
+                    debugger;
         $.ajax({
             data: init_data_info,
             dataType: "json",
