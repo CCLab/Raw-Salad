@@ -105,10 +105,10 @@ var _gui = (function () {
             html.push( 'data-per-id="', perspectives[i]['idef'], '">' );            
             html.push( '<div class="title">' );
             html.push( perspectives[i]['name'] );
-            html.push( '</div'> );
+            html.push( '</div>' );
             html.push( '<div class="description">' );
             html.push( perspectives[i]['description'] );
-            html.push( '</div'> );          
+            html.push( '</div>' );          
             // iterates in revers order because of CSS "float: right"
             for( j = issues.length-1; j >= 0; j -= 1 ) {
                 html.push( '<div class="more" ' );
