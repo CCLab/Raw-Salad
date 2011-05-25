@@ -38,7 +38,7 @@ var _store = (function () {
     that.create_new_group = function ( data ) {
 
         var found = find_group( data );
-
+        debugger;
         if( found !== -1 ) {
             active_group( found );
             return false;
