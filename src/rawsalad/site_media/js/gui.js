@@ -101,7 +101,7 @@ var _gui = (function () {
             issues = perspectives[i]['issues'];
             
             html.push( '<div class="position" ' );
-            html.push( 'data-set-id="', dataset_id, ' ' );            
+            html.push( 'data-set-id="', dataset_id, '" ' );            
             html.push( 'data-per-id="', perspectives[i]['idef'], '">' );            
             html.push( '<div class="title">' );
             html.push( perspectives[i]['name'] );
