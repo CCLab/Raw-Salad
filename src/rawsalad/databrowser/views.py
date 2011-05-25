@@ -83,7 +83,7 @@ func_dict = {
 
 def get_page( data ):
     template = loader.get_template( "app.html" )
-    context = Context( get_meta_data() )
+    context = Context( tmp_solution_for_metadata() )
     return HttpResponse( template.render( context ))
 
 
@@ -137,6 +137,42 @@ def get_perspectives( col_nr ):
 
     return dataset_coll
 
+
+
+
+def tmp_solution_for_metadata():
+    return [
+        {
+            "idef": 0, 
+            "long_description": null, 
+            "name": "Budżet centralny", 
+            "description": "Ustawa budżetowa w kilku odsłonach"
+        }, 
+        {
+            "idef": 1, 
+            "long_description": null, 
+            "name": "Środki europejskie", 
+            "description": "Udział środków europejskich w budżecie centralnym Polski"
+        }, 
+        {
+            "idef": 2, 
+            "long_description": null, 
+            "name": "Fundusze celowe i agencje narodowe", 
+            "description": "Części kosztowe budżetów wszystkich funduszy celowych i agencji narodowych"
+        }, 
+        {
+            "idef": 3, 
+            "long_description": null, 
+            "name": "Narodowy Fundusz Zdrowia", 
+            "description": "Budżet Narodowego Funduszu Zdrowia z rozbiciem na ośrodki wojewódzkie"
+        }, 
+        {
+            "idef": 4, 
+            "long_description": null, 
+            "name": "Krajowy Fundusz Drogowy", 
+            "description": "Dane finansowe Krajowego Funduszu Drogowego"
+        }
+    ]
 
 
 class UnicodeWriter:
