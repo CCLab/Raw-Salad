@@ -7,7 +7,7 @@
   "issue": 2011,
   "explorable": "type",
   "max_level": "e",
-  "batchsize": 40,
+  "batchsize": null,
   "columns": [
     {
       "key": "type",

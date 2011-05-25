@@ -90,7 +90,7 @@
       "level": 1,
       "idef": 1
   },
-  "query": {"node": null},
+  "query": {},
   "sort": {
       "0": {"idef_sort": 1},
       "1": {"parent_sort": 1},

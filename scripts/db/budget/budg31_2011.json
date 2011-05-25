@@ -1,15 +1,16 @@
 {
-  "name": "nfz",
-  "perspective": "Narodowy Fundusz Zdrowia 2011",
+  "name": "nfz_2011_detailed",
+  "perspective": "Narodowy Fundusz Zdrowia 2011 - dane ośrodków regionalnych",
   "ns": "dd_fund2011_nfz",
   "dataset": 3,
   "idef": 1,
   "issue": 2011,
-  "explorable": "numer",
+  "explorable": "type",
+  "max_level": "e",
   "batchsize": null,
   "columns": [
     {
-      "key": "numer",
+      "key": "type",
       "label": "Numer",
       "type": "string",
       "basic": true,
@@ -23,144 +24,8 @@
       "processable": true
     },
     {
-      "key": "centrala",
-      "label": "Centrala",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "dolnoslaskie",
-      "label": "Dolnośląskie",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "kujawskopomorskie",
-      "label": "Kujawsko-Pomorskie",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "lubelski",
-      "label": "Lubelski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "lubuski",
-      "label": "Lubuski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "lodzki",
-      "label": "Łódzki",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "malopolski",
-      "label": "Małopolski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "mazowiecki",
-      "label": "Mazowiecki",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "opolski",
-      "label": "Opolski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "podkarpacki",
-      "label": "Podkarpacki",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "podlaski",
-      "label": "Podlaski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "pomorski",
-      "label": "Pomorski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "slaski",
-      "label": "Śląski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "swietokrzyski",
-      "label": "Świętokrzyski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "warminskomazurski",
-      "label": "Warmińsko-Mazurski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "wielkopolski",
-      "label": "Wielkopolski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "zachodniopomorski",
-      "label": "Zachodniopomorski",
-      "processable": true,
-      "basic": false,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "ogolem",
-      "label": "Ogółem (Centrala+Ośrodki Wojewódzkie)",
+      "key": "val",
+      "label": "Ogółem",
       "processable": true,
       "basic": true,
       "type": "number",
@@ -168,11 +33,12 @@
     }
   ],
   "aux": {
+      "idef": 1,
       "leaf": 1,
       "parent": 1,
       "level": 1
   },
-  "query": {},
+  "query": { "node": 1 },
   "sort": {
       "0": {"idef_sort": 1},
       "1": {"parent_sort": 1},
