@@ -99,8 +99,6 @@ var _gui = (function () {
 
         for( i = 0; i < perspectives.length; i += 1 ) {
             issues = perspectives[i]['issues'];
-
-            debugger;
             
             html.push( '<div class="position" ' );
             html.push( 'data-set-id="', dataset_id, ' ' );            
@@ -119,10 +117,13 @@ var _gui = (function () {
                 html.push( '</div>' );
             }
             html.push( '</div>' );
+            
+            
         }
 
         $('#choose-perspectives')
             .append( $( html.join('') ))
+            .show()
             .find( '.position' )
             .find('.more' )
             .click( function () {
