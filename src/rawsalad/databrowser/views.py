@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+#from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import Context, loader
 from django.utils import simplejson as json
 # DK
 import rawsdbapi as rawdb
+import csv
 
 
 # to be removed soon
@@ -95,10 +97,14 @@ def app_page( request ):
 def redirect( request ):
     return HttpResponseRedirect('/app')
 
-
+#@csrf_protect
 def download_data( request ):
+   
     data = request.POST.get( 'sheet' )
-    return HttpResponse( data, mimetype='text/csv' )
+    response = HttpResponse( content=data, mimetype='text/csv' )
+    response['Content-Disposition'] = 'attachment; filename=data.csv'
+
+    return response
 
 
 # is that ever used?!

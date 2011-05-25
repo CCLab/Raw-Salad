@@ -890,16 +890,23 @@
     $('#filter-form').hide();    
     init_data_object( tab_data_object );
 
+    $('#download-form').hide();
     $('#download-button').click( function () {
 
-        $.ajax({
-            url: '/download/',
-            type: 'POST',
-            data: { sheet: sheet_list["sheets"][sheet_list["active_sheet"]] },
-            success: function () {
-                console.log( "Works fine" );
-            }
-        });
+	var i, j;
+	var data = "";
+	var sheet = sheet_list['sheets'][sheet_list['active_sheet']];
+
+	for( i = 0; i < sheet['rows'].length; ++i ) {
+            data += sheet['rows'][i]['type'] + ';';
+	    data += sheet['rows'][i]['name'] + ';\n';
+	}	
+	
+	$('#download-form')
+		.find('input')
+		.val( data )
+		.end()
+		.submit();
     });
 
 })();
