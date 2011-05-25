@@ -43,10 +43,12 @@ var _store = (function () {
             active_group( found );
             return false;
         }
-        debugger;        
+ 
         groups.push( new_group( data ));
+        debugger;               
         active_group( groups.length - 1 );
-        
+        debugger;       
+                
         return true;
     };
     
@@ -110,7 +112,7 @@ var _store = (function () {
         debugger;
     
         if( arguments.length === 0 ) {
-            return groups[ 'active_group_number' ];
+            return groups[ active_group_number ];
         }
         
         active_group_number = value;

@@ -231,7 +231,27 @@ def tmp_solution_for_metadata():
             "idef": 3, 
             "long_description": None, 
             "name": "Narodowy Fundusz Zdrowia", 
-            "description": "Budżet Narodowego Funduszu Zdrowia z rozbiciem na ośrodki wojewódzkie"
+            "description": "Budżet Narodowego Funduszu Zdrowia z rozbiciem na ośrodki wojewódzkie",
+            "perspectives": [
+                {
+                    "idef": 0, 
+                    "description": "Dane szczebla centralnego", 
+                    "long_description": null, 
+                    "name": "Dane zagregowane",
+                    "issues": [
+                        2011
+                    ]
+                }, 
+                {
+                    "idef": 1, 
+                    "description": "Dane budżetowe ośrodków regionalnych NFZ", 
+                    "long_description": null, 
+                    "name": "Dane ośrodków regionalnych",
+                    "issues": [
+                        2011
+                    ]
+                }
+            ]
         }, 
         {
             "idef": 4, 
