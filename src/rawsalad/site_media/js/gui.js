@@ -73,7 +73,7 @@ var _gui = (function () {
             html.push( '</div>' );
             html.push( '<div class="description">' );
             html.push( dataset[i]['description'] );
-            html.push( '</div'> );            
+            html.push( '</div>' );            
             html.push( '<div class="more">Zobacz dane</div>' );
             html.push( '</div>' );
         }
