@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -146,11 +145,11 @@ def tmp_solution_for_metadata():
             "idef": 0, 
             "long_description": None, 
             "name": "Budżet centralny", 
-            "description": "Ustawa budżetowa w kilku odsłonach",
+            "description": "Budżet Rzeczpospolitej Polskiej",
             "perspectives": [
                 {
                     "idef": 0, 
-                    "description": "Ustawa budżetowa as such", 
+                    "description": "Układ tradycyjny budżetu to realizacja ustawy budżetowej przyjętej przez Parlament", 
                     "long_description": None, 
                     "name": "Budżet tradycyjny",
                     "issues": [
@@ -159,7 +158,7 @@ def tmp_solution_for_metadata():
                 }, 
                 {
                     "idef": 1, 
-                    "description": "Dwadzieścia dwie funkcje państwa", 
+                    "description": "Układ zadaniowy to dokument pomocniczy w debacie nad projektem ustawy budżetowej. Dzieli on pańtwo na dwadzieścia dwie funkcje, co ukazuje wydatki państwa w bardzo przejrzysty sposób", 
                     "long_description": None, 
                     "name": "Budżet zadaniowy",
                     "issues": [
@@ -168,7 +167,7 @@ def tmp_solution_for_metadata():
                 }, 
                 {
                     "idef": 2, 
-                    "description": "Wszyscy dysponenci ustawy budżetowej", 
+                    "description": "Dane budżetu zadaniowego zreorganizowane, by kluczem podstawowym byli dysponenci finansów budżetowych", 
                     "long_description": None, 
                     "name": "Budżet instytucjonalny",
                     "issues": [
@@ -235,18 +234,18 @@ def tmp_solution_for_metadata():
             "perspectives": [
                 {
                     "idef": 0, 
-                    "description": "Dane szczebla centralnego", 
+                    "description": "Zagregowane dane części wydatkowej budżetów Ośrodków Wojewódzkich i Centrali Narodowego Funduszu Zdrowia", 
                     "long_description": None, 
-                    "name": "Dane zagregowane",
+                    "name": "Zagregowane dane centralne",
                     "issues": [
                         2011
                     ]
                 }, 
                 {
                     "idef": 1, 
-                    "description": "Dane budżetowe ośrodków regionalnych NFZ", 
+                    "description": "Część wydatkowa budżetów Ośrodków Wojewódzkich Narodowego Funduszu Zdrowia", 
                     "long_description": None, 
-                    "name": "Dane ośrodków regionalnych",
+                    "name": "Budżety Ośrodków Wojewódzkiech",
                     "issues": [
                         2011
                     ]
