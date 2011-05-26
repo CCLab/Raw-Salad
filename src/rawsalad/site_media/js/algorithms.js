@@ -1,35 +1,7 @@
-var Utilities = (function () {
+var _algorithms = (function () {
     var that = {};
     
-    /*****************************************************************************
-     *                                                                           *
-     *                             SORTING                                       *
-     *                                                                           *
-     *****************************************************************************/
-    /*
-      General sorting interface is:
-         
-         - for whole collection:
-             type_of_sort( data, settings )
-
-         - for range of the collection:
-             type_of_sort( data, settings, start, end )
-
-         - settings object is a list of prefferences each containing two fields:
-             name - a key to be used as a base for sorting
-             pref - sorting order (1 - ascending, -1 - descending)
-
-             [{
-                 pref: 1,
-                 name: "age"
-              },
-              {
-                 pref: -1,
-                 name: "name"
-              }]
-    */
-    
-    // S O R T
+//  P U B L I C   I N T E R F A C E
 
     // sorts part of an array data with a hybrid sorting algorithm
     // which uses merge sort for dividing big part of an array and mergin them
@@ -54,9 +26,42 @@ var Utilities = (function () {
         }
     };
     
+    // filters collection
+    that.filter = function ( data, filter_mask ) {
+        var i;
+        var result = [ ];
+        var passed_filter_object = {};
+        
+        prepare_mask( filter_mask );
+        
+        // for each element in collection
+        for ( i = 0; i < data.length; i += 1 ) {
+            // checks if the object passes through the filter
+            if ( check_obj( data[i], filter_mask ) ) {
+                $.extend( true, passed_filter_object, data[ i ] );
+                result.push( passed_filter_object );
+                passed_filter_object = {};
+            }
+        }
+        return result;
+    };
+    
+    that.prepare_sorting_setting = function( sorting_setting, key ) {
+        var hidden_attribute = {
+            "pref": -1,
+            "name": key
+        };
+        
+        sorting_setting.push( hidden_attribute );
+    };
+    
+//  P R I V A T E   I N T E R F A C E
+
+//   S O R T I N G   H E L P E R   F U N C T I O N S
+
     // sorts data in range [start; end] with bubble_sort algorithm
     // with setting sorting_setting, which decides when an object is bigger than another
-    function bubble_sort( data, sorting_setting, start, end ) {
+    var bubble_sort = function( data, sorting_setting, start, end ) {
         var start = start || 0;
         var end = end || data.length - 1;
         
@@ -74,7 +79,7 @@ var Utilities = (function () {
     };
 
     // sorts part of an array data with merge sort algorithm using setting sett
-    function merge_sort( data, sorting_setting, start, end ) {
+    var merge_sort = function( data, sorting_setting, start, end ) {
         var start = start || 0;
         var end = end || data.lenght - 1;
         var middle;
@@ -95,7 +100,7 @@ var Utilities = (function () {
 
     // merges two subarrays, 1st: data[start, middle], 2nd: data[middle+1, end]
     // result is that data[start, end] is sorted
-    function merge( data, sorting_setting, start, middle, end ) {    
+    var merge = function( data, sorting_setting, start, middle, end ) {    
         var i = 0;
         var j = 0;
         var ind = start;
@@ -132,142 +137,9 @@ var Utilities = (function () {
             }
         }
     };
-
-
-    /*****************************************************************************
-     *                                                                           *
-     *                             FILTERING                                     *
-     *                                                                           *
-     *****************************************************************************/
-
-    // name: name of attribute which will be checked during filtering,
-    // two types of masks:
-    // a) numeric:
-    //   pref: -2 -> < value
-    //   pref: -1 -> <= value
-    //   pref: 0 -> == value
-    //   pref: 1 -> >= value
-    //   pref: 2 -> > value
-    // b) string:
-    //   pref: -2 -> does not start value
-    //   pref: -1 -> does not contain value
-    //   pref: 1 -> contains value
-    //   pref:2 -> starts from value
-    /*var mask = [
-                { name: 'y2010', pref: '1', value: '100000' },
-                { name: 'y2011', pref: '-1', value: '300000' }
-    ];*/
     
-    // filters collection
-    that.filter = function ( data, filter_mask ) {
-        var i;
-        var result = [ ];
-        var passed_filter_object = {};
-        
-        prepare_mask( filter_mask );
-        
-        // for each element in collection
-        for ( i = 0; i < data.length; i += 1 ) {
-            // checks if the object passes through the filter
-            if ( check_obj( data[i], filter_mask ) ) {
-                $.extend( true, passed_filter_object, data[ i ] );
-                result.push( passed_filter_object );
-                passed_filter_object = {};
-            }
-        }
-        return result;
-    };
-    
-    // looks for every criterion that is string value and
-    // changes is to lower case
-    function prepare_mask( mask ) {
-        var i;
-        var attr;
-        var value;
-        var type;
-        
-        for ( i = 0; i < mask.length; i += 1 ) {
-            type = typeof mask[ i ];
-            if ( type === "string" ) {
-                value = mask[ i ].value;
-                mask[ i ].value = value.toLowerCase();
-            }
-        }
-    };
-    
-    // checks if an object passes through a filter
-    function check_obj( obj, filter_mask ) {
-        var i;
-        var key;
-        var pref;
-        var value;
-        
-        // for each attribute of an object which is also in filter_mask
-        for ( i = 0; i < filter_mask.length; i += 1 ) {
-            key = filter_mask[i].name;
-            pref = filter_mask[i].pref;
-            value = filter_mask[i].value;
-            // one of attributes does not pass through a filter
-            if ( !check_attr( obj, key, pref, value ) ) {
-                return false;
-            }
-        }
-        return true;
-    };
-
-    // checks if specfied attribute of an object passes a filter
-    function check_attr( obj, attr, pref, value ) {
-        var obj_val = obj[attr];
-        var type = typeof obj_val;
-
-        if ( type === "number" ) {
-            if ( pref === 'lt' && obj_val < value) {
-                return true;
-            } else if ( pref === 'gt' && obj_val > value ) {
-                return true;
-            } else if ( pref === 'eq' && obj_val === value ) {
-                return true;
-            }
-        } else {
-            // is string
-            var str = obj[attr].toLowerCase();
-            
-            if ( pref === -2 && !starts_with( str, value ) ||
-                 pref === -1 && !contains( str, value ) ||
-                 pref === 1 && contains( str, value ) ||
-                 pref === 2 && starts_with( str, value ) ) {
-                 return true;
-            } else {
-                return false;
-            }
-        }
-        
-        return false;
-    };
-    
-    function starts_with( str, value ) {
-        return ( str.indexOf( value ) === 0 );
-    };
-    
-    function contains( str, value ) {
-        return ( str.indexOf( value ) !== -1 );
-    };
-    
-    
-    // S O R T I N G   H E L P E R   F U N C T I O N S
-    
-    // adds hidden parameter to sorting setting to avoid a situation,
-    that.prepare_sorting_setting = function( sorting_setting, key ) {
-        var hidden_attribute = {
-            "pref": -1,
-            "name": key
-        };
-        
-        sorting_setting.push( hidden_attribute );
-    };
-
     // changes elements in array
-    function swap( data, i, j) {
+    var swap = function( data, i, j) {
         var tmp = data[i];
         data[i] = data[j];
         data[j] = tmp;
@@ -275,7 +147,7 @@ var Utilities = (function () {
 
 
     // gets middle point between start and end
-    function get_middle( start, end ) {
+     var get_middle = function( start, end ) {
         var length = start + end;
         var rest = length % 2;
         var temp = length - rest;
@@ -284,10 +156,9 @@ var Utilities = (function () {
     }
 
     // compares values of specified attribute of two objects, returned value depends on preference
-    function compare_atr( ob1, ob2, attr, pref ) {
+    var compare_atr = function( ob1, ob2, attr, pref ) {
         var compare_value;
         var alphabet;
-        var compare_strings;
         
         if ( typeof ob1[attr] === "number" ) {
             if ( ob1[attr] < ob2[attr] ) {
@@ -309,7 +180,7 @@ var Utilities = (function () {
     // alpha is slighlty modified function from
     // http://stackoverflow.com/questions/3630645/how-to-compare-utf-8-strings-in-javascript/3633725#3633725
     // written by Mic and Tomasz Wysocki
-    function alpha( alphabet, dir, case_sensitive ) {
+    var alpha = function( alphabet, dir, case_sensitive ) {
         dir = dir || 1;
         function compare_letters( a, b ) {
             var ia = alphabet.indexOf( a );
@@ -341,7 +212,7 @@ var Utilities = (function () {
     };
 
     // compares two objects, compares their attributes mentioned in sorting_setting
-    function compare_obj( ob1, ob2, sorting_setting ) {
+    var compare_obj = function( ob1, ob2, sorting_setting ) {
         var i;
         var result = 0;
         var key;
@@ -366,7 +237,7 @@ var Utilities = (function () {
         return result;
     };
     
-    function id_comparison( ob1, ob2, sorting_setting ) {
+    var id_comparison = function( ob1, ob2, sorting_setting ) {
         var key;
         var pref;
         var sett_length = sorting_setting.length;
@@ -402,7 +273,81 @@ var Utilities = (function () {
         return result * pref;
     }
     
+//   F I L T E R I N G   H E L P E R   F U N C T I O N S
     
+    // looks for every criterion that is string value and
+    // changes it to lower case
+    var prepare_mask = function( mask ) {
+        var i;
+        var value;
+        var type;
+        
+        for ( i = 0; i < mask.length; i += 1 ) {
+            type = typeof mask[ i ];
+            if ( type === "string" ) {
+                value = mask[ i ].value;
+                mask[ i ].value = value.toLowerCase();
+            }
+        }
+    };
+    
+    // checks if an object passes through a filter
+    var check_obj = function( obj, filter_mask ) {
+        var i;
+        var key;
+        var pref;
+        var value;
+        
+        // for each attribute of an object which is also in filter_mask
+        for ( i = 0; i < filter_mask.length; i += 1 ) {
+            key = filter_mask[i].name;
+            pref = filter_mask[i].pref;
+            value = filter_mask[i].value;
+            // one of attributes does not pass through a filter
+            if ( !check_attr( obj, key, pref, value ) ) {
+                return false;
+            }
+        }
+        return true;
+    };
 
+    // checks if specfied attribute of an object passes a filter
+    var check_attr = function( obj, attr, pref, value ) {
+        var obj_val = obj[attr];
+        var type = typeof obj_val;
+
+        if ( type === "number" ) {
+            if ( pref === 'lt' && obj_val < value) {
+                return true;
+            } else if ( pref === 'gt' && obj_val > value ) {
+                return true;
+            } else if ( pref === 'eq' && obj_val === value ) {
+                return true;
+            }
+        } else {
+            // is string
+            var str = obj[attr].toLowerCase();
+            
+            if ( pref === -2 && !starts_with( str, value ) ||
+                 pref === -1 && !contains( str, value ) ||
+                 pref === 1 && contains( str, value ) ||
+                 pref === 2 && starts_with( str, value ) ) {
+                 return true;
+            } else {
+                return false;
+            }
+        }
+        
+        return false;
+    };
+    
+    var starts_with = function( str, value ) {
+        return ( str.indexOf( value ) === 0 );
+    };
+    
+    var contains = function( str, value ) {
+        return ( str.indexOf( value ) !== -1 );
+    };
+    
     return that;
 })();
