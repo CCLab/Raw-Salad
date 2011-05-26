@@ -4,8 +4,8 @@
         
         var new_table_data_object = {};
         
-        Utilities.prepare_sorting_setting( sett, id );
-        Utilities.sort( table_data_object[ 'rows' ], sett );
+        _algorithms.prepare_sorting_setting( sett, id );
+        _algorithms.sort( table_data_object[ 'rows' ], sett );
     };
 
 
@@ -226,7 +226,7 @@
             
             new_data_object = {};
             $.extend( true, new_data_object, tab_data_object );
-            new_data_object['rows'] = Utilities.filter( tab_data_object['rows'], mask );
+            new_data_object['rows'] = _algorithms.filter( tab_data_object['rows'], mask );
             new_sheet_nr = create_new_sheet( new_data_object, true );
             
             tab_data_object = sheet_list["sheets"][new_sheet_nr];

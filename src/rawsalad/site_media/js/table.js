@@ -88,6 +88,7 @@ var _table = (function () {
                 }
                 else {
                     nodes.toggle();
+                    toggle_hidden_param( id );
                 }
                 
                 _gui.highlight( current_level );
@@ -96,9 +97,52 @@ var _table = (function () {
         node.find( '.data' ).each( function () {
             $(this).children( '.cell' ).equalize_heights();
         });
-    };    
+    };
 
+    that.toggle_hidden_param = function( id ) {
+    
+        var parent = filter( function ( element ) {
+                return element['idef'] === id;
+            }, _store.active_rows() );
+            
+        Assert.assert( parent.length > 0,
+                       "No row found" );
+                       
+        Assert.assert( parent.length === 1,
+                       "Too many rows found" );
+            
+        Assert.assert( !parent['leaf'], 
+                       "Can't hide leaf's children" );
+            
+        parent[0]['hidden'] = !parent[0]['hidden'];
+    };
+    
+    that.hide_hidden_nodes = function() {
+        var parents_with_hidden_children;
+        var node;
+        var i;
+        var id;
+        var hidden_children;
+        
+        parents_with_hidden_children = filter( function ( element ) {
+                return !!element['hidden'];
+            }, _store.active_rows() );
+            
+        for ( i = 0; i < parents_with_hidden_children.length; i += 1 ) {
+            id = parents_with_hidden_children[i]['idef'];
+            node = $('#'+id);
+            hidden_children = node.find('.data')
+                                  .find('.type')
+                                  .parent()
+                                  .next();
+                                  
+            Assert.assert( hidden_children.length > 0,
+                           "Row with hidden children without hidden children" );
 
+            hidden_children.toggle();
+        }
+    }
+    
     // P R I V A T E   I N T E R F A C E
     var generate_header = function () {
         var i;
@@ -145,6 +189,7 @@ var _table = (function () {
         var schema;
         var level;
         var rows;
+        var is_hidden;
         
         var next_letter = function( letter ) {
             var number = letter.charCodeAt( 0 );
@@ -173,13 +218,15 @@ var _table = (function () {
                 container.append( html_row.join('') );
                 
                 if ( !!item[ 'parent' ] ) {
-                    id = item[ 'parent' ];                 
-                    that.arm_nodes( id );
+                    id = item[ 'parent' ];
+                    is_hidden = item[ 'hidden' ];
+                    that.arm_nodes( id, is_hidden );
                 }
             }
         }
         
         that.arm_nodes();
+        that.hide_hidden_nodes();
         _gui.make_zebra();
     };    
     
