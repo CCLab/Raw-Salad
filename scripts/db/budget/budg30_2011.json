@@ -4,7 +4,7 @@
   "ns": "dd_fund2011_nfz",
   "dataset": 3,
   "idef": 0,
-  "issue": 2011,
+  "issue": "2011",
   "explorable": "type",
   "max_level": "d",
   "batchsize": null,

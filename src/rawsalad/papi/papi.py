@@ -247,7 +247,7 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     nav_select_columns= {'_id':0} # _id is never returned
     cond_query= {} # query conditions
 
-    nav_select_columns.update({ 'perspectives.issue':1 })
+    nav_select_columns.update({ 'perspectives.issues':1 })
     cond_query.update({ 'idef': int(dataset_idef) }) # query conditions
 
     cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
@@ -255,7 +255,6 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     result= cursor_data['perspectives'][int(view_idef)]
 
     if serializer == 'json':
-        result['issues']= result.pop('issue')
         out= json.dumps( result, ensure_ascii=False, indent=4 )
         mime_tp= "application/json"
     elif serializer == 'xml':
@@ -284,7 +283,7 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
 
     result= {}
-    result['count']= len(cursor_data['perspectives'][int(view_idef)]['issue'])
+    result['count']= len(cursor_data['perspectives'][int(view_idef)]['issues'])
 
     if serializer == 'json':
         out= json.dumps( { 'issues': result }, ensure_ascii=False, indent=4 )
@@ -305,7 +304,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         db.authenticate(dsn['username'], dsn['password'])        
 
     # EXTRACT metadata
-    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), int(issue), db)
+    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), str(issue), db)
     if metadata_full is None:
         dt= []
     else:
@@ -381,7 +380,7 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
         db.authenticate(dsn['username'], dsn['password'])        
 
     # EXTRACT metadata
-    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), int(issue), db)
+    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), str(issue), db)
 
     if metadata_full is None:
         result= { 'metadata': None, 'response': 'No such data' }

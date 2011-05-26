@@ -4,7 +4,7 @@
   "ns": "dd_budg2011_in",
   "dataset": 0,
   "idef": 2,
-  "issue": 2011,
+  "issue": "2011",
   "explorable": "type",
   "batchsize": 40,
   "columns": [

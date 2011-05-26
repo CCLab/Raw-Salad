@@ -4,7 +4,7 @@
   "ns": "dd_agnc2011_go",
   "dataset": 2,
   "idef": 2,
-  "issue": 2011,
+  "issue": "2011",
   "explorable": "type",
   "max_level": "e",
   "batchsize": null,
