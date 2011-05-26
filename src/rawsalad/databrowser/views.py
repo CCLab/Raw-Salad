@@ -234,18 +234,18 @@ def tmp_solution_for_metadata():
             "perspectives": [
                 {
                     "idef": 0, 
-                    "description": "Dane szczebla centralnego", 
+                    "description": "Zagregowane dane części wydatkowej budżetów Ośrodków Wojewódzkich i Centrali Narodowego Funduszu Zdrowia", 
                     "long_description": None, 
-                    "name": "Zagregowane dane części wydatkowej budżetów Ośrodków Wojewódzkich i Centrali Narodowego Funduszu Zdrowia",
+                    "name": "Zagregowane dane centralne",
                     "issues": [
                         2011
                     ]
                 }, 
                 {
                     "idef": 1, 
-                    "description": "Dane budżetowe ośrodków regionalnych NFZ", 
+                    "description": "Część wydatkowa budżetów Ośrodków Wojewódzkich Narodowego Funduszu Zdrowia", 
                     "long_description": None, 
-                    "name": "Część wydatkowa budżetów Ośrodków Wojewódzkich Narodowego Funduszu Zdrowia",
+                    "name": "Budżety Ośrodków Wojewódzkiech",
                     "issues": [
                         2011
                     ]
