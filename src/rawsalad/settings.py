@@ -29,9 +29,9 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 
-MEDIA_PREFIX = '/media/'
-MEDIA_ROOT = os.path.join( ROOT_PATH, 'site_media/media' )
-MEDIA_URL = 'http://127.0.0.1:8000/site_media/media/' # for development period
+MEDIA_PREFIX = ''
+MEDIA_ROOT = os.path.join( ROOT_PATH, 'site_media/' )
+MEDIA_URL = 'http://127.0.0.1:8000/site_media/' # for development period
 ADMIN_MEDIA_PREFIX = '/admin_media/'
 
 SECRET_KEY = '%f(004sk%!4d*xr$nu6=_5mn_jl6t@2j(jh+wc7#r8o2ttfyev'

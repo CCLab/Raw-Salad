@@ -14,7 +14,7 @@ var _store = (function () {
         }
         
         // set it just once
-        Assert.assert( meta_data.length === 0, 
+        _assert.assert( meta_data.length === 0, 
                        "meta_data already assigned!!!" );
 
         // TODO >> it should come from db as a simple list 
@@ -97,6 +97,19 @@ var _store = (function () {
         active_group()['basic_changed'] = value;        
     };
 
+
+    // active sheet getter / setter
+    that.active_sheet = function ( value ) {
+        var active_grp = active_group();
+        
+        if( arguments.length === 0 ) {
+            return active_grp['sheets'][active_grp['active_sheet_number']];
+        }
+        
+        active_grp['active_sheet_number'] = value;
+    };
+
+
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
     var meta_data = [];
@@ -114,16 +127,6 @@ var _store = (function () {
         active_group_number = value;
     };
 
-    // active sheet getter / setter
-    var active_sheet = function ( value ) {
-        var active_grp = active_group();
-        
-        if( arguments.length === 0 ) {
-            return active_grp['sheets'][active_grp['active_sheet_number']];
-        }
-        
-        active_grp['active_sheet_number'] = value;
-    };
 
     var find_group = function ( data ) {
         var i;
