@@ -163,12 +163,6 @@ var _gui = (function () {
                 if( _store.create_new_group( id ) ) {
                     // get top-level data from db                
                     _db.get_init_data();     
-                    
-                    // create a table
-                    _table.init_table();
-
-                    // initialize an application
-                    that.init_app();           
                 } 
                 else {
                     // go back to application with focus on requested sheet
