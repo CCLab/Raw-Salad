@@ -5,7 +5,7 @@
   "dataset": 2,
   "max_level": "d",
   "idef": 0,
-  "issue": 2011,
+  "issue": "2011",
   "explorable": "type",
   "batchsize": null,
   "columns": [

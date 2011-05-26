@@ -45,12 +45,12 @@ def get_db_connect(dbtype):
 
 
 #-----------------------------
-def get_metadata_full(ds_id, ps_id, dbase):
+def get_metadata_full(ds_id, ps_id, is_id, dbase):
     """
     returns complete set of metadata (with "sort", "aux" and "query")
     """
     metadata_full= dbase[conn_schema].find_one(
-        { 'dataset': ds_id, 'idef' : ps_id },
+        { 'dataset': ds_id, 'idef' : ps_id, 'issue': is_id },
         { '_id' : 0 }
         )
     return metadata_full
@@ -58,13 +58,14 @@ def get_metadata_full(ds_id, ps_id, dbase):
 
 
 #-----------------------------
-def get_metadata(dataset_id, perspective_id):
+def get_metadata(dataset_id, perspective_id, issue_num):
     """
     returns metadata used for representation (without "sort", "aux" and "query")
     """
 
     md_ds= int(dataset_id)
     md_ps= int(perspective_id)
+    md_is= str(issue_num)
 
     # connection details
     dsn= get_db_connect('mongodb')
@@ -73,7 +74,7 @@ def get_metadata(dataset_id, perspective_id):
     md_db.authenticate(dsn['username'], dsn['password'])
 
     # EXTRACT metadata
-    mdata= get_metadata_full(md_ds, md_ps, md_db)
+    mdata= get_metadata_full(md_ds, md_ps, md_is, md_db)
     keys_to_delete= ['sort', 'query', 'aux', 'batchsize']
     for k in keys_to_delete:
         if k in mdata:
@@ -84,7 +85,7 @@ def get_metadata(dataset_id, perspective_id):
 
 
 #-----------------------------
-def extract_docs(dataset_id, perspective_id, query_aux):
+def extract_docs(dataset_id, perspective_id, issue_num, query_aux):
     """
     extracts data for given dataset and perspective
     query_aux represents special cases
@@ -93,6 +94,7 @@ def extract_docs(dataset_id, perspective_id, query_aux):
 
     ds= int(dataset_id)
     ps= int(perspective_id)
+    iss= str(issue_num)
     # connection details
     dsn= get_db_connect('mongodb')
     connect= pymongo.Connection(dsn['host'], dsn['port'])
@@ -100,7 +102,7 @@ def extract_docs(dataset_id, perspective_id, query_aux):
     db.authenticate(dsn['username'], dsn['password'])
 
     # EXTRACT metadata
-    metadata_full= get_metadata_full(ds, ps, db)
+    metadata_full= get_metadata_full(ds, ps, iss, db)
     conn_coll= metadata_full['ns'] # collection name
 
     md_select_columns= {'_id':0} # _id is never returned
@@ -176,3 +178,4 @@ def extract_nav(keys_aux=None, query_aux=None):
         out.append(row)
 
     return out
+
