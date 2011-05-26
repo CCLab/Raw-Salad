@@ -44,6 +44,8 @@ var _gui = (function () {
                 $('#info-text')
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
 
+                $(this)
+                    .hide();
                 $('#choose-perspectives')
                     .hide();
                 $('#choose-datasets')
@@ -64,9 +66,12 @@ var _gui = (function () {
         var i;
         var html = [];
         var datasets = _store.meta_datasets();
-        
-        for( i = 0; i < datasets.length; i += 1 ) {
-            html.push( '<div class="position" ' );
+        var len = datasets.length;
+        var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
+                
+        html.push( '<div class="left">' );
+        for( i = 0; i < len; i += 1 ) {
+            html.push( '<div class="position" ');
             html.push( 'data-set-id="', datasets[i]['idef'], '">' );            
             html.push( '<div class="title">' );
             html.push( datasets[i]['name'] );
@@ -76,7 +81,12 @@ var _gui = (function () {
             html.push( '</div>' );            
             html.push( '<div class="more">Zobacz dane</div>' );
             html.push( '</div>' );
+
+            if( i === mid ) {
+                html.push( '</div><div class="left second-column">' );
+            }
         }
+        html.push( '</div>' );
         
         $('#choose-datasets')
             .append( $( html.join('') ))
@@ -95,9 +105,12 @@ var _gui = (function () {
         var i, j;
         var html = [];
         var perspectives = _store.meta_perspectives( dataset_id );
+        var len = perspectives.length;
+        var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
         var issues;        
 
-        for( i = 0; i < perspectives.length; i += 1 ) {
+        html.push( '<div class="left">' );
+        for( i = 0; i < len; i += 1 ) {
             issues = perspectives[i]['issues'];
             
             html.push( '<div class="position" ' );
@@ -116,11 +129,23 @@ var _gui = (function () {
                 html.push( issues[j] );
                 html.push( '</div>' );
             }
+            html.push( '<div class="more-desc">Zobacz dane:</div>' );
             html.push( '</div>' );
-            
-            
-        }
 
+            if( i === mid ) {
+                html.push( '</div><div class="left second-column">' );
+            }            
+        }
+        html.push( '</div>' );
+        
+        $('#info-title')
+            .html( _store.meta_datasets()[ dataset_id ]['name'] );
+        $('#info-text')
+            .html('Wybierz jedno z wydań danych.');
+
+        $('#back-to-datasets')
+            .show();
+            
         $('#choose-perspectives')
             .append( $( html.join('') ))
             .show()

@@ -100,7 +100,7 @@ body {
         border-radius: 3px 3px 0px 0px;
     }
 
-        #choose-collection-name {
+        #info-title {
             background-color: #767676;
             height: 14px;
             padding: 12px 10px;
@@ -131,14 +131,20 @@ body {
         -moz-border-radius: 0px 0px 3px 3px;
         border-radius: 0px 0px 3px 3px;
     }
-        #choose-collections {
+    
+        #back-to-datasets {
+            float: left;
+        }
+    
+        #choose-datasets {
             width: 855px;
             padding-left: 105px;
         }
 
 
         #choose-perspectives {
-            width: 960px;
+            float: left;
+            margin-left: 35px;            
         }
 
         
@@ -152,9 +158,18 @@ body {
             padding-bottom: 5px;
             margin-bottom: 10px;
             overflow: auto;
+            border: 1px #fff solid;
+        }
+        
+        .position:hover {
+            border: 1px #e2eaee solid;
         }
 
-        .position-title {
+        .second-column {
+            margin-left: 40px;
+        }
+        
+        .position .title {
             border-bottom: #ccc 1px solid;
             color: #009fe3;
             font-size: 15px;
@@ -164,22 +179,32 @@ body {
             margin-top: 10px;
             margin-bottom: 5px;
         }
-
-        .position-desc {
+        
+        .position .desc {
         }
 
-        .position-more {
+        .position .more {
             float: right;
             color: #4abff7;
             font-size: 10px;
-            margin-top: 3px;
-            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            padding: 3px;
         }
 
-        .position-more:hover {
+        .position .more:hover {
             cursor: pointer;
-            color: #4cbceb;
+            color: #fff;
+            background-color: #4abff7;            
         }
+       
+        .more-desc {
+            float: right;
+            font-size: 10px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            padding: 3px;
+        }        
 
 #open-close-choose-panel {
     margin-top: 10px;
