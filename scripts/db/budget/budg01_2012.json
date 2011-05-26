@@ -4,7 +4,7 @@
     "ns": "dd_budg2012_go",
     "dataset": 0,
     "idef": 1,
-    "issue": 2012,
+    "issue": "2012",
     "explorable": "type",
     "columns": [
         {
