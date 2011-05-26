@@ -176,12 +176,12 @@ def tmp_solution_for_metadata():
                 }
             ]
         }, 
-#        {
-#            "idef": 1, 
-#            "long_description": None, 
-#            "name": "Środki europejskie", 
-#            "description": "Udział środków europejskich w budżecie centralnym Polski"            
-#        }, 
+        {
+            "idef": 1, 
+            "long_description": None, 
+            "name": "Środki europejskie", 
+            "description": "Udział środków europejskich w budżecie centralnym Polski"            
+        }, 
         {
             "idef": 2, 
             "long_description": None, 
@@ -251,12 +251,12 @@ def tmp_solution_for_metadata():
                     ]
                 }
             ]
-#        }, 
-#        {
-#            "idef": 4, 
-#            "long_description": None, 
-#            "name": "Krajowy Fundusz Drogowy", 
-#            "description": "Dane finansowe Krajowego Funduszu Drogowego"
+        }, 
+        {
+            "idef": 4, 
+            "long_description": None, 
+            "name": "Krajowy Fundusz Drogowy", 
+            "description": "Dane finansowe Krajowego Funduszu Drogowego"
         }
     ])}
 
