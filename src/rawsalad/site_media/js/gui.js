@@ -91,8 +91,9 @@ var _gui = (function () {
         $('#choose-datasets')
             .append( $( html.join('') ))
             .find( '.position' )
+            .find( '.more' )
             .click( function () {
-                var dataset_id = $(this).attr( 'data-set-id' );
+                var dataset_id = $(this).parent().attr( 'data-set-id' );
                 
                 create_perspectives_panel( dataset_id );
                 
