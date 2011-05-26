@@ -200,6 +200,16 @@ var _gui = (function () {
         $('#choose-panel')
             .slideUp( 400 );
             
+        _gui.make_zebra();
+
+        $('#thead').find( '.data' ).each( function () {
+            $(this).children( '.cell' ).equalize_heights();
+        });        
+
+        $('.a').find( '.data' ).each( function () {
+            $(this).children( '.cell' ).equalize_heights();
+        });        
+
         $('#application')
             .animate({ opacity: 1 }, 300 );
             
@@ -213,8 +223,10 @@ var _gui = (function () {
     that.make_zebra = function () {
         // get all visible rows
         var visible_list = $('.data').not( ':hidden' );
-        
-        // TODO >> each is told to be slow - will we need it to be fast?!
+
+        _assert.not_equal( visible_list.length, 0,
+                           "No visible elements in the table" );
+                                   
         // change background for each row
         visible_list.each( function ( i, e ) {
             // does row belongs to darkened grounp?

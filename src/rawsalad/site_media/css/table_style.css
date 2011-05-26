@@ -41,7 +41,7 @@
     clear: both;
 }
 
-.a, .b, .c {
+.a, .b, .c, .d, .e, .f {
     clear: both;
 }
 
@@ -62,6 +62,16 @@
 .d > .data > .type {
     width: 113px;
     padding-left: 30px !important;    
+}
+
+.e > .data > .type {
+    width: 103px;
+    padding-left: 40px !important;    
+}
+
+.f > .data > .type {
+    width: 93px;
+    padding-left: 50px !important;    
 }
 
 .name {
@@ -96,7 +106,6 @@
 .data {
     clear: both;
     overflow: auto;
-    min-height: 16px;    
 }
 
 .data:hover {
@@ -117,7 +126,7 @@
 }
 
 #thead .cell {
-    height: 30px !important;
+    min-height: 16px !important;
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 5px;

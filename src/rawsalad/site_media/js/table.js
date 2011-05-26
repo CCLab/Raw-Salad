@@ -52,7 +52,7 @@ var _table = (function () {
         for ( i = 0; i < data.length; i += 1 ) {
             item = data[i];
             row_html = generate_row( item, schema );
-            html.push( row_html );
+            html.push( row_html.join('') );
         }
         
         container.append( $( html.join('') ) );
@@ -98,10 +98,13 @@ var _table = (function () {
                 _gui.highlight( current_level );
             });	                             
         
-        node.find( '.data' ).each( function () {
-            $(this).children( '.cell' ).equalize_heights();
-        });
+        if( !node.hasClass( 'a' ) ) {
+            node.find( '.data' ).each( function () {
+                $(this).children( '.cell' ).equalize_heights();
+            });        
+        }
     };
+
 
     that.toggle_hidden_param = function( id ) {
     
@@ -219,7 +222,7 @@ var _table = (function () {
                 }
                 
                 html_row = generate_row( item, schema );
-                container.append( html_row.join('') );
+                container.append( $(html_row.join('')) );
                 
                 if ( !!item[ 'parent' ] ) {
                     id = item[ 'parent' ];
@@ -228,10 +231,9 @@ var _table = (function () {
                 }
             }
         }
-        
+
         that.arm_nodes();
         that.hide_hidden_nodes();
-        _gui.make_zebra();
     };    
     
 
@@ -246,7 +248,7 @@ var _table = (function () {
         html.push( 'class="', item['level'], ' ' );
         html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
         html.push( '<div class="data">' );
-        
+
         // TODO >> recode this loop to make it work with all the datasets
         for ( i = 0; i < schema.length; i += 1 ) {
             col = schema[i];
