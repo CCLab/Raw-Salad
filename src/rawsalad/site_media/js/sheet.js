@@ -8,21 +8,19 @@ var _sheet = (function () {
     var that = {};
 
     that.create_new_sheet = function ( sheet_data, sheet_name, filtered_sheet ) {
-        var new_sheet_nr = _store.sheets_number();
+        var new_sheet_nr = _store.active_sheet_index();
         var new_sheet = { };
         
         $.extend( true, new_sheet, sheet_data );
-        new_sheet["dataset"] = sheet_data["dataset"];
-        new_sheet["perspective"] = sheet_data["perspective"];
         new_sheet["name"] = sheet_name;
         
         add_new_sheet( new_sheet );
         
-        if ( _store.active_sheet_number() === 0 && !_store.basic_sheet_pure() ) {
+        if ( _store.active_sheet_index() === 0 && _store.active_basic_changed() ) {
             clean_basic_sheet();
         }
         
-        _store.active_sheet_number = new_sheet_nr;
+        _store.active_sheet_index(new_sheet_nr);
         
         _gui.create_sheet_tab( sheet_name, new_sheet_nr, filtered_sheet );
         
@@ -44,20 +42,23 @@ var _sheet = (function () {
         var active_sheet_number;
         var max_sheet_number;
         
-        active_sheet_number = _store.active_sheet_number();
-        max_sheet_number = _store.sheets_number();
+        active_sheet_number = _store.active_sheet_index();
+        ////TODO : can't get max number of sheets in the group
+        // temporary solution
+        max_sheet_number = _store.active_sheet_index();
         
-        _store.active_sheet_number( max_sheet_number );
+        _store.active_sheet_index( max_sheet_number );
         
         _store.dataset( new_sheet['dataset'] );
         _store.perspective( new_sheet['perspective'] );
         _store.issue( new_sheet['issue'] );
-        _store.columns( new_sheet['columns'] );
-        _store.rows( new_sheet['rows'] );
-        _store.pending_nodes( [] );
-        _store.name( new_sheet['name'] );
+        _store.active_columns( new_sheet['columns'] );
+        _store.active_rows( new_sheet['rows'] );
+        _store.active_pending_nodes( [] );
+        ////TODO : should sheet have a name? can't set
+        //_store.name( new_sheet['name'] );
         
-        _store.active_sheet_number( active_sheet_number );
+        _store.active_sheet_index( active_sheet_number );
     };
 
 
@@ -66,15 +67,17 @@ var _sheet = (function () {
         var basic_sheet;
         var basic_sheet_rows = [];
         
-        active_sheet_number = _store.active_sheet_number();
-        basic_sheet = _store.basic_sheet();
-        $.extend( true, basic_sheet_rows, basic_sheet['rows'] );
+        active_sheet_number = _store.active_sheet_index();
         
-        _store.active_sheet_number(0);
-        _store.rows( basic_sheet_rows );
-        _store.basic_pure_state( true );
+        ////TODO : can't get basic_sheet
+        //basic_sheet = _store.basic_sheet();
+        //$.extend( true, basic_sheet_rows, basic_sheet['rows'] );
         
-        _store.active_sheet_number( active_sheet_number );
+        _store.active_sheet_index(0);
+        _store.acitve_sheet_rows( basic_sheet_rows );
+        _store.active_basic_changed( false );
+        
+        _store.active_sheet_index( active_sheet_number );
     };
 
     return that;

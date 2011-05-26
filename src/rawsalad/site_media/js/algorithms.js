@@ -1,3 +1,7 @@
+//
+//      Collection of algorithms used to sort and filter rows in table
+//
+
 var _algorithms = (function () {
     var that = {};
     
