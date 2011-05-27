@@ -122,9 +122,8 @@ var _ttools = (function () {
 
                 that.sort( _store.active_rows(), settings );
                 
-                $('#table').empty();
-                _table.generate_header( );
-                _table.generate_table_body( );
+                _table.clean_table();
+                _table.init_table();
                 
                 $(this).hide();
                 
