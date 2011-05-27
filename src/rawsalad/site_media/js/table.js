@@ -101,7 +101,7 @@ var _table = (function () {
                     }
                     else {
                         nodes.toggle();
-                        toggle_hidden_param( id );
+                        that.toggle_hidden_param( id );
                     }
                     
                     _gui.highlight( current_level );

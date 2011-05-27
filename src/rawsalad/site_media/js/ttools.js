@@ -27,7 +27,7 @@ var _ttools = (function () {
     
     var add_sort_key = function() {
         var i, key;
-        var perspective = tab_data_object['perspective']['columns'];
+        var perspective = _store.active_columns();
         var columns = [];
         var html = [];
 
