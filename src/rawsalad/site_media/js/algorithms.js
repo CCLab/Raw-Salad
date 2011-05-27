@@ -254,7 +254,7 @@ var _algorithms = (function () {
         var token_to_int2;
         
         key = sorting_setting[ sett_length - 1 ].name;
-        pref = sorting_setting[ sorting_setting_length - 1 ].pref;
+        pref = sorting_setting[ sett_length - 1 ].pref;
         
         id1_tokenized = ob1[key].split("-");
         id2_tokenized = ob2[key].split("-");
