@@ -118,7 +118,7 @@ var _table = (function () {
 
     that.toggle_hidden_param = function( id ) {
     
-        var parent = filter( function ( element ) {
+        var parent = _utils.filter( function ( element ) {
                 return element['idef'] === id;
             }, _store.active_rows() );
             
