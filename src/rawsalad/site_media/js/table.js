@@ -10,9 +10,9 @@ var _table = (function () {
         $('#table').empty();
     };
 
-    that.init_table = function () {
+    that.init_table = function ( filter_mode ) {
         generate_header();
-        generate_table_body();
+        generate_table_body( filter_mode );
     };
     
     
@@ -197,8 +197,8 @@ var _table = (function () {
     };
     
     
-    // TODO >> what is "simple_mode"
-    var generate_table_body = function( simple_mode ) {
+    // TODO >> what is "filter_mode"
+    var generate_table_body = function( filter_mode ) {
         var container;
         var html_row;
         var id;
@@ -225,7 +225,7 @@ var _table = (function () {
             
             for ( i = 0; i < rows.length; i += 1 ) {
                 item = rows[ i ];
-                if ( !item[ 'parent' ] || simple_mode ) {
+                if ( !item[ 'parent' ] || filter_mode ) {
                     container = $('#tbody');
                 } else {
                     container = $('#'+ item[ 'parent' ] +' > .nodes');

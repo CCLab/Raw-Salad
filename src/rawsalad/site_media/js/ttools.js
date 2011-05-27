@@ -211,8 +211,7 @@ var _ttools = (function () {
                 _sheet.create_new_sheet( new_sheet, "arkusz", true );
                 
                 _table.clean_table();
-                _table.generate_header();
-                _table.generate_table_body( true );
+                _table.init_table( true );
 
                 $(this).hide();
                             
