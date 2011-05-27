@@ -69,35 +69,43 @@ var _assert = (function () {
     })();
 
     that.print_error = function ( type, message ) {
-        var body,
-            error, 
-            msg,
-            style;
+        var html = [];
+        var error;
+        var msg;
+        var style;
 
         if( !message ) {
             throw new that.AssertException( type );
         }
         else {
             if( that.browser ) {
-                style = "position: fixed; \
-                             top: 0px; \
-                             left: 0px; \
-                             width: 200px; \
-                             background: #a55; \
-                             color: #fff; \
-                             font-family: sans-serif; \
-                             font-size: 11px; \
-                          padding: 10px";
-                body = document.getElementsByTagName( 'body' )[0];
-                error = document.createElement( 'div' );
-                msg =  ">> <b>AssertException</b><br />";
-                msg += ">> Type: " + type + "<br />";
-                msg += ">> Message: " + message;
+                
+                style = {
+                    'position': 'fixed', 
+                     'top': '0px', 
+                     'left': '0px', 
+                     'width': '200px', 
+                     'background-color': '#a55', 
+                     'color': '#fff', 
+                     'font-family': 'sans-serif', 
+                     'font-size': '11px', 
+                     'padding': '10px'
+                };
+                         
+                html.push( '<div id="error-popup">' );
+                html.push( '>> <b>AssertException</b><br />' );
+                html.push( '>> Type: <br />' );
+                html.push( '<b>', type, '</b><br />' );
+                html.push( '>> Message: <br />' );
+                html.push( '<b>', message, '</b><br />' );                
                     
-                error.setAttribute( 'style', style );
-                error.innerHTML = msg;
+                error = $( html.join('') );
+                error.css( style )
+                     .click( function () {
+                         $(this).remove();
+                     });
 
-                body.appendChild( error );
+                $('body').append( error );
                 
                 throw new that.AssertException( type );
             }
