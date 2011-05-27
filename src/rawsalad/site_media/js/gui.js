@@ -13,8 +13,6 @@ var _gui = (function () {
         $('#filter-form').hide();    
         $('#application').hide();    
         
-        $('#download-button').click( _download.current_sheet() );
-        
         // arm open/close button and hide it!
         $('#open-close-choose-panel')
             .click( function () {
@@ -181,7 +179,8 @@ var _gui = (function () {
             
         $('#application')
             .fadeIn( 400 );
-            
+
+        $('#download-button').click( _download.current_sheet() );            
         that.hide_choose_panel();
     }
 
