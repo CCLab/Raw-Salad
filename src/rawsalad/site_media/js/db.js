@@ -21,12 +21,18 @@ var _db = (function () {
             dataType: "json",
             success: function( received_data ) {
                 var data = {
-                    columns: received_data.perspective,
+                    columns: received_data.perspective.columns,
                     rows: received_data.rows,
-                    name: received_data.name
+                    name: received_data.perspective.perspective
                 };
-                
+
                 _store.init_basic_sheet( data );
+
+                // create a table
+                _table.init_table();
+
+                // initialize an application
+                _gui.init_app();           
             }
         });
     };

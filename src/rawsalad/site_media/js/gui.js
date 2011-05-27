@@ -10,8 +10,10 @@ var _gui = (function () {
     that.init_gui = function () {
         // hide what's not needed now
         $('#sort-form').hide();
-        $('#filter-form').hide();    
-        $('#application').hide();    
+        $('#filter-form').hide();  
+        $('#download-form').hide();                       
+        $('#download-button').click( _download.current_sheet );
+        $('#application').hide();  
         
         // arm open/close button and hide it!
         $('#open-close-choose-panel')
@@ -163,12 +165,6 @@ var _gui = (function () {
                 if( _store.create_new_group( id ) ) {
                     // get top-level data from db                
                     _db.get_init_data();     
-                    
-                    // create a table
-                    _table.init_table();
-
-                    // initialize an application
-                    that.init_app();           
                 } 
                 else {
                     // go back to application with focus on requested sheet
@@ -206,6 +202,16 @@ var _gui = (function () {
         $('#choose-panel')
             .slideUp( 400 );
             
+        _gui.make_zebra();
+
+        $('#thead').find( '.data' ).each( function () {
+            $(this).children( '.cell' ).equalize_heights();
+        });        
+
+        $('.a').find( '.data' ).each( function () {
+            $(this).children( '.cell' ).equalize_heights();
+        });        
+
         $('#application')
             .animate({ opacity: 1 }, 300 );
             
@@ -219,8 +225,10 @@ var _gui = (function () {
     that.make_zebra = function () {
         // get all visible rows
         var visible_list = $('.data').not( ':hidden' );
-        
-        // TODO >> each is told to be slow - will we need it to be fast?!
+
+        _assert.not_equal( visible_list.length, 0,
+                           "No visible elements in the table" );
+                                   
         // change background for each row
         visible_list.each( function ( i, e ) {
             // does row belongs to darkened grounp?

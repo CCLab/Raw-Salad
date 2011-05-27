@@ -23,9 +23,8 @@ var _table = (function () {
         var item;
         var i;
         var container;
-        var html_result;
         var row_html = [];
-        
+     
         // if it's the first time, prepare the top-level data
         if( arguments.length === 0 ) {
             data = _utils.filter( function ( element ) {
@@ -44,14 +43,19 @@ var _table = (function () {
             return element['basic'] === true;
         }, _store.active_columns() );
 
+        _assert.not_equal( data.length, 0, 
+                           "Rows not defined" );
+
+        _assert.not_equal( schema.length, 0, 
+                           "Schema not defined" );
+        
         for ( i = 0; i < data.length; i += 1 ) {
             item = data[i];
             row_html = generate_row( item, schema );
-            html.push( row_html );
+            html.push( row_html.join('') );
         }
         
-        html_result = $( html.join('') );
-        container.append( html_result );
+        container.append( $( html.join('') ) );
         
         that.arm_nodes( id );
         _gui.make_zebra();
@@ -94,10 +98,13 @@ var _table = (function () {
                 _gui.highlight( current_level );
             });	                             
         
-        node.find( '.data' ).each( function () {
-            $(this).children( '.cell' ).equalize_heights();
-        });
+        if( !node.hasClass( 'a' ) ) {
+            node.find( '.data' ).each( function () {
+                $(this).children( '.cell' ).equalize_heights();
+            });        
+        }
     };
+
 
     that.toggle_hidden_param = function( id ) {
     
@@ -105,13 +112,13 @@ var _table = (function () {
                 return element['idef'] === id;
             }, _store.active_rows() );
             
-        Assert.assert( parent.length > 0,
+        _assert.assert( parent.length > 0,
                        "No row found" );
                        
-        Assert.assert( parent.length === 1,
+        _assert.is_equal( parent.length, 1,
                        "Too many rows found" );
             
-        Assert.assert( !parent['leaf'], 
+        _assert.is_false( parent['leaf'], 
                        "Can't hide leaf's children" );
             
         parent[0]['hidden'] = !parent[0]['hidden'];
@@ -124,7 +131,7 @@ var _table = (function () {
         var id;
         var hidden_children;
         
-        parents_with_hidden_children = filter( function ( element ) {
+        parents_with_hidden_children = _utils.filter( function ( element ) {
                 return !!element['hidden'];
             }, _store.active_rows() );
             
@@ -136,7 +143,7 @@ var _table = (function () {
                                   .parent()
                                   .next();
                                   
-            Assert.assert( hidden_children.length > 0,
+            _assert.assert( hidden_children.length > 0,
                            "Row with hidden children without hidden children" );
 
             hidden_children.toggle();
@@ -215,7 +222,7 @@ var _table = (function () {
                 }
                 
                 html_row = generate_row( item, schema );
-                container.append( html_row.join('') );
+                container.append( $(html_row.join('')) );
                 
                 if ( !!item[ 'parent' ] ) {
                     id = item[ 'parent' ];
@@ -224,10 +231,9 @@ var _table = (function () {
                 }
             }
         }
-        
+
         that.arm_nodes();
         that.hide_hidden_nodes();
-        _gui.make_zebra();
     };    
     
 
@@ -242,7 +248,7 @@ var _table = (function () {
         html.push( 'class="', item['level'], ' ' );
         html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
         html.push( '<div class="data">' );
-        
+
         // TODO >> recode this loop to make it work with all the datasets
         for ( i = 0; i < schema.length; i += 1 ) {
             col = schema[i];

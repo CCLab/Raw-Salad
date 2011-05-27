@@ -68,14 +68,14 @@ var _store = (function () {
 
     that.init_basic_sheet = function ( data ) {
         var active_grp = active_group();
-        
+
         active_grp['basic_sheet'] = new_sheet( data );
-        active_grp['sheets'].push( new_sheet( data ) );         
+        active_grp['sheets'].push( new_sheet( data ) );  
     };
 
 
     that.active_columns = function () {
-        return active_sheet()['columns'];
+        return that.active_sheet()['columns'];
     };
 
 
@@ -84,12 +84,12 @@ var _store = (function () {
     };
 
     that.active_rows = function () {
-        return active_sheet()['rows'];
+        return that.active_sheet()['rows'];
     };
     
 
     that.active_pending_nodes = function () {
-        return active_sheet()['pending_nodes'];
+        return that.active_sheet()['pending_nodes'];
     };
     
     
