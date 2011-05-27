@@ -3,7 +3,7 @@ var _download = (function () {
     var that = {};
     
     that.current_sheet = function () {
-        var i;
+        var i, j;
         var data = '';
         var html = [];
         var form;
@@ -18,7 +18,12 @@ var _download = (function () {
         
         _assert.not_equal( rows.length, 0,
                            ">> DOWNLOAD <br/>Rows length === 0" );
-        
+
+        for( i = 0; i < columns.length; i += 1 ) {
+            data += columns[i]['label'];
+            data += ';';
+        }
+        data += '|';
      
         for( i = 0; i < rows.length; i += 1 ) {
             for( j = 0; j < columns.length; j += 1 ) {
