@@ -24,7 +24,6 @@ var _table = (function () {
         var i;
         var container;
         var row_html = [];
-        var are_children_leaves;
      
         // if it's the first time, prepare the top-level data
         if( arguments.length === 0 ) {
@@ -58,11 +57,7 @@ var _table = (function () {
         
         container.append( $( html.join('') ) );
         
-        are_children_leaves = !!data[0]['leaf'];
-        
-        if ( !are_children_leaves ) {
-            that.arm_nodes( id );
-        }
+        that.arm_nodes( id );
         _gui.make_zebra();
     };
 
@@ -70,6 +65,7 @@ var _table = (function () {
     // add action listener to newly created nodes
     that.arm_nodes = function ( id ) {
         var node;
+        var rows;
         
         // no parameters for a-level nodes
         if( arguments.length === 0 ) {      
@@ -87,20 +83,29 @@ var _table = (function () {
                 var nodes = $(this).parent().next();
                 // get level's id
                 var id = $(this).parent().parent().attr('id');
-                var current_level = $(this).parent().parent();
-            
-                // if the subtree not loaded yet --> load it
-                if( nodes.find('div').length === 0 ) {
-                    if ( _db.add_pending_node( id ) ) {
-                        _db.download_node( id );
-                    }
-                }
-                else {
-                    nodes.toggle();
-                    toggle_hidden_param( id );
-                }
                 
-                _gui.highlight( current_level );
+                rows = _utils.filter( function ( element ) {
+                    return element['idef'] === id;
+                }, _store.active_rows() );
+                
+                _assert.assert( rows.length > 0, "No row with given id" );
+                
+                if ( !rows[0]['leaf'] ) {
+                    var current_level = $(this).parent().parent();
+                
+                    // if the subtree not loaded yet --> load it
+                    if( nodes.find('div').length === 0 ) {
+                        if ( _db.add_pending_node( id ) ) {
+                            _db.download_node( id );
+                        }
+                    }
+                    else {
+                        nodes.toggle();
+                        toggle_hidden_param( id );
+                    }
+                    
+                    _gui.highlight( current_level );
+                }
             });	                             
         
         if( !node.hasClass( 'a' ) ) {
