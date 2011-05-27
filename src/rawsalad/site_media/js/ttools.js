@@ -173,7 +173,9 @@ var _ttools = (function () {
                             break;
                         }
                     }                
-                    
+                    var x = filter( function ( e ) {
+                        return e['key'] === column;
+                    }, _store.active_columns() );
                     type = filter( function ( e ) {
                         return e['key'] === column;
                     }, _store.active_columns() )[0]['type'];
