@@ -24,6 +24,7 @@ var _table = (function () {
         var i;
         var container;
         var row_html = [];
+        var are_children_leaves;
      
         // if it's the first time, prepare the top-level data
         if( arguments.length === 0 ) {
@@ -57,7 +58,11 @@ var _table = (function () {
         
         container.append( $( html.join('') ) );
         
-        that.arm_nodes( id );
+        are_children_leaves = !!data[0]['leaf'];
+        
+        if ( !are_children_leaves ) {
+            that.arm_nodes( id );
+        }
         _gui.make_zebra();
     };
 
