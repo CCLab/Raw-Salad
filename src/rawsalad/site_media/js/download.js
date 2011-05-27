@@ -31,13 +31,8 @@ var _download = (function () {
         _assert.not_equal( data, '', 
                            ">> DOWNLOAD <br/>Data string empty" );
         
-        html.push( '<form action="/download/" method="post" name="input">' );
-        html.push( '<input type="text" name="sheet" />' );
-        html.push( '</form>' );
-        
-        form = $( html.join( '' ));
-
-        form.find('input')
+        $('#download-form')
+            .find('input')
             .val( data.slice( 0, data.length-1 ) )
             .end()
             .submit();

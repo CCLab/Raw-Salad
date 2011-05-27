@@ -10,8 +10,10 @@ var _gui = (function () {
     that.init_gui = function () {
         // hide what's not needed now
         $('#sort-form').hide();
-        $('#filter-form').hide();    
-        $('#application').hide();    
+        $('#filter-form').hide();  
+        $('#download-form').hide();                       
+        $('#download-button').click( _download.current_sheet );
+        $('#application').hide();  
         
         // arm open/close button and hide it!
         $('#open-close-choose-panel')
@@ -179,8 +181,7 @@ var _gui = (function () {
             
         $('#application')
             .fadeIn( 400 );
-
-        $('#download-button').click( _download.current_sheet() );            
+            
         that.hide_choose_panel();
     }
 
