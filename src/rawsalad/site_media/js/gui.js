@@ -347,7 +347,7 @@ var _gui = (function () {
             .click( function () {
                 $('.snapshot').removeClass('active');
                 $(this).addClass('active');
-                if ( _store.active_sheet_nr() !== new_sheet_nr ) {
+                if ( _store.active_sheet_index() !== new_sheet_nr ) {
                     _sheet.change_active_sheet( new_sheet_nr );
                 }
             });
