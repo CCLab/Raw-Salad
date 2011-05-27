@@ -240,9 +240,12 @@ var _table = (function () {
                     that.arm_nodes( id, is_hidden );
                 }
             }
+            if (level === 'a') {
+                that.arm_nodes();
+            }
         }
 
-        that.arm_nodes();
+        
         that.hide_hidden_nodes();
     };    
     
