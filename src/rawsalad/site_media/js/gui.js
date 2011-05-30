@@ -166,7 +166,7 @@ var _gui = (function () {
                 if( _store.create_new_group( id ) ) {
                     // get top-level data from db                
                     _db.get_init_data();
-                    name = id['dataset'] + id['perspective'] + '-' + id['issue'];
+                    name = id['dataset'] + '-' + id['perspective'] + '-' + id['issue'];
                     that.create_basic_snapshot_button( {'basic_snapshot_name': name} );
                 } 
                 else {
@@ -384,6 +384,21 @@ var _gui = (function () {
                   '" class="basic-snapshot active">');
         html.push(name);
         html.push('</div>');
+        
+        $('#basic-snapshot-' + max_group_nr.toString())
+            .each( function () {
+                $('.basic-snapshot').removeClass('active');
+                $(this).addClass('active');
+            })
+            .click( function () {
+                $('.basic-snapshot').removeClass('active');
+                $(this).addClass('active');
+                if ( _store.active_group_index() !== max_group_nr ) {
+                    //_store.active_group_index( max_group_nr );
+                    _sheet.show_basic_sheet( {'group_nr': max_group_nr} );
+                    //_sheet.change_active_sheet( new_sheet_nr );
+                }
+            });
         
         $('#snapshots').append( $( html.join('') ));
     };

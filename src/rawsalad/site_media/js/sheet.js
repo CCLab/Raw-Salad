@@ -29,11 +29,24 @@ var _sheet = (function () {
     
     
     that.change_active_sheet = function ( sheet_nr ) {
-        if ( _store.active_sheet_nr() !== sheet_nr ) {
-            _store.active_sheet_nr( sheet_nr );
+        if ( _store.active_sheet_index() !== sheet_nr ) {
+            _store.active_sheet( sheet_nr );
             _table.clean_table();
             _table.init_table( filtered_sheet );
         }
+    }
+    
+    that.show_basic_sheet = function ( args )
+    {
+        var group_nr = args.group_nr;
+        
+        if ( !!group_nr ) {
+            if (_store.active_group_index() !== group_nr) {
+                _store.active_group( group_nr );
+            }
+        }
+        
+        that.change_active_sheet( 0 );
     }
     
     // P R I V A T E  I N T E R F A C E

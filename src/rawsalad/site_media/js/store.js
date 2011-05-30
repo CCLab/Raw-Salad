@@ -40,34 +40,34 @@ var _store = (function () {
         var found = find_group( data );
 
         if( found !== -1 ) {
-            active_group( found );
+            that.active_group( found );
             return false;
         }
  
         groups.push( new_group( data ));
-        active_group( groups.length - 1 );
+        that.active_group( groups.length - 1 );
                 
         return true;
     };
     
     
     that.dataset = function () {
-        return active_group()['dataset'];
+        return that.active_group()['dataset'];
     };
 
 
     that.perspective = function () {
-        return active_group()['perspective'];
+        return that.active_group()['perspective'];
     };
 
     
     that.issue = function () {
-        return active_group()['issue'];
+        return that.active_group()['issue'];
     };
 
 
     that.init_basic_sheet = function ( data ) {
-        var active_grp = active_group();
+        var active_grp = that.active_group();
 
         active_grp['basic_sheet'] = new_sheet( data );
         active_grp['sheets'].push( new_sheet( data ) );  
@@ -80,11 +80,19 @@ var _store = (function () {
 
 
     that.active_sheet_index = function () {
-        return active_group()['active_sheet_number'];
+        return that.active_group()['active_sheet_number'];
+    };
+    
+    that.active_group_index = function () {
+        return active_group_number;
+    };
+    
+    that.max_sheet_nr = function () {
+        return that.active_group()['sheets'].length;
     };
     
     that.max_group_nr = function () {
-        return active_group()['sheets'].length;
+        return groups.length;
     };
 
     that.active_rows = function () {
@@ -98,19 +106,28 @@ var _store = (function () {
     
     
     that.active_basic_changed = function ( value ) {
-        active_group()['basic_changed'] = value;        
+        that.active_group()['basic_changed'] = value;        
     };
 
 
     // active sheet getter / setter
     that.active_sheet = function ( value ) {
-        var active_grp = active_group();
+        var active_grp = that.active_group();
         
         if( arguments.length === 0 ) {
             return active_grp['sheets'][active_grp['active_sheet_number']];
         }
         
         active_grp['active_sheet_number'] = value;
+    };
+    
+    // active group getter / setter
+    that.active_group = function ( value ) {
+        if( arguments.length === 0 ) {
+            return groups[ active_group_number ];
+        }
+        
+        active_group_number = value;
     };
 
 
@@ -122,16 +139,7 @@ var _store = (function () {
     var groups = [];
     var active_group_number = null;
 
-    // active group getter / setter
-    var active_group = function ( value ) {
-        if( arguments.length === 0 ) {
-            return groups[ active_group_number ];
-        }
-        
-        active_group_number = value;
-    };
-
-
+    
     var find_group = function ( data ) {
         var i;
         
