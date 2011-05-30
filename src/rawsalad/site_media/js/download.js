@@ -35,7 +35,12 @@ var _download = (function () {
                 }
                 data += '|';
                 
-                add_children( children[i]['idef'] );
+                if( children[i]['hidden'] === true ) {
+                    continue;
+                }
+                else {
+                    add_children( children[i]['idef'] );
+                }
             }
         };
 
