@@ -386,7 +386,8 @@ var _gui = (function () {
         html.push('</div>');
         
         $('.basic-snapshot').removeClass('active');
-        $('#snapshots').append( $( html.join('') ));
+        //$('#snapshots').append( $( html.join('') ));
+        $( html.join('') ).insertBefore('#snapshots');
         
         $('#basic-snapshot-' + max_group_nr.toString())
             .click( function () {
