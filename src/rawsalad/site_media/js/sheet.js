@@ -8,7 +8,8 @@ var _sheet = (function () {
     var that = {};
 
     that.create_new_sheet = function ( sheet_data, sheet_name, filtered_sheet ) {
-        var new_sheet_nr = _store.active_sheet_index();
+        var new_sheet_nr = _store.max_sheet_number();
+        var group_nr = _store.group_index();
         var new_sheet = { };
         
         $.extend( true, new_sheet, sheet_data );
@@ -22,7 +23,8 @@ var _sheet = (function () {
         
         _store.active_sheet_index(new_sheet_nr);
         
-        _gui.create_sheet_tab( sheet_name, new_sheet_nr, filtered_sheet );
+        _gui.create_sheet_tab( { 'name': sheet_name, 'sheet_nr': new_sheet_nr,
+                                 'group_nr': group_nr, 'filtered_sheet': filtered_sheet } );
         
         return new_sheet_nr;
     }

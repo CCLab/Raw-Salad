@@ -338,21 +338,49 @@ var _gui = (function () {
     }
     
     
-    
-    that.create_sheet_tab = function ( sheet_name, new_sheet_nr, filtered_sheet ) {
+    that.create_sheet_tab = function ( args ) {//sheet_name, new_sheet_nr, filtered_sheet ) {
         var html = [];
+        var sheet_name = args.name;
+        var new_sheet_nr = args.sheet_nr;
+        var group_nr = args.group_nr;
+        var filtered_sheet = args.filtered_sheet;
+        var container;
+        var group_changed;
         
-        html.push('<div id="snap-' + new_sheet_nr.toString() + '" class="snapshot active">');
+        html.push('<div id="snap-' + group_nr.toString() + '-' +
+                  new_sheet_nr.toString() + '" class="snapshot active">');
         html.push(sheet_name);
         html.push('</div>');
         
-        html.push('<div id="save-snapshot">');
+        container = $( '#basic-snapshot-' + group_nr.toString() );
+        container.append( $( html.join('') ));
+        
+        $('#snapshots')
+            .find('#snap-' + group_nr.toString() + '-' + new_sheet_nr.toString() )
+            .each( function () {
+                $('.snapshot').removeClass('active');
+                $(this).addClass('active');
+            })
+            .click( function () {
+                $('.snapshot').removeClass('active');
+                $(this).addClass('active');
+                
+                group_changed = (_store.active_group_index() !== group_nr);
+                if ( _store.active_sheet_index() !== new_sheet_nr || group_changed ) {                     
+                
+                     _sheet.change_active_sheet( {'sheet_nr': new_sheet_nr,
+                                                  'group_changed': group_changed,
+                                                  'filtered_sheet': filtered_sheet} );
+                }
+            });
+        
+        /*html.push('<div id="save-snapshot">');
         html.push('Zapisz arkusz');
-        html.push('</div>');
+        html.push('</div>');*/
         
         //TODO: change it so that adding a new sheet does not involve
         //      removing and adding New sheet button
-        $('#save-snapshot').remove();
+        /*$('#save-snapshot').remove();
         $('#snapshots').append( $( html.join('') ));
         $('#snapshots')
             .find('#snap-' + new_sheet_nr.toString())
@@ -371,7 +399,7 @@ var _gui = (function () {
         $('#save-snapshot')
             .click( function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Nowy arkusz" );
-            });
+            });*/
     };
     
     that.create_basic_snapshot_button = function( args ) {
@@ -379,15 +407,14 @@ var _gui = (function () {
         var max_group_nr;
         var name = args.basic_snapshot_name;
         
-        max_group_nr = _store.max_group_nr() - 1;
+        max_group_nr = _store.max_group_number() - 1;
         html.push('<div id="basic-snapshot-' + max_group_nr.toString() +
                   '" class="basic-snapshot active">');
         html.push(name);
         html.push('</div>');
         
         $('.basic-snapshot').removeClass('active');
-        //$('#snapshots').append( $( html.join('') ));
-        $( html.join('') ).insertBefore('#snapshots');
+        $( html.join('') ).insertBefore('#save-snapshot');
         
         $('#basic-snapshot-' + max_group_nr.toString())
             .click( function () {

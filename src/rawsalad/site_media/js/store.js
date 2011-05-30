@@ -87,11 +87,11 @@ var _store = (function () {
         return active_group_number;
     };
     
-    that.max_sheet_nr = function () {
+    that.max_sheet_number = function () {
         return that.active_group()['sheets'].length;
     };
     
-    that.max_group_nr = function () {
+    that.max_group_number = function () {
         return groups.length;
     };
 
