@@ -31,6 +31,7 @@ var _sheet = (function () {
     that.change_active_sheet = function ( args ) {
         var sheet_nr = args.sheet_nr;
         var group_changed = args.group_changed;
+        var filtered_sheet = args.filtered_sheet; // TODO: add filtered property
         
         if ( _store.active_sheet_index() !== sheet_nr || !!group_changed ) {
             _store.active_sheet( sheet_nr );
