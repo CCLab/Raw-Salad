@@ -382,7 +382,7 @@ var _gui = (function () {
         max_group_nr = _store.max_group_nr();
         html.push('<div="basic-snapshot-"' + max_group_nr.toString() +
                   '" class="basic-snapshot active">');
-        html.push(basic_snapshot_name);
+        html.push(name);
         html.push('</div>');
         
         $('#snapshots').append( $( html.join('') ));
