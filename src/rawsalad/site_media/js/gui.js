@@ -386,10 +386,6 @@ var _gui = (function () {
         html.push('</div>');
         
         $('#basic-snapshot-' + max_group_nr.toString())
-            .each( function () {
-                $('.basic-snapshot').removeClass('active');
-                $(this).addClass('active');
-            })
             .click( function () {
                 $('.basic-snapshot').removeClass('active');
                 $(this).addClass('active');
