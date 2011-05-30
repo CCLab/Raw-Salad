@@ -379,7 +379,7 @@ var _gui = (function () {
         var max_group_nr;
         var name = args.basic_snapshot_name;
         
-        max_group_nr = _store.max_group_nr();
+        max_group_nr = _store.max_group_nr() - 1;
         html.push('<div id="basic-snapshot-' + max_group_nr.toString() +
                   '" class="basic-snapshot active">');
         html.push(name);
