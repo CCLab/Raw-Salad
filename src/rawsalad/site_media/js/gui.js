@@ -363,15 +363,22 @@ var _gui = (function () {
     
     // unmark a-node, shade its nodes
     var unmark_a_node = function( node ) {
-        node.removeClass( 'marked' );
+        node.find( '.marked' ).removeClass( 'marked' );
         node.find( '.data' ).removeClass( 'leftborder' );
         node.find( '.data' ).removeClass( 'rightborder' );
         node.find( '.data' ).removeClass( 'bottomborder' );
         node.find( '.data' ).addClass( 'darkened' );
+        $('#tbody').find('.darkened').removeClass('darkened');
     }
     
     // mark a-node, shade other nodes
     var mark_a_node = function( node ) {
+        var previous_node = $('#tbody')
+                                .find('.marked')
+                                .parent();
+                                
+        unmark_a_node( previous_node );
+            
         node.children( '.data' )
             .addClass( 'marked' ); 
 
