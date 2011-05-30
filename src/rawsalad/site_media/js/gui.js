@@ -359,7 +359,7 @@ var _gui = (function () {
                              '-' + (new_sheet_nr - 1).toString() );
         }
         
-        predecessor.append( $( html.join('') ));
+        $( html.join('') ).insertAfter( predecessor );
         
         $('#snapshots')
             .find('#snap-' + group_nr.toString() + '-' + new_sheet_nr.toString() )
