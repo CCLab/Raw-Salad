@@ -392,7 +392,6 @@ var _gui = (function () {
                 $('.basic-snapshot').removeClass('active');
                 $(this).addClass('active');
                 _sheet.show_basic_sheet( {'group_nr': max_group_nr} );
-                }
             });
     };
     
