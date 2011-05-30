@@ -255,6 +255,19 @@ var _gui = (function () {
     };
     
     
+    that.equalize_table = function () {
+        $('#thead').find( '.data' ).each( function () {
+            $(this).children( '.cell' ).equalize_heights();
+        });
+        
+        $('.node').each( function () {
+            $(this).find( '.data' ).each( function () {
+                $(this).children( '.cell' ).equalize_heights();
+            });
+        });        
+    };
+    
+    
     // TODO refactor it not to involve children
     that.highlight = function( node ) {        
 
@@ -347,7 +360,7 @@ var _gui = (function () {
             .click( function () {
                 $('.snapshot').removeClass('active');
                 $(this).addClass('active');
-                if ( _store.active_sheet_nr() !== new_sheet_nr ) {
+                if ( _store.active_sheet_index() !== new_sheet_nr ) {
                     _sheet.change_active_sheet( new_sheet_nr );
                 }
             });
@@ -363,15 +376,22 @@ var _gui = (function () {
     
     // unmark a-node, shade its nodes
     var unmark_a_node = function( node ) {
-        node.removeClass( 'marked' );
+        node.find( '.marked' ).removeClass( 'marked' );
         node.find( '.data' ).removeClass( 'leftborder' );
         node.find( '.data' ).removeClass( 'rightborder' );
         node.find( '.data' ).removeClass( 'bottomborder' );
         node.find( '.data' ).addClass( 'darkened' );
+        $('#tbody').find('.darkened').removeClass('darkened');
     }
     
     // mark a-node, shade other nodes
     var mark_a_node = function( node ) {
+        var previous_node = $('#tbody')
+                                .find('.marked')
+                                .parent();
+                                
+        unmark_a_node( previous_node );
+            
         node.children( '.data' )
             .addClass( 'marked' ); 
 

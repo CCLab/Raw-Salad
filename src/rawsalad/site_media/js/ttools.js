@@ -27,7 +27,7 @@ var _ttools = (function () {
     
     var add_sort_key = function() {
         var i, key;
-        var perspective = tab_data_object['perspective']['columns'];
+        var perspective = _store.active_columns();
         var columns = [];
         var html = [];
 
@@ -122,9 +122,10 @@ var _ttools = (function () {
 
                 that.sort( _store.active_rows(), settings );
                 
-                $('#table').empty();
-                _table.generate_header( );
-                _table.generate_table_body( );
+                _table.clean_table();
+                _table.init_table();
+                _gui.make_zebra();
+                _gui.equalize_table();
                 
                 $(this).hide();
                 
@@ -174,8 +175,8 @@ var _ttools = (function () {
                             break;
                         }
                     }                
-                    
-                    type = filter( function ( e ) {
+
+                    type = _utils.filter( function ( e ) {
                         return e['key'] === column;
                     }, _store.active_columns() )[0]['type'];
                     
@@ -212,8 +213,7 @@ var _ttools = (function () {
                 _sheet.create_new_sheet( new_sheet, "arkusz", true );
                 
                 _table.clean_table();
-                _table.generate_header();
-                _table.generate_table_body( true );
+                _table.init_table( true );
 
                 $(this).hide();
                             

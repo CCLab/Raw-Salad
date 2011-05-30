@@ -9,10 +9,10 @@ var _table = (function () {
     that.clean_table = function () {
         $('#table').empty();
     };
-
-    that.init_table = function () {
+   
+    that.init_table = function ( filter_mode ) {
         generate_header();
-        generate_table_body();
+        generate_table_body( filter_mode );
     };
     
     
@@ -65,6 +65,7 @@ var _table = (function () {
     // add action listener to newly created nodes
     that.arm_nodes = function ( id ) {
         var node;
+        var rows;
         
         // no parameters for a-level nodes
         if( arguments.length === 0 ) {      
@@ -82,20 +83,29 @@ var _table = (function () {
                 var nodes = $(this).parent().next();
                 // get level's id
                 var id = $(this).parent().parent().attr('id');
-                var current_level = $(this).parent().parent();
-            
-                // if the subtree not loaded yet --> load it
-                if( nodes.find('div').length === 0 ) {
-                    if ( _db.add_pending_node( id ) ) {
-                        _db.download_node( id );
-                    }
-                }
-                else {
-                    nodes.toggle();
-                    toggle_hidden_param( id );
-                }
                 
-                _gui.highlight( current_level );
+                rows = _utils.filter( function ( element ) {
+                    return element['idef'] === id;
+                }, _store.active_rows() );
+                
+                _assert.assert( rows.length > 0, "No row with given id" );
+                
+                if ( !rows[0]['leaf'] ) {
+                    var current_level = $(this).parent().parent();
+                
+                    // if the subtree not loaded yet --> load it
+                    if( nodes.find('div').length === 0 ) {
+                        if ( _db.add_pending_node( id ) ) {
+                            _db.download_node( id );
+                        }
+                    }
+                    else {
+                        nodes.toggle();
+                        that.toggle_hidden_param( id );
+                    }
+                    
+                    _gui.highlight( current_level );
+                }
             });	                             
         
         if( !node.hasClass( 'a' ) ) {
@@ -108,7 +118,7 @@ var _table = (function () {
 
     that.toggle_hidden_param = function( id ) {
     
-        var parent = filter( function ( element ) {
+        var parent = _utils.filter( function ( element ) {
                 return element['idef'] === id;
             }, _store.active_rows() );
             
@@ -187,8 +197,8 @@ var _table = (function () {
     };
     
     
-    // TODO >> what is "simple_mode"
-    var generate_table_body = function( simple_mode ) {
+    // TODO >> what is "filter_mode"
+    var generate_table_body = function( filter_mode ) {
         var container;
         var html_row;
         var id;
@@ -215,7 +225,7 @@ var _table = (function () {
             
             for ( i = 0; i < rows.length; i += 1 ) {
                 item = rows[ i ];
-                if ( !item[ 'parent' ] || simple_mode ) {
+                if ( !item[ 'parent' ] || filter_mode ) {
                     container = $('#tbody');
                 } else {
                     container = $('#'+ item[ 'parent' ] +' > .nodes');
@@ -230,9 +240,12 @@ var _table = (function () {
                     that.arm_nodes( id, is_hidden );
                 }
             }
+            if (level === 'a') {
+                that.arm_nodes();
+            }
         }
 
-        that.arm_nodes();
+        
         that.hide_hidden_nodes();
     };    
     

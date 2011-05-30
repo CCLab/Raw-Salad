@@ -66,7 +66,7 @@ var _db = (function () {
                 that.remove_pending_node( parent_id );
                                
                 // if it was a basic sheet sign it changed
-                if ( _store.active_sheet_number() === 0 ) {
+                if ( _store.active_sheet_index() === 0 ) {
                     _store.active_basic_changed( true );
                 }
             }
