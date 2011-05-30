@@ -338,7 +338,7 @@ var _gui = (function () {
     }
     
     
-    that.create_sheet_tab = function ( args )
+    that.create_sheet_tab = function ( args ) {
         var html = [];
         var sheet_name = args.name;
         var new_sheet_nr = args.sheet_nr;
