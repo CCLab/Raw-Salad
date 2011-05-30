@@ -338,13 +338,13 @@ var _gui = (function () {
     }
     
     
-    that.create_sheet_tab = function ( args ) {//sheet_name, new_sheet_nr, filtered_sheet ) {
+    that.create_sheet_tab = function ( args )
         var html = [];
         var sheet_name = args.name;
         var new_sheet_nr = args.sheet_nr;
         var group_nr = args.group_nr;
         var filtered_sheet = args.filtered_sheet;
-        var container;
+        var predecessor;
         var group_changed;
         
         html.push('<div id="snap-' + group_nr.toString() + '-' +
@@ -352,8 +352,15 @@ var _gui = (function () {
         html.push(sheet_name);
         html.push('</div>');
         
-        container = $( '#basic-snapshot-' + group_nr.toString() );
-        container.append( $( html.join('') ));
+        if (new_sheet_nr === 0) {
+            predecessor = $( '#basic-snapshot-' + group_nr.toString() );
+        } else {
+            predecessor = $( '#snap-' + group_nr.toString() +
+                             '-' + (new_sheet_nr - 1).toString() );
+        }
+        
+        predecessor.append( $( html.join('') ));
+        $( html.join('') ).insertAfter( predecessor );
         
         $('#snapshots')
             .find('#snap-' + group_nr.toString() + '-' + new_sheet_nr.toString() )
