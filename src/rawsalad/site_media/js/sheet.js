@@ -9,7 +9,7 @@ var _sheet = (function () {
 
     that.create_new_sheet = function ( sheet_data, sheet_name, filtered_sheet ) {
         var new_sheet_nr = _store.max_sheet_number();
-        var group_nr = _store.group_index();
+        var group_nr = _store.active_group_index();
         var new_sheet = { };
         
         $.extend( true, new_sheet, sheet_data );
