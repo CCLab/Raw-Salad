@@ -385,6 +385,8 @@ var _gui = (function () {
         html.push(name);
         html.push('</div>');
         
+        $('#snapshots').append( $( html.join('') ));
+        
         $('#basic-snapshot-' + max_group_nr.toString())
             .click( function () {
                 $('.basic-snapshot').removeClass('active');
@@ -395,8 +397,6 @@ var _gui = (function () {
                     //_sheet.change_active_sheet( new_sheet_nr );
                 }
             });
-        
-        $('#snapshots').append( $( html.join('') ));
     };
     
     
