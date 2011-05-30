@@ -352,7 +352,7 @@ var _gui = (function () {
         html.push(sheet_name);
         html.push('</div>');
         
-        if (new_sheet_nr === 0) {
+        if ((new_sheet_nr - 1) === 0) {
             predecessor = $( '#basic-snapshot-' + group_nr.toString() );
         } else {
             predecessor = $( '#snap-' + group_nr.toString() +
