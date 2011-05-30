@@ -225,7 +225,7 @@ var _ttools = (function () {
         
         $('#save-snapshot')
             .click( function () {
-                _sheet.create_new_sheet( _store.active_sheet(), "arkusz" );
+                _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
             
         $('#basic-snapshot')

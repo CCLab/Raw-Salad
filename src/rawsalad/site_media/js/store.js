@@ -87,7 +87,7 @@ var _store = (function () {
         return active_group_number;
     };
     
-    that.max_sheet_number = function () {
+    that.next_sheet_number = function () {
         return that.active_group()['sheets'].length;
     };
     
@@ -130,6 +130,14 @@ var _store = (function () {
         active_group_number = value;
     };
 
+
+    that.add_new_sheet = function ( data ) {
+        var active_grp = that.active_group();
+        var next_sheet_number = that.next_sheet_number() ;
+        
+        active_grp['sheets'].push( new_sheet( data ) );
+        that.active_sheet_index( next_sheet_number );
+    };
 
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
@@ -186,160 +194,6 @@ var _store = (function () {
     return that;
 
 }) ();
-
-
-
-
-
-
-//    that.dataset = function ( value ) { 
-//        if( arguments === 0 ) {
-//            return active_group()['dataset'];
-//        }
-//        
-//        active_group()['dataset'] = value;
-//    };
-//     
-//      
-//    that.perspective = function ( value ) { 
-//        if( arguments === 0 ) {
-//            return active_group()['perspecive'];
-//        }
-//        
-//        active_group()['perspective'] = value;
-//    };        
-
-
-//    that.issue = function ( value ) { 
-//        if( arguments === 0 ) {
-//            return active_group()['issue'];
-//        }
-//        
-//        return active_group()['issue'];
-//    };        
-
-
-//    that.active_group_number = function ( value ) { 
-//        if( arguments === 0 ) {
-//            return group_container['active_group_list'];
-//        }
-//        
-//        group_container['active_group_list'] = value;
-//    };        
-
-
-//    that.active_sheet_number = function ( value ) { 
-//        if( arguments === 0 ) {
-//            return groups['active_sheet_number'];
-//        }
-//        
-//        sheets_group['active_sheet_number'] = value;
-//    };
-
-
-//    that.active_sheet = function () {
-//        return active_group()[ 'active_sheet_number' ];
-//    };
-
-
-
-
-
-
-/*
-    // setters/getters: sheet_list
-    that.columns = function ( value ) {
-        if( arguments === 0 ) {
-            return sheet_data['columns'];
-        }
-        
-        sheet_data['columns'] = value;
-    };
-    
-        
-    that.rows = function ( value ) {
-        if( arguments === 0 ) {
-            return sheet_data['rows'];
-        }
-        
-        sheet_data['rows'] = value;
-    };
-
-
-
-
-    that.pending_nodes = function ( value ) {
-        if( arguments === 0 ) {
-            return sheet_data['pending_nodes'];
-        }
-        
-        sheet_data['pending_nodes'] = value;
-    };
-    
-
-    that.sheet_name = function ( value ) {
-        if( arguments === 0 ) {
-            return sheet_data['name'];
-        }
-        
-        sheet_data['name'] = value;
-    };
-    
-        
-    // setters/getters: sheet_list
-    that.active_sheet_number = function ( value ) {
-        if( arguments === 0 ) {
-            return sheet_list['active_sheet_number'];
-        }
-        
-        sheet_list['active_sheet_number'] = value;
-        sheet_data = sheet_list['sheets'][ value ];
-    };
-    
-    
-    that.basic_sheet = function ( value ) { 
-        if( arguments === 0 ) {
-            return sheet_list['basic_sheet'];
-        }
-        
-        sheet_list['basic_sheet'] = value;
-    };
-
-    
-    that.basic_pure_state = function ( value ) { 
-        if( arguments === 0 ) {
-            return sheet_list['basic_pure_state'];
-        }
-        
-        sheet_list['basic_pure_state'] = value;
-    };
-     
-     
-    that.sheets_number = function () {
-        return sheet_list['sheets'].length;
-    }; 
-    
-    
-    that.init_basic_sheet = function () {
-        
-        $.extend( true, that.basic_sheet(), sheet_data );
-        
-        that.basic_pure_state( true );
-    };
-    
-    
-    that.active_sheet = function () {
-        return sheet_list['sheets'][ that.active_sheet_number ];
-    };
-
-
-
-
-*/
-
-
-
-
 
 
 

@@ -420,9 +420,8 @@ var _gui = (function () {
         html.push('</div>');
         
         $('.basic-snapshot').removeClass('active');
-        $( html.join('') ).insertBefore('#save-snapshot');
-        
-        $('#basic-snapshot-' + max_group_nr.toString())
+        $( html.join('') )
+            .insertBefore('#save-snapshot')
             .click( function () {
                 $('.basic-snapshot').removeClass('active');
                 $(this).addClass('active');

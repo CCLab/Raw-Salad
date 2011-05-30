@@ -281,14 +281,15 @@ body {
     #snapshots > div {
         display: inline;
     }
+    
         .basic-snapshot {
             padding: 5px 5px;
-            color: #ff1493;
+            color: #4abff7;
             margin-right: 5px;
             text-align: center;
             padding: 3px 5px;
 
-            border: 1px solid #7cfc00;
+            border: 2px solid #7cfc00;
             border-bottom: 0px solid #7cfc00;
             border-radius: 3px 3px 0px 0px;
             -moz-border-radius: 3px 3px 0px 0px;
@@ -301,9 +302,9 @@ body {
         }
         
         .basic-snapshot.active {
-            background-color: #adff2f;
+            background-color: #989898;
             color: #fff;
-            border: 1px solid #7cfc00;
+            border: 1px solid #545454;
             border-radius: 3px 3px 0px 0px;
             -moz-border-radius: 3px 3px 0px 0px;
         }
