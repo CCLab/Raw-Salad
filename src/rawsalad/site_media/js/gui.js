@@ -255,6 +255,19 @@ var _gui = (function () {
     };
     
     
+    that.equalize_table = function () {
+        $('#thead').find( '.data' ).each( function () {
+            $(this).children( '.cell' ).equalize_heights();
+        });
+        
+        $('.node').each( function () {
+            $(this).find( '.data' ).each( function () {
+                $(this).children( '.cell' ).equalize_heights();
+            });
+        });        
+    };
+    
+    
     // TODO refactor it not to involve children
     that.highlight = function( node ) {        
 

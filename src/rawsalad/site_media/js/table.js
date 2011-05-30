@@ -9,7 +9,7 @@ var _table = (function () {
     that.clean_table = function () {
         $('#table').empty();
     };
-
+   
     that.init_table = function ( filter_mode ) {
         generate_header();
         generate_table_body( filter_mode );

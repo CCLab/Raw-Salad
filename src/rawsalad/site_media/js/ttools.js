@@ -124,6 +124,8 @@ var _ttools = (function () {
                 
                 _table.clean_table();
                 _table.init_table();
+                _gui.make_zebra();
+                _gui.equalize_table();
                 
                 $(this).hide();
                 
