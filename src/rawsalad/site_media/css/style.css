@@ -281,6 +281,26 @@ body {
     #snapshots > div {
         display: inline;
     }
+        .basic-snapshot {
+            padding: 5px 5px;
+            color: #ff1493;
+            margin-right: 5px;
+            text-align: center;
+
+            border: 1px solid #7cfc00;
+            border-bottom: 0px solid #7cfc00;
+            border-radius: 3px 3px 0px 0px;
+            -moz-border-radius: 3px 3px 0px 0px;
+        }
+        
+        .basic-snapshot.active {
+            background-color: #adff2f;
+            color: #fff;
+            border: 1px solid #7cfc00;
+            border-radius: 3px 3px 0px 0px;
+            -moz-border-radius: 3px 3px 0px 0px;
+        }
+        
         .snapshot {
             padding: 5px 5px;
             color: #4abff7;

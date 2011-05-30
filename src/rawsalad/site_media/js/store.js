@@ -82,6 +82,10 @@ var _store = (function () {
     that.active_sheet_index = function () {
         return active_group()['active_sheet_number'];
     };
+    
+    that.max_group_nr = function () {
+        return active_group()['sheets'].length;
+    };
 
     that.active_rows = function () {
         return that.active_sheet()['rows'];

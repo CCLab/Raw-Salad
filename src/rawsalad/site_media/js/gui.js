@@ -110,7 +110,8 @@ var _gui = (function () {
         var perspectives = _store.meta_perspectives( dataset_id );
         var len = perspectives.length;
         var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
-        var issues;        
+        var issues;   
+        var name;        
 
         html.push( '<div class="left">' );
         for( i = 0; i < len; i += 1 ) {
@@ -164,7 +165,9 @@ var _gui = (function () {
                 // if new group is created, get data and show table   
                 if( _store.create_new_group( id ) ) {
                     // get top-level data from db                
-                    _db.get_init_data();     
+                    _db.get_init_data();
+                    name = id['dataset'] + id['perspective'] + '-' + id['issue'];
+                    that.create_basic_snapshot_button( {'basic_snapshot_name': name} );
                 } 
                 else {
                     // go back to application with focus on requested sheet
@@ -369,6 +372,20 @@ var _gui = (function () {
             .click( function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Nowy arkusz" );
             });
+    };
+    
+    that.create_basic_snapshot_button = function( args ) {
+        var html = [];
+        var max_group_nr;
+        var name = args.basic_snapshot_name;
+        
+        max_group_nr = _store.max_group_nr();
+        html.push('<div="basic-snapshot-"' + max_group_nr.toString() +
+                  '" class="basic-snapshot active">');
+        html.push(basic_snapshot_name);
+        html.push('</div>');
+        
+        $('#snapshots').append( $( html.join('') ));
     };
     
     
