@@ -28,8 +28,11 @@ var _sheet = (function () {
     }
     
     
-    that.change_active_sheet = function ( sheet_nr ) {
-        if ( _store.active_sheet_index() !== sheet_nr ) {
+    that.change_active_sheet = function ( args ) {
+        var sheet_nr = args.sheet_nr;
+        var group_changed = args.group_changed;
+        
+        if ( _store.active_sheet_index() !== sheet_nr || !!group_changed ) {
             _store.active_sheet( sheet_nr );
             _table.clean_table();
             _table.init_table( filtered_sheet );
@@ -39,14 +42,16 @@ var _sheet = (function () {
     that.show_basic_sheet = function ( args )
     {
         var group_nr = args.group_nr;
+        var group_changed = false;
         
-        if ( !!group_nr ) {
+        if ( !!group_nr || group_nr === 0 ) {
             if (_store.active_group_index() !== group_nr) {
                 _store.active_group( group_nr );
+                group_changed = true;
             }
         }
         
-        that.change_active_sheet( 0 );
+        that.change_active_sheet( {'sheet_nr': 0, 'group_changed': group_changed );
     }
     
     // P R I V A T E  I N T E R F A C E

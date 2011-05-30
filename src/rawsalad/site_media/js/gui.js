@@ -391,10 +391,7 @@ var _gui = (function () {
             .click( function () {
                 $('.basic-snapshot').removeClass('active');
                 $(this).addClass('active');
-                if ( _store.active_group_index() !== max_group_nr ) {
-                    //_store.active_group_index( max_group_nr );
-                    _sheet.show_basic_sheet( {'group_nr': max_group_nr} );
-                    //_sheet.change_active_sheet( new_sheet_nr );
+                _sheet.show_basic_sheet( {'group_nr': max_group_nr} );
                 }
             });
     };
