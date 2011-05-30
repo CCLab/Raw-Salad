@@ -380,7 +380,7 @@ var _gui = (function () {
         var name = args.basic_snapshot_name;
         
         max_group_nr = _store.max_group_nr();
-        html.push('<div="basic-snapshot-' + max_group_nr.toString() +
+        html.push('<div id="basic-snapshot-' + max_group_nr.toString() +
                   '" class="basic-snapshot active">');
         html.push(name);
         html.push('</div>');
