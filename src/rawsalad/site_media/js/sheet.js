@@ -51,7 +51,7 @@ var _sheet = (function () {
             }
         }
         
-        that.change_active_sheet( {'sheet_nr': 0, 'group_changed': group_changed );
+        that.change_active_sheet( {'sheet_nr': 0, 'group_changed': group_changed} );
     }
     
     // P R I V A T E  I N T E R F A C E
