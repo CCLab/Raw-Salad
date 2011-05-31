@@ -1,10 +1,10 @@
 {
-    "name": "budzet_instytucjonalny_2011",
-    "perspective": "Budżet Instytucjonalny 2011",
-    "ns": "dd_budg2011_in",
+    "name": "budzet_instytucjonalny_2012",
+    "perspective": "Budżet Instytucjonalny 2012",
+    "ns": "dd_budg2012_in",
     "dataset": 0,
     "idef": 2,
-    "issue": "2011",
+    "issue": "2012",
     "explorable": "type",
     "batchsize": 40,
     "columns": [
