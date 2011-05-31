@@ -6,6 +6,7 @@
     "idef": 1,
     "issue": "2012",
     "explorable": "type",
+    "max_level": "d",
     "columns": [
         {
             "key": "type",
@@ -28,28 +29,17 @@
             "processable": true
             },
         {
-            "key": "cel",
-            "label": "Cel",
+            "key": "czesc_name",
+            "label": "Część w budźecie księgowym",
             "type": "string",
             "processable": true
             },
         {
-            "key": "miernik_nazwa",
-            "label": "Miernik",
+            "key": "info",
+            "label": "Cel & Miernik",
             "type": "string",
-            "processable": true
-            },
-        {
-            "key": "miernik_wartosc_bazowa",
-            "label": "Wartość bazowa",
-            "type": "string",
-            "processable": true
-            },
-        {
-            "key": "miernik_wartosc_rb",
-            "label": "Wartość br.",
-            "type": "string",
-            "processable": true
+            "processable": false,
+            "basic": false
             },
         {
             "key": "v_total",
