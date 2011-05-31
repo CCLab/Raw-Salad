@@ -80,7 +80,7 @@
 
 .value {
     float: right !important;
-    width: 108px;    
+    min-width: 108px;    
     position: relative;
 }
 
