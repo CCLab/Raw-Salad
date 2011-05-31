@@ -181,9 +181,18 @@ var _gui = (function () {
     that.init_app = function () {
         $('#open-close-choose-panel')    
             .show();
-            
+
+        // no way to equilize the heights of the rows before the app is shown
+        // opacity is 0 not to present it till the heights and zebra are done
         $('#application')
-            .fadeIn( 400 );
+            .css( 'opacity', 0 )
+            .show();
+
+        _gui.make_zebra();
+
+        $('.data').each( function () {
+            $(this).children('.cell').equalize_heights();
+        });            
             
         that.hide_choose_panel();
     }
@@ -204,16 +213,6 @@ var _gui = (function () {
     that.hide_choose_panel = function () {   
         $('#choose-panel')
             .slideUp( 400 );
-            
-        _gui.make_zebra();
-
-        $('#thead').find( '.data' ).each( function () {
-            $(this).children( '.cell' ).equalize_heights();
-        });        
-
-        $('.a').find( '.data' ).each( function () {
-            $(this).children( '.cell' ).equalize_heights();
-        });        
 
         $('#application')
             .animate({ opacity: 1 }, 300 );
@@ -221,10 +220,8 @@ var _gui = (function () {
         $('#open-close-choose-panel')
             .html('zmień dane');
     };
-    
 
 
-   
     that.make_zebra = function () {
         // get all visible rows
         var visible_list = $('.data').not( ':hidden' );
