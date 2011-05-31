@@ -87,7 +87,7 @@ def fetch_elem(tbl, conn, elem_idef):
 
 
 #-----------------------------
-def work_cursor(work_tbl, connection):
+def work_cursor(work_tbl, connection, work_year, budget_traditional):
     out= []
     print '...quering database'
     select_statement= """
@@ -95,8 +95,14 @@ def work_cursor(work_tbl, connection):
         SUM(v_total) AS sum_v_total, SUM(v_nation) as sum_v_nation, SUM(v_eu) as sum_v_eu
         from
     """ + work_tbl + """
-        WHERE ((node IS NULL OR node = 1) AND (elem_level = 'd') AND (idef NOT LIKE '22%'))
-        OR ((node IS NULL OR node = 0) AND (elem_level = 'c') AND (idef LIKE '22%'))
+        WHERE 
+        (
+        	((node IS NULL OR node = 1) AND (elem_level = 'd') AND (idef NOT LIKE '22-%'))
+        	OR 
+        	((node IS NULL OR node = 0) AND (elem_level = 'c') AND (idef LIKE '22-%'))
+        )
+        AND (budg_year = 
+    """ + work_year + """)
         GROUP BY elem_name, parent, parent_sort, czesc
         ORDER BY elem_name, parent_sort, czesc
     """
@@ -128,9 +134,10 @@ def work_cursor(work_tbl, connection):
             dysp_dict['idef_sort']= 'dt-'+sort_format(str(dysp_idef_count))
             dysp_dict['parent']= None
             dysp_dict['parent_sort']= None
+            dysp_dict['node']= None # Dysponent is no node
             dysp_dict['leaf']= False
             dysp_dict['level']= 'a'
-            dysp_dict['type']= 'DYSPONENT'
+            dysp_dict['type']= 'Dysponent'
             dysp_dict['v_nation']= row['sum_v_nation']
             dysp_dict['v_eu']= row['sum_v_eu']
             dysp_dict['v_total']= row['sum_v_total']
@@ -143,19 +150,19 @@ def work_cursor(work_tbl, connection):
             dysp_dict['v_eu'] += row['sum_v_eu']
             dysp_dict['v_total'] += row['sum_v_total']
 
-
         # creating funkcja dict - level of parent2, 'b'
         if curr_parent2 != row['parent2']:
             curr_parent2= row['parent2'] # current funkcja
             if len(parent2_dict) != 0: out.append(parent2_dict)
             parent2_dict= {}
             funk_row = fetch_elem(work_tbl, connection, str(int(row['parent2'])))
-            parent2_dict['idef']= funk_row['idef']
-            parent2_dict['idef_sort']= funk_row['idef_sort']
+            parent2_dict['idef']= curr_dysp_idef + '-'+funk_row['idef']
+            parent2_dict['idef_sort']= curr_dysp_idef_sort + '-'+funk_row['idef_sort']
             parent2_dict['parent']= curr_dysp_idef
             parent2_dict['parent_sort']= curr_dysp_idef_sort
             parent2_dict['name']= funk_row['elem_name']
             parent2_dict['type']= funk_row['elem_type']
+            parent2_dict['node']= None # Funkcja is no node
             parent2_dict['leaf']= False
             parent2_dict['level']= 'b'
             parent2_dict['v_nation']= row['sum_v_nation']
@@ -173,15 +180,22 @@ def work_cursor(work_tbl, connection):
         # creating zadanie dict - level of parent1, 'c'
         if curr_parent1 != row['parent1']:
             curr_parent1= row['parent1'] # current zadanie
-            if len(parent1_dict) != 0: out.append(parent1_dict)
+            if len(parent1_dict) != 0:
+                out.append(parent1_dict)
+                parent1_dict_node1= parent1_dict.copy() # for node 1
+                parent1_dict_node1['node']= 1
+                if ' 22.' in parent1_dict_node1['type']:
+                    parent1_dict_node1['leaf']= True # Zadanie CAN BE a leaf in node 1 (of Funk 22)
+                out.append(parent1_dict_node1)
             parent1_dict= {}
             zadn_row = fetch_elem(work_tbl, connection, clean_format(row['parent1']))
-            parent1_dict['idef']= zadn_row['idef']
-            parent1_dict['idef_sort']= zadn_row['idef_sort']
+            parent1_dict['idef']= curr_dysp_idef+'-'+zadn_row['idef']
+            parent1_dict['idef_sort']= curr_dysp_idef_sort+'-'+zadn_row['idef_sort']
             parent1_dict['parent']= curr_funk_idef
             parent1_dict['parent_sort']= curr_funk_idef_sort
             parent1_dict['name']= zadn_row['elem_name']
             parent1_dict['type']= zadn_row['elem_type']
+            parent1_dict['node']= 0 # Zadanie is a node 0
             parent1_dict['leaf']= False
             parent1_dict['level']= 'c'
             parent1_dict['v_nation']= row['sum_v_nation']
@@ -199,14 +213,21 @@ def work_cursor(work_tbl, connection):
         # creating podzadanie dict - level of parent1, 'd'
         if curr_parent0 != row['parent0']:
             if row['parent1'] != row['parent0']: # there is at least 1 podzadanie, creating a dict
-                if len(parent0_dict) != 0: out.append(parent0_dict)
+                curr_parent0= row['parent0'] # current zadanie
+                if len(parent0_dict) != 0:
+                    out.append(parent0_dict)
+                    parent0_dict_node1= parent0_dict.copy() # for node 1
+                    parent0_dict_node1['node']= 1
+                    parent0_dict_node1['leaf']= True # Podzadanie IS ALWAYS a leaf in node 1
+                    out.append(parent0_dict_node1)
                 parent0_dict= {}
                 podz_row = fetch_elem(work_tbl, connection, row['parent'])
-                parent0_dict['idef']= podz_row['idef']
-                parent0_dict['idef_sort']= podz_row['idef_sort']
+                parent0_dict['idef']= curr_dysp_idef+'-'+podz_row['idef']
+                parent0_dict['idef_sort']= curr_dysp_idef_sort+'-'+podz_row['idef_sort']
                 parent0_dict['parent']= curr_zadn_idef
                 parent0_dict['parent_sort']= curr_zadn_idef_sort
                 parent0_dict['name']= podz_row['elem_name']
+                parent0_dict['node']= 0 # Podzadanie is a node 0
                 parent0_dict['type']= podz_row['elem_type']
                 parent0_dict['leaf']= False
                 parent0_dict['level']= 'd'
@@ -234,9 +255,15 @@ def work_cursor(work_tbl, connection):
             czesc_dict['level']= 'e'
         czesc_dict['idef_sort']= sort_format(czesc_dict['idef'])
         czesc_dict['parent_sort']= sort_format(czesc_dict['parent'])
+        czesc_dict['node']= 0 # Czesc is a node 0
         czesc_dict['leaf']= True
-        czesc_dict['type']= 'Część'
-        czesc_dict['name']= row['czesc']
+        czesc_dict['type']= 'Część ' + row['czesc']
+        czesc_ref= row['czesc'][0:2]
+        ref= budget_traditional.find_one({ 'idef': czesc_ref }, { 'name':1, '_id':0 })
+        if ref is not None: # finding the name for czesc from Budzet Ksiegowy
+            czesc_dict['name']= ref['name']
+        else:
+            czesc_dict['name']= row['czesc']
         czesc_dict['v_nation'], czesc_dict['v_eu'], czesc_dict['v_total']= row['sum_v_nation'], row['sum_v_eu'], row['sum_v_total']
         out.append(czesc_dict)
         # summarizing grand totals only on the level of czesc
@@ -254,10 +281,21 @@ def work_cursor(work_tbl, connection):
     out.append(parent2_dict)
     out.append(parent1_dict)
     out.append(parent0_dict)
+    # node 1 - Zadanie
+    parent1_dict_node1= parent1_dict.copy() # for node 1
+    parent1_dict_node1['node']= 1
+    if ' 22.' in parent1_dict_node1['type']:
+        parent1_dict_node1['leaf']= True # Zadanie CAN BE a leaf in node 1 (of Funk 22)
+    out.append(parent1_dict_node1)
+    # node 1 - Podzadanie
+    parent0_dict_node1= parent0_dict.copy() # for node 1
+    parent0_dict_node1['node']= 1
+    parent0_dict_node1['leaf']= True # Podzadanie IS ALWAYS a leaf in node 1
+    out.append(parent0_dict_node1)
 
     total_dict= {}
-    total_dict['idef']= '999999'
-    total_dict['idef_sort']= '999999'
+    total_dict['idef']= 'dt-9999'
+    total_dict['idef_sort']= 'dt-9999'
     total_dict['parent']= None
     total_dict['parent_sort']= None
     total_dict['level']= 'a'
@@ -283,6 +321,7 @@ def work_cursor(work_tbl, connection):
 if __name__ == "__main__":
     cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] collection_name") 
     cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
+    cmdparser.add_option("-y", "--year", action="store", dest="budg_year", help="budgeting year")    
     cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean db before insert (ignored if db is not updated)")
 
     opts, args = cmdparser.parse_args()
@@ -290,6 +329,10 @@ if __name__ == "__main__":
     conf_filename= opts.conf_filename
     if conf_filename is None:
         print 'No configuratuion file specified!'
+        exit()
+
+    if opts.budg_year is None:
+        print 'Year isn\'t specified! Exiting now.'
         exit()
 
     try:
@@ -315,11 +358,6 @@ if __name__ == "__main__":
     except Exception, e:
         print 'Unable to connect to the PostgreSQL database:\n %s\n' % e
         exit() #no connection to the database - no data processing
-
-    wrk_table= "budg_go"
-    obj_parsed= work_cursor(wrk_table, connect_postgres)
-
-    print "...no errors so far - inserting data into mongo collection"
 
     # get mongo connection details
     conn_mongo= get_db_connect(conf_filename, 'mongodb')
@@ -349,6 +387,12 @@ if __name__ == "__main__":
     # data & meta-data collections
     coll_schm= 'md_fund_scheme'
     coll_data= args[0] #'dd_bugd2011_in'
+
+    wrk_table= "budg_go"
+    budget_ref= mongo_db['dd_budg2011_tr']
+    obj_parsed= work_cursor(wrk_table, connect_postgres, opts.budg_year, budget_ref)
+
+    print "...no errors so far - inserting data into mongo collection"
 
     if db_insert(obj_parsed, mongo_db, coll_data, clean_db):
         print '...the data successfully inserted to the collection %s' % coll_data
