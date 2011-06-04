@@ -37,6 +37,8 @@ var _sheet = (function () {
             _store.active_sheet( sheet_nr );
             _table.clean_table();
             _table.init_table( filtered_sheet );
+            _gui.make_zebra();
+            _gui.equalize_table();
         }
     }
     
