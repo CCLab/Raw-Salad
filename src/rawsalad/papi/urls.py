@@ -6,19 +6,21 @@ urlpatterns = patterns( 'papi.papi',
     (r'^(?P<serializer>[a-z]+)/meta/$', 'get_datasets_meta' ),
     (r'^(?P<serializer>[a-z]+)/dataset/$', 'get_datasets' ),
     (r'^(?P<serializer>[a-z]+)/dataset/meta/$', 'get_datasets_meta' ),
-    
+
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/$', 'get_views' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/meta/$', 'get_views_meta' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/$', 'get_views' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/meta/$', 'get_views_meta' ),
-    
+
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/$', 'get_issues' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/meta/$', 'get_issues_meta' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/$', 'get_issues' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/meta/$', 'get_issues_meta' ),
-    
+
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/meta/$', 'get_metadata' ),
+    (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/tree/$', 'get_tree' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/$', 'get_data' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>[0-9a-zA-Z/\-]*)/meta/$', 'get_metadata' ),
+    (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>[0-9a-zA-Z/\-]*)/meta/$', 'get_tree' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>[0-9a-zA-Z/\-]*)/$', 'get_data' ),
 )
