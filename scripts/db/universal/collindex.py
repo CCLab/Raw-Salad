@@ -65,7 +65,7 @@ def ensure_indexes(db, md_coll):
                 sort_list_index.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
 
             sort_index_name= "_".join([curr_ns,"sort_default"])
-            print "...ensure index %s for sort keys %s" % (sort_list_index, sort_list_index)
+            print "...ensure index %s for sort keys %s" % (sort_index_name, sort_list_index)
             db[curr_ns].ensure_index(sort_list_index, name=sort_index_name)
 
         print "...trying to ensure indexes for query keys"
@@ -86,7 +86,7 @@ def ensure_indexes(db, md_coll):
 #-----------------------------
 if __name__ == "__main__":
     # process command line options
-    cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] source_file.csv source_schema.json") 
+    cmdparser = optparse.OptionParser(usage="usage: python %prog [Options]") 
     cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
     cmdparser.add_option("-l", "--collect", action="store",dest='collection_name',help="collection name where metadata is stored")
 
