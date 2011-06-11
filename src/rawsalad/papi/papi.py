@@ -440,6 +440,8 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
     else:
         # delete useless columns
         useless_keys= ['ns', 'aux', 'batchsize', 'sort', 'query', 'explorable']
+        if len(path) != 0: # no parent - so, max_level is also useless
+            useless_keys.append('max_level')
         for curr in useless_keys:
             if curr in metadata_full:
                 del metadata_full[curr]
@@ -514,7 +516,7 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 
         result['request']= metadata_full['name']
         if root_idef is not None:
-            result['root_id']= root_idef
+            result['root_idef']= root_idef
 
         if len(result['tree']) > 0:
             result['response']= 'OK'
