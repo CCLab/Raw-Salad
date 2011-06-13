@@ -35,8 +35,12 @@ xml_header= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 
 error_codes= {
     '10': 'ERROR: No such data!',
-    '20': 'ERROR: No metadata specified!'
+    '20': 'ERROR: No metadata specified!',
+    '30': 'ERROR: Wrong request!'
     }
+
+level_list= ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
+
 
 #-----------------------------
 def dict2et(xml_dict, root_tag='result', list_names=None):
@@ -47,7 +51,6 @@ def dict2et(xml_dict, root_tag='result', list_names=None):
 
     return root
 
-#-----------------------------
 def _convert_dict_to_xml_recurse(parent, dict_item, list_names):
     # XML conversion
     # WARNING! can't convert bare lists
@@ -105,6 +108,15 @@ def get_db_connect(dbtype):
     return connect_dict
 
 #-----------------------------
+def get_mongo_db():
+    # connection details
+    dsn= get_db_connect('mongodb')
+    connect= pymongo.Connection(dsn['host'], dsn['port'])
+    dbase= connect[dsn['database']]
+    dbase.authenticate(dsn['username'], dsn['password'])
+    return dbase
+
+#-----------------------------
 def format_result(result, srz, rt_tag= None):
     if srz == 'json':
         res= json.dumps( result, ensure_ascii=False, indent=4 )
@@ -116,6 +128,22 @@ def format_result(result, srz, rt_tag= None):
         res= "".join([ xml_header, res_raw ])
         mime_tp= "application/xml"
     return res, mime_tp
+
+#-----------------------------
+def path2query(path_str):
+    out_query= {}
+
+    if len(path_str) != 0:
+        path_list= path_str.rsplit('/')
+        last_elt= path_list[len(path_list)-1]
+        if last_elt in level_list: # last element is a sign of level
+            if path_list[len(path_list)-1] == 'a': # level 'a' has no parents
+                out_query['level']= path_list[len(path_list)-1]
+            else:
+                out_query['parent']= path_list[len(path_list)-2] # the one before last is a parent
+        else:
+            out_query['idef']= path_list[len(path_list)-1] # the last elt is current idef
+    return out_query
 
 #-----------------------------
 def get_formats(request):
@@ -132,11 +160,7 @@ def get_metadata_full(ds_id, ps_id, iss, dbase):
 #-----------------------------
 def get_datasets(request, serializer, db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= { 'request': 'datasets' }
 
@@ -164,11 +188,7 @@ def get_datasets(request, serializer, db=None):
 #-----------------------------
 def get_datasets_meta(request, serializer, db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= { 'request': 'datasets' }
 
@@ -192,11 +212,7 @@ def get_datasets_meta(request, serializer, db=None):
 #-----------------------------
 def get_views(request, serializer, dataset_idef, db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= {
         'request': 'views',
@@ -229,11 +245,7 @@ def get_views(request, serializer, dataset_idef, db=None):
 #-----------------------------
 def get_views_meta(request, serializer, dataset_idef, db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= {
         'request': 'views',
@@ -266,11 +278,7 @@ def get_views_meta(request, serializer, dataset_idef, db=None):
 #-----------------------------
 def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= {
         'request': 'issues',
@@ -300,11 +308,7 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
 #-----------------------------
 def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= {
         'request': 'issues',
@@ -336,11 +340,7 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
 #-----------------------------
 def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= {
         'dataset_id': int(dataset_idef),
@@ -380,17 +380,11 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
             for sort_key in list_sort:
                 cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
 
-        cond_query= metadata_full.pop('query') # query conditions
-        parent_idef= None
-        if path == '':
-            query_aux= { 'level': 'a' }
-        else:
-            path_list= path.rsplit('/', 1)
-            parent_idef= path_list[1] # last idef in the call
-            query_aux= { 'parent': parent_idef }
+        cond_query= metadata_full.pop('query') # initial query conditions
 
-        cond_query.update(query_aux) # additional query, depends on the path argument
-        out= {'query':cond_query, 'columns':md_select_columns, 'sort':cursor_sort}
+        if len(path) != 0:
+            aux_query= path2query(path)
+            cond_query.update(aux_query) # new condition, depends on the path argument
 
         # EXTRACT data (rows)
         if cursor_batchsize in ['default', None]:
@@ -402,9 +396,9 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         for row in cursor_data:
             dt.append(row)
 
+        result['count']= cursor_data.count()
         result['request']= metadata_full['name']
-        if parent_idef is not None:
-            result['parent_id']= parent_idef
+        result.update(aux_query)
 
         if len(dt) > 0:
             result['data']= dt
@@ -419,11 +413,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 #-----------------------------
 def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= {
         'dataset_id': int(dataset_idef),
@@ -438,30 +428,44 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
         result['response']= error_codes['20']
         result['request']= 'unknown'
     else:
-        # delete useless columns
-        useless_keys= ['ns', 'aux', 'batchsize', 'sort', 'query', 'explorable']
-        if len(path) != 0: # no parent - so, max_level is also useless
-            useless_keys.append('max_level')
+        result['request']= metadata_full['name']
+        result['response']= 'OK'
+
+        count_query= metadata_full['query']
+
+        useless_keys= ['ns', 'aux', 'batchsize', 'sort', 'query', 'explorable', 'name']
+        if len(path) != 0:
+            parent_idef= path.rsplit('/', 1)[1] # last idef in the call is a parent
+            #count_query.update({ 'parent': parent_idef })
+            count_query.update(path2query(path))
+
+            useless_keys.append('max_level') # no parent - so, max_level is also useless
+
+        # first counting children of a given parent
+        metadata_full['count']= get_count(count_query, metadata_full['ns'], db)
+
+        # and then deleting useless keys
         for curr in useless_keys:
             if curr in metadata_full:
                 del metadata_full[curr]
 
         result['metadata']= metadata_full
-        result['request']= metadata_full['name']
-        result['response']= 'OK'
 
     out, mime_tp = format_result(result, serializer)
 
     return HttpResponse( out, mimetype=mime_tp )
 
 #-----------------------------
+def get_count(query, collection, db=None):
+    if db is None:
+        db= get_mongo_db()
+
+    return db[collection].find(query).count()
+
+#-----------------------------
 def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
-        # connection details
-        dsn= get_db_connect('mongodb')
-        connect= pymongo.Connection(dsn['host'], dsn['port'])
-        db= connect[dsn['database']]
-        db.authenticate(dsn['username'], dsn['password'])
+        db= get_mongo_db()
 
     result= {
         'dataset_id': int(dataset_idef),
@@ -500,7 +504,7 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         clean_query= cond_query.copy()
 
         root_idef= None
-        if path == '': # no parent, so, we extract all the collection in a form of a tree
+        if len(path) == 0: # no parent, so, we extract all the collection in a form of a tree
             result['tree']= []
             cond_query.update({ 'level': 'a' })
             cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
@@ -510,9 +514,12 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
                 curr_branch= build_tree(db[conn_coll], clean_query, md_select_columns, cursor_sort, curr_root['idef'])
                 result['tree'].append(curr_branch)
         else: # extracting only subtree for the given parent
-            path_list= path.rsplit('/', 1)
-            root_idef= path_list[1] # last idef in the call
-            result['tree']= build_tree(db[conn_coll], cond_query, md_select_columns, cursor_sort, root_idef)
+            aux_query= path2query(path)
+            if 'idef' in aux_query: # root element
+                result['tree']= build_tree(db[conn_coll], cond_query, md_select_columns, cursor_sort, aux_query['idef'])
+            else: # means we deal with URL like /a/X/b/ or /a/X/b/Y/c - which is nonesense for a tree
+                result['tree']= {}
+                result['response']= error_codes['30']
 
         result['request']= metadata_full['name']
         if root_idef is not None:
@@ -521,7 +528,8 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         if len(result['tree']) > 0:
             result['response']= 'OK'
         else:
-            result['response']= error_codes['10']
+            if 'response' not in result: # response not yet specified, that means "no such data"
+                result['response']= error_codes['10']
 
     out, mime_tp = format_result(result, serializer)
 
