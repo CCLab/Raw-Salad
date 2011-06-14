@@ -1,23 +1,85 @@
-By collection I mean a selected triple of dataset/view/issue.
-From now on the:
+DATA COLLECTIONS 
+----------------
+All data in Raw Salad DB are organized in data collections. Each data collection
+consists of a hierarchical triple: dataset, view and issue. 
 
-   <col>
-   
-is a shorthand representing a general collection URL:
+EXAMPLES:
 
+   DATASET                       VIEW                      ISSUE
+   National budget             > Performance budget      > 2011
+                                                         > 2012
+                               > Institutional budget    > 2011
+                                                         > 2012
+   National agencies budgets   > Traditional structure   > 2011
+                               > Performance structure   > 2011
+                               
+As hown in the example, some datasets contain a few distinct views and some of 
+the views have multiple issues. The issue don't have to be a year date. 
+
+A specified triple of dataset-view-issue is called "Data collection" and along 
+the data format is a mandatory element of API URL. 
+
+
+DATA FORMATS
+------------
+Public API of Raw Salad provides users with two optional data formats: XML and 
+JSON both encoded in UTF-8. In future YAML is to be implemented as well. 
+
+
+RESPONSE STRUCTURE
+------------------
+To be written
+
+
+BASIC URL STRUCTURE
+-------------------
+The basic part of API URL consists of three parts: host, format, collection:
+
+   HOST                       FORMAT   COLLECTION
+   |--------------------------|--------|---------------------------------------|
    http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/issue/<idef>/
 
-EXAMPLE:
-   
-   National performance budget 2011 in XML format
-   http://cecyf.megivps.pl/api/xml/dataset/0/view/1/issue/2011/
 
-   National istitutional budget 2012 in JSON format
-   http://cecyf.megivps.pl/api/json/dataset/0/view/2/issue/2012/
-    
+EXAMPLES:
+
+   National budget > Institutional budget > 2012 in XML format
+   http://cecyf.megivps.pl/api/xml/dataset/0/view/2/issue/2012/
+   
+   National agencies budget > Performance structure > 2011 in JSON format
+   http://cecyf.megivps.pl/api/json/dataset/2/view/3/issue/2011/
+   
+
 All URLs in the API have to contain a trailing slash!
 
+All API URLs are self descriptive and reflective. It means that all information 
+necessary to browse Raw Salad DB and build software (or language wrappers) on 
+top of Raw Salad API is included in API responses. 
 
+
+   List of available formats
+   http://cecyf.megivps.pl/api/
+
+   List of available datasets (response in <format>)
+   http://cecyf.megivps.pl/api/<format>/
+   http://cecyf.megivps.pl/api/<format>/dataset/
+
+   List of available views of specified dataset (response in <format>)
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/
+
+   List of available issues of specified dataset-view (response in <format>)
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/issue/
+
+   List of all data in specified collection (response in <format>)
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/issue/<idef>/
+
+The last URL is the first API call that responses with raw data from a specified
+collection in a specified format. The futher specification is provided below.
+
+
+RAW DATA API
+============
 1. The structure of the urls is as follows:
     
    the whole collection:
