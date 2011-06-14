@@ -13,11 +13,12 @@ EXAMPLES:
    National agencies budgets   > Traditional structure   > 2011
                                > Performance structure   > 2011
                                
-As hown in the example, some datasets contain a few distinct views and some of 
-the views have multiple issues. The issue don't have to be a year date. 
+As shown in the example, some datasets contain a few distinct views and some of 
+the views have multiple issues. The issue don't have to be a year date and 
+should be treated as an arbitrary (though self-descriptive) identifier. 
 
-A specified triple of dataset-view-issue is called "Data collection" and along 
-the data format is a mandatory element of API URL. 
+A specified triple of dataset-view-issue is called "Data collection" and with 
+data format creates a basic URL structure.
 
 
 DATA FORMATS
@@ -35,14 +36,14 @@ BASIC URL STRUCTURE
 -------------------
 The basic part of API URL consists of three parts: host, format, collection:
 
-   HOST                       FORMAT   COLLECTION
+              HOST              FORMAT               COLLECTION
    |--------------------------|--------|---------------------------------------|
    http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/issue/<idef>/
 
 
 EXAMPLES:
 
-   National budget > Institutional budget > 2012 in XML format
+   National budget > Institutional structure > 2012 in XML format
    http://cecyf.megivps.pl/api/xml/dataset/0/view/2/issue/2012/
    
    National agencies budget > Performance structure > 2011 in JSON format
@@ -55,6 +56,9 @@ All API URLs are self descriptive and reflective. It means that all information
 necessary to browse Raw Salad DB and build software (or language wrappers) on 
 top of Raw Salad API is included in API responses. 
 
+
+STEP BY STEP THROUGH BASIC URL
+------------------------------
 
    List of available formats
    http://cecyf.megivps.pl/api/
@@ -79,8 +83,12 @@ collection in a specified format. The futher specification is provided below.
 
 
 RAW DATA API
-============
-1. The structure of the urls is as follows:
+------------
+Throughout this part "<col>" is used to indicate URL for a specific collection 
+in a specific format. 
+
+
+The structure of the raw data urls is as follows:
     
    the whole collection:
 
@@ -88,6 +96,7 @@ RAW DATA API
       <col>/meta       - metadata for the collection including 'max_level'
       <col>/tree       - the whole collection as a tree
         
+
    EXAMPLES:
 
       A flat list of all the entities in the national performance budget 2012
