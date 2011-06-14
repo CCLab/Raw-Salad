@@ -14,7 +14,7 @@ EXAMPLES:
                                > Performance structure   > 2011
                                
 As shown in the example, some datasets contain a few distinct views and some of 
-the views have multiple issues. The issue don't have to be a year date and 
+the views have multiple issues. The issues don't have to be a year date and 
 should be treated as an arbitrary (though self-descriptive) identifier. 
 
 A specified triple of dataset-view-issue is called "Data collection" and with 
@@ -85,7 +85,7 @@ collection in a specified format. The futher specification is provided below.
 RAW DATA API
 ------------
 Throughout this part "<col>" is used to indicate URL for a specific collection 
-in a specific format. 
+in a specific format (see section above). 
 
 
 The structure of the raw data urls is as follows:
@@ -93,16 +93,17 @@ The structure of the raw data urls is as follows:
    the whole collection:
 
       <col>/           - a flat list of all entities in a whole collection
-      <col>/meta       - metadata for the collection including 'max_level'
+      <col>/meta       - metadata for the collection including 'max_level' and
+                         children 'count'
       <col>/tree       - the whole collection as a tree
         
 
    EXAMPLES:
 
-      A flat list of all the entities in the national performance budget 2012
+      A flat list of all entities in the national performance budget 2012
       http://cecyf.megivps.pl/api/json/dataset/0/view/1/issue/2012/  
       
-      A tree of all the entities in the national traditional budget 2011
+      A tree of all entities in the national traditional budget 2011
       http://cecyf.megivps.pl/api/xml/dataset/0/view/0/issue/2011/tree  
       
 
@@ -122,12 +123,12 @@ The structure of the raw data urls is as follows:
       
       <col>/(<level>/<idef>/)+         - a specified <idef> entity
       <col>/(<level>/<idef>/)+meta/    - a specified <idef> entity metadata
-                                         including children count information
+                                         including children 'count'
       <col>/(<level>/<idef>/)+tree/    - a subtree of the collection with 
                                          a specified <idef> entity as a root
 
 
-   <level> is represented by a single letter reflecting a tree level (a, b...)
+   <level> is represented by a single letter reflecting tree level (a, b, c...)
    <idef> is a unique (in scope of the single collection) id of the entity
     
    EXAMPLES:
@@ -155,8 +156,8 @@ The structure of the raw data urls is as follows:
 
       <col>/(<level>/<idef>/)*<level>/\[<idef>(\+(AND|TO)\+<idef>)+\]/(<level>)*
 
-   The scope expression can be used only to the deepest level requested.
-   The scope expression can be used only for the flat list view.
+   The group expression can be used only to the deepest level requested and only
+   for the flat list view - users can't use grouping with tree results.
 
    EXAMPLES:
 
@@ -175,14 +176,14 @@ The structure of the raw data urls is as follows:
 
 2. Additional GET attribute "fields" can be used to narrow the result's size:
 
-   fields=[field_name(, <field_name>)+] - list of fields of specified entities
+   fields=[<field_name>(, <field_name>)+] - list of fields of specified entities
 
    EXAMPLES:
       
       National Health Fund budget 2011 in XML
       <col> = http://cecyf.megivps.pl/api/json/dataset/3/view/1/issue/2012/  
 
-      A list of all entities with only name and toal value as a result:
+      A list of all entities with only name and total value as a result:
       <col>/a/?fields=[name, val]
 
       A list of two regions with idef and total value as a result
