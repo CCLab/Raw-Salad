@@ -336,6 +336,45 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
 
     return HttpResponse( out, mimetype=mime_tp )
 
+#-----------------------------
+def get_ud_columns(rq):
+    clm_str= rq.GET.get('fields', '[]')
+    out_list= []
+    if clm_str != '[]':
+        clm_str= clm_str.replace(' ', '')
+        out_list= clm_str[1:-1].split(',')
+
+    return out_list
+
+#-----------------------------
+def get_columns(meta_data, usr_def_cols):
+    columns_list= {'_id':0} # _id is never returned
+    columns_list.update(meta_data['aux']) # list of columns to be returned in any case
+    if len(usr_def_cols) > 0:
+        for clm in usr_def_cols: # list of user defined columns to be returned
+            columns_list[clm]= 1
+    else:
+        md_columns= metadata_full['columns'] # list of main columns to be returned
+        for clm in md_columns:
+            columns_list[clm['key']]= 1
+
+    return columns_list
+
+#-----------------------------
+def get_sort_list(meta_data):
+    sort_list= []
+    try:
+        cond_sort= meta_data['sort']
+    except:
+        cond_sort= None
+
+    if cond_sort is not None:
+        srt= [int(k) for k, v in cond_sort.iteritems()]
+        srt.sort()
+        for sort_key in srt:
+            sort_list.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
+
+    return sort_list
 
 #-----------------------------
 def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
@@ -356,29 +395,15 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
     else:
         conn_coll= metadata_full.pop('ns') # collection name
 
-        md_select_columns= {'_id':0} # _id is never returned
-        cond_aux= metadata_full.pop('aux') # list of aux columns to be returned
-        md_select_columns.update(cond_aux)
-        md_columns= metadata_full['columns'] # list of main columns to be returned
-        for clm in md_columns:
-            md_select_columns[clm['key']]= 1
+        # get columns list
+        md_select_columns= get_columns(metadata_full, get_ud_columns(request))
+        # get list of sort columns
+        cursor_sort= get_sort_list(metadata_full)
 
         try: # batch size
             cursor_batchsize= metadata_full.pop('batchsize')
         except:
             cursor_batchsize= 'default'
-
-        cursor_sort= [] # sort
-        try:
-            cond_sort= metadata_full.pop('sort')
-        except:
-            cond_sort= None
-
-        if cond_sort is not None:
-            list_sort= [int(k) for k, v in cond_sort.iteritems()]
-            list_sort.sort()
-            for sort_key in list_sort:
-                cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
 
         cond_query= metadata_full.pop('query') # initial query conditions
 
@@ -398,7 +423,10 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 
         result['count']= cursor_data.count()
         result['request']= metadata_full['name']
-        result.update(aux_query)
+        try:
+            result.update(aux_query) # idef: XX for the wuery on specified element
+        except:
+            pass
 
         if len(dt) > 0:
             result['data']= dt
@@ -479,26 +507,13 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         result['response']= error_codes['20']
         result['request']= 'unknown'
     else:
-        conn_coll= metadata_full.pop('ns') # collection name
+        conn_coll= metadata_full['ns'] # collection name
 
-        md_select_columns= {'_id':0} # _id is never returned
-        cond_aux= metadata_full.pop('aux') # list of aux columns to be returned
-        md_select_columns.update(cond_aux)
-        md_columns= metadata_full['columns'] # list of main columns to be returned
-        for clm in md_columns:
-            md_select_columns[clm['key']]= 1
-
-        cursor_sort= [] # sort
-        try:
-            cond_sort= metadata_full.pop('sort')
-        except:
-            cond_sort= None
-
-        if cond_sort is not None:
-            list_sort= [int(k) for k, v in cond_sort.iteritems()]
-            list_sort.sort()
-            for sort_key in list_sort:
-                cursor_sort.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
+        # get columns list
+        md_select_columns= get_columns(metadata_full, get_ud_columns(request))
+        # get list of sort columns
+        cursor_sort= get_sort_list(metadata_full)
+        result['cursor_sort']= cursor_sort
 
         cond_query= metadata_full.pop('query') # query conditions
         clean_query= cond_query.copy()
@@ -534,7 +549,6 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
     out, mime_tp = format_result(result, serializer)
 
     return HttpResponse( out, mimetype=mime_tp )
-
 
 #-----------------------------
 def build_tree(cl, query, columns, sortby, root):
