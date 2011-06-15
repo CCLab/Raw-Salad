@@ -22,5 +22,5 @@ urlpatterns = patterns( 'papi.papi',
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/$', 'get_data' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>[0-9a-zA-Z/\-]*)/meta/$', 'get_metadata' ),
     (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>[0-9a-zA-Z/\-]*)/tree/$', 'get_tree' ),
-    (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>[0-9a-zA-Z/\-]*)/$', 'get_data' ),
+    (r'^(?P<serializer>[a-z]+)/dataset/(?P<dataset_idef>\d+)/view/(?P<view_idef>\d+)/issue/(?P<issue>\d+)/(?P<path>([a-z]+|[0-9\-\+(AND|TO)\[\]]*/)+)$', 'get_data' ),
 )
