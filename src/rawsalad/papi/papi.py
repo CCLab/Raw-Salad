@@ -338,11 +338,20 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
 
 #-----------------------------
 def get_ud_columns(rq):
+    """
+    user defined list of fields
+    format can be (with or without space):
+      ?fields=[fieldX, fieldY]
+      ?fields=fieldX, fieldY
+    """
     clm_str= rq.GET.get('fields', '[]')
     out_list= []
     if clm_str != '[]':
         clm_str= clm_str.replace(' ', '')
-        out_list= clm_str[1:-1].split(',')
+        if '[' and ']' in clm_str:
+            out_list= clm_str[1:-1].split(',')
+        else:
+            out_list= clm_str.split(',')
 
     return out_list
 
@@ -354,7 +363,7 @@ def get_columns(meta_data, usr_def_cols):
         for clm in usr_def_cols: # list of user defined columns to be returned
             columns_list[clm]= 1
     else:
-        md_columns= metadata_full['columns'] # list of main columns to be returned
+        md_columns= meta_data['columns'] # list of main columns to be returned
         for clm in md_columns:
             columns_list[clm['key']]= 1
 
@@ -393,19 +402,20 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         result['response']= error_codes['20']
         result['request']= 'unknown'
     else:
-        conn_coll= metadata_full.pop('ns') # collection name
+        conn_coll= metadata_full['ns'] # collection name
 
         # get columns list
-        md_select_columns= get_columns(metadata_full, get_ud_columns(request))
+        result['ud_columns']= get_ud_columns(request)
+        md_select_columns= get_columns(metadata_full, result['ud_columns'])
         # get list of sort columns
         cursor_sort= get_sort_list(metadata_full)
 
         try: # batch size
-            cursor_batchsize= metadata_full.pop('batchsize')
+            cursor_batchsize= metadata_full['batchsize']
         except:
             cursor_batchsize= 'default'
 
-        cond_query= metadata_full.pop('query') # initial query conditions
+        cond_query= metadata_full['query'] # initial query conditions
 
         if len(path) != 0:
             aux_query= path2query(path)
