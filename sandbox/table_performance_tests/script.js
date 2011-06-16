@@ -12,6 +12,7 @@
     $('#clone').click( function ( event ) {
         var start = new Date().getTime();
         var store_copy = store.slice();
+
         store = [];
 
         $('tbody').html('');
@@ -87,6 +88,9 @@
             $('tbody').append( generate_row( list[i] ));
         }
         make_zebra();
+
+        // append new data into store
+        store = [].concat( store, list );
     }
 
 
@@ -96,14 +100,14 @@
         for( ; i >= 0; i -= 1 ) {
             $('#'+list[i]['parent']).after( generate_row( list[i] ));
         }
+
+        // append new data into store
+        store = [].concat( store, list );
     }
 
     function generate_row( node ) {
         var html = [];
         var row;
-
-        // append this node to the current store
-        store.push( node );
 
         // row definition
         html.push( '<tr id="', node['idef'], '" ' );
