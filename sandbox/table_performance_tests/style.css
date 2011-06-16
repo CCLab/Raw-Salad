@@ -73,3 +73,19 @@ td+td {
   padding-left: 30px !important;    
 }
 
+#clone {
+  text-transform: capitalize;
+  width: 80px;
+  text-align: center;
+  padding: 5px;
+  background-color: #5b5b5b;
+  color: #fff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+
+}
+
+#clone:hover {
+  color: #ccc;
+  cursor: pointer;
+}
