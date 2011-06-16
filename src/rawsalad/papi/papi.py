@@ -338,14 +338,20 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
 
 #-----------------------------
 def get_ud_columns(rq):
-    # user defined list of fields
+    """
+    user defined list of fields
+    format can be (with or without space):
+      ?fields=[fieldX, fieldY]
+      ?fields=fieldX, fieldY
+    """
     clm_str= rq.GET.get('fields', '[]')
     out_list= []
-    if "[" or "]" not in clm_str: # not a list but single element
-        clm_str= "".join(["[", clm_str, "]"]) # make it a list
     if clm_str != '[]':
         clm_str= clm_str.replace(' ', '')
-        out_list= clm_str[1:-1].split(',')
+        if '[' and ']' in clm_str:
+            out_list= clm_str[1:-1].split(',')
+        else:
+            out_list= clm_str.split(',')
 
     return out_list
 
@@ -399,7 +405,8 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         conn_coll= metadata_full['ns'] # collection name
 
         # get columns list
-        md_select_columns= get_columns(metadata_full, get_ud_columns(request))
+        result['ud_columns']= get_ud_columns(request)
+        md_select_columns= get_columns(metadata_full, result['ud_columns'])
         # get list of sort columns
         cursor_sort= get_sort_list(metadata_full)
 
