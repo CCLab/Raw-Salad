@@ -162,7 +162,7 @@ def get_datasets(request, serializer, db=None):
     if db is None:
         db= get_mongo_db()
 
-    result= { 'request': 'datasets' }
+    result= { 'request': 'dataset' }
 
     # initial params
     nav_select_columns= {'_id':0} # _id is never returned
@@ -190,7 +190,7 @@ def get_datasets_meta(request, serializer, db=None):
     if db is None:
         db= get_mongo_db()
 
-    result= { 'request': 'datasets' }
+    result= { 'request': 'dataset' }
 
     # initial params
     nav_select_columns= {'_id':0} # _id is never returned
@@ -215,7 +215,7 @@ def get_views(request, serializer, dataset_idef, db=None):
         db= get_mongo_db()
 
     result= {
-        'request': 'views',
+        'request': 'view',
         'dataset_id': int(dataset_idef)
         }
 
@@ -248,7 +248,7 @@ def get_views_meta(request, serializer, dataset_idef, db=None):
         db= get_mongo_db()
 
     result= {
-        'request': 'views',
+        'request': 'view',
         'dataset_id': int(dataset_idef)
         }
 
@@ -281,7 +281,7 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
         db= get_mongo_db()
 
     result= {
-        'request': 'issues',
+        'request': 'issue',
         'dataset_id': int(dataset_idef),
         'view_id': int(view_idef)
         }
@@ -311,7 +311,7 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
         db= get_mongo_db()
 
     result= {
-        'request': 'issues',
+        'request': 'issue',
         'dataset_id': int(dataset_idef),
         'view_id': int(view_idef)
         }
@@ -345,14 +345,18 @@ def get_ud_columns(rq):
       ?fields=fieldX, fieldY
     """
     clm_str= rq.GET.get('fields', '[]')
-    out_list= []
+    out_tmp, out_list= [], []
     if clm_str != '[]':
         clm_str= clm_str.replace(' ', '')
         if '[' and ']' in clm_str:
-            out_list= clm_str[1:-1].split(',')
+            out_tmp= clm_str[1:-1].split(',')
         else:
-            out_list= clm_str.split(',')
+            out_tmp= clm_str.split(',')
 
+    for elm in out_tmp: # check for empty elements
+        if len(elm) > 0:
+            out_list.append(elm)
+    
     return out_list
 
 #-----------------------------
@@ -405,8 +409,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         conn_coll= metadata_full['ns'] # collection name
 
         # get columns list
-        result['ud_columns']= get_ud_columns(request)
-        md_select_columns= get_columns(metadata_full, result['ud_columns'])
+        md_select_columns= get_columns(metadata_full, get_ud_columns(request))
         # get list of sort columns
         cursor_sort= get_sort_list(metadata_full)
 
@@ -469,23 +472,35 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
         result['request']= metadata_full['name']
         result['response']= 'OK'
 
+        # used for counting
         count_query= metadata_full['query']
 
+        # define useless keys
         useless_keys= ['ns', 'aux', 'batchsize', 'sort', 'query', 'explorable', 'name']
+
         if len(path) != 0:
-            parent_idef= path.rsplit('/', 1)[1] # last idef in the call is a parent
-            #count_query.update({ 'parent': parent_idef })
             count_query.update(path2query(path))
 
             useless_keys.append('max_level') # no parent - so, max_level is also useless
 
-        # first counting children of a given parent
+        # but before delete useless keys
+        # counting children of a given parent
         metadata_full['count']= get_count(count_query, metadata_full['ns'], db)
 
-        # and then deleting useless keys
+        # delete useless keys
         for curr in useless_keys:
             if curr in metadata_full:
                 del metadata_full[curr]
+
+        # user defined columns
+        ud_columns= get_ud_columns(request)
+        ud_column_list= []
+        if len(ud_columns) > 0: # describe only user defined columns
+            full_column_list= metadata_full.pop('columns')
+            for clmn in full_column_list:
+                if clmn['key'] in ud_columns:
+                    ud_column_list.append(clmn)
+            metadata_full['columns']= ud_column_list
 
         result['metadata']= metadata_full
 
@@ -523,7 +538,6 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         md_select_columns= get_columns(metadata_full, get_ud_columns(request))
         # get list of sort columns
         cursor_sort= get_sort_list(metadata_full)
-        result['cursor_sort']= cursor_sort
 
         cond_query= metadata_full.pop('query') # query conditions
         clean_query= cond_query.copy()
