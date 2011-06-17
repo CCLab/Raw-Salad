@@ -36,7 +36,11 @@ xml_header= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 error_codes= {
     '10': 'ERROR: No such data!',
     '20': 'ERROR: No metadata specified!',
-    '30': 'ERROR: Wrong request!'
+    '30': 'ERROR: Wrong request!',
+    '31': 'ERROR: IDs in +TO+ scope should be on the same level!',
+    '32': 'ERROR: Wrong sequence in the scope +TO+!',
+    '33': 'ERROR: Scope +TO+ should include only 2 elements!',
+    '34': 'ERROR: Syntax error in scope definition!'
     }
 
 level_list= ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
@@ -390,6 +394,61 @@ def get_sort_list(meta_data):
     return sort_list
 
 #-----------------------------
+def parse_conditions(pth):
+    path_elm_list= []
+    idef_list= []
+    if '[' and ']' in pth:
+        path_elm_list= pth[pth.index('[')+1:-1].split('+AND+')
+        if len(path_elm_list) > 0:
+            for elm in path_elm_list:
+                scope_list= elm.split('+TO+')
+                
+                if len(scope_list) == 1: # no scope, just adding it to the list of idefs
+                    idef_list.append(elm)
+
+                elif len(scope_list) == 2: # there is a correctly defined scope
+                    idef_from, idef_to= scope_list[0], scope_list[1]
+
+                    tmplst_from= idef_from.split('-')
+                    tmplst_to= idef_to.split('-')
+
+                    if len(tmplst_from) != len(tmplst_to): # ERROR!
+                        return { "error": '31' } # 'to' and 'from' are from different levels
+                    
+                    if len(tmplst_from) > 1: # check one, but do for both, as it's alredy checked if they are on the same level
+                        try:
+                            last_num_from= int(tmplst_from[-1])
+                            last_num_to= int(tmplst_to[-1])
+                        except:
+                            return { "error": '34' } # syntax error like [...+AND] or [+TO+2...]
+                        
+                        base_from= "-".join(tmplst_from[:-1])
+                        base_to= "-".join(tmplst_to[:-1])
+                    else:
+                        last_num_from= int(tmplst_from[0])
+                        last_num_to= int(tmplst_to[0])
+
+                    if last_num_to < last_num_from: # ERROR!
+                        return { "error": '32' } # 'to' is less than 'from'
+
+                    last_num_curr= last_num_from
+                    while last_num_curr <= last_num_to:
+                        if len(tmplst_from) > 1:
+                            idef_list.append("-".join([base_from, str(last_num_curr)]))
+                        else:
+                            idef_list.append(str(last_num_curr))
+                        last_num_curr += 1
+                        
+
+                elif len(scope_list) > 2: # ERROR!
+                    return { "error": '33' } # incorrectly defined scope!
+
+        return { "idef": { "$in": idef_list } }
+    else:
+        return path2query(pth)
+
+
+#-----------------------------
 def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
         db= get_mongo_db()
@@ -397,55 +456,59 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
     result= {
         'dataset_id': int(dataset_idef),
         'view_id': int(view_idef),
-        'issue': issue,
+        'issue': issue
         }
 
-    # EXTRACT metadata
-    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), str(issue), db)
-    if metadata_full is None:
-        result['response']= error_codes['20']
-        result['request']= 'unknown'
+    cond_query_path= parse_conditions(path)
+    if 'error' in cond_query_path: # already an error
+        result['response']= error_codes[cond_query_path['error']]
     else:
-        conn_coll= metadata_full['ns'] # collection name
 
-        # get columns list
-        md_select_columns= get_columns(metadata_full, get_ud_columns(request))
-        # get list of sort columns
-        cursor_sort= get_sort_list(metadata_full)
-
-        try: # batch size
-            cursor_batchsize= metadata_full['batchsize']
-        except:
-            cursor_batchsize= 'default'
-
-        cond_query= metadata_full['query'] # initial query conditions
-
-        if len(path) != 0:
-            aux_query= path2query(path)
-            cond_query.update(aux_query) # new condition, depends on the path argument
-
-        # EXTRACT data (rows)
-        if cursor_batchsize in ['default', None]:
-            cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
+    # EXTRACT metadata
+        metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), str(issue), db)
+        if metadata_full is None:
+            result['response']= error_codes['20']
+            result['request']= 'unknown'
         else:
-            cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
+            conn_coll= metadata_full['ns'] # collection name
 
-        dt= []
-        for row in cursor_data:
-            dt.append(row)
+            # get columns list
+            md_select_columns= get_columns(metadata_full, get_ud_columns(request))
+            # get list of sort columns
+            cursor_sort= get_sort_list(metadata_full)
 
-        result['count']= cursor_data.count()
-        result['request']= metadata_full['name']
-        try:
-            result.update(aux_query) # idef: XX for the wuery on specified element
-        except:
-            pass
+            try: # batch size
+                cursor_batchsize= metadata_full['batchsize']
+            except:
+                cursor_batchsize= 'default'
 
-        if len(dt) > 0:
-            result['data']= dt
-            result['response']= 'OK'
-        else:
-            result['response']= error_codes['10']
+            cond_query= metadata_full['query'] # initial query conditions
+
+            if len(cond_query_path) != 0:
+                cond_query.update(cond_query_path) # new condition, depends on the path argument
+
+            # EXTRACT data (rows)
+            if cursor_batchsize in ['default', None]:
+                cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
+            else:
+                cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
+
+            dt= []
+            for row in cursor_data:
+                dt.append(row)
+
+            result['count']= cursor_data.count()
+            result['request']= metadata_full['name']
+            try:
+                result.update(aux_query) # idef: XX for the wuery on specified element
+            except:
+                pass
+
+            if len(dt) > 0:
+                result['data']= dt
+                result['response']= 'OK'
+            else:
+                result['response']= error_codes['10']
 
     out, mime_tp = format_result(result, serializer)
 
