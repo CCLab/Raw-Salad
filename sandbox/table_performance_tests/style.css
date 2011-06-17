@@ -1,0 +1,91 @@
+body {
+    width: 960px;
+    margin: 10px auto;
+    
+    font-family: "Verdana", sans-serif;
+    font-size: 11px;
+    color: #333;
+}
+
+table {
+  border-collapse: collapse;
+  border-right: 2px solid #8b8b8b;
+  border-left: 2px solid #8b8b8b;
+}
+
+.odd {
+  background-color: #fff;
+}
+
+.even {
+  background-color: #eee;
+}
+
+tr:hover {
+  background-color: #98d39f;
+}
+
+td {
+  cursor: default;
+  vertical-align: top;
+  padding: 5px;
+}
+
+td+td {
+  border-left: 1px solid #8b8b8b;
+}
+
+.click {
+  color: #11a8f7;
+  font-weight: bold;
+}
+
+.click:hover {
+  cursor: pointer;
+}
+
+.name {
+  width: 450px;
+}
+
+.value {
+  width: 100px;
+  text-align: right;
+}
+
+
+.a > .type {
+  width: 138px;
+}
+
+.b > .type {
+  width: 133px;
+  padding-left: 10px !important;
+}
+
+.c > .type {
+  width: 123px;
+  padding-left: 20px !important;    
+}
+
+.d > .type {
+  width: 113px;
+  padding-left: 30px !important;    
+}
+
+#clone {
+  text-transform: capitalize;
+  width: 80px;
+  text-align: center;
+  padding: 5px;
+  background-color: #5b5b5b;
+  color: #fff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+
+}
+
+#clone:hover {
+  color: #ccc;
+  cursor: pointer;
+}
