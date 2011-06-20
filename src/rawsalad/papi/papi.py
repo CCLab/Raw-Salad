@@ -3,19 +3,6 @@
 project: Raw Salad
 function: public API to data and meta-data
 requirements: mongod, conf file (see conf_filename)
-
-to-do:
-+ standartization of the formats for both XML and JSON:
-{
-    "request": ... (should be root element for XML!!!)
-    "response": // "OK", "Error: <error descr>" //
-    "data": // or "meta-data" (CAN BE BOTH!) //
-    "..etc.."
-}
-+ errors processing (list of possible errors to appear)
-+ get_data shouldn't return metadata!
-- function for getting the whole branch (react to path= ...?get_branch=parent_id or sthn like that - need to specify the task!)
-+ check bookmark # ERROR HERE!!!
 """
 
 from django.http import HttpResponse
@@ -37,7 +24,7 @@ error_codes= {
     '10': 'ERROR: No such data!',
     '20': 'ERROR: No metadata specified!',
     '30': 'ERROR: Wrong request!',
-    '31': 'ERROR: IDs in +TO+ scope should be on the same level!',
+    '31': 'ERROR: Scope +TO+ is applicable to the same level!',
     '32': 'ERROR: Wrong sequence in the scope +TO+!',
     '33': 'ERROR: Scope +TO+ should include only 2 elements!',
     '34': 'ERROR: Syntax error in scope definition!'
@@ -393,8 +380,6 @@ def get_sort_list(meta_data):
 
     return sort_list
 
-# [8+AND+6-12+TO+14]/
-
 #-----------------------------
 def parse_conditions(pth):
     path_elm_list= []
@@ -460,7 +445,6 @@ def parse_conditions(pth):
 
     else: # ERROR
         return { "error": '34' } # otherwise it's a syntax error
-
 
 #-----------------------------
 def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
