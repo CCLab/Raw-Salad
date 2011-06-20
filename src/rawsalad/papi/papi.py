@@ -393,16 +393,23 @@ def get_sort_list(meta_data):
 
     return sort_list
 
+# [8+AND+6-12+TO+14]/
+
 #-----------------------------
 def parse_conditions(pth):
     path_elm_list= []
     idef_list= []
-    if '[' and ']' in pth:
+
+    test_presence= '[' and ']' in pth
+    test_order= pth.find('[') < pth.find(']')
+    test_count= (pth.count('[') + pth.count(']') == 2)
+
+    if test_presence and test_order and test_count:
         path_elm_list= pth[pth.index('[')+1:-1].split('+AND+')
         if len(path_elm_list) > 0:
             for elm in path_elm_list:
                 scope_list= elm.split('+TO+')
-                
+
                 if len(scope_list) == 1: # no scope, just adding it to the list of idefs
                     idef_list.append(elm)
 
@@ -419,14 +426,17 @@ def parse_conditions(pth):
                         try:
                             last_num_from= int(tmplst_from[-1])
                             last_num_to= int(tmplst_to[-1])
-                        except:
-                            return { "error": '34' } # syntax error like [...+AND] or [+TO+2...]
-                        
-                        base_from= "-".join(tmplst_from[:-1])
-                        base_to= "-".join(tmplst_to[:-1])
+
+                            base_from= "-".join(tmplst_from[:-1])
+                            base_to= "-".join(tmplst_to[:-1])
+                        except: # ERROR!
+                            return { "error": '34' } # syntax error like [...+AND] or [+TO+2...]                        
                     else:
-                        last_num_from= int(tmplst_from[0])
-                        last_num_to= int(tmplst_to[0])
+                        try:
+                            last_num_from= int(tmplst_from[0])
+                            last_num_to= int(tmplst_to[0])
+                        except:
+                            return { "error": '34' } # syntax error like [...+2+6+AND...]                        
 
                     if last_num_to < last_num_from: # ERROR!
                         return { "error": '32' } # 'to' is less than 'from'
@@ -444,8 +454,12 @@ def parse_conditions(pth):
                     return { "error": '33' } # incorrectly defined scope!
 
         return { "idef": { "$in": idef_list } }
-    else:
-        return path2query(pth)
+
+    elif (not test_presence) and (not test_order) and (not test_count):
+        return path2query(pth) # well, then it means we're dealing with single idef
+
+    else: # ERROR
+        return { "error": '34' } # otherwise it's a syntax error
 
 
 #-----------------------------
