@@ -42,7 +42,10 @@
     function make_table( list ) {
         var level;
         var i;
-        var hashed_list = all_rows( list );
+        var hashed_list = Tools.all_rows( list, function ( elem ) {
+                              return elem['data'];
+                          });
+
         var level_nodes;
         var max_level = hashed_list['highest_level'];
         
@@ -71,31 +74,52 @@
             }
         });
     }
-
-
+    
+    
     function init_table( list ) {
         var i = 0;
+        var store_list = [];
 
         for( ; i < list.length; ++i ) {
             $('tbody').append( generate_row( list[i] ));
+            store_list.push( generate_store_data( list[i] ) );
         }
         make_zebra();
 
         // append new data into store
-        store = [].concat( store, list );
+        store = [].concat( store, store_list );
     }
-
-
+    
+    
     function add_rows( list ) {
         var i = list.length - 1;
+        var store_list = [];
 
         for( ; i >= 0; i -= 1 ) {
             $('#'+list[i]['parent']).after( generate_row( list[i] ));
+            store_list.push( generate_store_data( list[i] ) );
         }
 
         // append new data into store
-        store = [].concat( store, list );
+        store = [].concat( store, store_list );
     }
+    
+    
+    function generate_store_data( node ) {
+        var store_node = {};
+        var state = {};
+        
+        store_node['data'] = node;
+        
+        state['open'] = false;
+        state['marked'] = false;
+        state['checked'] = false;
+        
+        store_node['state'] = state;
+        
+        return store_node;
+    };
+    
 
     function generate_row( node ) {
         var html = [];
