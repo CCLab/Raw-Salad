@@ -24,16 +24,10 @@
 
 
     // functions definitions
-    function kill_children( id, what ) {
+    function with_subtree( id, fun, args ) {
         $('tr.'+id).each( function () {
-            kill_children( $(this).attr('id'), what );
-
-            if( what === 'hide' ) {
-                $(this).hide();
-            }
-            else {
-                $(this).show();
-            }
+            with_subtree( $(this).attr('id'), fun );
+            fun.apply( $(this), [ args ] );
         });
     }
 
@@ -45,6 +39,7 @@
     }
 
 
+    // TODO reimplement it with hash-table instead of filter
     function make_table( list, level ) {
         var level = level || 'a';
 
@@ -112,6 +107,9 @@
         // row definition
         html.push( '<tr id="', node['idef'], '" ' );
         html.push( 'data-open="false" ' );
+        if( node['level'] === 'a' ) {
+            html.push( 'data-selected="false" ' );
+        }
         html.push( 'class="', node['level'], ' ', node['parent'],'">' );
 
         // cells definition
@@ -127,28 +125,93 @@
         // create & arm row
         row = $( html.join('') );
         row.click( function ( event ) {
-            if( $(this).attr( 'data-open' ) === 'false' ) {
+            // a-level parent
+            var a_root = a_parent( $(this) );
+            var open = a_root.attr( 'data-open' );
+            var selected = a_root.attr( 'data-selected' );
+            // next a-level node
+            var next = $('#'+(parseInt( a_root.attr('id'), 10 ) + 1));
 
-                if( $('.'+node['idef']).length !== 0 ) {
-                    kill_children( node['idef'], 'show' );
+            // dim everything outside this a-rooted subtree
+            a_root
+                .siblings()
+                .not(':hidden')
+                .addClass('dim');
+
+            // make a-root background black
+            $('tr.root').removeClass('root');
+            a_root.addClass('root');
+
+            // highlight the subtree
+            with_subtree( a_root.attr('id'), function () {
+                this.addClass( 'highlight' );
+                this.removeClass( 'dim' );
+            });
+
+            // add the bottom border
+            $('.next').removeClass('next');
+            next.addClass('next');
+
+            // open/close a subtree if it's a-level or already selected/open
+            if( (selected === 'false' && open === 'false') ||
+                (selected === 'true'  && open === 'true') ) {
+
+                // the node is closed
+                if( $(this).attr( 'data-open' ) === 'false' ) {
+
+                    // children are hidden
+                    if( $('.'+node['idef']).length !== 0 ) {
+                        with_subtree( node['idef'], $.fn.show );
+                    }
+                    // children not loaded yet
+                    else {
+                        var children = full_data.filter( function ( e ) {
+                            return e['parent'] === node['idef'];
+                        });
+
+                        add_rows( children );
+                    }
+
+                    // mark subtree as open
+                    $(this).attr( 'data-open', 'true' );
                 }
+                // the node is closed
                 else {
-                    var children = full_data.filter( function ( e ) {
-                        return e['parent'] === node['idef'];
-                    });
+                    // hide subtree
+                    with_subtree( node['idef'], $.fn.hide );
 
-                    add_rows( children );
+                    // mark subtree as closed
+                    $(this).attr( 'data-open', 'false' );
+
+                    // if it's a-level node - clear the css highlight/dim
+                    if( $(this).hasClass( 'a' ) ) {
+                        $(this).removeClass( 'root' );
+                        $('.dim').removeClass('dim');
+                        $('.highlight').removeClass('highlight');
+                        $('.next').removeClass('next');
+                    }
                 }
-                $(this).attr( 'data-open', 'true' );
             }
-            else {
-                kill_children( node['idef'], 'hide' );
-                $(this).attr( 'data-open', 'false' );
-            }
+
+            // clear selected attributes and set selection to clicked tree
+            $('tr[data-selected=true]').attr('data-selected', 'false');
+            a_root.attr('data-selected', 'true');
+
             make_zebra();
         });
 
         return row;
     }
+
+    // return a-level parent of a given node
+    function a_parent( node ) {
+        if( node.hasClass( 'a' ) ) {
+            return node;
+        }
+        var prev = node.prev();
+
+        return prev.hasClass('a') ? prev : a_parent( prev );
+    }
+
 
 })();

@@ -89,3 +89,24 @@ td+td {
   color: #ccc;
   cursor: pointer;
 }
+
+.current { 
+  border: 1px solid #3b3b3b;
+}
+
+.highlight {
+}
+
+.root {
+  color: #fff;
+  background-color: #000 !important; 
+}
+
+.dim {
+  color: #aaa;
+}
+
+.next {
+  border-top: 1px solid #5b5b5b;
+}
+
