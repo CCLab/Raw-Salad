@@ -37,28 +37,25 @@
 
         return String.fromCharCode( number + 1 );
     }
-
-
-    // TODO reimplement it with hash-table instead of filter
-    function make_table( list, level ) {
-        var level = level || 'a';
-
-        var nodes = list.filter( function ( e ) {
-            return e['level'] === level;
-        });
-
-        if( nodes.length === 0 ) {
-            return;
+    
+    
+    function make_table( list ) {
+        var level;
+        var i;
+        var hashed_list = all_rows( list );
+        var level_nodes;
+        var max_level = hashed_list['highest_level'];
+        
+        for ( level = 'a'; level <= max_level; level = next_letter(level) ) {
+            level_nodes = hashed_list[ level ];
+            
+            if (level === 'a' ) {
+                init_table( level_nodes );
+            }
+            else {
+                add_rows( level_nodes );
+            }
         }
-
-        if( level === 'a' ) {
-            init_table( nodes );
-        }
-        else {
-            add_rows( nodes );
-        }
-
-        make_table( list, next_letter( level ));
     }
 
 
@@ -127,8 +124,6 @@
         row.click( function ( event ) {
             // a-level parent
             var a_root = a_parent( $(this) );
-            var open = a_root.attr( 'data-open' );
-            var selected = a_root.attr( 'data-selected' );
             // next a-level node
             var next = $('#'+(parseInt( a_root.attr('id'), 10 ) + 1));
 
@@ -153,45 +148,7 @@
             next.addClass('next');
 
             // open/close a subtree if it's a-level or already selected/open
-            if( (selected === 'false' && open === 'false') ||
-                (selected === 'true'  && open === 'true') ) {
-
-                // the node is closed
-                if( $(this).attr( 'data-open' ) === 'false' ) {
-
-                    // children are hidden
-                    if( $('.'+node['idef']).length !== 0 ) {
-                        with_subtree( node['idef'], $.fn.show );
-                    }
-                    // children not loaded yet
-                    else {
-                        var children = full_data.filter( function ( e ) {
-                            return e['parent'] === node['idef'];
-                        });
-
-                        add_rows( children );
-                    }
-
-                    // mark subtree as open
-                    $(this).attr( 'data-open', 'true' );
-                }
-                // the node is closed
-                else {
-                    // hide subtree
-                    with_subtree( node['idef'], $.fn.hide );
-
-                    // mark subtree as closed
-                    $(this).attr( 'data-open', 'false' );
-
-                    // if it's a-level node - clear the css highlight/dim
-                    if( $(this).hasClass( 'a' ) ) {
-                        $(this).removeClass( 'root' );
-                        $('.dim').removeClass('dim');
-                        $('.highlight').removeClass('highlight');
-                        $('.next').removeClass('next');
-                    }
-                }
-            }
+            open_close_subtree( $(this), a_root );
 
             // clear selected attributes and set selection to clicked tree
             $('tr[data-selected=true]').attr('data-selected', 'false');
@@ -211,6 +168,53 @@
         var prev = node.prev();
 
         return prev.hasClass('a') ? prev : a_parent( prev );
+    }
+    
+    // open/close a subtree if it's a-level or already selected/open
+    function open_close_subtree( node, a_root ) {
+        var a_root = a_root || a_parent( node );
+        var a_level_open = a_root.attr( 'data-open' );
+        var a_level_selected = a_root.attr( 'data-selected' );
+        var id = node.attr('id');
+        
+        if ( a_level_selected === a_level_open ) {
+
+            // the node is closed
+            if( node.attr( 'data-open' ) === 'false' ) {
+
+                // children are hidden
+                if( $('.'+id).length !== 0 ) {
+                    with_subtree( id, $.fn.show );
+                }
+                // children not loaded yet
+                else {
+                    var children = full_data.filter( function ( e ) {
+                        return e['parent'] === id;
+                    });
+
+                    add_rows( children );
+                }
+
+                // mark subtree as open
+                node.attr( 'data-open', 'true' );
+            }
+            // the node is closed
+            else {
+                // hide subtree
+                with_subtree( id, $.fn.hide );
+
+                // mark subtree as closed
+                node.attr( 'data-open', 'false' );
+
+                // if it's a-level node - clear the css highlight/dim
+                if( node.hasClass( 'a' ) ) {
+                    node.removeClass( 'root' );
+                    $('.dim').removeClass('dim');
+                    $('.highlight').removeClass('highlight');
+                    $('.next').removeClass('next');
+                }
+            }
+        }
     }
 
 

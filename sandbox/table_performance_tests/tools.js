@@ -46,6 +46,35 @@ var Tools = (function () {
 
         return result;
     };
+    
+    // get hashed table(by its element's level) containing elements from collection
+    that.all_rows = function ( collection ) {
+        var result = [];
+        var level;
+        var element;
+        var i;
+        var highest_level;
+        
+        for ( i = 0; i < collection.length; i += 1 ) {
+            element = collection[ i ];
+            level = element['level'];
+            if ( !result[level] ) {
+                result[level] = [];
+                if ( level > highest_level ) {
+                    highest_level = level;
+                }
+            }
+            result[level].push( element );
+        }
+        
+        if ( !highest_level ) {
+            highest_level = 'a';
+        }
+        
+        result['highest_level'] = highest_level;
+        
+        return result;
+    };
 
     // get log10 of the value x
     that.log10 = function ( x ) {
