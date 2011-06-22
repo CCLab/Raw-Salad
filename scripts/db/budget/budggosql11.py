@@ -87,13 +87,13 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 #-----------------------------
 def sort_format(src):
     """
-    format 1-2-3... to 001-002-003...
+    format 1-2-3... to 0001-0002-0003...
     src should be convertable to int
     """
     src_list= src.split('-')
     res_list= []
     for elm in src_list:
-        res_list.append('%03d' % int(elm))
+        res_list.append('%04d' % int(elm))
     res= '-'.join(res_list)
     return res
 
@@ -109,17 +109,17 @@ def fill_work_table(curr_year, temp_tbl, work_tbl, connection):
         # FUNKCJA: level 'a', node NULL
         if row['test_f']:
             idef= row['numer']
-            idef_sort= '%03d' % int(row['numer'])
+            idef_sort= sort_format(idef)
             funk_type_name= row['funkcja_zadanie'].split('.', 2)
             curr_funkcja= row['numer']
-            leaf= False # 'funkcja' has children
+            leaf= False # 'funkcja' has childrenidef
             v_total= row['ogolem']
             v_nation= row['budzet_panstwa']
             v_eu= row['budzet_srodkow_europejskich']
             if v_total != 0:
                 v_proc_eu= round(float(v_eu) / float(v_total) * 100, 2) #percentage
                 v_proc_nation= round(float(v_nation) / float(v_total) * 100, 2)
-            if row['numer'] == '999999':
+            if row['numer'] == '9999':
                 idef_sort= row['numer']
                 elem_type= 'Total'
                 elem_name= row['funkcja_zadanie'].strip().decode('utf-8')
@@ -138,13 +138,13 @@ def fill_work_table(curr_year, temp_tbl, work_tbl, connection):
             idef= curr_zadanie
             idef_sort= sort_format(idef)
             parent= curr_funkcja
-            parent_sort= int(curr_funkcja)
+            parent_sort= sort_format(parent)
             list_name= row['funkcja_zadanie'].split('.', 2)
             elem_type= ('Zadanie ' + list_name[0].strip() + '.' + list_name[1].strip()).decode('utf-8')
             elem_name= list_name[2].strip().decode('utf-8')
             leaf= False # 'zadanie' has children
             insert_statement= """
-                INSERT INTO %s VALUES ('%s', '%s', '%s', '%03d', NULL, '%s', 'b', '%s', '%s', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, %d)
+                INSERT INTO %s VALUES ('%s', '%s', '%s', '%s', NULL, '%s', 'b', '%s', '%s', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, %d)
                 """ % (work_tbl, idef, idef_sort, parent, parent_sort, leaf, elem_type, elem_name, curr_year)
             execute_sql(insert_statement, connection) # money are NULL on that level
             zadanie_dysp_count= 0 # for incrementing children - 'dysponent'
