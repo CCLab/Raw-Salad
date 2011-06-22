@@ -113,8 +113,9 @@ def format_result(result, srz, rt_tag= None):
         res= json.dumps( result, ensure_ascii=False, indent=4 )
         mime_tp= "application/json"
     elif srz == 'xml':
-        if rt_tag is None: # if root tag is not given, use 'request' key as a root tag
-            rt_tag= result.pop('request')
+        # if rt_tag is None: # if root tag is not given, use 'request' key as a root tag
+        #     rt_tag= result.pop('request') # i liked this idea very much
+        rt_tag= 'result'
         res_raw= ET.tostring(dict2et(result, root_tag=rt_tag))
         res= "".join([ xml_header, res_raw ])
         mime_tp= "application/xml"
@@ -138,7 +139,9 @@ def path2query(path_str):
 
 #-----------------------------
 def get_formats(request):
-    return HttpResponse( json.dumps( {'formats': ['json', 'xml']} ), 'application/json' )
+    result= {'formats': ['json', 'xml']}
+    result['uri']= request.build_absolute_uri()
+    return HttpResponse( json.dumps( result ), 'application/json' )
 
 #-----------------------------
 def get_metadata_full(ds_id, ps_id, iss, dbase):
@@ -167,8 +170,10 @@ def get_datasets(request, serializer, db=None):
         res= []
         for row in cursor_data:
             res.append(row)
-        result['response']= 'OK'
+
         result['data']= res
+        result['response']= 'OK'
+        result['uri']= request.build_absolute_uri()
     else:
         result['response']= error_codes['10']
 
@@ -193,6 +198,7 @@ def get_datasets_meta(request, serializer, db=None):
     if cursor_data.count() > 0:
         result['response']= 'OK'
         result['metadata']= { 'count': cursor_data.count() }
+        result['uri']= request.build_absolute_uri()
     else:
         result['response']= error_codes['10']
 
@@ -228,6 +234,7 @@ def get_views(request, serializer, dataset_idef, db=None):
     else:
         result['response']= 'OK'
         result['data']= cursor_data['perspectives']
+        result['uri']= request.build_absolute_uri()
 
     out, mime_tp = format_result(result, serializer)
 
@@ -261,6 +268,7 @@ def get_views_meta(request, serializer, dataset_idef, db=None):
     else:
         result['response']= 'OK'
         result['metadata']= { 'count': len(cursor_data['perspectives']) }
+        result['uri']= request.build_absolute_uri()
 
     out, mime_tp = format_result(result, serializer)
 
@@ -291,6 +299,7 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     else:
         result['response']= 'OK'
         result['data']= cursor_data['perspectives'][int(view_idef)].pop('issues')
+        result['uri']= request.build_absolute_uri()
 
     out, mime_tp = format_result(result, serializer)
 
@@ -322,6 +331,7 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     else:
         result['response']= 'OK'
         result['metadata']= {'count': len(cursor_data['perspectives'][int(view_idef)]['issues']) }
+        result['uri']= request.build_absolute_uri()
 
     out, mime_tp = format_result(result, serializer)
 
@@ -460,8 +470,8 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
     cond_query_path= parse_conditions(path)
     if 'error' in cond_query_path: # already an error
         result['response']= error_codes[cond_query_path['error']]
-    else:
 
+    else:
     # EXTRACT metadata
         metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), str(issue), db)
         if metadata_full is None:
@@ -505,6 +515,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
             if len(dt) > 0:
                 result['data']= dt
                 result['response']= 'OK'
+                result['uri']= request.build_absolute_uri()
             else:
                 result['response']= error_codes['10']
 
@@ -532,6 +543,7 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
     else:
         result['request']= metadata_full['name']
         result['response']= 'OK'
+        result['uri']= request.build_absolute_uri()
 
         # used for counting
         count_query= metadata_full['query']
@@ -627,6 +639,7 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 
         if len(result['tree']) > 0:
             result['response']= 'OK'
+            result['uri']= request.build_absolute_uri()
         else:
             if 'response' not in result: # response not yet specified, that means "no such data"
                 result['response']= error_codes['10']
