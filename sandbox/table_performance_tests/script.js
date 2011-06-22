@@ -60,7 +60,7 @@
 
 
     function make_zebra() {
-        $('tr').each( function ( i ) {
+        $('tr').not(':hidden').each( function ( i ) {
             if( i % 2 === 0 ) {
                 $(this).removeClass( 'odd' );
                 $(this).addClass( 'even' );
@@ -74,10 +74,10 @@
     
     
     function init_table( list ) {
-        var i = 0;
+        var i, len = list.length;
         var store_list = [];
 
-        for( ; i < list.length; ++i ) {
+        for( i = 0; i < len; ++i ) {
             $('tbody').append( generate_row( list[i] ));
             store_list.push( generate_store_data( list[i] ) );
         }
@@ -103,20 +103,16 @@
     
     
     function generate_store_data( node ) {
-        var store_node = {};
-        var state = {};
-        
-        store_node['data'] = node;
-        
-        state['open'] = false;
-        state['marked'] = false;
-        state['checked'] = false;
-        
-        store_node['state'] = state;
-        
-        return store_node;
+        return { 
+            data: node,
+            state: {
+                open: false,
+                marked: false,
+                checked: false
+            }
+        };
     };
-    
+        
 
     function generate_row( node ) {
         var html = [];
