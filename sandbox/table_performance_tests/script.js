@@ -24,16 +24,10 @@
 
 
     // functions definitions
-    function kill_children( id, what ) {
+    function with_subtree( id, fun, args ) {
         $('tr.'+id).each( function () {
-            kill_children( $(this).attr('id'), what );
-
-            if( what === 'hide' ) {
-                $(this).hide();
-            }
-            else {
-                $(this).show();
-            }
+            with_subtree( $(this).attr('id'), fun );
+            fun.apply( $(this), [ args ] );
         });
     }
 
@@ -43,32 +37,30 @@
 
         return String.fromCharCode( number + 1 );
     }
+    
+    
+    function make_table( list ) {
+        var level = 'a';
+        var nodes_list = Tools.hash_list( list, function ( elem ) {
+                              return elem['data'];
+                         });
 
+        while( !!nodes_list[ level ] ) {  
 
-    function make_table( list, level ) {
-        var level = level || 'a';
+            if (level === 'a' ) {
+                init_table( nodes_list[ level ] );
+            }
+            else {
+                add_rows( nodes_list[ level ] );
+            }
 
-        var nodes = list.filter( function ( e ) {
-            return e['level'] === level;
-        });
-
-        if( nodes.length === 0 ) {
-            return;
+            level = next_letter( level );
         }
-
-        if( level === 'a' ) {
-            init_table( nodes );
-        }
-        else {
-            add_rows( nodes );
-        }
-
-        make_table( list, next_letter( level ));
     }
 
 
     function make_zebra() {
-        $('tr').each( function ( i ) {
+        $('tr').not(':hidden').each( function ( i ) {
             if( i % 2 === 0 ) {
                 $(this).removeClass( 'odd' );
                 $(this).addClass( 'even' );
@@ -79,31 +71,48 @@
             }
         });
     }
-
-
+    
+    
     function init_table( list ) {
-        var i = 0;
+        var i, len = list.length;
+        var store_list = [];
 
-        for( ; i < list.length; ++i ) {
+        for( i = 0; i < len; ++i ) {
             $('tbody').append( generate_row( list[i] ));
+            store_list.push( generate_store_data( list[i] ) );
         }
         make_zebra();
 
         // append new data into store
-        store = [].concat( store, list );
+        store = [].concat( store, store_list );
     }
-
-
+    
+    
     function add_rows( list ) {
         var i = list.length - 1;
+        var store_list = [];
 
         for( ; i >= 0; i -= 1 ) {
             $('#'+list[i]['parent']).after( generate_row( list[i] ));
+            store_list.push( generate_store_data( list[i] ) );
         }
 
         // append new data into store
-        store = [].concat( store, list );
+        store = [].concat( store, store_list );
     }
+    
+    
+    function generate_store_data( node ) {
+        return { 
+            data: node,
+            state: {
+                open: false,
+                marked: false,
+                checked: false
+            }
+        };
+    };
+        
 
     function generate_row( node ) {
         var html = [];
@@ -112,6 +121,9 @@
         // row definition
         html.push( '<tr id="', node['idef'], '" ' );
         html.push( 'data-open="false" ' );
+        if( node['level'] === 'a' ) {
+            html.push( 'data-selected="false" ' );
+        }
         html.push( 'class="', node['level'], ' ', node['parent'],'">' );
 
         // cells definition
@@ -127,28 +139,100 @@
         // create & arm row
         row = $( html.join('') );
         row.click( function ( event ) {
-            if( $(this).attr( 'data-open' ) === 'false' ) {
+            // a-level parent
+            var a_root = a_parent( $(this) );
+            // next a-level node
+            var next = $('#'+(parseInt( a_root.attr('id'), 10 ) + 1));
 
-                if( $('.'+node['idef']).length !== 0 ) {
-                    kill_children( node['idef'], 'show' );
-                }
-                else {
-                    var children = full_data.filter( function ( e ) {
-                        return e['parent'] === node['idef'];
-                    });
+            // dim everything outside this a-rooted subtree
+            a_root
+                .siblings()
+                .not(':hidden')
+                .addClass('dim');
 
-                    add_rows( children );
-                }
-                $(this).attr( 'data-open', 'true' );
-            }
-            else {
-                kill_children( node['idef'], 'hide' );
-                $(this).attr( 'data-open', 'false' );
-            }
+            // make a-root background black
+            $('tr.root').removeClass('root');
+            a_root.addClass('root');
+
+            // highlight the subtree
+            with_subtree( a_root.attr('id'), function () {
+                this.addClass( 'highlight' );
+                this.removeClass( 'dim' );
+            });
+
+            // add the bottom border
+            $('.next').removeClass('next');
+            next.addClass('next');
+
+            // open/close a subtree if it's a-level or already selected/open
+            open_close_subtree( $(this), a_root );
+
+            // clear selected attributes and set selection to clicked tree
+            $('tr[data-selected=true]').attr('data-selected', 'false');
+            a_root.attr('data-selected', 'true');
+
             make_zebra();
         });
 
         return row;
     }
+
+    // return a-level parent of a given node
+    function a_parent( node ) {
+        if( node.hasClass( 'a' ) ) {
+            return node;
+        }
+        var prev = node.prev();
+
+        return prev.hasClass('a') ? prev : a_parent( prev );
+    }
+    
+    // open/close a subtree if it's a-level or already selected/open
+    function open_close_subtree( node, a_root ) {
+        var a_root = a_root || a_parent( node );
+        var a_level_open = a_root.attr( 'data-open' );
+        var a_level_selected = a_root.attr( 'data-selected' );
+        var id = node.attr('id');
+        
+        if ( a_level_selected === a_level_open ) {
+
+            // the node is closed
+            if( node.attr( 'data-open' ) === 'false' ) {
+
+                // children are hidden
+                if( $('.'+id).length !== 0 ) {
+                    with_subtree( id, $.fn.show );
+                }
+                // children not loaded yet
+                else {
+                    var children = full_data.filter( function ( e ) {
+                        return e['parent'] === id;
+                    });
+
+                    add_rows( children );
+                }
+
+                // mark subtree as open
+                node.attr( 'data-open', 'true' );
+            }
+            // the node is closed
+            else {
+                // hide subtree
+                with_subtree( id, $.fn.hide );
+
+                // mark subtree as closed
+                node.attr( 'data-open', 'false' );
+
+                // if it's a-level node - clear the css highlight/dim
+                if( node.hasClass( 'a' ) ) {
+                    node.removeClass( 'root' );
+                    $('.dim').removeClass('dim');
+                    $('.highlight').removeClass('highlight');
+                    $('.next').removeClass('next');
+                }
+            }
+        }
+    }
+
 
 })();

@@ -46,6 +46,25 @@ var Tools = (function () {
 
         return result;
     };
+    
+    // get hashed table(by its element's level) containing elements from collection
+    that.hash_list = function ( collection, fun_get_elem ) {
+        var i, len = collection.length;
+        var result = [];
+        var level;
+        var element;
+        
+        for ( i = 0; i < len; i += 1 ) {
+            element = fun_get_elem( collection[ i ] );
+            level = element['level'];
+
+            if ( !result[level] ) {
+                result[ level ] = [];
+            }
+            result[level].push( element );
+        }
+        return result;
+    };
 
     // get log10 of the value x
     that.log10 = function ( x ) {
