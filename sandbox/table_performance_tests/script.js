@@ -40,24 +40,21 @@
     
     
     function make_table( list ) {
-        var level;
-        var i;
-        var hashed_list = Tools.all_rows( list, function ( elem ) {
+        var level = 'a';
+        var nodes_list = Tools.hash_list( list, function ( elem ) {
                               return elem['data'];
-                          });
+                         });
 
-        var level_nodes;
-        var max_level = hashed_list['highest_level'];
-        
-        for ( level = 'a'; level <= max_level; level = next_letter(level) ) {
-            level_nodes = hashed_list[ level ];
-            
+        while( !!nodes_list[ level ] ) {  
+
             if (level === 'a' ) {
-                init_table( level_nodes );
+                init_table( nodes_list[ level ] );
             }
             else {
-                add_rows( level_nodes );
+                add_rows( nodes_list[ level ] );
             }
+
+            level = next_letter( level );
         }
     }
 

@@ -48,31 +48,21 @@ var Tools = (function () {
     };
     
     // get hashed table(by its element's level) containing elements from collection
-    that.all_rows = function ( collection, fun_get_elem ) {
+    that.hash_list = function ( collection, fun_get_elem ) {
+        var i, len = collection.length;
         var result = [];
         var level;
         var element;
-        var i;
-        var highest_level;
         
-        for ( i = 0; i < collection.length; i += 1 ) {
+        for ( i = 0; i < len; i += 1 ) {
             element = fun_get_elem( collection[ i ] );
             level = element['level'];
+
             if ( !result[level] ) {
                 result[ level ] = [];
-                if ( level > highest_level ) {
-                    highest_level = level;
-                }
             }
             result[level].push( element );
         }
-        
-        if ( !highest_level ) {
-            highest_level = 'a';
-        }
-        
-        result['highest_level'] = highest_level;
-        
         return result;
     };
 
