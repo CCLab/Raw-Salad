@@ -48,7 +48,7 @@ var Tools = (function () {
     };
     
     // get hashed table(by its element's level) containing elements from collection
-    that.all_rows = function ( collection, fun_get_elem ) {
+    that.hash_list = function ( collection ) {
         var i, len = collection.length;
         var result = [];
         var level;

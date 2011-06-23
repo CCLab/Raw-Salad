@@ -1,6 +1,6 @@
 (function () {
-    // good old store...
-    var store = [];
+    // good old _rows...
+    var _rows = [];
 
     // execution ground
     var i;
@@ -18,11 +18,9 @@
     $('#clone').click( function ( event ) {
         // TODO: _store.new_sheet();
         // TODO: _table.recreate_table();
-        // TODO: _   
-        var start = new Date().getTime();
-        var store_copy = store.slice();
+        var store_copy = _rows.slice();
 
-        store = [];
+        _rows = [];
 
         $('tbody').html('');
 
@@ -49,30 +47,18 @@
 
 
     function make_table( list ) {
-        var level;
-        var i;
-        var hashed_data_list = Tools.all_rows( list, function ( elem ) {
-                                   return elem['data'];
-                               });
-        var hashed_state_list = Tools.all_rows( list, function ( elem ) {
-                                    return elem['state'];
-                                });
-
-        var level_data_nodes;
-        var level_state_nodes;
+        var level = 'a';
+        var hashed_list = Tools.hash_list( list );
         
-        var max_level = hashed_data_list['highest_level'];
-        
-        for ( level = 'a'; level <= max_level; level = next_letter(level) ) {
-            level_data_nodes = hashed_data_list[ level ];
-            level_state_nodes = hashed_state_list[ level ];
-                
+        while( !!hashed_list[level] ) {
             if (level === 'a' ) {
-                init_table( level_data_nodes, level_state_nodes );
+                init_table( hashed_list );
             }
             else {
-                add_rows( level_data_nodes, level_state_nodes );
+                add_rows( hashed_list );
             }
+
+	    level = nextLetter( level );
         }
     }
 
@@ -93,37 +79,30 @@
     
     function init_table( data_list ) {
         var i, len = data_list.length;
-        var store_list = [];
 
         for( i = 0; i < len; ++i ) {
             $('tbody').append( generate_row( data_list[i] ));
         }
         make_zebra();
 
-        // append new data into store
-        store = [].concat( store, data_list );
+        // append new data into _rows
+        _rows = [].concat( _rows, data_list );
     }
     
     
-    function add_rows( data_list, state_list ) {
-        var i = data_list.length - 1;
+    function add_rows( list ) {
+        var i = list.length - 1;
         var store_list = [];
         var data;
         var state;
 
         for( ; i >= 0; i -= 1 ) {
-            data = data_list[i];
-            if ( !!state_list ) {
-                state = state_list[i];
-            }
-            
-            store_list.push( generate_sheet_row( data, state ) );
-            $('#'+data_list[i]['parent']).after( generate_row( data, state ));
+            $('#'+list[i]['data']['parent']).after( generate_row( list[i] ));
         }
 
         // append new data into store
         // TODO _store.add_rows( store_list );
-        store = [].concat( store, store_list );
+        _rows = [].concat( _rows, list );
     }
     
     
@@ -208,8 +187,8 @@
         var i;
         var elem;
         
-        for ( i = 0; i < store.length; i += 1 ) {
-            elem = store[i];
+        for ( i = 0; i < _rows.length; i += 1 ) {
+            elem = _rows[i];
             if ( elem['data']['idef'] === id ) {
                 fun ( elem );
             }
@@ -234,7 +213,6 @@
         var id = node.attr('id');
         
         if ( a_level_selected === a_level_open ) {
-debugger;
             // the node is closed
             if( node.attr( 'data-open' ) === 'false' ) {
 
@@ -248,7 +226,11 @@ debugger;
                         return e['parent'] === id;
                     });
 
-                    add_rows( children );
+                    var objects = [];
+                    for( i = 0; i < children.length; i += 1 ) { 
+                        objects.push( generate_sheet_row( children[i] ));
+                    }
+                    add_rows( objects );
                 }
 
                 // mark subtree as open
