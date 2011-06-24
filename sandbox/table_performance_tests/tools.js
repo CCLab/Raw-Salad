@@ -132,7 +132,7 @@ var Tools = (function () {
                 result.push( value.slice( value.length - 3 ));
                 cut( value.slice( 0, value.length - 3 ));
             }
-        }
+        };
         cut( value );
         return value === '0' ? '0' : result.reverse().join(' ') + " 000";
     };

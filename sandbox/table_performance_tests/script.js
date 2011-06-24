@@ -111,7 +111,7 @@
             data: data,
             state: { open: false, selected: false }
         };
-    };
+    }
     
 
     function generate_row( node ) {
@@ -206,8 +206,8 @@
     }
     
     // open/close a subtree if it's a-level or already selected/open
-    function open_close_subtree( node, a_root ) {
-        var a_root = a_root || a_parent( node );
+    function open_close_subtree( node, root ) {
+        var a_root = root || a_parent( node );
         var a_level_open = a_root.attr( 'data-open' );
         var a_level_selected = a_root.attr( 'data-selected' );
         var id = node.attr('id');
