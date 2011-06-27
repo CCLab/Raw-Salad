@@ -75,16 +75,13 @@ var _db = (function () {
             data: download_data,
             dataType: 'json',
             success: function( received_data ) {
-                var i;
-                var data = _store.active_rows();
 
-                for ( i = 0; i < received_data.length; i += 1 ) {
-                    data.push( received_data[ i ] );
-                }
-
-                // add recieved data to the table and render html
+                // store new data in model
+                _store.add_data( received_data );
+                // render new data in table
+                // TODO is parent_id really necessary?!
                 _table.add_node( parent_id );
-                that.remove_pending_node( parent_id );
+                remove_pending_node( parent_id );
 
                 // if it was a basic sheet sign it changed
                 if ( _store.active_sheet_index() === 0 ) {

@@ -38,7 +38,8 @@ var _algorithms = (function () {
         var border = border || 2;
         var middle;
 
-        if ( start > end - border ) // an array is small enough to use bubble sort
+        // an array is small enough to use bubble sort
+        if ( start > end - border )
             bubble_sort( data, sorting_setting, start, end);
         else {
             middle = get_middle( start, end );

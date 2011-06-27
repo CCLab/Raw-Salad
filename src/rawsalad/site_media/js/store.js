@@ -183,6 +183,18 @@ var _store = (function () {
     };
 
 
+    that.add_data = function ( new_data ) {
+        var rows = that.active_rows();
+
+        rows = [].concat( rows, new_data.map( function ( row ) {
+                return {
+                    data: row,
+                    state: { open: false, selected: false }
+                };
+        }));
+    };
+
+
     that.add_new_sheet = function ( data ) {
         var active_grp = that.active_group();
         var next_sheet_number = that.next_sheet_number() ;

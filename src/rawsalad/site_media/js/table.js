@@ -41,6 +41,15 @@ var _table = (function () {
         _gui.make_zebra();
     };
 
+
+    that.add_node = function ( parent_id ) {
+        var children = _store.active_rows().filter( function ( e ) {
+            return e['data']['parent'] === parent_id;
+        });
+
+        add_rows( children );
+    };
+
     return that;
 
 //  P R I V A T E   I N T E R F A C E
@@ -185,19 +194,7 @@ var _table = (function () {
                 }
                 // if children not loaded yet
                 else {
-                    add_rows( full_data
-                                // get children
-                                .filter( function ( e ) {
-                                    return e['parent'] === id;
-                                })
-                                // add state to each child
-                                .map( function ( e ) {
-                                    return {
-                                        data: e,
-                                        state: { open: false, selected: false }
-                                    };
-                                })
-                    );
+                    _db.download_node( id );
                 }
 
                 // mark subtree as open
