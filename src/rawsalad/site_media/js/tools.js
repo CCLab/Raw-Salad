@@ -1,30 +1,51 @@
+// Copyright (c) 2011, Centrum Cyfrowe
+// All rights reserved.
 //
-//    Public interface for table tools
+// Redistribution and use in source and binary forms, with or without modification,
+// are permitted provided that the following conditions are met:
 //
+//   * Redistributions of source code must retain the above copyright notice,
+//     this list of conditions and the following disclaimer.
+//   * Redistributions in binary form must reproduce the above copyright notice,
+//     this list of conditions and the following disclaimer in the documentation
+//     and/or other materials provided with the distribution.
+//   * Neither the name of the Centrum Cyfrowe nor the names of its contributors
+//     may be used to endorse or promote products derived from this software
+//     without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+// GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+// LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+// OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-var _ttools = (function () {
+var _tools = (function () {
 
 //  P U B L I C   I N T E R F A C E
-
     var that = {};
-    
+
     that.sort = function ( data, sett ) {
         var id = "idef";
-        
+
         var new_table_data_object = {};
-        
+
         _algorithms.prepare_sorting_setting( sett, id );
         _algorithms.sort( data, sett );
     };
-    
+
     that.prepare_table_interface = function () {
         prepare_sorting_interface();
         prepare_filtering_interface();
         prepare_snapshot_interface();
     };
-    
+
 //  P R I V A T E   I N T E R F A C E
-    
+
     var add_sort_key = function() {
         var i, key;
         var perspective = _store.active_columns();
@@ -34,9 +55,9 @@ var _ttools = (function () {
         key = $('#sort-form > div').length;
 
         for( i = 0; i < perspective.length; ++i ) {
-            if( perspective[i]['basic'] === true && 
+            if( perspective[i]['basic'] === true &&
                 perspective[i]['processable'] === true ) {
-                columns.push( 
+                columns.push(
                     {
                         name: perspective[i]['key'],
                         label: perspective[i]['label']
@@ -54,13 +75,13 @@ var _ttools = (function () {
         html.push( '<select name="columns" class="key-', key, '">' );
         html.push( '<option value="null" class="key-', key, '" selected>' );
         html.push( 'Wybierz kolumnę</option>' );
-        
+
         // TODO don't include already selected colmuns
         for( i = 0; i < columns.length; ++i ) {
             html.push( '<option value="', columns[i]['name'], '" class="key-', key, '">' );
             html.push( columns[i]['label'], '</option>' );
         }
-        
+
         html.push( '</select>' );
         // ascending/descending radio buttons
         html.push( 'Rosnąco <input class="radio key-', key, '" type="radio" ' );
@@ -78,27 +99,27 @@ var _ttools = (function () {
 
         if( key === 0 ) {
             $('#add-sort-key').click( function () {
-                add_sort_key();   
+                add_sort_key();
             });
         }
     }
-    
+
     var prepare_sorting_interface = function() {
-    
+
         $('#sort-button')
             .click( function () {
                 $('#filter-form').hide();
                 $('#sort-form').html('').toggle();
                 add_sort_key();
             });
-        
+
         $('#sort-form')
             .submit( function () {
 
                 var column, order;
                 var settings = [];
                 var i, len = $('#sort-form select').length;
-                
+
                 for( i = 0; i < len; ++i ) {
                     column = $('.key-'+i+' option:selected').val();
                     if( column === "null" ) {
@@ -110,7 +131,7 @@ var _ttools = (function () {
                             break;
                         }
                     }
-                    order = parseInt($('.key-'+i+':radio:checked').val());                 
+                    order = parseInt($('.key-'+i+':radio:checked').val());
 
                     settings.push(
                         {
@@ -121,17 +142,17 @@ var _ttools = (function () {
                 }
 
                 that.sort( _store.active_rows(), settings );
-                
+
                 _table.clean_table();
                 _table.init_table();
                 _gui.make_zebra();
                 _gui.equalize_table();
-                
+
                 $(this).hide();
-                
+
                 return false;
             });
-            
+
         var i;
         for( i = 1; i <= $('#sort-form select').length; ++i ) {
             if( i > 1 ) {
@@ -139,7 +160,7 @@ var _ttools = (function () {
             }
 
             (function (i) {
-                $('#sort-form select.key-'+i).change( function () {    
+                $('#sort-form select.key-'+i).change( function () {
                     if( $('.key-'+i+' option:selected').val() !== "null" ) {
                         $('#key-'+(i+1)).show();
                     }
@@ -147,13 +168,13 @@ var _ttools = (function () {
             })(i);
         }
     };
-    
+
     var prepare_filtering_interface = function() {
-    
+
         $('#filter-button')
             .click( function () {
-                $('#filter-form').toggle(); 
-                $('#sort-form').hide();               
+                $('#filter-form').toggle();
+                $('#sort-form').hide();
             });
 
         $('#filter-form')
@@ -174,12 +195,12 @@ var _ttools = (function () {
                         else {
                             break;
                         }
-                    }                
+                    }
 
                     type = _utils.filter( function ( e ) {
                         return e['key'] === column;
                     }, _store.active_columns() )[0]['type'];
-                    
+
                     operation = $('#filter-'+i+'-operations option:selected').val();;
                     query = $('#filter-'+i+'-query').val();
 
@@ -192,63 +213,63 @@ var _ttools = (function () {
                         }
                         else {
                             // characters for numeric column -- do nothing & quit
-                            $(this).hide();            
+                            $(this).hide();
                             return false;
                         }
                     }
-                    
+
                     mask.push(
                         {
-                           name: column, 
-                           pref: operation, 
+                           name: column,
+                           pref: operation,
                            value: query
                         }
                     );
                 }
-                
+
                 new_sheet = {};
                 $.extend( true, new_sheet, _store.active_sheet() );
                 new_sheet['rows'] = _algorithms.filter( new_sheet['rows'], mask );
-                
+
                 _sheet.create_new_sheet( new_sheet, "arkusz", true );
-                
+
                 _table.clean_table();
                 _table.init_table( true );
 
                 $(this).hide();
-                            
+
                 return false;
            });
     };
-    
+
     var prepare_snapshot_interface = function() {
-        
+
         $('#save-snapshot')
             .click( function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
-            
+
         $('#basic-snapshot')
             .click( function () {
                 $('.snapshot').removeClass('active');
                 $(this).addClass('active');
 
                 if ( _store.active_sheet_index() !== 0 ) {
-                    _store.active_sheet(0);                    
+                    _store.active_sheet(0);
                     _table.clean_table();
                     _table.generate_header();
                     _table.generate_table_body();
                 }
             });
     }
-    
+
     that.prepare_table_interface();
-    
+
     return that;
-    
+
 }) ();
 
-    
-    
+
+
 
 

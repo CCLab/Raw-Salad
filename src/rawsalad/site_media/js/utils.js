@@ -1,20 +1,32 @@
 var _utils = (function () {
     var that = {};
-    
-    that.filter = function ( fn, list ) {
-        var result = [];
+
+    // get hashed table(by its element's level) containing elements from collection
+    that.hash_list = function ( collection ) {
+        var i, len = collection.length;
+        var result = {};
+        var level;
         var element;
-        var i;
-            
-        for( i = 0; i < list.length; i += 1 ) {
-            element = list[ i ];
-            if( fn( element ) ) {
-                result.push( element );
+
+        for ( i = 0; i < len; i += 1 ) {
+            element = collection[ i ];
+            level = element['data']['level'];
+
+            if ( !result[ level ] ) {
+                result[ level ] = [];
             }
-        } 
-        
+            result[ level ].push( element );
+        }
         return result;
     };
+
+
+    that.next_letter = function ( letter ) {
+        var number = letter.charCodeAt( 0 );
+
+        return String.fromCharCode( number + 1 );
+    };
+
 
     that.money = function ( value ) {
         var result = [];
@@ -34,13 +46,13 @@ var _utils = (function () {
     };
 
     return that;
-    
+
 })();
 
 // this function cames from jQuery API example
 $.fn.equalize_heights = function() {
     return this.height( Math.max.apply (
-        this, $(this).map( function ( i, e ) { 
-            return $(e).height() 
+        this, $(this).map( function ( i, e ) {
+            return $(e).height()
     }).get()
 ))};
