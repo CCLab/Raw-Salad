@@ -14,6 +14,9 @@ import xml.etree.cElementTree as ET
 from ConfigParser import ConfigParser
 import pymongo
 
+import rsdbapi as rsdb
+
+
 conn_schema= "md_budg_scheme"
 nav_schema= "ms_nav"
 conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/rawsdata.conf"
@@ -33,7 +36,6 @@ error_codes= {
 level_list= ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
 
 
-#-----------------------------
 def dict2et(xml_dict, root_tag='result', list_names=None):
     if not list_names:
         list_names = {}
@@ -41,6 +43,7 @@ def dict2et(xml_dict, root_tag='result', list_names=None):
     _convert_dict_to_xml_recurse(root, xml_dict, list_names)
 
     return root
+
 
 def _convert_dict_to_xml_recurse(parent, dict_item, list_names):
     # XML conversion
@@ -64,7 +67,7 @@ def _convert_dict_to_xml_recurse(parent, dict_item, list_names):
     elif not dict_item is None:
         parent.text = unicode(dict_item)
 
-#-----------------------------
+
 def get_db_connect(dbtype):
     connect_dict= {}
     defaults= {
@@ -98,7 +101,7 @@ def get_db_connect(dbtype):
 
     return connect_dict
 
-#-----------------------------
+
 def get_mongo_db():
     # connection details
     dsn= get_db_connect('mongodb')
@@ -107,7 +110,7 @@ def get_mongo_db():
     dbase.authenticate(dsn['username'], dsn['password'])
     return dbase
 
-#-----------------------------
+
 def format_result(result, srz, rt_tag= None):
     if srz == 'json':
         res= json.dumps( result, ensure_ascii=False, indent=4 )
@@ -121,7 +124,7 @@ def format_result(result, srz, rt_tag= None):
         mime_tp= "application/xml"
     return res, mime_tp
 
-#-----------------------------
+
 def path2query(path_str):
     out_query= {}
 
@@ -137,13 +140,13 @@ def path2query(path_str):
             out_query['idef']= path_list[len(path_list)-1] # the last elt is current idef
     return out_query
 
-#-----------------------------
+
 def get_formats(request):
     result= {'formats': ['json', 'xml']}
     result['uri']= request.build_absolute_uri()
     return HttpResponse( json.dumps( result ), 'application/json' )
 
-#-----------------------------
+
 def get_metadata_full(ds_id, ps_id, iss, dbase):
     metadata_full= dbase[conn_schema].find_one(
         { 'dataset': ds_id, 'idef' : ps_id, 'issue': iss },
@@ -151,10 +154,10 @@ def get_metadata_full(ds_id, ps_id, iss, dbase):
         )
     return metadata_full
 
-#-----------------------------
+
 def get_datasets(request, serializer, db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= { 'request': 'dataset' }
 
@@ -181,10 +184,10 @@ def get_datasets(request, serializer, db=None):
 
     return HttpResponse( out, mimetype=mime_tp )
 
-#-----------------------------
+
 def get_datasets_meta(request, serializer, db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= { 'request': 'dataset' }
 
@@ -206,10 +209,10 @@ def get_datasets_meta(request, serializer, db=None):
 
     return HttpResponse( out, mimetype=mime_tp )
 
-#-----------------------------
+
 def get_views(request, serializer, dataset_idef, db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= {
         'request': 'view',
@@ -240,10 +243,10 @@ def get_views(request, serializer, dataset_idef, db=None):
 
     return HttpResponse( out, mimetype=mime_tp )
 
-#-----------------------------
+
 def get_views_meta(request, serializer, dataset_idef, db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= {
         'request': 'view',
@@ -274,10 +277,10 @@ def get_views_meta(request, serializer, dataset_idef, db=None):
 
     return HttpResponse( out, mimetype=mime_tp )
 
-#-----------------------------
+
 def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= {
         'request': 'issue',
@@ -305,10 +308,10 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
 
     return HttpResponse( out, mimetype=mime_tp )
 
-#-----------------------------
+
 def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= {
         'request': 'issue',
@@ -337,8 +340,8 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
 
     return HttpResponse( out, mimetype=mime_tp )
 
-#-----------------------------
-def get_ud_columns(rq):
+
+def get_userdef_fields(rq):
     """
     user defined list of fields
     format can be (with or without space):
@@ -360,7 +363,7 @@ def get_ud_columns(rq):
     
     return out_list
 
-#-----------------------------
+
 def get_columns(meta_data, usr_def_cols):
     columns_list= {'_id':0} # _id is never returned
     columns_list.update(meta_data['aux']) # list of columns to be returned in any case
@@ -374,7 +377,7 @@ def get_columns(meta_data, usr_def_cols):
 
     return columns_list
 
-#-----------------------------
+
 def get_sort_list(meta_data):
     sort_list= []
     try:
@@ -390,7 +393,7 @@ def get_sort_list(meta_data):
 
     return sort_list
 
-#-----------------------------
+
 def parse_conditions(pth):
     path_elm_list= []
     idef_list= []
@@ -456,10 +459,17 @@ def parse_conditions(pth):
     else: # ERROR
         return { "error": '34' } # otherwise it's a syntax error
 
-#-----------------------------
+
+def get_count(query, collection, db=None):
+    if db is None:
+        db= rsdb.DBconnect("mongodb").dbconnect
+
+    return db[collection].find(query).count()
+
+
 def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= {
         'dataset_id': int(dataset_idef),
@@ -467,66 +477,36 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         'issue': issue
         }
 
-    cond_query_path= parse_conditions(path)
-    if 'error' in cond_query_path: # already an error
-        result['response']= error_codes[cond_query_path['error']]
+    userdef_query= parse_conditions(path)
+    if 'error' in userdef_query: # already an error
+        result['response']= error_codes[userdef_query['error']]
 
     else:
-    # EXTRACT metadata
-        metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), str(issue), db)
-        if metadata_full is None:
-            result['response']= error_codes['20']
-            result['request']= 'unknown'
-        else:
-            conn_coll= metadata_full['ns'] # collection name
+        userdef_fields= get_userdef_fields(request)
 
-            # get columns list
-            md_select_columns= get_columns(metadata_full, get_ud_columns(request))
-            # get list of sort columns
-            cursor_sort= get_sort_list(metadata_full)
+        coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
+        data= coll.get_data(db, dataset_idef, view_idef, issue)
+        if coll.response == 'OK':
+            result['data']= data
+            result['count']= coll.count
+            result['uri']= request.build_absolute_uri()
 
-            try: # batch size
-                cursor_batchsize= metadata_full['batchsize']
-            except:
-                cursor_batchsize= 'default'
+        if coll.warning:
+            result['warning']= coll.warning
 
-            cond_query= metadata_full['query'] # initial query conditions
+        result['response']= coll.response
+        result['request']= coll.request
 
-            if len(cond_query_path) != 0:
-                cond_query.update(cond_query_path) # new condition, depends on the path argument
-
-            # EXTRACT data (rows)
-            if cursor_batchsize in ['default', None]:
-                cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
-            else:
-                cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort).batch_size(cursor_batchsize)
-
-            dt= []
-            for row in cursor_data:
-                dt.append(row)
-
-            result['count']= cursor_data.count()
-            result['request']= metadata_full['name']
-            try:
-                result.update(aux_query) # idef: XX for the wuery on specified element
-            except:
-                pass
-
-            if len(dt) > 0:
-                result['data']= dt
-                result['response']= 'OK'
-                result['uri']= request.build_absolute_uri()
-            else:
-                result['response']= error_codes['10']
+        coll= None
 
     out, mime_tp = format_result(result, serializer)
 
     return HttpResponse( out, mimetype=mime_tp )
 
-#-----------------------------
+
 def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= {
         'dataset_id': int(dataset_idef),
@@ -534,64 +514,31 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
         'issue': issue,
         }
 
-    # EXTRACT metadata
-    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), str(issue), db)
+    userdef_fields= get_userdef_fields(request)
+    userdef_query= {}
+    if len(path) != 0:
+        userdef_query.update(path2query(path))
 
-    if metadata_full is None:
-        result['response']= error_codes['20']
-        result['request']= 'unknown'
-    else:
-        result['request']= metadata_full['name']
-        result['response']= 'OK'
+    coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
+    metadata= coll.get_metadata(db, dataset_idef, view_idef, issue)
+    if coll.response == 'OK':
+        result['metadata']= metadata
         result['uri']= request.build_absolute_uri()
 
-        # used for counting
-        count_query= metadata_full['query']
+    if coll.warning:
+        result['warning']= coll.warning
 
-        # define useless keys
-        useless_keys= ['ns', 'aux', 'batchsize', 'sort', 'query', 'explorable', 'name']
-
-        if len(path) != 0:
-            count_query.update(path2query(path))
-
-            useless_keys.append('max_level') # no parent - so, max_level is also useless
-
-        # but before delete useless keys
-        # counting children of a given parent
-        metadata_full['count']= get_count(count_query, metadata_full['ns'], db)
-
-        # delete useless keys
-        for curr in useless_keys:
-            if curr in metadata_full:
-                del metadata_full[curr]
-
-        # user defined columns
-        ud_columns= get_ud_columns(request)
-        ud_column_list= []
-        if len(ud_columns) > 0: # describe only user defined columns
-            full_column_list= metadata_full.pop('columns')
-            for clmn in full_column_list:
-                if clmn['key'] in ud_columns:
-                    ud_column_list.append(clmn)
-            metadata_full['columns']= ud_column_list
-
-        result['metadata']= metadata_full
+    result['response']= coll.response
+    result['request']= coll.request
 
     out, mime_tp = format_result(result, serializer)
 
     return HttpResponse( out, mimetype=mime_tp )
 
-#-----------------------------
-def get_count(query, collection, db=None):
-    if db is None:
-        db= get_mongo_db()
 
-    return db[collection].find(query).count()
-
-#-----------------------------
 def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
-        db= get_mongo_db()
+        db= rsdb.DBconnect("mongodb").dbconnect
 
     result= {
         'dataset_id': int(dataset_idef),
@@ -599,77 +546,25 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         'issue': issue,
         }
 
-    # EXTRACT metadata
-    metadata_full= get_metadata_full(int(dataset_idef), int(view_idef), str(issue), db)
-    if metadata_full is None:
-        result['response']= error_codes['20']
-        result['request']= 'unknown'
+    userdef_query= parse_conditions(path)
+    if 'error' in userdef_query: # already an error
+        result['response']= error_codes[userdef_query['error']]
+
     else:
-        conn_coll= metadata_full['ns'] # collection name
+        userdef_fields= get_userdef_fields(request)
 
-        # get columns list
-        md_select_columns= get_columns(metadata_full, get_ud_columns(request))
-        # get list of sort columns
-        cursor_sort= get_sort_list(metadata_full)
-
-        cond_query= metadata_full.pop('query') # query conditions
-        clean_query= cond_query.copy()
-
-        root_idef= None
-        if len(path) == 0: # no parent, so, we extract all the collection in a form of a tree
-            result['tree']= []
-            cond_query.update({ 'level': 'a' })
-            cursor_data= db[conn_coll].find(cond_query, md_select_columns, sort=cursor_sort)
-            for curr_root in cursor_data:
-                if 'idef' in clean_query: del clean_query['idef'] # clean the clean_query before it starts working
-                if 'parent' in clean_query: del clean_query['parent']
-                curr_branch= build_tree(db[conn_coll], clean_query, md_select_columns, cursor_sort, curr_root['idef'])
-                result['tree'].append(curr_branch)
-        else: # extracting only subtree for the given parent
-            aux_query= path2query(path)
-            if 'idef' in aux_query: # root element
-                result['tree']= build_tree(db[conn_coll], cond_query, md_select_columns, cursor_sort, aux_query['idef'])
-            else: # means we deal with URL like /a/X/b/ or /a/X/b/Y/c - which is nonesense for a tree
-                result['tree']= {}
-                result['response']= error_codes['30']
-
-        result['request']= metadata_full['name']
-        if root_idef is not None:
-            result['root_idef']= root_idef
-
-        if len(result['tree']) > 0:
-            result['response']= 'OK'
+        coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
+        tree= coll.get_tree(db, dataset_idef, view_idef, issue)
+        if coll.response == 'OK':
+            result['tree']= tree
             result['uri']= request.build_absolute_uri()
-        else:
-            if 'response' not in result: # response not yet specified, that means "no such data"
-                result['response']= error_codes['10']
+
+        if coll.warning:
+            result['warning']= coll.warning
+
+        result['response']= coll.response
+        result['request']= coll.request
 
     out, mime_tp = format_result(result, serializer)
 
     return HttpResponse( out, mimetype=mime_tp )
-
-#-----------------------------
-def build_tree(cl, query, columns, sortby, root):
-    out= {}
-
-    query['idef']= root
-
-    root_elt= cl.find_one(query, columns, sort=sortby)
-    if not root_elt['leaf']: # there are children
-        if 'idef' in query: del query['idef'] # don't need this anymore
-        _get_children_recurse(root_elt, cl, query, columns, sortby)
-    else: # no children, just leave root_elt as it is
-        pass
-    out.update(root_elt)
-
-    return out
-
-def _get_children_recurse(parent, coll, curr_query, columns, srt):
-    if not parent['leaf']:
-        parent['children']= []
-        curr_query['parent']= parent['idef']
-        crs= coll.find(curr_query, columns, sort=srt)
-        if crs.count() > 0:
-            for elm in crs:
-                parent['children'].append(elm)
-                _get_children_recurse(elm, coll, curr_query, columns, srt)
