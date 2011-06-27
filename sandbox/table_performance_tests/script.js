@@ -1,19 +1,26 @@
 (function () {
-    // good old store...
-    var store = [];
+    // good old _rows...
+    var _rows = [];
 
     // execution ground
-    init_table( full_data.filter( function ( e ) {
+    var i;
+    var data = full_data.filter( function ( e ) {
         return e['level'] === 'a';
-    }));
-
+    });
+    var objects = [];
+    for( i = 0; i < data.length; i += 1 ) { 
+        objects.push( generate_sheet_row( data[i] ));
+    }
+    
+    init_table( objects );
     make_zebra();
 
     $('#clone').click( function ( event ) {
-        var start = new Date().getTime();
-        var store_copy = store.slice();
+        // TODO: _store.new_sheet();
+        // TODO: _table.recreate_table();
+        var store_copy = _rows.slice();
 
-        store = [];
+        _rows = [];
 
         $('tbody').html('');
 
@@ -37,24 +44,21 @@
 
         return String.fromCharCode( number + 1 );
     }
-    
-    
+
+
     function make_table( list ) {
         var level = 'a';
-        var nodes_list = Tools.hash_list( list, function ( elem ) {
-                              return elem['data'];
-                         });
-
-        while( !!nodes_list[ level ] ) {  
-
+        var hashed_list = Tools.hash_list( list );
+        
+        while( !!hashed_list[level] ) {
             if (level === 'a' ) {
-                init_table( nodes_list[ level ] );
+                init_table( hashed_list );
             }
             else {
-                add_rows( nodes_list[ level ] );
+                add_rows( hashed_list );
             }
 
-            level = next_letter( level );
+	    level = nextLetter( level );
         }
     }
 
@@ -73,66 +77,68 @@
     }
     
     
-    function init_table( list ) {
-        var i, len = list.length;
-        var store_list = [];
+    function init_table( data_list ) {
+        var i, len = data_list.length;
 
         for( i = 0; i < len; ++i ) {
-            $('tbody').append( generate_row( list[i] ));
-            store_list.push( generate_store_data( list[i] ) );
+            $('tbody').append( generate_row( data_list[i] ));
         }
         make_zebra();
 
-        // append new data into store
-        store = [].concat( store, store_list );
+        // append new data into _rows
+        _rows = [].concat( _rows, data_list );
     }
     
     
     function add_rows( list ) {
         var i = list.length - 1;
         var store_list = [];
+        var data;
+        var state;
 
         for( ; i >= 0; i -= 1 ) {
-            $('#'+list[i]['parent']).after( generate_row( list[i] ));
-            store_list.push( generate_store_data( list[i] ) );
+            $('#'+list[i]['data']['parent']).after( generate_row( list[i] ));
         }
 
         // append new data into store
-        store = [].concat( store, store_list );
+        // TODO _store.add_rows( store_list );
+        _rows = [].concat( _rows, list );
     }
     
     
-    function generate_store_data( node ) {
-        return { 
-            data: node,
-            state: {
-                open: false,
-                marked: false,
-                checked: false
-            }
+    function generate_sheet_row( data ) {
+        return {
+            data: data,
+            state: { open: false, selected: false }
         };
-    };
-        
+    }
+    
 
     function generate_row( node ) {
         var html = [];
         var row;
+        var data = node['data'];
+        var is_open;
+        var is_selected;
+        
+        is_open = node['state']['open'];
+        is_selected = node['state']['selected'];
 
         // row definition
-        html.push( '<tr id="', node['idef'], '" ' );
-        html.push( 'data-open="false" ' );
-        if( node['level'] === 'a' ) {
-            html.push( 'data-selected="false" ' );
+        html.push( '<tr id="', data['idef'], '" ' );
+        html.push( 'data-open="', is_open, '" ' );
+        if( data['level'] === 'a' ) {
+            html.push( 'data-selected="', is_selected, '" ' );
         }
-        html.push( 'class="', node['level'], ' ', node['parent'],'">' );
+        html.push( 'class="', data['level'], ' ', data['parent'],'">' );
 
         // cells definition
-        html.push( '<td class="type', node['leaf'] ? '">' : ' click">' );
-        html.push( node['type'], '</td>' );
-        html.push( '<td class="name">', node['name'], '</td>' );
-        html.push( '<td class="value">', Tools.money(node['v_eu']), '</td>' );
-        html.push( '<td class="value">', Tools.money(node['v_nation']), '</td>' );
-        html.push( '<td class="value">', Tools.money(node['v_total']), '</td>' );
+        html.push( '<td class="type', data['leaf'] ? '">' : ' click">' );
+        html.push( data['type'], '</td>' );
+        html.push( '<td class="name">', data['name'], '</td>' );
+        html.push( '<td class="value">', Tools.money(data['v_eu']), '</td>' );
+        html.push( '<td class="value">', Tools.money(data['v_nation']), '</td>' );
+        html.push( '<td class="value">', Tools.money(data['v_total']), '</td>' );
 
         html.push( '</tr>' );
 
@@ -176,6 +182,18 @@
 
         return row;
     }
+    
+    function do_node( id, fun ) {
+        var i;
+        var elem;
+        
+        for ( i = 0; i < _rows.length; i += 1 ) {
+            elem = _rows[i];
+            if ( elem['data']['idef'] === id ) {
+                fun ( elem );
+            }
+        }
+    }
 
     // return a-level parent of a given node
     function a_parent( node ) {
@@ -188,14 +206,13 @@
     }
     
     // open/close a subtree if it's a-level or already selected/open
-    function open_close_subtree( node, a_root ) {
-        var a_root = a_root || a_parent( node );
+    function open_close_subtree( node, root ) {
+        var a_root = root || a_parent( node );
         var a_level_open = a_root.attr( 'data-open' );
         var a_level_selected = a_root.attr( 'data-selected' );
         var id = node.attr('id');
         
         if ( a_level_selected === a_level_open ) {
-
             // the node is closed
             if( node.attr( 'data-open' ) === 'false' ) {
 
@@ -209,7 +226,11 @@
                         return e['parent'] === id;
                     });
 
-                    add_rows( children );
+                    var objects = [];
+                    for( i = 0; i < children.length; i += 1 ) { 
+                        objects.push( generate_sheet_row( children[i] ));
+                    }
+                    add_rows( objects );
                 }
 
                 // mark subtree as open
@@ -232,6 +253,10 @@
                 }
             }
         }
+        
+        do_node( id, function( elem ) {
+            elem['state']['open'] = !elem['state']['open'];
+        });
     }
 
 

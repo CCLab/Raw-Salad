@@ -48,16 +48,16 @@ var Tools = (function () {
     };
     
     // get hashed table(by its element's level) containing elements from collection
-    that.hash_list = function ( collection, fun_get_elem ) {
+    that.hash_list = function ( collection ) {
         var i, len = collection.length;
         var result = [];
         var level;
         var element;
-        
+       
         for ( i = 0; i < len; i += 1 ) {
-            element = fun_get_elem( collection[ i ] );
-            level = element['level'];
-
+            element = collection[ i ];
+            level = element['data']['level'];
+            
             if ( !result[level] ) {
                 result[ level ] = [];
             }
@@ -132,7 +132,7 @@ var Tools = (function () {
                 result.push( value.slice( value.length - 3 ));
                 cut( value.slice( 0, value.length - 3 ));
             }
-        }
+        };
         cut( value );
         return value === '0' ? '0' : result.reverse().join(' ') + " 000";
     };
