@@ -123,8 +123,7 @@ var _store = (function () {
         var node, rows = that.active_rows();
         var i, len = rows.length;
 
-debugger;
-        for( i = 0; i < len; i += 0 ) {
+        for( i = 0; i < len; i += 1 ) {
             node = rows[i];
             if( node['data']['idef'] === id ) {
                 node['state']['open'] = state;
