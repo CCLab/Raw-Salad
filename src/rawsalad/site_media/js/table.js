@@ -125,7 +125,7 @@ var _table = (function () {
         schema.forEach( function ( column ) {
             html.push( '<td class="', column['key'], ' ' );
             html.push( column['type'], ' ' );
-            html.push( data['leaf'] ? '">' : ' click">' );
+            html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
             html.push( data[column['key']] );
             html.push( '</td>' );
         });
