@@ -43,7 +43,8 @@ var _table = (function () {
 
 
     that.add_node = function ( parent_id ) {
-        var children = _store.active_rows().filter( function ( e ) {
+        var rows = _store.active_rows();
+        var children = rows.filter( function ( e ) {
             return e['data']['parent'] === parent_id;
         });
         debugger;
