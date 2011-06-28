@@ -71,20 +71,20 @@ var _db = (function () {
             parent: parent_id,
         };
 
-debugger;
+//debugger;
         $.ajax({
             data: download_data,
             dataType: 'json',
             success: function( received_data ) {
-debugger;
+//debugger;
 
                 // store new data in model
                 _store.add_data( received_data );
-debugger;
+//debugger;
                 // render new data in table
                 // TODO is parent_id really necessary?!
                 _table.add_node( parent_id );
-debugger;
+//debugger;
                 remove_pending_node( parent_id );
 
                 // if it was a basic sheet sign it changed
