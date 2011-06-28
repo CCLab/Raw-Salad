@@ -186,7 +186,6 @@ var _table = (function () {
         var id = node.attr('id');
         var children;
 
-debugger;
         if ( is_a_selected === is_a_open ) {
             // if the node is closed
             if( node.attr( 'data-open' ) === 'false' ) {

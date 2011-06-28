@@ -81,6 +81,7 @@ var _db = (function () {
                 // render new data in table
                 // TODO is parent_id really necessary?!
                 _table.add_node( parent_id );
+debugger;
                 remove_pending_node( parent_id );
 
                 // if it was a basic sheet sign it changed
