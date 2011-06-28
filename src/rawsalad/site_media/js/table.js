@@ -46,7 +46,7 @@ var _table = (function () {
         var children = _store.active_rows().filter( function ( e ) {
             return e['data']['parent'] === parent_id;
         });
-
+        debugger;
         add_rows( children );
     };
 
