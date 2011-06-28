@@ -194,6 +194,7 @@ var _store = (function () {
                     state: { open: false, selected: false }
                 };
         }));
+        debugger;
     };
 
 

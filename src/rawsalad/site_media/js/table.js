@@ -196,6 +196,7 @@ var _table = (function () {
                 }
                 // if children not loaded yet
                 else {
+                    debugger;
                     _db.download_node( id );
                 }
 
