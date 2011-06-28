@@ -35,7 +35,7 @@ var _table = (function () {
 
     that.init_table = function () {
         // TODO header generation to be implemented
-        create_thead();
+        // create_thead();
         create_tbody();
 
         _gui.make_zebra();
