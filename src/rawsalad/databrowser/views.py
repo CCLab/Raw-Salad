@@ -6,46 +6,40 @@ from django.http import HttpResponseRedirect
 from django.template import Context, loader
 from django.utils import simplejson as json
 
-import rawsdbapi
+import rsdbapi as rsdb
 import csv, codecs, cStringIO
 
 
 # to be removed soon
 def choose_collection( data ):
-    col_nr = data["col_nr"]
     # getting data from db using col_nr
-    return_data = get_perspectives( col_nr )
+    return_data = get_perspectives( data["col_nr"] )
     json_data = json.dumps( return_data )
     return HttpResponse( json_data )
-
 
 # get the basic, top-level view of some issue
 def get_init_data( data ):
-    ds_id= data["dataset"]
-    ps_id= data["perspective"]
-    iss_nr= data["issue"]
+    db= rsdb.DBconnect("mongodb").dbconnect
+    coll= rsdb.Collection(query= { 'level': 'a' })
 
     return_data = {}
-    return_data['perspective']= rawsdbapi.get_metadata(ds_id, ps_id, iss_nr)
-    initial_data_query= { 'level': 'a' }
-    return_data["rows"]= rawsdbapi.extract_docs(ds_id, ps_id, iss_nr, initial_data_query)
+    return_data["rows"]= coll.get_data(
+        db, data["dataset"], data["perspective"], data["issue"]
+        )
+    return_data["perspective"]= coll.metadata_complete
 
     json_data = json.dumps( return_data )
 
     return HttpResponse( json_data )
 
-
 # get the subtree of the next level
 def get_node( data ):
-    ds_id= data["dataset"]
-    ps_id= data["perspective"]
-    iss_nr= data["issue"]
-    parent_id= data["parent"]
+    db= rsdb.DBconnect("mongodb").dbconnect
+    coll= rsdb.Collection(query= { 'parent': data["parent"] })
 
-    # getting data from db
-    return_data = []
-    parent_data_query= { 'parent': parent_id }
-    return_data= rawsdbapi.extract_docs(ds_id, ps_id, iss_nr, parent_data_query)
+    return_data= coll.get_data(
+        db, data["dataset"], data["perspective"], data["issue"]
+        )
 
     json_data = json.dumps( return_data )
 
@@ -112,158 +106,10 @@ def download_data( request ):
     return response
 
 def get_ms_nav():
-    nav_full= rawsdbapi.extract_nav()
+    db= rsdb.DBconnect("mongodb").dbconnect
+    nav_full= rsdb.Navigator().get_nav_full(db)
     out= { 'meta_data': json.dumps( nav_full ) }
     return out
-
-# DK - to delete
-# # is that ever used?!
-# def get_meta_data():
-#     # DK
-#     datasets= {'collections':None}
-#     # return only the highest level
-#     datasets['collections']= rawsdbapi.extract_nav(keys_aux={'perspectives':0})
-
-#     return datasets
-
-# # to be replaced with a single meta-data call!!
-# def get_perspectives( col_nr ):
-#     # DK
-#     dataset_coll= {}
-#     # dataset
-#     keys_dict={ 'name':1, 'idef':1 }
-#     query_dict={ 'idef':int(col_nr) }
-#     dataset_coll['collection']= rawsdbapi.extract_nav(keys_dict, query_dict)[0]
-#     dataset_coll['collection']['number']= dataset_coll['collection'].pop('idef')
-#     # its perspectives
-#     keys_dict={ 'perspectives':1 }
-#     query_dict={ 'idef':int(col_nr) }
-#     persp_dict= rawsdbapi.extract_nav(keys_dict, query_dict)[0]
-#     dataset_coll.update(persp_dict)
-
-#     return dataset_coll
-
-# def tmp_solution_for_metadata():
-#     return { "meta_data": json.dumps( [
-#         {
-#             "idef": 0, 
-#             "long_description": None, 
-#             "name": "Budżet centralny", 
-#             "description": "Budżet Rzeczpospolitej Polskiej",
-#             "perspectives": [
-#                 {
-#                     "idef": 0, 
-#                     "description": "Układ tradycyjny budżetu to realizacja ustawy budżetowej przyjętej przez Parlament", 
-#                     "long_description": None, 
-#                     "name": "Budżet tradycyjny",
-#                     "issues": [
-#                         2011
-#                     ]
-#                 }, 
-#                 {
-#                     "idef": 1, 
-#                     "description": "Układ zadaniowy to dokument pomocniczy w debacie nad projektem ustawy budżetowej. Dzieli on pańtwo na dwadzieścia dwie funkcje, co ukazuje wydatki państwa w bardzo przejrzysty sposób", 
-#                     "long_description": None, 
-#                     "name": "Budżet zadaniowy",
-#                     "issues": [
-#                         2011, 2012
-#                     ]
-#                 }, 
-#                 {
-#                     "idef": 2, 
-#                     "description": "Dane budżetu zadaniowego zreorganizowane, by kluczem podstawowym byli dysponenci finansów budżetowych", 
-#                     "long_description": None, 
-#                     "name": "Budżet instytucjonalny",
-#                     "issues": [
-#                         2011
-#                     ]
-#                 }
-#             ]
-#         }, 
-#         {
-#             "idef": 1, 
-#             "long_description": None, 
-#             "name": "Środki europejskie", 
-#             "description": "Udział środków europejskich w budżecie centralnym Polski"            
-#         }, 
-#         {
-#             "idef": 2, 
-#             "long_description": None, 
-#             "name": "Fundusze celowe i agencje narodowe", 
-#             "description": "Części kosztowe budżetów wszystkich funduszy celowych i agencji narodowych",
-#             "perspectives": [
-#                 {
-#                     "idef": 0, 
-#                     "description": "Z podziałem na funkcje, zadania i podzadania", 
-#                     "long_description": None, 
-#                     "name": "Fundusze celowe w układzie zadaniowym",
-#                     "issues": [
-#                         2011
-#                     ]
-#                 }, 
-#                 {
-#                     "idef": 1, 
-#                     "description": "Odpowiadające klasycznemu układowi budżetu państwa", 
-#                     "long_description": None, 
-#                     "name": "Fundusze celowe w układzie tradycyjnym",
-#                     "issues": [
-#                         2011
-#                     ]
-#                 }, 
-#                 {
-#                     "idef": 2, 
-#                     "description": "Z podziałem na funkcje, zadania i podzadania", 
-#                     "long_description": None, 
-#                     "name": "Agencje narodowe w układzie zadaniowym",
-#                     "issues": [
-#                         2011
-#                     ]
-#                 }, 
-#                 {
-#                     "idef": 3, 
-#                     "description": "Odpowiadające klasycznemu układowi budżetu państwa", 
-#                     "long_description": None, 
-#                     "name": "Agencje narodowe w układzie tradycyjnym",
-#                     "issues": [
-#                         2011
-#                     ]
-#                 }
-#             ]            
-#         }, 
-#         {
-#             "idef": 3, 
-#             "long_description": None, 
-#             "name": "Narodowy Fundusz Zdrowia", 
-#             "description": "Budżet Narodowego Funduszu Zdrowia z rozbiciem na ośrodki wojewódzkie",
-#             "perspectives": [
-#                 {
-#                     "idef": 0, 
-#                     "description": "Zagregowane dane części wydatkowej budżetów Ośrodków Wojewódzkich i Centrali Narodowego Funduszu Zdrowia", 
-#                     "long_description": None, 
-#                     "name": "Zagregowane dane centralne",
-#                     "issues": [
-#                         2011
-#                     ]
-#                 }, 
-#                 {
-#                     "idef": 1, 
-#                     "description": "Część wydatkowa budżetów Ośrodków Wojewódzkich Narodowego Funduszu Zdrowia", 
-#                     "long_description": None, 
-#                     "name": "Budżety Ośrodków Wojewódzkiech",
-#                     "issues": [
-#                         2011
-#                     ]
-#                 }
-#             ]
-#         }, 
-#         {
-#             "idef": 4, 
-#             "long_description": None, 
-#             "name": "Krajowy Fundusz Drogowy", 
-#             "description": "Dane finansowe Krajowego Funduszu Drogowego"
-#         }
-#     ])}
-# DK - to delete - end
 
 class UnicodeWriter:
     """
