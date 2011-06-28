@@ -68,6 +68,7 @@ class DBconnect(object):
 #-----------------------------
 class Navigator(object):
     def __init__(self):
+        self.response= 'OK' # Navigator class is optimistic
         pass
 
     def __del__(self):
