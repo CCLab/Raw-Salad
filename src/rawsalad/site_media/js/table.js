@@ -88,6 +88,7 @@ var _table = (function () {
     function add_rows( data ) {
         var i = data.length - 1;
         var schema = _store.basic_schema();
+        debugger;
         var parent = $( '#' + data[0]['data']['parent'] );
 
         for( ; i >= 0; i -= 1 ) {
