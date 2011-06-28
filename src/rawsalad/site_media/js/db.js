@@ -75,9 +75,11 @@ var _db = (function () {
             data: download_data,
             dataType: 'json',
             success: function( received_data ) {
+debugger;
 
                 // store new data in model
                 _store.add_data( received_data );
+debugger;
                 // render new data in table
                 // TODO is parent_id really necessary?!
                 _table.add_node( parent_id );
