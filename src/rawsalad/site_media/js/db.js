@@ -71,6 +71,7 @@ var _db = (function () {
             parent: parent_id,
         };
 
+debugger;
         $.ajax({
             data: download_data,
             dataType: 'json',
