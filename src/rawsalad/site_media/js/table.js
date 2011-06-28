@@ -142,7 +142,6 @@ var _table = (function () {
             var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
             var next = $('tr[data-index='+ (a_root_index + 1) +']');
 
-debugger;
             // dim everything outside this a-rooted subtree
             a_root
                 .siblings()
@@ -187,6 +186,7 @@ debugger;
         var id = node.attr('id');
         var children;
 
+debugger;
         if ( is_a_selected === is_a_open ) {
             // if the node is closed
             if( node.attr( 'data-open' ) === 'false' ) {
