@@ -1,10 +1,32 @@
+// Copyright (c) 2011, Centrum Cyfrowe
+// All rights reserved.
 //
-//      Collection of algorithms used to sort and filter rows in table
+// Redistribution and use in source and binary forms, with or without modification,
+// are permitted provided that the following conditions are met:
 //
+//   * Redistributions of source code must retain the above copyright notice,
+//     this list of conditions and the following disclaimer.
+//   * Redistributions in binary form must reproduce the above copyright notice,
+//     this list of conditions and the following disclaimer in the documentation
+//     and/or other materials provided with the distribution.
+//   * Neither the name of the Centrum Cyfrowe nor the names of its contributors
+//     may be used to endorse or promote products derived from this software
+//     without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+// GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+// LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+// OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 var _algorithms = (function () {
     var that = {};
-    
+
 //  P U B L I C   I N T E R F A C E
 
     // sorts part of an array data with a hybrid sorting algorithm
@@ -15,29 +37,30 @@ var _algorithms = (function () {
         var end = end || data.length - 1;
         var border = border || 2;
         var middle;
-        
-        if ( start > end - border ) // an array is small enough to use bubble sort
+
+        // an array is small enough to use bubble sort
+        if ( start > end - border )
             bubble_sort( data, sorting_setting, start, end);
         else {
             middle = get_middle( start, end );
-            
+
             // sort two arrays separately
             that.sort( data, sorting_setting, start, middle, border );
             that.sort( data, sorting_setting, middle + 1, end, border );
-            
+
             // merge sorted arrays
             merge( data, sorting_setting, start, middle, end);
         }
     };
-    
+
     // filters collection
     that.filter = function ( data, filter_mask ) {
         var i;
         var result = [ ];
         var passed_filter_object = {};
-        
+
         prepare_mask( filter_mask );
-        
+
         // for each element in collection
         for ( i = 0; i < data.length; i += 1 ) {
             // checks if the object passes through the filter
@@ -49,16 +72,16 @@ var _algorithms = (function () {
         }
         return result;
     };
-    
+
     that.prepare_sorting_setting = function( sorting_setting, key ) {
         var hidden_attribute = {
             "pref": -1,
             "name": key
         };
-        
+
         sorting_setting.push( hidden_attribute );
     };
-    
+
 //  P R I V A T E   I N T E R F A C E
 
 //   S O R T I N G   H E L P E R   F U N C T I O N S
@@ -68,11 +91,11 @@ var _algorithms = (function () {
     var bubble_sort = function( data, sorting_setting, start, end ) {
         var start = start || 0;
         var end = end || data.length - 1;
-        
+
         var i;
         var j;
         var sorted;
-        
+
         for ( i = start, sorted = 0; i < end; i += 1, sorted += 1 ) {
             for ( j = start; j < end - sorted; j += 1 ) {
                 if ( compare_obj( data[j], data[j+1], sorting_setting ) == -1 ) {
@@ -87,31 +110,31 @@ var _algorithms = (function () {
         var start = start || 0;
         var end = end || data.lenght - 1;
         var middle;
-        
+
         if ( start > end - 1 ) {
             return;
         }
-        
+
         middle = get_middle( start, end );
-        
+
         // sort two arrays separately
         merge_sort( data, sorting_setting, start, middle );
         merge_sort( data, sorting_setting, middle + 1, end );
-        
+
         // merge sorted arrays
         merge( data, sorting_setting, start, middle, end);
     };
 
     // merges two subarrays, 1st: data[start, middle], 2nd: data[middle+1, end]
     // result is that data[start, end] is sorted
-    var merge = function( data, sorting_setting, start, middle, end ) {    
+    var merge = function( data, sorting_setting, start, middle, end ) {
         var i = 0;
         var j = 0;
         var ind = start;
-        
+
         var subarray1 = data.slice(start, middle + 1);
         var subarray2 = data.slice(middle + 1, end + 1);
-        
+
         // put the smallest actually element in the first available place in data
         while ( i < subarray1.length && j < subarray2.length ) {
 
@@ -124,7 +147,7 @@ var _algorithms = (function () {
             }
             ind += 1;
         }
-        
+
         if ( i < subarray1.length ) {
             // put last elements from subarray1 in the last spots in data
             while ( i < subarray1.length ) {
@@ -141,7 +164,7 @@ var _algorithms = (function () {
             }
         }
     };
-    
+
     // changes elements in array
     var swap = function( data, i, j) {
         var tmp = data[i];
@@ -163,7 +186,7 @@ var _algorithms = (function () {
     var compare_atr = function( ob1, ob2, attr, pref ) {
         var compare_value;
         var alphabet;
-        
+
         if ( typeof ob1[attr] === "number" ) {
             if ( ob1[attr] < ob2[attr] ) {
                 compare_value = -1;
@@ -176,11 +199,11 @@ var _algorithms = (function () {
             alphabet = "0123456789a\u0105bc\u0107de\u0119fghijkl\u0142mn\u0144o\u00f3pqrs\u015btuvwxyz\u017a\u017c";
             return alpha( alphabet, pref, false )( ob1[ attr ], ob2[ attr ] );
         }
-        
+
         // changes value to return basing on value of pref
         return compare_value * pref;
     }
-    
+
     // alpha is slighlty modified function from
     // http://stackoverflow.com/questions/3630645/how-to-compare-utf-8-strings-in-javascript/3633725#3633725
     // written by Mic and Tomasz Wysocki
@@ -198,7 +221,7 @@ var _algorithms = (function () {
             }
             return ia > ib;
         }
-  
+
         return function( a, b ) {
             var pos = 0;
             var min = Math.min( a.length, b.length );
@@ -210,7 +233,7 @@ var _algorithms = (function () {
             while( a.charAt( pos ) === b.charAt( pos ) && pos < min ) {
                 pos++;
             }
-            
+
             return compare_letters( a.charAt(pos), b.charAt(pos)) ? dir : -dir;
         };
     };
@@ -221,18 +244,18 @@ var _algorithms = (function () {
         var result = 0;
         var key;
         var pref;
-        
+
         // for each attribute in sorting_setting
         for ( i = 0; i < sorting_setting.length; i += 1 ) {
             key = sorting_setting[i].name;
             pref = sorting_setting[i].pref;
-            
+
             if ( i !== sorting_setting.length - 1 ) {
                 result = compare_atr( ob1, ob2, key, pref );
             } else {
                 result = id_comparison( ob1, ob2, sorting_setting );
             }
-            
+
             if ( result !== 0 ) {
                 break;
             }
@@ -240,7 +263,7 @@ var _algorithms = (function () {
 
         return result;
     };
-    
+
     var id_comparison = function( ob1, ob2, sorting_setting ) {
         var key;
         var pref;
@@ -252,40 +275,40 @@ var _algorithms = (function () {
         var result;
         var token_to_int1;
         var token_to_int2;
-        
+
         key = sorting_setting[ sett_length - 1 ].name;
         pref = sorting_setting[ sett_length - 1 ].pref;
-        
+
         id1_tokenized = ob1[key].split("-");
         id2_tokenized = ob2[key].split("-");
-        
+
         min_length = (id1_tokenized.length < id2_tokenized.length) ?
                             id1_tokenized.length : id2_tokenized.length;
-                
+
         result = 1;
         for ( i = 0; i < min_length; i += 1 ) {
             token_to_int1 = parseInt( id1_tokenized[i] );
             token_to_int2 = parseInt( id2_tokenized[i] );
-            
+
             if ( token_to_int1 < token_to_int2 ) {
                 result = -1;
             } else if ( token_to_int1 > token_to_int2 ) {
                 result = 1;
             }
         }
-        
+
         return result * pref;
     }
-    
+
 //   F I L T E R I N G   H E L P E R   F U N C T I O N S
-    
+
     // looks for every criterion that is string value and
     // changes it to lower case
     var prepare_mask = function( mask ) {
         var i;
         var value;
         var type;
-        
+
         for ( i = 0; i < mask.length; i += 1 ) {
             type = typeof mask[ i ];
             if ( type === "string" ) {
@@ -294,14 +317,14 @@ var _algorithms = (function () {
             }
         }
     };
-    
+
     // checks if an object passes through a filter
     var check_obj = function( obj, filter_mask ) {
         var i;
         var key;
         var pref;
         var value;
-        
+
         // for each attribute of an object which is also in filter_mask
         for ( i = 0; i < filter_mask.length; i += 1 ) {
             key = filter_mask[i].name;
@@ -331,7 +354,7 @@ var _algorithms = (function () {
         } else {
             // is string
             var str = obj[attr].toLowerCase();
-            
+
             if ( pref === -2 && !starts_with( str, value ) ||
                  pref === -1 && !contains( str, value ) ||
                  pref === 1 && contains( str, value ) ||
@@ -341,17 +364,17 @@ var _algorithms = (function () {
                 return false;
             }
         }
-        
+
         return false;
     };
-    
+
     var starts_with = function( str, value ) {
         return ( str.indexOf( value ) === 0 );
     };
-    
+
     var contains = function( str, value ) {
         return ( str.indexOf( value ) !== -1 );
     };
-    
+
     return that;
 })();

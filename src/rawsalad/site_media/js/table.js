@@ -1,299 +1,246 @@
+// Copyright (c) 2011, Centrum Cyfrowe
+// All rights reserved.
 //
-//    Table creation functionality
+// Redistribution and use in source and binary forms, with or without modification,
+// are permitted provided that the following conditions are met:
 //
+//   * Redistributions of source code must retain the above copyright notice,
+//     this list of conditions and the following disclaimer.
+//   * Redistributions in binary form must reproduce the above copyright notice,
+//     this list of conditions and the following disclaimer in the documentation
+//     and/or other materials provided with the distribution.
+//   * Neither the name of the Centrum Cyfrowe nor the names of its contributors
+//     may be used to endorse or promote products derived from this software
+//     without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+// GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+// LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+// OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 var _table = (function () {
 
+//  P U B L I C   I N T E R F A C E
     var that = {};
 
-
     that.clean_table = function () {
-        $('#table').empty();
+        $('table').empty();
     };
-   
-    that.init_table = function ( filter_mode ) {
-        generate_header();
-        generate_table_body( filter_mode );
-    };
-    
-    
-    that.add_node = function( id ) {
-        var data;
-        var schema;
-        var html = [];
-        var item;
-        var i;
-        var container;
-        var row_html = [];
-     
-        // if it's the first time, prepare the top-level data
-        if( arguments.length === 0 ) {
-            data = _utils.filter( function ( element ) {
-                return element['level'] === 'a';
-            }, _store.active_rows() );
-            container = $('#tbody');
-        } 
-        else {
-            data = _utils.filter( function ( element ) {
-                return element['parent'] === id;
-            }, _store.active_rows() );
-            container = $('#' + id + '> .nodes');
-        }
-        
-        schema = _utils.filter( function ( element ) {
-            return element['basic'] === true;
-        }, _store.active_columns() );
 
-        _assert.not_equal( data.length, 0, 
-                           "Rows not defined" );
+    that.init_table = function () {
+        // TODO header generation to be implemented
+        // create_thead();
+        create_tbody();
 
-        _assert.not_equal( schema.length, 0, 
-                           "Schema not defined" );
-        
-        for ( i = 0; i < data.length; i += 1 ) {
-            item = data[i];
-            row_html = generate_row( item, schema );
-            html.push( row_html.join('') );
-        }
-        
-        container.append( $( html.join('') ) );
-        
-        that.arm_nodes( id );
         _gui.make_zebra();
     };
 
 
-    // add action listener to newly created nodes
-    that.arm_nodes = function ( id ) {
-        var node;
-        var rows;
-        
-        // no parameters for a-level nodes
-        if( arguments.length === 0 ) {      
-            node = $('.a');
-        } 
-        else {
-            node = $('#'+id+' > .nodes');
-        }
-        
-        // add action listener to the cell
-        node.find('.data')
-            .find('.type')
-            .click( function () {
-                // get subtree of this level
-                var nodes = $(this).parent().next();
-                // get level's id
-                var id = $(this).parent().parent().attr('id');
-                
-                rows = _utils.filter( function ( element ) {
-                    return element['idef'] === id;
-                }, _store.active_rows() );
-                
-                _assert.assert( rows.length > 0, "No row with given id" );
-                
-                if ( !rows[0]['leaf'] ) {
-                    var current_level = $(this).parent().parent();
-                
-                    // if the subtree not loaded yet --> load it
-                    if( nodes.find('div').length === 0 ) {
-                        if ( _db.add_pending_node( id ) ) {
-                            _db.download_node( id );
-                        }
-                    }
-                    else {
-                        nodes.toggle();
-                        that.toggle_hidden_param( id );
-                    }
-                    
-                    _gui.highlight( current_level );
-                }
-            });	                             
-        
-        if( !node.hasClass( 'a' ) ) {
-            node.find( '.data' ).each( function () {
-                $(this).children( '.cell' ).equalize_heights();
-            });        
-        }
+    that.add_node = function ( parent_id ) {
+        var children = _store.active_rows().filter( function ( e ) {
+            return e['data']['parent'] === parent_id;
+        });
+
+        add_rows( children );
     };
 
+    return that;
 
-    that.toggle_hidden_param = function( id ) {
-    
-        var parent = _utils.filter( function ( element ) {
-                return element['idef'] === id;
-            }, _store.active_rows() );
-            
-        _assert.assert( parent.length > 0,
-                       "No row found" );
-                       
-        _assert.is_equal( parent.length, 1,
-                       "Too many rows found" );
-            
-        _assert.is_false( parent['leaf'], 
-                       "Can't hide leaf's children" );
-            
-        parent[0]['hidden'] = !parent[0]['hidden'];
-    };
-    
-    that.hide_hidden_nodes = function() {
-        var parents_with_hidden_children;
-        var node;
-        var i;
-        var id;
-        var hidden_children;
-        
-        parents_with_hidden_children = _utils.filter( function ( element ) {
-                return !!element['hidden'];
-            }, _store.active_rows() );
-            
-        for ( i = 0; i < parents_with_hidden_children.length; i += 1 ) {
-            id = parents_with_hidden_children[i]['idef'];
-            node = $('#'+id);
-            hidden_children = node.find('.data')
-                                  .find('.type')
-                                  .parent()
-                                  .next();
-                                  
-            _assert.assert( hidden_children.length > 0,
-                           "Row with hidden children without hidden children" );
+//  P R I V A T E   I N T E R F A C E
 
-            hidden_children.toggle();
-        }
-    }
-    
-    // P R I V A T E   I N T E R F A C E
-    var generate_header = function () {
-        var i;
-        var columns;
-        var html = [ '<div id="thead"><div class="data">' ];
-        var col, col_type;
-        
-        // get all the basic view columns definitions        
-        columns = _utils.filter( function ( element ) {
-                    return element['basic'] === true;
-                }, _store.active_columns() );
-                
-        for ( i = 0; i < columns.length; i += 1 ) {
-            col = columns[i];
-            
-            // distinguish between type/key and values columns
-            if ( col['key'] === 'type' || col['key'] === 'name' ) {
-                col_type = col['key'] + ' cell';
-            } else {
-                col_type = 'value cell';
-            }	
-            
-            html.push( '<div class="', col_type, '">' );
-            html.push( col['label'] );
-            html.push( '</div>' );
-        }
-        html.push( '</div></div>' );
-        
-        // create empty table body
-        html.push( '<div id="tbody"></div>' );
-        html.push( '<div style="overflow: hidden; height: 1px;">.</div>');
-        
-        $('#table')
-            .append( $( html.join('') ));
-    };
-    
-    
-    // TODO >> what is "filter_mode"
-    var generate_table_body = function( filter_mode ) {
-        var container;
-        var html_row;
-        var id;
-        var item;
-        var schema;
-        var level;
-        var rows;
-        var is_hidden;
-        
-        var next_letter = function( letter ) {
-            var number = letter.charCodeAt( 0 );
-            return String.fromCharCode( number + 1 );
-        };
-        
-        schema = _utils.filter( function ( element ) {
-            return element['basic'] === true;
-        }, _store.active_columns() );
-                
+    function create_tbody() {
+        var level = 'a';
+        var hashed_list = _utils.hash_list( _store.active_rows() );
 
-        for ( level = 'a'; level != 'z'; level = next_letter( level )) {
-            rows = _utils.filter( function ( element ) {
-                return element['level'] === level;
-            }, _store.active_rows() );
-            
-            for ( i = 0; i < rows.length; i += 1 ) {
-                item = rows[ i ];
-                if ( !item[ 'parent' ] || filter_mode ) {
-                    container = $('#tbody');
-                } else {
-                    container = $('#'+ item[ 'parent' ] +' > .nodes');
-                }
-                
-                html_row = generate_row( item, schema );
-                container.append( $(html_row.join('')) );
-                
-                if ( !!item[ 'parent' ] ) {
-                    id = item[ 'parent' ];
-                    is_hidden = item[ 'hidden' ];
-                    that.arm_nodes( id, is_hidden );
-                }
-            }
-            if (level === 'a') {
-                that.arm_nodes();
-            }
-        }
-
-        
-        that.hide_hidden_nodes();
-    };    
-    
-
-    // generates the html code for a single row
-    var generate_row = function( item, schema ) {
-        var i;
-        var col;
-        var col_type;
-        var html = [];
-    
-        html.push( '<div id="', item['idef'], '"' );
-        html.push( 'class="', item['level'], ' ' );
-        html.push( item['leaf'] === true ? 'leaf">' : 'node">' );
-        html.push( '<div class="data">' );
-
-        // TODO >> recode this loop to make it work with all the datasets
-        for ( i = 0; i < schema.length; i += 1 ) {
-            col = schema[i];
-            
-            if ( col['key'] === 'type' || col['key'] === 'name' ) {
-                col_type = col['key'] + ' cell';
-            } else {
-                col_type = 'value cell';
-            }				
-            
-            html.push( '<div class="', col_type, '">' );
-
-            if( col_type === 'value cell' )
-            {
-                html.push( _utils.money( item[col['key']] ) );
+        while( !!hashed_list[ level ] ) {
+            if( level === 'a' ) {
+                add_top_level( hashed_list[ level ] );
             }
             else {
-                html.push( item[col['key']] );
-            }    
-            html.push( '</div>' );
-        }
-        html.push( '</div>' );
+                add_rows( hashed_list[ level ] );
+            }
 
-        if( item['leaf'] !== true ) {
-            html.push( '<div class="nodes"></div>' );
+            level = _utils.next_letter( level );
         }
-        html.push( '</div>' );
-        
-        return html;
-    };    
-    
-    
-    return that;
+    }
+
+
+    function add_top_level( data ) {
+        var i, len = data.length;
+        var schema = _store.basic_schema();
+
+        for( i = 0; i < len; ++i ) {
+            $('tbody').append( generate_row({
+                node: data[i],
+                index: i,
+                schema: schema
+            }));
+        }
+    }
+
+
+    function add_rows( data ) {
+        var i = data.length - 1;
+        var schema = _store.basic_schema();
+
+        var parent = $( '#' + data[0]['data']['parent'] );
+
+        for( ; i >= 0; i -= 1 ) {
+            parent.after( generate_row({
+                node: data[i],
+                schema: schema
+            }));
+        }
+        _gui.make_zebra();
+    }
+
+
+    // generate a single table row
+    function generate_row( args ) {
+        var node = args['node'];
+        var data = node['data'];
+        var schema = args['schema'];
+        var is_open = node['state']['open'];
+        var is_selected = node['state']['selected'];
+        var html = [];
+        var row;
+
+        // row definition
+        html.push( '<tr id="', data['idef'], '" ' );
+        html.push( 'data-open="', is_open, '" ' );
+        if( data['level'] === 'a' ) {
+            html.push( 'data-selected="', is_selected, '" ' );
+            html.push( 'data-index="', args['index'], '" ' );
+        }
+        html.push( 'class="', data['level'], ' ', data['parent'],'">' );
+
+        // cells definition
+        // TODO >> it can be sligthly slower than for loop - test it
+        schema.forEach( function ( column ) {
+            html.push( '<td class="', column['key'], ' ' );
+            html.push( column['type'], ' ' );
+            html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
+            html.push( data[column['key']] );
+            html.push( '</td>' );
+        });
+
+        html.push( '</tr>' );
+
+        // create & arm row
+        row = $( html.join('') );
+        row.click( function ( event ) {
+            // a-level parent
+            var a_root = a_parent( $(this) );
+            var a_root_id = a_root.attr('id');
+            // next a-level node
+            var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
+            var next = $('tr[data-index='+ (a_root_index + 1) +']');
+
+            // dim everything outside this a-rooted subtree
+            a_root
+                .siblings()
+                .not(':hidden')
+                .addClass('dim');
+
+            // make a-root background black
+            $('tr.root').removeClass('root');
+            a_root.addClass('root');
+
+            // highlight the subtree
+            with_subtree( a_root.attr('id'), function () {
+                // uses 'this' instead of '$(this)' for fun.call reason
+                // TODO do it with just one css class if possible
+                this.addClass( 'highlight' );
+                this.removeClass( 'dim' );
+            });
+
+            // add the bottom border
+            $('.next').removeClass('next');
+            next.addClass('next');
+
+            // open/close a subtree if it's a-level or already selected/open
+            open_close_subtree( $(this), a_root );
+
+            // clear selected attributes and set selection to clicked tree
+            _store.set_selected( a_root_id );
+            $('tr[data-selected=true]').attr('data-selected', 'false');
+            a_root.attr('data-selected', 'true');
+
+            _gui.make_zebra();
+        });
+
+        return row;
+    }
+
+
+    function open_close_subtree( node, root ) {
+        var a_root = root || a_parent( node );
+        var is_a_open     = a_root.attr( 'data-open' );
+        var is_a_selected = a_root.attr( 'data-selected' );
+        var id = node.attr('id');
+        var children;
+
+        if ( is_a_selected === is_a_open ) {
+            // if the node is closed
+            if( node.attr( 'data-open' ) === 'false' ) {
+
+                // if children are hidden
+                if( $('.'+id).length !== 0 ) {
+                    with_subtree( id, $.fn.show );
+                }
+                // if children not loaded yet
+                else {
+                    _db.download_node( id );
+                }
+
+                // mark subtree as open
+                _store.set_open( id, true );
+                node.attr( 'data-open', 'true' );
+            }
+            // the node is closed
+            else {
+                // hide subtree
+                with_subtree( id, $.fn.hide );
+
+                // mark subtree as closed
+                _store.set_open( id, false );
+                node.attr( 'data-open', 'false' );
+
+                // if it's a-level node - clear the css highlight/dim
+                if( node.hasClass( 'a' ) ) {
+                    node.removeClass( 'root' );
+                    $('.dim').removeClass('dim');
+                    $('.highlight').removeClass('highlight');
+                    $('.next').removeClass('next');
+                }
+            }
+        }
+    }
+
+
+    // return a-level parent of a given node
+    function a_parent( node ) {
+        if( node.hasClass( 'a' ) ) {
+            return node;
+        }
+        var prev = node.prev();
+
+        return prev.hasClass('a') ? prev : a_parent( prev );
+    }
+
+
+    // go through the subtree of id-node and do fun
+    function with_subtree( id, fun ) {
+        $('tr.'+id).each( function () {
+            with_subtree( $(this).attr('id'), fun );
+            fun.call( $(this) );
+        });
+    }
 
 })();
