@@ -188,12 +188,18 @@ var _store = (function () {
     that.add_data = function ( new_data ) {
         var rows = that.active_rows();
 
-        rows = rows.concat( new_data.map( function ( row ) {
+        new_data
+            .map( function ( row ) {
                 return {
                     data: row,
                     state: { open: false, selected: false }
                 };
-        }));
+            })
+            .forEach( function ( e ) {
+                rows.push( e );
+            });
+
+        console.log( that.active_rows() );
     };
 
 
