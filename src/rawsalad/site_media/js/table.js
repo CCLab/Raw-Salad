@@ -43,11 +43,10 @@ var _table = (function () {
 
 
     that.add_node = function ( parent_id ) {
-        var rows = _store.active_rows();
-        var children = rows.filter( function ( e ) {
+        var children = _store.active_rows().filter( function ( e ) {
             return e['data']['parent'] === parent_id;
         });
-        debugger;
+
         add_rows( children );
     };
 
@@ -89,7 +88,7 @@ var _table = (function () {
     function add_rows( data ) {
         var i = data.length - 1;
         var schema = _store.basic_schema();
-        debugger;
+
         var parent = $( '#' + data[0]['data']['parent'] );
 
         for( ; i >= 0; i -= 1 ) {
@@ -196,7 +195,6 @@ var _table = (function () {
                 }
                 // if children not loaded yet
                 else {
-                    debugger;
                     _db.download_node( id );
                 }
 

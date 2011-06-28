@@ -198,8 +198,6 @@ var _store = (function () {
             .forEach( function ( e ) {
                 rows.push( e );
             });
-
-        console.log( that.active_rows() );
     };
 
 
