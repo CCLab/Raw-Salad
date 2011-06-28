@@ -12,13 +12,10 @@ from django.core import serializers
 import xml.etree.cElementTree as ET
 
 from ConfigParser import ConfigParser
-import pymongo
 
 import rsdbapi as rsdb
 
 
-conn_schema= "md_budg_scheme"
-nav_schema= "ms_nav"
 conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/rawsdata.conf"
 
 xml_header= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -68,56 +65,13 @@ def _convert_dict_to_xml_recurse(parent, dict_item, list_names):
         parent.text = unicode(dict_item)
 
 
-def get_db_connect(dbtype):
-    connect_dict= {}
-    defaults= {
-        'basedir': conf_filename
-    }
-    cfg= ConfigParser(defaults)
-
-    cfg.read(conf_filename)
-
-    success= True
-    try: # check if we can read conf file
-        connect_dict['host']= cfg.get(dbtype,'host')
-    except:
-        success= False
-
-    if success: # all OK, fill the rest
-        connect_dict['port']= cfg.getint(dbtype,'port')
-        connect_dict['database']= cfg.get(dbtype,'database')
-        connect_dict['username']= cfg.get(dbtype,'username')
-        try:
-            connect_dict['password']= cfg.get(dbtype,'password')
-        except:
-            # password must be instance of basestring
-            connect_dict['password']= ''
-    else: # can't read conf file - filling defaults
-        connect_dict['host']= 'localhost'
-        connect_dict['port']= 27017
-        connect_dict['database']= 'rawsdoc00'
-        connect_dict['username']= 'readonly'
-        connect_dict['password']= ''
-
-    return connect_dict
-
-
-def get_mongo_db():
-    # connection details
-    dsn= get_db_connect('mongodb')
-    connect= pymongo.Connection(dsn['host'], dsn['port'])
-    dbase= connect[dsn['database']]
-    dbase.authenticate(dsn['username'], dsn['password'])
-    return dbase
-
-
 def format_result(result, srz, rt_tag= None):
     if srz == 'json':
         res= json.dumps( result, ensure_ascii=False, indent=4 )
         mime_tp= "application/json"
     elif srz == 'xml':
         # if rt_tag is None: # if root tag is not given, use 'request' key as a root tag
-        #     rt_tag= result.pop('request') # i liked this idea very much
+        #     rt_tag= result.pop('request') # ehh.. i liked this idea very much
         rt_tag= 'result'
         res_raw= ET.tostring(dict2et(result, root_tag=rt_tag))
         res= "".join([ xml_header, res_raw ])
@@ -147,66 +101,34 @@ def get_formats(request):
     return HttpResponse( json.dumps( result ), 'application/json' )
 
 
-def get_metadata_full(ds_id, ps_id, iss, dbase):
-    metadata_full= dbase[conn_schema].find_one(
-        { 'dataset': ds_id, 'idef' : ps_id, 'issue': iss },
-        { '_id' : 0 }
-        )
-    return metadata_full
-
-
 def get_datasets(request, serializer, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    result= { 'request': 'dataset' }
+    nav= rsdb.Navigator()
+    data= nav.get_dataset(db)
 
-    # initial params
-    nav_select_columns= {'_id':0} # _id is never returned
-    cond_query= {} # query conditions
-
-    nav_select_columns.update({ 'perspectives':0 })
-
-    cursor_data= db[nav_schema].find(cond_query, nav_select_columns)
-
-    if cursor_data.count() > 0:
-        res= []
-        for row in cursor_data:
-            res.append(row)
-
-        result['data']= res
-        result['response']= 'OK'
+    result= { 'request': nav.request, 'response': nav.response }
+    if result['response'] == 'OK':
+        result['data']= data
         result['uri']= request.build_absolute_uri()
-    else:
-        result['response']= error_codes['10']
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
-
 
 def get_datasets_meta(request, serializer, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    result= { 'request': 'dataset' }
+    nav= rsdb.Navigator()
+    count= nav.get_count(db)
 
-    # initial params
-    nav_select_columns= {'_id':0} # _id is never returned
-    cond_query= {} # query conditions
-
-    nav_select_columns.update({ 'perspectives':0 })
-
-    cursor_data= db[nav_schema].find(cond_query, nav_select_columns)
-    if cursor_data.count() > 0:
-        result['response']= 'OK'
-        result['metadata']= { 'count': cursor_data.count() }
+    result= { 'request': nav.request, 'response': nav.response }
+    if result['response'] == 'OK':
+        result['metadata']= { 'count': count }
         result['uri']= request.build_absolute_uri()
-    else:
-        result['response']= error_codes['10']
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
 
 
@@ -214,132 +136,61 @@ def get_views(request, serializer, dataset_idef, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    result= {
-        'request': 'view',
-        'dataset_id': int(dataset_idef)
-        }
+    nav= rsdb.Navigator()
+    data= nav.get_view(db, dataset_idef)
 
-    # initial params
-    nav_select_columns= {'_id':0} # _id is never returned
-    cond_query= {} # query conditions
-
-    nav_select_columns.update({
-            'perspectives.idef':1,
-            'perspectives.name':1,
-            'perspectives.description':1,
-            'perspectives.long_description':1
-            })
-    cond_query.update({ 'idef': int(dataset_idef) }) # query conditions
-
-    cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
-    if cursor_data is None:
-        result['response']= error_codes['10']
-    else:
-        result['response']= 'OK'
-        result['data']= cursor_data['perspectives']
+    result= { 'request': nav.request, 'response': nav.response }
+    if result['response'] == 'OK':
+        result['data']= data
         result['uri']= request.build_absolute_uri()
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
-
 
 def get_views_meta(request, serializer, dataset_idef, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    result= {
-        'request': 'view',
-        'dataset_id': int(dataset_idef)
-        }
+    nav= rsdb.Navigator()
+    count= nav.get_count(db, dataset_idef)
 
-    # initial params
-    nav_select_columns= {'_id':0} # _id is never returned
-    cond_query= {} # query conditions
-
-    nav_select_columns.update({
-            'perspectives.idef':1,
-            'perspectives.name':1,
-            'perspectives.description':1,
-            'perspectives.long_description':1
-            })
-    cond_query.update({ 'idef': int(dataset_idef) }) # query conditions
-
-    cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
-    if cursor_data is None:
-        result['response']= error_codes['10']
-    else:
-        result['response']= 'OK'
-        result['metadata']= { 'count': len(cursor_data['perspectives']) }
+    result= { 'request': nav.request, 'response': nav.response }
+    if result['response'] == 'OK':
+        result['metadata']= { 'count': count }
         result['uri']= request.build_absolute_uri()
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
-
 
 def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    result= {
-        'request': 'issue',
-        'dataset_id': int(dataset_idef),
-        'view_id': int(view_idef)
-        }
+    nav= rsdb.Navigator()
+    data= nav.get_issue(db, dataset_idef, view_idef)
 
-    # initial params
-    nav_select_columns= {'_id':0} # _id is never returned
-    cond_query= {} # query conditions
-
-    nav_select_columns.update({ 'perspectives.issues':1 })
-    cond_query.update({ 'idef': int(dataset_idef),
-        'perspectives': { '$elemMatch': { 'idef': int(view_idef) } } }) # query conditions
-
-    cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
-    if cursor_data is None:
-        result['response']= error_codes['10']
-    else:
-        result['response']= 'OK'
-        result['data']= cursor_data['perspectives'][int(view_idef)].pop('issues')
+    result= { 'request': nav.request, 'response': nav.response }
+    if result['response'] == 'OK':
+        result['data']= data
         result['uri']= request.build_absolute_uri()
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
-
 
 def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    result= {
-        'request': 'issue',
-        'dataset_id': int(dataset_idef),
-        'view_id': int(view_idef)
-        }
+    nav= rsdb.Navigator()
+    count= nav.get_count(db, dataset_idef, view_idef)
 
-    # initial params
-    nav_select_columns= {'_id':0} # _id is never returned
-    cond_query= {} # query conditions
-
-    nav_select_columns.update({ 'perspectives':1 })
-    cond_query.update({
-        'idef': int(dataset_idef),
-        'perspectives': { '$elemMatch': { 'idef': int(view_idef) } } }) # query conditions
-
-    cursor_data= db[nav_schema].find_one(cond_query, nav_select_columns)
-    if cursor_data is None:
-        result['response']= error_codes['10']
-    else:
-        result['response']= 'OK'
-        result['metadata']= {'count': len(cursor_data['perspectives'][int(view_idef)]['issues']) }
+    result= { 'request': nav.request, 'response': nav.response }
+    if result['response'] == 'OK':
+        result['metadata']= { 'count': count }
         result['uri']= request.build_absolute_uri()
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
-
 
 def get_userdef_fields(rq):
     """
@@ -362,37 +213,6 @@ def get_userdef_fields(rq):
             out_list.append(elm)
     
     return out_list
-
-
-def get_columns(meta_data, usr_def_cols):
-    columns_list= {'_id':0} # _id is never returned
-    columns_list.update(meta_data['aux']) # list of columns to be returned in any case
-    if len(usr_def_cols) > 0:
-        for clm in usr_def_cols: # list of user defined columns to be returned
-            columns_list[clm]= 1
-    else:
-        md_columns= meta_data['columns'] # list of main columns to be returned
-        for clm in md_columns:
-            columns_list[clm['key']]= 1
-
-    return columns_list
-
-
-def get_sort_list(meta_data):
-    sort_list= []
-    try:
-        cond_sort= meta_data['sort']
-    except:
-        cond_sort= None
-
-    if cond_sort is not None:
-        srt= [int(k) for k, v in cond_sort.iteritems()]
-        srt.sort()
-        for sort_key in srt:
-            sort_list.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
-
-    return sort_list
-
 
 def parse_conditions(pth):
     path_elm_list= []
@@ -459,7 +279,6 @@ def parse_conditions(pth):
     else: # ERROR
         return { "error": '34' } # otherwise it's a syntax error
 
-
 def get_count(query, collection, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
@@ -479,7 +298,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 
     userdef_query= parse_conditions(path)
     if 'error' in userdef_query: # already an error
-        result['response']= error_codes[userdef_query['error']]
+        result['response']= rsdb.Error().throw_error(userdef_query['error'])
 
     else:
         userdef_fields= get_userdef_fields(request)
@@ -500,7 +319,6 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         coll= None
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
 
 
@@ -532,7 +350,6 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
     result['request']= coll.request
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
 
 
@@ -548,7 +365,7 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
 
     userdef_query= parse_conditions(path)
     if 'error' in userdef_query: # already an error
-        result['response']= error_codes[userdef_query['error']]
+        result['response']= rsdb.Error().throw_error(userdef_query['error'])
 
     else:
         userdef_fields= get_userdef_fields(request)
@@ -566,5 +383,4 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         result['request']= coll.request
 
     out, mime_tp = format_result(result, serializer)
-
     return HttpResponse( out, mimetype=mime_tp )
