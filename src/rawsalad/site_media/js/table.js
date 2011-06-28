@@ -90,7 +90,7 @@ var _table = (function () {
         var schema = _store.basic_schema();
 
         var parent = $( '#' + data[0]['data']['parent'] );
-debugger;
+
         for( ; i >= 0; i -= 1 ) {
             parent.after( generate_row({
                 node: data[i],
@@ -142,6 +142,7 @@ debugger;
             var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
             var next = $('tr[data-index='+ (a_root_index + 1) +']');
 
+debugger;
             // dim everything outside this a-rooted subtree
             a_root
                 .siblings()
