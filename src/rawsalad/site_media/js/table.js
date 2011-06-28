@@ -30,7 +30,7 @@ var _table = (function () {
     var that = {};
 
     that.clean_table = function () {
-        $('#table').empty();
+        $('table').empty();
     };
 
     that.init_table = function () {
