@@ -90,13 +90,14 @@ var _table = (function () {
         var schema = _store.basic_schema();
 
         var parent = $( '#' + data[0]['data']['parent'] );
-
+debugger;
         for( ; i >= 0; i -= 1 ) {
             parent.after( generate_row({
                 node: data[i],
                 schema: schema
             }));
         }
+        _gui.make_zebra();
     }
 
 
