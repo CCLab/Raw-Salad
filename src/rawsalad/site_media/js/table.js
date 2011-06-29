@@ -169,8 +169,6 @@ var _table = (function () {
             // highlight the subtree
             with_subtree( a_root.attr('id'), function () {
                 // uses 'this' instead of '$(this)' for fun.call reason
-                // TODO do it with just one css class if possible
-                this.addClass( 'highlight' );
                 this.removeClass( 'dim' );
             });
 
@@ -230,7 +228,6 @@ var _table = (function () {
                 if( node.hasClass( 'a' ) ) {
                     node.removeClass( 'root' );
                     $('.dim').removeClass('dim');
-                    $('.highlight').removeClass('highlight');
                     $('.next').removeClass('next');
                 }
             }
