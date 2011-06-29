@@ -20,16 +20,6 @@ conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/
 
 xml_header= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 
-error_codes= {
-    '10': 'ERROR: No such data!',
-    '20': 'ERROR: No metadata specified!',
-    '30': 'ERROR: Wrong request!',
-    '31': 'ERROR: Scope +TO+ is applicable to the same level!',
-    '32': 'ERROR: Wrong sequence in the scope +TO+!',
-    '33': 'ERROR: Scope +TO+ should include only 2 elements!',
-    '34': 'ERROR: Syntax error in scope definition!'
-    }
-
 level_list= ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
 
 
