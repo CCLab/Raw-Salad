@@ -12,7 +12,6 @@ meta_src= "md_budg_scheme"
 nav_schema= "ms_nav"
 conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/rawsdata.conf"
 
-#-----------------------------
 class Error(object):
     def __init__(self):
         self.error_dict= {
@@ -29,7 +28,6 @@ class Error(object):
     def throw_error(self, code):
         return self.error_dict[str(code)]
 
-#-----------------------------
 class DBconnect(object):
     def __init__(self, db_type):
         if db_type == 'mongodb':
@@ -66,7 +64,6 @@ class DBconnect(object):
             self.username= 'readonly'
             self.password= ''
 
-#-----------------------------
 class Navtree(object): # Navigator tree
     def __init__(self, **parms):
         """
@@ -173,7 +170,6 @@ class Navtree(object): # Navigator tree
 
         return count
 
-#-----------------------------
 class Collection(object):
 
     def __init__(self, **parms):
