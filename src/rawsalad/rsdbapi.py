@@ -70,7 +70,6 @@ class DBconnect(object):
 class Navtree(object): # Navigator tree
     def __init__(self):
         self.response= 'OK' # Navtree class is optimistic
-        pass
 
     def __del__(self):
         pass
