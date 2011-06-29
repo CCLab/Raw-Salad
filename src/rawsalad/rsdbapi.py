@@ -22,7 +22,8 @@ class Error(object):
             '31': 'ERROR: Scope +TO+ is applicable to the same level!',
             '32': 'ERROR: Wrong sequence in the scope +TO+!',
             '33': 'ERROR: Scope +TO+ should include only 2 elements!',
-            '34': 'ERROR: Syntax error in scope definition!'
+            '34': 'ERROR: Syntax error in scope definition!',
+            '35': 'ERROR: Format missing!'
             }
 
     def throw_error(self, code):
@@ -66,9 +67,9 @@ class DBconnect(object):
             self.password= ''
 
 #-----------------------------
-class Navigator(object):
+class Navtree(object): # Navigator tree
     def __init__(self):
-        self.response= 'OK' # Navigator class is optimistic
+        self.response= 'OK' # Navtree class is optimistic
         pass
 
     def __del__(self):
