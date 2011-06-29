@@ -1,4 +1,3 @@
-
 table {
   width: 960px;
   border-collapse: collapse;
@@ -6,15 +5,12 @@ table {
   border-left: 2px solid #8b8b8b;
 }
 
-.odd {
-  background-color: #fff;
+
+thead > tr {
+  border-top: 1px #5b5b5b solid;
 }
 
-.even {
-  background-color: #eee;
-}
-
-tr:hover {
+tbody > tr:hover {
   background-color: #98d39f;
 }
 
@@ -26,6 +22,14 @@ td {
 
 td+td {
   border-left: 1px solid #8b8b8b;
+}
+
+.odd {
+  background-color: #fff;
+}
+
+.even {
+  background-color: #eee;
 }
 
 .click {
@@ -66,28 +70,8 @@ td+td {
   padding-left: 30px !important;    
 }
 
-#clone {
-  text-transform: capitalize;
-  width: 80px;
-  text-align: center;
-  padding: 5px;
-  background-color: #5b5b5b;
-  color: #fff;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-
-}
-
-#clone:hover {
-  color: #ccc;
-  cursor: pointer;
-}
-
 .current { 
   border: 1px solid #3b3b3b;
-}
-
-.highlight {
 }
 
 .root {
@@ -103,209 +87,7 @@ td+td {
   border-top: 1px solid #5b5b5b;
 }
 
-
-
-
-/*  T A B L E  
-#table {
-    width: 960px;
-    margin-left: 0px;
-    background-color: #fff;
-    overflow: auto;
+.number {
+  width: 120px;
+  text-align: right;
 }
-
-#table div {
-    cursor: default;
-    display: block;
-}
-
-
-/*  T A B L E   H E A D  
-#thead > .data > * {
-    background-color: #808080 !important; 
-    color: #fff;
-    font-weight: bold;
-}
-
-#thead > .data > .type {
-    width: 138px;
-}
-
-#thead > .data {
-    overflow: auto;
-    border-right: 1px solid #808080;    
-    border-left: 1px solid #808080;  
-    border-top: 1px solid #ccc;      
-}
-
-#thead > div {
-    text-align: center;
-}
-
-
-/*  T A B L E   B O D Y  
-#tbody {
-    height: 100%;
-    clear: both;
-}
-
-.a, .b, .c, .d, .e, .f {
-    clear: both;
-}
-
-.a > .data > .type {
-    width: 138px;
-}
-
-.b > .data > .type {
-    width: 133px;
-    padding-left: 10px !important;
-}
-
-.c > .data > .type {
-    width: 123px;
-    padding-left: 20px !important;    
-}
-
-.d > .data > .type {
-    width: 113px;
-    padding-left: 30px !important;    
-}
-
-.e > .data > .type {
-    width: 103px;
-    padding-left: 40px !important;    
-}
-
-.f > .data > .type {
-    width: 93px;
-    padding-left: 50px !important;    
-}
-
-.name {
-    width: 441px;;
-}
-
-.value {
-    float: right !important;
-    width: 108px;    
-    position: relative;
-}
-
-.value > span {
-    margin-right: 22px;
-}
-
-#tbody .value {
-    text-align: right;
-}
-
-.node > .data > .type {
-    color: #11a8f7;
-    font-weight: bold;
-}
-
-.node > .data > .type:hover {
-    color: #888;
-    cursor: pointer !important;
-
-}
-
-.data {
-    clear: both;
-    overflow: auto;
-}
-
-.data:hover {
-    background-color: #98d39f !important;
-}
-
-.data > div {
-    float: left;
-}
-
-#tbody .cell {
-    min-height: 16px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 5px;
-    padding-right: 5px;    
-    border-right: 1px #ccc solid;
-}
-
-#thead .cell {
-    min-height: 16px !important;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 5px;
-    padding-right: 5px;    
-    border-right: 1px #ccc solid;
-}
-
-
-/*  C H E C K B O X  
-.checkbox {
-    position: absolute;
-
-    top: 2px;
-    right: 3px;
-    width: 20px;
-    height: 20px;
-
-    background: url('/site_media/img/checkbox.off.png') no-repeat; 
-}
-
-.checkbox:hover {
-    cursor: pointer !important;
-}
-
-.checkbox.selected {
-    position: absolute;
-
-    top: 2px;
-    right: 3px;
-    width: 20px;
-    height: 20px;
-
-    background: url('/site_media/img/checkbox.on.png') no-repeat; 
-}
-
-.checkbox.selected:hover {
-    cursor: pointer;
-}
-
-.marked {
-    background-color: #000 !important;
-    color: #fff;
-}
-
-.marked:hover {
-    background-color: #000 !important;
-    color: #fff;
-}
-
-.type.marked {
-    border-left: 1px solid #000 !important;
-}
-
-.darkened {
-    color: #aaa;
-    background-color: #f8f8f8;
-}
-
-/*.leftborder {*/
-/*    border-left: 1px solid #000 !important;*/
-/*}*/
-
-/*.rightborder {*/
-/*    border-right: 1px solid #000 !important;*/
-/*}*/
-
-/*.bottomborder {*/
-/*    border-bottom: 1px solid #000;*/
-/*}
-
-.top-border {
-    border-top: 1px solid #000;
-}
-*/
