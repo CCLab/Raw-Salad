@@ -38,33 +38,32 @@ var _tools = (function () {
         _algorithms.sort( data, sett );
     };
 
-    that.prepare_table_interface = function () {
+    that.prepare_tools = function () {
         prepare_sorting_interface();
         prepare_filtering_interface();
         prepare_snapshot_interface();
     };
 
+    return that;
+
 //  P R I V A T E   I N T E R F A C E
 
-    var add_sort_key = function() {
+    function add_sort_key() {
         var i, key;
-        var perspective = _store.active_columns();
-        var columns = [];
         var html = [];
+        var schema = _store.basic_schema();
+        var columns = schema
+                        .filter( function ( e ) {
+                            return e['processible'];
+                        })
+                        .map( function ( e ) {
+                            return {
+                                name: schema[i]['key'],
+                                label: schema[i]['label']
+                            };
+                        });
 
         key = $('#sort-form > div').length;
-
-        for( i = 0; i < perspective.length; ++i ) {
-            if( perspective[i]['basic'] === true &&
-                perspective[i]['processable'] === true ) {
-                columns.push(
-                    {
-                        name: perspective[i]['key'],
-                        label: perspective[i]['label']
-                    }
-                );
-            }
-        }
 
         if( key === 2 ) {
             $('#add-sort-key' ).remove();
@@ -95,7 +94,7 @@ var _tools = (function () {
         }
         html.push( '</div>' );
 
-        $('#sort-form').append( $(html.join('')) );
+        $('#sort-form').append( $( html.join('') ));
 
         if( key === 0 ) {
             $('#add-sort-key').click( function () {
@@ -104,7 +103,7 @@ var _tools = (function () {
         }
     }
 
-    var prepare_sorting_interface = function() {
+    function prepare_sorting_interface() {
 
         $('#sort-button')
             .click( function () {
@@ -119,9 +118,10 @@ var _tools = (function () {
                 var column, order;
                 var settings = [];
                 var i, len = $('#sort-form select').length;
-
-                for( i = 0; i < len; ++i ) {
-                    column = $('.key-'+i+' option:selected').val();
+debugger;
+                for( i = 0; i < len; i += 1 ) {
+                    column = $( '.key-'+ i +' option:selected' ).val();
+                    // TODO what does this condition mean?!
                     if( column === "null" ) {
                         if( i === 1 ) {
                             $(this).hide();
@@ -131,7 +131,7 @@ var _tools = (function () {
                             break;
                         }
                     }
-                    order = parseInt($('.key-'+i+':radio:checked').val());
+                    order = parseInt( $('.key-'+ i +':radio:checked').val() );
 
                     settings.push(
                         {
@@ -144,12 +144,11 @@ var _tools = (function () {
                 that.sort( _store.active_rows(), settings );
 
                 _table.clean_table();
+debugger;
                 _table.init_table();
-                _gui.make_zebra();
-                _gui.equalize_table();
-
                 $(this).hide();
 
+                // TODO why false?!
                 return false;
             });
 
@@ -169,7 +168,7 @@ var _tools = (function () {
         }
     };
 
-    var prepare_filtering_interface = function() {
+    function prepare_filtering_interface() {
 
         $('#filter-button')
             .click( function () {
@@ -242,7 +241,7 @@ var _tools = (function () {
            });
     };
 
-    var prepare_snapshot_interface = function() {
+    function prepare_snapshot_interface() {
 
         $('#save-snapshot')
             .click( function () {
@@ -263,9 +262,6 @@ var _tools = (function () {
             });
     }
 
-    that.prepare_table_interface();
-
-    return that;
 
 }) ();
 

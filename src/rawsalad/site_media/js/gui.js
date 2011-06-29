@@ -37,6 +37,8 @@ var _gui = (function () {
         $('#download-button').click( _download.current_sheet );
         $('#application').hide();
 
+        _tools.prepare_tools();
+
         // arm open/close button and hide it!
         $('#open-close-choose-panel')
             .click( function () {
@@ -103,7 +105,7 @@ var _gui = (function () {
 
     that.make_zebra = function () {
         // TODO make it work with only current sheet
-        $('tr').not(':hidden').each( function ( i ) {
+        $('tbody > tr').not(':hidden').each( function ( i ) {
             if( i % 2 === 0 ) {
                 $(this).removeClass( 'odd' );
                 $(this).addClass( 'even' );
