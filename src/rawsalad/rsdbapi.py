@@ -68,31 +68,30 @@ class DBconnect(object):
 
 #-----------------------------
 class Navtree(object): # Navigator tree
-    def __init__(self):
+    def __init__(self, **parms):
+        """
+        **parms are:
+        - fields_aux - {} specified keys from the structure
+        - query_aux - {} additional query conditions
+        """
+        self.fields= parms.pop("fields_aux", {}) # before match against metadata
+        self.query= parms.pop("query_aux", {}) # before update from metadata
         self.response= 'OK' # Navtree class is optimistic
 
     def __del__(self):
         pass
 
 
-    def get_nav_full(self, datasrc, **parms):
-        """
-        **parms are:
-        - fields_aux - {} specified keys from the structure
-        - query_aux - {} additional query conditions
-        """
+    def get_nav_full(self, datasrc):
         out= []
 
         self.request= 'navigator'
 
-        fields_aux= parms.pop("fields_aux", {})
-        query_aux= parms.pop("query_aux", {})
-
         nav_fields= {'_id':0} # _id is never returned
-        nav_fields.update(fields_aux)
+        nav_fields.update(self.fields)
 
         query= {} # query conditions
-        query.update(query_aux) # additional query, depends on the call
+        query.update(self.query) # additional query, depends on the call
         
         cursor_data= datasrc[nav_schema].find(query, nav_fields)
         if cursor_data is not None:
