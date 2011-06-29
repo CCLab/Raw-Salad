@@ -58,8 +58,8 @@ var _tools = (function () {
                         })
                         .map( function ( e ) {
                             return {
-                                name: schema[i]['key'],
-                                label: schema[i]['label']
+                                name: e['key'],
+                                label: e['label']
                             };
                         });
 
