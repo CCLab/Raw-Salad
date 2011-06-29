@@ -54,7 +54,7 @@ var _tools = (function () {
         var schema = _store.basic_schema();
         var columns = schema
                         .filter( function ( e ) {
-                            return e['processible'];
+                            return e['processable'];
                         })
                         .map( function ( e ) {
                             return {
@@ -118,7 +118,7 @@ var _tools = (function () {
                 var column, order;
                 var settings = [];
                 var i, len = $('#sort-form select').length;
-debugger;
+
                 for( i = 0; i < len; i += 1 ) {
                     column = $( '.key-'+ i +' option:selected' ).val();
                     // TODO what does this condition mean?!
@@ -140,7 +140,7 @@ debugger;
                         }
                     );
                 }
-
+debugger;
                 that.sort( _store.active_rows(), settings );
 
                 _table.clean_table();
