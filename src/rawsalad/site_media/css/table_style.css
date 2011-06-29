@@ -7,7 +7,8 @@ table {
 
 
 thead > tr {
-  border-top: 1px #5b5b5b solid;
+  background-color: #5b5b5b;
+  color: #fff;
 }
 
 tbody > tr:hover {
@@ -70,13 +71,18 @@ td+td {
   padding-left: 30px !important;    
 }
 
+.e > .type {
+  width: 103px;
+  padding-left: 40px !important;    
+}
+
 .current { 
   border: 1px solid #3b3b3b;
 }
 
 .root {
   color: #fff;
-  background-color: #000 !important; 
+  background-color: #5b5b5b !important; 
 }
 
 .dim {

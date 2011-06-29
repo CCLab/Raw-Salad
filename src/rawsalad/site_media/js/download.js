@@ -36,9 +36,9 @@ var _download = (function () {
         var columns, rows;
 
         var add_children = function ( parent ) {
-            var i;
+            var i, node;
             var children = _store.active_rows().filter( function ( e ) {
-                return e['parent'] === parent;
+                return e['data']['parent'] === parent;
             });
 
             if( children.length === 0 ) {
@@ -46,26 +46,27 @@ var _download = (function () {
             }
 
             for( i = 0; i < children.length; i += 1 ) {
-                data += children[i]['idef'] + ';';
-                if( !!children[i]['parent'] === false ) {
+                node = children[i]['data'];
+                data += node['idef'] + ';';
+                if( !!node['parent'] === false ) {
                     data += ';'
                 }
                 else {
-                    data += children[i]['parent'] + ';';
+                    data += node['parent'] + ';';
                 }
-                data += children[i]['level'] + ';';
+                data += node['level'] + ';';
 
                 for( j = 0; j < columns.length; j += 1 ) {
-                    data += children[i][ columns[j]['key'] ];
+                    data += node[ columns[j]['key'] ];
                     data += ';';
                 }
                 data += '|';
 
-                if( children[i]['hidden'] === true ) {
+                if( node['hidden'] === true ) {
                     continue;
                 }
                 else {
-                    add_children( children[i]['idef'] );
+                    add_children( node['idef'] );
                 }
             }
         };
