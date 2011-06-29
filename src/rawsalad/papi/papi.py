@@ -303,7 +303,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
         data= coll.get_data(db, dataset_idef, view_idef, issue)
         if coll.response == 'OK':
-            result['dir']= dir(rsdb)
+            result['dir']= dir(rsdb) # TEST
             result['data']= data
             result['count']= coll.count
             result['uri']= request.build_absolute_uri()
