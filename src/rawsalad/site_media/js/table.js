@@ -34,8 +34,7 @@ var _table = (function () {
     };
 
     that.init_table = function () {
-        // TODO header generation to be implemented
-        // create_thead();
+        create_thead();
         create_tbody();
 
         _gui.make_zebra();
@@ -53,6 +52,21 @@ var _table = (function () {
     return that;
 
 //  P R I V A T E   I N T E R F A C E
+
+    function create_thead() {
+        var schema = _store.basic_schema();
+        var html = [ '<tr>' ];
+
+        schema.forEach( function ( column ) {
+            html.push( '<td class="', column['key'], ' ' );
+            html.push( column['type'], '">' );
+            html.push( column['label'] );
+            html.push( '</td>' );
+        });
+
+        html.push( '</tr>' );
+        $('thead').append( html.join('') );
+    }
 
     function create_tbody() {
         var level = 'a';
@@ -124,7 +138,7 @@ var _table = (function () {
         // TODO >> it can be sligthly slower than for loop - test it
         schema.forEach( function ( column ) {
             html.push( '<td class="', column['key'], ' ' );
-            html.push( column['type'], ' ' );
+            html.push( column['type'] );
             html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
             html.push( data[column['key']] );
             html.push( '</td>' );
