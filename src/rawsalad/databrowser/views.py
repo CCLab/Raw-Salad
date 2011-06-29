@@ -107,7 +107,7 @@ def download_data( request ):
 
 def get_ms_nav():
     db= rsdb.DBconnect("mongodb").dbconnect
-    nav_full= rsdb.Navigator().get_nav_full(db)
+    nav_full= rsdb.Navtree().get_nav_full(db)
     out= { 'meta_data': json.dumps( nav_full ) }
     return out
 
