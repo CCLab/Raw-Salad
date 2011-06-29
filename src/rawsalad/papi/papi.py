@@ -76,6 +76,12 @@ def format_result(result, srz, rt_tag= None):
         res_raw= ET.tostring(dict2et(result, root_tag=rt_tag))
         res= "".join([ xml_header, res_raw ])
         mime_tp= "application/xml"
+    else: # error: format missing (like ../api/dataset/ instead of /api/<format>/dataset/)
+        res= json.dumps( {
+            "response": rsdb.Error().throw_error(35),
+            "request": srz
+            }, ensure_ascii=False, indent=4 )
+        mime_tp= "application/json"
     return res, mime_tp
 
 
@@ -105,7 +111,7 @@ def get_datasets(request, serializer, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    nav= rsdb.Navigator()
+    nav= rsdb.Navtree()
     data= nav.get_dataset(db)
 
     result= { 'request': nav.request, 'response': nav.response }
@@ -120,7 +126,7 @@ def get_datasets_meta(request, serializer, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    nav= rsdb.Navigator()
+    nav= rsdb.Navtree()
     count= nav.get_count(db)
 
     result= { 'request': nav.request, 'response': nav.response }
@@ -136,7 +142,7 @@ def get_views(request, serializer, dataset_idef, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    nav= rsdb.Navigator()
+    nav= rsdb.Navtree()
     data= nav.get_view(db, dataset_idef)
 
     result= { 'request': nav.request, 'response': nav.response }
@@ -151,7 +157,7 @@ def get_views_meta(request, serializer, dataset_idef, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    nav= rsdb.Navigator()
+    nav= rsdb.Navtree()
     count= nav.get_count(db, dataset_idef)
 
     result= { 'request': nav.request, 'response': nav.response }
@@ -166,7 +172,7 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    nav= rsdb.Navigator()
+    nav= rsdb.Navtree()
     data= nav.get_issue(db, dataset_idef, view_idef)
 
     result= { 'request': nav.request, 'response': nav.response }
@@ -181,7 +187,7 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
-    nav= rsdb.Navigator()
+    nav= rsdb.Navtree()
     count= nav.get_count(db, dataset_idef, view_idef)
 
     result= { 'request': nav.request, 'response': nav.response }
