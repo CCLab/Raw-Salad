@@ -101,6 +101,7 @@ def get_datasets(request, serializer, db=None):
     if db is None:
         db= rsdb.DBconnect("mongodb").dbconnect
 
+    print dir( rsdb )
     nav= rsdb.Navtree()
     data= nav.get_dataset(db)
 
