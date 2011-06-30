@@ -43,8 +43,7 @@ var _utils = (function () {
             }
             result[ level ].push( element );
         }
-        console.log( result );
-        debugger;
+
         return result;
     };
 

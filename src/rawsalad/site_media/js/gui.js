@@ -147,6 +147,12 @@ var _gui = (function () {
         else {
             new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
         }
+
+        _store.active_sheet( sheet_nr );
+        _store.active_group( group_nr );
+
+        _table.clean_table();
+        _table.init_table( filtered_sheet );
     };
 
 

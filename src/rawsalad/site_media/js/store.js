@@ -201,11 +201,11 @@ var _store = (function () {
     };
 
 
-    that.add_new_sheet = function ( data ) {
+    that.add_new_sheet = function ( sheet ) {
         var active_grp = that.active_group();
         var next_sheet_number = that.next_sheet_number() ;
 
-        active_grp['sheets'].push( sheet( data ) );
+        active_grp['sheets'].push( sheet );
         that.active_sheet_index( next_sheet_number );
     };
 
