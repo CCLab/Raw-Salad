@@ -147,6 +147,7 @@ var _gui = (function () {
         else {
             new_tab.insertAfter( '#snap'+group_nr+'-'+(sheet_nr-1) );
         }
+        debugger;
     };
 
 
