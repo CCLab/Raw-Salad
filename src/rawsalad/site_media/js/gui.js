@@ -89,18 +89,63 @@ var _gui = (function () {
 
 
     // used once when some perspective is chosen for the very first time
-    that.init_app = function () {
+    that.init_app = function ( collection_name ) {
         $('#open-close-choose-panel')
             .show();
 
-        // make it "not hidden" (invisible though) to make zebra
-        $('#application')
-            .css( 'opacity', 0 )
-            .show();
+        that.create_sheet_tab({
+            // TODO move name from func arg to store!!
+            name: collection_name,
+            group_nr: _store.active_group_index(),
+            sheet_nr: _store.active_sheet_index()
+        });
 
-        that.make_zebra();
         hide_choose_panel();
     }
+
+
+    that.create_sheet_tab = function ( args ) {
+        var html = [];
+
+        var group_nr = args.group_nr || _store.active_group_index();
+        var sheet_nr = args.sheet_nr || _store.active_sheet_index();
+        var sheet_name = args.name || "Arkusz " + group_nr + '-' + sheet_nr;
+        var filtered_sheet = args.filtered_sheet;
+
+        var group_changed = _store.active_group_index() !== group_nr;
+        var sheet_changed = _store.active_sheet_index() !== sheet_nr;
+        var new_tab;
+
+        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
+        html.push( 'class="snapshot active">' );
+        html.push( sheet_name );
+        html.push( '</div>' );
+
+        new_tab = $( html.join('') );
+
+        $('.snapshot').removeClass('active');
+        new_tab
+            .addClass( 'active' )
+            .click( function () {
+                $('.snapshot').removeClass('active');
+                $(this).addClass('active');
+
+                if( sheet_changed || group_changed ) {
+                    _store.active_sheet( sheet_nr );
+                    _store.active_group( group_nr );
+
+                    _table.clean_table();
+                    _table.init_table( filtered_sheet );
+                }
+            });
+
+        if( sheet_nr === 0 ) {
+            new_tab.insertBefore( '#save-snapshot' );
+        }
+        else {
+            new_tab.insertAfter( '#snap'+group_nr+'-'+(sheet_nr-1) );
+        }
+    };
 
 
     that.make_zebra = function () {
@@ -108,6 +153,7 @@ var _gui = (function () {
         $('tbody > tr').not(':hidden').each( function ( i ) {
             if( i % 2 === 0 ) {
                 $(this).removeClass( 'odd' );
+
                 $(this).addClass( 'even' );
             }
             else {
@@ -117,47 +163,6 @@ var _gui = (function () {
         });
     };
 
-
-    that.create_sheet_tab = function ( args ) {
-        var html = [];
-        var sheet_name = args.name;
-        var new_sheet_nr = args.sheet_nr;
-        var group_nr = args.group_nr;
-        var filtered_sheet = args.filtered_sheet;
-        var predecessor;
-        var group_changed;
-
-        html.push( '<div id="snap-' + group_nr + '-' + new_sheet_nr + '" ' );
-        html.push( 'class="snapshot active">' );
-        html.push( sheet_name );
-        html.push( '</div>' );
-
-        if( new_sheet_nr === 1 ) {
-            predecessor = $( '#basic-snapshot-' + group_nr );
-        } else {
-            predecessor = $( '#snap-' + group_nr + '-' + (new_sheet_nr - 1));
-        }
-
-        $( html.join('') ).insertAfter( predecessor );
-
-        $('.snapshot').removeClass('active');
-        $('#snap-' + group_nr + '-' + new_sheet_nr )
-            .addClass( 'active' )
-            .click( function () {
-                $('.snapshot').removeClass('active');
-                $(this).addClass('active');
-
-                group_changed = _store.active_group_index() !== group_nr;
-                if ( _store.active_sheet_index() !== new_sheet_nr || group_changed ) {
-
-                     _sheet.change_active_sheet({
-                        'sheet_nr': new_sheet_nr,
-                        'group_changed': group_changed,
-                        'filtered_sheet': filtered_sheet
-                    });
-                }
-            });
-    };
 
     return that;
 
@@ -277,7 +282,7 @@ var _gui = (function () {
             .append( $( html.join('') ))
             .show()
             .find( '.position' )
-            .find('.more' )
+            .find( '.more' )
             .click( function () {
                 var col_id = {
                     dataset: $(this).parent().attr( 'data-set-id' ),
@@ -289,39 +294,11 @@ var _gui = (function () {
                 if( _store.create_new_group( col_id ) ) {
                     // get top-level data from db
                     _db.get_init_data();
-                    name = col_id['dataset'] + '-' +
-                           col_id['perspective'] + '-' +
-                           col_id['issue'];
-                    create_basic_snapshot_button({
-                          'basic_snapshot_name': name
-                    });
                 }
                 else {
                     // go back to application with focus on requested sheet
                     hide_choose_panel();
                 }
-            });
-    };
-
-
-    function create_basic_snapshot_button( args ) {
-        var html = [];
-        var max_group_nr;
-        var name = args.basic_snapshot_name;
-
-        max_group_nr = _store.max_group_number() - 1;
-        html.push('<div id="basic-snapshot-' + max_group_nr() +
-                  '" class="basic-snapshot active">');
-        html.push(name);
-        html.push('</div>');
-
-        $('.basic-snapshot').removeClass('active');
-        $( html.join('') )
-            .insertBefore('#save-snapshot')
-            .click( function () {
-                $('.basic-snapshot').removeClass('active');
-                $(this).addClass('active');
-                _sheet.show_basic_sheet( {'group_nr': max_group_nr} );
             });
     };
 

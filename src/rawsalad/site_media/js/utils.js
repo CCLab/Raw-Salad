@@ -74,11 +74,3 @@ var _utils = (function () {
     return that;
 
 })();
-
-// this function cames from jQuery API example
-$.fn.equalize_heights = function() {
-    return this.height( Math.max.apply (
-        this, $(this).map( function ( i, e ) {
-            return $(e).height()
-    }).get()
-))};

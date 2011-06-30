@@ -53,7 +53,7 @@ var _db = (function () {
                 // create a table
                 _table.init_table();
                 // initialize an application
-                _gui.init_app();
+                _gui.init_app( data['name'] );
             }
         });
     };

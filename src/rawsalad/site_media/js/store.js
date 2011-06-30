@@ -209,6 +209,8 @@ var _store = (function () {
         that.active_sheet_index( next_sheet_number );
     };
 
+    return that;
+
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
     var meta_data = [];
@@ -247,7 +249,6 @@ var _store = (function () {
                 };
             }),
             'pending_nodes': [],
-
             'name': data['name']
         };
     };
@@ -265,9 +266,6 @@ var _store = (function () {
             'basic_changed': false
         };
     };
-
-
-    return that;
 
 }) ();
 

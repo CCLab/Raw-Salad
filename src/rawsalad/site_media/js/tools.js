@@ -144,7 +144,6 @@ var _tools = (function () {
                 that.sort( _store.active_rows(), settings );
 
                 _table.clean_table();
-debugger;
                 _table.init_table();
                 $(this).hide();
 
@@ -230,7 +229,7 @@ debugger;
                 $.extend( true, new_sheet, _store.active_sheet() );
                 new_sheet['rows'] = _algorithms.filter( new_sheet['rows'], mask );
 
-                _sheet.create_new_sheet( new_sheet, "arkusz", true );
+                _sheet.create_new_sheet( new_sheet, "Arkusz", true );
 
                 _table.clean_table();
                 _table.init_table( true );
@@ -246,19 +245,6 @@ debugger;
         $('#save-snapshot')
             .click( function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
-            });
-
-        $('#basic-snapshot')
-            .click( function () {
-                $('.snapshot').removeClass('active');
-                $(this).addClass('active');
-
-                if ( _store.active_sheet_index() !== 0 ) {
-                    _store.active_sheet(0);
-                    _table.clean_table();
-                    _table.generate_header();
-                    _table.generate_table_body();
-                }
             });
     }
 
