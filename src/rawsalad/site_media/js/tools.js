@@ -29,11 +29,11 @@ var _tools = (function () {
 //  P U B L I C   I N T E R F A C E
     var that = {};
 
+    // TODO refactor this !!!!
     that.sort = function ( data, sett ) {
         var id = "idef";
-
+        // TODO what is it for?!
         var new_table_data_object = {};
-
         _algorithms.prepare_sorting_setting( sett, id );
         _algorithms.sort( data, sett );
     };
@@ -140,7 +140,7 @@ var _tools = (function () {
                         }
                     );
                 }
-debugger;
+
                 that.sort( _store.active_rows(), settings );
 
                 _table.clean_table();

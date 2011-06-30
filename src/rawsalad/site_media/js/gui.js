@@ -127,36 +127,34 @@ var _gui = (function () {
         var predecessor;
         var group_changed;
 
-        html.push('<div id="snap-' + group_nr.toString() + '-' +
-                  new_sheet_nr.toString() + '" class="snapshot active">');
-        html.push(sheet_name);
-        html.push('</div>');
+        html.push( '<div id="snap-' + group_nr + '-' + new_sheet_nr + '" ' );
+        html.push( 'class="snapshot active">' );
+        html.push( sheet_name );
+        html.push( '</div>' );
 
-        if ((new_sheet_nr - 1) === 0) {
-            predecessor = $( '#basic-snapshot-' + group_nr.toString() );
+        if( new_sheet_nr === 1 ) {
+            predecessor = $( '#basic-snapshot-' + group_nr );
         } else {
-            predecessor = $( '#snap-' + group_nr.toString() +
-                             '-' + (new_sheet_nr - 1).toString() );
+            predecessor = $( '#snap-' + group_nr + '-' + (new_sheet_nr - 1));
         }
 
         $( html.join('') ).insertAfter( predecessor );
 
-        $('#snapshots')
-            .find('#snap-' + group_nr.toString() + '-' + new_sheet_nr.toString() )
-            .each( function () {
-                $('.snapshot').removeClass('active');
-                $(this).addClass('active');
-            })
+        $('.snapshot').removeClass('active');
+        $('#snap-' + group_nr + '-' + new_sheet_nr )
+            .addClass( 'active' )
             .click( function () {
                 $('.snapshot').removeClass('active');
                 $(this).addClass('active');
 
-                group_changed = (_store.active_group_index() !== group_nr);
+                group_changed = _store.active_group_index() !== group_nr;
                 if ( _store.active_sheet_index() !== new_sheet_nr || group_changed ) {
 
-                     _sheet.change_active_sheet( {'sheet_nr': new_sheet_nr,
-                                                  'group_changed': group_changed,
-                                                  'filtered_sheet': filtered_sheet} );
+                     _sheet.change_active_sheet({
+                        'sheet_nr': new_sheet_nr,
+                        'group_changed': group_changed,
+                        'filtered_sheet': filtered_sheet
+                    });
                 }
             });
     };
@@ -312,7 +310,7 @@ var _gui = (function () {
         var name = args.basic_snapshot_name;
 
         max_group_nr = _store.max_group_number() - 1;
-        html.push('<div id="basic-snapshot-' + max_group_nr.toString() +
+        html.push('<div id="basic-snapshot-' + max_group_nr() +
                   '" class="basic-snapshot active">');
         html.push(name);
         html.push('</div>');
