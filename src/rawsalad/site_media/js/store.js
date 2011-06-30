@@ -53,8 +53,6 @@ var _store = (function () {
 
     // creates a new group or sets an active group index to apropriate group
     that.create_new_group = function ( data ) {
-        var g = groups;
-        debugger;
         var found = find_group( data );
 
         if( found !== -1 ) {
@@ -211,7 +209,6 @@ var _store = (function () {
         that.active_sheet_index( next_sheet_number );
     };
 
-    return that;
 
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
@@ -222,12 +219,10 @@ var _store = (function () {
     var active_group_number = null;
 
 
+
     // returns group id if it exists or -1 if there is no such a group
     function find_group( data ) {
         var i;
-        if( groups === undefined ) {
-            return -1;
-        }
 
         for( i = 0; i < groups.length; i += 1 ) {
             if( data['dataset'] === groups[i]['dataset'] &&
@@ -271,6 +266,8 @@ var _store = (function () {
             'basic_changed': false
         };
     };
+
+    return that;
 
 }) ();
 
