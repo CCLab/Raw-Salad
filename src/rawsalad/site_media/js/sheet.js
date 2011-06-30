@@ -38,7 +38,6 @@ var _sheet = (function () {
         new_sheet["name"] = sheet_name + ' ' + sheet_nr;
 
         _store.add_new_sheet( new_sheet );
-
         _gui.create_sheet_tab({
             'name': new_sheet['name'],
             'sheet_nr': sheet_nr,

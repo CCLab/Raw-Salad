@@ -129,16 +129,18 @@ var _gui = (function () {
         new_tab
             .addClass( 'active' )
             .click( function () {
+                var id_elements = $(this).attr('id').split('-');
+                var group_nr = id_elements[1];
+                var sheet_nr = id_elements[0];
+
                 $('.snapshot').removeClass('active');
                 $(this).addClass('active');
 
-                if( sheet_changed || group_changed ) {
-                    _store.active_sheet( sheet_nr );
-                    _store.active_group( group_nr );
+                _store.active_group( group_nr );
+                _store.active_sheet( sheet_nr );
 
-                    _table.clean_table();
-                    _table.init_table( filtered_sheet );
-                }
+                _table.clean_table();
+                _table.init_table();
             });
 
         if( sheet_nr === 0 ) {

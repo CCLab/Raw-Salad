@@ -47,6 +47,14 @@ var _utils = (function () {
         return result;
     };
 
+    that.next_id = (function () {
+        var id = 1000;
+        var fun = function () {
+            return id++;
+        };
+
+        return fun;
+    })();
 
     that.next_letter = function ( letter ) {
         var number = letter.charCodeAt( 0 );
