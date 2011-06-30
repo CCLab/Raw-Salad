@@ -73,7 +73,6 @@ var _table = (function () {
         var level = 'a';
         var hashed_list = _utils.hash_list( _store.active_rows() );
 
-debugger;
         while( !!hashed_list[ level ] ) {
             if( level === 'a' ) {
                 add_top_level( hashed_list[ level ] );
@@ -91,6 +90,7 @@ debugger;
         var i, len = data.length;
         var schema = _store.basic_schema();
 
+debugger;
         for( i = 0; i < len; ++i ) {
             $('tbody').append( generate_row({
                 node: data[i],
