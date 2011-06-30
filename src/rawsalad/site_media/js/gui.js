@@ -100,6 +100,8 @@ var _gui = (function () {
             sheet_nr: _store.active_sheet_index()
         });
 
+        $('#application').show();
+
         hide_choose_panel();
     }
 
