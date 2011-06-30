@@ -53,6 +53,8 @@ var _store = (function () {
 
     // creates a new group or sets an active group index to apropriate group
     that.create_new_group = function ( data ) {
+        var g = groups;
+        debugger;
         var found = find_group( data );
 
         if( found !== -1 ) {
