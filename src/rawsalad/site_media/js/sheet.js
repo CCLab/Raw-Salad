@@ -45,6 +45,7 @@ var _sheet = (function () {
             'group_nr': group_nr,
             'filtered_sheet': filtered_sheet
         });
+        debugger;
     }
 
     return that;

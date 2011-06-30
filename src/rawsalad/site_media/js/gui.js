@@ -101,7 +101,7 @@ var _gui = (function () {
         });
 
         $('#application').show();
-
+        that.make_zebra();
         hide_choose_panel();
     }
 
