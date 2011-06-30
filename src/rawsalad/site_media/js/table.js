@@ -90,7 +90,6 @@ var _table = (function () {
         var i, len = data.length;
         var schema = _store.basic_schema();
 
-debugger;
         for( i = 0; i < len; ++i ) {
             $('tbody').append( generate_row({
                 node: data[i],
