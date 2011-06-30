@@ -223,6 +223,9 @@ var _store = (function () {
     // returns group id if it exists or -1 if there is no such a group
     function find_group( data ) {
         var i;
+        if( groups === undefined ) {
+            return -1;
+        }
 
         for( i = 0; i < groups.length; i += 1 ) {
             if( data['dataset'] === groups[i]['dataset'] &&
