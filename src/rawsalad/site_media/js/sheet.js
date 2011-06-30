@@ -35,13 +35,13 @@ var _sheet = (function () {
         var new_sheet = {};
 
         $.extend( true, new_sheet, sheet_data );
-        new_sheet["name"] = sheet_name + ' ' + new_sheet_nr;
+        new_sheet["name"] = sheet_name + ' ' + sheet_nr;
 
         _store.add_new_sheet( new_sheet );
 
         _gui.create_sheet_tab({
             'name': new_sheet['name'],
-            'sheet_nr': new_sheet_nr,
+            'sheet_nr': sheet_nr,
             'group_nr': group_nr,
             'filtered_sheet': filtered_sheet
         });
