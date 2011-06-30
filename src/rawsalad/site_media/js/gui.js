@@ -138,7 +138,6 @@ var _gui = (function () {
 
                     _table.clean_table();
                     _table.init_table( filtered_sheet );
-                    debugger;
                 }
             });
 

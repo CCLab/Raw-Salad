@@ -73,6 +73,7 @@ var _table = (function () {
         var level = 'a';
         var hashed_list = _utils.hash_list( _store.active_rows() );
 
+debugger;
         while( !!hashed_list[ level ] ) {
             if( level === 'a' ) {
                 add_top_level( hashed_list[ level ] );
