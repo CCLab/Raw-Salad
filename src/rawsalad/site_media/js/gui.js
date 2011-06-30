@@ -145,9 +145,7 @@ var _gui = (function () {
             new_tab.insertBefore( '#save-snapshot' );
         }
         else {
-            var tmp = $( '#snap'+group_nr+'-'+(sheet_nr-1) );
-            new_tab.insertAfter(tmp);
-            debugger;
+            new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
         }
     };
 
