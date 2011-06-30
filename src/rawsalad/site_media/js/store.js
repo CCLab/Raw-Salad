@@ -32,8 +32,8 @@ var _store = (function () {
     // meta_data setter/getter
     that.meta_data = function ( value ) {
         // set it just once
-        _assert.is_equal( meta_data.length, 0,
-                          "meta_data already assigned" );
+//        _assert.is_equal( meta_data.length, 0,
+//                          "meta_data already assigned" );
 
         meta_data = value;
     };
