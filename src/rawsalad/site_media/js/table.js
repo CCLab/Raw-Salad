@@ -103,10 +103,11 @@ var _table = (function () {
     function add_rows( data ) {
         var i = data.length - 1;
         var schema = _store.basic_schema();
-
-        var parent = $( '#' + data[0]['data']['parent'] );
+	var parent;
+        
 
         for( ; i >= 0; i -= 1 ) {
+            parent = $( '#' + data[i]['data']['parent'] );
             parent.after( generate_row({
                 node: data[i],
                 schema: schema

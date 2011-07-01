@@ -131,8 +131,9 @@ var _gui = (function () {
             .click( function () {
                 var id_elements = $(this).attr('id').split('-');
                 var group_nr = id_elements[1];
-                var sheet_nr = id_elements[0];
+                var sheet_nr = id_elements[2];
 
+		console.log( group_nr + " :: " + sheet_nr );
                 $('.snapshot').removeClass('active');
                 $(this).addClass('active');
 
