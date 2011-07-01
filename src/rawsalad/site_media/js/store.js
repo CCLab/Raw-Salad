@@ -107,15 +107,25 @@ var _store = (function () {
     };
 
 
-    that.set_selected = function ( id ) {
-        that.active_rows().forEach( function ( node ) {
+    that.set_selected = function ( id, state ) {
+        var node, rows = that.active_rows();
+        var i, len = rows.length;
+
+        for( i = 0; i < len; i += 1 ) {
+            node = rows[i];
             if( node['data']['idef'] === id ) {
-                node['state']['selected'] = true;
+                node['state']['selected'] = state;
+                return;
             }
-            else {
-                node['state']['selected'] = false;
-            }
-        });
+        }
+//        that.active_rows().forEach( function ( node ) {
+//            if( node['data']['idef'] === id ) {
+//                node['state']['selected'] = true;
+//            }
+//            else {
+//                node['state']['selected'] = false;
+//            }
+//        });
     };
 
 

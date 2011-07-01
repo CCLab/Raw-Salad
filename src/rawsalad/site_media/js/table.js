@@ -108,6 +108,9 @@ var _table = (function () {
 
         for( ; i >= 0; i -= 1 ) {
             parent = $( '#' + data[i]['data']['parent'] );
+	    if( parent.attr( 'data-open' ) === 'false' ) {
+	    	continue;
+	    }
             parent.after( generate_row({
                 node: data[i],
                 schema: schema
@@ -181,11 +184,6 @@ var _table = (function () {
             // open/close a subtree if it's a-level or already selected/open
             open_close_subtree( $(this), a_root );
 
-            // clear selected attributes and set selection to clicked tree
-            _store.set_selected( a_root_id );
-            $('tr[data-selected=true]').attr('data-selected', 'false');
-            a_root.attr('data-selected', 'true');
-
             _gui.make_zebra();
         });
 
@@ -195,6 +193,7 @@ var _table = (function () {
 
     function open_close_subtree( node, root ) {
         var a_root = root || a_parent( node );
+        var a_root_id = a_root.attr('id');
         var is_a_open     = a_root.attr( 'data-open' );
         var is_a_selected = a_root.attr( 'data-selected' );
         var id = node.attr('id');
@@ -216,6 +215,11 @@ var _table = (function () {
                 // mark subtree as open
                 _store.set_open( id, true );
                 node.attr( 'data-open', 'true' );
+
+                // clear selected attributes and set selection to clicked tree
+                _store.set_selected( a_root_id, true );
+                $('tr[data-selected=true]').attr('data-selected', 'false');
+                a_root.attr('data-selected', 'true');
             }
             // the node is closed
             else {
@@ -226,13 +230,23 @@ var _table = (function () {
                 _store.set_open( id, false );
                 node.attr( 'data-open', 'false' );
 
+
                 // if it's a-level node - clear the css highlight/dim
                 if( node.hasClass( 'a' ) ) {
                     node.removeClass( 'root' );
                     $('.dim').removeClass('dim');
                     $('.next').removeClass('next');
+
+                    // clear selected attributes and set selection to clicked tree
+                    _store.set_selected( a_root_id, false );
+                    $('tr[data-selected=true]').attr('data-selected', 'false');
                 }
             }
+        }
+        else if( a_root.attr( 'data-selected' ) === 'false' ) {
+            _store.set_selected( a_root_id, true );
+            $('tr[data-selected=true]').attr('data-selected', 'false');
+            a_root.attr('data-selected', 'true');
         }
     }
 
