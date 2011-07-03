@@ -176,7 +176,7 @@ The structure of the raw data urls is as follows:
 
 2. Additional GET attribute "fields" can be used to narrow the result's size:
 
-   fields=[<field_name>(, <field_name>)+] - list of fields of specified entities
+   fields=<field_name>(, <field_name>)+ - list of fields of specified entities
 
    EXAMPLES:
       
@@ -184,9 +184,9 @@ The structure of the raw data urls is as follows:
       <col> = http://cecyf.megivps.pl/api/json/dataset/3/view/1/issue/2012/  
 
       A list of all entities with only name and total value as a result:
-      <col>/a/?fields=[name, val]
+      <col>/a/?fields=name,val
 
       A list of two regions with idef and total value as a result
-      <col>/a/[280000+AND+320000]/?fields=[idef, val]
+      <col>/a/[280000+AND+320000]/?fields=idef,val
 
 
