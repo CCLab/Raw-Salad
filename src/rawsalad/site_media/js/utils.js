@@ -59,7 +59,7 @@ var _utils = (function () {
     // go through the subtree of id-node and do fun
     that.with_subtree = function ( id, fun ) {
         $('tr.'+id).each( function () {
-            with_subtree( $(this).attr('id'), fun );
+            that.with_subtree( $(this).attr('id'), fun );
             fun.call( $(this) );
         });
     }
