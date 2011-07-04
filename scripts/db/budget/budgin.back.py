@@ -65,7 +65,7 @@ def clean_format(src):
 
 #-----------------------------
 def sort_format(src):
-    #format 1-2-3... to 0001-0002-0003...
+    #format 1-2-3... to 001-002-003...
     src_list= src.split('-')
     res_list= []
     for elm in src_list:
@@ -87,11 +87,11 @@ def fetch_elem(tbl, conn, elem_idef):
 
 
 #-----------------------------
-def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal):
+def work_cursor(work_tbl, connection, work_year, budget_traditional):
     out= []
     print '...quering database'
     select_statement= """
-        SELECT DISTINCT elem_name, substring(parent_sort from '....') as parent2, substring(parent_sort from '....-....') as parent1, parent_sort as parent0, parent, czesc,
+        SELECT DISTINCT elem_name, substring(parent_sort from '...') as parent2, substring(parent_sort from '...-...') as parent1, parent_sort as parent0, parent, czesc,
         SUM(v_total) AS sum_v_total, SUM(v_nation) as sum_v_nation, SUM(v_eu) as sum_v_eu
         from
     """ + work_tbl + """
@@ -130,12 +130,10 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
             if len(dysp_dict) != 0: out.append(dysp_dict)
             dysp_dict= {}
             dysp_dict['name']= row['elem_name']
-            dysp_dict['idef']= str(dysp_idef_count)
-            dysp_dict['idef_sort']= sort_format(dysp_dict['idef'])
+            dysp_dict['idef']= 'dt-'+str(dysp_idef_count)
+            dysp_dict['idef_sort']= 'dt-'+sort_format(str(dysp_idef_count))
             dysp_dict['parent']= None
             dysp_dict['parent_sort']= None
-            dysp_dict['orig_idef']= None # linking to goal priented budget - not on the level of dysp
-            dysp_dict['orig_ns']= budget_goal # linking to goal priented budget
             dysp_dict['node']= None # Dysponent is no node
             dysp_dict['leaf']= False
             dysp_dict['level']= 'a'
@@ -144,9 +142,8 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
             dysp_dict['v_eu']= row['sum_v_eu']
             dysp_dict['v_total']= row['sum_v_total']
             # loop control values
-            curr_dysp_idef= dysp_dict['idef']
+            curr_dysp_idef, curr_dysp_idef_sort= dysp_dict['idef'], dysp_dict['idef_sort']
             curr_parent2= None # reset - new dysponent always means new funkcja
-            func_idef_count= 0 # numbering funkcji
 #             print "%10s; %10s; %-10s; %s; %-50s;" % (dysp_dict['idef'], '', dysp_dict['level'], dysp_dict['type'], dysp_dict['name'])
         else:
             dysp_dict['v_nation'] += row['sum_v_nation']
@@ -154,19 +151,15 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
             dysp_dict['v_total'] += row['sum_v_total']
 
         # creating funkcja dict - level of parent2, 'b'
-        # print "curr_parent2 - %s, row['parent2'] - %s in row %s" % (curr_parent2, row['parent2'], row)
         if curr_parent2 != row['parent2']:
             curr_parent2= row['parent2'] # current funkcja
             if len(parent2_dict) != 0: out.append(parent2_dict)
             parent2_dict= {}
-            func_idef_count += 1
             funk_row = fetch_elem(work_tbl, connection, str(int(row['parent2'])))
-            parent2_dict['idef']= "-".join([curr_dysp_idef, str(func_idef_count)])
-            parent2_dict['idef_sort']= sort_format(parent2_dict['idef'])
+            parent2_dict['idef']= curr_dysp_idef + '-'+funk_row['idef']
+            parent2_dict['idef_sort']= curr_dysp_idef_sort + '-'+funk_row['idef_sort']
             parent2_dict['parent']= curr_dysp_idef
-            parent2_dict['parent_sort']= sort_format(parent2_dict['parent'])
-            parent2_dict['orig_idef']= funk_row['idef'] # linking to goal oriented budget
-            parent2_dict['orig_ns']= budget_goal # linking to goal priented budget - collection            
+            parent2_dict['parent_sort']= curr_dysp_idef_sort
             parent2_dict['name']= funk_row['elem_name']
             parent2_dict['type']= funk_row['elem_type']
             parent2_dict['node']= None # Funkcja is no node
@@ -176,9 +169,8 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
             parent2_dict['v_eu']= row['sum_v_eu']
             parent2_dict['v_total']= row['sum_v_total']
             # loop control values
-            curr_funk_idef= parent2_dict['idef']
+            curr_funk_idef, curr_funk_idef_sort= parent2_dict['idef'], parent2_dict['idef_sort']
             curr_parent1= None # reset - new funkcja always means new zadanie
-            zad_idef_count= 0 # numbering zadanie
 #             print "%10s; %10s; %-10s; %8s %s; %-50s" % (parent2_dict['idef'], parent2_dict['parent'], parent2_dict['level'], '', parent2_dict['type'], parent2_dict['name'])
         else:
             parent2_dict['v_nation'] += row['sum_v_nation']
@@ -196,14 +188,11 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
                     parent1_dict_node1['leaf']= True # Zadanie CAN BE a leaf in node 1 (of Funk 22)
                 out.append(parent1_dict_node1)
             parent1_dict= {}
-            zad_idef_count += 1
             zadn_row = fetch_elem(work_tbl, connection, clean_format(row['parent1']))
-            parent1_dict['idef']= "-".join([curr_funk_idef, str(zad_idef_count)])
-            parent1_dict['idef_sort']= sort_format(parent1_dict['idef'])
+            parent1_dict['idef']= curr_dysp_idef+'-'+zadn_row['idef']
+            parent1_dict['idef_sort']= curr_dysp_idef_sort+'-'+zadn_row['idef_sort']
             parent1_dict['parent']= curr_funk_idef
-            parent1_dict['parent_sort']= sort_format(parent1_dict['parent'])
-            parent1_dict['orig_idef']= zadn_row['idef']
-            parent1_dict['orig_ns']= budget_goal
+            parent1_dict['parent_sort']= curr_funk_idef_sort
             parent1_dict['name']= zadn_row['elem_name']
             parent1_dict['type']= zadn_row['elem_type']
             parent1_dict['node']= 0 # Zadanie is a node 0
@@ -213,9 +202,8 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
             parent1_dict['v_eu']= row['sum_v_eu']
             parent1_dict['v_total']= row['sum_v_total']
             # loop control values
-            curr_zadn_idef= parent1_dict['idef']
+            curr_zadn_idef, curr_zadn_idef_sort= parent1_dict['idef'], parent1_dict['idef_sort']
             curr_parent0= None # reset - new zadanie always means new podzadanie
-            podzad_idef_count= 0 # numbering podzadanie
 #             print "%10s; %10s; %-10s; %16s %s; %-50s" % (parent1_dict['idef'], parent1_dict['parent'], parent1_dict['level'], '', parent1_dict['type'], parent1_dict['name'])
         else:
             parent1_dict['v_nation'] += row['sum_v_nation']
@@ -230,17 +218,14 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
                     out.append(parent0_dict)
                     parent0_dict_node1= parent0_dict.copy() # for node 1
                     parent0_dict_node1['node']= 1
-                    # parent0_dict_node1['leaf']= True # Podzadanie IS ALWAYS a leaf in node 1
+                    parent0_dict_node1['leaf']= True # Podzadanie IS ALWAYS a leaf in node 1
                     out.append(parent0_dict_node1)
                 parent0_dict= {}
-                podzad_idef_count += 1
                 podz_row = fetch_elem(work_tbl, connection, row['parent'])
-                parent0_dict['idef']= "-".join([curr_zadn_idef, str(podzad_idef_count)])
-                parent0_dict['idef_sort']= sort_format(parent0_dict['idef'])
+                parent0_dict['idef']= curr_dysp_idef+'-'+podz_row['idef']
+                parent0_dict['idef_sort']= curr_dysp_idef_sort+'-'+podz_row['idef_sort']
                 parent0_dict['parent']= curr_zadn_idef
-                parent0_dict['parent_sort']= sort_format(parent0_dict['parent'])
-                parent0_dict['orig_idef']= podz_row['idef']
-                parent0_dict['orig_ns']= budget_goal
+                parent0_dict['parent_sort']= curr_zadn_idef_sort
                 parent0_dict['name']= podz_row['elem_name']
                 parent0_dict['node']= 0 # Podzadanie is a node 0
                 parent0_dict['type']= podz_row['elem_type']
@@ -250,8 +235,7 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
                 parent0_dict['v_eu']= row['sum_v_eu']
                 parent0_dict['v_total']= row['sum_v_total']
                 # loop control values
-                curr_podz_idef= parent0_dict['idef']
-                czesc_idef_count= 0 # numbering czesc
+                curr_podz_idef, curr_podz_idef_sort= parent0_dict['idef'], parent0_dict['idef_sort']
 #                 print "%10s; %10s; %-10s; %20s %s; %-50s" % (row['parent'], parent0_dict['parent'], parent0_dict['level'], '', parent0_dict['type'], parent0_dict['name'])
         else:
             if row['parent1'] != row['parent0']: # there is at least 1 podzadanie, summarizing podzadanie
@@ -261,13 +245,12 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
 
         # creating czesc dict - level below parent, 'e' or 'd' (in case of funk 22 where there is no podzadanie leve)
         czesc_dict= {}
-        czesc_idef_count += 1
         if row['parent1'] == row['parent0']: # czesc is a child of Zadanie
-            czesc_dict['idef']= '-'.join([curr_zadn_idef, str(czesc_idef_count)])
+            czesc_dict['idef']= '-'.join([curr_zadn_idef, row['czesc']])
             czesc_dict['parent']= curr_zadn_idef
             czesc_dict['level']= 'd'
         else: # czesc is a child of Podzadanie
-            czesc_dict['idef']= '-'.join([curr_podz_idef, str(czesc_idef_count)])
+            czesc_dict['idef']= '-'.join([curr_podz_idef, row['czesc']])
             czesc_dict['parent']= curr_podz_idef
             czesc_dict['level']= 'e'
         czesc_dict['idef_sort']= sort_format(czesc_dict['idef'])
@@ -282,9 +265,6 @@ def work_cursor(work_tbl, connection, work_year, budget_traditional, budget_goal
         else:
             czesc_dict['name']= row['czesc']
         czesc_dict['v_nation'], czesc_dict['v_eu'], czesc_dict['v_total']= row['sum_v_nation'], row['sum_v_eu'], row['sum_v_total']
-        czesc_dict['orig_idef']= None # linking to goal oriented budget - not on the level of czesc
-        czesc_dict['orig_ns']= budget_goal
-
         out.append(czesc_dict)
         # summarizing grand totals only on the level of czesc
         grand_total_nation += row['sum_v_nation']
@@ -409,11 +389,8 @@ if __name__ == "__main__":
     coll_data= args[0] #'dd_bugd2011_in'
 
     wrk_table= "budg_go"
-    budgref_tr_name= 'dd_budg2011_tr'
-    budgref_go_name= "".join(['dd_budg',str(opts.budg_year),'_go'])
-    budgref_tr= mongo_db[budgref_tr_name]
-    
-    obj_parsed= work_cursor(wrk_table, connect_postgres, opts.budg_year, budgref_tr, budgref_go_name)
+    budget_ref= mongo_db['dd_budg2011_tr']
+    obj_parsed= work_cursor(wrk_table, connect_postgres, opts.budg_year, budget_ref)
 
     print "...no errors so far - inserting data into mongo collection"
 

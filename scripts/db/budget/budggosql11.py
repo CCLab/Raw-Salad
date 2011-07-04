@@ -403,7 +403,7 @@ def csv_parse(csv_read, table, schema, conn):
 if __name__ == "__main__":
     # process command line options
     cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] src_filename.csv src_schema.json") 
-    cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file (CSV)")
+    cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
     cmdparser.add_option("-c", action="store_true",dest='dbact',help="clean db before insert (ignored if db is not updated)")
 
     opts, args = cmdparser.parse_args()

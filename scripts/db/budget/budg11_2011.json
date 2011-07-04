@@ -1,0 +1,67 @@
+{
+    "name": "budzet_srodkow_EU_zadaniowy_podzadania_2011",
+    "perspective": "Budżet środków europejskich 2011 w układzie zadaniowym",
+    "ns": "dd_budg2011_go",
+    "dataset": 1,
+    "idef": 1,
+    "issue": "2011",
+    "explorable": "type",
+    "max_level": "d",
+    "columns": [
+        {
+            "key": "type",
+            "label": "Typ",
+            "type": "string",
+            "basic": true,
+            "processable": false
+            },
+        {
+            "key": "name",
+            "label": "Nazwa",
+            "type": "string",
+            "basic": true,
+            "processable": true
+            },
+        {
+            "key": "czesc",
+            "label": "Część",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "czesc_name",
+            "label": "Część w budźecie księgowym",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "info",
+            "label": "Cel & Miernik",
+            "type": "string",
+            "processable": false,
+            "basic": false
+            },
+        {
+            "key": "v_eu",
+            "label": "Środki europejskie",
+            "processable": true,
+            "basic": true,
+            "type": "number",
+            "checkable": true
+            }
+        ],
+    "aux": {
+        "leaf": 1,
+        "parent": 1,
+        "level": 1,
+        "idef": 1
+        },
+    "query": {
+        "node": { "$in" : [ null, 1 ] }
+        },
+    "sort": {
+        "2": {"level": 1},
+        "1": {"parent_sort": 1},
+        "0": {"idef_sort": 1}
+        }
+    }

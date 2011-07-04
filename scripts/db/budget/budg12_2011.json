@@ -1,0 +1,61 @@
+{
+    "name": "budzet_srodkow_EU_instytucionalny_2012",
+    "perspective": "Budżet środków europejskich 2012 w układzie instytucionalnym",
+    "ns": "dd_budg2011_in",
+    "dataset": 1,
+    "idef": 2,
+    "issue": "2011",
+    "explorable": "type",
+    "max_level": "d",
+    "columns": [
+        {
+            "key": "type",
+            "label": "Typ",
+            "type": "string",
+            "basic": true,
+            "processable": false
+            },
+        {
+            "key": "name",
+            "label": "Nazwa",
+            "type": "string",
+            "basic": true,
+            "processable": true
+            },
+        {
+            "key": "czesc",
+            "label": "Część",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "czesc_name",
+            "label": "Część w budźecie księgowym",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "v_eu",
+            "label": "Środki europejskie",
+            "processable": true,
+            "basic": true,
+            "type": "number",
+            "checkable": true
+            }
+        ],
+    "aux": {
+        "leaf": 1,
+        "parent": 1,
+        "level": 1,
+        "idef": 1
+        },
+    "query": {
+        "node": { "$in" : [ null, 1 ] },
+        "v_eu": { "$gt" : 0 }
+        },
+    "sort": {
+        "2": {"level": 1},
+        "1": {"parent_sort": 1},
+        "0": {"idef_sort": 1}
+        }
+    }
