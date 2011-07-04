@@ -39,6 +39,7 @@ var _table = (function () {
         create_tbody();
 
 //        _gui.highlight_node();
+        _utils.
         _gui.make_zebra();
     };
 
@@ -73,6 +74,7 @@ var _table = (function () {
     function create_tbody() {
         var level = 'a';
         var hashed_list = _utils.hash_list( _store.active_rows() );
+        var selected_node;
 
         while( !!hashed_list[ level ] ) {
             if( level === 'a' ) {
@@ -83,6 +85,14 @@ var _table = (function () {
             }
 
             level = _utils.next_letter( level );
+        }
+        
+        // apply node selection(if there is selected node) to css classes
+        selected_node = _store.active_rows().filter( function ( e ) {
+            return e['state']['selected'];
+        });
+        if ( selected_node.length > 0 ) {
+            apply_selection( selected_node[0]['data']['idef'] );
         }
     }
 
@@ -154,40 +164,47 @@ var _table = (function () {
         // create & arm row
         row = $( html.join('') );
         row.click( function ( event ) {
-            // a-level parent
-            var a_root = a_parent( $(this) );
-            var a_root_id = a_root.attr('id');
-            // next a-level node
-            var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
-            var next = $('tr[data-index='+ (a_root_index + 1) +']');
-
-            // dim everything outside this a-rooted subtree
-            a_root
-                .siblings()
-                .not(':hidden')
-                .addClass('dim');
-
-            // make a-root background black
-            $('tr.root').removeClass('root');
-            a_root.addClass('root');
-
-            // highlight the subtree
-            _utils.with_subtree( a_root.attr('id'), function () {
-                // uses 'this' instead of '$(this)' for fun.call reason
-                this.removeClass( 'dim' );
-            });
-
-            // add the bottom border
-            $('.next').removeClass('next');
-            next.addClass('next');
+            // update css classes connected with node selection
+            apply_selection( $(this).attr('id') );
 
             // open/close a subtree if it's a-level or already selected/open
-            open_close_subtree( $(this), a_root );
+            open_close_subtree( $(this), a_parent( $(this) ) );
 
             _gui.make_zebra();
         });
 
         return row;
+    }
+    
+    function apply_selection( id ) {
+        var node = $('#' + id);
+        
+        // a-level parent
+        var a_root = a_parent( node );
+        var a_root_id = a_root.attr('id');
+        // next a-level node
+        var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
+        var next = $('tr[data-index='+ (a_root_index + 1) +']');
+        
+        // dim everything outside this a-rooted subtree
+        a_root
+            .siblings()
+            .not(':hidden')
+            .addClass('dim');
+
+        // make a-root background black
+        $('tr.root').removeClass('root');
+        a_root.addClass('root');
+
+        // highlight the subtree
+        _utils.with_subtree( a_root.attr('id'), function () {
+            // uses 'this' instead of '$(this)' for fun.call reason
+            this.removeClass( 'dim' );
+        });
+        
+        // add the bottom border
+        $('.next').removeClass('next');
+        next.addClass('next');
     }
 
 
