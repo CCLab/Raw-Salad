@@ -120,7 +120,7 @@ var _gui = (function () {
 
         html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
         html.push( 'class="snapshot active" ' );
-        html.push( 'alt="', sheet_name, '">' );
+        html.push( 'title="', sheet_name, '">' );
         html.push( sheet_name.length > 13 ?
                    sheet_name.slice( 0, 10 ) + '...' :
                    sheet_name );
@@ -151,6 +151,10 @@ var _gui = (function () {
         }
         else {
             new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
+        }
+
+        if( $('.snapshot').length == 10 ) {
+            $('#save-snapshot' ).hide();
         }
 
         _store.active_sheet( sheet_nr );
