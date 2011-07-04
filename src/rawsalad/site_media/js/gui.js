@@ -119,8 +119,11 @@ var _gui = (function () {
         var new_tab;
 
         html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
-        html.push( 'class="snapshot active">' );
-        html.push( sheet_name );
+        html.push( 'class="snapshot active" ' );
+        html.push( 'alt="', sheet_name, '">' );
+        html.push( sheet_name.length > 13 ?
+                   sheet_name.slice( 0, 10 ) + '...' :
+                   sheet_name );
         html.push( '</div>' );
 
         new_tab = $( html.join('') );
@@ -133,7 +136,6 @@ var _gui = (function () {
                 var group_nr = id_elements[1];
                 var sheet_nr = id_elements[2];
 
-		console.log( group_nr + " :: " + sheet_nr );
                 $('.snapshot').removeClass('active');
                 $(this).addClass('active');
 
@@ -160,7 +162,6 @@ var _gui = (function () {
 
 
     that.make_zebra = function () {
-        // TODO make it work with only current sheet
         $('tbody > tr').not(':hidden').each( function ( i ) {
             if( i % 2 === 0 ) {
                 $(this).removeClass( 'odd' );
