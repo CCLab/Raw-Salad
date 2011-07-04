@@ -4,118 +4,147 @@ import simplejson as json
 import pymongo
 import optparse
 import getpass
+from ConfigParser import ConfigParser
 
 #-----------------------------
-def db_insert(data_bulk, collect, **parms):
-    #params
-    clean= parms.pop('clean', False) 
-    condition_k= parms.pop('condition_k', None)
-    condition_v_raw= parms.pop('condition_v', None)
-    if parms: 
-        raise TypeError("Unsupported configuration options %s" % list(parms))
+def get_db_connect(fullpath, dbtype):
+    connect_dict= {}
 
-    condition_v= None
+    defaults= {
+        "basedir": fullpath
+    }
+
+    cfg= ConfigParser(defaults)
+    cfg.read(fullpath)
+    connect_dict["host"]= cfg.get(dbtype,"host")
+    connect_dict["port"]= cfg.getint(dbtype,"port")
+    connect_dict["database"]= cfg.get(dbtype,"database")
+    connect_dict["username"]= cfg.get(dbtype,"username")
     try:
-        if '.' in condition_v_raw:
-            condition_v= float(condition_v_raw)
-        elif ',' in condition_v_raw:
-            condition_v= float(condition_v_raw)
-        else:
-            condition_v= int(condition_v_raw)
+        connect_dict["password"]= cfg.get(dbtype,"password")
     except:
-        condition_v= str(condition_v_raw)
-    condition= dict({condition_k : condition_v})
-    if clean: # delete first
+        connect_dict["password"]= None
+
+    return connect_dict
+
+#-----------------------------
+def db_insert(data_bulk, collect, dbdel=False, query=None):
+    if dbdel: # delete first
         try:
-            if condition is not None:
-                print '...removing document(s) under condition', condition
-                collect.remove(condition, safe=True)
-                print "...specified documents deleted successfully"
+            print "...trying to remove document(s) under given condition"
+            collect.remove(query)
+            print "...specified documents deleted successfully"
         except Exception as e:
-            print 'Cannot delete data under:\n %s\n' % e
+            print "ERROR: cannot remove data:\n %s\n" % e
             return e
         
     try: # insert
+        print "...trying to insert document(s)"
         collect.insert(data_bulk, check_keys= False)
         return "...data insert successfully"
     except Exception as e:
-        print 'Cannot insert data:\n %s\n'
+        print "Cannot insert data:\n %s\n"
         return e
 
+#-----------------------------
+def parse_query(pth):
+    result_query= {}
+
+    test_presence= '{' and '}' in pth
+    test_order= pth.find('{') < pth.find('}')
+    test_count= (pth.count('{') + pth.count('}') == 2)
+
+    if test_presence and test_order and test_count:
+        path_elm_list= pth[pth.index('{')+1:-1].split(',')
+        if len(path_elm_list) > 0:
+            for elm in path_elm_list:
+                scope_list= elm.split(':')
+                if len(scope_list) == 2: # there is a correctly defined scope
+                    qry_key, qry_val= scope_list[0], scope_list[1]
+                    if '"' in qry_key:
+                        qry_key= qry_key.strip('"')
+                    if '"' in qry_val: # string
+                        qry_val= str(qry_val.strip('"'))
+                    else: # int
+                        qry_val= int(qry_val)
+                    result_query[qry_key]= qry_val
+    else: # ERROR
+        result_query['error']= "incorrectly defined query"
+
+    return result_query
+    
 
 #-----------------------------
 if __name__ == "__main__":
     # process command line options
-    cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] json_file database.collection") 
-    cmdparser.add_option("-H", "--host", action="store", default="localhost", help="host [default: %default]")
-    cmdparser.add_option("-p", "--port", action="store", default=27017, help="port to connect to the database [default: %default]")
-    cmdparser.add_option("-u", "--user", action="store", help="database user login (must have rights of admin)")
-    cmdparser.add_option("-w", "--password", action="store", help="user password")
-    cmdparser.add_option("-c", action="store_true", dest='dbact', default=False, help="clean before insert")
+    cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] json_file") 
+    cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
+    cmdparser.add_option("-r", "--query", action="store", dest="query", help="query to indetify docs")
+    cmdparser.add_option("-l", "--collect", action="store", dest="collect", help="collection name to insert into")
+    cmdparser.add_option("-c", action="store_true", dest="rplc", default=False, help="replace documents (delete before insert)")
 
     opts, args = cmdparser.parse_args()
 
     try: #file
-        src_file= open(args[0], 'rb')
+        src_filename= args[0]
+    except:
+        print "ERROR: No json filename specified, exiting now!"
+        exit()
+
+    try:
+        src_file= open(src_filename, 'rb')
     except IOError as e:
-        print 'Unable to open file:\n %s\n' % e
+        print "ERROR: Unable to read from file:\n %s\n" % e
         exit()
 
     try: #json object
         json_obj= json.load(src_file, encoding='utf-8')
+        print "...JSON file %s successfully de-serialized" % src_filename
     except Exception as e:
-        print 'Error in deserializing json file:\n %s\n' % e
+        print "ERROR: cannot deserialize json file:\n %s\n" % e
         exit()
 
-    conn_host= opts.host #database
-    try:
-        conn_port= int(opts.port)
-    except Exception as e:
-        print 'Error in connection details:\n %s\n' % e
+    # get connection details
+    conn= get_db_connect(opts.conf_filename, "mongodb")
+    if conn["password"] is None: #username - ask for password
+        conn["password"] = getpass.getpass("MongoDB: provide password for the user %s:" % conn["username"])
+    try: # connect
+        mongo_conn= pymongo.Connection(conn["host"], conn["port"])
+        mongo_db= mongo_conn[conn["database"]]
+        print "...connected to MongoDb database", conn["database"]
+    except Exception, e:
+        print "ERROR: Unable to connect to the MongoDb database:\n %s\n" % e
+        exit() #no connection to the database - no data processing
+
+    if mongo_db.authenticate(conn["username"], conn["password"]) == 1:
+        print "...successfully authenticated to MongoDB database"
+    else:
+        print "ERROR: Cannot authenticate to MongoDB, exiting now!"
         exit()
 
-    str_dbconnect= args[1] # database connection string
-    db_name= None
-    dbparam= []
-    if str_dbconnect is not None: #parse it
-        if '.' in str_dbconnect:
-            dbparam= str_dbconnect.split('.', 2)
-            db_name= dbparam[0]
-            db_coll= dbparam[1]
-        else:
-            print 'Unable to parse dbconnect - wrong format: \n %s\n' % str_dbconnect
+    if opts.collect is None:
+        print "ERROR: No collection specified, exiting now!"
+        exit()
+
+    del_doc= opts.rplc # action before insert
+
+    query= None
+    if opts.query is not None:
+        print "...checking query"
+        query= parse_query(opts.query)
+        if "error" in query:
+            print "ERROR: %s, exiting now!" % query["error"]
             exit()
-    if db_name is not None:
-        db_user= opts.user
-        db_pswd= opts.password
-        if db_pswd is None:
-            db_pswd = getpass.getpass()
-    else:
-        exit()
 
-    try: # connection
-        conn= pymongo.Connection(conn_host, conn_port)
-        db= conn[db_name]
-        print '...connected to the database', db_name
-    except Exception as e:
-        print 'Unable to connect to the database:\n %s\n' % e
-        exit()
+    if query is None and del_doc:
+        print "WARNING: no query is specified - the whole collections will be erased before insert!"
+        answ= raw_input("Continue? (y/N): ")
+        if answ not in ['y', 'yes', 'Yes', 'YES']:
+            del_doc= False
+            print "...the data will only be inserted!"
 
-    if db.authenticate(db_user, db_pswd): # authentication
-        collection= db[db_coll]
-    else:
-        print 'Cannot authenticate to the database with given username and password!'
-        exit()
+    mongo_conn.start_request()
+    print db_insert(json_obj, mongo_db[opts.collect], del_doc, query) # processing and inserting the data
+    mongo_conn.end_request()
 
-    db_act= opts.dbact # action before insert
-    cond= None
-    while cond is None:
-        cond= raw_input('Provide condition for db.collection.find() in a form key=value:')
-    cond= cond.split('=', 2)
-
-    print '...inserting data into', str_dbconnect
-    conn.start_request()
-    print db_insert(json_obj, collection, clean=db_act, condition_k=cond[0], condition_v=cond[1]) # processing and inserting the data
-    conn.end_request()
-
-    print 'Done'
+    print "Done"
