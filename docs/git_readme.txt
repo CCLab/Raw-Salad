@@ -66,8 +66,6 @@ So, now only src/rawsalad/settings.py should be on this list.
 
 6. Adding a new file to the repo on server without adding to it to github.
 
-[change]
-
 To do this, we have to tell git that this file should be ignored locally(only on this repo), but
 (!!) this will work if the file will not be added to github in the future.
 To add such a file( e.g. abc.xyz ) open: projects/rawsalad/.git/info/exclude
