@@ -59,6 +59,8 @@ class DataReceiver:
         collection_tree_url = self.construct_url(dataset_id, view_id, issue_id) + 'tree/'
         str_result = self.fetch(collection_tree_url)
         json_result = json.loads(str_result)
+        if json_result['response'] == 'ERROR: No such meta-data!':
+            return None
         return json_result['tree']
         
     def get_collection_meta(self, dataset_id, view_id, issue_id):
@@ -85,10 +87,22 @@ class Logger:
         self.file.close()
 
 
+class Filter:
+    """ Knows about data that has a different form should not be checked """
+    
+    def __init__(self, exceptions):
+        """ Inits exceptions """
+        self.exceptions = exceptions
+        
+    def is_exception(self, dataset_id, view_id, issue, row_id):
+        """ Checks if given row from specified collection is exception """ 
+        return (dataset_id, view_id, issue, row_id) in self.exceptions
+
 class Validator:
     """ Checks correctness of downloaded numerical data """
-    def __init__(self, names, dataset_id, view_id, issue_id, logger):
+    def __init__(self, names, dataset_id, view_id, issue_id, logger, filter):
         self.logger = logger
+        self.filter = filter
         self.names = names
         self.dataset_id = dataset_id
         self.view_id = view_id
@@ -106,8 +120,8 @@ class Validator:
     def sum_values(self, values_list):
         """ Sums values from list of lists of values and returns list with summed values """
         summed_values = {}
-        #init summed_values
-        for key in values_list[0].keys():
+        
+        for key in values_list[0].keys():  # Init summed_values
             summed_values[key] = 0
         
         for values in values_list:
@@ -178,9 +192,21 @@ class Validator:
         is_equal = compare_result['result']
         if is_equal == False:
             self.bad_idefs.append({'id': subtree['idef'], 'names': compare_result['names']})
+            
+    def filter_results(self):
+        i = 0
+        while i < len(self.bad_idefs):
+            bad_idef = self.bad_idefs[i]
+            if self.filter.is_exception(self.dataset_id, self.view_id, self.issue_id, bad_idef['id']):
+                self.bad_idefs.remove(bad_idef)
+                i -= 1  # It's needed to avoid checking an element after removed one.
+            i += 1
+
         
     def print_results(self):
         """ Saves results to a file using logger """
+        self.filter_results()
+        
         if len(self.bad_idefs) == 0:
             self.logger.log('No errors in dataset = ' + str(self.dataset_id) + ', view = ' + str(self.view_id) + ', issue = ' + str(self.issue_id))
         else:
@@ -200,11 +226,11 @@ def init_names():
     names['(0, 1, 2012)'] = ['v_total', 'v_nation', 'v_eu']
     names['(0, 2, 2011)'] = ['v_total', 'v_nation', 'v_eu']
     names['(0, 2, 2012)'] = ['v_total', 'v_nation', 'v_eu']
-    names['(1, 0, 2011)'] = [] # no data
-    names['(1, 1, 2011)'] = [] # no data
+    names['(1, 0, 2011)'] = []  # No data
+    names['(1, 1, 2011)'] = []  # No data
     names['(2, 0, 2011)'] = ['val_2011', 'val_2012', 'val_2013']
     names['(2, 1, 2011)'] = ['frst_popr', 'plan_nast']
-    names['(2, 2, 2011)'] = ['val_2011', 'val_2012', 'val_2013'] # data with errors
+    names['(2, 2, 2011)'] = ['val_2011', 'val_2012', 'val_2013']
     names['(2, 3, 2011)'] = ['frst_popr', 'plan_nast']
     names['(3, 0, 2011)'] = ['centrala', 'dolnoslaskie','kujawskopomorskie',
                              'lubelski', 'lubuski', 'lodzki', 'malopolski',
@@ -213,15 +239,26 @@ def init_names():
                              'warminskomazurski', 'wielkopolski',
                              'zachodniopomorski', 'osrodki_wojewodzkie', 'ogolem']
     names['(3, 1, 2011)'] = ['val']
-    names['(4, 0, 2011)'] = [] # no data
+    names['(4, 0, 2011)'] = []  # No data
     
     return names
+
+
+def init_exceptions():
+    """ Returns set containing exceptions that should not be validated """
+    exceptions = [
+                  (2, 0, 2011, '7-1'),
+                  (2, 0, 2011, '15-2'),
+                  (2, 0, 2011, '15-3')
+    ]
+    
+    return exceptions
 
 
 def construct_collections_map():
     """ Constructs tuples containing available dataset_ids, view_ids and issues """
     collections = []
-    """
+    
     data_receiver = DataReceiver()
     datasets = data_receiver.get_datasets()
     for dataset in datasets:
@@ -231,30 +268,28 @@ def construct_collections_map():
             for issue in issues:
                 t = dataset['idef'], view['idef'], int(issue)
                 collections.append(t)
-    """
-    collections = [(0, 0, 2011), (0, 1, 2011), (0, 1, 2012), (0, 2, 2011),
-                   (0, 2, 2012), (1, 0, 2011), (1, 1, 2011), (2, 0, 2011),
-                   (2, 1, 2011), (2, 2, 2011), (2, 3, 2011), (3, 0, 2011),
-                   (3, 1, 2011), (4, 0, 2011)]
+    
     return collections
 
 
 if __name__ == "__main__":
     
     logger = Logger('errors.log')
+    filter = Filter(init_exceptions())
     data_receiver = DataReceiver()
     names = init_names()
     cmap = construct_collections_map()
-    
-    for t in cmap:
+        
+    for t in cmap:  # t = dataset_id, view_id, issue
         logger.log('---------------------------------------------------------')
-        if t[0] == 1 or t[0] == 4:
+        logger.log('CHECK ' + str(t))
+        
+        val = Validator(names[str(t)], t[0], t[1], t[2], logger, filter)
+        collection_tree = data_receiver.get_collection_tree(t[0], t[1], t[2])
+        if not collection_tree:
             logger.log('NO DATA FOR ' + str(t))
             continue
-            
-        logger.log('CHECK ' + str(t))
-        val = Validator(names[str(t)], t[0], t[1], t[2], logger)
-        collection_tree = data_receiver.get_collection_tree(t[0], t[1], t[2])
+        
         val.check_tree(collection_tree)
     
     logger.close()
