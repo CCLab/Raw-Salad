@@ -98,7 +98,7 @@ var _algorithms = (function () {
 
         for ( i = start, sorted = 0; i < end; i += 1, sorted += 1 ) {
             for ( j = start; j < end - sorted; j += 1 ) {
-                if ( compare_obj( data[j], data[j+1], sorting_setting ) == -1 ) {
+                if ( compare_obj( data[j]['data'], data[j+1]['data'], sorting_setting ) == -1 ) {
                     swap( data, j, j+1 );
                 }
             }
@@ -138,7 +138,7 @@ var _algorithms = (function () {
         // put the smallest actually element in the first available place in data
         while ( i < subarray1.length && j < subarray2.length ) {
 
-            if ( compare_obj( subarray1[i], subarray2[j], sorting_setting ) == 1 ) {
+            if ( compare_obj( subarray1[i]['data'], subarray2[j]['data'], sorting_setting ) == 1 ) {
                 data[ind] = subarray1[i];
                 i += 1;
             } else {

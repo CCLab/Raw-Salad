@@ -89,25 +89,87 @@ var _gui = (function () {
 
 
     // used once when some perspective is chosen for the very first time
-    that.init_app = function () {
+    that.init_app = function ( collection_name ) {
         $('#open-close-choose-panel')
             .show();
 
-        // make it "not hidden" (invisible though) to make zebra
-        $('#application')
-            .css( 'opacity', 0 )
-            .show();
+        that.create_sheet_tab({
+            // TODO move name from func arg to store!!
+            name: collection_name,
+            group_nr: _store.active_group_index(),
+            sheet_nr: _store.active_sheet_index()
+        });
 
+        $('#application').show();
         that.make_zebra();
         hide_choose_panel();
     }
 
 
+    that.create_sheet_tab = function ( args ) {
+        var html = [];
+
+        var group_nr = args.group_nr || _store.active_group_index();
+        var sheet_nr = args.sheet_nr || _store.active_sheet_index();
+        var sheet_name = args.name || "Arkusz " + group_nr + '-' + sheet_nr;
+        var filtered_sheet = args.filtered_sheet;
+
+        var group_changed = _store.active_group_index() !== group_nr;
+        var sheet_changed = _store.active_sheet_index() !== sheet_nr;
+        var new_tab;
+
+        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
+        html.push( 'class="snapshot active" ' );
+        html.push( 'title="', sheet_name, '">' );
+        html.push( sheet_name.length > 13 ?
+                   sheet_name.slice( 0, 10 ) + '...' :
+                   sheet_name );
+        html.push( '</div>' );
+
+        new_tab = $( html.join('') );
+
+        $('.snapshot').removeClass('active');
+        new_tab
+            .addClass( 'active' )
+            .click( function () {
+                var id_elements = $(this).attr('id').split('-');
+                var group_nr = id_elements[1];
+                var sheet_nr = id_elements[2];
+
+                $('.snapshot').removeClass('active');
+                $(this).addClass('active');
+
+                _store.active_group( group_nr );
+                _store.active_sheet( sheet_nr );
+
+                _table.clean_table();
+                _table.init_table();
+            });
+
+        if( sheet_nr === 0 ) {
+            new_tab.insertBefore( '#save-snapshot' );
+        }
+        else {
+            new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
+        }
+
+        if( $('.snapshot').length == 10 ) {
+            $('#save-snapshot' ).hide();
+        }
+
+        _store.active_sheet( sheet_nr );
+        _store.active_group( group_nr );
+
+        _table.clean_table();
+        _table.init_table( filtered_sheet );
+    };
+
+
     that.make_zebra = function () {
-        // TODO make it work with only current sheet
         $('tbody > tr').not(':hidden').each( function ( i ) {
             if( i % 2 === 0 ) {
                 $(this).removeClass( 'odd' );
+
                 $(this).addClass( 'even' );
             }
             else {
@@ -118,46 +180,43 @@ var _gui = (function () {
     };
 
 
-    that.create_sheet_tab = function ( args ) {
-        var html = [];
-        var sheet_name = args.name;
-        var new_sheet_nr = args.sheet_nr;
-        var group_nr = args.group_nr;
-        var filtered_sheet = args.filtered_sheet;
-        var predecessor;
-        var group_changed;
+    that.highlight_node = function () {
+        var a_root = $('tr[data-selected="true"]');
+        // next a-level node
+        var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
+        var next = $('tr[data-index='+ (a_root_index + 1) +']');
 
-        html.push( '<div id="snap-' + group_nr + '-' + new_sheet_nr + '" ' );
-        html.push( 'class="snapshot active">' );
-        html.push( sheet_name );
-        html.push( '</div>' );
-
-        if( new_sheet_nr === 1 ) {
-            predecessor = $( '#basic-snapshot-' + group_nr );
-        } else {
-            predecessor = $( '#snap-' + group_nr + '-' + (new_sheet_nr - 1));
+        if( a_root.length === 0 ) {
+            // nothing found - nothing to do
+            return;
+        }
+        else {
+            // jquery returns a list of objects even for single entity
+            a_root = a_root[0];
         }
 
-        $( html.join('') ).insertAfter( predecessor );
+        a_root
+            .siblings()
+            .not(':hidden')
+            .addClass('dim');
 
-        $('.snapshot').removeClass('active');
-        $('#snap-' + group_nr + '-' + new_sheet_nr )
-            .addClass( 'active' )
-            .click( function () {
-                $('.snapshot').removeClass('active');
-                $(this).addClass('active');
+        // make a-root background black
+        $('tr.root').removeClass('root');
+        a_root.addClass('root');
 
-                group_changed = _store.active_group_index() !== group_nr;
-                if ( _store.active_sheet_index() !== new_sheet_nr || group_changed ) {
+        // highlight the subtree
+        _utils.with_subtree( a_root.attr('id'), function () {
+            // uses 'this' instead of '$(this)' for fun.call reason
+            this.removeClass( 'dim' );
+        });
 
-                     _sheet.change_active_sheet({
-                        'sheet_nr': new_sheet_nr,
-                        'group_changed': group_changed,
-                        'filtered_sheet': filtered_sheet
-                    });
-                }
-            });
-    };
+        // add the bottom border
+        $('.next').removeClass('next');
+        next.addClass('next');
+
+        that.make_zebra();
+    }
+
 
     return that;
 
@@ -277,7 +336,7 @@ var _gui = (function () {
             .append( $( html.join('') ))
             .show()
             .find( '.position' )
-            .find('.more' )
+            .find( '.more' )
             .click( function () {
                 var col_id = {
                     dataset: $(this).parent().attr( 'data-set-id' ),
@@ -289,39 +348,11 @@ var _gui = (function () {
                 if( _store.create_new_group( col_id ) ) {
                     // get top-level data from db
                     _db.get_init_data();
-                    name = col_id['dataset'] + '-' +
-                           col_id['perspective'] + '-' +
-                           col_id['issue'];
-                    create_basic_snapshot_button({
-                          'basic_snapshot_name': name
-                    });
                 }
                 else {
                     // go back to application with focus on requested sheet
                     hide_choose_panel();
                 }
-            });
-    };
-
-
-    function create_basic_snapshot_button( args ) {
-        var html = [];
-        var max_group_nr;
-        var name = args.basic_snapshot_name;
-
-        max_group_nr = _store.max_group_number() - 1;
-        html.push('<div id="basic-snapshot-' + max_group_nr() +
-                  '" class="basic-snapshot active">');
-        html.push(name);
-        html.push('</div>');
-
-        $('.basic-snapshot').removeClass('active');
-        $( html.join('') )
-            .insertBefore('#save-snapshot')
-            .click( function () {
-                $('.basic-snapshot').removeClass('active');
-                $(this).addClass('active');
-                _sheet.show_basic_sheet( {'group_nr': max_group_nr} );
             });
     };
 

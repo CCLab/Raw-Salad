@@ -38,6 +38,7 @@ var _table = (function () {
         create_thead();
         create_tbody();
 
+//        _gui.highlight_node();
         _gui.make_zebra();
     };
 
@@ -72,6 +73,7 @@ var _table = (function () {
     function create_tbody() {
         var level = 'a';
         var hashed_list = _utils.hash_list( _store.active_rows() );
+        var selected_node;
 
         while( !!hashed_list[ level ] ) {
             if( level === 'a' ) {
@@ -82,6 +84,14 @@ var _table = (function () {
             }
 
             level = _utils.next_letter( level );
+        }
+        
+        // apply node selection(if there is selected node) to css classes
+        selected_node = _store.active_rows().filter( function ( e ) {
+            return e['state']['selected'];
+        });
+        if ( selected_node.length > 0 ) {
+            apply_selection( selected_node[0]['data']['idef'] );
         }
     }
 
@@ -103,10 +113,13 @@ var _table = (function () {
     function add_rows( data ) {
         var i = data.length - 1;
         var schema = _store.basic_schema();
-
-        var parent = $( '#' + data[0]['data']['parent'] );
+        var parent;
 
         for( ; i >= 0; i -= 1 ) {
+            parent = $( '#' + data[i]['data']['parent'] );
+	    if( parent.attr( 'data-open' ) === 'false' ) {
+	    	continue;
+	    }
             parent.after( generate_row({
                 node: data[i],
                 schema: schema
@@ -150,54 +163,58 @@ var _table = (function () {
         // create & arm row
         row = $( html.join('') );
         row.click( function ( event ) {
-            // a-level parent
-            var a_root = a_parent( $(this) );
-            var a_root_id = a_root.attr('id');
-            // next a-level node
-            var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
-            var next = $('tr[data-index='+ (a_root_index + 1) +']');
-
-            // dim everything outside this a-rooted subtree
-            a_root
-                .siblings()
-                .not(':hidden')
-                .addClass('dim');
-
-            // make a-root background black
-            $('tr.root').removeClass('root');
-            a_root.addClass('root');
-
-            // highlight the subtree
-            with_subtree( a_root.attr('id'), function () {
-                // uses 'this' instead of '$(this)' for fun.call reason
-                this.removeClass( 'dim' );
-            });
-
-            // add the bottom border
-            $('.next').removeClass('next');
-            next.addClass('next');
+            // update css classes connected with node selection
+            apply_selection( $(this).attr('id') );
 
             // open/close a subtree if it's a-level or already selected/open
-            open_close_subtree( $(this), a_root );
-
-            // clear selected attributes and set selection to clicked tree
-            _store.set_selected( a_root_id );
-            $('tr[data-selected=true]').attr('data-selected', 'false');
-            a_root.attr('data-selected', 'true');
+            open_close_subtree( $(this), a_parent( $(this) ) );
 
             _gui.make_zebra();
         });
 
         return row;
     }
+    
+    function apply_selection( id ) {
+        var node = $('#' + id);
+        
+        // a-level parent
+        var a_root = a_parent( node );
+        var a_root_id = a_root.attr('id');
+        // next a-level node
+        var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
+        var next = $('tr[data-index='+ (a_root_index + 1) +']');
+        
+        // dim everything outside this a-rooted subtree
+        a_root
+            .siblings()
+            .not(':hidden')
+            .addClass('dim');
+
+        // make a-root background black
+        $('tr.root').removeClass('root');
+        a_root.addClass('root');
+
+        // highlight the subtree
+        _utils.with_subtree( a_root.attr('id'), function () {
+            // uses 'this' instead of '$(this)' for fun.call reason
+            this.removeClass( 'dim' );
+        });
+        
+        // add the bottom border
+        $('.next').removeClass('next');
+        next.addClass('next');
+    }
 
 
     function open_close_subtree( node, root ) {
         var a_root = root || a_parent( node );
+        var a_root_id = a_root.attr('id');
         var is_a_open     = a_root.attr( 'data-open' );
         var is_a_selected = a_root.attr( 'data-selected' );
         var id = node.attr('id');
         var children;
+        var previously_selected_id;
 
         if ( is_a_selected === is_a_open ) {
             // if the node is closed
@@ -205,33 +222,58 @@ var _table = (function () {
 
                 // if children are hidden
                 if( $('.'+id).length !== 0 ) {
-                    with_subtree( id, $.fn.show );
+                    _utils.with_subtree( id, $.fn.show );
                 }
                 // if children not loaded yet
                 else {
                     _db.download_node( id );
                 }
+                
+                // if there is previously selected node, unselect it in _store
+                previously_selected_id = $('tr[data-selected=true]').attr('id');
+                if ( !!previously_selected_id ) {
+                    _store.set_selected( previously_selected_id, false );
+                }
 
                 // mark subtree as open
                 _store.set_open( id, true );
                 node.attr( 'data-open', 'true' );
+
+                // clear selected attributes and set selection to clicked tree
+                _store.set_selected( a_root_id, true );
+                $('tr[data-selected=true]').attr('data-selected', 'false');
+                a_root.attr('data-selected', 'true');
             }
             // the node is closed
             else {
                 // hide subtree
-                with_subtree( id, $.fn.hide );
+                _utils.with_subtree( id, $.fn.hide );
 
                 // mark subtree as closed
                 _store.set_open( id, false );
                 node.attr( 'data-open', 'false' );
+
 
                 // if it's a-level node - clear the css highlight/dim
                 if( node.hasClass( 'a' ) ) {
                     node.removeClass( 'root' );
                     $('.dim').removeClass('dim');
                     $('.next').removeClass('next');
+
+                    // clear selected attributes and set selection to clicked tree
+                    _store.set_selected( a_root_id, false );
+                    $('tr[data-selected=true]').attr('data-selected', 'false');
                 }
             }
+        }
+        else if( a_root.attr( 'data-selected' ) === 'false' ) {
+            // unselect previously selected node in _store
+            previously_selected_id = $('tr[data-selected=true]').attr('id');
+            _store.set_selected( previously_selected_id, false );
+                
+            _store.set_selected( a_root_id, true );
+            $('tr[data-selected=true]').attr('data-selected', 'false');
+            a_root.attr('data-selected', 'true');
         }
     }
 
@@ -244,15 +286,6 @@ var _table = (function () {
         var prev = node.prev();
 
         return prev.hasClass('a') ? prev : a_parent( prev );
-    }
-
-
-    // go through the subtree of id-node and do fun
-    function with_subtree( id, fun ) {
-        $('tr.'+id).each( function () {
-            with_subtree( $(this).attr('id'), fun );
-            fun.call( $(this) );
-        });
     }
 
 })();

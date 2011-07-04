@@ -32,8 +32,8 @@ var _store = (function () {
     // meta_data setter/getter
     that.meta_data = function ( value ) {
         // set it just once
-        _assert.is_equal( meta_data.length, 0,
-                          "meta_data already assigned" );
+//        _assert.is_equal( meta_data.length, 0,
+//                          "meta_data already assigned" );
 
         meta_data = value;
     };
@@ -107,15 +107,25 @@ var _store = (function () {
     };
 
 
-    that.set_selected = function ( id ) {
-        that.active_rows().forEach( function ( node ) {
+    that.set_selected = function ( id, state ) {
+        var node, rows = that.active_rows();
+        var i, len = rows.length;
+
+        for( i = 0; i < len; i += 1 ) {
+            node = rows[i];
             if( node['data']['idef'] === id ) {
-                node['state']['selected'] = true;
+                node['state']['selected'] = state;
+                return;
             }
-            else {
-                node['state']['selected'] = false;
-            }
-        });
+        }
+//        that.active_rows().forEach( function ( node ) {
+//            if( node['data']['idef'] === id ) {
+//                node['state']['selected'] = true;
+//            }
+//            else {
+//                node['state']['selected'] = false;
+//            }
+//        });
     };
 
 
@@ -201,13 +211,14 @@ var _store = (function () {
     };
 
 
-    that.add_new_sheet = function ( data ) {
+    that.add_new_sheet = function ( sheet ) {
         var active_grp = that.active_group();
         var next_sheet_number = that.next_sheet_number() ;
 
-        active_grp['sheets'].push( sheet( data ) );
+        active_grp['sheets'].push( sheet );
         that.active_sheet_index( next_sheet_number );
     };
+
 
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
@@ -216,6 +227,7 @@ var _store = (function () {
     // a store for a sheets tab in the GUI
     var groups = [];
     var active_group_number = null;
+
 
 
     // returns group id if it exists or -1 if there is no such a group
@@ -247,7 +259,6 @@ var _store = (function () {
                 };
             }),
             'pending_nodes': [],
-
             'name': data['name']
         };
     };
@@ -265,7 +276,6 @@ var _store = (function () {
             'basic_changed': false
         };
     };
-
 
     return that;
 

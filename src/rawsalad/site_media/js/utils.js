@@ -43,8 +43,26 @@ var _utils = (function () {
             }
             result[ level ].push( element );
         }
+
         return result;
     };
+
+    that.next_id = (function () {
+        var id = 1000;
+        var fun = function () {
+            return id++;
+        };
+
+        return fun;
+    })();
+
+    // go through the subtree of id-node and do fun
+    that.with_subtree = function ( id, fun ) {
+        $('tr.'+id).each( function () {
+            that.with_subtree( $(this).attr('id'), fun );
+            fun.call( $(this) );
+        });
+    }
 
 
     that.next_letter = function ( letter ) {
@@ -74,11 +92,3 @@ var _utils = (function () {
     return that;
 
 })();
-
-// this function cames from jQuery API example
-$.fn.equalize_heights = function() {
-    return this.height( Math.max.apply (
-        this, $(this).map( function ( i, e ) {
-            return $(e).height()
-    }).get()
-))};

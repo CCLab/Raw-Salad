@@ -30,59 +30,25 @@ var _sheet = (function () {
     var that = {};
 
     that.create_new_sheet = function ( sheet_data, sheet_name, filtered_sheet ) {
-        var new_sheet_nr = _store.next_sheet_number();
         var group_nr = _store.active_group_index();
+        var sheet_nr = _store.next_sheet_number();
         var new_sheet = {};
 
         $.extend( true, new_sheet, sheet_data );
-        new_sheet["name"] = sheet_name + new_sheet_nr;
+        new_sheet["name"] = sheet_name + ' ' + sheet_nr;
 
         _store.add_new_sheet( new_sheet );
-
         _gui.create_sheet_tab({
             'name': new_sheet['name'],
-            'sheet_nr': new_sheet_nr,
+            'sheet_nr': sheet_nr,
             'group_nr': group_nr,
             'filtered_sheet': filtered_sheet
         });
-
-        return new_sheet_nr;
     }
 
+    return that;
 
-    that.change_active_sheet = function ( args ) {
-        var sheet_nr = args.sheet_nr;
-        var group_changed = args.group_changed;
-        var filtered_sheet = args.filtered_sheet; // TODO: add filtered property
-
-        if ( _store.active_sheet_index() !== sheet_nr || !!group_changed ) {
-            _store.active_sheet( sheet_nr );
-            _table.clean_table();
-            _table.init_table( filtered_sheet );
-            _gui.make_zebra();
-            _gui.equalize_table();
-        }
-    }
-
-    that.show_basic_sheet = function ( args )
-    {
-        var group_nr = args.group_nr;
-        var group_changed = false;
-
-        if ( !!group_nr || group_nr === 0 ) {
-            if (_store.active_group_index() !== group_nr) {
-                _store.active_group( group_nr );
-                group_changed = true;
-            }
-        }
-
-        that.change_active_sheet( {'sheet_nr': 0, 'group_changed': group_changed} );
-    }
-
-    // P R I V A T E  I N T E R F A C E
-
-
-
+// P R I V A T E  I N T E R F A C E
     var clean_basic_sheet = function () {
         var active_sheet_number;
         var basic_sheet;
@@ -100,7 +66,5 @@ var _sheet = (function () {
 
         _store.active_sheet_index( active_sheet_number );
     };
-
-    return that;
 
 }) ();
