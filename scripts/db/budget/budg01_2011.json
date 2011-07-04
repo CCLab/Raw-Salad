@@ -42,43 +42,11 @@
             "basic": false
             },
         {
-            "key": "v_total",
-            "label": "OGÓŁEM",
-            "processable": true,
-            "basic": true,
-            "type": "number",
-            "checkable": true
-            },
-        {
             "key": "v_nation",
             "label": "Budżet Państwa",
             "processable": true,
             "basic": true,
             "type": "number",
-            "checkable": true
-            },
-        {
-            "key": "v_eu",
-            "label": "Środki Europejskie",
-            "processable": true,
-            "basic": true,
-            "type": "number",
-            "checkable": true
-            },
-        {
-            "key": "v_proc_eu",
-            "label": "Procent Środków EU",
-            "type": "number",
-            "processable": true,
-            "basic": false,
-            "checkable": true
-            },
-        {
-            "key": "v_proc_nation",
-            "label": "Procent Środków Państwa",
-            "type": "number",
-            "processable": true,
-            "basic": false,
             "checkable": true
             }
         ],
