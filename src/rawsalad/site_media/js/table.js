@@ -38,7 +38,7 @@ var _table = (function () {
         create_thead();
         create_tbody();
 
-        _gui.highlight_node();
+//        _gui.highlight_node();
         _gui.make_zebra();
     };
 
