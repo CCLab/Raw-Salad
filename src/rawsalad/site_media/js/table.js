@@ -214,6 +214,7 @@ var _table = (function () {
         var is_a_selected = a_root.attr( 'data-selected' );
         var id = node.attr('id');
         var children;
+        var previously_selected_id;
 
         if ( is_a_selected === is_a_open ) {
             // if the node is closed
@@ -226,6 +227,12 @@ var _table = (function () {
                 // if children not loaded yet
                 else {
                     _db.download_node( id );
+                }
+                
+                // if there is previously selected node, unselect it in _store
+                previously_selected_id = $('tr[data-selected=true]').attr('id');
+                if ( !previously_selected_id ) {
+                    _store.set_selected( previously_selected_id, false );
                 }
 
                 // mark subtree as open
@@ -260,6 +267,10 @@ var _table = (function () {
             }
         }
         else if( a_root.attr( 'data-selected' ) === 'false' ) {
+            // unselect previously selected node in _store
+            previously_selected_id = $('tr[data-selected=true]').attr('id');
+            _store.set_selected( previously_selected_id, false );
+                
             _store.set_selected( a_root_id, true );
             $('tr[data-selected=true]').attr('data-selected', 'false');
             a_root.attr('data-selected', 'true');
