@@ -231,7 +231,7 @@ var _table = (function () {
                 
                 // if there is previously selected node, unselect it in _store
                 previously_selected_id = $('tr[data-selected=true]').attr('id');
-                if ( !previously_selected_id ) {
+                if ( !!previously_selected_id ) {
                     _store.set_selected( previously_selected_id, false );
                 }
 
