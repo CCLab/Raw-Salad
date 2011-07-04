@@ -36,17 +36,24 @@
         "perspectives": [
             { 
                 "idef": 0,
-                "name": "Budżet środków europejskich",
+                "name": "Budżet środków europejskich w układzie tradycyjnym",
                 "description": "Dane dotyczące środków europejskich na szczeblu centralnym",
                 "long_description": null,
                 "issues": [ "2011" ]
                 },             
             { 
                 "idef": 1,
-                "name": "Budżet środków europejskich",
+                "name": "Budżet środków europejskich w układzie zadaniowym",
                 "description": "Dane dotyczące środków europejskich na szczeblu centralnym",
                 "long_description": null,
-                "issues": [ "2011" ]
+                "issues": [ "2011", "2012" ]
+                },
+            {
+                "idef": 2,
+                "name": "Budżet środków europejskich w układzie instytucionalnym",
+                "description": "Dane dotyczące środków europejskich na szczeblu centralnym",
+                "long_description": null,
+                "issues": [ "2011", "2012" ]
                 }
             ]
         },
