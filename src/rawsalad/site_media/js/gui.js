@@ -180,6 +180,44 @@ var _gui = (function () {
     };
 
 
+    that.highlight_node = function () {
+        var a_root = $('tr[data-selected=true]');
+        // next a-level node
+        var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
+        var next = $('tr[data-index='+ (a_root_index + 1) +']');
+
+        if( a_root === undefined ) {
+            // nothing found - nothing to do
+            return;
+        }
+        else {
+            // jquery returns a list of objects even for single entity
+            a_root = a_root[0];
+        }
+
+        a_root
+            .siblings()
+            .not(':hidden')
+            .addClass('dim');
+
+        // make a-root background black
+        $('tr.root').removeClass('root');
+        a_root.addClass('root');
+
+        // highlight the subtree
+        _utils.with_subtree( a_root.attr('id'), function () {
+            // uses 'this' instead of '$(this)' for fun.call reason
+            this.removeClass( 'dim' );
+        });
+
+        // add the bottom border
+        $('.next').removeClass('next');
+        next.addClass('next');
+
+        that.make_zebra();
+    }
+
+
     return that;
 
 

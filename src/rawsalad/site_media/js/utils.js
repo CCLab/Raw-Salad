@@ -56,6 +56,15 @@ var _utils = (function () {
         return fun;
     })();
 
+    // go through the subtree of id-node and do fun
+    that.with_subtree = function ( id, fun ) {
+        $('tr.'+id).each( function () {
+            with_subtree( $(this).attr('id'), fun );
+            fun.call( $(this) );
+        });
+    }
+
+
     that.next_letter = function ( letter ) {
         var number = letter.charCodeAt( 0 );
 

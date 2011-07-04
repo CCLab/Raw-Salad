@@ -38,6 +38,7 @@ var _table = (function () {
         create_thead();
         create_tbody();
 
+        _gui.highlight_node();
         _gui.make_zebra();
     };
 
@@ -103,8 +104,7 @@ var _table = (function () {
     function add_rows( data ) {
         var i = data.length - 1;
         var schema = _store.basic_schema();
-	var parent;
-        
+        var parent;
 
         for( ; i >= 0; i -= 1 ) {
             parent = $( '#' + data[i]['data']['parent'] );
@@ -172,7 +172,7 @@ var _table = (function () {
             a_root.addClass('root');
 
             // highlight the subtree
-            with_subtree( a_root.attr('id'), function () {
+            _utils.with_subtree( a_root.attr('id'), function () {
                 // uses 'this' instead of '$(this)' for fun.call reason
                 this.removeClass( 'dim' );
             });
@@ -205,7 +205,7 @@ var _table = (function () {
 
                 // if children are hidden
                 if( $('.'+id).length !== 0 ) {
-                    with_subtree( id, $.fn.show );
+                    _utils.with_subtree( id, $.fn.show );
                 }
                 // if children not loaded yet
                 else {
@@ -224,7 +224,7 @@ var _table = (function () {
             // the node is closed
             else {
                 // hide subtree
-                with_subtree( id, $.fn.hide );
+                _utils.with_subtree( id, $.fn.hide );
 
                 // mark subtree as closed
                 _store.set_open( id, false );
@@ -259,15 +259,6 @@ var _table = (function () {
         var prev = node.prev();
 
         return prev.hasClass('a') ? prev : a_parent( prev );
-    }
-
-
-    // go through the subtree of id-node and do fun
-    function with_subtree( id, fun ) {
-        $('tr.'+id).each( function () {
-            with_subtree( $(this).attr('id'), fun );
-            fun.call( $(this) );
-        });
     }
 
 })();
