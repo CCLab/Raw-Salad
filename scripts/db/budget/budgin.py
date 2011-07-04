@@ -420,7 +420,7 @@ if __name__ == "__main__":
     if db_insert(obj_parsed, mongo_db, coll_data, clean_db):
         print '...the data successfully inserted to the collection %s' % coll_data
     else:
-        print '...something went wrong during insert, exiting now'
+        print 'ERROR: something went wrong during insert, exiting now'
         exit()
 
-    print "Done (don't forget about the schema!)"
+    print "Done (don't forget to update meta-data!)"
