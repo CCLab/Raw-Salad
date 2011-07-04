@@ -138,7 +138,7 @@ var _algorithms = (function () {
         // put the smallest actually element in the first available place in data
         while ( i < subarray1.length && j < subarray2.length ) {
 
-            if ( compare_obj( subarray1[i], subarray2[j], sorting_setting ) == 1 ) {
+            if ( compare_obj( subarray1[i]['data'], subarray2[j]['data'], sorting_setting ) == 1 ) {
                 data[ind] = subarray1[i];
                 i += 1;
             } else {
