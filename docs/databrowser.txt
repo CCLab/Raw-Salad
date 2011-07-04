@@ -1,0 +1,39 @@
+Django structure:
+
+There are 2 Django apps: databrowser and papi. Databrowser is an application used to present public data,
+papi implements public api for databrowser.
+
+Databrowser serves four kinds of urls:
+a) "/"
+b) "app/"
+c) "download/"
+d) "prepare_data"
+
+Ad a) Django serves it in redirect(), which redirects to "app/"
+
+Ad b) Django serves it in app_page(), returned response depends on parameters sent in GET.
+      - if there are no parameters, starting web site should be send(template "app.html" filled with data from db),
+        get_page() is called, uses function get_ms_nav() to get information about all collections in database
+      
+        get_ms_nav(): returns meta data about all collections what is used when loading page,
+                      it is saved in _store in its meta_data list
+              
+           -> db= rsdb.DBconnect("mongodb").dbconnect - connects to MongoDB using the configuration file
+           -> nav_full= rsdb.Navtree().get_nav_full(db) - gets list of all collections
+      
+      - if action parameter of object passed in GET is 'get_init_data',
+        get_init_data() is called, sets up connection to MongoDB, gets initial data (data schema + a-level nodes)
+        of collection(which is specified by other GET parameters: 'dataset', 'perspective' and 'issue')
+        from database and sends it back to browser as HttpResponse
+        
+      - if action parameter of object passed in GET is 'get_node',
+        get_node() is called, sets up connection to MongoDB, gets children nodes of selected node('parent' parameter)
+        from collection(which is specified by other GET parameters: 'dataset', 'perspective' and 'issue')
+        from database and sends it back to browser as HttpResponse
+        
+Ad c) Django serves it in download_data(), this function has to be tagged to provide protection against
+      Cross Site Request Forgery,
+      creates header of HttpResponse and adds content using UnicodeWriter, which creates Unicode encoded content
+      of the csv file basing on data sent by POST, sends the response back to browser
+      
+Ad d) ??

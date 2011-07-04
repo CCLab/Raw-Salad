@@ -1,0 +1,523 @@
+List of intermodule function calls:
+
+_store:
+    meta_data():
+        called by:
+            initiating(on loading page)
+        calls:
+            ----
+            
+    basic_schema():
+        called by:
+            _table.add_top_level()
+            _table.add_rows()
+        calls:
+            _store.active_columns()
+            
+    active_columns():
+        called by:
+            _store.basic_schema()
+            _tools.prepare_filtering_interface()
+            _download.current_sheet()
+        calls:
+            ----
+            
+    active_sheet():
+        called by:
+            _tools.prepare_filtering_interface()
+            _gui.create_sheet_tab()
+            _tools.prepare_snapshot_interface()
+            _store.active_rows()
+            _store.active_pending_nodes()
+        calls:
+            _store.active_group()
+            
+    active_group():
+        called by:
+            _store.active_sheet()
+            _store.active_group_index()
+            _store.next_sheet_number()
+            _store.add_new_sheet()
+            _store.active_sheet_index()
+            _gui.create_sheet_tab()
+            _store.create_new_group()
+            _store.dataset()
+            _store.perspective()
+            _store.issue()
+            _store.init_basic_sheet()
+            _store.active_basic_changed()
+        calls:
+            ----
+            
+    active_group_index():
+        called by:
+            _sheet.create_new_sheet()
+            _gui.create_sheet_tab()
+            _gui.init_app()
+        calls:
+            _store.active_group()
+            
+    next_sheet_number():
+        called by:
+            _sheet.create_new_sheet()
+            _store.add_new_sheet()
+        calls:
+            _store.active_group()
+            
+    add_new_sheet():
+        called by:
+            _sheet.create_new_sheet()
+        calls:
+            _store.active_group()
+            _store.next_sheet_number()
+            _store.active_sheet_index()
+            
+    active_sheet_index():
+        called by:
+            _store.add_new_sheet()
+            _gui.create_sheet_tab()
+            _gui.init_app()
+            _db.download_node()
+            _sheet.clean_basic_sheet()
+        calls:
+            _store.active_group()
+            
+    active_rows():
+        called by:
+            _download.add_children()
+            _store.add_data()
+            _table.add_node()
+            _store.set_open()
+            _store.set_selected()
+        calls:
+            _store.active_sheet()
+            
+    meta_datasets():
+        called by:
+            _gui.init_choose_panel()
+        calls:
+            ----
+            
+    meta_perspectives():
+        called by:
+            _gui.create_perspectives_panel()
+        calls:
+            ----
+            
+    create_new_group():
+        called by:
+            _gui.create_perspectives_panel()
+        calls:
+            _store.find_group()
+            _store.active_group()
+            _store.group()
+            
+    find_group():
+        called by:
+            _store.create_new_group()
+        calls:
+            ----
+            
+    dataset():
+        called by:
+            _db.get_init_data()
+            _db.download_node()
+        calls:
+            _store.active_group()
+            
+    perspective():
+        called by:
+            _db.get_init_data()
+            _db.download_node()
+        calls:
+            _store.active_group()
+            
+    issue():
+        called by:
+            _db.get_init_data()
+            _db.download_node()
+        calls:
+            _store.active_group()
+            
+    init_basic_sheet():
+        called by:
+            _db.get_init_data()
+        calls:
+            _store.active_group()
+            _store.sheet()
+            
+    sheet():
+        called by:
+            _store.init_basic_sheet()
+        calls:
+            ----
+            
+    add_data():
+        called by:
+            _db.download_node()
+        calls:
+            _store.active_rows()
+            
+    active_pending_nodes():
+        called by:
+            _db.remove_pending_node()
+            _db.add_pending_node()
+        calls:
+            _store.active_sheet()
+            
+    active_basic_changed():
+        called by:
+            _db.download_node()
+        calls:
+            _store.active_group()
+            _sheet.clean_basic_sheet()
+            
+    set_open():
+        called by:
+            _table.open_close_subtree()
+        calls:
+            _store.active_rows()
+            
+    set_selected():
+        called by:
+            _table.open_close_subtree()
+        calls:
+            _store.active_rows()
+            
+    max_group_number():
+        called by:
+            ---- (!!)
+        calls:
+            ----
+            
+    group():
+        called by:
+            _store.create_new_group()
+        calls:
+            ----
+    
+_gui:
+    init_gui():
+        called by:
+            initiating(on loading page)
+        calls:
+            _tools.prepare_tools()
+            _download.current_sheet()
+            _gui.hide_choose_panel()
+            _gui.show_choose_panel()
+            _gui.init_choose_panel()
+            
+    make_zebra():
+        called by:
+            _table.add_rows()
+            _table.init_table()
+            _gui.init_app()
+            _table.generate_row()
+        calls:
+            ----
+            
+    create_sheet_tab():
+        called by:
+            _sheet.create_new_sheet()
+            _gui.init_app()
+        calls:
+            _store.active_group_index()
+            _store.active_sheet_index()
+            _store.active_group()
+            _store.active_sheet()
+            _table.clean_table()
+            _table.init_table()
+            
+    hide_choose_panel():
+        called by:
+            _gui.init_gui()
+            _gui.init_app()
+            _gui.create_perspectives_panel()
+        calls:
+            ----
+            
+    show_choose_panel():
+        called by:
+            _gui.init_gui()
+        calls:
+            ----
+            
+    init_choose_panel():
+        called by:
+            _gui.init_gui()
+        calls:
+            _store.meta_datasets()
+            _gui.create_perspectives_panel()
+            
+    create_perspectives_panel():
+        called by:
+            _gui.init_choose_panel()
+        calls:
+            _store.meta_perspectives()
+            _store.create_new_group()
+            _db.get_init_data()
+            _gui.hide_choose_panel()
+            
+    init_app():
+        called by:
+            _db.get_init_data()
+        calls:
+            _gui.create_sheet_tab()
+            _store.active_group_index()
+            _store.active_sheet_index()
+            _gui.make_zebra()
+            _gui.hide_choose_panel()
+            
+_tools:
+    prepare_tools():
+        called by:
+            _gui.init_gui()
+        calls:
+            _tools.prepare_sorting_interface()
+            _tools.prepare_filtering_interface()
+            _tools.prepare_snapshot_interface()
+            
+    prepare_sorting_interface():
+        called by:
+            _tools.prepare_tools()
+        calls:
+            _tools.sort()
+            _table.clean_table()
+            _table.init_table()
+            
+    prepare_filtering_interface():
+        called by:
+            _tools.prepare_tools()
+        calls:
+            _utils.filter() (ERROR)
+            _store.active_columns()
+            _store.active_sheet()
+            _algorithms.filter()
+            _sheet.create_new_sheet()
+            _table.clean_table()
+            _table.init_table()
+            
+    sort():
+        called by:
+            _tools.prepare_sorting_interface()
+        calls:
+            _algorithms.prepare_sorting_setting()
+            _algorithms.sort()
+            
+    prepare_snapshot_interface():
+        called by:
+            _tools.prepare_tools()
+        calls:
+            _sheet.create_new_sheet()
+            _store.active_sheet()
+            
+_algorithms:
+    prepare_sorting_setting():
+        called by:
+            _tools.sort()
+        calls:
+        
+    sort():
+        called by:
+            _tools.sort()
+        calls:
+            (only inner module calls)
+            
+    filter():
+        called by:
+            _tools.prepare_filtering_interface()
+        calls:
+            (only inner module calls)
+            
+_table:
+    clean_table():
+        called by:
+            _tools.prepare_sorting_interface()
+            _gui.create_sheet_tab()
+            _tools.prepare_filtering_interface()
+        calls:
+            ----
+            
+    init_table():
+        called by:
+            _tools.prepare_sorting_interface()
+            _gui.create_sheet_tab()
+            _tools.prepare_filtering_interface()
+            _db.get_init_data()
+        calls:
+            _table.create_thead()
+            _table.create_tbody()
+            _gui.make_zebra()
+            
+     create_thead():
+        called by:
+            _table.init_table()
+        calls:
+            ----
+            
+    create_tbody():
+        called by:
+            _table.init_table()
+        calls:
+            _utils.hash_list()
+            _table.add_top_level()
+            _table.add_rows()
+            _utils.next_letter()
+            
+    add_top_level():
+        called by:
+            _table.create_tbody()
+        calls:
+            _store.basic_schema()
+            _table.generate_row()
+            
+    add_rows():
+        called by:
+            _table.create_tbody()
+            _table.add_node()
+        calls:
+            _store.basic_schema()
+            _table.generate_row()
+            _gui.make_zebra()
+            
+    generate_row():
+        called by:
+            _table.add_top_level()
+            _table.add_rows()
+        calls:
+            _table.a_parent()
+            _table.open_close_subtree()
+            _gui.make_zebra()
+            
+    a_parent():
+        called by:
+            _table.generate_row()
+        calls:
+            ----
+            
+    open_close_subtree():
+        called by:
+            _table.generate_row()
+        calls:
+            _db.download_node()
+            _store.set_open()
+            _store.set_selected()
+            
+    add_node():
+        called by:
+            _db.download_node()
+        calls:
+            _store.active_rows()
+            _table.add_rows()
+            
+_utils:
+    hash_list():
+        called by:
+            _table.create_body()
+        calls:
+        
+    next_letter():
+        called by:
+            _table.create_tbody()
+        calls:
+            ----
+            
+    filter():
+        called by:
+            _tools.prepare_filtering_interface() (ERROR)
+        calls:
+            ----
+            
+    money():
+        called by:
+            ---- (!!)
+        calls:
+            ----
+        
+_sheet:
+    create_new_sheet():
+        called by:
+            _tools.prepare_filtering_interface()
+            _tools.prepare_snapshot_interface()
+        calls:
+            _store.active_group_index()
+            _store.next_sheet_number()
+            _store.add_new_sheet()
+            _gui.create_sheet_tab()
+            
+    clean_basic_sheet():
+        called by:
+            ---- (!!)
+        calls:
+            _store.active_sheet_index()
+            _store.active_sheet_rows() (ERROR)
+            _store.active_basic_changed()
+            
+_download:
+    current_sheet():
+        called by:
+            _gui.init_gui()
+        calls:
+            _download.add_children()
+            _store.active_columns()
+            
+    add_children():
+        called by:
+            _download.current_sheet()
+        calls:
+            _store.active_rows()
+            
+_db:
+    get_init_data():
+        called by:
+            _gui.create_perspectives_panel()
+        calls:
+            _store.dataset()
+            _store.perspective()
+            _store.issue()
+            _store.init_basic_sheet()
+            _table.init_table()
+            _gui.init_app()
+            
+    download_node():
+        called by:
+            _table.open_close_subtree()
+        calls:
+            _store.dataset()
+            _store.perspective()
+            _store.issue()
+            _store.add_data()
+            _table.add_node()
+            _db.remove_pending_node()
+            _store.active_sheet_index()
+            _store.active_basic_changed()
+            
+    remove_pending_node():
+        called by:
+            _db.download_node()
+        calls:
+            _store.active_pending_nodes()
+            
+    add_pending_node():
+        called by:
+            ---- (!!)
+        calls:
+            _store.active_pending_nodes()
+            
+
+This table shows what each module has to know about other modules.
+X means that module in horizontal line knows about module in vertical line.
+            
+             -----------------------------------------------------------------------------------
+            | _store | _gui | _tools | _alogrithms | _table | _utils | _sheet | _download | _db |
+            |--------|------|--------|-------------|--------|--------|--------|-----------|-----| 
+_store      |    -   |      |        |             |        |        |        |           |     | 
+_gui        |    X   |   -  |    X   |             |    X   |        |        |      X    |  X  | 
+_tools      |    X   |      |    -   |      X      |    X   |    X   |    X   |           |     | 
+_algorithms |        |      |        |      -      |        |        |        |           |     | 
+_table      |    X   |   X  |        |             |    -   |    X   |        |           |  X  | 
+_utils      |        |      |        |             |        |    -   |        |           |     | 
+_sheet      |    X   |   X  |        |             |        |        |    -   |           |     | 
+_download   |    X   |      |        |             |        |        |        |      -    |     | 
+_db         |    X   |   X  |        |             |    X   |        |        |           |  -  | 
+             -----------------------------------------------------------------------------------

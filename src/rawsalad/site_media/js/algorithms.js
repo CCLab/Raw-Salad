@@ -98,7 +98,7 @@ var _algorithms = (function () {
 
         for ( i = start, sorted = 0; i < end; i += 1, sorted += 1 ) {
             for ( j = start; j < end - sorted; j += 1 ) {
-                if ( compare_obj( data[j], data[j+1], sorting_setting ) == -1 ) {
+                if ( compare_obj( data[j]['data'], data[j+1]['data'], sorting_setting ) == -1 ) {
                     swap( data, j, j+1 );
                 }
             }
