@@ -181,12 +181,12 @@ var _gui = (function () {
 
 
     that.highlight_node = function () {
-        var a_root = $('tr[data-selected=true]');
+        var a_root = $('tr[data-selected="true"]');
         // next a-level node
         var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
         var next = $('tr[data-index='+ (a_root_index + 1) +']');
 
-        if( a_root === undefined ) {
+        if( a_root.length === 0 ) {
             // nothing found - nothing to do
             return;
         }
