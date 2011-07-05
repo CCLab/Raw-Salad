@@ -41,7 +41,7 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 
 
 #-----------------------------
-def fill_rbt(budg_data, type_label):
+def fill_rbt(budg_data):
     levels= ['a', 'b', 'c', 'd', 'e', 'f']
     out= budg_data[:]
 
@@ -49,16 +49,10 @@ def fill_rbt(budg_data, type_label):
         if row_doc['parent'] == '':
             row_doc['parent']= None
         row_doc['level']= levels[row_doc['level']]
-        if '/' in row_doc['czesc']:
-            row_doc['czesc']= row_doc['czesc'].partition('/')[0]
-        row_doc['czesc']= int(row_doc['czesc']) #convert to int for the possibility to be compared against 'budzet zadaniowy'
-        row_doc['type']= type_label[row_doc['level']] + ' ' + str(row_doc['numer'])
+        if '/' in row_doc['czesc']: #part and convert to int for the possibility to be compared against 'budzet zadaniowy'
+            row_doc['czesc']= int(row_doc['czesc'].partition('/')[0])
         if row_doc['idef'] == '999999':
             row_doc['type']= 'Total' # specific type
-        row_doc['v_nation']= row_doc['dot_sub'] + row_doc['swiad_fiz'] + row_doc['wyd_jednostek'] + row_doc['wyd_majatk'] + row_doc['wyd_dlug'] # recalculate v_nation
-        row_doc['v_eu']= row_doc['sw_eu'] + row_doc['wspolfin_eu'] # recalculate v_eu
-        row_doc['v_proc_eu']= round(float(row_doc['v_eu']) / float(row_doc['v_total']) * 100, 2) # percentage
-        row_doc['v_proc_nation']= round(float(row_doc['v_nation']) / float(row_doc['v_total']) * 100, 2)
 
     # filling out 'leaf'
     budg_list= out[:]
@@ -113,16 +107,11 @@ def csv_parse(csv_read, schema):
                     except:
                         dict_row[new_key] = field # no, it is a string
                 #additional fields
-                dict_row['type']= None
                 dict_row['leaf']= True
-                dict_row['v_nation']= 0
-                dict_row['v_eu']= 0
-                dict_row['v_proc_eu']= 0
-                dict_row['v_proc_nation']= 0
 
                 i += 1
 
-            if dict_row['level'] == 0:                
+            if dict_row['level'] == 0:
                 for k in dbkeys_summ: #totalling here all the summarizable values
                     total_dict[k]= total_dict[k] + dict_row[k]
             out.append(dict_row)
@@ -136,10 +125,6 @@ def csv_parse(csv_read, schema):
     total_dict['parent']= None
     total_dict['leaf']= True
     total_dict['level']= 0
-    total_dict['v_nation']= 0
-    total_dict['v_eu']= 0
-    total_dict['v_proc_eu']= 0
-    total_dict['v_proc_nation']= 0
 
     out.append(total_dict)
 
@@ -223,25 +208,10 @@ if __name__ == "__main__":
             print 'Unable to authenticate to the database:\n %s\n' % e
             exit()
 
-        #meta info - just the labels for types
-        meta_info= schema['meta']
-        meta_level_label= meta_info['level_label']
-
         print '-- inserting data into '+ dbname +'.'+ dbname
         mongo_connect.start_request()
-        obj_rep= fill_rbt(obj_parsed, meta_level_label) # processing and inserting the data
+        obj_rep= fill_rbt(obj_parsed) # processing and inserting the data
         print "-- %d records inserted" % db_insert(obj_rep, work_db, collectname, clean_db)
-
-        #meta info
-        meta_name= meta_info['name']
-        meta_perspective= meta_info['perspective']
-        meta_collnum= meta_info['idef']
-        meta_explore= meta_info['explorable']
-        meta_collection= dict(zip(('idef', 'name', 'perspective', 'collection', 'explorable'), (meta_collnum, meta_name, meta_perspective, collectname, meta_explore)))
-        meta_collection['columns']= schema['columns']
-
-        schema_coll= 'md_budg_scheme'
-        print '-- updating schema collection', db_insert(meta_collection, work_db, schema_coll, False)
 
         mongo_connect.end_request()
 
