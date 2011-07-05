@@ -115,7 +115,7 @@ var _tools = (function () {
         $('#sort-form')
             .submit( function () {
             
-                _utils.create_preloader('Sortowanie');
+//                _utils.create_preloader('Sortowanie');
 
                 var column, order;
                 var settings = [];
@@ -147,9 +147,7 @@ var _tools = (function () {
 
                 _table.clean_table();
                 _table.init_table();
-                $(this).hide( function() {
-                            _utils.clean_preloader();
-                        });
+                $(this).hide();
 
                 // TODO why false?!
                 return false;

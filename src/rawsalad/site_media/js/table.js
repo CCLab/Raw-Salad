@@ -35,11 +35,12 @@ var _table = (function () {
     };
 
     that.init_table = function () {
+        _utils.create_preloader('Wczytujê tabelê');
         create_thead();
         create_tbody();
-
-//        _gui.highlight_node();
+        
         _gui.make_zebra();
+        _utils.clean_preloader();
     };
 
 
