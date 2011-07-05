@@ -1,20 +1,21 @@
 {
   "alias": {
-      "0":"numer",
-      "1":"parent",
-      "2":"idef",
-      "3":"czesc",
-      "4":"level",
-      "5":"name",
-      "6":"pozycja",
-      "7":"v_total",
-      "8": "dot_sub",
-      "9": "swiad_fiz",
-      "10": "wyd_jednostek",
-      "11": "wyd_majatk",
-      "12": "wyd_dlug",
-      "13": "sw_eu",
-      "14": "wspolfin_eu"
+      "0":"type",
+      "1":"numer",
+      "2":"parent",
+      "3":"idef",
+      "4":"czesc",
+      "5":"level",
+      "6":"name",
+      "7":"pozycja",
+      "8":"v_total",
+      "9": "dot_sub",
+      "10": "swiad_fiz",
+      "11": "wyd_jednostek",
+      "12": "wyd_majatk",
+      "13": "wyd_dlug",
+      "14": "sw_eu",
+      "15": "wspolfin_eu"
   },
   "type": {
       "parent": "string",
@@ -34,8 +35,7 @@
       "name": "budzet_ksiegowy_2011",
       "perspective": "Budżet księgowy 2011",
       "idef": 3,
-      "explorable": "type",
-      "level_label": {"a": "Część", "b": "Dział", "c": "Rozdział", "d":"Podrozdział"}
+      "explorable": "type"
   },
   "columns": [
     {
@@ -131,38 +131,6 @@
       "type": "number",
       "basic": true,
       "processable": true,
-      "checkable": true
-    },
-    {
-      "key": "v_nation",
-      "label": "Budżet Państwa",
-      "processable": true,
-      "basic": true,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "v_eu",
-      "label": "Budżet Środków Europejskich",
-      "processable": true,
-      "basic": true,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "v_proc_eu",
-      "label": "Procent Środków EU",
-      "processable": true,
-      "basic": true,
-      "type": "number",
-      "checkable": true
-    },
-    {
-      "key": "v_proc_nation",
-      "label": "Procent Środków Państwa",
-      "processable": true,
-      "basic": true,
-      "type": "number",
       "checkable": true
     }
   ]
