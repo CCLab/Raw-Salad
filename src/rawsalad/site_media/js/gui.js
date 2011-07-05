@@ -197,7 +197,7 @@ var _gui = (function () {
 
         a_root
             .siblings()
-            .not(':hidden')
+//            .not(':hidden')
             .addClass('dim');
 
         // make a-root background black
@@ -214,7 +214,7 @@ var _gui = (function () {
         $('.next').removeClass('next');
         next.addClass('next');
 
-        that.make_zebra();
+//        that.make_zebra();
     }
 
 

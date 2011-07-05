@@ -114,6 +114,8 @@ var _tools = (function () {
 
         $('#sort-form')
             .submit( function () {
+            
+//                _utils.create_preloader('Sortowanie');
 
                 var column, order;
                 var settings = [];

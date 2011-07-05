@@ -88,6 +88,20 @@ var _utils = (function () {
         cut( value );
         return value === '0' ? '0' : result.reverse().join(' ') + " 000";
     };
+    
+    that.create_preloader = function( text ) {
+        var html = [];
+        var preloader;
+        html.push('<div id="preloader">');
+        html.push( text );
+        html.push('</div>');
+        preloader = $( html.join('') );
+        $('#filter-popup').after( preloader );
+    };
+
+    that.clean_preloader = function() {
+        $('#preloader').remove();
+    };
 
     return that;
 

@@ -35,11 +35,12 @@ var _table = (function () {
     };
 
     that.init_table = function () {
+        _utils.create_preloader('Wczytujê tabelê');
         create_thead();
         create_tbody();
-
-//        _gui.highlight_node();
+        
         _gui.make_zebra();
+        _utils.clean_preloader();
     };
 
 
@@ -49,6 +50,7 @@ var _table = (function () {
         });
 
         add_rows( children );
+        _gui.make_zebra();
     };
 
     return that;
@@ -125,7 +127,7 @@ var _table = (function () {
                 schema: schema
             }));
         }
-        _gui.make_zebra();
+//        _gui.make_zebra();
     }
 
 
@@ -169,7 +171,7 @@ var _table = (function () {
             // open/close a subtree if it's a-level or already selected/open
             open_close_subtree( $(this), a_parent( $(this) ) );
 
-            _gui.make_zebra();
+//            _gui.make_zebra();
         });
 
         return row;
@@ -188,7 +190,7 @@ var _table = (function () {
         // dim everything outside this a-rooted subtree
         a_root
             .siblings()
-            .not(':hidden')
+//            .not(':hidden')
             .addClass('dim');
 
         // make a-root background black
