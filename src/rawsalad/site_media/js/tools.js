@@ -172,31 +172,29 @@ var _tools = (function () {
             for ( i = 0; i < schema.length; i += 1 ) {
                 if ( schema[i]['key'] === selected_column ) {
                     type = schema[i]['type'];
-                    var filter_ops = $('#filter-' + key + '-operations');
-                    var filter_keys;
                     
-                    var new_select_type = type + '-operation';
-                    filter_ops.attr('name', new_select_type);
+                    $('#filter-' + key + '-operations').remove();
+                    
+                    html = [ '<select id="filter-', key, '-operations"' ];
                     if ( schema[i]['type'] === 'number' ) {
-                        html = [ ];
+                        html.push( ' name="number-operation">' );
                         html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
                         html.push( '<option value="gt" class="filter-', key, '">></option>' );
                         html.push( '<option value="eq" class="filter-', key, '">=</option>' );
                         html.push( '<option value="lt" class="filter-', key, '"><</option>' );
                     } else {
-                        html = [ ];
+                        html.push( ' name="string-operation">' );
                         html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
                         html.push( '<option value="cnt" class="filter-', key, '">></option>' );
                         html.push( '<option value="st" class="filter-', key, '">></option>' );
                         html.push( '<option value="ncnt" class="filter-', key, '">></option>' );
                         html.push( '<option value="nst" class="filter-', key, '">></option>' );
                     }
+                    html.push( '</select>' );
                     
                     html.push( '<input type="text" name="query" id="filter-', key, '-query" />' );
                     
-                    filter_part.append( $( html.join('') ) );
-                    
-                    $('filter-' + key + '-operations').removeAttr('disabled');
+                    $( html.join('') ).insertAfter( $('#filter-' + key + '-columns') );
                     
                     break;
                 }
