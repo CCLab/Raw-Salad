@@ -64,7 +64,7 @@ var _algorithms = (function () {
         // for each element in collection
         for ( i = 0; i < data.length; i += 1 ) {
             // checks if the object passes through the filter
-            if ( check_obj( data[i], filter_mask ) ) {
+            if ( check_obj( data[i]['data'], filter_mask ) ) {
                 $.extend( true, passed_filter_object, data[ i ] );
                 result.push( passed_filter_object );
                 passed_filter_object = {};
