@@ -178,23 +178,23 @@ var _tools = (function () {
                     var new_select_type = type + '-operation';
                     filter_ops.attr('name', new_select_type);
                     if ( schema[i]['type'] === 'number' ) {
-                        html = [ '<select>' ];
+                        html = [ ];
                         html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
                         html.push( '<option value="gt" class="filter-', key, '">></option>' );
                         html.push( '<option value="eq" class="filter-', key, '">=</option>' );
                         html.push( '<option value="lt" class="filter-', key, '"><</option>' );
-                        html.push( '</select' );
                     } else {
-                        html = [ '<select>' ];
+                        html = [ ];
                         html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
                         html.push( '<option value="cnt" class="filter-', key, '">></option>' );
                         html.push( '<option value="st" class="filter-', key, '">></option>' );
                         html.push( '<option value="ncnt" class="filter-', key, '">></option>' );
                         html.push( '<option value="nst" class="filter-', key, '">></option>' );
-                        html.push( '</select>' );
                     }
                     
                     html.push( '<input type="text" name="query" id="filter-', key, '-query" />' );
+                    
+                    filter_part.append( $( html.join('') ) );
                 }
             }
             //alert('Handler for .change() called.');
