@@ -146,7 +146,7 @@ var _tools = (function () {
         html.push( '</select>' );
         
         html.push( '<select id="filter-', key, '-operations"' );
-        html.push( ' name="null-operation">' );
+        html.push( ' name="null-operation" disabled="true">' );
         // not needed because column has not been selected yet
         
         html.push( '</select>' );
@@ -165,7 +165,7 @@ var _tools = (function () {
             });
         }
         
-        filter_part = $('filter-', key, '-columns');
+        filter_part = $('#filter-', key, '-columns');
         filter_part.change( function() {
             selected_column = $(this).val();
             // schema[0] is for empty column
