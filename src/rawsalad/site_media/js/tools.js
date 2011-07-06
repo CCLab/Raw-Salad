@@ -43,6 +43,12 @@ var _tools = (function () {
         prepare_filtering_interface();
         prepare_snapshot_interface();
     };
+    
+    that.get_full_parents = function ( id ) {
+        var par_ids = [];
+        
+        
+    };
 
     return that;
 
@@ -197,9 +203,9 @@ var _tools = (function () {
                         }
                     }
 
-                    type = _utils.filter( function ( e ) {
+                    type = _store.active_columns().filter( function ( e ) {
                         return e['key'] === column;
-                    }, _store.active_columns() )[0]['type'];
+                    })[0]['type'];
 
                     operation = $('#filter-'+i+'-operations option:selected').val();;
                     query = $('#filter-'+i+'-query').val();
@@ -230,7 +236,8 @@ var _tools = (function () {
                 new_sheet = {};
                 $.extend( true, new_sheet, _store.active_sheet() );
                 new_sheet['rows'] = _algorithms.filter( new_sheet['rows'], mask );
-
+                //new_sheet['filtered'] = true;
+                   
                 _sheet.create_new_sheet( new_sheet, "Arkusz", true );
 
                 _table.clean_table();
@@ -249,7 +256,6 @@ var _tools = (function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
     }
-
 
 }) ();
 
