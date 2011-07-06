@@ -172,11 +172,11 @@ var _tools = (function () {
             for ( i = 0; i < schema.length; i += 1 ) {
                 if ( schema[i]['key'] === selected_column ) {
                     type = schema[i]['type'];
-                    var filter_ops = $('#filter-', key, '-operations');
+                    var filter_ops = $('#filter-' + key + '-operations');
                     var filter_keys;
                     
                     var new_select_type = type + '-operation';
-                    filter_ops.attr('name', type);
+                    filter_ops.attr('name', new_select_type);
                     if ( schema[i]['type'] === 'number' ) {
                         html = [ '<select>' ];
                         html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
