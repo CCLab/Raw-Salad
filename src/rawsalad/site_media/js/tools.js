@@ -286,7 +286,7 @@ var _tools = (function () {
                 var i, len = $('#filter-form select').length / 2;
                 var tmp, type;
                 var new_sheet;
-                for( i = 1; i < len; ++i ) {
+                for( i = 0; i < len; ++i ) {
                     column = $('#filter-'+i+'-columns option:selected').val();
                     if( column === "null" ) {
                         if( i === 1 ) {
