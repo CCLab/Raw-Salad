@@ -210,7 +210,7 @@ var _tools = (function () {
                     operation = $('#filter-'+i+'-operations option:selected').val();;
                     query = $('#filter-'+i+'-query').val();
 
-                    tmp = parseInt( query, 10 ) / 1000;
+                    tmp = parseInt( query, 10 );
                     // if the column if numeric - check if the query is so
                     if( type === 'number' ) {
                         // crazy way to check if tmp is a number!
