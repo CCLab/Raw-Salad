@@ -45,6 +45,34 @@ var _gui = (function () {
                 .removeClass('inactive');
         });
         $('#download-tab').click( function () {
+            var html = [];
+
+            $('.snapshot').each( function () {
+                var id = $(this).attr('id').split();
+                var group = id[1];
+                var sheet = id[2];
+                var name = $(this).attr('title');
+
+                html.push( '<tr>' );
+                html.push( '<td class="check">' );
+                html.push( '<input type="checkbox" ');
+                html.push( 'id="', ( group + '-' + sheet ));
+                html.push( '" /></td>' );
+                html.push( '<td class="radio">' );
+                html.push( '<input type="radio" name="scope" value="sheet" checked />' )
+                html.push( '</td>' );
+                html.push( '<td class="space"></td>' );
+                html.push( '<td class="radio">' );
+                html.push( '<input type="radio" name="scope" value="sheet" checked />' )
+                html.push( '</td>' );
+                html.push( '<td class="name">' );
+                html.push( name );
+                html.push( '</td>' );
+                html.push( '</tr>' );
+            });
+
+            $('#download-table > tbody').append( html.join('') );
+
             $('#table-container').hide();
             $('#download-container').show();
             $('#permalink-container').hide();
