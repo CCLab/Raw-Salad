@@ -40,8 +40,12 @@ var _gui = (function () {
 
             $('#tabs')
                 .find('div')
-                .toggleClass('active')
-                .toggleClass('inactive');
+                .removeClass('active')
+                .addClass('inactive');
+
+            $(this)
+                .addClass('active')
+                .removeClass('inactive');
         });
         $('#download-container').hide();
         $('#download-tab').click( function () {
@@ -51,8 +55,12 @@ var _gui = (function () {
 
             $('#tabs')
                 .find('div')
-                .toggleClass('active')
-                .toggleClass('inactive');
+                .removeClass('active')
+                .addClass('inactive');
+
+            $(this)
+                .addClass('active')
+                .removeClass('inactive');
         });
         $('#permalink-container').hide();
         $('#permalink-tab').click( function () {
@@ -62,8 +70,12 @@ var _gui = (function () {
 
             $('#tabs')
                 .find('div')
-                .toggleClass('active')
-                .toggleClass('inactive');
+                .removeClass('active')
+                .addClass('inactive');
+
+            $(this)
+                .addClass('active')
+                .removeClass('inactive');
         });
         $('#download-form').hide();
         $('#download-button').click( _download.current_sheet );
