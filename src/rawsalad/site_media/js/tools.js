@@ -108,7 +108,110 @@ var _tools = (function () {
             });
         }
     }
+    
+    function add_filter_key() {
+        var i, key;
+        var html = [];
+        var filter_part;
+        var selected_column;
+        var type;
+        var schema = _store.basic_schema();        
+        var columns = schema
+                        .filter( function ( e ) {
+                            return e['processable'];
+                        })
+                        .map( function ( e ) {
+                            return {
+                                name: e['key'],
+                                label: e['label']
+                            };
+                        });
 
+        key = $('#filter-form > div').length;
+        
+        columns.unshift({
+            name: 'null',
+            label: 'Wybierz jedną z kolumn'
+        });
+        
+        html.push( '<select id="filter-', key, '-columns"' );
+        html.push( ' name="columns">');
+        for ( i = 0; i < columns.length; i += 1 ) {
+            html.push( '<option value="', columns[i]['key']);
+            html.push( '" class="filter-', key, '" >"');
+            html.push( columns[i]['label'], '</option>' );
+        }
+        html.push( '</select>' );
+        
+        html.push( '<select id="filter-', key, '-operations"' );
+        html.push( ' name="null-operation">' );
+        // not needed because column has not been selected yet
+        
+        html.push( '</select>' );
+            
+        html.push( '<br />' );
+        
+        if ( key === 0 ) {
+            html.push( '<div id="add-filter-key">+</div>' );
+            html.push( '<input type="submit" value="Filtruj" />' );
+        }
+        
+
+        $('#filter-form').append( $( html.join('') );
+
+        if( key === 0 ) {
+            $('#add-filter-key').click( function () {
+                add_filter_key();
+            });
+        }
+        
+        filter_part = $('filter-', key, '-columns');
+        filter_part.change( function() {
+            selected_column = $(this).val();
+            // schema[0] is for empty column
+            for ( i = 0; i < schema.length; i += 1 ) {
+                if ( schema[i]['key'] === selected_column ) {
+                    type = schema[i]['type'];
+                    var filter_ops = $('#filter-', key, '-operations');
+                    var filter_keys;
+                    
+                    var new_select_type = type + '-operation';
+                    filter_ops.attr('name', type);
+                    if ( schema[i]['type'] === 'number' ) {
+                        html = [ '<select>' ];
+                        html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
+                        html.push( '<option value="gt" class="filter-', key, '">></option>' );
+                        html.push( '<option value="eq" class="filter-', key, '">=</option>' );
+                        html.push( '<option value="lt" class="filter-', key, '"><</option>' );
+                        html.push( '</select' );
+                    } else {
+                        html = [ '<select>' ];
+                        html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
+                        html.push( '<option value="cnt" class="filter-', key, '">></option>' );
+                        html.push( '<option value="st" class="filter-', key, '">></option>' );
+                        html.push( '<option value="ncnt" class="filter-', key, '">></option>' );
+                        html.push( '<option value="nst" class="filter-', key, '">></option>' );
+                        html.push( '</select>' );
+                    }
+                    
+                    html.push( '<input type="text" name="query" id="filter-', key, '-query" />' );
+                }
+            }
+            //alert('Handler for .change() called.');
+        });
+    }
+    
+    /*for ( i = 0; i < schema.length; i += 1 ) {
+            html.push( '<option value="', schema[i]['key']);
+            html.push( '" class="filter-', m key, '" >"');
+            html.push( schema[i]['label'], '</option>' );
+        }*/
+    // TODO don't include already selected colmuns
+        /*for( i = 0; i < columns.length; ++i ) {
+            html.push( '<option value="', columns[i]['name'], '" class="key-', key, '">' );
+            html.push( columns[i]['label'], '</option>' );
+        }*/
+        
     function prepare_sorting_interface() {
 
         $('#sort-button')
@@ -179,8 +282,9 @@ var _tools = (function () {
 
         $('#filter-button')
             .click( function () {
-                $('#filter-form').toggle();
+                $('#filter-form').html('').toggle();
                 $('#sort-form').hide();
+                add_filter_key();
             });
 
         $('#filter-form')
