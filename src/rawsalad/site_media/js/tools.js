@@ -131,14 +131,14 @@ var _tools = (function () {
         
         columns.unshift({
             name: 'null',
-            label: 'Wybierz jedną z kolumn'
+            label: 'Wybierz kolumnę'
         });
         
         html.push( '<select id="filter-', key, '-columns"' );
         html.push( ' name="columns">');
         for ( i = 0; i < columns.length; i += 1 ) {
-            html.push( '<option value="', columns[i]['key']);
-            html.push( '" class="filter-', key, '" >"');
+            html.push( '<option value="', columns[i]['label']);
+            html.push( '" class="filter-', key, '" >');
             html.push( columns[i]['label'], '</option>' );
         }
         html.push( '</select>' );
