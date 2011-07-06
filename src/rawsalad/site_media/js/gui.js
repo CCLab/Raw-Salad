@@ -77,12 +77,12 @@ var _gui = (function () {
             $('#download-table > tbody').append( html.join('') );
 
             $('#download-table .radio > input').attr( 'disabled', 'true' );
-            $('#download-table .checkbox > input' ).change( function () {
+            $('#download-table .check > input' ).change( function () {
                 if( $(this).attr('checked') ) {
-                    $(this).parent().find('.radio > input').removeAttr('disabled');
+                    $(this).parent().parent().find('.radio > input').removeAttr('disabled');
                 }
                 else {
-                    $(this).parent().find('.radio > input').attr('disabled', 'true');
+                    $(this).parent().parent().find('.radio > input').attr('disabled', 'true');
                 }
             });
 
