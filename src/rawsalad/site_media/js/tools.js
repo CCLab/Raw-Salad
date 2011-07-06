@@ -137,7 +137,7 @@ var _tools = (function () {
         html.push( '<select id="filter-', key, '-columns"' );
         html.push( ' name="columns">');
         for ( i = 0; i < columns.length; i += 1 ) {
-            html.push( '<option value="', columns[i]['label']);
+            html.push( '<option value="', columns[i]['key']);
             html.push( '" class="filter-', key, '" >');
             html.push( columns[i]['label'], '</option>' );
         }
@@ -148,8 +148,6 @@ var _tools = (function () {
         // not needed because column has not been selected yet
         
         html.push( '</select>' );
-            
-        html.push( '<br />' );
         
         if ( key === 0 ) {
             html.push( '<div id="add-filter-key">+</div>' );
@@ -164,6 +162,8 @@ var _tools = (function () {
                 add_filter_key();
             });
         }
+        
+        html.push( '<br />' );
         
         filter_part = $('filter-', key, '-columns');
         filter_part.change( function() {
