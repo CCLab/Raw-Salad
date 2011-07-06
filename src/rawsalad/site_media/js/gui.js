@@ -30,9 +30,6 @@ var _gui = (function () {
     var that = {};
 
     that.init_gui = function () {
-        // hide what's not needed now
-        $('#sort-form').hide();
-        $('#filter-form').hide();
         $('#table-tab').click( function () {
             $('#table-container').show();
             $('#download-container').hide();
@@ -47,7 +44,6 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#download-container').hide();
         $('#download-tab').click( function () {
             $('#table-container').hide();
             $('#download-container').show();
@@ -62,7 +58,6 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#permalink-container').hide();
         $('#permalink-tab').click( function () {
             $('#table-container').hide();
             $('#download-container').hide();
@@ -77,10 +72,7 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#download-form').hide();
         $('#download-button').click( _download.current_sheet );
-        $('#application').hide();
-
 
         $('#download-container').find('.radio > input').attr( 'disabled', 'true' );
         $('#download-container').find('.check > input').change( function () {
@@ -104,8 +96,7 @@ var _gui = (function () {
                 else {
                     show_choose_panel();
                 }
-            })
-            .hide();
+            });
 
         // arm back-to-datasets button
         $('#back-to-datasets')
@@ -135,10 +126,8 @@ var _gui = (function () {
                 // clear the perspectives list
                 $('#choose-perspectives')
                     .html('');
-            })
-            .hide();
+            });
 
-        $('#choose-perspectives').hide();
         init_choose_panel();
     };
 
