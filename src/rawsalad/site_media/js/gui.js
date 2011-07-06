@@ -86,7 +86,7 @@ var _gui = (function () {
         $('#download-container').find('.check > input').change( function () {
             var radios = $('#download-container').find('.radio > input');
             if( $(this).attr('checked') ) {
-                radios.attr( 'disabled', '' );
+                radios.removeAttr( 'disabled' );
             }
             else {
                 radios.attr( 'disabled', 'true' );
