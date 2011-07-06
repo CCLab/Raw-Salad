@@ -12,9 +12,6 @@
           </div>
           <div id="download-tab" class="tab inactive">
             pobierz dane
-            <form id="download-form" action="/download/" method="post" name="input">
-                <input type="text" name="sheet" />
-            </form>
           </div>
           <div id="permalink-tab" class="tab inactive">
             podziel się
@@ -68,7 +65,10 @@
 
         <!-- D O W N L O A D -->
         <div id="download-container">
-            download panel
+            <form id="download-form" action="/download/" method="post" name="input">
+                <input type="text" name="sheet" />
+            </form>
+            <div id="download-button" style="background-color: #5b5b5b; padding: 3px;">Pobierz aktualny arkusz</div>
         </div>
 
         <!-- P E R M A L I N K -->
