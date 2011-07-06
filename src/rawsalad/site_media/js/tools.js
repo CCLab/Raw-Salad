@@ -156,18 +156,14 @@ var _tools = (function () {
             html.push( '<input type="submit" value="Filtruj" />' );
         }
         
-
+        html.push( '</div>' );
         $('#filter-form').append( $( html.join('') ) );
-
+        
         if( key === 0 ) {
             $('#add-filter-key').click( function () {
                 add_filter_key();
             });
         }
-        
-        html.push( '</div>' );
-        
-        html.push( '<br />' );
         
         filter_part = $('filter-', key, '-columns');
         filter_part.change( function() {
