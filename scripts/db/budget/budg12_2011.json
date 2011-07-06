@@ -42,7 +42,8 @@
         "level": 1
         },
     "query": {
-        "node": { "$in" : [ null, 0 ] }
+        "node": { "$in" : [ null, 0 ] },
+        "v_eu": { "$gt" : 0 }
         },
     "sort": {
         "2": {"level": 1},
