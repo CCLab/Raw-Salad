@@ -12,9 +12,6 @@
           </div>
           <div id="download-tab" class="tab inactive">
             pobierz dane
-            <form id="download-form" action="/download/" method="post" name="input">
-                <input type="text" name="sheet" />
-            </form>
           </div>
           <div id="permalink-tab" class="tab inactive">
             podziel się
@@ -52,6 +49,12 @@
               <form id="filter-form" action="">
               </form>
             </div>
+
+            <!-- M A N A G E  C O L U M N S  P O P U P -->
+            <div id="manage-columns-popup">
+              <form id="manage-columns-form" action="">
+              </form>
+            </div>
             
             <!-- T A B E L -->
             <table style="clear: both">
@@ -62,12 +65,15 @@
 
         <!-- D O W N L O A D -->
         <div id="download-container">
-            download panel
+            <form id="download-form" action="/download/" method="post" name="input">
+                <input type="text" name="sheet" />
+            </form>
+            <div id="download-button">Pobierz aktualny arkusz</div>
         </div>
 
         <!-- P E R M A L I N K -->
         <div id="permalink-container">
-            permalink panel
+            Już niebawem dostępna będzie opcja wysyłania permalinków do znajomych!
         </div>
 
        </div>
