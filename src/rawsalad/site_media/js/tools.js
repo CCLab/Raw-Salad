@@ -195,22 +195,14 @@ var _tools = (function () {
                     html.push( '<input type="text" name="query" id="filter-', key, '-query" />' );
                     
                     filter_part.append( $( html.join('') ) );
+                    
+                    $('filter-' + key + '-operations').removeAttr('disabled');
+                    
+                    break;
                 }
             }
-            //alert('Handler for .change() called.');
         });
     }
-    
-    /*for ( i = 0; i < schema.length; i += 1 ) {
-            html.push( '<option value="', schema[i]['key']);
-            html.push( '" class="filter-', m key, '" >"');
-            html.push( schema[i]['label'], '</option>' );
-        }*/
-    // TODO don't include already selected colmuns
-        /*for( i = 0; i < columns.length; ++i ) {
-            html.push( '<option value="', columns[i]['name'], '" class="key-', key, '">' );
-            html.push( columns[i]['label'], '</option>' );
-        }*/
         
     function prepare_sorting_interface() {
 
