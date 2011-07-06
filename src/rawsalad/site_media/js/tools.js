@@ -157,7 +157,7 @@ var _tools = (function () {
         }
         
 
-        $('#filter-form').append( $( html.join('') );
+        $('#filter-form').append( $( html.join('') ) );
 
         if( key === 0 ) {
             $('#add-filter-key').click( function () {
