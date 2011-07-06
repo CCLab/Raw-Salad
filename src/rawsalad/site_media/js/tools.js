@@ -152,7 +152,7 @@ var _tools = (function () {
         html.push( '</select>' );
         
         if ( key === 0 ) {
-            html.push( '<div id="add-filter-key">+</div>' );
+            html.push( '<div id="add-sort-key">+</div>' );
             html.push( '<input type="submit" value="Filtruj" />' );
         }
         
@@ -160,7 +160,8 @@ var _tools = (function () {
         $('#filter-form').append( $( html.join('') ) );
         
         if( key === 0 ) {
-            $('#add-filter-key').click( function () {
+            //TODO create CSS class for add-filter-key !!!!!!!!!!!
+            $('#add-sort-key').click( function () {
                 add_filter_key();
             });
         }
@@ -185,10 +186,10 @@ var _tools = (function () {
                     } else {
                         html.push( ' name="string-operation">' );
                         html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
-                        html.push( '<option value="cnt" class="filter-', key, '">></option>' );
-                        html.push( '<option value="st" class="filter-', key, '">></option>' );
-                        html.push( '<option value="ncnt" class="filter-', key, '">></option>' );
-                        html.push( '<option value="nst" class="filter-', key, '">></option>' );
+                        html.push( '<option value="cnt" class="filter-', key, '">Zawiera</option>' );
+                        html.push( '<option value="st" class="filter-', key, '">Zaczyna się od</option>' );
+                        html.push( '<option value="ncnt" class="filter-', key, '">Nie zawiera</option>' );
+                        html.push( '<option value="nst" class="filter-', key, '">Nie zaczyna się od</option>' );
                     }
                     html.push( '</select>' );
                     
