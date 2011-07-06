@@ -269,6 +269,21 @@ body {
         cursor: pointer;
     }
 
+#download-container {
+  clear: both;
+  width: 900px;
+  min-height: 120px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 0px 0px 5px 5px;
+  -moz-border-radius: 0px 0px 5px 5px;
+}
+
+#permalink-container {
+  clear: both;
+  width: 960px;
+}
+
     #snapshots {
         background-color: #fff;
         padding: 0px 5px;
