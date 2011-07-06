@@ -134,10 +134,12 @@ var _tools = (function () {
             label: 'Wybierz kolumnę'
         });
         
+        html.push( '<div id="filter-key-', key, '">' );
+        
         html.push( '<select id="filter-', key, '-columns"' );
         html.push( ' name="columns">');
         for ( i = 0; i < columns.length; i += 1 ) {
-            html.push( '<option value="', columns[i]['key']);
+            html.push( '<option value="', columns[i]['name']);
             html.push( '" class="filter-', key, '" >');
             html.push( columns[i]['label'], '</option>' );
         }
@@ -162,6 +164,8 @@ var _tools = (function () {
                 add_filter_key();
             });
         }
+        
+        html.push( '</div>' );
         
         html.push( '<br />' );
         
