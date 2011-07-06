@@ -117,9 +117,9 @@ def fill_elt_b(src, idef_b, parent, db):
         "idef_sort": idef_sort,
         "parent": str(parent),
         "parent_sort": sort_format(str(parent)),
-        "name": elm_name,
+        "name": elm_name.replace("  ", " ").strip(),
         "level": "b",
-        "type": " ".join(["Część", src["czesc"]]),
+        "type": " ".join(["Część", src["czesc"]]).strip(),
         "leaf": True
         }
 
@@ -159,6 +159,7 @@ def fill_docs(budg_data, db):
                 # cleaning names before insert
                 row_dict_a['name']= row_dict_a['name'].replace('\n', ' ')
                 row_dict_a['name']= row_dict_a['name'].replace('Ŝ', 'ż')
+                row_dict_a['name']= row_dict_a['name'].replace("  ", " ").strip()
                 row_dict_a['nss']= nss
                 row_dict_a.update(fill_elt_a(idef_level_a)) # idef, parent, leaf, level, etc.
 
