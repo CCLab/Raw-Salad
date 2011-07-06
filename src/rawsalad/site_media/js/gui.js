@@ -38,7 +38,10 @@ var _gui = (function () {
             $('#download-container').hide();
             $('#permalink-container').hide();
 
-            $('#tabs').find('div').toggleClass('active', 'inactive');
+            $('#tabs')
+                .find('div')
+                .toggleClass('active')
+                .toggleClass('inactive');
         });
         $('#download-container').hide();
         $('#download-tab').click( function () {
@@ -46,7 +49,10 @@ var _gui = (function () {
             $('#download-container').show();
             $('#permalink-container').hide();
 
-            $('#tabs').find('div').toggleClass('active', 'inactive');
+            $('#tabs')
+                .find('div')
+                .toggleClass('active')
+                .toggleClass('inactive');
         });
         $('#permalink-container').hide();
         $('#permalink-tab').click( function () {
@@ -54,7 +60,10 @@ var _gui = (function () {
             $('#download-container').hide();
             $('#permalink-container').show();
 
-            $('#tabs').find('div').toggleClass('active', 'inactive');
+            $('#tabs')
+                .find('div')
+                .toggleClass('active')
+                .toggleClass('inactive');
         });
         $('#download-form').hide();
         $('#download-button').click( _download.current_sheet );
