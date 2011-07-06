@@ -219,6 +219,9 @@ var _store = (function () {
         that.active_sheet_index( next_sheet_number );
     };
 
+    that.get_all_groups = function () {
+        return groups;
+    };
 
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives

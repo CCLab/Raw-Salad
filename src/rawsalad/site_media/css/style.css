@@ -279,18 +279,53 @@ body {
   -moz-border-radius: 0px 0px 5px 5px;
 }
 
-#download-button {
-  float: left;
-  color: #fff; 
-  background-color: #5b5b5b; 
-  padding: 3px; 
-  border-radius: 0px 0px 5px 5px;
-  -moz-border-radius: 0px 0px 5px 5px;
-}
+      #download-container p {
+        padding-left: 5px;
+      }
 
-#download-button:hover {
-  cursor: pointer;
-}
+      #download-container table {
+        width: 600px;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+      }
+
+      #download-container td, th {
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+
+      #download-container th.under {
+        border-bottom: 1px solid #5b5b5b;
+      }
+
+      #download-container td.radio {
+        width: 100px;
+        border-bottom: 1px solid #bbbbbb;
+        text-align: center;
+      }
+      #download-container td.space {
+        width: 1px;
+      }
+      #download-container td.name {
+        border-bottom: 1px solid #bbbbbb;
+      }
+
+      #download-button {
+        float: left;
+        padding: 5px;
+        background-color: #ff6000;
+        color: #fff;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        cursor: default;
+      }
+
+      #download-button:hover {
+        cursor: pointer;
+      }
 
 #permalink-container {
   clear: both;

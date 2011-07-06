@@ -81,6 +81,15 @@ var _gui = (function () {
         $('#download-button').click( _download.current_sheet );
         $('#application').hide();
 
+          $('#download-container').find('.radio > input').attr( 'disabled', 'true' );
+          $('#download-container').find('.check > input').change( function () {
+            if( $(this).attr('checked') ) {
+              $('#download-container').find('.radio > input').attr( 'disabled', '' );
+            }
+            else {
+              $('#download-container').find('.radio > input').attr( 'disabled', 'true' );
+            }
+          });
         _tools.prepare_tools();
 
         // arm open/close button and hide it!

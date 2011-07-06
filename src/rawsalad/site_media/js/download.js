@@ -28,6 +28,12 @@ var _download = (function () {
 
     var that = {};
 
+    // ids = { '0': [ 2, 3, 5 ], '4': [ 1, 3, 4 ] }
+    that.download_sheets = function ( ids ) {
+
+    };
+
+
     that.current_sheet = function () {
         var i, j;
         var data = '';
