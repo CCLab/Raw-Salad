@@ -48,7 +48,7 @@ var _gui = (function () {
             var html = [];
 
             $('.snapshot').each( function () {
-                var id = $(this).attr('id').split();
+                var id = $(this).attr('id').split('-');
                 var group = id[1];
                 var sheet = id[2];
                 var name = $(this).attr('title');
