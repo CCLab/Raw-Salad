@@ -165,7 +165,7 @@ var _tools = (function () {
             });
         }
         
-        filter_part = $('#filter-', key, '-columns');
+        filter_part = $('#filter-' + key + '-columns');
         filter_part.change( function() {
             selected_column = $(this).val();
             // schema[0] is for empty column
