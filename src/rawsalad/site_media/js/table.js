@@ -30,15 +30,15 @@ var _table = (function () {
     var that = {};
 
     that.clean_table = function () {
-        $('thead').empty();
-        $('tbody').empty();
+        $('#data-table > thead').empty();
+        $('#data-table > tbody').empty();
     };
 
     that.init_table = function () {
         _utils.create_preloader('Wczytujê tabelê');
         create_thead();
         create_tbody();
-        
+
         _gui.make_zebra();
         _utils.clean_preloader();
     };
@@ -69,7 +69,7 @@ var _table = (function () {
         });
 
         html.push( '</tr>' );
-        $('thead').append( html.join('') );
+        $('#data-table > thead').append( html.join('') );
     }
 
     function create_tbody() {
@@ -87,7 +87,7 @@ var _table = (function () {
 
             level = _utils.next_letter( level );
         }
-        
+
         // apply node selection(if there is selected node) to css classes
         selected_node = _store.active_rows().filter( function ( e ) {
             return e['state']['selected'];
@@ -103,7 +103,7 @@ var _table = (function () {
         var schema = _store.basic_schema();
 
         for( i = 0; i < len; ++i ) {
-            $('tbody').append( generate_row({
+            $('#data-table > tbody').append( generate_row({
                 node: data[i],
                 index: i,
                 schema: schema
@@ -176,17 +176,17 @@ var _table = (function () {
 
         return row;
     }
-    
+
     function apply_selection( id ) {
         var node = $('#' + id);
-        
+
         // a-level parent
         var a_root = a_parent( node );
         var a_root_id = a_root.attr('id');
         // next a-level node
         var a_root_index = parseInt( a_root.attr( 'data-index' ), 10 );
         var next = $('tr[data-index='+ (a_root_index + 1) +']');
-        
+
         // dim everything outside this a-rooted subtree
         a_root
             .siblings()
@@ -202,7 +202,7 @@ var _table = (function () {
             // uses 'this' instead of '$(this)' for fun.call reason
             this.removeClass( 'dim' );
         });
-        
+
         // add the bottom border
         $('.next').removeClass('next');
         next.addClass('next');
@@ -230,7 +230,7 @@ var _table = (function () {
                 else {
                     _db.download_node( id );
                 }
-                
+
                 // if there is previously selected node, unselect it in _store
                 previously_selected_id = $('tr[data-selected=true]').attr('id');
                 if ( !!previously_selected_id ) {
@@ -272,7 +272,7 @@ var _table = (function () {
             // unselect previously selected node in _store
             previously_selected_id = $('tr[data-selected=true]').attr('id');
             _store.set_selected( previously_selected_id, false );
-                
+
             _store.set_selected( a_root_id, true );
             $('tr[data-selected=true]').attr('data-selected', 'false');
             a_root.attr('data-selected', 'true');
