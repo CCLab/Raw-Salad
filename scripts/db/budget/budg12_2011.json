@@ -6,7 +6,7 @@
     "idef": 2,
     "issue": "2011",
     "explorable": "type",
-    "max_level": "d",
+    "max_level": "e",
     "columns": [
         {
             "key": "type",
@@ -50,8 +50,7 @@
         "idef": 1
         },
     "query": {
-        "node": { "$in" : [ null, 1 ] },
-        "v_eu": { "$gt" : 0 }
+        "node": { "$in" : [ null, 1 ] }
         },
     "sort": {
         "2": {"level": 1},
