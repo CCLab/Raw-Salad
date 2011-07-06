@@ -33,6 +33,50 @@ var _gui = (function () {
         // hide what's not needed now
         $('#sort-form').hide();
         $('#filter-form').hide();
+        $('#table-tab').click( function () {
+            $('#table-container').show();
+            $('#download-container').hide();
+            $('#permalink-container').hide();
+
+            $('#tabs')
+                .find('div')
+                .removeClass('active')
+                .addClass('inactive');
+
+            $(this)
+                .addClass('active')
+                .removeClass('inactive');
+        });
+        $('#download-container').hide();
+        $('#download-tab').click( function () {
+            $('#table-container').hide();
+            $('#download-container').show();
+            $('#permalink-container').hide();
+
+            $('#tabs')
+                .find('div')
+                .removeClass('active')
+                .addClass('inactive');
+
+            $(this)
+                .addClass('active')
+                .removeClass('inactive');
+        });
+        $('#permalink-container').hide();
+        $('#permalink-tab').click( function () {
+            $('#table-container').hide();
+            $('#download-container').hide();
+            $('#permalink-container').show();
+
+            $('#tabs')
+                .find('div')
+                .removeClass('active')
+                .addClass('inactive');
+
+            $(this)
+                .addClass('active')
+                .removeClass('inactive');
+        });
         $('#download-form').hide();
         $('#download-button').click( _download.current_sheet );
         $('#application').hide();
