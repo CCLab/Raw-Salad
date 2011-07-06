@@ -33,6 +33,23 @@ var _gui = (function () {
         // hide what's not needed now
         $('#sort-form').hide();
         $('#filter-form').hide();
+        $('#table-tab').click( function () {
+            $('#table-container').show();
+            $('#download-container').hide();
+            $('#permalink-container').hide();
+        });
+        $('#download-container').hide();
+        $('#download-tab').click( function () {
+            $('#table-container').hide();
+            $('#download-container').show();
+            $('#permalink-container').hide();
+        });
+        $('#permalink-container').hide();
+        $('#permalink-tab').click( function () {
+            $('#table-container').hide();
+            $('#download-container').hide();
+            $('#permalink-container').show();
+        });
         $('#download-form').hide();
         $('#download-button').click( _download.current_sheet );
         $('#application').hide();
