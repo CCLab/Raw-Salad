@@ -59,14 +59,17 @@ var _gui = (function () {
                 html.push( 'id="', ( group + '-' + sheet ));
                 html.push( '" /></td>' );
                 html.push( '<td class="radio">' );
-                html.push( '<input type="radio" name="scope" value="sheet" checked />' )
+                html.push( '<input type="radio" name="scope-', group, '-', sheet );
+                html.push( '" value="sheet" checked />' )
                 html.push( '</td>' );
                 html.push( '<td class="space"></td>' );
-                html.push( '<td class="radio">' );
-                html.push( '<input type="radio" name="scope" value="sheet" checked />' )
-                html.push( '</td>' );
+                if( sheet === 0 ) {
+                    html.push( '<td class="radio">' );
+                    html.push( '<input type="radio" name="scope-', group, '-', sheet );
+                    html.push( '" value="full" checked />' )
+                }
                 html.push( '<td class="name">' );
-                html.push( name );
+                html.push( sheet === 0 ? name : ( ' > ' + name ));
                 html.push( '</td>' );
                 html.push( '</tr>' );
             });
