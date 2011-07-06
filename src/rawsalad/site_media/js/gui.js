@@ -74,9 +74,17 @@ var _gui = (function () {
                 html.push( '</td>' );
                 html.push( '</tr>' );
             });
-
-            $('.radio > input').attr( 'disabled', 'true' );
             $('#download-table > tbody').append( html.join('') );
+
+            $('#download-table .radio > input').attr( 'disabled', 'true' );
+            $('#download-table .checkbox > input' ).change( function () {
+                if( $(this).attr('checked') ) {
+                    $(this).parent().find('.radio > input').removeAttr('disabled');
+                }
+                else {
+                    $(this).parent().find('.radio > input').attr('disabled', 'true');
+                }
+            });
 
             $('#table-container').hide();
             $('#download-container').show();
