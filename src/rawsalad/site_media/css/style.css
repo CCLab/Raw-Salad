@@ -506,8 +506,21 @@ body {
     background-color: #ddd;
 }
 
+#add-filter-key {
+    width: 5px;
+    height: 1px;
+    padding: 5px;
+    margin: 0px 5px;
+    display: inline;
+    
+    background-color: #fffdfa;
+    border-radius: 5px;    
+    -moz-border-radius: 5px;    
+}
 
-
-
+#add-filter-key:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}
 
 

@@ -152,7 +152,7 @@ var _tools = (function () {
         html.push( '</select>' );
         
         if ( key === 0 ) {
-            html.push( '<div id="add-sort-key">+</div>' );
+            html.push( '<div id="add-filter-key">+</div>' );
             html.push( '<input type="submit" value="Filtruj" />' );
         }
         
@@ -161,7 +161,7 @@ var _tools = (function () {
         
         if( key === 0 ) {
             //TODO create CSS class for add-filter-key !!!!!!!!!!!
-            $('#add-sort-key').click( function () {
+            $('#add-filter-key').click( function () {
                 add_filter_key();
             });
         }
@@ -169,7 +169,9 @@ var _tools = (function () {
         filter_part = $('#filter-' + key + '-columns');
         filter_part.change( function() {
             selected_column = $(this).val();
-            // schema[0] is for empty column
+            
+            $('#filter-' + key + '-query').remove();
+            
             for ( i = 0; i < schema.length; i += 1 ) {
                 if ( schema[i]['key'] === selected_column ) {
                     type = schema[i]['type'];
