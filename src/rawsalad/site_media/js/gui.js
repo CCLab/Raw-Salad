@@ -63,17 +63,19 @@ var _gui = (function () {
                 html.push( '" value="sheet" checked />' )
                 html.push( '</td>' );
                 html.push( '<td class="space"></td>' );
+                html.push( '<td class="radio">' );
                 if( sheet === '0' ) {
-                    html.push( '<td class="radio">' );
                     html.push( '<input type="radio" name="scope-', group, '-', sheet );
-                    html.push( '" value="full" checked />' )
+                    html.push( '" value="full" />' )
                 }
+                html.push( '</td>' );
                 html.push( '<td class="name">' );
                 html.push( sheet === '0' ? name : ( ' > ' + name ));
                 html.push( '</td>' );
                 html.push( '</tr>' );
             });
 
+            $('.radio > input').attr( 'disabled', 'true' );
             $('#download-table > tbody').append( html.join('') );
 
             $('#table-container').hide();
