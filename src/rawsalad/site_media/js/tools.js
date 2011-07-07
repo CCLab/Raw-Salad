@@ -50,6 +50,7 @@ var _tools = (function () {
         var visual_list = remove_hidden( filtered_list );
         var visual_rows_object = get_filtered_data( visual_list );
         var i;
+        var id;
         
         for ( i = 0; i < visual_list.length; i += 1 ) {
             id = visual_list[i]['data']['idef'];
