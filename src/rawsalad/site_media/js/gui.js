@@ -430,9 +430,9 @@ var _gui = (function () {
                 };
 
                 // if new group is created, get data and show table
-                if( _store.create_new_group( col_id ) ) {
+                if( _store.group_exists( col_id ) ) {
                     // get top-level data from db
-                    _db.get_init_data();
+                    _db.get_init_data(col_id);
                 }
                 else {
                     // go back to application with focus on requested sheet

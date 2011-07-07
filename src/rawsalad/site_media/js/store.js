@@ -51,6 +51,23 @@ var _store = (function () {
     }
 
 
+    // check if group exists
+    that.group_exists = function (data) {
+        if( find_group( data ) !== -1) {
+            return false;
+        }
+        return true;
+    }
+
+
+    // creates a new group and sets an activ group index
+    that.create_group = function (data) {
+        // create a group for new data collection
+        groups.push( group( data ));
+        that.active_group( groups.length - 1 );   
+    }
+
+
     // creates a new group or sets an active group index to apropriate group
     that.create_new_group = function ( data ) {
         var found = find_group( data );
@@ -272,7 +289,7 @@ var _store = (function () {
             'dataset': data['dataset'],
             'perspective': data['perspective'],
             'issue': data['issue'],
-
+            'columns': data['columns'],
             'active_sheet_number': 0,
             'sheets': [],
             'basic_sheet': null,
