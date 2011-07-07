@@ -126,7 +126,7 @@ var _gui = (function () {
 
             checkboxes.each( function () {
                 var box = $(this);
-                var box_id = box.attr('id').split();
+                var box_id = box.attr('id').split('-');
                 var group = box_id[0];
                 var sheet = box_id[1];
                 var scope = table

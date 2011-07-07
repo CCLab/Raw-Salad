@@ -64,7 +64,7 @@ var _store = (function () {
     that.create_group = function (data) {
         // create a group for new data collection
         groups.push( group( data ));
-        that.active_group( groups.length - 1 );   
+        that.active_group( groups.length - 1 );
     }
 
 
@@ -112,7 +112,7 @@ var _store = (function () {
 
      // add column to active_sheet
     that.add_column_to_sheet = function () {
-    }    
+    }
 
 
     that.active_columns = function () {
@@ -246,7 +246,7 @@ var _store = (function () {
     };
 
 
-    // check column in active_sheet 
+    // check column in active_sheet
     that.find_column_in_active_sheet = function(key){
 	var i;
 	var col = that.active_columns();
@@ -257,6 +257,10 @@ var _store = (function () {
         }
         return false;
     }
+
+    that.get_sheet = function ( group, sheet ) {
+        return groups[group]['sheets'][sheet];
+    };
 
 
 // P R I V A T E   I N T E R F A C E
@@ -298,12 +302,12 @@ var _store = (function () {
             });
 
 	if (!!basic){
-            return rows; 
+            return rows;
         }
         return {
             'columns': that.active_group()['columns'].filter( function ( e ) {
 				return e['basic'] == true;
-			}),            
+			}),
             'rows': rows,
             'name': data['name']
 //          'pending_nodes': []
