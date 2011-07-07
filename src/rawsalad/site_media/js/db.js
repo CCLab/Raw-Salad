@@ -46,7 +46,7 @@ var _db = (function () {
                 var data = {
 			// TODO get rid of colkumns here 
 			// TODO move it to create sheet function
-                    columns: received_data.perspective.columns,
+//                    columns: received_data.perspective.columns,
                     rows: received_data.rows,
                     name: received_data.perspective.perspective
                 };

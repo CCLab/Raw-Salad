@@ -104,7 +104,7 @@ var _store = (function () {
         var active_grp = that.active_group();
 
         // store original version of collection
-        active_grp['basic_sheet'] = sheet( data );
+        active_grp['basic_rows'] = sheet( data, true );
         // add data to mutable list of sheets
         active_grp['sheets'].push( sheet( data ) );
     };
@@ -269,19 +269,26 @@ var _store = (function () {
 
 // O B J E C T   F A C T O R I E S
     // a single sheet
-    function sheet( data ) {
-        return {
-            'columns': data['columns'],
-            'rows': data['rows'].map( function ( row ) {
+    function sheet( data, basic ) {
+	var rows = data['rows'].map( function ( row ) {
                 return {
                     data: row,
                     state: { open: false, selected: false }
                 };
-            }),
-            'pending_nodes': [],
+
+	if (!!basic){
+            return rows; 
+        }
+        return {
+            'columns': that.active_group()['columns'].filter( function ( e ) {
+				return e['basic'] == true;
+			}),            
+            'rows': rows,
             'name': data['name']
+//          'pending_nodes': []
         };
     };
+
 
     // list of all sheets of the same dataset/perspective/issue
     function group( data ) {
@@ -292,7 +299,7 @@ var _store = (function () {
             'columns': data['columns'],
             'active_sheet_number': 0,
             'sheets': [],
-            'basic_sheet': null,
+            'basic_rows': null,
             'basic_changed': false
         };
     };
