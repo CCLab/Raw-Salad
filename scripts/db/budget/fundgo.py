@@ -3,16 +3,12 @@
 
 """
 import Funduszy Celowe w ukladie Zadaniowy to mongoDB
-flat structure (each data unit is a separate doc in the collection)
-parenting is archieved through 'parent' key
 
 the structure:
-there are 2 'branches of the tree' of a budget structure, 
-outlined in the collection as 'node':null and 'node':0
-
-nodes are:
-null: [fundusz] 1-N [zadanie] 1-N [podzadanie]
-0: ...[zadanie] 1-N [miernik]
+flat structure (each data unit is a separate doc in the collection),
+  parenting is archieved through 'parent' key
+Cel & Miernik are subtrees of a parent (parents can be Zadanie & Podzadanie),
+  stored in the 'info' key of the element
 
 Warning! No schema create or update!
 
@@ -23,6 +19,7 @@ the files needed to upload the budget:
 
 type python fundgo.py -h for instructions
 """
+
 import getpass
 import os
 import optparse
@@ -55,14 +52,14 @@ def get_db_connect(fullpath, dbtype):
 #-----------------------------
 def sort_format(src):
     """
-    format 1-2-3... to 001-002-003...
+    format 1-2-3... to 0001-0002-0003...
     src should be convertable to int
     """
     src_list= src.split('-')
     res_list= []
     for elm in src_list:
         try:
-            res_list.append('%03d' % int(elm))
+            res_list.append('%04d' % int(elm))
         except:
             res_list.append(elm)
     res= '-'.join(res_list)
@@ -88,22 +85,49 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 
 
 #-----------------------------
-def check_collection(db, collname):
-    # checking the result collection for consistency
+def check_collection(db, collname, dict_de):
+    """ checking created collection for consistency """
     noerrors= True
 
-    # 1. find those with 'leaf':null and check if they have children
-    #    and update 'leaf':True if no, 'leaf':False otherwise
-    null_leaf_curr= db[collname].find({'leaf':None})
+    # first filling out "info" keys
+    print '...filling info key'
+    for curr_dict in dict_de:
+        if curr_dict["type"] == "Cel":
+            lookup= curr_dict["parent"]
+        elif curr_dict["type"] == "Miernik":
+            lookup= curr_dict["parent"].rsplit("-",1)[0]
+        else:
+            print "--! inconsistency found! Info element %s with unproper type: %s" % (curr_dict["idef"], curr_dict["type"])
+            break
+
+        curr_parent= db[collname].find({'idef':lookup})
+        if curr_parent.count() > 0:
+            for cp in curr_parent:
+                #setting up level
+                if curr_dict["type"] == "Cel":
+                    lv_index= 1
+                elif curr_dict["type"] == "Miernik":
+                    lv_index= 2
+                curr_dict["level"]= levels[levels.index(cp["level"])+lv_index]
+                
+                if cp["info"] is None: cp["info"]= [] # first insert
+                cp["info"].append(curr_dict)
+                db[collname].save(cp, safe=True)
+        else:
+            print "--! inconsistency found! Info element %s doesn't have a parent: %s" % (curr_dict["idef"], curr_dict["parent"])
+
+    # set 'leaf' to False if an element have children, 'leaf':True otherwise
+    null_leaf_curr= db[collname].find()
     for row in null_leaf_curr:
         curr_idef= row['idef']
         if db[collname].find({'parent':curr_idef}).count() > 0:
             leaf_status= False
         else:
             leaf_status= True
-        row['leaf']= leaf_status
-        db[collname].save(row, safe=True)
-        print '--- update leaf status to %s for element %s' % (leaf_status, curr_idef)
+        if row['leaf'] != leaf_status:
+            row['leaf']= leaf_status
+            db[collname].save(row, safe=True)
+            print '--- update leaf status to %s for element %s' % (leaf_status, curr_idef)
 
     # check for broken "links" in the parent keys
     curs= db[collname].find({'parent': {'$ne': None}}, {'_id':0})
@@ -116,32 +140,198 @@ def check_collection(db, collname):
     return noerrors
 
 #-----------------------------
-def clean_dict(src_dict):
-    # delete obsolete keys
-    if 'fundusz' in src_dict: del src_dict['fundusz']
-    if 'dzial' in src_dict: del src_dict['dzial']
-    if 'zadanie' in src_dict: del src_dict['zadanie']
-    if 'podzadanie' in src_dict: del src_dict['podzadanie']
-    # transform type from "blahblah X-Y-Z" to "blahblah X.Y.Z"
-    type_list= src_dict['type'].rsplit(' ')
-    type_list[1]= type_list[1].replace('-', '.')
-    src_dict['type']= ' '.join(type_list)
-    # all meaningful text fields go through .replace('\n', ' ') and .replace('Ŝ', 'ż')
-    if src_dict['cel'] is not None:
-        src_dict['cel']= src_dict['cel'].replace('\n', ' ')
-        src_dict['cel']= src_dict['cel'].replace('Ŝ', 'ż')
-    if src_dict['miernik'] is not None:
-        src_dict['miernik']= src_dict['miernik'].replace('\n', ' ')
-        src_dict['miernik']= src_dict['miernik'].replace('Ŝ', 'ż')
-    if src_dict['name'] is not None:
-        src_dict['name']= src_dict['name'].replace('\n', ' ')
-        src_dict['name']= src_dict['name'].replace('Ŝ', 'ż')
-
-    return src_dict
-
+def clean_text(text_in):
+    """ text goes through .replace('\n', ' ') and .replace('Ŝ', 'ż') """
+    text_in= text_in.replace('\n', ' ')
+    text_in= text_in.replace('  ', ' ')
+    text_in= text_in.replace('Ŝ', 'ż')
+    return text_in
 
 #-----------------------------
-def csv_parse(csv_read, schema, type_str):
+def fill_val(dict_from):
+    """ copy all integer vals from src to the result dict """
+
+    dict_to= {}
+    int_list= [k for k,v in schema["type"].iteritems() if v == "int"]
+    for key in int_list:
+        val= dict_from[key]
+        if val is None:
+            val= 0
+        dict_to[key]= val
+    
+    return dict_to
+
+#-----------------------------
+def fill_a(src_dict):
+    """ fill first level - FUNDUSZ """
+
+    idef= src_dict["idef"].strip()
+    result_dict= {
+        "idef": idef,
+        "idef_sort": sort_format(idef),
+        "parent": None,
+        "parent_sort": None,
+        "level": "a",
+        "leaf": False,
+        "name": clean_text(src_dict["fundusz"]),
+        "type": " ".join([type_str, idef])
+        }
+    result_dict.update(fill_val(src_dict))
+
+    return result_dict
+
+#-----------------------------
+def fill_b(src_dict):
+    """ fill second level - Zadanie """
+
+    idef= src_dict["idef"].strip()
+    parent= idef.rsplit("-",1)[0]
+    numer= idef.replace("-",".")
+    result_dict= {
+        "idef": idef,
+        "idef_sort": sort_format(idef),
+        "parent": parent,
+        "parent_sort": sort_format(parent),
+        "level": "b",
+        "leaf": False, # for a while, this will be "fixed" later if necessary
+        "name": clean_text(src_dict["zadanie"]),
+        "type": " ".join(["Zadanie", numer])
+        }
+    result_dict.update(fill_val(src_dict))
+
+    return result_dict
+
+#-----------------------------
+def fill_c(src_dict):
+    """ fill third level - Podzadanie """
+
+    idef= src_dict["idef"].strip()
+    parent= idef.rsplit("-",1)[0]
+    numer= idef.replace("-",".")
+    result_dict= {
+        "idef": idef,
+        "idef_sort": sort_format(idef),
+        "parent": parent,
+        "parent_sort": sort_format(parent),
+        "level": "c",
+        "leaf": True, # for a while, this will be "fixed" later if necessary
+        "name": clean_text(src_dict["podzadanie"]),
+        "type": " ".join(["Podzadanie", numer])
+        }
+    result_dict.update(fill_val(src_dict))
+
+    return result_dict
+
+#-----------------------------
+def fill_cel(src_dict, idef_cnt):
+    """ fill level of Cel (for info key) """
+
+    parent= src_dict["idef"].strip()
+    idef= "-".join([ parent, str(idef_cnt) ])
+    result_dict= {
+        "idef": idef,
+        "idef_sort": sort_format(idef),
+        "parent": parent,
+        "parent_sort": sort_format(parent),
+        "level": None, # for a while, will fiil it on the last stage
+        "leaf": False, # Cel can't be leaf
+        "name": clean_text(src_dict["cel"]),
+        "type": "Cel"
+        }
+
+    return result_dict
+
+#-----------------------------
+def fill_miernik(src_dict, parent, idef_cnt):
+    """ fill level of Miernik (for info key) """
+
+    idef= "-".join([ parent, str(idef_cnt) ])
+    result_dict= {
+        "idef": idef,
+        "idef_sort": sort_format(idef),
+        "parent": parent,
+        "parent_sort": sort_format(parent),
+        "level": None, # for a while, will fiil it on the last stage
+        "leaf": True, # Miernik is always leaf
+        "name": clean_text(src_dict["miernik"]),
+        "type": "Miernik",
+        "miernik_wartosc_bazowa": clean_text(str(src_dict["miernik_wartosc_bazowa"])),
+        "miernik_wartosc_2011": clean_text(str(src_dict["miernik_wartosc_2011"])),
+        "miernik_wartosc_2012": clean_text(str(src_dict["miernik_wartosc_2012"])),
+        "miernik_wartosc_2013": clean_text(str(src_dict["miernik_wartosc_2013"]))
+        }
+
+    return result_dict
+
+#-----------------------------
+def fill_levels(raw_list):
+    """ first pass: create 2 separate lists of dicts:
+    1. core data structure (Fund, Zadanie, Podzadanie)
+    2. list of Cel & Miernik with the parent info """
+
+    out_tree, out_info= [], []
+    total_dict= {}
+    count_d, count_e= 1, 1 
+    for elt in raw_list:
+
+        curr_dict_tree= {} # dict for main data (levels a, b, c)
+        curr_dict_info= {} # dict for info list (d, e)
+
+        # filling a, b, c
+        if elt['test_f'] == 1: # level 'a' FUNDUSZ
+            curr_dict_tree= fill_a(elt)
+            # counting totals on the highest level
+            if len(total_dict) == 0: # first pass, it's empty
+                total_dict= fill_val(curr_dict_tree)
+            else: # summarizing
+                curr_val= fill_val(curr_dict_tree)
+                for k in total_dict:
+                    total_dict[k] += curr_val[k]
+        elif elt['test_z'] == 1: # level 'b' Zadanie
+            curr_dict_tree= fill_b(elt)
+        elif elt['test_p'] == 1: # level 'c' Podzadanie
+            curr_dict_tree= fill_c(elt)
+
+        if len(curr_dict_tree) > 0: # updating result only if it's level a, b, or c
+            curr_dict_tree["info"]= None # info should be present even if there's no Cel & Miernik
+            out_tree.append(curr_dict_tree)
+            count_d= 1 # if it's a, b or c, it definitely has a new Cel
+
+
+        # filling d, e
+        if elt['test_c'] == 1: # info level 'd' Cel
+            if elt['test_z'] == 0 and elt['test_p'] == 0: # meanin' it's Cel only
+                count_d += 1
+            curr_dict_info= fill_cel(elt, count_d)
+            curr_cel_idef= curr_dict_info["idef"]
+            count_e= 1 # if it's a new Cel, it will definitely have a new Miernik
+            if len(curr_dict_info) > 0: # updating result only if it's level d
+                out_info.append(curr_dict_info)
+
+        if elt['test_m'] == 1: # info level 'e' Miernik
+            if elt['test_z'] == 0 and elt['test_p'] == 0 and elt['test_c'] == 0: # meanin' it's Miernik only
+                count_e += 1
+            curr_dict_info= fill_miernik(elt, curr_cel_idef, count_e)
+            if len(curr_dict_info) > 0: # updating result only if it's level e
+                out_info.append(curr_dict_info)
+
+    # ordinary keys in total dict
+    total_dict.update({
+        "idef": "9999",
+        "idef_sort": "9999",
+        "parent": None,
+        "parent_sort": None,
+        "level": "a",
+        "leaf": True,
+        "name": "OGÓŁEM",
+        "type": "Total"
+        })
+    out_tree.append(total_dict) # total doc
+
+    return out_tree, out_info
+
+#-----------------------------
+def csv_parse(csv_read):
     # parse csv data and put in into the dictionary
     out= []
 
@@ -182,119 +372,17 @@ def csv_parse(csv_read, schema, type_str):
                         except:
                             dict_row[new_key] = field # no, it is a string
                 i += 1
-
-            dict_row_miernik= {} # for the case we create miernik for Zadanie
-
-            # check the role and create an element of according type
-            if dict_row['level'] == 'a': # FUNDUSZ
-                dict_row['name']= dict_row['fundusz']
-                dict_row['type']= type_str+str(dict_row['idef'])
-                dict_row['parent']= None
-                dict_row['leaf']= False
-                dict_row['node']= None
-                dict_row['idef_sort']= sort_format(dict_row['idef'])
-                dict_row['parent_sort']= None
-                total_val_2011 += dict_row['val_2011']
-                total_val_2012 += dict_row['val_2012']
-                total_val_2013 += dict_row['val_2013']
-
-#             elif dict_row['level'] == 'b': # Dzial
-#                 dict_row['name']= dict_row['dzial']
-#                 dict_row['type']= 'Dział '+str(dict_row['idef'])
-#                 idef_list= dict_row['idef'].split('-')
-#                 dict_row['parent']= idef_list[0]
-#                 dict_row['leaf']= False
-#                 dict_row['node']= None
-#                 dict_row['idef_sort']= sort_format(dict_row['idef'])
-#                 dict_row['parent_sort']= sort_format(dict_row['parent'])
-
-            elif dict_row['level'] == 'b': # Zadanie
-                dict_row['name']= dict_row['zadanie']
-                dict_row['type']= 'Zadanie '+str(dict_row['idef'])
-                idef_list= dict_row['idef'].rsplit('-', 1)
-                dict_row['parent']= idef_list[0]
-                dict_row['leaf']= None # check later if it's a leaf - .find({leaf:null})
-                dict_row['node']= None
-                dict_row['idef_sort']= sort_format(dict_row['idef'])
-                dict_row['parent_sort']= sort_format(dict_row['parent'])
-                # create here another node for Miernik (of Cel which belongs to Zadanie), which is coded as '...-...-...-d...'
-                if dict_row['cel'] is not None:
-                    dict_row_miernik= dict_row.copy()
-                    dict_row_miernik['idef']= dict_row['idef']+'-d01'
-                    dict_row_miernik['name']= dict_row['miernik']
-                    dict_row_miernik['type']= 'Miernik '+str(dict_row_miernik['idef'])
-                    dict_row_miernik['parent']= dict_row['idef'] # current Zadanie is a parent of Miernik
-                    dict_row_miernik['leaf']= True # we now it's a leaf
-                    dict_row_miernik['level']= 'c' # miernik of Zadanie is at level "c"
-                    dict_row_miernik['cel']= None # Cel is on the level of Zadanie
-                    dict_row_miernik['miernik']= None # 'miernik' becomes 'name'
-                    dict_row_miernik['node']= 0 # Zadanie - Miernik is node 0
-                    dict_row_miernik['idef_sort']= sort_format(dict_row_miernik['idef'])
-                    dict_row_miernik['parent_sort']= sort_format(dict_row_miernik['parent'])
-                    dict_row_miernik['val_2011'], dict_row_miernik['val_2012'], dict_row_miernik['val_2013']= 0,0,0 # no money on the level of miernik
-                    out.append(clean_dict(dict_row_miernik))
-                    # update dict row
-                    dict_row['miernik']= None
-                    dict_row['miernik_wartosc_bazowa']= None # clean 'miernik' from it
-                    dict_row['miernik_wartosc_2011']= None
-                    dict_row['miernik_wartosc_2012']= None
-                    dict_row['miernik_wartosc_2013']= None
-                    dict_row['leaf']= False # now we know it's not a leaf
-
-            elif dict_row['level'] == 'c': # Podzadanie
-                dict_row['name']= dict_row['podzadanie']
-                dict_row['type']= 'Podzadanie '+str(dict_row['idef'])
-                idef_list= dict_row['idef'].rsplit('-', 1)
-                dict_row['parent']= idef_list[0]
-                dict_row['leaf']= True # podzadanie is the deepest level
-                dict_row['node']= None
-                dict_row['idef_sort']= sort_format(dict_row['idef'])
-                dict_row['parent_sort']= sort_format(dict_row['parent'])
-
-            elif dict_row['level'] == 'd': # Miernik
-                # the level actually can be 'c', if it's Miernik for Zadanie
-                if dict_row['idef'].count('-') == 2:
-                    dict_row['level']= 'c'
-                dict_row['name']= dict_row['miernik']
-                dict_row['type']= 'Miernik '+str(dict_row['idef'])
-                idef_list= dict_row['idef'].rsplit('-', 1)
-                dict_row['parent']= idef_list[0]
-                dict_row['leaf']= True
-                dict_row['node']= 0
-                dict_row['idef_sort']= sort_format(dict_row['idef'])
-                dict_row['parent_sort']= sort_format(dict_row['parent'])
-                dict_row['val_2011'], dict_row['val_2012'], dict_row['val_2013']= 0,0,0 # no money on the level of miernik
-
-            out.append(clean_dict(dict_row))
-
-    # total doc
-    total_dict= {}
-    total_dict['idef']= '999999'
-    total_dict['idef_sort']= '999999'
-    total_dict['parent']= None
-    total_dict['parent_sort']= None
-    total_dict['level']= 'a'
-    total_dict['leaf']= True
-    total_dict['node']= None
-    total_dict['type']= 'Total'
-    total_dict['name']= 'Ogółem'
-    total_dict['cel']= None
-    total_dict['miernik']= None
-    total_dict['miernik_wartosc_bazowa']= None
-    total_dict['miernik_wartosc_2011']= None
-    total_dict['miernik_wartosc_2012']= None
-    total_dict['miernik_wartosc_2013']= None
-    total_dict['val_2011']= total_val_2011
-    total_dict['val_2012']= total_val_2012
-    total_dict['val_2013']= total_val_2013
-    out.append(total_dict)
+            out.append(dict_row)
 
     return out
 
-    
-
 #-----------------------------
 if __name__ == "__main__":
+    # globals & defaults
+    schema= {}
+    type_str= 'ELEMENT'
+    levels= ['a','b','c','d','e','f','g','h']
+
     # process command line options
     cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] source_file.csv source_schema.json") 
     cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
@@ -318,24 +406,19 @@ if __name__ == "__main__":
 
     # get connection details
     conn= get_db_connect(conf_filename, 'mongodb')
-    conn_host= conn['host']
-    conn_port= conn['port']
-    conn_db= conn['database']
 
     try:
-        connection= pymongo.Connection(conn_host, conn_port)
-        db= connection[conn_db]
+        connection= pymongo.Connection(conn['host'], conn['port'])
+        db= connection[conn['database']]
         print '...connected to the database', db
     except Exception as e:
         print 'Unable to connect to the mongodb database:\n %s\n' % e
         exit()
 
     # authentication
-    conn_username= conn['username']
-    conn_password= conn['password']
-    if conn_password is None:
-        conn_password = getpass.getpass()
-    if db.authenticate(conn_username, conn_password) != 1:
+    if conn['password'] is None:
+        conn['password'] = getpass.getpass()
+    if db.authenticate(conn['username'], conn['password']) != 1:
         print 'Cannot authenticate to db, exiting now'
         exit()
 
@@ -348,11 +431,9 @@ if __name__ == "__main__":
         coll_data= opts.collection_name
 
     if coll_data.find('agnc') <> -1:
-        type_str= 'AGENCJA '
+        type_str= 'AGENCJA'
     elif coll_data.find('fund') <> -1:
-        type_str= 'FUNDUSZ '
-    else:
-        type_str= 'ELEMENT '
+        type_str= 'FUNDUSZ'
 
     # CSV file
     try:
@@ -383,14 +464,17 @@ if __name__ == "__main__":
         print 'Error in processing schema file:\n %s\n' % e
         exit()
 
-    obj_parsed= csv_parse(csv_read, schema, type_str) # fill data table
+    obj_parsed= csv_parse(csv_read) # fill data table
+    obj_struct, obj_info= fill_levels(obj_parsed)
+    # for obj in obj_info:
+    #     print "%-10s %-8s %5s %-20s %-80s" % (obj['idef'], obj['parent'], obj['level'], obj['type'], obj['name'])
 
-    if db_insert(obj_parsed, db, coll_data, clean_db):
+    if db_insert(obj_struct, db, coll_data, clean_db):
         print '...the data successfully inserted to the collection %s' % coll_data
 
     print '...checking data consistency'
 
-    if check_collection(db, coll_data):
+    if check_collection(db, coll_data, obj_info):
         print '...no inconsistencies have been found in the collection %s' % coll_data
     else:
         print '...inconsistencies have been found in the collection %s - check your data' % coll_data
