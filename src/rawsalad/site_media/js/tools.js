@@ -47,7 +47,10 @@ var _tools = (function () {
     
     that.create_filter_result = function( filtered_list ) {
         var filter_result = [];
-        var visual_list = remove_hidden( filtered_list );
+        var visual_list = filtered_list.filter( function ( e ) {
+                              var id = e['data']['idef'];
+                              return ! $('#'+id).is(':hidden');
+                          });
         var visual_rows_object = get_filtered_data( visual_list );
         var i;
         var id;
@@ -388,13 +391,6 @@ var _tools = (function () {
             .click( function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
-    }
-    
-    function remove_hidden( filtered_list ) {
-        return filtered_list.filter( function ( e ) {
-                   var idx = e['data']['idef'];
-                   return ! $('#'+id).is(':hidden');
-        });
     }
     
     function get_filtered_data( visual_list ) {
