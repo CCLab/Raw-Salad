@@ -379,6 +379,89 @@ var _tools = (function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
     }
+    
+    function remove_hidden( filtered_list ) {
+        return filtered_list.filter( function ( e ) {
+                   var idx = e['data']['idef'];
+                   return ! $('#'+id).is(':hidden');
+        });
+    }
+    
+    that.create_filter_result = function( visual_list ) {
+        var filter_result = [];
+        var visual_rows_object = get_filtered_data( visual_list );
+        var visual_list = remove_hidden( filtered_list );
+        var i;
+        
+        for ( i = 0; i < visual_list.length; i += 1 ) {
+            id = visual_list[i]['data']['idef'];
+            filter_result.push({
+                breadcrumb: create_breadcrumb( id ),
+                info: visual_rows_object[ id ]
+            });
+        }
+    }
+    
+    function get_filtered_data( visual_list ) {
+        visual_data_object = {};
+        
+        var i;
+        var id;
+        for ( i = 0; i < visual_list.length; i += 1 ) {
+            id = visual_list[i]['data']['idef'];
+            visual_data_object[ id ] = visual_list[i];
+        }
+        
+        return visual_data_object;
+    }
+    
+    function create_breadcrumb( id ) {
+        var tmp_id = id;
+        var node;
+        var type;
+        var full_type;
+        var name;
+        
+        tmp_id = id;
+        var breadcrumb_reversed = [];
+        
+        do {
+            node = $('tr[id='+ tmp_id +']');
+            full_type = node.children('.type').html();
+            type = get_type_representation( full_type );
+            name = node.children('.name').html();
+            
+            tmp_id = get_parent_id( tmp_id );
+            breadcrumb_reversed.push({
+                type: type,
+                name: name
+            });
+        }
+        while ( !!tmp_id );
+        
+        return breadcrumb_reversed.reverse();
+    }
+    
+    function get_type_representation( full_type ) {
+        var type;
+        var type_list;
+        type_list = full_type.split(' ');
+        type = type_list.pop();
+        return type;
+    }
+    
+    function get_parent_id( id ) {
+        var parent_id;
+        var last_index = id.lastIndexOf('-');
+        
+        if ( last_index === -1 ) {
+            parent_id = '';
+        } else {
+            parent_id = id.slice( 0, last_index );
+        }
+        
+        return parent_id;
+    }
 
 }) ();
 
