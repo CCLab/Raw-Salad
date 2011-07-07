@@ -30,9 +30,6 @@ var _gui = (function () {
     var that = {};
 
     that.init_gui = function () {
-        // hide what's not needed now
-        $('#sort-form').hide();
-        $('#filter-form').hide();
         $('#table-tab').click( function () {
             $('#table-container').show();
             $('#download-container').hide();
@@ -47,8 +44,53 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#download-container').hide();
         $('#download-tab').click( function () {
+            var html = [];
+
+            $('.snapshot').each( function () {
+                var id = $(this).attr('id').split('-');
+                var group = id[1];
+                var sheet = id[2];
+                var name = $(this).attr('title');
+
+                html.push( '<tr>' );
+                html.push( '<td class="check">' );
+                html.push( '<input type="checkbox" ');
+                html.push( 'id="', ( group + '-' + sheet ));
+                html.push( '" /></td>' );
+                html.push( '<td class="radio">' );
+                html.push( '<input type="radio" name="scope-', group, '-', sheet );
+                html.push( '" value="sheet" checked />' )
+                html.push( '</td>' );
+                html.push( '<td class="space"></td>' );
+                html.push( '<td class="radio">' );
+                if( sheet === '0' ) {
+                    html.push( '<input type="radio" name="scope-', group, '-', sheet );
+                    html.push( '" value="full" />' )
+                    html.push( '</td>' );
+                    html.push( '<td class="name group">' );
+                    html.push( name );
+                }
+                else {
+                    html.push( '</td>' );
+                    html.push( '<td class="name indent">' );
+                    html.push( ' > ' + name );
+                }
+                html.push( '</td>' );
+                html.push( '</tr>' );
+            });
+            $('#download-table > tbody').empty().append( html.join('') );
+
+            $('#download-table .radio > input').attr( 'disabled', 'true' );
+            $('#download-table .check > input' ).change( function () {
+                if( $(this).attr('checked') ) {
+                    $(this).parent().parent().find('.radio > input').removeAttr('disabled');
+                }
+                else {
+                    $(this).parent().parent().find('.radio > input').attr('disabled', 'true');
+                }
+            });
+
             $('#table-container').hide();
             $('#download-container').show();
             $('#permalink-container').hide();
@@ -62,7 +104,6 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#permalink-container').hide();
         $('#permalink-tab').click( function () {
             $('#table-container').hide();
             $('#download-container').hide();
@@ -77,10 +118,44 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#download-form').hide();
-        $('#download-button').click( _download.current_sheet );
-        $('#application').hide();
 
+        $('#download-button').click( function () {
+            var ids = {};
+            var table = $('#download-table');
+            var checkboxes = table.find('input:checkbox:checked');
+
+            checkboxes.each( function () {
+                var box = $(this);
+                var box_id = box.attr('id').split('-');
+                var group = box_id[0];
+                var sheet = box_id[1];
+                var scope = table
+                                .find('input:radio[name=scope-'+box_id+']:checked')
+                                .val();
+
+                if( !ids[group] ) {
+                    ids[group] = [];
+                }
+
+                ids[group].push({
+                    id: sheet,
+                    scope: scope
+                });
+            });
+
+            _download.selected( ids );
+        });
+
+        $('#download-container').find('.radio > input').attr( 'disabled', 'true' );
+        $('#download-container').find('.check > input').change( function () {
+            var radios = $('#download-container').find('.radio > input');
+            if( $(this).attr('checked') ) {
+                radios.removeAttr( 'disabled' );
+            }
+            else {
+                radios.attr( 'disabled', 'true' );
+            }
+        });
         _tools.prepare_tools();
 
         // arm open/close button and hide it!
@@ -93,8 +168,7 @@ var _gui = (function () {
                 else {
                     show_choose_panel();
                 }
-            })
-            .hide();
+            });
 
         // arm back-to-datasets button
         $('#back-to-datasets')
@@ -124,10 +198,8 @@ var _gui = (function () {
                 // clear the perspectives list
                 $('#choose-perspectives')
                     .html('');
-            })
-            .hide();
+            });
 
-        $('#choose-perspectives').hide();
         init_choose_panel();
     };
 
@@ -389,9 +461,9 @@ var _gui = (function () {
                 };
 
                 // if new group is created, get data and show table
-                if( _store.create_new_group( col_id ) ) {
+                if( _store.group_exists( col_id ) ) {
                     // get top-level data from db
-                    _db.get_init_data();
+                    _db.get_init_data(col_id);
                 }
                 else {
                     // go back to application with focus on requested sheet

@@ -30,13 +30,13 @@ var _db = (function () {
     var that = {};
 
     // gets the top-level from db
-    that.get_init_data = function () {
+    that.get_init_data = function (col_id) {
         // ajax call data object
         var init_data_info = {
             "action": "get_init_data",
-            "dataset": _store.dataset(),
-            "perspective": _store.perspective(),
-            "issue": _store.issue()
+            "dataset": col_id.dataset,
+            "perspective": col_id.perspective,
+            "issue": col_id.issue
         };
 
         $.ajax({
@@ -44,11 +44,20 @@ var _db = (function () {
             dataType: "json",
             success: function( received_data ) {
                 var data = {
-                    columns: received_data.perspective.columns,
+			// TODO get rid of colkumns here 
+			// TODO move it to create sheet function
+//                    columns: received_data.perspective.columns,
                     rows: received_data.rows,
                     name: received_data.perspective.perspective
                 };
-
+                
+                // create group
+                _store.create_group({
+                   "dataset": col_id.dataset,
+                   "perspective": col_id.perspective,
+                   "issue": col_id.issue,
+                   "columns": received_data.perspective.columns,
+                });
                 _store.init_basic_sheet( data );
                 // create a table
                 _table.init_table();

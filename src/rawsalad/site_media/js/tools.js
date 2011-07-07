@@ -41,15 +41,10 @@ var _tools = (function () {
     that.prepare_tools = function () {
         prepare_sorting_interface();
         prepare_filtering_interface();
+//	prepare_manage_columns_interface();
         prepare_snapshot_interface();
     };
     
-    that.get_full_parents = function ( id ) {
-        var par_ids = [];
-        
-        
-    };
-
     return that;
 
 //  P R I V A T E   I N T E R F A C E
@@ -109,11 +104,114 @@ var _tools = (function () {
         }
     }
 
+    
+    function add_manage_checkbox()  {
+	//TODO add checkboxes to manage columns popup
+    }
+
+ 
+    function add_filter_key() {
+        var i, key;
+        var html = [];
+        var filter_part;
+        var selected_column;
+        var type;
+        var schema = _store.basic_schema();        
+        var columns = schema
+                        .filter( function ( e ) {
+                            return e['processable'];
+                        })
+                        .map( function ( e ) {
+                            return {
+                                name: e['key'],
+                                label: e['label']
+                            };
+                        });
+
+        key = $('#filter-form > div').length;
+        
+        columns.unshift({
+            name: 'null',
+            label: 'Wybierz kolumnę'
+        });
+        
+        html.push( '<div id="filter-key-', key, '">' );
+        
+        html.push( '<select id="filter-', key, '-columns"' );
+        html.push( ' name="columns">');
+        for ( i = 0; i < columns.length; i += 1 ) {
+            html.push( '<option value="', columns[i]['name']);
+            html.push( '" class="filter-', key, '" >');
+            html.push( columns[i]['label'], '</option>' );
+        }
+        html.push( '</select>' );
+        
+        html.push( '<select id="filter-', key, '-operations"' );
+        html.push( ' name="null-operation" disabled="true">' );
+        // not needed because column has not been selected yet
+        
+        html.push( '</select>' );
+        
+        if ( key === 0 ) {
+            html.push( '<div id="add-filter-key">+</div>' );
+            html.push( '<input type="submit" value="Filtruj" />' );
+        }
+        
+        html.push( '</div>' );
+        $('#filter-form').append( $( html.join('') ) );
+        
+        if( key === 0 ) {
+            //TODO create CSS class for add-filter-key !!!!!!!!!!!
+            $('#add-filter-key').click( function () {
+                add_filter_key();
+            });
+        }
+        
+        filter_part = $('#filter-' + key + '-columns');
+        filter_part.change( function() {
+            selected_column = $(this).val();
+            
+            $('#filter-' + key + '-query').remove();
+            
+            for ( i = 0; i < schema.length; i += 1 ) {
+                if ( schema[i]['key'] === selected_column ) {
+                    type = schema[i]['type'];
+                    
+                    $('#filter-' + key + '-operations').remove();
+                    
+                    html = [ '<select id="filter-', key, '-operations"' ];
+                    if ( schema[i]['type'] === 'number' ) {
+                        html.push( ' name="number-operation">' );
+                        html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
+                        html.push( '<option value="gt" class="filter-', key, '">></option>' );
+                        html.push( '<option value="eq" class="filter-', key, '">=</option>' );
+                        html.push( '<option value="lt" class="filter-', key, '"><</option>' );
+                    } else {
+                        html.push( ' name="string-operation">' );
+                        html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
+                        html.push( '<option value="cnt" class="filter-', key, '">Zawiera</option>' );
+                        html.push( '<option value="st" class="filter-', key, '">Zaczyna się od</option>' );
+                        html.push( '<option value="ncnt" class="filter-', key, '">Nie zawiera</option>' );
+                        html.push( '<option value="nst" class="filter-', key, '">Nie zaczyna się od</option>' );
+                    }
+                    html.push( '</select>' );
+                    
+                    html.push( '<input type="text" name="query" id="filter-', key, '-query" />' );
+                    
+                    $( html.join('') ).insertAfter( $('#filter-' + key + '-columns') );
+                    
+                    break;
+                }
+            }
+        });
+    }
+        
     function prepare_sorting_interface() {
 
         $('#sort-button')
             .click( function () {
                 $('#filter-form').hide();
+                $('#manage-columns-form').hide();
                 $('#sort-form').html('').toggle();
                 add_sort_key();
             });
@@ -179,8 +277,10 @@ var _tools = (function () {
 
         $('#filter-button')
             .click( function () {
-                $('#filter-form').toggle();
+                $('#filter-form').html('').toggle();
+                $('#manage-columns-form').hide();
                 $('#sort-form').hide();
+                add_filter_key();
             });
 
         $('#filter-form')
@@ -191,7 +291,9 @@ var _tools = (function () {
                 var i, len = $('#filter-form select').length / 2;
                 var tmp, type;
                 var new_sheet;
-                for( i = 1; i < len; ++i ) {
+                var filtered_rows;
+                
+                for( i = 0; i < len; ++i ) {
                     column = $('#filter-'+i+'-columns option:selected').val();
                     if( column === "null" ) {
                         if( i === 1 ) {
@@ -233,20 +335,38 @@ var _tools = (function () {
                     );
                 }
 
+                filtered_rows = _algorithms.filter( _store.active_rows(), mask );
                 new_sheet = {};
                 $.extend( true, new_sheet, _store.active_sheet() );
-                new_sheet['rows'] = _algorithms.filter( new_sheet['rows'], mask );
-                //new_sheet['filtered'] = true;
-                   
+                new_sheet['rows'] = create_filter_result( filtered_rows );                
+
                 _sheet.create_new_sheet( new_sheet, "Arkusz", true );
 
                 _table.clean_table();
-                _table.init_table( true );
+                //_table.init_table();
+                _table.init_filtered_table();
 
                 $(this).hide();
 
                 return false;
            });
+    };
+
+    function 	prepare_manage_columns_interface(){
+
+        $('#manage-columns-form')
+            .click( function () {
+                $('#filter-form').hide();
+                $('#sort-button').hide();
+                $('#sort-form').html('').toggle();
+                add_manage_checkbox();
+            });
+
+        $('#manage-columns-form')
+            .submit( function () {
+		//TODO changes in _Store
+
+        });   
     };
 
     function prepare_snapshot_interface() {
@@ -255,6 +375,76 @@ var _tools = (function () {
             .click( function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
+    }
+    
+    function create_filter_result( filtered_list ) {        
+        return filtered_list.filter( function ( e ) {                   
+                                 var id = e['data']['idef'];
+                                 return ! $('#'+id).is(':hidden');
+                             })
+                             .map( function (e) {
+                                 var id = e['data']['idef'];
+                                 e['breadcrumb'] = create_breadcrumb( id );
+                                 return e;
+                             });
+    }
+    
+    function get_filtered_data( visual_list ) {
+        visual_data_object = {};
+        
+        var i;
+        var id;
+        for ( i = 0; i < visual_list.length; i += 1 ) {
+            id = visual_list[i]['data']['idef'];
+            visual_data_object[ id ] = visual_list[i];
+        }
+        
+        return visual_data_object;
+    }
+    
+    function create_breadcrumb( id ) {
+        var tmp_id = id;
+        var node;
+        var type;
+        var full_type;
+        var name;
+        
+        tmp_id = get_parent_id( id );
+        var breadcrumb_reversed = [];
+        
+        while ( !!tmp_id) {
+            node = $('#'+ tmp_id);
+            full_type = node.children('.type').html();
+            type = get_type_representation( full_type );
+            name = node.children('.name').html();
+            
+            tmp_id = get_parent_id( tmp_id );
+            breadcrumb_reversed.push({
+                type: type,
+                name: name
+            });
+        }
+        
+        return breadcrumb_reversed.reverse();
+    }
+    
+    function get_type_representation( full_type ) {
+        var type_list;
+        type_list = full_type.split(' ');
+        return type_list.pop();
+    }
+    
+    function get_parent_id( id ) {
+        var parent_id;
+        var last_index = id.lastIndexOf('-');
+        
+        if ( last_index === -1 ) {
+            parent_id = '';
+        } else {
+            parent_id = id.slice( 0, last_index );
+        }
+        
+        return parent_id;
     }
 
 }) ();

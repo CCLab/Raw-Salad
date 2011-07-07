@@ -1,4 +1,4 @@
-table {
+#data-table {
   width: 960px;
   border-collapse: collapse;
   border-right: 2px solid #8b8b8b;
@@ -6,22 +6,22 @@ table {
 }
 
 
-thead > tr {
+#data-table thead > tr {
   background-color: #2b2b2b;
   color: #fff;
 }
 
-tbody > tr:hover {
+#data-table tbody > tr:hover {
   background-color: #98d39f;
 }
 
-td {
+#data-table td {
   cursor: default;
   vertical-align: top;
   padding: 5px;
 }
 
-td+td {
+#data-table td+td {
   border-left: 1px solid #8b8b8b;
 }
 

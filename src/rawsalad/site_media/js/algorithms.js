@@ -65,7 +65,7 @@ var _algorithms = (function () {
         for ( i = 0; i < data.length; i += 1 ) {
             // checks if the object passes through the filter
             if ( check_obj( data[i]['data'], filter_mask ) ) {
-                $.extend( true, passed_filter_object, data[i] );
+                $.extend( true, passed_filter_object, data[ i ] );
                 result.push( passed_filter_object );
                 passed_filter_object = {};
             }
@@ -342,6 +342,7 @@ var _algorithms = (function () {
     var check_attr = function( obj, attr, pref, value ) {
         var obj_val = obj[attr];
         var type = typeof obj_val;
+        
 
         if ( type === "number" ) {
             if ( pref === 'lt' && obj_val < value) {
@@ -353,12 +354,12 @@ var _algorithms = (function () {
             }
         } else {
             // is string
-            var str = obj[attr].toLowerCase();
-
-            if ( pref === -2 && !starts_with( str, value ) ||
-                 pref === -1 && !contains( str, value ) ||
-                 pref === 1 && contains( str, value ) ||
-                 pref === 2 && starts_with( str, value ) ) {
+            value = value.toLowerCase();
+            obj_val = obj_val.toLowerCase()
+            if ( pref === 'nst' && !starts_with( obj_val, value ) ||
+                 pref === 'ncnt' && !contains( obj_val, value ) ||
+                 pref === 'cnt' && contains( obj_val, value ) ||
+                 pref === 'st' && starts_with( obj_val, value ) ) {
                  return true;
             } else {
                 return false;

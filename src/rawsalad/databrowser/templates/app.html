@@ -57,7 +57,7 @@
             </div>
             
             <!-- T A B E L -->
-            <table style="clear: both">
+            <table id="data-table" style="clear: both">
                 <thead></thead>
                 <tbody></tbody>
             </table>      
@@ -65,10 +65,25 @@
 
         <!-- D O W N L O A D -->
         <div id="download-container">
-            <form id="download-form" action="/download/" method="post" name="input">
-                <input type="text" name="sheet" />
+            <p>Zaznacz kolekcje danych, ktore chcesz zapisac na dysku</p>
+            <hr />
+            <form>
+              <table id="download-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th class="under">Dane w arkuszu</th>
+                    <th></th>
+                    <th class="under">Cala kolekcja</th>
+                    <th class="under"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              <br />
+              <div id="download-button">Pobierz</div>
             </form>
-            <div id="download-button">Pobierz aktualny arkusz</div>
         </div>
 
         <!-- P E R M A L I N K -->
