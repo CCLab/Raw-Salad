@@ -250,11 +250,12 @@ var _store = (function () {
     that.find_column_in_active_sheet = function(key){
 	var i;
 	var col = that.active_columns();
-	for (i=0; i< col.lenght; i++){
-	    if(col['key'] === key){
-                return true;
-            }
-        }
+	return col['key'];
+//	for (i=0; i< col.lenght; i++){
+//	    if(col['key'] === key){
+//                return true;
+//            }
+//        }
         return false;
     }
 
