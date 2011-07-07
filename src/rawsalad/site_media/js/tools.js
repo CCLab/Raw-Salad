@@ -45,11 +45,20 @@ var _tools = (function () {
         prepare_snapshot_interface();
     };
     
-    that.get_full_parents = function ( id ) {
-        var par_ids = [];
+    that.create_filter_result = function( visual_list ) {
+        var filter_result = [];
+        var visual_rows_object = get_filtered_data( visual_list );
+        var visual_list = remove_hidden( filtered_list );
+        var i;
         
-        
-    };
+        for ( i = 0; i < visual_list.length; i += 1 ) {
+            id = visual_list[i]['data']['idef'];
+            filter_result.push({
+                breadcrumb: create_breadcrumb( id ),
+                info: visual_rows_object[ id ]
+            });
+        }
+    }
 
     return that;
 
@@ -387,21 +396,6 @@ var _tools = (function () {
         });
     }
     
-    that.create_filter_result = function( visual_list ) {
-        var filter_result = [];
-        var visual_rows_object = get_filtered_data( visual_list );
-        var visual_list = remove_hidden( filtered_list );
-        var i;
-        
-        for ( i = 0; i < visual_list.length; i += 1 ) {
-            id = visual_list[i]['data']['idef'];
-            filter_result.push({
-                breadcrumb: create_breadcrumb( id ),
-                info: visual_rows_object[ id ]
-            });
-        }
-    }
-    
     function get_filtered_data( visual_list ) {
         visual_data_object = {};
         
@@ -426,7 +420,7 @@ var _tools = (function () {
         var breadcrumb_reversed = [];
         
         do {
-            node = $('tr[id='+ tmp_id +']');
+            node = $('#'+ tmp_id);
             full_type = node.children('.type').html();
             type = get_type_representation( full_type );
             name = node.children('.name').html();
