@@ -118,7 +118,33 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#download-button').click( _download.current_sheet );
+
+        $('#download-button').click( function () {
+            var ids = {};
+            var table = $('#download-table');
+            var checkboxes = table.find('input:checkbox:checked');
+
+            checkboxes.each( function () {
+                var box = $(this);
+                var box_id = box.attr('id').split();
+                var group = box_id[0];
+                var sheet = box_id[1];
+                var scope = table
+                                .find('input:radio[name=scope-'+box_id+']:checked')
+                                .val();
+
+                if( !ids[group] ) {
+                    ids[group] = [];
+                }
+
+                ids[group] = {
+                    id: sheet,
+                    scope: scope
+                };
+            });
+
+            _download.selected();
+        });
 
         $('#download-container').find('.radio > input').attr( 'disabled', 'true' );
         $('#download-container').find('.check > input').change( function () {

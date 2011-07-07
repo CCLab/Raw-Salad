@@ -28,8 +28,9 @@ var _download = (function () {
 
     var that = {};
 
-    // ids = { '0': [ 2, 3, 5 ], '4': [ 1, 3, 4 ] }
-    that.download_sheets = function ( ids ) {
+    // ids = { '0': [{ id: 2, scope: 'full' }, { id: 3, scope: 'sheet' }], '4': [{ id: 1, scope: 'sheet' }] }
+    that.selected = function ( ids ) {
+        console.log( ids );
 
     };
 
