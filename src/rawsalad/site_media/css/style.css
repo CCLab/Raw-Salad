@@ -320,6 +320,7 @@ body {
 
       #download-container td.indent {
         padding-left: 10px;
+        margin-left: 10px;
       }
       #download-button {
         float: left;
