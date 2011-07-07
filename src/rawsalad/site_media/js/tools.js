@@ -62,6 +62,8 @@ var _tools = (function () {
                 info: visual_rows_object[ id ]
             });
         }
+        
+        return filter_result;
     }
 
     return that;
@@ -413,10 +415,10 @@ var _tools = (function () {
         var full_type;
         var name;
         
-        tmp_id = id;
+        tmp_id = get_parent_id( id );
         var breadcrumb_reversed = [];
         
-        do {
+        while ( !!tmp_id) {
             node = $('#'+ tmp_id);
             full_type = node.children('.type').html();
             type = get_type_representation( full_type );
@@ -428,7 +430,6 @@ var _tools = (function () {
                 name: name
             });
         }
-        while ( !!tmp_id );
         
         return breadcrumb_reversed.reverse();
     }
