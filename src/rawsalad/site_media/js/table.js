@@ -115,7 +115,7 @@ var _table = (function () {
             html.push('</div>');
             html.push('<div id="filter-data-', i, '">');
             schema.forEach( function ( column ) {
-                html.push('div class="', column['type'], '">');
+                html.push('<div class="', column['type'], '">');
                 html.push( e[ column['name'] ] );
                 html.push('</div>');
             });
@@ -124,6 +124,7 @@ var _table = (function () {
         });
         
         html.push('</div>');
+        $('#data-table').insertAfter( $( html.join('') ) );
         /*
         <div id="tmp-filter">
             <div id="filter-result-0">
