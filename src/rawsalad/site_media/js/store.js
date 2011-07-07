@@ -275,6 +275,7 @@ var _store = (function () {
                     data: row,
                     state: { open: false, selected: false }
                 };
+            });
 
 	if (!!basic){
             return rows; 
