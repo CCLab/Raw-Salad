@@ -343,7 +343,6 @@ var _algorithms = (function () {
         var obj_val = obj[attr];
         var type = typeof obj_val;
         var str = obj_val.toLowerCase()
-        var value = value.toLowerCase();
 
         if ( type === "number" ) {
             if ( pref === 'lt' && obj_val < value) {
@@ -355,6 +354,7 @@ var _algorithms = (function () {
             }
         } else {
             // is string
+            value = value.toLowerCase();
 
             if ( pref === 'nst' && !starts_with( str, value ) ||
                  pref === 'ncnt' && !contains( str, value ) ||

@@ -42,7 +42,13 @@ var _table = (function () {
         _gui.make_zebra();
         _utils.clean_preloader();
     };
-
+    
+    that.init_filtered_table = function () {
+        _utils.create_preloader('Wczytujê tabelê');
+        //create_thead();
+        create_filtered_tbody();
+        _utils.clean_preloader();
+    };
 
     that.add_node = function ( parent_id ) {
         var children = _store.active_rows().filter( function ( e ) {
@@ -95,6 +101,55 @@ var _table = (function () {
         if ( selected_node.length > 0 ) {
             apply_selection( selected_node[0]['data']['idef'] );
         }
+    }
+    
+    function create_filtered_tbody() {
+        var html = ['<div id="tmp-filter">'];
+        var schema = _store.basic_schema();
+        var rows = _store.active_rows();
+        
+        rows.forEach( function (e, i) {
+            html.push('<div id="filter-result-', i, '">');
+            html.push('<div id="breadcrumb-', i, '">');
+            html.push( e['breadcrumb'] );
+            html.push('</div>');
+            html.push('<div id="filter-data-', i, '">');
+            schema.forEach( function ( column ) {
+                html.push('div class="', column['type'], '">');
+                html.push( e[ column['name'] ] );
+                html.push('</div>');
+            });
+            html.push('</div>');
+            html.push('</div>');
+        });
+        
+        html.push('</div>');
+        /*
+        <div id="tmp-filter">
+            <div id="filter-result-0">
+              <div id="breadcrumb-0">
+              {text}
+              </div>
+              <div id="filter-data-0">
+              <div class="string">
+              Dysponent
+              </div>
+              <div class="string">
+              Krajowa Rada Radiofonii i Telewizji
+              </div>
+              <div class="number">
+              0
+              </div>
+              <div class="number">
+              3290000
+              </div>
+              <div class="number">
+              3290000
+              </div>
+              </div>
+            </div>
+        </div>
+        */
     }
 
 

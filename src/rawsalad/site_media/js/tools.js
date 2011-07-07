@@ -45,27 +45,6 @@ var _tools = (function () {
         prepare_snapshot_interface();
     };
     
-    that.create_filter_result = function( filtered_list ) {
-        var filter_result = [];
-        var visual_list = filtered_list.filter( function ( e ) {
-                              var id = e['data']['idef'];
-                              return ! $('#'+id).is(':hidden');
-                          });
-        var visual_rows_object = get_filtered_data( visual_list );
-        var i;
-        var id;
-        
-        for ( i = 0; i < visual_list.length; i += 1 ) {
-            id = visual_list[i]['data']['idef'];
-            filter_result.push({
-                breadcrumb: create_breadcrumb( id ),
-                info: visual_rows_object[ id ]
-            });
-        }
-        
-        return filter_result;
-    }
-
     return that;
 
 //  P R I V A T E   I N T E R F A C E
@@ -312,6 +291,8 @@ var _tools = (function () {
                 var i, len = $('#filter-form select').length / 2;
                 var tmp, type;
                 var new_sheet;
+                var filtered_rows;
+                
                 for( i = 0; i < len; ++i ) {
                     column = $('#filter-'+i+'-columns option:selected').val();
                     if( column === "null" ) {
@@ -354,15 +335,16 @@ var _tools = (function () {
                     );
                 }
 
+                filtered_rows = _algorithms.filter( _store.active_rows(), mask );
                 new_sheet = {};
                 $.extend( true, new_sheet, _store.active_sheet() );
-                new_sheet['rows'] = _algorithms.filter( new_sheet['rows'], mask );
-                //new_sheet['filtered'] = true;
-                   
+                new_sheet['rows'] = create_filter_result( filtered_rows );                
+
                 _sheet.create_new_sheet( new_sheet, "Arkusz", true );
 
                 _table.clean_table();
-                _table.init_table( true );
+                //_table.init_table();
+                _table.init_filtered_table();
 
                 $(this).hide();
 
@@ -393,6 +375,18 @@ var _tools = (function () {
             .click( function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
+    }
+    
+    function create_filter_result( filtered_list ) {        
+        return filtered_list.filter( function ( e ) {                   
+                                 var id = e['data']['idef'];
+                                 return ! $('#'+id).is(':hidden');
+                             })
+                             .map( function (e) {
+                                 var id = e['data']['idef'];
+                                 e['breadcrumb'] = create_breadcrumb( id );
+                                 return e;
+                             });
     }
     
     function get_filtered_data( visual_list ) {
