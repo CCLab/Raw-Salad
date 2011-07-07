@@ -246,11 +246,11 @@ var _store = (function () {
     };
 
 
-    // check column in active_sheet
+    // TODO check column in active_sheet 
     that.find_column_in_active_sheet = function(key){
 	var i;
 	var col = that.active_columns();
-	return col[0].['key'];
+//	return col[0].['key'];
 //	for (i=0; i< col.lenght; i++){
 //	    if(col['key'] === key){
 //                return true;
