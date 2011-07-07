@@ -47,8 +47,8 @@ var _tools = (function () {
     
     that.create_filter_result = function( filtered_list ) {
         var filter_result = [];
-        var visual_rows_object = get_filtered_data( visual_list );
         var visual_list = remove_hidden( filtered_list );
+        var visual_rows_object = get_filtered_data( visual_list );
         var i;
         
         for ( i = 0; i < visual_list.length; i += 1 ) {
