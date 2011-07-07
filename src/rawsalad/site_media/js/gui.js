@@ -143,7 +143,7 @@ var _gui = (function () {
                 };
             });
 
-            _download.selected();
+            _download.selected( ids );
         });
 
         $('#download-container').find('.radio > input').attr( 'disabled', 'true' );
