@@ -41,6 +41,7 @@ var _tools = (function () {
     that.prepare_tools = function () {
         prepare_sorting_interface();
         prepare_filtering_interface();
+//	prepare_manage_columns_interface();
         prepare_snapshot_interface();
     };
     
@@ -109,6 +110,12 @@ var _tools = (function () {
         }
     }
     
+    function add_manage_checkbox()  {
+	//funkcja dodająca checkboxy do PopUp-a
+    }
+
+
+
     function add_filter_key() {
         var i, key;
         var html = [];
@@ -210,6 +217,7 @@ var _tools = (function () {
         $('#sort-button')
             .click( function () {
                 $('#filter-form').hide();
+                $('#manage-columns-form').hide();
                 $('#sort-form').html('').toggle();
                 add_sort_key();
             });
@@ -276,6 +284,7 @@ var _tools = (function () {
         $('#filter-button')
             .click( function () {
                 $('#filter-form').html('').toggle();
+                $('#manage-columns-form').hide();
                 $('#sort-form').hide();
                 add_filter_key();
             });
@@ -344,6 +353,23 @@ var _tools = (function () {
 
                 return false;
            });
+    };
+
+    function 	prepare_manage_columns_interface(){
+
+        $('#manage-columns-form')
+            .click( function () {
+                $('#filter-form').hide();
+                $('#sort-button').hide();
+                $('#sort-form').html('').toggle();
+                add_manage_checkbox();
+            });
+
+        $('#manage-columns-form')
+            .submit( function () {
+		// Tutaj dodanie kontrolek wedle tego co mam w tabela txt
+
+        });   
     };
 
     function prepare_snapshot_interface() {
