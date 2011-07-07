@@ -251,7 +251,7 @@ var _store = (function () {
 	var i;
 	var col = that.active_columns();
 	for (i=0; i< col.lenght; i++){
-	    if(col['key'] === true){
+	    if(col['key'] === key){
                 return true;
             }
         }
@@ -328,6 +328,3 @@ var _store = (function () {
     return that;
 
 }) ();
-
-
-
