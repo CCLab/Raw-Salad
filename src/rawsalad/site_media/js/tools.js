@@ -45,7 +45,7 @@ var _tools = (function () {
         prepare_snapshot_interface();
     };
     
-    that.create_filter_result = function( visual_list ) {
+    that.create_filter_result = function( filtered_list ) {
         var filter_result = [];
         var visual_rows_object = get_filtered_data( visual_list );
         var visual_list = remove_hidden( filtered_list );
@@ -437,11 +437,9 @@ var _tools = (function () {
     }
     
     function get_type_representation( full_type ) {
-        var type;
         var type_list;
         type_list = full_type.split(' ');
-        type = type_list.pop();
-        return type;
+        return type_list.pop();
     }
     
     function get_parent_id( id ) {
