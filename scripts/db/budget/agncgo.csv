@@ -1,238 +1,242 @@
-"idef";"level";"FUNDUSZ";"Realizowane zadania/podzadania";;"Cel";"Miernik - Nazwa";"Miernik - Wartość Bazowa";"Miernik - Wartość w 2011 r.";"Miernik - Wartość w 2012 r.";"Miernik - Wartość w 2013 r.";"Wydatki (w tys. zł) 2011 r.";"Wydatki (w tys. zł) 2012 r.";"Wydatki (w tys. zł) 2013 r."
-1;"a";"Wojskowa Agencja Mieszkaniowa";;;;;;;;;886610;882162;871355
-"1-1";"b";;"Gospodarowanie mieniem Skarbu Państwa";;"Efektywne gospodarowanie mieniem Skarbu
-Państwa";"Rentowność działalności  (bez dotacji budŜetowej)";"26,0%";"13,5%";"13,5%";"10,1%";477543;478311;472809
-"1-1-1";"c";;;"Przekształcenia własnościowe (prywatyzacja)";"Sprawne prowadzenie przekształceń
-własnościowych";"Rentowność sprzedaŜy mienia - nieruchomości i rzeczy ruchomych (bez innych form zagospodarowania mienia oraz dotacji budŜetowej)";"78,3%";"74,5%";"74,3%";"72,8%";23878;23916;18912
-"1-1-2";"c";;;"Zarządzanie mieniem Skarbu Państwa";"Efektywne zagospodarowanie mienia Skarbu Państwa uwzględniające zasady rachunku ekonomicznego oraz właściwego zabezpieczenia interesów majątkowych Skarbu Państwa";"Rentowność działalności (bez sprzedaŜy mienia i dotacji budŜetowej)";"4,9%";"2,2%";"2,2%";"1,7%";453665;454395;453897
-"1-2";"b";;"Wspieranie budownictwa";;"Utrzymanie i poprawa istniejących zasobów mieszkaniowych";"Udział środków własnych przeznaczonych na remonty w przychodach z opłat za uŜywanie lokali mieszkalnych";"48,0%";"48,0%";"48,0%";"48,0%";42020;36807;32416
-"1-2-1";"c";;;"Termomodernizacja i remonty zasobów mieszkaniowych";"Poprawa stanu technicznego budynków mieszkalnych oraz oszczędność energii cieplnej wykorzystywanej na cele komunalno-bytowe";"Udział środków własnych przeznaczonych na remonty w przychodach z opłat za uŜywanie lokali mieszkalnych";"48,0%";"48,0%";"48,0%";"48,0%";42020;36807;32416
-"1-3";"b";;"Utrzymanie zdolności obronnych";;"Zapewnienie gotowości SZ do podjęcia i realizacji zadań zgodnie z operacyjnym przeznaczeniem";"Poziom gotowości SZ do działań (miernik opisowy)";"pozytywny";"pozytywny";"pozytywny";"pozytywny";367047;367044;366130
-"1-3-1";"c";;;"Zakwaterowanie Sił Zbrojnych";"Zapewnianie świadczeń i uprawnień Ŝołnierzom zagwarantowanych prawem w zakresie zakwaterowania";"Relacja liczby zrealizowanych świadczeń i uprawnień do liczby oczekujących";"96,3%";"97,8%";"99,1%";"99,3%";367047;367044;366130
-2;"a";"Agencja Mienia Wojskowego";;;;;;;;;143937;162217;162217
-"2-1";"b";;"Gospodarowanie mieniem Skarbu Państwa";;"Efektywne gospodarowanie mienem Skarbu
-Państwa";"Rentowność działalności (bez dotacji budŜetowej)";"33,0%";"44,6%";"29,9%";"22,1%";142446;162217;162217
-"2-1-1";"c";;;"Przekształcenia własnościowe (prywatyzacja)";"Sprawne prowadzenie przeksztalceń
-własnosciowych";"Rentownośc sprzedaŜy mienia - nieruchomości i rzeczy ruchomych (bez innych form zagospodarowania menia oraz dotacji budŜetowej)";"43,8%";"48,3%";"32,4%";"23,9%";136340;155242;155242
-"2-1-2";"c";;;"Zarządzanie mieniem Skarbu Państwa";"Efektywne zagospodarowanie mienia Skarbu Państwa uwzgledniające zasady rachunku ekonomicznego oraz właściwego zabezpieczenia interesów majątkowych Skarbu Państwa";"Rentowność działalności (bez sprzedaŜy menia i dotacji budŜetowej)";"8,6%";"4,1%";"4,1%";"4,1%";6106;6975;6975
-"2-2";"b";;"Utrzymanie zdolności obronnych";;"Utrzymanie nieruchomości przejętych przez
-AMW z resortu obrony narodowej w dobrym stanie technicznym gwarantujacym efektywne ich zagospodarowanie";"Udział kwoty dotacji w kosztach ogółem ponoszonych przez AMW na utrzymanie techniczne nieruchomości przejętych przez MON";"0,7%";"3,4%";"0*";"0*";1491;0;0
-"2-2-1";"c";;;"Wsparcie utrzymania zdolności operacyjnych";"Utrzymanie nieruchomości przejetych przez
-AMW z resortu obrony narodowej w dobrym stanie technicznym gwarantujacym efektywne ich zagospodarowanie";"Udział kwoty dotacji w kosztach ogółem ponoszonych przez AMW na utrzymanie techniczne nieruchomości przejętych przez MON";"0,7%";"3,4%";"0*";"0*";1491;0;0
-3;"a";"Agencja Restrukturyzacji i Modernizacji Rolnictwa";;;;;;;;;2297202;2392127;2420205
-"3-1";"b";;"Wspieranie rybactwa śródlądowego i rybołówstwa morskiego*";;"Wzmocnienie pozycji konkurencyjnej polskich podmiotów związanych z rybołówstwem i rybactwem";"% wykorzystania środków EFR";;;;;;;
-"3-1-1";"c";;;"PO ZrównowaŜony rozwój sektora rybołówstwa i nadbrzeŜnych obszarów rybackich 2007-2013*";"-";"-";;;;;;;
-"3-2";"b";;"Realizacja Wspólnej Polityki Rolnej oraz pomocy krajowej";;"Wsparcie realizacji inwestycji w rolnictwie i przetwórstwie produktów rolnych oraz pomoc gospodarstwom rolnym i działom specjalnym produkcji rolnej na wznowienie produkcji rolnej po klęskach Ŝywiołowych, a takŜe utylizacji zwierząt gospodarskich i zalesień gruntów rolnych";"% wykorzystania środków budŜetowych ujętych w planie finansowym";100;100;100;100;915680;997021;1010737
-"3-2-1";"c";;;"Pomoc krajowa";"Wsparcie realizacji inwestycji w rolnictwie i przetwórstwie produktów rolnych oraz pomoc gospodarstwom rolnym i działom specjalnym produkcji rolnej na wznowienie produkcji rolnej po klęskach Ŝywiołowych a takŜe utylizacji zwierząt gospodarskich i zalesien gruntów rolnych";"% wykorzystanie środków budŜetowych ujętych w planie finansowym";100;100;100;100;915680;997021;1010737
-"3-2-2";"c";;;"WPR finansowane z EFRG*";"-";"-";;;;;;;
-"3-2-3";"c";;;"Program Rozwoju Obszarów Wiejskich 2007-2013*";"-";"-";;;;;;;
-"3-2-4";"c";;;"Realizacja płatności bezpośrednich*";"-";"-";;;;;;;
-"3-3";"b";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania urzędu w zakresie obsługi administracyjnej przy rozsądnym koszcie";"Koszty obsługi administracyjnej (w tym koszty zakupu usług zewnętrznych w zakresie
-obsługi administracyjnej)";1361740;1381522;1395106;1409468;1381522;1395106;1409468
-4;"a";"Agencja Rynku Rolnego";;;;;;;;;359312;374274;411815
-"4-1";"b";;"Realizacja Wspólnej Polityki Rolnej oraz pomocy krajowej";;"Tworzenie konkurencyjnego, nowoczesnego i dynamicznego sektora rolnego";"Liczba wydanych decyzji oraz umów
-(dokumenty skutkujace płatnością (szt))";50114;50000;51000;53000;359312;374274;411815
-"4-1-m02";"d";;;;;"Liczba uczniów korzystających z dopłaty krajowej do spoŜycia mleka i przetworów mlecznych w szkołach podstawowych (szt)";1700000;2450000;2450000;2450000;;;
-"4-1-1";"c";;;"Pomoc krajowa";"Tworzenie konkurencyjnego, nowoczesnego i dynamicznego sektora rolnego";"Liczba uczniów korzystających z dopłaty krajowej do spoŜycia mleka i przetworów mlecznych w szkołach podstawowych (szt)";1700000;2450000;2450000;2450000;234124;246301;284085
-"4-1-2";"c";;;"Wspieranie realizacji WPR Unii Europejskiej";"Tworzenie konkurencyjnego, nowoczesnego i dynamicznego sektora rolnego";"Liczba wydanych decyzji oraz umów
+"idef";"FUNDUSZ";"Realizowane zadania/podzadania";;"Cel";"Nazwa";"Wartość
+bazowa";"Wartość
+w 2011 r.";"Wartość
+w 2012 r.";"Wartość
+w 2013 r.";"2011 r.";"2012 r.";"2013 r.";"test_f";"test_z";"test_p";"test_c";"test_m"
+1;"Wojskowa Agencja Mieszkaniowa";;;;;;;;;886610;882162;871355;1;0;0;0;0
+"1-1";;"Gospodarowanie mieniem Skarbu Państwa";;"Efektywne gospodarowanie mieniem Skarbu
+Państwa";"Rentowność działalności  (bez dotacji budŜetowej)";"26,0%";"13,5%";"13,5%";"10,1%";477543;478311;472809;0;1;0;1;1
+"1-1-1";;;"Przekształcenia własnościowe (prywatyzacja)";"Sprawne prowadzenie przekształceń
+własnościowych";"Rentowność sprzedaŜy mienia - nieruchomości i rzeczy ruchomych (bez innych form zagospodarowania mienia oraz dotacji budŜetowej)";"78,3%";"74,5%";"74,3%";"72,8%";23878;23916;18912;0;0;1;1;1
+"1-1-2";;;"Zarządzanie mieniem Skarbu Państwa";"Efektywne zagospodarowanie mienia Skarbu Państwa uwzględniające zasady rachunku ekonomicznego oraz właściwego zabezpieczenia interesów majątkowych Skarbu Państwa";"Rentowność działalności (bez sprzedaŜy mienia i dotacji budŜetowej)";"4,9%";"2,2%";"2,2%";"1,7%";453665;454395;453897;0;0;1;1;1
+"1-2";;"Wspieranie budownictwa";;"Utrzymanie i poprawa istniejących zasobów mieszkaniowych";"Udział środków własnych przeznaczonych na remonty w przychodach z opłat za uŜywanie lokali mieszkalnych";"48,0%";"48,0%";"48,0%";"48,0%";42020;36807;32416;0;1;0;1;1
+"1-2-1";;;"Termomodernizacja i remonty zasobów mieszkaniowych";"Poprawa stanu technicznego budynków mieszkalnych oraz oszczędność energii cieplnej wykorzystywanej na cele komunalno-bytowe";"Udział środków własnych przeznaczonych na remonty w przychodach z opłat za uŜywanie lokali mieszkalnych";"48,0%";"48,0%";"48,0%";"48,0%";42020;36807;32416;0;0;1;1;1
+"1-3";;"Utrzymanie zdolności obronnych";;"Zapewnienie gotowości SZ do podjęcia i realizacji zadań zgodnie z operacyjnym przeznaczeniem";"Poziom gotowości SZ do działań (miernik opisowy)";"pozytywny";"pozytywny";"pozytywny";"pozytywny";367047;367044;366130;0;1;0;1;1
+"1-3-1";;;"Zakwaterowanie Sił Zbrojnych";"Zapewnianie świadczeń i uprawnień Ŝołnierzom zagwarantowanych prawem w zakresie zakwaterowania";"Relacja liczby zrealizowanych świadczeń i uprawnień do liczby oczekujących";"96,3%";"97,8%";"99,1%";"99,3%";367047;367044;366130;0;0;1;1;1
+2;"Agencja Mienia Wojskowego";;;;;;;;;143937;162217;162217;1;0;0;0;0
+"2-1";;"Gospodarowanie mieniem Skarbu Państwa";;"Efektywne gospodarowanie mienem Skarbu
+Państwa";"Rentowność działalności (bez dotacji budŜetowej)";"33,0%";"44,6%";"29,9%";"22,1%";142446;162217;162217;0;1;0;1;1
+"2-1-1";;;"Przekształcenia własnościowe (prywatyzacja)";"Sprawne prowadzenie przeksztalceń
+własnosciowych";"Rentownośc sprzedaŜy mienia - nieruchomości i rzeczy ruchomych (bez innych form zagospodarowania menia oraz dotacji budŜetowej)";"43,8%";"48,3%";"32,4%";"23,9%";136340;155242;155242;0;0;1;1;1
+"2-1-2";;;"Zarządzanie mieniem Skarbu Państwa";"Efektywne zagospodarowanie mienia Skarbu Państwa uwzgledniające zasady rachunku ekonomicznego oraz właściwego zabezpieczenia interesów majątkowych Skarbu Państwa";"Rentowność działalności (bez sprzedaŜy menia i dotacji budŜetowej)";"8,6%";"4,1%";"4,1%";"4,1%";6106;6975;6975;0;0;1;1;1
+"2-2";;"Utrzymanie zdolności obronnych";;"Utrzymanie nieruchomości przejętych przez
+AMW z resortu obrony narodowej w dobrym stanie technicznym gwarantujacym efektywne ich zagospodarowanie";"Udział kwoty dotacji w kosztach ogółem ponoszonych przez AMW na utrzymanie techniczne nieruchomości przejętych przez MON";"0,7%";"3,4%";"0*";"0*";1491;0;0;0;1;0;1;1
+"2-2-1";;;"Wsparcie utrzymania zdolności operacyjnych";"Utrzymanie nieruchomości przejetych przez
+AMW z resortu obrony narodowej w dobrym stanie technicznym gwarantujacym efektywne ich zagospodarowanie";"Udział kwoty dotacji w kosztach ogółem ponoszonych przez AMW na utrzymanie techniczne nieruchomości przejętych przez MON";"0,7%";"3,4%";"0*";"0*";1491;0;0;0;0;1;1;1
+3;"Agencja Restrukturyzacji i Modernizacji Rolnictwa";;;;;;;;;2297202;2392127;2420205;1;0;0;0;0
+"3-1";;"Wspieranie rybactwa śródlądowego i rybołówstwa morskiego*";;"Wzmocnienie pozycji konkurencyjnej polskich podmiotów związanych z rybołówstwem i rybactwem";"% wykorzystania środków EFR";;;;;;;;0;1;0;1;1
+"3-1-1";;;"PO ZrównowaŜony rozwój sektora rybołówstwa i nadbrzeŜnych obszarów rybackich 2007-2013*";"-";"-";;;;;;;;0;0;1;1;1
+"3-2";;"Realizacja Wspólnej Polityki Rolnej oraz pomocy krajowej";;"Wsparcie realizacji inwestycji w rolnictwie i przetwórstwie produktów rolnych oraz pomoc gospodarstwom rolnym i działom specjalnym produkcji rolnej na wznowienie produkcji rolnej po klęskach Ŝywiołowych, a takŜe utylizacji zwierząt gospodarskich i zalesień gruntów rolnych";"% wykorzystania środków budŜetowych ujętych w planie finansowym";100;100;100;100;915680;997021;1010737;0;1;0;1;1
+"3-2-1";;;"Pomoc krajowa";"Wsparcie realizacji inwestycji w rolnictwie i przetwórstwie produktów rolnych oraz pomoc gospodarstwom rolnym i działom specjalnym produkcji rolnej na wznowienie produkcji rolnej po klęskach Ŝywiołowych a takŜe utylizacji zwierząt gospodarskich i zalesien gruntów rolnych";"% wykorzystanie środków budŜetowych ujętych w planie finansowym";100;100;100;100;915680;997021;1010737;0;0;1;1;1
+"3-2-2";;;"WPR finansowane z EFRG*";"-";"-";;;;;;;;0;0;1;1;1
+"3-2-3";;;"Program Rozwoju Obszarów Wiejskich 2007-2013*";"-";"-";;;;;;;;0;0;1;1;1
+"3-2-4";;;"Realizacja płatności bezpośrednich*";"-";"-";;;;;;;;0;0;1;1;1
+"3-3";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania urzędu w zakresie obsługi administracyjnej przy rozsądnym koszcie";"Koszty obsługi administracyjnej (w tym koszty zakupu usług zewnętrznych w zakresie
+obsługi administracyjnej)";1361740;1381522;1395106;1409468;1381522;1395106;1409468;0;1;0;1;1
+4;"Agencja Rynku Rolnego";;;;;;;;;359312;374274;411815;1;0;0;0;0
+"4-1";;"Realizacja Wspólnej Polityki Rolnej oraz pomocy krajowej";;"Tworzenie konkurencyjnego, nowoczesnego i dynamicznego sektora rolnego";"Liczba wydanych decyzji oraz umów
+(dokumenty skutkujace płatnością (szt))";50114;50000;51000;53000;359312;374274;411815;0;1;0;1;1
+"4-1";;;;;"Liczba uczniów korzystających z dopłaty krajowej do spoŜycia mleka i przetworów mlecznych w szkołach podstawowych (szt)";1700000;2450000;2450000;2450000;;;;0;0;0;0;1
+"4-1-1";;;"Pomoc krajowa";"Tworzenie konkurencyjnego, nowoczesnego i dynamicznego sektora rolnego";"Liczba uczniów korzystających z dopłaty krajowej do spoŜycia mleka i przetworów mlecznych w szkołach podstawowych (szt)";1700000;2450000;2450000;2450000;234124;246301;284085;0;0;1;1;1
+"4-1-2";;;"Wspieranie realizacji WPR Unii Europejskiej";"Tworzenie konkurencyjnego, nowoczesnego i dynamicznego sektora rolnego";"Liczba wydanych decyzji oraz umów
 (dokumenty skutkujace płatnością (szt))";"*
 0";"*
 0";"*
-0";"0*";125188;127973;127730
-5;"a";"Agencja Nieruchomości Rolnych";;;;;;;;;160300;167270;174540
-"5-1";"b";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";"Zapewnienie sprawnego funkcjonowania ANR i realizacji celów określonych w ustawie
+0";"0*";125188;127973;127730;0;0;1;1;1
+5;"Agencja Nieruchomości Rolnych";;;;;;;;;160300;167270;174540;1;0;0;0;0
+"5-1";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";"Zapewnienie sprawnego funkcjonowania ANR i realizacji celów określonych w ustawie
 o gospodarowaniu nieruchomościami rolnymi
-Skarbu Państwa";"Udział kosztów funkcjonowania ANR  w przychodach ZWRSP ogółem";"-";"7,1%";"5,4%";"7,1%";"7,5%";160300;167270;174540
-6;"a";"Zasób Własności Rolnej Skarbu Państwa";;;;;;;;;838780;8649701;8766401
-"6-1";"b";;"Gospodarowanie mieniem Skarbu Państwa²’";;"SprzedaŜ, nieodpłatne przekazanie i wydzierŜawienie oraz przygotowanie do prywatyzacji mienia Zasobu Własności Rolnej Skarbu Państwa";"Udział powierzchni gruntów sprzedanych i nieodpłatnie przekazanych w danym roku w powierzchni gruntów ZWRSP na początek roku (w %)";"5,0%";"7,3%";"5,5%";"5,8%";693480;712700;717100
-"6-1-m02";"d";;;;;"Udział powierzchni gruntów wydzierŜawionych na koniec roku w
-powierzchni ZWRSP na początek roku (w %)";"74,3%";"75,5%";"73,3%";"71,4%";;;
-"6-1-1";"c";;;"Przekształcenia własnościowe (prywatyzacja)";"SprzedaŜ, nieodpłatne przekazanie i wydzierŜawienie oraz przygotowanie do prywatyzacji mienia Zasobu Własności Rolnej Skarbu Państwa";"Udział powierzchni gruntów sprzedanych i nieodpłatnie przekazanych w danym roku w powierzchni gruntów ZWRSP na początek roku (w %)";"5,0%";"7,3%";"5,5%";"5,8%";693480;712700;717100
-"6-1-1-m02";"d";;;;;"Udział powierzchni gruntów wydzierŜawionych na koniec roku w
-powierzchni ZWRSP na początek roku (w %)";"74,3%";"75,5%";"73,3%";"71,4%";;;
-"6-2";"b";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Zapewnienie sprawnego funkcjonowania ANR i realizacji celów określonych w ustawie
+Skarbu Państwa";"Udział kosztów funkcjonowania ANR  w przychodach ZWRSP ogółem";"-";"7,1%";"5,4%";"7,1%";"7,5%";160300;167270;174540;0;1;1;1;1
+6;"Zasób Własności Rolnej Skarbu Państwa";;;;;;;;;838780;8649701;8766401;1;0;0;0;0
+"6-1";;"Gospodarowanie mieniem Skarbu Państwa²’";;"SprzedaŜ, nieodpłatne przekazanie i wydzierŜawienie oraz przygotowanie do prywatyzacji mienia Zasobu Własności Rolnej Skarbu Państwa";"Udział powierzchni gruntów sprzedanych i nieodpłatnie przekazanych w danym roku w powierzchni gruntów ZWRSP na początek roku (w %)";"5,0%";"7,3%";"5,5%";"5,8%";693480;712700;717100;0;1;0;1;1
+"6-1";;;;;"Udział powierzchni gruntów wydzierŜawionych na koniec roku w
+powierzchni ZWRSP na początek roku (w %)";"74,3%";"75,5%";"73,3%";"71,4%";;;;0;0;0;0;1
+"6-1-1";;;"Przekształcenia własnościowe (prywatyzacja)";"SprzedaŜ, nieodpłatne przekazanie i wydzierŜawienie oraz przygotowanie do prywatyzacji mienia Zasobu Własności Rolnej Skarbu Państwa";"Udział powierzchni gruntów sprzedanych i nieodpłatnie przekazanych w danym roku w powierzchni gruntów ZWRSP na początek roku (w %)";"5,0%";"7,3%";"5,5%";"5,8%";693480;712700;717100;0;0;1;1;1
+"6-1-1";;;;;"Udział powierzchni gruntów wydzierŜawionych na koniec roku w
+powierzchni ZWRSP na początek roku (w %)";"74,3%";"75,5%";"73,3%";"71,4%";;;;0;0;0;0;1
+"6-2";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Zapewnienie sprawnego funkcjonowania ANR i realizacji celów określonych w ustawie
 o gospodarowaniu nieruchomościami rolnymi
 Skarbu Państwa";"Udział wydatków na koszty funkcjonowania
-ANR w wydatkach  ZWRSP ogółem (w %)";"7,0%";"5,1%";"8,1%";"8,7%";145300;152270;159540
-7;"a";"Narodowy Fundusz Ochorny Środowiska i Gospodarki Wodnej";;;;;;;;;1982545;2288515;2342765
-"7-1";"b";;"Bezpieczeństwo gospodarcze państwa";;"Zapewnianie ciągłości dostaw surowców energetycznych";"Łączna głębokość otworów wykonanych w celu rozpoznania zasobów wód termalnych (m)";0;4000;4000;4000;33086;30082;28096
-"7-1-1";"c";;;"Wspieranie wykorzystania odnawialnych źródeł energii i biopaliw ciekłych w transporcie";"Wzrost udziału odnawialnych źródeł energii w bilansie paliwowo-energetycznym w tym biopaliw";"Łączna głębokość otworów wykonanych w celu rozpoznania zasobów wód termalnych (m)";0;4000;4000;4000;33086;30082;28096
-"7-2";"b";;"Nadzór i kontrola nad zakładami górniczymi oraz zakładami wykonującymi roboty geologiczne";;"Ograniczanie szkodliwych oddziaływań górnictwa na środowisko oraz właściwe zagospodarowanie złoŜami kopalin";"Liczba zlikwidowanych zakładów górniczych, wyrobisk eksploatacyjnych i obiektów budowlanych (szt.)";0;1;1;2;24639;28137;28192
-"7-2-1";"c";;;"Nadzór i kontrola nad projektowaniem, budową, utrzymaniem, remontem i rozbiórką obiektów budowlanych zakładów górniczych";"Eliminowanie zagroŜeń wynikających z zakresu budowy i uŜytkowania obiektów budowlanych zakładów górniczych";"Liczba zlikwidowanych zakładów górniczych, wyrobisk eksploatacyjnych i obiektów budowlanych (szt.)";0;1;1;2;24639;28137;28192
-"7-3";"b";;"Kształtowanie bioróŜnorodności";;"Zachowanie róŜnorodności biologicznej oraz zapewnienie jej trwałości i moŜliwości rozwoju";"Powierzchnia obszarów chronionych objętych działaniami ochronnymi (tys. ha)";1305;630;619;619;229225;185553;197092
-"7-3-1";"c";;;"Realizacja sieci Natura 2000";"Zapewnienie właściwej ochrony siedlisk i gatunków wymienionych w dyrektywach UE";"Liczba wykonanych opracowań, analiz, wytycznych (szt.)";25;65;55;60;3615;3061;3072
-"7-3-2";"c";;;"Ochrona przyrody i krajobrazu, w tym parki narodowe";"Zachowanie i kształtowanie procesów przyrodniczych przebiegających w ekosystemie";"Powierzchnia obszarów chronionych objętych działaniami ochronnymi (tys. ha)";305;330;319;319;103790;101446;97820
-"7-3-3";"c";;;"Ochrona i zrównowaŜony rozwój lasów oraz powiększanie zasobów leśnych";"Rozwijanie zrównowaŜonej, wielofunkcyjnej gospodarki leśnej oraz ochrona ekosystemów leśnych";"Powierzchnia obszarów leśnych objętych działaniami z zakresu zachowania i powiększania zasobów leśnych kraju (tys. ha)";1000;300;300;300;40656;40612;40720
-"7-3-4";"c";;;"Ochrona funkcji gleb i przywrócenie gleb do stanu właściwego";"Zachowanie funkcji gleb i rekultywacja terenów zdegradowanych i zdewastowanych";"Powierzchnia obszarów poddanych rekultywacji i zabiegom ochronnym (ha)";0;315;315;315;81164;40434;55480
-"7-4";"b";;"Kształtowanie jakości powietrza atmosferycznego i przeciwdziałanie zmianom klimatu";;"Ograniczanie emisji zanieczyszczeń do powietrza";"Redukcja emisji lub uniknięcie emisji gazów cieplarnianych wg wydatków (tys. Mg/rok)";89;108;1279;2017;211542;965799;1128291
-"7-4-1";"c";;;"Ograniczenie emisji gazów cieplarnianych oraz działania z zakresu handlu emisjami CO2  i pakietu energetyczno-klimatycznego";"Ograniczanie emisji gazów cieplarnianych do powietrza";"Redukcja emisji lub uniknięcie emisji gazów cieplarnianych wg wydatków (tys. Mg/rok)";89;108;1279;2017;209327;962595;1125941
-"7-4-2";"c";;;"Opracowanie programów ochrony powietrza";"Sporządzenie programów i planów działania celem oceny stanu jakości powietrza oraz wskazanie sposobów jego poprawy";"Liczba stref objętych programami (szt.)";55;54;60;0;2215;3204;2350
-"7-5";"b";;"Racjonalne gospodarowanie zasobami i strukturami geologicznymi";;"Rozpoznawanie budowy geologicznej kraju pod kątem moŜliwości zaopatrzenia ludności oraz sektorów gospodarczych w kopaliny i wody podziemne wraz z ich ochroną";"Zaawansowanie prac projektowych i badawczych (wg umów) (%)";0;30;35;40;168091;106038;81204
-"7-5-1";"c";;;"Badania geologiczne, gospodarowanie zasobami złóŜ kopalin oraz ustalanie dyspozycyjnych zasobów wód podziemnych";"Zapewnianie racjonalnego gospodarowania zasobami geologicznymi";"Zaawansowanie prac projektowych i badawczych (wg umów) (%)";0;30;35;40;167991;105938;81104
-"7-5-2";"c";;;"Promocja i upowszechnianie osiągnięć w dziedzinie geologii i górnictwie";"Promowanie i rozpowszechnianie wiedzy w zakresie polskiej geologii";"Liczba numerów wydanych w danym roku przez WUG (liczba numerów/rok)";0;12;12;12;100;100;100
-"7-6";"b";;"Gospodarka odpadami";;"Zapewnienie postępowania z odpadami w sposób niezagraŜający Ŝyciu i zdrowiu ludzi oraz środowisku";"Masa pojazdów wycofanych z eksploatacji przyjętych do stacji demontaŜu pojazdów (tys. Mg.)";160;170;170;170;194699;189626;193660
-"7-6-1";"c";;;"Ograniczanie wpływu odpadów na środowisko";"Redukcja ilości składowanych odpadów komunalnych i zwiększenie udziału odpadów komunalnych podawanych odzyskowi i unieszkodliwianiu metodami innymi niŜ składowanie";"Masa pojazdów wycofanych z eksploatacji przyjętych do stacji demontaŜu pojazdów (tys. Mg.)";160;170;170;170;193291;188224;192440
-"7-6-2";"c";;;"Nadzorowanie i koordynacja gospodarowania odpadami";"Zapewnianie sprawnego funkcjonowania organów zaangaŜowanych w kontrolę i nadzór nad gospodarką odpadami";"Liczba projektów zrealizowanych";0;2;2;2;1408;1402;1220
-"7-7";"b";;"Gospodarowanie zasobami wodnymi";;"Poprawa bezpieczeństwa przeciwpowodziowego
-i zapobieganie skutkom suszy";"Liczba umów zawartych na dofinansowanie budowy, rozbudowy obiektów hydrotechnicznych (szt.)";11;15;10;10;491720;206018;159058
-"7-7-1";"c";;;"Kształtowanie, ochrona i wykorzystanie zasobów wodnych";"Osiąganie i utrzymanie dobrego stanu wód przy zapewnieniu racjonalnego wykorzystania zasobów wodnych";"Liczba umów zawartych na dofinansowanie budowy, rozbudowy obiektów hydrotechnicznych (szt.)";11;15;10;10;491720;206018;159058
-"7-8";"b";;"Rozbudowa infrastruktury ochrony środowiska";;"Rozwój infrastruktury przyczyniającej się do poprawy stanu środowiska";"Wzrost redukcji ładunku ścieków oczyszczonych (RLM)";0;0;26000;212000;95670;143822;147840
-"7-8-1";"c";;;"Gospodarka wodno-ściekowa";"Poprawa stanu wód powierzchniowych i podziemnych poprzez budowę oczyszczalni ścieków i kanalizacji";"Wzrost redukcji ładunku ścieków oczyszczonych (RLM)";0;0;26000;212000;54468;119240;124736
-"7-8-2";"c";;;"Przedsięwzięcia dostosowujące przedsiębiorstwa do wymogów ochrony środowiska";"Ograniczanie negatywnego wpływu działalności przemysłowej";"Wartość pozyskanego kapitału na finansowanie projektów dostosowujących przedsiębiorstwa do wymogów ochrony środowiska (tys. zł)";0;4100;4500;3800;730;404;440
-"7-8-3";"c";;;"Zadania związane z realizacją projektów finansowanych z Funduszu
-Spójności";"Rozbudowa infrastruktury ochrony środowiska  z wykorzystaniem środków europejskich";"Liczba zakończonych przedsięwzięć (szt.)";10;0;0;0;40472;24178;22664
-"7-9";"b";;"Kontrola, monitoring stanu środowiska i przeciwdziałanie powaŜnym awariom";;"Ochrona stanu środowiska przed negatywnym wpływem czynników cywilizacyjnych";"Liczba wykonanych opracowań, baz danych, studiów (szt.)";34;34;34;34;290320;168261;128448
-"7-9-1";"c";;;"Monitoring stanu środowiska";"Uzyskanie pełnej informacji o bieŜącym i przyszłym stanie środowiska";"Liczba wykonanych opracowań, baz danych, studiów (szt.)";34;34;34;34;112889;108853;106968
-"7-9-2";"c";;;"Ochrona przed skutkami zagroŜeń naturalnych";"Zwiększenie poziomu ochrony przed skutkami zagroŜeń naturalnych oraz powaŜnych awarii, usuwanie ich skutków oraz wzmocnienie wybranych elementów zarządzania środowiskiem";"Liczba zakupionego sprzętu i urządzeń dla jednostek ratownictwa (szt.)";560;150;150;150;177431;59408;21480
-"7-10";"b";;"Realizacja polityki ekologicznej państwa";;"Zapewnienie bezpieczeństwa ekologicznego kraju (mieszkańców, zasobów przyrodniczych i
-infrastruktury społecznej) i tworzenie podstaw do zrównowaŜonego rozwoju społeczno- gospodarczego";"Liczba osób objętych działaniami edukacyjnymi i promocyjnymi (tys. szt.)";5000;6000;7000;8000;134688;166750;165591
-"7-10-1";"c";;;"Prowadzenie polityki ekologicznej państwa";"Zwiększanie poziomu wydatków na finansowanie działalności badawczo-rozwojowej w ochronie środowiska oraz wdraŜanie ekoinnowacji w przemyśle";"Liczba wykonanych opracowań, analiz i prac naukowo-badawczych (szt.)";40;72;62;56;66687;94393;88992
-"7-10-2";"c";;;"Promocja postaw proekologicznych i edukacja środowiskowa";"Podnoszenie świadomości ekologicznej społeczeństwa";"Liczba osób objętych działaniami edukacyjnymi i promocyjnymi (tys. szt.)";5000;6000;7000;8000;68001;72357;76599
-"7-11";"b";;"Zapewnianie Polsce sprzyjających warunków rozwoju";;"Zapewnianie Polsce odpowiedniej pozycji na arenie międzynarodowej";"Liczba finansowanych konwencji (szt.)";12;15;15;15;11751;4443;4168
-"7-11-1";"c";;;"Udział Polski we współpracy na forum organizacji międzynarodowych";"Zapewnienie odpowiedniej reprezentacji Polski w pracach organizacji międzynarodowych";"Liczba finansowanych konwencji (szt.)";12;15;15;15;11751;4443;4168
-"7-12";"b";;"Wspieranie transportu morskiego i Ŝeglugi śródlądowej";;"Zwiększanie dostępności i poprawa jakości transportu morskiego i Ŝeglugi śródlądowej";"Liczba umów zawartych z Ministrem Infrastruktury na dofinansowanie przedsięwzięć związanych z Ŝeglugą śródlądową (szt.)";1;1;1;1;3554;3551;3560
-"7-12-1";"c";;;"Wspieranie infrastruktury morskiej i Ŝeglugi śródlądowej";"Zapewnianie dobrego stanu infrastruktury Ŝeglugi transportowej";"Liczba umów zawartych z Ministrem Infrastruktury na dofinansowanie przedsięwzięć związanych z Ŝeglugą śródlądową (szt.)";1;1;1;1;3554;3551;3560
-"7-13";"b";;"Wspieranie transportu intermodalnego";;"Wzrost udziału przewozów intermodalnych";"Masa przewiezionego ładunku z wykorzystaniem transportu intermodalnego (tys. tkm/Rok)";0;32000;43000;43000;7931;10408;10480
-"7-13-1";"c";;;"Wspieranie transportu intermodalnego";"Wspieranie rozwoju transportu intermodalnego z wykorzystaniem infrastruktury PLK";"Masa przewiezionego ładunku z wykorzystaniem transportu intermodalnego (tys. tkm/rok)";0;32000;43000;43000;7931;10408;10480
-"7-14";"b";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Udzielanie wsparcia finansowego inwestycjom słuŜącym ochronie środowiska";"Kwota udzielanych poŜyczek i finansowania kapitałowego przeznaczonych na finansowanie ochrony środowiska (mln zł)";2877;768;1458;1723;49007;46393;54337
-"7-14-1";"c";;;"Finansowaniem przedsięwzięć słuŜących ochronie środowiska, z wykorzystaniem środków krajowych i zagranicznych";"Udzielanie wsparcia finansowego inwestycjom słuŜącym ochronie środowiska";"Kwota udzielanych poŜyczek i finansowania kapitałowego przeznaczonych na finansowanie ochrony środowiska (mln zł)";2877;768;1458;1723;49007;46393;54337
-"7-15";"b";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania systemu finansowania ochrony środowiska w Polsce";"Wartość logiczna tak/nie";"tak";"tak";"tak";"tak";36622;33634;12748
-"7-15-1";"c";;;"Obsługa prawna, administracyjna, finansowa i techniczna biura
-NFOŚiGW";"Zapewnienie sprawnego funkcjonowania systemu finansowania ochrony środowiska w Polsce";"Wartość logiczna tak/nie";"tak";"tak";"tak";"tak";36622;33634;12748
-8;"a";"Polska Organizacja Turystyczna";;;;;;;;;114314;81996;45692
-"8-1";"b";;"Wsparcie i promocja turystyki";;"Zwiększenie liczby turystów odwiedzających
-Polskę";"Liczba turystów zagranicznych przyjeŜdzających do Polski w danym roku (w mln)";119;126;132;132;101709;72631;44674
-"8-1-m02";"d";;;;"Zwiększenie średniego poziomu wydatków turystów zagranicznych";"Roczne wydatki turystów zagranicznych w
-Polsce (w mld USD)";52;49;58;56;;;
-"8-1-1";"c";;;"Kreowanie polityki w obszarze turystyki";"Osiągnięcie poziomu średnich wydatków turysty na poziomie minimum 50% średniej w Europie";"Średni poziom wydatków turysty zagranicznego w Polsce do średniego poziomu wydatków turysty międzynarodowego w Europie w danym roku (%)";49;52;57;53;1186;1062;875
-"8-1-2";"c";;;"Wsparcie produktów turystycznych";"Zwiększenie konkurencyjności polskiego produktu turystycznego";"Liczba certyfikowanych produktów";96;128;132;135;18879;10744;5868
-"8-1-3";"c";;;"Tworzenie i wspieranie spójnego i efektywnego systemu marketingu w turystyce";"Zwiększenie dostępności informacji o turystycznej atrakcyjności Polski";"Liczba odbiorców przekazu marketingowego w danym roku do roku bazowego (%)";1000;1026;1025;1015;81644;60825;37931
-"8-2";"b";;"Informatyzacja działalności i budowa społeczeństwa informacyjnego";;"Zwiększenie zakresu integracji, a takŜe osiągnięcia pełnej transakcyjności usług administracji świadczonych na rzecz społeczeństwa";"Procentowy udział bezawaryjnego funkcjonwania serwisów (%)";"95%";"95%";"95%";"95%";12605;9365;1018
-"8-2-m02";"d";;;;;"Liczba wybudowanych i uruchomionych systemowych rozwiązań informatycznych w sektorze turystyki w danym roku (szt.)";0;0;1;1;;;
-"8-2-1";"c";;;"Utrzymanie systemów informatycznych";"Zapewnienie bezawaryjnego funkcjonowania narodowego portalu turystycznego";"Procentowy udział bezawaryjnego funkcjonwania serwisów";"95%";"95%";"95%";"95%";9478;4339;810
-"8-2-2";"c";;;"Budowa i wdroŜenie rozwiązań informatycznych";"Uruchomienie 1 systemowego rozwiązania informatycznego w sektorze turystyki";"Liczba wybudowanych i uruchomionych systemowych rozwiązań informatycznych w sektorze turystyki w danym roku (szt.)";0;0;1;1;3127;5026;208
-9;"a";"Polski Klub Wyścigów Konnych";;;;;;;;;5717;5673;5741
-"9-1";"b";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Rozwój wyścigów konnych na terytorium RP";"Ilość organizatorów (szt.)";3;3;3;3;5717;5673;5741
-"9-1-1";"c";;;"Działalność statutowa PKWK";"Rozwój wyścigów konnych na terytorium RP";"Ilość organizatorów (szt.)";3;3;3;3;5717;5673;5741
-10;"a";"Agencja Rezerw Materiałowych";;;;;;;;;490841;638434;1129759
-"10-1";"b";;"Bezpieczeństwo gospodarcze państwa";;"Zabezpieczenie ludności i przemysłu w środki materiałowe w zakresie produktów rolnych i Ŝywnościowych, leczniczych i wyrobów medycznych oraz surowców, materiałów i paliw niezbędnych do realizacji zadań w dziedzinie obronności i bezpieczeństwa państwa";"Procentowy stopień realizacji wartości bazowej towarów określonej przez organ tworzący rezerwy";100;100;100;100;408149;556013;1047338
-"10-1-m02";"d";;;;;"Średni stan zapasów państwowych ropy naftowej i produktów naftowych, wyraŜony w dniach średniego dziennego zuŜycia ropy naftowej i produktów naftowych";154;154;154;154;;;
-"10-1-1";"c";;;"Potencjał gospodarczy na rzecz bezpieczeństwa państwa";"Zabezpieczenie ludności i przemysłu w środki materiałowe w zakresie produktów rolnych i Ŝywnościowych, leczniczych i wyrobów medycznych oraz surowców, materiałów i paliw niezbędnych do realizacji zadań w dziedzinie obronności i bezpieczeństwa państwa";"Procentowy stopień realizacji wartości bazowej towarów określonej przez organ tworzący rezerwy";100;100;100;100;408149;556013;1047338
-"10-2";"b";;"Obsługa administracyjna";;"Zapewnienie prawidłowego i sprawnego funkcjonownia Agencji Rezerw Materiałowych";"Procentowy stopień realizacji wartości
-bazowej środków na funkcjonowanie Agencji i nakłady inwestycyjne określonej  przez organ tworzący rezerwy w zatwierdzonym planie finansowym";100;100;100;100;82692;82421;82421
-11;"a";"Polska Agencja Żeglugi Powietrznej";;;;;;;;;676396;699137;753281
-"11-1";"b";;"Wspieranie transportu lotniczego i infrastruktury lotniczej";;"Dostosowanie infrastruktury lotniskowej i nawigacyjnej oraz wzrost dostępności transportu lotniczego";"Wskaźnik poziomu bezpieczeństwa liczony
+ANR w wydatkach  ZWRSP ogółem (w %)";"7,0%";"5,1%";"8,1%";"8,7%";145300;152270;159540;0;1;0;1;1
+7;"Narodowy Fundusz Ochorny Środowiska i Gospodarki Wodnej";;;;;;;;;1982545;2288515;2342765;1;0;0;0;0
+"7-1";;"Bezpieczeństwo gospodarcze państwa";;"Zapewnianie ciągłości dostaw surowców energetycznych";"Łączna głębokość otworów wykonanych w celu rozpoznania zasobów wód termalnych (m)";0;4000;4000;4000;33086;30082;28096;0;1;0;1;1
+"7-1-1";;;"Wspieranie wykorzystania odnawialnych źródeł energii i biopaliw ciekłych w transporcie";"Wzrost udziału odnawialnych źródeł energii w bilansie paliwowo-energetycznym w tym biopaliw";"Łączna głębokość otworów wykonanych w celu rozpoznania zasobów wód termalnych (m)";0;4000;4000;4000;33086;30082;28096;0;0;1;1;1
+"7-2";;"Nadzór i kontrola nad zakładami górniczymi oraz zakładami wykonującymi roboty geologiczne";;"Ograniczanie szkodliwych oddziaływań górnictwa na środowisko oraz właściwe zagospodarowanie złoŜami kopalin";"Liczba zlikwidowanych zakładów górniczych, wyrobisk eksploatacyjnych i obiektów budowlanych (szt.)";0;1;1;2;24639;28137;28192;0;1;0;1;1
+"7-2-1";;;"Nadzór i kontrola nad projektowaniem, budową, utrzymaniem, remontem i rozbiórką obiektów budowlanych zakładów górniczych";"Eliminowanie zagroŜeń wynikających z zakresu budowy i uŜytkowania obiektów budowlanych zakładów górniczych";"Liczba zlikwidowanych zakładów górniczych, wyrobisk eksploatacyjnych i obiektów budowlanych (szt.)";0;1;1;2;24639;28137;28192;0;0;1;1;1
+"7-3";;"Kształtowanie bioróŜnorodności";;"Zachowanie róŜnorodności biologicznej oraz zapewnienie jej trwałości i moŜliwości rozwoju";"Powierzchnia obszarów chronionych objętych działaniami ochronnymi (tys. ha)";1305;630;619;619;229225;185553;197092;0;1;0;1;1
+"7-3-1";;;"Realizacja sieci Natura 2000";"Zapewnienie właściwej ochrony siedlisk i gatunków wymienionych w dyrektywach UE";"Liczba wykonanych opracowań, analiz, wytycznych (szt.)";25;65;55;60;3615;3061;3072;0;0;1;1;1
+"7-3-2";;;"Ochrona przyrody i krajobrazu, w tym parki narodowe";"Zachowanie i kształtowanie procesów przyrodniczych przebiegających w ekosystemie";"Powierzchnia obszarów chronionych objętych działaniami ochronnymi (tys. ha)";305;330;319;319;103790;101446;97820;0;0;1;1;1
+"7-3-3";;;"Ochrona i zrównowaŜony rozwój lasów oraz powiększanie zasobów leśnych";"Rozwijanie zrównowaŜonej, wielofunkcyjnej gospodarki leśnej oraz ochrona ekosystemów leśnych";"Powierzchnia obszarów leśnych objętych działaniami z zakresu zachowania i powiększania zasobów leśnych kraju (tys. ha)";1000;300;300;300;40656;40612;40720;0;0;1;1;1
+"7-3-4";;;"Ochrona funkcji gleb i przywrócenie gleb do stanu właściwego";"Zachowanie funkcji gleb i rekultywacja terenów zdegradowanych i zdewastowanych";"Powierzchnia obszarów poddanych rekultywacji i zabiegom ochronnym (ha)";0;315;315;315;81164;40434;55480;0;0;1;1;1
+"7-4";;"Kształtowanie jakości powietrza atmosferycznego i przeciwdziałanie zmianom klimatu";;"Ograniczanie emisji zanieczyszczeń do powietrza";"Redukcja emisji lub uniknięcie emisji gazów cieplarnianych wg wydatków (tys. Mg/rok)";89;108;1279;2017;211542;965799;1128291;0;1;0;1;1
+"7-4-1";;;"Ograniczenie emisji gazów cieplarnianych oraz działania z zakresu handlu emisjami CO2  i pakietu energetyczno-klimatycznego";"Ograniczanie emisji gazów cieplarnianych do powietrza";"Redukcja emisji lub uniknięcie emisji gazów cieplarnianych wg wydatków (tys. Mg/rok)";89;108;1279;2017;209327;962595;1125941;0;0;1;1;1
+"7-4-2";;;"Opracowanie programów ochrony powietrza";"Sporządzenie programów i planów działania celem oceny stanu jakości powietrza oraz wskazanie sposobów jego poprawy";"Liczba stref objętych programami (szt.)";55;54;60;0;2215;3204;2350;0;0;1;1;1
+"7-5";;"Racjonalne gospodarowanie zasobami i strukturami geologicznymi";;"Rozpoznawanie budowy geologicznej kraju pod kątem moŜliwości zaopatrzenia ludności oraz sektorów gospodarczych w kopaliny i wody podziemne wraz z ich ochroną";"Zaawansowanie prac projektowych i badawczych (wg umów) (%)";0;30;35;40;168091;106038;81204;0;1;0;1;1
+"7-5-1";;;"Badania geologiczne, gospodarowanie zasobami złóŜ kopalin oraz ustalanie dyspozycyjnych zasobów wód podziemnych";"Zapewnianie racjonalnego gospodarowania zasobami geologicznymi";"Zaawansowanie prac projektowych i badawczych (wg umów) (%)";0;30;35;40;167991;105938;81104;0;0;1;1;1
+"7-5-2";;;"Promocja i upowszechnianie osiągnięć w dziedzinie geologii i górnictwie";"Promowanie i rozpowszechnianie wiedzy w zakresie polskiej geologii";"Liczba numerów wydanych w danym roku przez WUG (liczba numerów/rok)";0;12;12;12;100;100;100;0;0;1;1;1
+"7-6";;"Gospodarka odpadami";;"Zapewnienie postępowania z odpadami w sposób niezagraŜający Ŝyciu i zdrowiu ludzi oraz środowisku";"Masa pojazdów wycofanych z eksploatacji przyjętych do stacji demontaŜu pojazdów (tys. Mg.)";160;170;170;170;194699;189626;193660;0;1;0;1;1
+"7-6-1";;;"Ograniczanie wpływu odpadów na środowisko";"Redukcja ilości składowanych odpadów komunalnych i zwiększenie udziału odpadów komunalnych podawanych odzyskowi i unieszkodliwianiu metodami innymi niŜ składowanie";"Masa pojazdów wycofanych z eksploatacji przyjętych do stacji demontaŜu pojazdów (tys. Mg.)";160;170;170;170;193291;188224;192440;0;0;1;1;1
+"7-6-2";;;"Nadzorowanie i koordynacja gospodarowania odpadami";"Zapewnianie sprawnego funkcjonowania organów zaangaŜowanych w kontrolę i nadzór nad gospodarką odpadami";"Liczba projektów zrealizowanych";0;2;2;2;1408;1402;1220;0;0;1;1;1
+"7-7";;"Gospodarowanie zasobami wodnymi";;"Poprawa bezpieczeństwa przeciwpowodziowego
+i zapobieganie skutkom suszy";"Liczba umów zawartych na dofinansowanie budowy, rozbudowy obiektów hydrotechnicznych (szt.)";11;15;10;10;491720;206018;159058;0;1;0;1;1
+"7-7-1";;;"Kształtowanie, ochrona i wykorzystanie zasobów wodnych";"Osiąganie i utrzymanie dobrego stanu wód przy zapewnieniu racjonalnego wykorzystania zasobów wodnych";"Liczba umów zawartych na dofinansowanie budowy, rozbudowy obiektów hydrotechnicznych (szt.)";11;15;10;10;491720;206018;159058;0;0;1;1;1
+"7-8";;"Rozbudowa infrastruktury ochrony środowiska";;"Rozwój infrastruktury przyczyniającej się do poprawy stanu środowiska";"Wzrost redukcji ładunku ścieków oczyszczonych (RLM)";0;0;26000;212000;95670;143822;147840;0;1;0;1;1
+"7-8-1";;;"Gospodarka wodno-ściekowa";"Poprawa stanu wód powierzchniowych i podziemnych poprzez budowę oczyszczalni ścieków i kanalizacji";"Wzrost redukcji ładunku ścieków oczyszczonych (RLM)";0;0;26000;212000;54468;119240;124736;0;0;1;1;1
+"7-8-2";;;"Przedsięwzięcia dostosowujące przedsiębiorstwa do wymogów ochrony środowiska";"Ograniczanie negatywnego wpływu działalności przemysłowej";"Wartość pozyskanego kapitału na finansowanie projektów dostosowujących przedsiębiorstwa do wymogów ochrony środowiska (tys. zł)";0;4100;4500;3800;730;404;440;0;0;1;1;1
+"7-8-3";;;"Zadania związane z realizacją projektów finansowanych z Funduszu
+Spójności";"Rozbudowa infrastruktury ochrony środowiska  z wykorzystaniem środków europejskich";"Liczba zakończonych przedsięwzięć (szt.)";10;0;0;0;40472;24178;22664;0;0;1;1;1
+"7-9";;"Kontrola, monitoring stanu środowiska i przeciwdziałanie powaŜnym awariom";;"Ochrona stanu środowiska przed negatywnym wpływem czynników cywilizacyjnych";"Liczba wykonanych opracowań, baz danych, studiów (szt.)";34;34;34;34;290320;168261;128448;0;1;0;1;1
+"7-9-1";;;"Monitoring stanu środowiska";"Uzyskanie pełnej informacji o bieŜącym i przyszłym stanie środowiska";"Liczba wykonanych opracowań, baz danych, studiów (szt.)";34;34;34;34;112889;108853;106968;0;0;1;1;1
+"7-9-2";;;"Ochrona przed skutkami zagroŜeń naturalnych";"Zwiększenie poziomu ochrony przed skutkami zagroŜeń naturalnych oraz powaŜnych awarii, usuwanie ich skutków oraz wzmocnienie wybranych elementów zarządzania środowiskiem";"Liczba zakupionego sprzętu i urządzeń dla jednostek ratownictwa (szt.)";560;150;150;150;177431;59408;21480;0;0;1;1;1
+"7-10";;"Realizacja polityki ekologicznej państwa";;"Zapewnienie bezpieczeństwa ekologicznego kraju (mieszkańców, zasobów przyrodniczych i
+infrastruktury społecznej) i tworzenie podstaw do zrównowaŜonego rozwoju społeczno- gospodarczego";"Liczba osób objętych działaniami edukacyjnymi i promocyjnymi (tys. szt.)";5000;6000;7000;8000;134688;166750;165591;0;1;0;1;1
+"7-10-1";;;"Prowadzenie polityki ekologicznej państwa";"Zwiększanie poziomu wydatków na finansowanie działalności badawczo-rozwojowej w ochronie środowiska oraz wdraŜanie ekoinnowacji w przemyśle";"Liczba wykonanych opracowań, analiz i prac naukowo-badawczych (szt.)";40;72;62;56;66687;94393;88992;0;0;1;1;1
+"7-10-2";;;"Promocja postaw proekologicznych i edukacja środowiskowa";"Podnoszenie świadomości ekologicznej społeczeństwa";"Liczba osób objętych działaniami edukacyjnymi i promocyjnymi (tys. szt.)";5000;6000;7000;8000;68001;72357;76599;0;0;1;1;1
+"7-11";;"Zapewnianie Polsce sprzyjających warunków rozwoju";;"Zapewnianie Polsce odpowiedniej pozycji na arenie międzynarodowej";"Liczba finansowanych konwencji (szt.)";12;15;15;15;11751;4443;4168;0;1;0;1;1
+"7-11-1";;;"Udział Polski we współpracy na forum organizacji międzynarodowych";"Zapewnienie odpowiedniej reprezentacji Polski w pracach organizacji międzynarodowych";"Liczba finansowanych konwencji (szt.)";12;15;15;15;11751;4443;4168;0;0;1;1;1
+"7-12";;"Wspieranie transportu morskiego i Ŝeglugi śródlądowej";;"Zwiększanie dostępności i poprawa jakości transportu morskiego i Ŝeglugi śródlądowej";"Liczba umów zawartych z Ministrem Infrastruktury na dofinansowanie przedsięwzięć związanych z Ŝeglugą śródlądową (szt.)";1;1;1;1;3554;3551;3560;0;1;0;1;1
+"7-12-1";;;"Wspieranie infrastruktury morskiej i Ŝeglugi śródlądowej";"Zapewnianie dobrego stanu infrastruktury Ŝeglugi transportowej";"Liczba umów zawartych z Ministrem Infrastruktury na dofinansowanie przedsięwzięć związanych z Ŝeglugą śródlądową (szt.)";1;1;1;1;3554;3551;3560;0;0;1;1;1
+"7-13";;"Wspieranie transportu intermodalnego";;"Wzrost udziału przewozów intermodalnych";"Masa przewiezionego ładunku z wykorzystaniem transportu intermodalnego (tys. tkm/Rok)";0;32000;43000;43000;7931;10408;10480;0;1;0;1;1
+"7-13-1";;;"Wspieranie transportu intermodalnego";"Wspieranie rozwoju transportu intermodalnego z wykorzystaniem infrastruktury PLK";"Masa przewiezionego ładunku z wykorzystaniem transportu intermodalnego (tys. tkm/rok)";0;32000;43000;43000;7931;10408;10480;0;0;1;1;1
+"7-14";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Udzielanie wsparcia finansowego inwestycjom słuŜącym ochronie środowiska";"Kwota udzielanych poŜyczek i finansowania kapitałowego przeznaczonych na finansowanie ochrony środowiska (mln zł)";2877;768;1458;1723;49007;46393;54337;0;1;0;1;1
+"7-14-1";;;"Finansowaniem przedsięwzięć słuŜących ochronie środowiska, z wykorzystaniem środków krajowych i zagranicznych";"Udzielanie wsparcia finansowego inwestycjom słuŜącym ochronie środowiska";"Kwota udzielanych poŜyczek i finansowania kapitałowego przeznaczonych na finansowanie ochrony środowiska (mln zł)";2877;768;1458;1723;49007;46393;54337;0;0;1;1;1
+"7-15";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania systemu finansowania ochrony środowiska w Polsce";"Wartość logiczna tak/nie";"tak";"tak";"tak";"tak";36622;33634;12748;0;1;0;1;1
+"7-15-1";;;"Obsługa prawna, administracyjna, finansowa i techniczna biura
+NFOŚiGW";"Zapewnienie sprawnego funkcjonowania systemu finansowania ochrony środowiska w Polsce";"Wartość logiczna tak/nie";"tak";"tak";"tak";"tak";36622;33634;12748;0;0;1;1;1
+8;"Polska Organizacja Turystyczna";;;;;;;;;114314;81996;45692;1;0;0;0;0
+"8-1";;"Wsparcie i promocja turystyki";;"Zwiększenie liczby turystów odwiedzających
+Polskę";"Liczba turystów zagranicznych przyjeŜdzających do Polski w danym roku (w mln)";119;126;132;132;101709;72631;44674;0;1;0;1;1
+"8-1";;;;"Zwiększenie średniego poziomu wydatków turystów zagranicznych";"Roczne wydatki turystów zagranicznych w
+Polsce (w mld USD)";52;49;58;56;;;;0;0;0;1;1
+"8-1-1";;;"Kreowanie polityki w obszarze turystyki";"Osiągnięcie poziomu średnich wydatków turysty na poziomie minimum 50% średniej w Europie";"Średni poziom wydatków turysty zagranicznego w Polsce do średniego poziomu wydatków turysty międzynarodowego w Europie w danym roku (%)";49;52;57;53;1186;1062;875;0;0;1;1;1
+"8-1-2";;;"Wsparcie produktów turystycznych";"Zwiększenie konkurencyjności polskiego produktu turystycznego";"Liczba certyfikowanych produktów";96;128;132;135;18879;10744;5868;0;0;1;1;1
+"8-1-3";;;"Tworzenie i wspieranie spójnego i efektywnego systemu marketingu w turystyce";"Zwiększenie dostępności informacji o turystycznej atrakcyjności Polski";"Liczba odbiorców przekazu marketingowego w danym roku do roku bazowego (%)";1000;1026;1025;1015;81644;60825;37931;0;0;1;1;1
+"8-2";;"Informatyzacja działalności i budowa społeczeństwa informacyjnego";;"Zwiększenie zakresu integracji, a takŜe osiągnięcia pełnej transakcyjności usług administracji świadczonych na rzecz społeczeństwa";"Procentowy udział bezawaryjnego funkcjonwania serwisów (%)";"95%";"95%";"95%";"95%";12605;9365;1018;0;1;0;1;1
+"8-2";;;;;"Liczba wybudowanych i uruchomionych systemowych rozwiązań informatycznych w sektorze turystyki w danym roku (szt.)";0;0;1;1;;;;0;0;0;0;1
+"8-2-1";;;"Utrzymanie systemów informatycznych";"Zapewnienie bezawaryjnego funkcjonowania narodowego portalu turystycznego";"Procentowy udział bezawaryjnego funkcjonwania serwisów";"95%";"95%";"95%";"95%";9478;4339;810;0;0;1;1;1
+"8-2-2";;;"Budowa i wdroŜenie rozwiązań informatycznych";"Uruchomienie 1 systemowego rozwiązania informatycznego w sektorze turystyki";"Liczba wybudowanych i uruchomionych systemowych rozwiązań informatycznych w sektorze turystyki w danym roku (szt.)";0;0;1;1;3127;5026;208;0;0;1;1;1
+9;"Polski Klub Wyścigów Konnych";;;;;;;;;5717;5673;5741;1;0;0;0;0
+"9-1";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Rozwój wyścigów konnych na terytorium RP";"Ilość organizatorów (szt.)";3;3;3;3;5717;5673;5741;0;1;0;1;1
+"9-1-1";;;"Działalność statutowa PKWK";"Rozwój wyścigów konnych na terytorium RP";"Ilość organizatorów (szt.)";3;3;3;3;5717;5673;5741;0;0;1;1;1
+10;"Agencja Rezerw Materiałowych";;;;;;;;;490841;638434;1129759;1;0;0;0;0
+"10-1";;"Bezpieczeństwo gospodarcze państwa";;"Zabezpieczenie ludności i przemysłu w środki materiałowe w zakresie produktów rolnych i Ŝywnościowych, leczniczych i wyrobów medycznych oraz surowców, materiałów i paliw niezbędnych do realizacji zadań w dziedzinie obronności i bezpieczeństwa państwa";"Procentowy stopień realizacji wartości bazowej towarów określonej przez organ tworzący rezerwy";100;100;100;100;408149;556013;1047338;0;1;0;1;1
+"10-1";;;;;"Średni stan zapasów państwowych ropy naftowej i produktów naftowych, wyraŜony w dniach średniego dziennego zuŜycia ropy naftowej i produktów naftowych";154;154;154;154;;;;0;0;0;0;1
+"10-1-1";;;"Potencjał gospodarczy na rzecz bezpieczeństwa państwa";"Zabezpieczenie ludności i przemysłu w środki materiałowe w zakresie produktów rolnych i Ŝywnościowych, leczniczych i wyrobów medycznych oraz surowców, materiałów i paliw niezbędnych do realizacji zadań w dziedzinie obronności i bezpieczeństwa państwa";"Procentowy stopień realizacji wartości bazowej towarów określonej przez organ tworzący rezerwy";100;100;100;100;408149;556013;1047338;0;0;1;1;1
+"10-2";;"Obsługa administracyjna";;"Zapewnienie prawidłowego i sprawnego funkcjonownia Agencji Rezerw Materiałowych";"Procentowy stopień realizacji wartości
+bazowej środków na funkcjonowanie Agencji i nakłady inwestycyjne określonej  przez organ tworzący rezerwy w zatwierdzonym planie finansowym";100;100;100;100;82692;82421;82421;0;1;0;1;1
+11;"Polska Agencja Żeglugi Powietrznej";;;;;;;;;676396;699137;753281;1;0;0;0;0
+"11-1";;"Wspieranie transportu lotniczego i infrastruktury lotniczej";;"Dostosowanie infrastruktury lotniskowej i nawigacyjnej oraz wzrost dostępności transportu lotniczego";"Wskaźnik poziomu bezpieczeństwa liczony
 1)
-na ilość operacji w danym roku";"0,545 (2008)";"stały poziom";"stały poziom";"stały poziom";676396;699137;753281
-"11-1-1";"c";;;"Wspieranie infrastruktury lotniskowej i nawigacyjnej";"Dostosowanie infrastruktury lotniskowej do wzrastającego popytu na usługi lotnicze";"2)
+na ilość operacji w danym roku";"0,545 (2008)";"stały poziom";"stały poziom";"stały poziom";676396;699137;753281;0;1;0;1;1
+"11-1-1";;;"Wspieranie infrastruktury lotniskowej i nawigacyjnej";"Dostosowanie infrastruktury lotniskowej do wzrastającego popytu na usługi lotnicze";"2)
 Średnia wartość opóźnień AFTM";"2 min/lot
 (2009)";"3)
 3 min";"2 min";"mniej niŜ 2
-min";207903;204998;220925
-"11-1-2";"c";;;"Regulowanie i nadzorowanie systemu lotnictwa cywilnego w Polsce";"Zapewnienie wysokiego poziomu
-bezpieczeństwa w  lotnictwie cywilnym w Polsce";"Wskaźnik poziomu bezpieczeństwa liczony na ilość operacji w danym roku4)";"0,545 (2008)";"stały poziom";"stały poziom";"stały poziom";387259;411255;447109
-"11-1-3";"c";;;"Kształtowanie warunków dla rozwoju transportu lotniczego";"Zapewnienie sprawnej realizacji zadań oraz instrumentów prawnych i warunków dla zrównowaŜonego rozwoju dla lotnictwa cywilnego w Polsce";"Wskaźnik poziomu bezpieczeństwa liczony na ilość operacji w danym roku5)";"0,545 (2008)";"stały poziom";"stały poziom";"stały poziom";81234;82884;85247
-12;"a";"Polska Agencja Rozwoju Przedsiębiorczości";;;;;;;;;5802392;5777236;3597166
-"12-1";"b";;"Wzrost konkurencyjności gospodarki";;"ZrównowaŜony rozwój polskiej gospodarki";"Liczba realizowanych projektów";2719;5444;5448;3902;3601189;3774541;2619460
-"12-1-1";"c";;;"Tworzenie warunków do zwiększenia innowacyjności przedsiębiorstw";"Zwiększanie udziału przedsiębiorstw prowadzących działalność innowacyjną";"Liczba realizowanych projektow wspierających innowacyjność";1640;3395;3556;2490;2687658;2776159;1915718
-"12-1-2";"c";;;"Tworzenie warunków dla funkcjonowania przedsiębiorstw";"Zapewnianie stabilnych i sprzyjających rozwojowi warunków funkcjonowania przedsiębiorców";"Liczba przedsiębiorstw/osób zamierzających rozpocząć działalność gospodarczą/ przedsiębiorców/klientów, którzy skorzystali z usług doradczych, szkoleniowych, informacyjnych i finansowych świadczonych przez IOB dzialające na rzecz rozwoju przedsiębiorczości";247680;229449;253857;246917;913531;998382;703742
-"12-2";"b";;"Kształtowanie międzynarodowego wizerunku RP";;"Promocja właściwego wizerunku RP na forum międzynarodowym";"Liczba realizowanych projektów";474;1467;1911;1509;56322;89593;90748
-"12-2-1";"c";;;"Prowadzenie promocji kraju";"Umocnienie pozytywnego wizerunku Polski za granicą";"Liczba zrealizowanych przedsięwzięć
-promocyjnych";6;12;11;8;56322;89593;90748
-"12-3";"b";;"Wsparcie rozwoju regionalnego kraju";;"Poprawa konkurencyjności regionów oraz spójności społeczno-gospodarczej i przestrzennej";"Liczba realizowanych projektów";69;122;88;151;2051894;1820044;791660
-"12-3-1";"c";;;"Wspracie województw Polski Wschodniej";"Przyśpieszanie tempa rozwoju społeczno- gospodarczego wojewodztw Polski Wschodniej";"Liczba zrealizowanych (zakończonych)
-projektów";1;36;27;30;2051894;1820044;791660
-"12-4";"b";;"Koordynacja realizacji NSRO 2007-2013 oraz zarządzanie i wdraŜanie programów operacyjnych";;"Efektywne i sprawne wykorzystanie środków pochodzących z UE w ramach NSRO 2007-2015";"Poziom wykorzystania alokacji PO IG, PO
+min";207903;204998;220925;0;0;1;1;1
+"11-1-2";;;"Regulowanie i nadzorowanie systemu lotnictwa cywilnego w Polsce";"Zapewnienie wysokiego poziomu
+bezpieczeństwa w  lotnictwie cywilnym w Polsce";"Wskaźnik poziomu bezpieczeństwa liczony na ilość operacji w danym roku4)";"0,545 (2008)";"stały poziom";"stały poziom";"stały poziom";387259;411255;447109;0;0;1;1;1
+"11-1-3";;;"Kształtowanie warunków dla rozwoju transportu lotniczego";"Zapewnienie sprawnej realizacji zadań oraz instrumentów prawnych i warunków dla zrównowaŜonego rozwoju dla lotnictwa cywilnego w Polsce";"Wskaźnik poziomu bezpieczeństwa liczony na ilość operacji w danym roku5)";"0,545 (2008)";"stały poziom";"stały poziom";"stały poziom";81234;82884;85247;0;0;1;1;1
+12;"Polska Agencja Rozwoju Przedsiębiorczości";;;;;;;;;5802392;5777236;3597166;1;0;0;0;0
+"12-1";;"Wzrost konkurencyjności gospodarki";;"ZrównowaŜony rozwój polskiej gospodarki";"Liczba realizowanych projektów";2719;5444;5448;3902;3601189;3774541;2619460;0;1;0;1;1
+"12-1-1";;;"Tworzenie warunków do zwiększenia innowacyjności przedsiębiorstw";"Zwiększanie udziału przedsiębiorstw prowadzących działalność innowacyjną";"Liczba realizowanych projektow wspierających innowacyjność";1640;3395;3556;2490;2687658;2776159;1915718;0;0;1;1;1
+"12-1-2";;;"Tworzenie warunków dla funkcjonowania przedsiębiorstw";"Zapewnianie stabilnych i sprzyjających rozwojowi warunków funkcjonowania przedsiębiorców";"Liczba przedsiębiorstw/osób zamierzających rozpocząć działalność gospodarczą/ przedsiębiorców/klientów, którzy skorzystali z usług doradczych, szkoleniowych, informacyjnych i finansowych świadczonych przez IOB dzialające na rzecz rozwoju przedsiębiorczości";247680;229449;253857;246917;913531;998382;703742;0;0;1;1;1
+"12-2";;"Kształtowanie międzynarodowego wizerunku RP";;"Promocja właściwego wizerunku RP na forum międzynarodowym";"Liczba realizowanych projektów";474;1467;1911;1509;56322;89593;90748;0;1;0;1;1
+"12-2-1";;;"Prowadzenie promocji kraju";"Umocnienie pozytywnego wizerunku Polski za granicą";"Liczba zrealizowanych przedsięwzięć
+promocyjnych";6;12;11;8;56322;89593;90748;0;0;1;1;1
+"12-3";;"Wsparcie rozwoju regionalnego kraju";;"Poprawa konkurencyjności regionów oraz spójności społeczno-gospodarczej i przestrzennej";"Liczba realizowanych projektów";69;122;88;151;2051894;1820044;791660;0;1;0;1;1
+"12-3-1";;;"Wspracie województw Polski Wschodniej";"Przyśpieszanie tempa rozwoju społeczno- gospodarczego wojewodztw Polski Wschodniej";"Liczba zrealizowanych (zakończonych)
+projektów";1;36;27;30;2051894;1820044;791660;0;0;1;1;1
+"12-4";;"Koordynacja realizacji NSRO 2007-2013 oraz zarządzanie i wdraŜanie programów operacyjnych";;"Efektywne i sprawne wykorzystanie środków pochodzących z UE w ramach NSRO 2007-2015";"Poziom wykorzystania alokacji PO IG, PO
 KL, PO RPW przyznanej PARP na lata 2007-
-2013";"0,06% (2008)";"41,06%";"59,02%";"72,48%";49450;51118;50662
-"12-4-1";"c";;;"WdraŜanie PO Innowacyjna Gospodarka";"Zapewnienie sprawnego wdraŜania PO IG";"Wartość środków zakontraktowanych (podpisanych umów o dofinansowanie) (narastająco) do wartość alokacji 2007-2013 na działania PO IG realizowane przez PARP";"17,29% (2008)";"73,62%";"88,89%";"97,67%";33089;35260;34571
-"12-4-2";"c";;;"WdraŜanie PO Kapitał Ludzki";"Zapewnienie sprawnego wdraŜania PO KL";"Wartość środków zakontraktowanych (podpisanych umów o dofinansowanie) (narastająco) do wartość alokacji 2007-2013 na działania PO KL realizowane przez PARP";"28,64% (2008)";"79,38%";"86,94%";"97,23%";5614;5369;5386
-"12-4-3";"c";;;"WdraŜanie PO Rozwój Polski Wschodniej";"Zapewnienie sprawnego wdraŜania PO RPW";"Wartość środków zakontraktowanych (podpisanych umów o dofinansowanie) (narastająco) do wartość alokacji 2007-2013 na działania PO RPW realizowane przez PARP";"3,55% (2008)";"86,22%";"89,74%";"93,14%";10747;10489;10705
-"12-5";"b";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Zapewnienie jakości oraz efektywności działań
-prowadzonych przez Agencję";"Liczba osób zaangaŜowanych w proces planowana strategicznego/ogół zatrudnionych";"6% (2008)";"6%";"6%";"6%";12457;12457;12457
-"12-6";"b";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania Agencji w zakresie obsługi administracyjnej";"Udział wydatków operacyjnych Agencji w wydatkach ogółem";"4,8% (2008)";"1,7%";"1,7%";"2,8%";15949;17086;17578
-"12-7";"b";;"Obsługa techniczna";;"Zapewnienie sprawnego fumkcjonowania Agencji w zakresie obsługi technicznej";"Czas niedostępności centralnych usług infrastruktury informatycznej";"brak danych (system w trakcie testowani a)";"-";"-";"-";15131;12397;14601
-13;"a";"Agencja Ochrony Technologii Medycznych";;;;;;;;;10290;20000;31090
-"13-1";"b";;"Zapewnianie dostępu do świadczeń opieki zdrowotnej";;"Poprawa dostępności do usług i świadczeń
-opieki zdrowotnej";"Liczba wydanych rekomendacji w zakresie świadczeń opieki zdrowotnej i technologii medycznych";50;73;80;85;3950;10202;20720
-"13-1-1";"c";;;"Organizacja oraz nadzór nad systemem opieki zdrowotnej";"Zapewnienie sprawnego i efektywnego funkcjonowania systemu opieki zdrowotnej, w tym podmiotów świadczących usługi z zakresu ochrony zdrowia";"Liczba świadczeń zleconych do oceny, liczba zleceń (31n), liczba wydanych rekomendacji, liczba wydanych opinii RK";"0/0/50";"55/12/73";"60/13/80";"80/20/85";3950;10202;20720
-"13-2";"b";;"Realizacja polityki lekowej państwa";;"Optymalizacja wykorzystania środków na finansowanie świadczeń ze środków publicznych";"Liczba opracowanych ocen raportów, liczba wydanych stanowisk RK";0;30;36;43;640;896;1070
-"13-2-1";"c";;;"Zapewnianie dostępu do leków i wyrobów medycznych poprzez umoŜliwienie refundacji leków i wyrobów medycznych najistotniejszych dla zdrowia społeczeństwa";"Optymalizacja wykorzystania środków na finansowanie świadczeń ze środków publicznych";"Liczba opracowanych ocen raportów, liczba wydanych stanowisk RK";0;30;36;43;640;896;1070
-"13-3";"b";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Zapewnienie sprawnego funkcjonowania Agencji w zakresie merytorycznej działalności, planowania strategicznego i operacyjnego";"Liczba osób zaangazowanych w procesie prawidłowego i sprawnego funkcjonowania Agencji (szt.)";1;2;2;2;400;430;510
-"13-4";"b";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania Agencji w zakresie obsługi administracyjnej przy rozsądnym koszcie (prawnym, kadrowym, finansowo-gospodarczym oraz bezpieczeństwa)";"Liczba osób zaangaŜowanych w obsługę administracyjną w stosunku do merytorycznych zatrudnionych na koniec danego okresu sprawozdawczego (%)";38;36;35;34;3200;6372;6590
-"13-5";"b";;"Obsługa techniczna";;"Zapewnienie sprawnego funkcjonowania obsługi technicznej przy rozsądnym koszcie";"Rzeczywiste koszty utrzymania 1 m2
-nieruchomości (PLN)";0;2100;2200;2300;2100;2100;2200
-14;"a";"Krajowa Szkoła Sądownicwa i Prokuratury";;;;;;;;;49987;68216;75037
-"14-1";"b";;"Edukacja i wychowanie";;"Zapewnienie dostępności do edukacji na róŜnych poziomach i o róŜnych profilach, poprzez przygotowanie do zawodu i doskonalenie zawodowe sędziów, prokuratorów, asesorów, referendarzy sądowych, asystentów,
-zawodowych kuratorów sądowych oraz urzędników sądów i prokuratury";"Liczba osób, które skorzystały z form doskonalenia i przygotowania zawodowego prowadzonego przez KSSiP w okresie sprawozdawczym";12763;13400;13900;14400;49987;68216;75037
-"14-1-1";"c";;;"Kształcenie ogólne, zawodowe i ustawiczne";"Dostosowanie kształcenia ogólnego, zawodowegoi ustawicznego do potrzeb rynku pracy";"Liczba osób, które skorzystały z form doskonalenia i przygotowania zawodowego prowadzonego przez KSSiP w okresie sprawozdawczym";12763;13400;13900;14400;49987;68216;75037
-15;"a";"Krajowa Szkoła Administracji Publicznej";;;;;;;;;19062;17997;19212
-"15-1";"b";;"Edukacja i wychowanie";;"Kształcenie i przygotowywanie do słuŜby publicznej przyszłych urzędników słuŜby cywilnej oraz kadr wyŜszych urzędników administracji Rzeczpospolitej Polskiej";"Liczba absolwentów  KSAP kończących naukę w opisywanym roku";54;71;70;70;9484;9484;10419
-"15-1-1";"c";;;"Kształcenie ogólne, zawodowe i ustawiczne";"Podnoszenie kwalifikacji zawodowych urzędników administracji publicznej";"Procent uczestników szkoleń, którzy wzięli udział w ankiecie ewaluacyjnej i uwaŜają, Ŝe podnieśli swoje kompetencje na skutek szkoleń";"97,4%";"97,0%";"97,0%";"97,0%";9484;9484;9671
-"15-2";"b";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Rzetelna realizacja zadań wynikających z ustawy o słuŜbie cywilnej";"Ilość osób, które z wynikiem pozytywnym ukończyły postępowanie kwalifikacyjne w słuŜbie cywilnej";529;860;900;900;648;648;648
-"15-3";"b";;"Obsługa administracyjna";;"Zapewnienie właściwego poziomu kształcenia";"Przeciętna liczba zatrudnionych w przeliczeniu na pełen etat";60;63;64;65;6099;6099;6277
-"15-4";"b";;"Obsługa techniczna";;"Zapewnienie prawidłowego funkcjonowania
-Szkoły";"Przeciętna liczba zatrudnionych na stanowiskach technicznych w przeliczeniu na pełen etat";3;3;4;5;2831;1766;1868
-16;"a";"Polski Instytut Sztuki Filmowej";;;;;;;;;135246;138356;141539
-"16-1";"b";;"Działalność artystyczna i promocja kultury";;"Wsparcie kinematografii";"Liczba dofinansowanych przedswięwzięć w zakresie kinematografii/rok poprzedni (%)";106;100;102;102;135246;138356;141539
-"16-1-1";"c";;;"Wspieranie kinematografii";"Wsparcie kinematografii";"Liczba dofinansowanych przedswięwzięć w zakresie kinematografii/rok poprzedni (%)";106;100;102;102;135246;138356;141539
-17;"a";"Urząd Dozoru Technicznego";;;;;;;;;354290;365172;378313
-"17-1";"b";;"Wzrost konkurencyjności gospodarki";;"Wykonywanie czynności dozoru technicznego, na podstawie ustawy o dozorze technicznym, zmierzających do zapewnienia bezpiecznego funkconowania urządzeń technicznych";"Wykonywanie badań*";"-";"Wnb≥0,9";"Wnb≥0,9";"Wnb≥0,9";354290;365172;378313
-"17-1-1";"c";;;"Tworzenie warunków dla funkcjonowania przedsiębiorstw";"Wykonywanie czynności dozoru technicznego, na podstawie ustawy o dozorze technicznym, zmierzających do zapewnienia bezpiecznego funkconowania urządzeń technicznych";"Wykonywanie badań*";"-";"Wnb≥0,9";"Wnb≥0,9";"Wnb≥0,9";354290;365172;378313
-18;"a";"Polski Instytut Spraw Międzynarodowych";;;;;;;;;10847;11347;11847
-"18-1";"b";;"Edukacja i wychowanie";;"Przygotowanie do pracy w słuŜbie zagranicznej aplikantów w ramach aplikacji dyplomatyczno- konsularnej oraz dokształcanie pracowników administracji publicznej wykonujących zadania w zakresie współpracy międzynarodowej i polityki zagranicznej RP";"Liczba osób szkolonych";165;165;175;185;1150;1203;1256
-"18-1-1";"c";;;"Kształcenie ogólne, zawodowe i ustawiczne";"Przygotowanie do pracy w słuŜbie zagranicznej aplikantów w ramach aplikacji dyplomatyczno- konsularnej oraz dokształcanie pracowników administracji publicznej wykonujących zadania w zakresie współpracy międzynarodowej i polityki zagranicznej RP";"Liczba osób szkolonych";165;165;175;185;1150;1203;1256
-"18-2";"b";;"Podtrzymywanie i rozpowszechnianie tradycji narodowej
+2013";"0,06% (2008)";"41,06%";"59,02%";"72,48%";49450;51118;50662;0;1;0;1;1
+"12-4-1";;;"WdraŜanie PO Innowacyjna Gospodarka";"Zapewnienie sprawnego wdraŜania PO IG";"Wartość środków zakontraktowanych (podpisanych umów o dofinansowanie) (narastająco) do wartość alokacji 2007-2013 na działania PO IG realizowane przez PARP";"17,29% (2008)";"73,62%";"88,89%";"97,67%";33089;35260;34571;0;0;1;1;1
+"12-4-2";;;"WdraŜanie PO Kapitał Ludzki";"Zapewnienie sprawnego wdraŜania PO KL";"Wartość środków zakontraktowanych (podpisanych umów o dofinansowanie) (narastająco) do wartość alokacji 2007-2013 na działania PO KL realizowane przez PARP";"28,64% (2008)";"79,38%";"86,94%";"97,23%";5614;5369;5386;0;0;1;1;1
+"12-4-3";;;"WdraŜanie PO Rozwój Polski Wschodniej";"Zapewnienie sprawnego wdraŜania PO RPW";"Wartość środków zakontraktowanych (podpisanych umów o dofinansowanie) (narastająco) do wartość alokacji 2007-2013 na działania PO RPW realizowane przez PARP";"3,55% (2008)";"86,22%";"89,74%";"93,14%";10747;10489;10705;0;0;1;1;1
+"12-5";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Zapewnienie jakości oraz efektywności działań
+prowadzonych przez Agencję";"Liczba osób zaangaŜowanych w proces planowana strategicznego/ogół zatrudnionych";"6% (2008)";"6%";"6%";"6%";12457;12457;12457;0;1;0;1;1
+"12-6";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania Agencji w zakresie obsługi administracyjnej";"Udział wydatków operacyjnych Agencji w wydatkach ogółem";"4,8% (2008)";"1,7%";"1,7%";"2,8%";15949;17086;17578;0;1;0;1;1
+"12-7";;"Obsługa techniczna";;"Zapewnienie sprawnego fumkcjonowania Agencji w zakresie obsługi technicznej";"Czas niedostępności centralnych usług infrastruktury informatycznej";"brak danych (system w trakcie testowani a)";"-";"-";"-";15131;12397;14601;0;1;0;1;1
+13;"Agencja Ochrony Technologii Medycznych";;;;;;;;;10290;20000;31090;1;0;0;0;0
+"13-1";;"Zapewnianie dostępu do świadczeń opieki zdrowotnej";;"Poprawa dostępności do usług i świadczeń
+opieki zdrowotnej";"Liczba wydanych rekomendacji w zakresie świadczeń opieki zdrowotnej i technologii medycznych";50;73;80;85;3950;10202;20720;0;1;0;1;1
+"13-1-1";;;"Organizacja oraz nadzór nad systemem opieki zdrowotnej";"Zapewnienie sprawnego i efektywnego funkcjonowania systemu opieki zdrowotnej, w tym podmiotów świadczących usługi z zakresu ochrony zdrowia";"Liczba świadczeń zleconych do oceny, liczba zleceń (31n), liczba wydanych rekomendacji, liczba wydanych opinii RK";"0/0/50";"55/12/73";"60/13/80";"80/20/85";3950;10202;20720;0;0;1;1;1
+"13-2";;"Realizacja polityki lekowej państwa";;"Optymalizacja wykorzystania środków na finansowanie świadczeń ze środków publicznych";"Liczba opracowanych ocen raportów, liczba wydanych stanowisk RK";0;30;36;43;640;896;1070;0;1;0;1;1
+"13-2-1";;;"Zapewnianie dostępu do leków i wyrobów medycznych poprzez umoŜliwienie refundacji leków i wyrobów medycznych najistotniejszych dla zdrowia społeczeństwa";"Optymalizacja wykorzystania środków na finansowanie świadczeń ze środków publicznych";"Liczba opracowanych ocen raportów, liczba wydanych stanowisk RK";0;30;36;43;640;896;1070;0;0;1;1;1
+"13-3";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Zapewnienie sprawnego funkcjonowania Agencji w zakresie merytorycznej działalności, planowania strategicznego i operacyjnego";"Liczba osób zaangazowanych w procesie prawidłowego i sprawnego funkcjonowania Agencji (szt.)";1;2;2;2;400;430;510;0;1;0;1;1
+"13-4";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania Agencji w zakresie obsługi administracyjnej przy rozsądnym koszcie (prawnym, kadrowym, finansowo-gospodarczym oraz bezpieczeństwa)";"Liczba osób zaangaŜowanych w obsługę administracyjną w stosunku do merytorycznych zatrudnionych na koniec danego okresu sprawozdawczego (%)";38;36;35;34;3200;6372;6590;0;1;0;1;1
+"13-5";;"Obsługa techniczna";;"Zapewnienie sprawnego funkcjonowania obsługi technicznej przy rozsądnym koszcie";"Rzeczywiste koszty utrzymania 1 m2
+nieruchomości (PLN)";0;2100;2200;2300;2100;2100;2200;0;1;0;1;1
+14;"Krajowa Szkoła Sądownicwa i Prokuratury";;;;;;;;;49987;68216;75037;1;0;0;0;0
+"14-1";;"Edukacja i wychowanie";;"Zapewnienie dostępności do edukacji na róŜnych poziomach i o róŜnych profilach, poprzez przygotowanie do zawodu i doskonalenie zawodowe sędziów, prokuratorów, asesorów, referendarzy sądowych, asystentów,
+zawodowych kuratorów sądowych oraz urzędników sądów i prokuratury";"Liczba osób, które skorzystały z form doskonalenia i przygotowania zawodowego prowadzonego przez KSSiP w okresie sprawozdawczym";12763;13400;13900;14400;49987;68216;75037;0;1;0;1;1
+"14-1-1";;;"Kształcenie ogólne, zawodowe i ustawiczne";"Dostosowanie kształcenia ogólnego, zawodowegoi ustawicznego do potrzeb rynku pracy";"Liczba osób, które skorzystały z form doskonalenia i przygotowania zawodowego prowadzonego przez KSSiP w okresie sprawozdawczym";12763;13400;13900;14400;49987;68216;75037;0;0;1;1;1
+15;"Krajowa Szkoła Administracji Publicznej";;;;;;;;;19062;17997;19212;1;0;0;0;0
+"15-1";;"Edukacja i wychowanie";;"Kształcenie i przygotowywanie do słuŜby publicznej przyszłych urzędników słuŜby cywilnej oraz kadr wyŜszych urzędników administracji Rzeczpospolitej Polskiej";"Liczba absolwentów  KSAP kończących naukę w opisywanym roku";54;71;70;70;9484;9484;10419;0;1;0;1;1
+"15-1-1";;;"Kształcenie ogólne, zawodowe i ustawiczne";"Podnoszenie kwalifikacji zawodowych urzędników administracji publicznej";"Procent uczestników szkoleń, którzy wzięli udział w ankiecie ewaluacyjnej i uwaŜają, Ŝe podnieśli swoje kompetencje na skutek szkoleń";"97,4%";"97,0%";"97,0%";"97,0%";9484;9484;9671;0;0;1;1;1
+"15-2";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Rzetelna realizacja zadań wynikających z ustawy o słuŜbie cywilnej";"Ilość osób, które z wynikiem pozytywnym ukończyły postępowanie kwalifikacyjne w słuŜbie cywilnej";529;860;900;900;648;648;648;0;1;0;1;1
+"15-3";;"Obsługa administracyjna";;"Zapewnienie właściwego poziomu kształcenia";"Przeciętna liczba zatrudnionych w przeliczeniu na pełen etat";60;63;64;65;6099;6099;6277;0;1;0;1;1
+"15-4";;"Obsługa techniczna";;"Zapewnienie prawidłowego funkcjonowania
+Szkoły";"Przeciętna liczba zatrudnionych na stanowiskach technicznych w przeliczeniu na pełen etat";3;3;4;5;2831;1766;1868;0;1;0;1;1
+16;"Polski Instytut Sztuki Filmowej";;;;;;;;;135246;138356;141539;1;0;0;0;0
+"16-1";;"Działalność artystyczna i promocja kultury";;"Wsparcie kinematografii";"Liczba dofinansowanych przedswięwzięć w zakresie kinematografii/rok poprzedni (%)";106;100;102;102;135246;138356;141539;0;1;0;1;1
+"16-1-1";;;"Wspieranie kinematografii";"Wsparcie kinematografii";"Liczba dofinansowanych przedswięwzięć w zakresie kinematografii/rok poprzedni (%)";106;100;102;102;135246;138356;141539;0;0;1;1;1
+17;"Urząd Dozoru Technicznego";;;;;;;;;354290;365172;378313;1;0;0;0;0
+"17-1";;"Wzrost konkurencyjności gospodarki";;"Wykonywanie czynności dozoru technicznego, na podstawie ustawy o dozorze technicznym, zmierzających do zapewnienia bezpiecznego funkconowania urządzeń technicznych";"Wykonywanie badań*";"-";"Wnb≥0,9";"Wnb≥0,9";"Wnb≥0,9";354290;365172;378313;0;1;0;1;1
+"17-1-1";;;"Tworzenie warunków dla funkcjonowania przedsiębiorstw";"Wykonywanie czynności dozoru technicznego, na podstawie ustawy o dozorze technicznym, zmierzających do zapewnienia bezpiecznego funkconowania urządzeń technicznych";"Wykonywanie badań*";"-";"Wnb≥0,9";"Wnb≥0,9";"Wnb≥0,9";354290;365172;378313;0;0;1;1;1
+18;"Polski Instytut Spraw Międzynarodowych";;;;;;;;;10847;11347;11847;1;0;0;0;0
+"18-1";;"Edukacja i wychowanie";;"Przygotowanie do pracy w słuŜbie zagranicznej aplikantów w ramach aplikacji dyplomatyczno- konsularnej oraz dokształcanie pracowników administracji publicznej wykonujących zadania w zakresie współpracy międzynarodowej i polityki zagranicznej RP";"Liczba osób szkolonych";165;165;175;185;1150;1203;1256;0;1;0;1;1
+"18-1-1";;;"Kształcenie ogólne, zawodowe i ustawiczne";"Przygotowanie do pracy w słuŜbie zagranicznej aplikantów w ramach aplikacji dyplomatyczno- konsularnej oraz dokształcanie pracowników administracji publicznej wykonujących zadania w zakresie współpracy międzynarodowej i polityki zagranicznej RP";"Liczba osób szkolonych";165;165;175;185;1150;1203;1256;0;0;1;1;1
+"18-2";;"Podtrzymywanie i rozpowszechnianie tradycji narodowej
 i państwowej";;"Popularyzacja wiedzy o polskiej polityce zagranicznej, współczesnych stosunkach międzynarodowych i historii dyplomacji";"Liczba: wydanych ksiąŜek/tytułów czasopism/
-innych publikacji";"14/5/100";"14/5/100";"15/5/110";"16/5/120";1491;1559;1627
-"18-2-1";"c";;;"Działalność naukowo-wydawnicza";"Popularyzacja wiedzy o polskiej polityce zagranicznej, współczesnych stosunkach międzynarodowych i historii dyplomacji";"Liczba: wydanych ksiąŜek/tytułów czasopism/
-innych publikacji";"14/5/100";"14/5/100";"15/5/110";"16/5/120";1491;1559;1627
-"18-3";"b";;"Ochrona dziedzictwa narodowego";;"Zapewnienie publicznego dostępu do specjalistycznego księgozbioru z zakresu spraw międzynarodowych";"Liczba: nabytych ksiąŜek/ prenumerat
+innych publikacji";"14/5/100";"14/5/100";"15/5/110";"16/5/120";1491;1559;1627;0;1;0;1;1
+"18-2-1";;;"Działalność naukowo-wydawnicza";"Popularyzacja wiedzy o polskiej polityce zagranicznej, współczesnych stosunkach międzynarodowych i historii dyplomacji";"Liczba: wydanych ksiąŜek/tytułów czasopism/
+innych publikacji";"14/5/100";"14/5/100";"15/5/110";"16/5/120";1491;1559;1627;0;0;1;1;1
+"18-3";;"Ochrona dziedzictwa narodowego";;"Zapewnienie publicznego dostępu do specjalistycznego księgozbioru z zakresu spraw międzynarodowych";"Liczba: nabytych ksiąŜek/ prenumerat
 czasopism/wizyt czytelników";"2000/200/8
 000";"2000/200/80
 00";"2100/200/9
 000";"2200/200/1
-0000";1329;1390;1451
-"18-3-1";"c";;;"Utrzymywanie bibliotek oraz innych instytucji, działających w sektorze ksiąŜki";"Zapewnienie publicznego dostępu do specjalistycznego księgozbioru z zakresu spraw międzynarodowych";"Liczba: nabytych ksiąŜek/ prenumerat czasopism/wizyt czytelników";"2000/200/8
+0000";1329;1390;1451;0;1;0;1;1
+"18-3-1";;;"Utrzymywanie bibliotek oraz innych instytucji, działających w sektorze ksiąŜki";"Zapewnienie publicznego dostępu do specjalistycznego księgozbioru z zakresu spraw międzynarodowych";"Liczba: nabytych ksiąŜek/ prenumerat czasopism/wizyt czytelników";"2000/200/8
 000";"2000/200/80
 00";"2100/200/9
 000";"2200/200/1
-0000";1329;1390;1451
-"18-4";"b";;"Prowadzenie badań naukowych";;"Korzystanie z wyników badań naukowych przy obsłudze organów władzy prowadzących politykę zagraniczną RP";"Liczba projektów badawczych";1;1;1;1;480;503;525
-"18-5";"b";;"Upowszechnianie, promocja oraz popularyzacja nauki";;"Wzrost zainteresowania stosunkami międzynarodowymi i intensyfikacja współpracy polskich ośrodków naukowych i analitycznych w tej dziedzinie";"Liczba zorganizowanych imprez (krajowych konferencji naukowych, seminariów, prezentacji etc.) (ilość)";24;24;26;28;525;549;574
-"18-6";"b";;"Zapewnianie Polsce sprzyjających warunków rozwoju";;"Zapewnienie profesjonalnej obsługi analityczno- eksperckiej organów władzy odpowiedzialnych za prowadzenie polityki zagranicznej RP";"Liczba: przygotowanych opracowań analitycznych/
-zorganizowanych konsultacji eksperckich";"300/ 25";"300/ 25";"320/ 30";"340/ 35";4727;4945;5163
-"18-6-m02";"d";;;;"Rozwój stosunków dwustronnych i wielostronnych poprzez organizację międzynarodowych konferencji naukowo-eksperckich oraz udział w zagranicznych konferencjach z zakresu spraw międzynarodowych";"Liczba zorganizowanych konferencji
-/liczba wyjazdów konferencyjnych";"14/ 80";"14/ 80";"15/ 85";"16/ 90";1145;1198;1251
-"18-6-1";"c";;;"Rozwijanie stosunków dwustronnych i wielostronnych";"Zapewnienie profesjonalnej obsługi analityczno- eksperckiej organów władzy odpowiedzialnych za prowadzenie polityki zagranicznej RP";"Liczba: przygotowanych opracowań analitycznych/
-zorganizowanych konsultacji eksperckich";"300/ 25";"300/ 25";"320/ 30";"340/ 35";4727;4945;5163
-"18-6-1-m02";"d";;;;"Rozwój stosunków dwustronnych i wielostronnych poprzez organizację międzynarodowych konferencji naukowo-eksperckich oraz udział w zagranicznych konferencjach z zakresu spraw międzynarodowych";"Liczba zorganizowanych konferencji
-/liczba wyjazdów konferencyjnych";"14/ 80";"14/ 80";"15/ 85";"16/ 90";1145;1198;1251
-19;"a";"Transportowy Dozór Techniczny";;;;;;;;;49999;49800;51148
-"19-1";"b";;"Wspieranie zrównowaŜonego rozwoju transportu";;"Stwarzanie warunków dla zrównowaŜonego rozwoju transportu";"Ilość przeprowadzonych działań technicznych (ilość osób egzaminowanych i badań technicznych)";86013;82549;85088;80122;37976;37149;37710
-"19-1-1";"c";;;"Zapewnienie właściwych standardów bezpieczeństwa dla urządzeń technicznych w zakresie transportu drogowego, kolejowego, lotniczego oraz wodnego";"Utrzymanie wysokiego poziomu bezpieczeństwa urządzeń technicznych w transporcie drogowym, wodnym, kolejowym i lotniczym oraz wiedzy i kompetencji kadry odpowiedzialnej za
-bezpieczne funkcjonowanie urządzeń technicznych, które mogą stworzyć zagroŜenie Ŝycia i zdrowia ludzkiego, mienia i środowiska";"Ilość przeprowadzonych działań technicznych (ilość osób egzaminowanych i badań technicznych)";86013;82549;85088;80122;37976;37149;37710
-"19-2";"b";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania jednostki i sprawnej obsługi pracowników";"% udział kosztów obsługi administracyjnej w stosunku do kosztów ogółem";"17,0%";"20,0%";"21,0%";"22,0%";10209;10230;11043
-"19-3";"b";;"Obsługa techniczna";;"Zapewnienie sprawnego funkcjonowania jednostki i sprawnej obsługi pracowników";"% udział kosztów obsługi technicznej w stosunku do kosztów ogółem";"4,0%";"5,0%";"7,0%";"6,0%";1814;2421;2395
-20;"a";"Polskie Centrum Akredytacji";;;;;;;;;15000;15000;15000
-"20-1";"b";;"Wzrost konkurencyjności gospodarki";;"Zapewnienie stabilnych i sprzyjających rozwojowi warunków funkcjonowania przedsiębiorców";"Liczba waŜnych akredytacji";"−*";1300;1400;1500;15000;15000;15000
-"20-1-1";"c";;;"Tworzenie warunków dla funkcjonowania przedsiębiorstw";"Zapewnienie stabilnych i sprzyjających rozwojowi warunków funkcjonowania przedsiębiorców";"Liczba waŜnych akredytacji";"−*";1300;1400;1500;15000;15000;15000
-21;"a";"Centrum Doradztwa Rolniczego w Brwinowie";;;;;;;;;16737;24485;24857
-"21-1";"b";;"Edukacja i wychowanie";;"Podniesienie wiedzy i umiejętności nauczycieli w zakresie zrównowaŜonego rozwoju obszarów wiejskich";"Liczba szkół rolniczych korzystających ze wsparcia CDR w zakresie doskonalenia poziomu jakości i kształcenia kadr";38;45;45;45;14;14;14
-"21-1-1";"c";;;"Kształcenie i doskonalenie nauczycieli oraz kształtowanie ich pragmatyki zawodowej";"Podniesienie wiedzy i umiejętności nauczycieli w zakresie zrównowaŜonego rozwoju obszarów wiejskich";"Liczba szkół rolniczych korzystających ze wsparcia CDR w zakresie doskonalenia poziomu jakości i kształcenia kadr";38;45;45;45;14;14;14
-"21-2";"b";;"Kształtowanie ustroju rolnego państwa oraz rolnictwo ekologiczne i Ŝywność
-regionalna, tradycyjna i systemy jakości Ŝywności";;"Efektywny system doradztwa";"Liczba odbiorców usług doradczych, szkoleniowych i upowszechnieniowych";4696;1000;1000;1000;1400;1266;1326
-"21-2-m02";"d";;;;;"Liczba wydanych materiałów szkoleniowych";;11000;11000;11000;;;
-"21-2-1";"c";;;"Rolnictwo ekologiczne";"Efektywny system doradztwa";"Liczba odbiorców usług doradczych, szkoleniowych i upowszechnieniowych";0;1000;1000;1000;580;960;960
-"21-2-2";"c";;;"śywność regionalna, tradycyjna i systemy jakości Ŝywności";"Efektywny system doradztwa";"Liczba wydanych materiałów szkoleniowych";0;11000;11000;11000;820;306;366
-"21-3";"b";;"Realizacja Wspólnej Polityki Rolnej oraz pomocy krajowej";;"Zapewnienie wysokiej jakości usług w zakresie doradztwa rolniczego
-Wspieranie Ośrodków Doradztwa Rolniczego w realizacji WPR oraz pomocy krajowej";"Liczba odbiorców-doradców";2000;3000;3000;3000;6407;7275;7377
-"21-3-m02";"d";;;;;"Liczba  przeszkolonych  doradców  z  zakresu udzielania  rolnikom  pomocy  doradczej  w korzystaniu  z  instrumentów  finansowych WPR";6000;8000;8000;8000;;;
-"21-3-m03";"d";;;;;"Liczba  kontroli  prywatnych  podmiotów doradczych";0;50;50;50;;;
-"21-3-1";"c";;;"Doradztwo rolnicze";"Wspieranie Ośrodków Doradztwa Rolniczego w realizacji WPR oraz pomocy krajowej";"Liczba przeszkolonych doradców z zakresu udzielania rolnikom pomocy doradczej w korzystaniu z instrumentów finansowych WPR";6000;8000;8000;8000;6407;7275;7377
-"21-4";"b";;"Informatyzacja działalności i budowa społeczeństwa informacyjnego";;"Utworzenie i utrzymanie zintegrowanego systemu informatycznego doradztwa";"Ilość prowadzonych baz danych oraz rozpowszechnianych aplikacji i programów komputerowych dla potrzeb doradztwa i rolników";0;15;15;15;425;6730;5020
-"21-4-1";"c";;;"Utrzymanie systemów informatycznych";"Utworzenie i utrzymanie zintegrowanego systemu informatycznego doradztwa";"Ilość prowadzonych baz danych oraz rozpowszechnianych aplikacji i programów komputerowych dla potrzeb doradztwa i rolników";0;4;10;15;325;930;3600
-"21-4-2";"c";;;"Budowa i wdroŜenie rozwiązań informatycznych";"Utworzenie i utrzymanie zintegrowanego systemu informatycznego doradztwa";"Ilość prowadzonych baz danych oraz rozpowszechnianych aplikacji i programów komputerowych dla potrzeb doradztwa i rolników";0;11;5;0;100;5800;1420
-"21-5";"b";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Zapewnienie sprawnego funkcjonowania CDR";"Liczba pracowników (w przeliczeniu na pełne etaty) koordynujących działalność CDR";0;21;21;21;1000;1230;1230
-"21-6";"b";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania CDR";"Liczba pracowników (w przeliczeniu na pełne etaty) zatrudnionych w obsłudze administracyjnej";0;56;56;56;4705;4220;5140
-"21-7";"b";;"Obsługa techniczna";;"Zapewnienie sprawnego funkcjonowania CDR";"Liczba pracowników (w przeliczeniu na pełne etaty) zatrudnionych w obsłudze technicznej";0;55;55;55;2786;3750;4750
+0000";1329;1390;1451;0;0;1;1;1
+"18-4";;"Prowadzenie badań naukowych";;"Korzystanie z wyników badań naukowych przy obsłudze organów władzy prowadzących politykę zagraniczną RP";"Liczba projektów badawczych";1;1;1;1;480;503;525;0;1;0;1;1
+"18-5";;"Upowszechnianie, promocja oraz popularyzacja nauki";;"Wzrost zainteresowania stosunkami międzynarodowymi i intensyfikacja współpracy polskich ośrodków naukowych i analitycznych w tej dziedzinie";"Liczba zorganizowanych imprez (krajowych konferencji naukowych, seminariów, prezentacji etc.) (ilość)";24;24;26;28;525;549;574;0;1;0;1;1
+"18-6";;"Zapewnianie Polsce sprzyjających warunków rozwoju";;"Zapewnienie profesjonalnej obsługi analityczno- eksperckiej organów władzy odpowiedzialnych za prowadzenie polityki zagranicznej RP";"Liczba: przygotowanych opracowań analitycznych/
+zorganizowanych konsultacji eksperckich";"300/ 25";"300/ 25";"320/ 30";"340/ 35";4727;4945;5163;0;1;0;1;1
+"18-6";;;;"Rozwój stosunków dwustronnych i wielostronnych poprzez organizację międzynarodowych konferencji naukowo-eksperckich oraz udział w zagranicznych konferencjach z zakresu spraw międzynarodowych";"Liczba zorganizowanych konferencji
+/liczba wyjazdów konferencyjnych";"14/ 80";"14/ 80";"15/ 85";"16/ 90";1145;1198;1251;0;0;0;1;1
+"18-6-1";;;"Rozwijanie stosunków dwustronnych i wielostronnych";"Zapewnienie profesjonalnej obsługi analityczno- eksperckiej organów władzy odpowiedzialnych za prowadzenie polityki zagranicznej RP";"Liczba: przygotowanych opracowań analitycznych/
+zorganizowanych konsultacji eksperckich";"300/ 25";"300/ 25";"320/ 30";"340/ 35";4727;4945;5163;0;0;1;1;1
+"18-6-1";;;;"Rozwój stosunków dwustronnych i wielostronnych poprzez organizację międzynarodowych konferencji naukowo-eksperckich oraz udział w zagranicznych konferencjach z zakresu spraw międzynarodowych";"Liczba zorganizowanych konferencji
+/liczba wyjazdów konferencyjnych";"14/ 80";"14/ 80";"15/ 85";"16/ 90";1145;1198;1251;0;0;0;1;1
+19;"Transportowy Dozór Techniczny";;;;;;;;;49999;49800;51148;1;0;0;0;0
+"19-1";;"Wspieranie zrównowaŜonego rozwoju transportu";;"Stwarzanie warunków dla zrównowaŜonego rozwoju transportu";"Ilość przeprowadzonych działań technicznych (ilość osób egzaminowanych i badań technicznych)";86013;82549;85088;80122;37976;37149;37710;0;1;0;1;1
+"19-1-1";;;"Zapewnienie właściwych standardów bezpieczeństwa dla urządzeń technicznych w zakresie transportu drogowego, kolejowego, lotniczego oraz wodnego";"Utrzymanie wysokiego poziomu bezpieczeństwa urządzeń technicznych w transporcie drogowym, wodnym, kolejowym i lotniczym oraz wiedzy i kompetencji kadry odpowiedzialnej za
+bezpieczne funkcjonowanie urządzeń technicznych, które mogą stworzyć zagroŜenie Ŝycia i zdrowia ludzkiego, mienia i środowiska";"Ilość przeprowadzonych działań technicznych (ilość osób egzaminowanych i badań technicznych)";86013;82549;85088;80122;37976;37149;37710;0;0;1;1;1
+"19-2";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania jednostki i sprawnej obsługi pracowników";"% udział kosztów obsługi administracyjnej w stosunku do kosztów ogółem";"17,0%";"20,0%";"21,0%";"22,0%";10209;10230;11043;0;1;0;1;1
+"19-3";;"Obsługa techniczna";;"Zapewnienie sprawnego funkcjonowania jednostki i sprawnej obsługi pracowników";"% udział kosztów obsługi technicznej w stosunku do kosztów ogółem";"4,0%";"5,0%";"7,0%";"6,0%";1814;2421;2395;0;1;0;1;1
+20;"Polskie Centrum Akredytacji";;;;;;;;;15000;15000;15000;1;0;0;0;0
+"20-1";;"Wzrost konkurencyjności gospodarki";;"Zapewnienie stabilnych i sprzyjających rozwojowi warunków funkcjonowania przedsiębiorców";"Liczba waŜnych akredytacji";"−*";1300;1400;1500;15000;15000;15000;0;1;0;1;1
+"20-1-1";;;"Tworzenie warunków dla funkcjonowania przedsiębiorstw";"Zapewnienie stabilnych i sprzyjających rozwojowi warunków funkcjonowania przedsiębiorców";"Liczba waŜnych akredytacji";"−*";1300;1400;1500;15000;15000;15000;0;0;1;1;1
+21;"Centrum Doradztwa Rolniczego w Brwinowie";;;;;;;;;16737;24485;24857;1;0;0;0;0
+"21-1";;"Edukacja i wychowanie";;"Podniesienie wiedzy i umiejętności nauczycieli w zakresie zrównowaŜonego rozwoju obszarów wiejskich";"Liczba szkół rolniczych korzystających ze wsparcia CDR w zakresie doskonalenia poziomu jakości i kształcenia kadr";38;45;45;45;14;14;14;0;1;0;1;1
+"21-1-1";;;"Kształcenie i doskonalenie nauczycieli oraz kształtowanie ich pragmatyki zawodowej";"Podniesienie wiedzy i umiejętności nauczycieli w zakresie zrównowaŜonego rozwoju obszarów wiejskich";"Liczba szkół rolniczych korzystających ze wsparcia CDR w zakresie doskonalenia poziomu jakości i kształcenia kadr";38;45;45;45;14;14;14;0;0;1;1;1
+"21-2";;"Kształtowanie ustroju rolnego państwa oraz rolnictwo ekologiczne i Ŝywność
+regionalna, tradycyjna i systemy jakości Ŝywności";;"Efektywny system doradztwa";"Liczba odbiorców usług doradczych, szkoleniowych i upowszechnieniowych";4696;1000;1000;1000;1400;1266;1326;0;1;0;1;1
+"21-2";;;;;"Liczba wydanych materiałów szkoleniowych";;11000;11000;11000;;;;0;0;0;0;1
+"21-2-1";;;"Rolnictwo ekologiczne";"Efektywny system doradztwa";"Liczba odbiorców usług doradczych, szkoleniowych i upowszechnieniowych";0;1000;1000;1000;580;960;960;0;0;1;1;1
+"21-2-2";;;"śywność regionalna, tradycyjna i systemy jakości Ŝywności";"Efektywny system doradztwa";"Liczba wydanych materiałów szkoleniowych";0;11000;11000;11000;820;306;366;0;0;1;1;1
+"21-3";;"Realizacja Wspólnej Polityki Rolnej oraz pomocy krajowej";;"Zapewnienie wysokiej jakości usług w zakresie doradztwa rolniczego
+Wspieranie Ośrodków Doradztwa Rolniczego w realizacji WPR oraz pomocy krajowej";"Liczba odbiorców-doradców";2000;3000;3000;3000;6407;7275;7377;0;1;0;1;1
+"21-3";;;;;"Liczba  przeszkolonych  doradców  z  zakresu udzielania  rolnikom  pomocy  doradczej  w korzystaniu  z  instrumentów  finansowych WPR";6000;8000;8000;8000;;;;0;0;0;0;1
+"21-3";;;;;"Liczba  kontroli  prywatnych  podmiotów doradczych";0;50;50;50;;;;0;0;0;0;1
+"21-3-1";;;"Doradztwo rolnicze";"Wspieranie Ośrodków Doradztwa Rolniczego w realizacji WPR oraz pomocy krajowej";"Liczba przeszkolonych doradców z zakresu udzielania rolnikom pomocy doradczej w korzystaniu z instrumentów finansowych WPR";6000;8000;8000;8000;6407;7275;7377;0;0;1;1;1
+"21-4";;"Informatyzacja działalności i budowa społeczeństwa informacyjnego";;"Utworzenie i utrzymanie zintegrowanego systemu informatycznego doradztwa";"Ilość prowadzonych baz danych oraz rozpowszechnianych aplikacji i programów komputerowych dla potrzeb doradztwa i rolników";0;15;15;15;425;6730;5020;0;1;0;1;1
+"21-4-1";;;"Utrzymanie systemów informatycznych";"Utworzenie i utrzymanie zintegrowanego systemu informatycznego doradztwa";"Ilość prowadzonych baz danych oraz rozpowszechnianych aplikacji i programów komputerowych dla potrzeb doradztwa i rolników";0;4;10;15;325;930;3600;0;0;1;1;1
+"21-4-2";;;"Budowa i wdroŜenie rozwiązań informatycznych";"Utworzenie i utrzymanie zintegrowanego systemu informatycznego doradztwa";"Ilość prowadzonych baz danych oraz rozpowszechnianych aplikacji i programów komputerowych dla potrzeb doradztwa i rolników";0;11;5;0;100;5800;1420;0;0;1;1;1
+"21-5";;"Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego";;"Zapewnienie sprawnego funkcjonowania CDR";"Liczba pracowników (w przeliczeniu na pełne etaty) koordynujących działalność CDR";0;21;21;21;1000;1230;1230;0;1;0;1;1
+"21-6";;"Obsługa administracyjna";;"Zapewnienie sprawnego funkcjonowania CDR";"Liczba pracowników (w przeliczeniu na pełne etaty) zatrudnionych w obsłudze administracyjnej";0;56;56;56;4705;4220;5140;0;1;0;1;1
+"21-7";;"Obsługa techniczna";;"Zapewnienie sprawnego funkcjonowania CDR";"Liczba pracowników (w przeliczeniu na pełne etaty) zatrudnionych w obsłudze technicznej";0;55;55;55;2786;3750;4750;0;1;0;1;1
