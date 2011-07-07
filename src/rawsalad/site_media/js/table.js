@@ -116,7 +116,7 @@ var _table = (function () {
             html.push('<div id="filter-data-', i, '">');
             schema.forEach( function ( column ) {
                 html.push('<div class="', column['type'], '">');
-                html.push( e[ column['key'] ] );
+                html.push( e['data'][ column['key'] ] );
                 html.push('</div>');
             });
             html.push('</div>');
