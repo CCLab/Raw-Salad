@@ -137,10 +137,10 @@ var _gui = (function () {
                     ids[group] = [];
                 }
 
-                ids[group] = {
+                ids[group].push({
                     id: sheet,
                     scope: scope
-                };
+                });
             });
 
             _download.selected( ids );
