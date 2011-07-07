@@ -40,7 +40,7 @@ var _download = (function () {
                     // get data directly from server!!
                 }
                 else {
-                    sheet = _store.get_sheet( i, e[id] );
+                    sheet = _store.get_sheet( i, e['id'] );
                     csv_string += add_children( sheet );
                 }
             });
