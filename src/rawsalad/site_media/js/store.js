@@ -112,7 +112,7 @@ var _store = (function () {
 
      // add column to active_sheet
     that.add_column_to_sheet = function () {
-    
+    }    
 
 
     that.active_columns = function () {
