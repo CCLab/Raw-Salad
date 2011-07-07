@@ -124,7 +124,7 @@ var _table = (function () {
         });
         
         html.push('</div>');
-        $('#table-container').insertAfter( $( html.join('') ) );
+        $('#table-container').append( $( html.join('') ) );
         /*
         <div id="tmp-filter">
             <div id="filter-result-0">
