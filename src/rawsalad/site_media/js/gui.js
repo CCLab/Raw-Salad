@@ -67,14 +67,19 @@ var _gui = (function () {
                 if( sheet === '0' ) {
                     html.push( '<input type="radio" name="scope-', group, '-', sheet );
                     html.push( '" value="full" />' )
+                    html.push( '</td>' );
+                    html.push( '<td class="name group">' );
+                    html.push( name );
                 }
-                html.push( '</td>' );
-                html.push( '<td class="name">' );
-                html.push( sheet === '0' ? name : ( ' > ' + name ));
+                else {
+                    html.push( '</td>' );
+                    html.push( '<td class="name indent">' );
+                    html.push( ' > ' + name );
+                }
                 html.push( '</td>' );
                 html.push( '</tr>' );
             });
-            $('#download-table > tbody').append( html.join('') );
+            $('#download-table > tbody').empty().append( html.join('') );
 
             $('#download-table .radio > input').attr( 'disabled', 'true' );
             $('#download-table .check > input' ).change( function () {
