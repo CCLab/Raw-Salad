@@ -342,7 +342,7 @@ var _algorithms = (function () {
     var check_attr = function( obj, attr, pref, value ) {
         var obj_val = obj[attr];
         var type = typeof obj_val;
-        var str = obj_val.toLowerCase()
+        
 
         if ( type === "number" ) {
             if ( pref === 'lt' && obj_val < value) {
@@ -355,11 +355,11 @@ var _algorithms = (function () {
         } else {
             // is string
             value = value.toLowerCase();
-
-            if ( pref === 'nst' && !starts_with( str, value ) ||
-                 pref === 'ncnt' && !contains( str, value ) ||
-                 pref === 'cnt' && contains( str, value ) ||
-                 pref === 'st' && starts_with( str, value ) ) {
+            obj_val = obj_val.toLowerCase()
+            if ( pref === 'nst' && !starts_with( obj_val, value ) ||
+                 pref === 'ncnt' && !contains( obj_val, value ) ||
+                 pref === 'cnt' && contains( obj_val, value ) ||
+                 pref === 'st' && starts_with( obj_val, value ) ) {
                  return true;
             } else {
                 return false;
