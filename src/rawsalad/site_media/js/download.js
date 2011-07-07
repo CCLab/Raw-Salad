@@ -30,8 +30,23 @@ var _download = (function () {
 
     // ids = { '0': [{ id: 2, scope: 'full' }, { id: 3, scope: 'sheet' }], '4': [{ id: 1, scope: 'sheet' }] }
     that.selected = function ( ids ) {
-        console.log( ids );
+        var i;
+        var group, sheet;
+        var csv_string = '';
 
+        for( i in ids ) {
+            ids[i].forEach( function ( e ) {
+                if( e[scope] === 'full' ) {
+                    // get data directly from server!!
+                }
+                else {
+                    sheet = _store.get_sheet( i, e[id] );
+                    csv_string += add_children( sheet )
+                }
+            }
+        }
+
+        console.log( csv_string );
     };
 
 
@@ -96,9 +111,6 @@ var _download = (function () {
 
         add_children( null );
 
-        _assert.not_equal( data, '',
-                           ">> DOWNLOAD <br/>Data string empty" );
-
         $('#download-form')
             .find('input')
             .val( data.slice( 0, data.length-1 ) )
@@ -107,4 +119,48 @@ var _download = (function () {
     };
 
     return that;
+
+
+//  P R I V A T E   I N T E R F A C E
+
+        function add_children( sheet, parent, result ) {
+            var parent = parent || null;
+            var result = result || '';
+            var i, node;
+            var columns = sheet['columns'];
+            var children = sheet['rows'].filter( function ( e ) {
+                return e['data']['parent'] === parent;
+            });
+
+            if( children.length === 0 ) {
+                return result;
+            }
+
+            for( i = 0; i < children.length; i += 1 ) {
+                node = children[i]['data'];
+                result += node['idef'] + ';';
+                if( !!node['parent'] === false ) {
+                    result += ';'
+                }
+                else {
+                    result += node['parent'] + ';';
+                }
+                result += node['level'] + ';';
+
+                for( j = 0; j < columns.length; j += 1 ) {
+                    result += node[ columns[j]['key'] ];
+                    result += ';';
+                }
+                result += '|';
+
+                if( node['hidden'] === true ) {
+                    continue;
+                }
+                else {
+                    add_children( sheet, node['idef'], result );
+                }
+            }
+        };
+
+
 })();
