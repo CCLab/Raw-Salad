@@ -133,6 +133,7 @@ var _download = (function () {
             });
 
             if( children.length === 0 ) {
+                console.log( result );
                 return result;
             }
 
