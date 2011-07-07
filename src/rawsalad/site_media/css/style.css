@@ -305,13 +305,22 @@ body {
         border-bottom: 1px solid #bbbbbb;
         text-align: center;
       }
+
       #download-container td.space {
         width: 1px;
       }
+
       #download-container td.name {
         border-bottom: 1px solid #bbbbbb;
       }
 
+      #download-container td.group {
+        font-weight: bold;
+      }
+
+      #download-container td.indent {
+        padding-left: 10px;
+      }
       #download-button {
         float: left;
         padding: 5px;
