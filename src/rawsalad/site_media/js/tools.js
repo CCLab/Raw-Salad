@@ -118,13 +118,13 @@ var _tools = (function () {
             });
         }
     }
+
     
     function add_manage_checkbox()  {
-	//add checkboxes to manage columns popup
+	//TODO add checkboxes to manage columns popup
     }
 
-
-
+ 
     function add_filter_key() {
         var i, key;
         var html = [];
@@ -376,7 +376,7 @@ var _tools = (function () {
 
         $('#manage-columns-form')
             .submit( function () {
-		// changes in _Store
+		//TODO changes in _Store
 
         });   
     };
