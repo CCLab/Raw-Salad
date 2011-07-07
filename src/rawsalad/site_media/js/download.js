@@ -41,9 +41,9 @@ var _download = (function () {
                 }
                 else {
                     sheet = _store.get_sheet( i, e[id] );
-                    csv_string += add_children( sheet )
+                    csv_string += add_children( sheet );
                 }
-            }
+            });
         }
 
         console.log( csv_string );
