@@ -110,6 +110,11 @@ var _store = (function () {
     };
 
 
+     // add column to active_sheet
+    that.add_column_to_sheet = function () {
+    
+
+
     that.active_columns = function () {
         return that.active_sheet()['columns'];
     };
@@ -265,6 +270,18 @@ var _store = (function () {
 
         return -1;
     };
+
+    // check column in active_sheet 
+    function find_column_in_active_sheet(key){
+	var i;
+	var col = that.active_columns();
+	for (i=0; i< col.lenght; i++){
+	    if(col['key'] === true){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 // O B J E C T   F A C T O R I E S
