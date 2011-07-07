@@ -408,24 +408,48 @@ var _tools = (function () {
         var type;
         var full_type;
         var name;
+        var breadcrumb = [];
+        var breadcrumb_list = [];
         
         tmp_id = get_parent_id( id );
-        var breadcrumb_reversed = [];
         
-        while ( !!tmp_id) {
+        while ( !!tmp_id ) {
             node = $('#'+ tmp_id);
             full_type = node.children('.type').html();
             type = get_type_representation( full_type );
             name = node.children('.name').html();
             
             tmp_id = get_parent_id( tmp_id );
-            breadcrumb_reversed.push({
+            breadcrumb_list.push({
                 type: type,
                 name: name
             });
         }
         
-        return breadcrumb_reversed.reverse();
+        breadcrumb_list = breadcrumb_list.reverse();
+        
+        breadcrumb_list.forEach( function ( el, i ) {
+            breadcrumb.push( el['type'] + ' ' );
+            if ( i < breadcrumb_list.length - 1 ) {
+                if ( el['name'].length > 35 ) {
+                    el['name'] = el['name']
+                                           .slice(0, 32)
+                                           .concat('...');
+                }
+            } else {
+                if ( el['name'].length > 45 ) {
+                    el['name'] = el['name']
+                                           .slice(0, 42)
+                                           .concat('...');
+                }
+            }
+            breadcrumb.push( el['name'] );
+            if ( i < breadcrumb_list.length - 1 ) {
+                breadcrumb.push(' > ');
+            }
+        });
+        
+        return breadcrumb.join('');
     }
     
     function get_type_representation( full_type ) {
