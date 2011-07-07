@@ -111,7 +111,7 @@ var _tools = (function () {
     }
     
     function add_manage_checkbox()  {
-	//funkcja dodająca checkboxy do PopUp-a
+	//add checkboxes to manage columns popup
     }
 
 
@@ -367,7 +367,7 @@ var _tools = (function () {
 
         $('#manage-columns-form')
             .submit( function () {
-		// Tutaj dodanie kontrolek wedle tego co mam w tabela txt
+		// changes in _Store
 
         });   
     };
