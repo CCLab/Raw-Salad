@@ -36,7 +36,7 @@ var _download = (function () {
 
         for( i in ids ) {
             ids[i].forEach( function ( e ) {
-                if( e[scope] === 'full' ) {
+                if( e['scope'] === 'full' ) {
                     // get data directly from server!!
                 }
                 else {
