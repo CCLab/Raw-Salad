@@ -245,6 +245,20 @@ var _store = (function () {
         return groups;
     };
 
+
+    // check column in active_sheet 
+    that.find_column_in_active_sheet = function(key){
+	var i;
+	var col = that.active_columns();
+	for (i=0; i< col.lenght; i++){
+	    if(col['key'] === true){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
     var meta_data = [];
@@ -271,17 +285,6 @@ var _store = (function () {
         return -1;
     };
 
-    // check column in active_sheet 
-    function find_column_in_active_sheet(key){
-	var i;
-	var col = that.active_columns();
-	for (i=0; i< col.lenght; i++){
-	    if(col['key'] === true){
-                return true;
-            }
-        }
-        return false;
-    }
 
 
 // O B J E C T   F A C T O R I E S
