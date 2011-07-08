@@ -32,7 +32,7 @@ var _table = (function () {
     that.clean_table = function () {
         $('#data-table > thead').empty();
         $('#data-table > tbody').empty();
-        $('#filter-table').empty();
+        $('#filtered-table').empty();
     };
 
     that.init_table = function () {
