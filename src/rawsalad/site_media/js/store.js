@@ -256,7 +256,7 @@ var _store = (function () {
 //                return true;
 //            }
 //        }
-        return false;
+        return col;
     }
 
     that.get_sheet = function ( group, sheet ) {
