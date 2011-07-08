@@ -39,9 +39,9 @@ var _tools = (function () {
     };
 
     that.prepare_tools = function () {
+	prepare_manage_columns_interface();
         prepare_sorting_interface();
         prepare_filtering_interface();
-	prepare_manage_columns_interface();
         prepare_snapshot_interface();
     };
     
@@ -381,11 +381,11 @@ var _tools = (function () {
                 add_manage_checkbox();
             });
 
-//        $('#manage-columns-form')
-//            .submit( function () {
-//		//TODO changes in _store
-//		return true;
-//        });   
+        $('#manage-columns-form')
+            .submit( function () {
+		//TODO changes in _store
+		return false;
+        });   
     };
 
     function prepare_snapshot_interface() {
