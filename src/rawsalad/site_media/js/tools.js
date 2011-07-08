@@ -385,7 +385,7 @@ var _tools = (function () {
         $('#manage-columns-form')
             .submit( function () {
 		//TODO changes in _store
-
+		return true;
         });   
     };
 
