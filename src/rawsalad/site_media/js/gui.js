@@ -228,7 +228,6 @@ var _gui = (function () {
         var group_nr = args.group_nr || _store.active_group_index();
         var sheet_nr = args.sheet_nr || _store.active_sheet_index();
         var sheet_name = args.name || "Arkusz " + group_nr + '-' + sheet_nr;
-        var filtered_sheet = args.filtered_sheet;
 
         var group_changed = _store.active_group_index() !== group_nr;
         var sheet_changed = _store.active_sheet_index() !== sheet_nr;
@@ -277,7 +276,7 @@ var _gui = (function () {
         _store.active_group( group_nr );
 
         _table.clean_table();
-        _table.init_table( filtered_sheet );
+        _table.init_table();
     };
 
 

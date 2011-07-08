@@ -338,7 +338,8 @@ var _tools = (function () {
                 filtered_rows = _algorithms.filter( _store.active_rows(), mask );
                 new_sheet = {};
                 $.extend( true, new_sheet, _store.active_sheet() );
-                new_sheet['rows'] = create_filter_result( filtered_rows );                
+                new_sheet['rows'] = create_filter_result( filtered_rows );
+                new_sheet['filtered'] = true;
 
                 _sheet.create_new_sheet( new_sheet, "Arkusz", true );
 

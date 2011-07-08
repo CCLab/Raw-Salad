@@ -34,6 +34,8 @@ var _sheet = (function () {
         var sheet_nr = _store.next_sheet_number();
         var new_sheet = {};
 
+        // TODO check if it's needed, because sheet_data may be not reference, but
+        // deep a copied object
         $.extend( true, new_sheet, sheet_data );
         new_sheet["name"] = sheet_name + ' ' + sheet_nr;
 
@@ -42,7 +44,6 @@ var _sheet = (function () {
             'name': new_sheet['name'],
             'sheet_nr': sheet_nr,
             'group_nr': group_nr,
-            'filtered_sheet': filtered_sheet
         });
     }
 
@@ -55,10 +56,6 @@ var _sheet = (function () {
         var basic_sheet_rows = [];
 
         active_sheet_number = _store.active_sheet_index();
-
-        ////TODO : can't get basic_sheet
-        //basic_sheet = _store.basic_sheet();
-        //$.extend( true, basic_sheet_rows, basic_sheet['rows'] );
 
         _store.active_sheet_index(0);
         _store.acitve_sheet_rows( basic_sheet_rows );

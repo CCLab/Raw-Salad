@@ -32,21 +32,19 @@ var _table = (function () {
     that.clean_table = function () {
         $('#data-table > thead').empty();
         $('#data-table > tbody').empty();
+        $('#filter-table').empty();
     };
 
     that.init_table = function () {
         _utils.create_preloader('Wczytujê tabelê');
-        create_thead();
-        create_tbody();
-
-        _gui.make_zebra();
-        _utils.clean_preloader();
-    };
-    
-    that.init_filtered_table = function () {
-        _utils.create_preloader('Wczytujê tabelê');
-        //create_thead();
-        create_filtered_tbody();
+        if ( !_store.active_filtered() ) {
+            create_thead();
+            create_tbody();
+            _gui.make_zebra();
+        } else {
+            create_filtered_thead();
+            create_filtered_tbody();
+        }
         _utils.clean_preloader();
     };
 
@@ -103,8 +101,19 @@ var _table = (function () {
         }
     }
     
+    function create_filtered_thead() {
+        var schema = _store.basic_schema();
+        var html = ['<div id="filtered-thead">'];
+        schema.forEach( function ( column ) {
+            html.push('<div class=', column['key'], ' ', column['type'], '">');
+            html.push(column['label'], '</div>');
+        });
+        html.push('</div>');
+        $('#filtered-table').append( html.join('') );
+    }
+    
     function create_filtered_tbody() {
-        var html = ['<div id="tmp-filter">'];
+        var html = ['<div id="filtered-tbody">'];
         var schema = _store.basic_schema();
         var rows = _store.active_rows();
         
@@ -124,33 +133,7 @@ var _table = (function () {
         });
         
         html.push('</div>');
-        $('#table-container').append( $( html.join('') ) );
-        /*
-        <div id="tmp-filter">
-            <div id="filter-result-0">
-              <div id="breadcrumb-0">
-              {text}
-              </div>
-              <div id="filter-data-0">
-              <div class="string">
-              Dysponent
-              </div>
-              <div class="string">
-              Krajowa Rada Radiofonii i Telewizji
-              </div>
-              <div class="number">
-              0
-              </div>
-              <div class="number">
-              3290000
-              </div>
-              <div class="number">
-              3290000
-              </div>
-              </div>
-            </div>
-        </div>
-        */
+        $('#filtered-table').append( $( html.join('') ) );
     }
 
 

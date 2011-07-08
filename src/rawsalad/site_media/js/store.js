@@ -194,6 +194,10 @@ var _store = (function () {
     that.active_basic_changed = function ( value ) {
         that.active_group()['basic_changed'] = value;
     };
+    
+    that.active_filtered = function () {
+        return that.active_sheet()['filtered'];
+    };
 
 
     // active sheet getter / setter
@@ -311,6 +315,7 @@ var _store = (function () {
             'rows': rows,
             'name': data['name']
 //          'pending_nodes': []
+            'filtered': false
         };
     };
 
