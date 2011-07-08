@@ -221,7 +221,7 @@ var _table = (function () {
             if ( !!parent ) {
                 parent.after( new_node );
             } else {
-                $('#filtered-tbody').append( new_node );
+                $('#filtered-tbody').prepend( new_node );
             }
         });
     }
