@@ -98,6 +98,8 @@ def download_data( request ):
 #
 #   to be reimplemented
 ###################
+    files = request.POST.get( 'sheets' ).split( '---file---' )[:-1]
+    rows = [ row.split('|')[:-1] for row in files ]
 #    data = request.POST.get( 'sheet' ).split( '|' )
 #    response = HttpResponse( mimetype='text/csv' )
 #    response['Content-Disposition'] = 'attachment; filename=data.csv'
@@ -107,7 +109,7 @@ def download_data( request ):
 #        writer.writerow( row.split(';') )
 
 #    return response
-    return HttpResponse( '' )
+    return HttpResponse( json.dumps( rows ))
 
 def get_ms_nav():
     db= rsdb.DBconnect("mongodb").dbconnect
