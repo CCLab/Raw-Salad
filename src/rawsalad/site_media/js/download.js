@@ -44,7 +44,7 @@ var _download = (function () {
                 }
                 else {
                     sheet = _store.get_sheet( i, e['id'] );
-                    columns = sheet-['columns'];
+                    columns = sheet.['columns'];
 
                     csv_string += 'ID;Rodzic;Poziom;';
 
