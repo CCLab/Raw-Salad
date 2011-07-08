@@ -13,7 +13,13 @@ bulk of files:
 - schema file JSON (for example, fundnfz-schema.json)
 - conf file with mongo connection settings
 
+there are 2 nodes:
+0 - aggregated
+1 - split up to regions
+
 type python fundnfz.py -h for instructions
+
+pay attention to # WARNING! comment!
 """
 
 import getpass
@@ -71,10 +77,91 @@ def db_insert(data_bulk, db, collname, clean_first=False):
     collect.insert(data_bulk)
     return collect.find().count()
 
+#-----------------------------
+def check_collection(db, collname):
+    """ checking created collection for consistency """
+    noerrors= True
+
+    # set 'leaf' to False if an element have children, 'leaf':True otherwise
+    null_leaf_curr= db[collname].find()
+    for row in null_leaf_curr:
+        curr_idef= row['idef']
+        if db[collname].find({'parent':curr_idef}).count() > 0:
+            leaf_status= False
+        else:
+            leaf_status= True
+        if row['leaf'] != leaf_status:
+            row['leaf']= leaf_status
+            db[collname].save(row, safe=True)
+            print '--- update leaf status to %s for element %s' % (leaf_status, curr_idef)
+
+    # check for broken "links" in the parent keys
+    curs= db[collname].find({'parent': {'$ne': None}}, {'_id':0})
+    for row in curs:
+        curr_parent= row['parent']
+        if db[collname].find({'idef':curr_parent}).count() == 0:
+            print '--! inconsistency found! Cannot find parent for element %s - idef %s not found in the collection' % (row['idef'], curr_parent)
+            noerrors= False
+
+    return noerrors
 
 #-----------------------------
-def fill_detail(fund_aggr, schema):
-    levels= ['a', 'b', 'c', 'd', 'e', 'f']
+def clean_info(lst, info_idefs, cut_prefix):
+    fin_list= lst[:]
+    print "...move defined elements to the info key of their parents: %s" % info_idefs
+    for info_idef in info_idefs:
+        parent_idef= info_idef.rsplit("-",1)[0]
+        index_parent, index_info= -1, -1
+        i= 0
+        print "...looking for idefs: info %s; parent %s" % (info_idef, parent_idef)
+        for curr_doc in fin_list:
+            if cut_prefix:
+                curr_idef= curr_doc["idef"].split("-",1)[1]
+            else:
+                curr_idef= curr_doc["idef"]
+
+            if curr_idef == parent_idef:
+                index_parent= i
+                parent_dict= curr_doc
+            if curr_idef == info_idef:
+                index_info= i
+                info_dict= curr_doc
+            if index_parent > 0 and index_info > 0: # ok, we've got them both
+                break
+            i += 1
+
+        if index_parent < 0 and index_info < 0:
+            print "ERROR: can't move elements to the info key - impossible to find them and/or their parents!"
+        else:
+            if parent_dict["info"] is None:
+                parent_dict["info"]= []
+            print "...setting up info key for element %s" % parent_dict["idef"]
+            del info_dict["info"]
+            del info_dict["node"]
+            parent_dict["info"].append(info_dict)
+            del fin_list[index_info]
+
+    return fin_list
+
+#-----------------------------
+def split_obj(full_list, info_idefs, cut_prefix):
+    """ splits full dict into parts based on TERYT code and send them to clean info """
+    result_list= []
+    for key in schema["teryt"]:
+        temp_list= []
+        for elm in full_list:
+            if key in elm["idef"]:
+                if elm["level"] == 'a':
+                    result_list.append(elm)
+                else:
+                    temp_list.append(elm)
+        temp_list= clean_info(temp_list, info_idefs, cut_prefix)
+        result_list += temp_list
+
+    return result_list
+
+#-----------------------------
+def fill_detail(fund_aggr):
     node_1= []
     teryt_list= schema['teryt']
     for teryt in teryt_list.items():
@@ -111,6 +198,7 @@ def fill_detail(fund_aggr, schema):
             new_dict['type']= aggr_row['type']
             new_dict['name']= aggr_row['name']
             new_dict['val']= aggr_row[curr_woj_key]
+            new_dict['info']= None
             node_1.append(new_dict)
 
         node_1.append(woj_dict)
@@ -122,10 +210,9 @@ def fill_docs(fund_data):
     # format parsed data (dict) for upload
 
     # add keys: idef, idef_sort, parent, parent_sort, level, leaf, node, osrodki_wojewodzkie (count total)
-    work_dict= fund_data[:]
-    levels= ['a', 'b', 'c', 'd', 'e', 'f']
+    work_list= fund_data[:]
     max_level= 0
-    for row_doc in work_dict:
+    for row_doc in work_list:
         row_doc['node']= 0 # node:0 is for aggregated data
         row_doc['idef']= row_doc['type'].replace('.', '-')
         row_doc['idef_sort']= sort_format(row_doc['idef'])
@@ -143,19 +230,11 @@ def fill_docs(fund_data):
 
     print '...info: aggregated data - max level is', levels[max_level]
 
-    # filling 'leaf'
-    leaf_dict= work_dict[:]
-    for row_doc in work_dict:
-        for curr_doc in leaf_dict:
-            if curr_doc['parent'] == row_doc['idef']:
-                row_doc['leaf']= False
-                break
-
-    return work_dict
+    return work_list
 
 
 #-----------------------------
-def csv_parse(csv_read, schema):
+def csv_parse(csv_read):
     # parse csv and return dict
     out= []
 
@@ -195,6 +274,7 @@ def csv_parse(csv_read, schema):
                         dict_row[new_key] = field # no, it is a string
                 #additional fields
                 dict_row['parent']= None
+                dict_row['info']= None
 
                 i += 1
 
@@ -205,6 +285,10 @@ def csv_parse(csv_read, schema):
 
 #-----------------------------
 if __name__ == "__main__":
+    # globals & defaults
+    schema= {}
+    levels= ['a','b','c','d','e','f','g','h']
+
     # process command line options
     cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] src_filename.csv src_schema.json")
     cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
@@ -251,24 +335,17 @@ if __name__ == "__main__":
 
     # get mongo connection details
     conn_mongo= get_db_connect(conf_filename, 'mongodb')
-    conn_mongo_host= conn_mongo['host']
-    conn_mongo_port= conn_mongo['port']
-    conn_mongo_db= conn_mongo['database']
-
     try:
-        connect= pymongo.Connection(conn_mongo_host, conn_mongo_port)
-        mongo_db= connect[conn_mongo_db]
+        connect= pymongo.Connection(conn_mongo['host'], conn_mongo['port'])
+        mongo_db= connect[conn_mongo['database']]
         print '...connected to the database', mongo_db
     except Exception as e:
         print 'Unable to connect to the mongodb database:\n %s\n' % e
         exit()
-
     # authentication
-    conn_mongo_username= conn_mongo['username']
-    conn_mongo_password= conn_mongo['password']
-    if conn_mongo_password is None:
-        conn_mongo_password = getpass.getpass()
-    if mongo_db.authenticate(conn_mongo_username, conn_mongo_password) != 1:
+    if conn_mongo['password'] is None:
+        conn_mongo['password'] = getpass.getpass('Password for '+conn_mongo['username']+': ')
+    if mongo_db.authenticate(conn_mongo['username'], conn_mongo['password']) != 1:
         print 'Cannot authenticate to db, exiting now'
         exit()
 
@@ -281,11 +358,23 @@ if __name__ == "__main__":
         print 'WARNING! No collection name specified, the data will be stored in the collection %s' % collect_name
 
     print "...parsing source file"
-    obj_parsed= csv_parse(csv_read, schema)
+    obj_parsed= csv_parse(csv_read)
     print "...formatting documents"
     obj_aggr= fill_docs(obj_parsed)
-    obj_detl= fill_detail(obj_aggr, schema)
+    obj_detl= fill_detail(obj_aggr)
+
+    # WARNING! pecularity: move defined elements to the info key of their parents
+    info_idef_list= ["A-3-1", "A-14-1", "D-3-1-1"]
+    obj_aggr= clean_info(obj_aggr, info_idef_list, cut_prefix=False)
+    obj_detl= split_obj(obj_detl, info_idef_list, cut_prefix=True)
 
     print '...inserting into db aggregated data -', db_insert(obj_aggr, mongo_db, collect_name, clean_db), 'records total'
     print '...inserting into db detailed data -', db_insert(obj_detl, mongo_db, collect_name, False), 'records total'
+
+    print '...checking data consistency'
+    if check_collection(mongo_db, collect_name):
+        print '...no inconsistencies have been found'
+    else:
+        print '...inconsistencies have been found in the collection %s - check your data' % collect_name
+    
     print "Done (don't forget about the schema!)"
