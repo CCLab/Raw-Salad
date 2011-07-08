@@ -372,11 +372,12 @@ var _tools = (function () {
 
     function 	prepare_manage_columns_interface(){
 
-        $('#manage-columns-form')
+        $('#manage-columns-button')
             .click( function () {
+
+                $('#manage-columns-form').html('').toggle();
                 $('#filter-form').hide();
                 $('#sort-button').hide();
-                $('#sort-form').html('').toggle();
                 add_manage_checkbox();
             });
 
