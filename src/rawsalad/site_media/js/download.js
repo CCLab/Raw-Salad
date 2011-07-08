@@ -54,7 +54,13 @@ var _download = (function () {
                     }
                     csv_string += '|';
 
-                    csv_string += add_children( sheet );
+                    if( sheet['filtered'] ) {
+                        //csv_string += add_filtered( sheet );
+                        csv_string += add_children( sheet );
+                    }
+                    else {
+                        csv_string += add_children( sheet );
+                    }
                 }
                 // end of file string
                 csv_string += '--file--';
@@ -73,6 +79,10 @@ var _download = (function () {
 
 
 //  P R I V A T E   I N T E R F A C E
+
+    function add_filtered( sheet ) {
+        // TODO code here
+    }
 
     function add_children( sheet, parent, result ) {
         var parent = parent || null;
