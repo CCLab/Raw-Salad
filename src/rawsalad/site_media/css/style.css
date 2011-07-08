@@ -235,6 +235,9 @@ body {
     -moz-border-radius: 3px 3px 3px 3px;
 }
 
+#tabs {
+  padding-left: 5px;
+}
 
     .tab {
         float: left;
