@@ -30,90 +30,41 @@ var _download = (function () {
 
     // ids = { '0': [{ id: 2, scope: 'full' }, { id: 3, scope: 'sheet' }], '4': [{ id: 1, scope: 'sheet' }] }
     that.selected = function ( ids ) {
-        var i;
+        var i, columns;
         var group, sheet;
         var csv_string = '';
 
         for( i in ids ) {
             ids[i].forEach( function ( e ) {
                 if( e['scope'] === 'full' ) {
-                    // get data directly from server!!
+                    group = _store.get_group( i );
+                    csv_string += group['dataset'] + '-';
+                    csv_string += group['perspective'] + '-';
+                    csv_string += group['issue'] + '.csv';
                 }
                 else {
                     sheet = _store.get_sheet( i, e['id'] );
+                    columns = sheet-['columns'];
+
+                    csv_string += 'ID;Rodzic;Poziom;';
+
+                    for( i = 0; i < columns.length; i += 1 ) {
+                        csv_string += columns[i]['label'];
+                        csv_string += ';';
+                    }
+                    csv_string += '|';
+
                     csv_string += add_children( sheet );
                 }
+                // end of file string
+                csv_string += '--file--';
             });
         }
 
-        console.log( csv_string );
-    };
-
-
-    that.current_sheet = function () {
-        var i, j;
-        var data = '';
-        var html = [];
-        var form;
-        var columns, rows;
-
-        var add_children = function ( parent ) {
-            var i, node;
-            var children = _store.active_rows().filter( function ( e ) {
-                return e['data']['parent'] === parent;
-            });
-
-            if( children.length === 0 ) {
-                return;
-            }
-
-            for( i = 0; i < children.length; i += 1 ) {
-                node = children[i]['data'];
-                data += node['idef'] + ';';
-                if( !!node['parent'] === false ) {
-                    data += ';'
-                }
-                else {
-                    data += node['parent'] + ';';
-                }
-                data += node['level'] + ';';
-
-                for( j = 0; j < columns.length; j += 1 ) {
-                    data += node[ columns[j]['key'] ];
-                    data += ';';
-                }
-                data += '|';
-
-                if( node['hidden'] === true ) {
-                    continue;
-                }
-                else {
-                    add_children( node['idef'] );
-                }
-            }
-        };
-
-
-        columns = _store.active_columns().filter( function ( e ) {
-                return e['basic'] === true;
-           });
-
-        _assert.not_equal( columns.length, 0,
-                           ">> DOWNLOAD <br/>Columns length === 0" );
-
-        data += 'ID;Rodzic;Poziom;';
-
-        for( i = 0; i < columns.length; i += 1 ) {
-            data += columns[i]['label'];
-            data += ';';
-        }
-        data += '|';
-
-        add_children( null );
-
+        // send it to server for further processing!!
         $('#download-form')
             .find('input')
-            .val( data.slice( 0, data.length-1 ) )
+            .val( csv_string )
             .end()
             .submit();
     };
@@ -123,46 +74,44 @@ var _download = (function () {
 
 //  P R I V A T E   I N T E R F A C E
 
-        function add_children( sheet, parent, result ) {
-            var parent = parent || null;
-            var result = result || '';
-            var i, node;
-            var columns = sheet['columns'];
-            var children = sheet['rows'].filter( function ( e ) {
-                return e['data']['parent'] === parent;
-            });
+    function add_children( sheet, parent, result ) {
+        var parent = parent || null;
+        var result = result || '';
+        var i, node;
+        var columns = sheet['columns'];
+        var children = sheet['rows'].filter( function ( e ) {
+            return e['data']['parent'] === parent;
+        });
 
-            if( children.length === 0 ) {
-                console.log( result );
-                return result;
-            }
-
-            for( i = 0; i < children.length; i += 1 ) {
-                node = children[i]['data'];
-                result += node['idef'] + ';';
-                if( !!node['parent'] === false ) {
-                    result += ';'
-                }
-                else {
-                    result += node['parent'] + ';';
-                }
-                result += node['level'] + ';';
-
-                for( j = 0; j < columns.length; j += 1 ) {
-                    result += node[ columns[j]['key'] ];
-                    result += ';';
-                }
-                result += '|';
-
-                if( node['hidden'] === true ) {
-                    continue;
-                }
-                else {
-                    add_children( sheet, node['idef'], result );
-                }
-            }
+        if( children.length === 0 ) {
             return result;
         }
 
+        for( i = 0; i < children.length; i += 1 ) {
+            node = children[i]['data'];
+            result += node['idef'] + ';';
+            if( !!node['parent'] === false ) {
+                result += ';';
+            }
+            else {
+                result += node['parent'] + ';';
+            }
+            result += node['level'] + ';';
+
+            for( j = 0; j < columns.length; j += 1 ) {
+                result += node[ columns[j]['key'] ];
+                result += ';';
+            }
+            result += '|';
+
+            if( node['hidden'] === true ) {
+                continue;
+            }
+            else {
+                add_children( sheet, node['idef'], result );
+            }
+        }
+        return result;
+    }
 
 })();

@@ -42,13 +42,13 @@ var _store = (function () {
     // get metadata about available datasets
     that.meta_datasets = function () {
         return meta_data;
-    }
+    };
 
 
     // get metadata about perspectives available in a cerain dataset
     that.meta_perspectives = function ( dataset_id ) {
         return meta_data[ dataset_id ]['perspectives'];
-    }
+    };
 
 
     // check if group exists
@@ -57,7 +57,7 @@ var _store = (function () {
             return false;
         }
         return true;
-    }
+    };
 
 
     // creates a new group and sets an activ group index
@@ -65,7 +65,7 @@ var _store = (function () {
         // create a group for new data collection
         groups.push( group( data ));
         that.active_group( groups.length - 1 );
-    }
+    };
 
 
     // creates a new group or sets an active group index to apropriate group
@@ -112,19 +112,19 @@ var _store = (function () {
 
      // add column to active_sheet or return 0
     that.add_column_to_sheet = function () {
-//	foreach 
-    }
+//	foreach
+    };
 
 
     that.active_columns = function () {
         return that.active_sheet()['columns'];
     };
 
-    
+
     that.group_columns = function () {
-	return that.active_group()['columns'];
-    }
-    
+        return that.active_group()['columns'];
+    };
+
     that.basic_schema = function () {
         var full_schema = that.active_columns();
 
@@ -199,7 +199,7 @@ var _store = (function () {
     that.active_basic_changed = function ( value ) {
         that.active_group()['basic_changed'] = value;
     };
-    
+
     that.active_filtered = function () {
         return that.active_sheet()['filtered'];
     };
@@ -255,17 +255,22 @@ var _store = (function () {
     };
 
 
-    // check if column exists in active_sheet 
-    that.is_column_in_active_sheet = function(key){
-	var i;
-	var col = that.active_columns();
-	for (i=0; i< col.length; i++){
-	    if(col[i]['key'] === key){
-                return true;
+    // check if column exists in active_sheet
+    that.is_column_in_active_sheet = function( key ){
+        var i;
+        var cols = that.active_columns();
+
+        for( i = 0; i < cols.length; i += 1 ) {
+            if( cols[i]['key'] === key ){
+                    return true;
             }
         }
         return false;
-    }
+    };
+
+    that.get_group = function ( group ) {
+        return groups[group];
+    };
 
     that.get_sheet = function ( group, sheet ) {
         return groups[group]['sheets'][sheet];
@@ -296,33 +301,35 @@ var _store = (function () {
         }
 
         return -1;
-    };
+    }
 
 
 
 // O B J E C T   F A C T O R I E S
     // a single sheet
     function sheet( data, basic ) {
-	var rows = data['rows'].map( function ( row ) {
-                return {
-                    data: row,
-                    state: { open: false, selected: false }
-                };
-            });
+        var cols = that.active_group()['columns'].filter( function ( e ) {
+                    return e['basic'] === true;
+                });
+        var rows = data['rows'].map( function ( row ) {
+                    return {
+                        data: row,
+                        state: { open: false, selected: false }
+                    };
+                });
 
-	if (!!basic){
+        if( !!basic ) {
             return rows;
         }
+
         return {
-            'columns': that.active_group()['columns'].filter( function ( e ) {
-				return e['basic'] == true;
-			}),
+            'columns': cols,
             'rows': rows,
             'name': data['name'],
-//          'pending_nodes': []
             'filtered': false
+//          'pending_nodes': []
         };
-    };
+    }
 
 
     // list of all sheets of the same dataset/perspective/issue
@@ -337,7 +344,7 @@ var _store = (function () {
             'basic_rows': null,
             'basic_changed': false
         };
-    };
+    }
 
     return that;
 
