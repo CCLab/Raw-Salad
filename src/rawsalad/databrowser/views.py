@@ -95,15 +95,19 @@ def redirect( request ):
 
 @csrf_exempt
 def download_data( request ):
-    data = request.POST.get( 'sheet' ).split( '|' )
-    response = HttpResponse( mimetype='text/csv' )
-    response['Content-Disposition'] = 'attachment; filename=data.csv'
+#
+#   to be reimplemented
+###################
+#    data = request.POST.get( 'sheet' ).split( '|' )
+#    response = HttpResponse( mimetype='text/csv' )
+#    response['Content-Disposition'] = 'attachment; filename=data.csv'
+#
+#    writer = UnicodeWriter( response )
+#    for row in data:
+#        writer.writerow( row.split(';') )
 
-    writer = UnicodeWriter( response )
-    for row in data:
-        writer.writerow( row.split(';') )
-
-    return response
+#    return response
+    return HttpResponse( '' )
 
 def get_ms_nav():
     db= rsdb.DBconnect("mongodb").dbconnect
