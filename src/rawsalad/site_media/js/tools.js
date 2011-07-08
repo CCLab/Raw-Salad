@@ -39,6 +39,7 @@ var _tools = (function () {
     };
 
     that.prepare_tools = function () {
+	alert("prepare tools");
 	prepare_manage_columns_interface();
         prepare_sorting_interface();
         prepare_filtering_interface();
@@ -293,7 +294,7 @@ var _tools = (function () {
     };
 
     function prepare_filtering_interface() {
-
+        alert("prepare filtring");
         $('#filter-button')
             .click( function () {
                 $('#filter-form').html('').toggle();
@@ -372,7 +373,7 @@ var _tools = (function () {
     };
 
     function 	prepare_manage_columns_interface(){
-
+	alert("prepara columns!!!");
         $('#manage-columns-button')
             .click( function () {
                 $('#filter-form').hide();
