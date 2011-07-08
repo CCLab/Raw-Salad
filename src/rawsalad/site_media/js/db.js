@@ -90,7 +90,7 @@ var _db = (function () {
                 // render new data in table
                 // TODO is parent_id really necessary?!
                 _table.add_node( parent_id );
-                remove_pending_node( parent_id );
+//                remove_pending_node( parent_id );
 
                 // if it was a basic sheet sign it changed
                 if ( _store.active_sheet_index() === 0 ) {
@@ -103,19 +103,19 @@ var _db = (function () {
 
     // adds a node id to list of nodes waiting to be downloaded
     // and inserted in the table
-    that.add_pending_node = function ( id ) {
-        var i;
-        var pending_nodes = _store.active_pending_nodes();
-
-        for ( i = 0; i < pending_nodes.length; i += 1 ) {
-            if ( pending_nodes[ i ] === id ) {
-                return false;
-            }
-        }
-        pending_nodes.push( id );
-
-        return true;
-    };
+//    that.add_pending_node = function ( id ) {
+//        var i;
+//        var pending_nodes = _store.active_pending_nodes();
+//
+//        for ( i = 0; i < pending_nodes.length; i += 1 ) {
+//            if ( pending_nodes[ i ] === id ) {
+//                return false;
+//            }
+//        }
+//        pending_nodes.push( id );
+//
+//        return true;
+//    };
 
     return that;
 
@@ -123,16 +123,16 @@ var _db = (function () {
 //  P R I V A T E   I N T E R F A C E
 
     // removes a node id from the list of nodes waiting to be downloaded
-    function remove_pending_node( id ) {
-        var i;
-        var pending_nodes = _store.active_pending_nodes();
-
-        for ( i = 0; i < pending_nodes.length; i += 1 ) {
-            if ( pending_nodes[ i ] === id ) {
-                pending_nodes.splice( i, 1 );
-                return;
-            }
-        }
-    };
+//    function remove_pending_node( id ) {
+//        var i;
+//        var pending_nodes = _store.active_pending_nodes();
+//
+//        for ( i = 0; i < pending_nodes.length; i += 1 ) {
+//            if ( pending_nodes[ i ] === id ) {
+//                pending_nodes.splice( i, 1 );
+//                return;
+//            }
+//        }
+//    };
 
 })();

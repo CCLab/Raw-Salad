@@ -186,9 +186,9 @@ var _store = (function () {
     };
 
 
-    that.active_pending_nodes = function () {
-        return that.active_sheet()['pending_nodes'];
-    };
+//    that.active_pending_nodes = function () {
+//        return that.active_sheet()['pending_nodes'];
+//    };
 
 
     that.active_basic_changed = function ( value ) {
@@ -246,17 +246,16 @@ var _store = (function () {
     };
 
 
-    // TODO check column in active_sheet 
-    that.find_column_in_active_sheet = function(key){
+    // check if column exists in active_sheet 
+    that.is_column_in_active_sheet = function(key){
 	var i;
 	var col = that.active_columns();
-//	return col[0].['key'];
-//	for (i=0; i< col.lenght; i++){
-//	    if(col['key'] === key){
-//                return true;
-//            }
-//        }
-        return col;
+	for (i=0; i< col.length; i++){
+	    if(col[i].key === key){
+                return true;
+            }
+        }
+        return false;
     }
 
     that.get_sheet = function ( group, sheet ) {
