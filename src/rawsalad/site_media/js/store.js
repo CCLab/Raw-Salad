@@ -318,7 +318,7 @@ var _store = (function () {
 				return e['basic'] == true;
 			}),
             'rows': rows,
-            'name': data['name']
+            'name': data['name'],
 //          'pending_nodes': []
             'filtered': false
         };
