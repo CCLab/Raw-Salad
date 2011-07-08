@@ -110,8 +110,9 @@ var _store = (function () {
     };
 
 
-     // add column to active_sheet
+     // add column to active_sheet or return 0
     that.add_column_to_sheet = function () {
+//	foreach 
     }
 
 
@@ -119,7 +120,11 @@ var _store = (function () {
         return that.active_sheet()['columns'];
     };
 
-
+    
+    that.group_columns = function () {
+	return that.active_group()['columns'];
+    }
+    
     that.basic_schema = function () {
         var full_schema = that.active_columns();
 
@@ -186,9 +191,9 @@ var _store = (function () {
     };
 
 
-    that.active_pending_nodes = function () {
-        return that.active_sheet()['pending_nodes'];
-    };
+//    that.active_pending_nodes = function () {
+//        return that.active_sheet()['pending_nodes'];
+//    };
 
 
     that.active_basic_changed = function ( value ) {
@@ -246,16 +251,15 @@ var _store = (function () {
     };
 
 
-    // TODO check column in active_sheet 
-    that.find_column_in_active_sheet = function(key){
+    // check if column exists in active_sheet 
+    that.is_column_in_active_sheet = function(key){
 	var i;
 	var col = that.active_columns();
-//	return col[0].['key'];
-//	for (i=0; i< col.lenght; i++){
-//	    if(col['key'] === key){
-//                return true;
-//            }
-//        }
+	for (i=0; i< col.length; i++){
+	    if(col[i]['key'] === key){
+                return true;
+            }
+        }
         return false;
     }
 
