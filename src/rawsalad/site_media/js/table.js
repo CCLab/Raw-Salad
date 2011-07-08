@@ -32,8 +32,8 @@ var _table = (function () {
     that.clean_table = function () {
         $('#data-table > thead').empty();
         $('#data-table > tbody').empty();
-        $('#filtered-table-thead').empty();
-        $('#filtered-table-tbody').empty();
+        $('#filtered-thead').empty();
+        $('#filtered-tbody').empty();
     };
 
     that.init_table = function () {
@@ -194,7 +194,7 @@ var _table = (function () {
     function create_filtered_tbody() {
         var level = 'a';
         var hashed_list = _utils.hash_list( _store.active_rows() );
-        var rows_to_add = hashed_list.length;
+        var rows_to_add = _store.active_rows().length;
         var rows_on_level;
 
         while( rows_to_add > 0 ) {
