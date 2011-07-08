@@ -110,8 +110,9 @@ var _store = (function () {
     };
 
 
-     // add column to active_sheet
+     // add column to active_sheet or return 0
     that.add_column_to_sheet = function () {
+//	foreach 
     }
 
 
@@ -119,7 +120,11 @@ var _store = (function () {
         return that.active_sheet()['columns'];
     };
 
-
+    
+    that.group_columns = function () {
+	return that.active_group()['columns'];
+    }
+    
     that.basic_schema = function () {
         var full_schema = that.active_columns();
 
@@ -251,7 +256,7 @@ var _store = (function () {
 	var i;
 	var col = that.active_columns();
 	for (i=0; i< col.length; i++){
-	    if(col[i].key === key){
+	    if(col[i]['key'] === key){
                 return true;
             }
         }

@@ -41,7 +41,7 @@ var _tools = (function () {
     that.prepare_tools = function () {
         prepare_sorting_interface();
         prepare_filtering_interface();
-//	prepare_manage_columns_interface();
+	prepare_manage_columns_interface();
         prepare_snapshot_interface();
     };
     
@@ -106,6 +106,24 @@ var _tools = (function () {
 
     
     function add_manage_checkbox()  {
+        var i;
+        var key;
+        var html = [];
+	var active_columns = _store.active_columns();
+	var all_columns = _store.group_columns();
+	
+        
+        for( i=0; i<all_columns.length; i+=1) {
+            key = all_columns[i]['key'];
+	    html.push ( '<input type="checkbox" name="colum-', key,'" ' );
+            html.push ( ' value="column-',key,'" ' );
+	    if (_store.is_column_in_active_sheet(key)){
+                html.push(' checked ');
+            }
+            html.push('>');
+            
+        }
+        $('#manage-columns-form').append( $( html.join('') ));
 	//TODO add checkboxes to manage columns popup
     }
 
@@ -364,7 +382,7 @@ var _tools = (function () {
 
         $('#manage-columns-form')
             .submit( function () {
-		//TODO changes in _Store
+		//TODO changes in _store
 
         });   
     };
