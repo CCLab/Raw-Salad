@@ -116,12 +116,13 @@ var _tools = (function () {
         for( i=0; i<all_columns.length; i+=1) {
             key = all_columns[i]['key'];
 	    html.push ( '<input type="checkbox" name="colum-', key,'" ' );
-            html.push ( ' value="column-',key,'" ' );
+            html.push ( ' value="column-',key,'" id="column-id-', key,'" ' );
 	    if (_store.is_column_in_active_sheet(key)){
-                html.push(' checked ');
+                html.push('checked ');
             }
             html.push('>');
-            
+            html.push('<label for="column-id-', key,'" >');
+            html.push(all_columns[i]['label'],'</label>');
         }
         $('#manage-columns-form').append( $( html.join('') ));
 	//TODO add checkboxes to manage columns popup
@@ -377,7 +378,7 @@ var _tools = (function () {
 
                 $('#manage-columns-form').html('').toggle();
                 $('#filter-form').hide();
-                $('#sort-button').hide();
+                $('#sort-form').hide();
                 add_manage_checkbox();
             });
 
