@@ -95,11 +95,10 @@ def redirect( request ):
 
 @csrf_exempt
 def download_data( request ):
-#
-#   to be reimplemented
-###################
     files = request.POST.get( 'sheets' ).split( '---file---' )[:-1]
+    print files
     rows = [ row.split('|')[:-1] for row in files ]
+    print rows
 #    data = request.POST.get( 'sheet' ).split( '|' )
 #    response = HttpResponse( mimetype='text/csv' )
 #    response['Content-Disposition'] = 'attachment; filename=data.csv'
