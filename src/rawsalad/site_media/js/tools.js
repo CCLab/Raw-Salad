@@ -375,18 +375,17 @@ var _tools = (function () {
 
         $('#manage-columns-button')
             .click( function () {
-
-                $('#manage-columns-form').html('').toggle();
                 $('#filter-form').hide();
                 $('#sort-form').hide();
+                $('#manage-columns-form').html('').toggle();
                 add_manage_checkbox();
             });
 
-        $('#manage-columns-form')
-            .submit( function () {
-		//TODO changes in _store
-		return true;
-        });   
+//        $('#manage-columns-form')
+//            .submit( function () {
+//		//TODO changes in _store
+//		return true;
+//        });   
     };
 
     function prepare_snapshot_interface() {
