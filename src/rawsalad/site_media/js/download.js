@@ -161,7 +161,8 @@ var _download = (function () {
                     add_children( sheet, node['idef'], result );
                 }
             }
-        };
+            return result;
+        }
 
 
 })();

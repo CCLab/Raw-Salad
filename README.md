@@ -18,7 +18,7 @@ The main contributors are (in alpha order):
 
 - Błażej Chwoła - UI architect
 - Denis Kolokol - DB developer
-- Jerzy de Merez - Web developer
+- Jerzy de Mezer - Web developer
 - Bartosz Stalewski - Web developer
 - Krzystof Trzewiczek - Project manager and front-end developer
 
