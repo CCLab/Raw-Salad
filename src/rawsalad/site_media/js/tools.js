@@ -429,7 +429,7 @@ var _tools = (function () {
         var breadcrumb = [];
         var breadcrumb_list = [];
         
-        tmp_id = get_parent_id( id );
+        tmp_id = _utils.get_parent_id( id );
         
         while ( !!tmp_id ) {
             node = $('#'+ tmp_id);
@@ -437,7 +437,7 @@ var _tools = (function () {
             type = get_type_representation( full_type );
             name = node.children('.name').html();
             
-            tmp_id = get_parent_id( tmp_id );
+            tmp_id = _utils.get_parent_id( tmp_id );
             breadcrumb_list.push({
                 type: type,
                 name: name
@@ -476,19 +476,6 @@ var _tools = (function () {
         return type_list.pop();
     }
     
-    function get_parent_id( id ) {
-        var parent_id;
-        var last_index = id.lastIndexOf('-');
-        
-        if ( last_index === -1 ) {
-            parent_id = '';
-        } else {
-            parent_id = id.slice( 0, last_index );
-        }
-        
-        return parent_id;
-    }
-
 }) ();
 
 

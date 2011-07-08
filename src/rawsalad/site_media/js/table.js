@@ -32,7 +32,8 @@ var _table = (function () {
     that.clean_table = function () {
         $('#data-table > thead').empty();
         $('#data-table > tbody').empty();
-        $('#filtered-table').empty();
+        $('#filtered-thead').empty();
+        $('#filtered-tbody').empty();
     };
 
     that.init_table = function () {
@@ -100,42 +101,6 @@ var _table = (function () {
             apply_selection( selected_node[0]['data']['idef'] );
         }
     }
-    
-    function create_filtered_thead() {
-        var schema = _store.basic_schema();
-        var html = ['<div id="filtered-thead">'];
-        schema.forEach( function ( column ) {
-            html.push('<div class=', column['key'], ' ', column['type'], '">');
-            html.push(column['label'], '</div>');
-        });
-        html.push('</div>');
-        $('#filtered-table').append( html.join('') );
-    }
-    
-    function create_filtered_tbody() {
-        var html = ['<div id="filtered-tbody">'];
-        var schema = _store.basic_schema();
-        var rows = _store.active_rows();
-        
-        rows.forEach( function (e, i) {
-            html.push('<div id="filter-result-', i, '">');
-            html.push('<div id="breadcrumb-', i, '">');
-            html.push( e['breadcrumb'] );
-            html.push('</div>');
-            html.push('<div id="filter-data-', i, '">');
-            schema.forEach( function ( column ) {
-                html.push('<div class="', column['type'], '">');
-                html.push( e['data'][ column['key'] ] );
-                html.push('</div>');
-            });
-            html.push('</div>');
-            html.push('</div>');
-        });
-        
-        html.push('</div>');
-        $('#filtered-table').append( $( html.join('') ) );
-    }
-
 
     function add_top_level( data ) {
         var i, len = data.length;
@@ -158,9 +123,9 @@ var _table = (function () {
 
         for( ; i >= 0; i -= 1 ) {
             parent = $( '#' + data[i]['data']['parent'] );
-	    if( parent.attr( 'data-open' ) === 'false' ) {
-	    	continue;
-	    }
+            if( parent.attr( 'data-open' ) === 'false' ) {
+                continue;
+            }
             parent.after( generate_row({
                 node: data[i],
                 schema: schema
@@ -214,6 +179,89 @@ var _table = (function () {
         });
 
         return row;
+    }
+    
+    function create_filtered_thead() {
+        var schema = _store.basic_schema();
+        var html = [];
+        schema.forEach( function ( column ) {
+            html.push('<div class=', column['key'], ' ', column['type'], '">');
+            html.push(column['label'], '</div>');
+        });
+        $('#filtered-thead').append( html.join('') );
+    }
+    
+    function create_filtered_tbody() {
+        var level = 'a';
+        var hashed_list = _utils.hash_list( _store.active_rows() );
+        var rows_to_add = _store.active_rows().length;
+        var rows_on_level;
+
+        while( rows_to_add > 0 ) {
+            rows_on_level = hashed_list[ level ];
+            rows_to_add -= rows_on_level.length;
+            if ( !!rows_on_level ) {
+                add_filtered_rows( rows_on_level );
+            }
+            level = _utils.next_letter( level );
+        }
+    }
+    
+    function add_filtered_rows( data ) {
+        var parent;
+        var new_node;
+        var schema = _store.basic_schema();
+        
+        data.reverse().forEach( function ( row ) {
+            parent = find_parent( row['data']['idef'] );
+            new_node = generate_filtered_row({
+                node: row,
+                schema: schema
+            });
+            if ( !!parent ) {
+                parent.after( new_node );
+            } else {
+                $('#filtered-tbody').append( new_node );
+            }
+        });
+    }
+    
+    function generate_filtered_row( args ) {
+        var html = [];
+        var node = args['node'];
+            
+        html.push('<div id="', node['data']['idef'], '">');
+        
+        html.push('<div id="breadcrumb-', node['data']['idef'], '">');
+        html.push( node['breadcrumb'] );
+        html.push('</div>');
+        
+        html.push('<div id="filter-data-', node['data']['idef'], '">');
+        args['schema'].forEach( function ( column ) {
+            html.push('<div class="', column['type'], '">');
+            html.push( node['data'][ column['key'] ] );
+            html.push('</div>');
+        });
+        html.push('</div>');
+        
+        html.push('</div>');
+        
+        return $( html.join('') );
+    }
+    
+    function find_parent( id ) {
+        var parent_id = _utils.get_parent_id( id );
+        var parent;
+        
+        while ( !!parent_id ) {
+            parent = $('#' + parent_id);
+            if ( !!parent ) {
+                break;
+            }
+            parent_id = _utils.get_parent_id( id );
+        }
+        // if parent not found, return []
+        return parent;
     }
 
     function apply_selection( id ) {
