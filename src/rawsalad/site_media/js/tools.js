@@ -362,8 +362,7 @@ var _tools = (function () {
                 _sheet.create_new_sheet( new_sheet, "Arkusz", true );
 
                 _table.clean_table();
-                //_table.init_table();
-                _table.init_filtered_table();
+                _table.init_table();
 
                 $(this).hide();
 
