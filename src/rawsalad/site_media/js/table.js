@@ -255,7 +255,7 @@ var _table = (function () {
         
         while ( !!parent_id ) {
             parent = $('#' + parent_id);
-            if ( !!parent ) {
+            if ( !!parent.length ) {
                 break;
             }
             parent_id = _utils.get_parent_id( id );
