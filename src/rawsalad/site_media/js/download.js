@@ -94,7 +94,7 @@ var _download = (function () {
         });
 
         if( children.length === 0 ) {
-            return;
+            return result;
         }
 
         for( i = 0; i < children.length; i += 1 ) {
