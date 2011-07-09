@@ -34,16 +34,16 @@ var _download = (function () {
         var group, sheet;
         var csv_string = '';
 
-        for( i in ids ) {
-            ids[i].forEach( function ( e ) {
+        for( group_id in ids ) {
+            ids[group_id].forEach( function ( e ) {
                 if( e['scope'] === 'full' ) {
-                    group = _store.get_group( i );
+                    group = _store.get_group( group_id );
                     csv_string += group['dataset'] + '-';
                     csv_string += group['perspective'] + '-';
                     csv_string += group['issue'] + '.csv';
                 }
                 else {
-                    sheet = _store.get_sheet( i, e['id'] );
+                    sheet = _store.get_sheet( group_id, e['id'] );
                     columns = sheet['columns'];
 
                     csv_string += 'ID;Rodzic;Poziom;';
