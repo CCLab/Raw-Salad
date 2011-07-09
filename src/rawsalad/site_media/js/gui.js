@@ -126,9 +126,9 @@ var _gui = (function () {
 
             checkboxes.each( function () {
                 var box = $(this);
-                var box_id = box.attr('id').split('-');
-                var group = box_id[0];
-                var sheet = box_id[1];
+                var box_id = box.attr('id');
+                var group = box_id.split('-')[0];
+                var sheet = box_id.split('-')[1];
                 var scope = table
                                 .find('input:radio[name=scope-'+box_id+']:checked')
                                 .val();
