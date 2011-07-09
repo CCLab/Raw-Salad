@@ -94,7 +94,7 @@ var _download = (function () {
         });
 
         if( children.length === 0 ) {
-            return result;
+            return;
         }
 
         for( i = 0; i < children.length; i += 1 ) {
@@ -118,7 +118,7 @@ var _download = (function () {
                 continue;
             }
             else {
-                add_children( sheet, node['idef'], result );
+                result = add_children( sheet, node['idef'], result );
             }
         }
         return result;
