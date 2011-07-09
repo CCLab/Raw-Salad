@@ -87,7 +87,7 @@ var _download = (function () {
     function add_children( sheet, parent, result ) {
         var parent = parent || null;
         var result = result || '';
-        var i, node;
+        var i, node, open;
         var columns = sheet['columns'];
         var children = sheet['rows'].filter( function ( e ) {
             return e['data']['parent'] === parent;
@@ -99,6 +99,8 @@ var _download = (function () {
 
         for( i = 0; i < children.length; i += 1 ) {
             node = children[i]['data'];
+            open = children[i]['state']['open'];
+
             result += node['idef'] + ';';
             if( !!node['parent'] === false ) {
                 result += ';';
@@ -114,7 +116,7 @@ var _download = (function () {
             }
             result += '|';
 
-            if( node['hidden'] === true ) {
+            if( open === false ) {
                 continue;
             }
             else {
