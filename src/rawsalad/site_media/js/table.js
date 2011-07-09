@@ -258,7 +258,7 @@ var _table = (function () {
             if ( !!parent.length ) {
                 break;
             }
-            parent_id = _utils.get_parent_id( id );
+            parent_id = _utils.get_parent_id( parent_id );
         }
         // if parent not found, return []
         return parent;
