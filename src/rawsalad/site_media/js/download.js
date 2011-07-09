@@ -55,8 +55,7 @@ var _download = (function () {
                     csv_string += '|';
 
                     if( sheet['filtered'] ) {
-                        //csv_string += add_filtered( sheet );
-                        csv_string += add_children( sheet );
+                        csv_string += add_filtered( sheet );
                     }
                     else {
                         csv_string += add_children( sheet );
@@ -82,6 +81,7 @@ var _download = (function () {
 
     function add_filtered( sheet ) {
         // TODO code here
+        return '';
     }
 
     function add_children( sheet, parent, result ) {

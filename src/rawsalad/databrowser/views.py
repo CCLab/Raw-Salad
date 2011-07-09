@@ -9,6 +9,9 @@ from django.utils import simplejson as json
 import rsdbapi as rsdb
 import csv, codecs, cStringIO
 
+from StringIO import StringIO
+from zipfile import ZipFile
+
 
 # to be removed soon
 def choose_collection( data ):
@@ -96,17 +99,30 @@ def redirect( request ):
 @csrf_exempt
 def download_data( request ):
     files = request.POST.get( 'sheets' ).split( '--file--' )[:-1]
-    rows = [ row.split('|')[:-1] for row in files ]
-#    data = request.POST.get( 'sheet' ).split( '|' )
-#    response = HttpResponse( mimetype='text/csv' )
-#    response['Content-Disposition'] = 'attachment; filename=data.csv'
-#
-#    writer = UnicodeWriter( response )
-#    for row in data:
-#        writer.writerow( row.split(';') )
+    in_memory = StringIO()
+    zip = ZipFile( in_memory, 'a' )
 
-#    return response
-    return HttpResponse( json.dumps( rows ))
+    for i, f in enumerate( files ):
+        zip.writestr( 'data-'+i+'.csv', f.replace( '|', '\n' ))
+#        rows = [ row.split('|')[:-1] for row in f ]
+#        tmp_file = open( 'data-'+i+'.csv', 'w' )
+#        writer = UnicodeWriter( tmp_file )
+#        for row in rows:
+#            writer.writerow( row.split(';') )
+
+    # fix for Linux zip files read in Windows
+    for file in zip.filelist:
+        file.create_system = 0
+
+    zip.close()
+
+    response = HttpResponse(mimetype="application/zip")
+    response["Content-Disposition"] = "attachment; filename=collected_data.zip"
+
+    in_memory.seek( 0 )
+    response.write( in_memory.read() )
+
+    return response
 
 def get_ms_nav():
     db= rsdb.DBconnect("mongodb").dbconnect
