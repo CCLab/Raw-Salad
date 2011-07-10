@@ -334,7 +334,7 @@ var _tools = (function () {
                         visible_form.slideUp( 400, function () {
                             visible_form.html('').toggle();
                             $('#filter-form').html('').toggle();
-                            add_sort_key();
+                            add_filter_key();
                             $('#filter-form').slideDown( 400 );
                         })
                     } else {
