@@ -149,6 +149,10 @@ var _tools = (function () {
 
         key = $('#filter-form > div').length;
         
+        if ( key === 2 ) {
+            $('#add-sort-key' ).remove();
+        }
+        
         columns.unshift({
             name: 'null',
             label: 'Wybierz kolumnę'
@@ -167,7 +171,6 @@ var _tools = (function () {
         
         html.push( '<select id="filter-', key, '-operations"' );
         html.push( ' name="null-operation" disabled="true">' );
-        // not needed because column has not been selected yet
         
         html.push( '</select>' );
         
@@ -180,7 +183,6 @@ var _tools = (function () {
         $('#filter-form').append( $( html.join('') ) );
         
         if( key === 0 ) {
-            //TODO create CSS class for add-filter-key !!!!!!!!!!!
             $('#add-filter-key').click( function () {
                 add_filter_key();
             });
@@ -229,8 +231,16 @@ var _tools = (function () {
 
         $('#sort-button')
             .click( function () {
-                $('#filter-form').hide();
-                $('#manage-columns-form').hide();
+                if ( $('#sort-form > div').length > 0 ) {
+                    $('#sort-form').slideUp( 400 );
+                } else {
+                    $('#filter-form').slideUp( 400, function () {
+                        $('#manage-columns-form').slideUp( 400, function () {
+                            $('#sort-form').slideDown( 400 );
+                        })
+                    });
+                }
+                
                 $('#sort-form').html('').toggle();
                 add_sort_key();
             });
@@ -295,9 +305,17 @@ var _tools = (function () {
     function prepare_filtering_interface() {
         $('#filter-button')
             .click( function () {
+                if ( $('#filter-form > div').length > 0 ) {
+                    $('#filter-form').slideUp( 400 );
+                } else {
+                    $('#sort-form').slideUp( 400, function () {
+                        $('#manage-columns-form').slideUp( 400, function () {
+                            $('#filter-form').slideDown( 400 );
+                        })
+                    });
+                }
+                
                 $('#filter-form').html('').toggle();
-                $('#manage-columns-form').hide();
-                $('#sort-form').hide();
                 add_filter_key();
             });
 
