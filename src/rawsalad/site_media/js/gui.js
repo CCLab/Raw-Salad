@@ -81,13 +81,13 @@ var _gui = (function () {
             });
             $('#download-table > tbody').empty().append( html.join('') );
 
-            $('#download-table .radio > input').attr( 'disabled', 'true' );
+            $('#download-table .radio > input').hide();
             $('#download-table .check > input' ).change( function () {
                 if( $(this).attr('checked') ) {
-                    $(this).parent().parent().find('.radio > input').removeAttr('disabled');
+                    $(this).parent().parent().find('.radio > input').show();
                 }
                 else {
-                    $(this).parent().parent().find('.radio > input').attr('disabled', 'true');
+                    $(this).parent().parent().find('.radio > input').hide();
                 }
             });
 
@@ -146,16 +146,6 @@ var _gui = (function () {
             _download.selected( ids );
         });
 
-        $('#download-container').find('.radio > input').hide();
-        $('#download-container').find('.check > input').change( function () {
-            var radios = $('#download-container').find('.radio > input');
-            if( $(this).attr('checked') ) {
-                radios.show();
-            }
-            else {
-                radios.hide();
-            }
-        });
         _tools.prepare_tools();
 
         // arm open/close button and hide it!
