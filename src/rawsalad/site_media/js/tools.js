@@ -245,8 +245,8 @@ var _tools = (function () {
                     
                     if ( !!visible_form ) {
                         visible_form.slideUp( 400, function () {
-                            visible_form.html('');
-                            $('#sort-form').html('');
+                            visible_form.html('').toggle();
+                            $('#sort-form').html('').toggle();
                             add_sort_key();
                             $('#sort-form').slideDown( 400 );
                         })
