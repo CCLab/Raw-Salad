@@ -199,8 +199,8 @@ var _table = (function () {
 
         while( rows_to_add > 0 ) {
             rows_on_level = hashed_list[ level ];
-            rows_to_add -= rows_on_level.length;
             if ( !!rows_on_level ) {
+                rows_to_add -= rows_on_level.length;
                 add_filtered_rows( rows_on_level );
             }
             level = _utils.next_letter( level );
