@@ -339,7 +339,7 @@ var _tools = (function () {
                         })
                     } else {
                         $('#filter-form').html('');
-                        add_sort_key();
+                        add_filter_key();
                         $('#filter-form').slideDown( 400 );
                     }
                 }
