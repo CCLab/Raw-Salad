@@ -277,6 +277,8 @@ var _gui = (function () {
         _store.active_sheet( sheet_nr );
         _store.active_group( group_nr );
 
+        $('#sort-form').hide();
+        $('#filter-form').hide();
         _table.clean_table();
         _table.init_table();
     };
