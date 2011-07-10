@@ -98,29 +98,41 @@ def redirect( request ):
 
 @csrf_exempt
 def download_data( request ):
+    response = HttpResponse()
     files = request.POST.get( 'sheets' ).split( '--file--' )[:-1]
-    in_memory = StringIO()
-    zip = ZipFile( in_memory, 'a' )
 
-    for i, f in enumerate( files ):
-        if '.csv' in f:
-            csv_string = open( 'site_media/csv/' + f ).read()
-        else:
-            csv_string = f.replace( '|', '\n' ).encode( 'utf-8' )
+    # send one sheet as CSV and collection of sheets as ZIP
+    if len( files ) == 1:
+        data = files[0].split( '|' )[:-1]
+        response['Content-Type'] = 'text/csv'
+        response['Content-Disposition'] = 'attachment; filename=data.csv'
 
-        zip.writestr( 'data-'+str(i)+'.csv', csv_string )
+        writer = UnicodeWriter( response )
+        for row in data:
+            writer.writerow( row.split(';') )
+    else:
+        in_memory = StringIO()
+        zip = ZipFile( in_memory, 'a' )
 
-    # fix for Linux zip files read in Windows
-    for file in zip.filelist:
-        file.create_system = 0
+        for i, f in enumerate( files ):
+            if '.csv' in f:
+                csv_string = open( 'site_media/csv/' + f ).read()
+            else:
+                csv_string = f.replace( '|', '\n' ).encode( 'utf-8' )
 
-    zip.close()
+            zip.writestr( 'data-'+str(i)+'.csv', csv_string )
 
-    response = HttpResponse(mimetype="application/zip")
-    response["Content-Disposition"] = "attachment; filename=collected_data.zip"
+        # fix for Linux zip files read in Windows
+        for file in zip.filelist:
+            file.create_system = 0
 
-    in_memory.seek( 0 )
-    response.write( in_memory.read() )
+        zip.close()
+
+        response['Content-Type'] = 'application/zip'
+        response["Content-Disposition"] = "attachment; filename=collected_data.zip"
+
+        in_memory.seek( 0 )
+        response.write( in_memory.read() )
 
     return response
 
