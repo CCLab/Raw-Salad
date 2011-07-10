@@ -232,17 +232,22 @@ var _tools = (function () {
         $('#sort-button')
             .click( function () {
                 if ( $('#sort-form > div').length > 0 ) {
-                    $('#sort-form').slideUp( 400 );
+                    $('#sort-form').slideUp( 400, function () {
+                        $('#sort-form').html('').toggle();
+                        add_sort_key();
+                    });
                 } else {
                     $('#filter-form').slideUp( 400, function () {
                         $('#manage-columns-form').slideUp( 400, function () {
-                            $('#sort-form').slideDown( 400 );
+                            $('#sort-form').slideDown( 400, function () {
+                                $('#sort-form').html('').toggle();
+                                add_sort_key();
+                            });
                         })
                     });
                 }
                 
-                $('#sort-form').html('').toggle();
-                add_sort_key();
+                
             });
 
         $('#sort-form')
@@ -306,17 +311,20 @@ var _tools = (function () {
         $('#filter-button')
             .click( function () {
                 if ( $('#filter-form > div').length > 0 ) {
-                    $('#filter-form').slideUp( 400 );
+                    $('#filter-form').slideUp( 400, function () {
+                        $('#filter-form').html('').toggle();
+                        add_filter_key();
+                    });
                 } else {
                     $('#sort-form').slideUp( 400, function () {
                         $('#manage-columns-form').slideUp( 400, function () {
-                            $('#filter-form').slideDown( 400 );
+                            $('#filter-form').slideDown( 400, function () {
+                                $('#filter-form').html('').toggle();
+                                add_filter_key();
+                            });
                         })
                     });
                 }
-                
-                $('#filter-form').html('').toggle();
-                add_filter_key();
             });
 
         $('#filter-form')
