@@ -104,10 +104,11 @@ def download_data( request ):
 
     for i, f in enumerate( files ):
         if '.csv' in f:
-            zip.write( 'site_media/csv/' + f )
+            csv_string = open( 'site_media/csv/' + f ).read()
         else:
             csv_string = f.replace( '|', '\n' ).encode( 'utf-8' )
-            zip.writestr( 'data-'+str(i)+'.csv', csv_string )
+
+        zip.writestr( 'data-'+str(i)+'.csv', csv_string )
 
     # fix for Linux zip files read in Windows
     for file in zip.filelist:
