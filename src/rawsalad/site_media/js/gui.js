@@ -146,14 +146,14 @@ var _gui = (function () {
             _download.selected( ids );
         });
 
-        $('#download-container').find('.radio > input').attr( 'disabled', 'true' );
+        $('#download-container').find('.radio > input').hide();
         $('#download-container').find('.check > input').change( function () {
             var radios = $('#download-container').find('.radio > input');
             if( $(this).attr('checked') ) {
-                radios.removeAttr( 'disabled' );
+                radios.show();
             }
             else {
-                radios.attr( 'disabled', 'true' );
+                radios.hide();
             }
         });
         _tools.prepare_tools();
@@ -256,7 +256,7 @@ var _gui = (function () {
 
                 _store.active_group( group_nr );
                 _store.active_sheet( sheet_nr );
-                
+
                 $('#sort-form').hide();
                 $('#filter-form').hide();
                 _table.clean_table();
