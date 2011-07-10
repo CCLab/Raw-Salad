@@ -238,6 +238,7 @@ var _tools = (function () {
                 } else {
                     $('#filter-form').slideUp( 400, function () {
                         $('#manage-columns-form').slideUp( 400, function () {
+                            $('#filter-form').html('').toggle();
                             $('#sort-form').html('').toggle();
                             add_sort_key();
                             $('#sort-form').slideDown( 400 );
@@ -315,6 +316,7 @@ var _tools = (function () {
                 } else {
                     $('#sort-form').slideUp( 400, function () {
                         $('#manage-columns-form').slideUp( 400, function () {
+                            $('#sort-form').html('').toggle();
                             $('#filter-form').html('').toggle();
                             add_filter_key();
                             $('#filter-form').slideDown( 400 );
