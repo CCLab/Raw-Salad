@@ -33,8 +33,8 @@ var _db = (function () {
     that.search = function ( query, scope, strict ) {
         var data = {
             query: query,
-            scope: scope,
-            strict: strict
+            scope: scope.toString(),
+            strict: strict.toString()
         };
 
         $.ajax({
