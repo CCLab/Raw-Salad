@@ -238,8 +238,8 @@ var _gui = (function () {
         html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
         html.push( 'class="snapshot active" ' );
         html.push( 'title="', sheet_name, '">' );
-        html.push( sheet_name.length > 13 ?
-                   sheet_name.slice( 0, 10 ) + '...' :
+        html.push( sheet_name.length > 20 ?
+                   sheet_name.slice( 0, 17 ) + '...' :
                    sheet_name );
         html.push( '</div>' );
 
