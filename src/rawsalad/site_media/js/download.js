@@ -80,9 +80,32 @@ var _download = (function () {
 //  P R I V A T E   I N T E R F A C E
 
     function add_filtered( sheet ) {
-        // TODO code here
+        var result = '';
+        var node_position;
+        var hashed_list = _utils.hash_list( sheet['rows'] );
+
+        for( level in hashed_list ) {
+            hashed_list[ level ].forEach( function ( e ) {
+                node_position = result.indexOf( '|' + e['idef'] );
+
+                // if not added yet - add it
+                if( node_position === -1 ) {
+
+                }
+            });
+        }
+        while( rows_to_add > 0 ) {
+            rows_on_level = hashed_list[ level ];
+            if ( !!rows_on_level ) {
+                rows_to_add -= rows_on_level.length;
+                add_filtered_rows( rows_on_level );
+            }
+            level = _utils.next_letter( level );
+        }
+
         return '';
     }
+
 
     function add_children( sheet, parent, result ) {
         var parent = parent || null;

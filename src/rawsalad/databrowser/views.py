@@ -49,16 +49,13 @@ def get_node( data ):
     return HttpResponse(json_data)
 
 
-# add columns - do we really need that?!
-def add_columns( data ):
-    pass
-
-
 # search engine enter point
-def find_data( data ):
-    pass
+def search_data( request ):
+    query = request.GET.get( 'query', '' )
+    scope = request.GET.get( 'scope', '' )
+    strict = request.GET.get( 'strict', 'false' )
 
-
+    return HttpResponse( json.dumps( 'I like vanilla!!' ))
 
 # list of possible ajax calls
 func_dict = {
