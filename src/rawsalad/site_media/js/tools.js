@@ -434,6 +434,8 @@ var _tools = (function () {
                     }                
                 } 
 		        _store.set_active_columnes( new_active_columns );
+                _table.clean_table();
+                _table.init_table();
                 $(this).hide();
 		return false;
         });   
