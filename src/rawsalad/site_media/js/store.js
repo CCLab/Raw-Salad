@@ -111,16 +111,16 @@ var _store = (function () {
 
 
      // add column to active_sheet or return 0
-    that.add_column_to_sheet = function () {
+ //   that.add_column_to_sheet = function () {
     // TODO
-    };
+//    };
 
 
-    that.get_column_from_group( id ) {
+    that.get_column_from_group = function( id ) {
         var columns = that.active_group()['columns'];
         return columns.filter( function ( col ) {
             return col['key'] === id;
-        }
+        });
     };
 
 

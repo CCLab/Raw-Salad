@@ -29,6 +29,24 @@ var _db = (function () {
 //  P U B L I C   I N T E R F A C E
     var that = {};
 
+
+    that.search = function ( query, scope, strict ) {
+        var data = {
+            query: query,
+            scope: scope.toString(),
+            strict: strict.toString()
+        };
+
+        $.ajax({
+            url: 'search/',
+            data: data,
+            dataType: 'json',
+            success: function ( received_data ) {
+                console.log( received_data );
+            }
+        });
+    };
+
     // gets the top-level from db
     that.get_init_data = function (col_id) {
         // ajax call data object
@@ -44,13 +62,13 @@ var _db = (function () {
             dataType: "json",
             success: function( received_data ) {
                 var data = {
-			// TODO get rid of colkumns here 
+			// TODO get rid of colkumns here
 			// TODO move it to create sheet function
 //                    columns: received_data.perspective.columns,
                     rows: received_data.rows,
                     name: received_data.perspective.perspective
                 };
-                
+
                 // create group
                 _store.create_group({
                    "dataset": col_id.dataset,
