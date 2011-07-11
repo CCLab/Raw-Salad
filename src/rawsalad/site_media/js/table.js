@@ -234,14 +234,15 @@ var _table = (function () {
         html.push('<div id="', node['data']['idef'], '" ');
         html.push( 'class="filtered-block">' );
 
-        html.push('<div id="breadcrumb-', node['data']['idef'], '">');
+        html.push('<div id="breadcrumb-', node['data']['idef'], '" ');
+        html.push( 'class="filtered-breadcrumb">' );
         html.push( node['breadcrumb'] );
         html.push('</div>');
 
         html.push('<div id="filter-data-', node['data']['idef'], '" ');
         html.push('class="filtered-data">' );
         args['schema'].forEach( function ( column ) {
-            html.push('<div class="', column['type'], '">');
+            html.push('<div class="', column['key'], ' ', column['type'], '">');
             html.push( node['data'][ column['key'] ] );
             html.push('</div>');
         });

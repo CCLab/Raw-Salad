@@ -382,10 +382,19 @@ body {
         width: 100%;
       }
 
+      .filtered-breadcrumb {
+        margin-bottom: 5px;
+        margin-top: 15px;
+      }
+
       .filtered-data > div {
         float: left;
         padding: 5px;
         background-color: #ccc;
+      }
+
+      .filtered-data .type {
+        width: 138px;
       }
 
 #permalink-container {
