@@ -141,7 +141,7 @@ var _download = (function () {
 
     function add_child( node, columns, csv ) {
         var result = '';
-        var parent_position = csv.indexOf( node['idef'] );
+        var parent_position = csv.indexOf( node['parent'] );
         var next_position;
 
         result += node['idef'] + ';';
