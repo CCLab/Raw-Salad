@@ -69,8 +69,6 @@ func_dict = {
     "get_node": get_node,
 
     # to be implemented
-    "add_columns": add_columns,
-    "find_data": find_data,
     }
 
 
