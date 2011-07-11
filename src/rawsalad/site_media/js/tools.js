@@ -235,7 +235,6 @@ var _tools = (function () {
                 if ( $('#sort-form > div').length > 0 ) {
                     $('#sort-form').slideUp( 400, function () {
                         $('#sort-form').html('');
-                        //$('#sort-form').html('').toggle();
                     });
                 } else {
                     if ( $('#filter-form > div').length > 0 ) {
@@ -246,19 +245,13 @@ var _tools = (function () {
                     
                     if ( !!visible_form ) {
                         visible_form.slideUp( 400, function () {
-                            visible_form.html('').toggle();
-                            $('#sort-form').html('').toggle();
+                            visible_form.html('');
                             add_sort_key();
                             $('#sort-form').slideDown( 400 );
                         })
                     } else {
                         add_sort_key();
                         $('#sort-form').slideDown( 400 );
-                    
-                    
-                        //$('#sort-form').html('').toggle();
-                        //add_sort_key();
-                        //$('#sort-form').slideDown( 400 );
                     }
                 }
             });
@@ -326,7 +319,7 @@ var _tools = (function () {
                 var visible_form;
                 if ( $('#filter-form > div').length > 0 ) {
                     $('#filter-form').slideUp( 400, function () {
-                        $('#filter-form').html('').toggle();
+                        $('#filter-form').html('');
                     });
                 } else {
                     if ( $('#sort-form > div').length > 0 ) {
@@ -337,13 +330,11 @@ var _tools = (function () {
                     
                     if ( !!visible_form ) {
                         visible_form.slideUp( 400, function () {
-                            visible_form.html('').toggle();
-                            $('#filter-form').html('').toggle();
+                            visible_form.html('');
                             add_filter_key();
                             $('#filter-form').slideDown( 400 );
                         })
                     } else {
-                        $('#filter-form').html('').toggle();
                         add_filter_key();
                         $('#filter-form').slideDown( 400 );
                     }
