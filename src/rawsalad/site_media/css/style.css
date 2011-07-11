@@ -293,6 +293,10 @@ body {
       }
 
       #download-container td, th {
+        height: 45px;
+      }
+
+      #download-container td, th {
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 10px;
@@ -304,7 +308,7 @@ body {
       }
 
       #download-container td.radio {
-        width: 100px;
+        width: 120px;
         border-bottom: 1px solid #bbbbbb;
         text-align: center;
       }
@@ -328,6 +332,7 @@ body {
 
       #download-button {
         float: left;
+        margin-left: 150px;
         padding: 5px;
         background-color: #4CBCEB;
         color: #fff;
@@ -343,6 +348,7 @@ body {
       .select-all {
         float: right;
         padding: 5px;
+        background-color: #ddd;
         color: #4CBCEB;
         border-radius: 5px;
         -moz-border-radius: 5px;
@@ -351,7 +357,7 @@ body {
 
       .select-all:hover {
         cursor: pointer;
-        text-decoration: underline;
+        background-color: #eee;
       }
 
 #permalink-container {

@@ -183,6 +183,8 @@ var _gui = (function () {
                 }
             )
             .click( function () {
+                $('#info-info')
+                    .html('');
                 $('#info-title')
                     .html('Dostępne kolekcje');
                 $('#info-text')
@@ -441,6 +443,9 @@ var _gui = (function () {
             }
         }
         html.push( '</div>' );
+
+        $('#info-info')
+            .html( 'Wybrano kolekcję: ' );
 
         $('#info-title')
             // TODO interface this call!!!
