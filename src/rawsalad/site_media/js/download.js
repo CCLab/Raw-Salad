@@ -92,7 +92,7 @@ var _download = (function () {
 
             return result.sort();
         })();
-        var top_level = sorted_key.shift();
+        var top_level = sorted_keys.shift();
 
         // top level first
         hashed[ top_level ].sort( function ( a, b ) {
