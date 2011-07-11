@@ -221,13 +221,16 @@ def init_names():
     names = {}
     names['(0, 0, 2011)'] = ['dot_sub', 'swiad_fiz', 'wyd_jednostek',
                              'wyd_majatk', 'wyd_dlug', 'sw_eu', 'wspolfin_eu',
-                             'v_total', 'v_nation', 'v_eu']
-    names['(0, 1, 2011)'] = ['v_total', 'v_eu', 'v_nation']
-    names['(0, 1, 2012)'] = ['v_total', 'v_nation', 'v_eu']
-    names['(0, 2, 2011)'] = ['v_total', 'v_nation', 'v_eu']
-    names['(0, 2, 2012)'] = ['v_total', 'v_nation', 'v_eu']
-    names['(1, 0, 2011)'] = []  # No data
-    names['(1, 1, 2011)'] = []  # No data
+                             'v_total']
+    names['(0, 1, 2011)'] = ['v_nation']
+    names['(0, 1, 2012)'] = ['v_nation']
+    names['(0, 2, 2011)'] = ['v_nation']
+    names['(0, 2, 2012)'] = ['v_nation']
+    names['(1, 0, 2011)'] = ['v_eu', 'v_nation_fin', 'v_nation_cofin']
+    names['(1, 1, 2011)'] = ['v_eu']
+    names['(1, 1, 2012)'] = ['v_eu']
+    names['(1, 2, 2011)'] = ['v_eu']
+    names['(1, 2, 2012)'] = ['v_eu']
     names['(2, 0, 2011)'] = ['val_2011', 'val_2012', 'val_2013']
     names['(2, 1, 2011)'] = ['frst_popr', 'plan_nast']
     names['(2, 2, 2011)'] = ['val_2011', 'val_2012', 'val_2013']
