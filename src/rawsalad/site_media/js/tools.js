@@ -427,9 +427,8 @@ var _tools = (function () {
         $('#manage-columns-form')
             .submit( function () {
                 checkboxes_list = $('input[name=columns]');
-                alert("checkboxes_list " + checkboxes_list);
-                for ( i = 0; i < checkboxes_list.length; i=+1 ) {
-                    alert ("Petelka - i ="+i);
+                 for ( i = 0; i < checkboxes_list.length; i=+1 ) {
+                    alert ("Petelka - i ="+i + "checkboxes_list.length = "+checkboxes_list.length);
                     if( checkbox_list[i].checked ) {
                         new_active_columns.
                             push( _store.get_column_from_group(checkboxes_list[i].value) );
