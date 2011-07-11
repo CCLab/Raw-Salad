@@ -251,7 +251,7 @@ var _tools = (function () {
                             $('#sort-form').slideDown( 400 );
                         })
                     } else {
-                        $('#sort-form').html('');
+                        $('#sort-form').html('').toggle();
                         add_sort_key();
                         $('#sort-form').slideDown( 400 );
                     }
@@ -259,6 +259,7 @@ var _tools = (function () {
             });
 
         $('#sort-form')
+            .toggle()
             .submit( function () {
             
 //                _utils.create_preloader('Sortowanie');
@@ -338,7 +339,7 @@ var _tools = (function () {
                             $('#filter-form').slideDown( 400 );
                         })
                     } else {
-                        $('#filter-form').html('');
+                        $('#filter-form').html('').toggle();
                         add_filter_key();
                         $('#filter-form').slideDown( 400 );
                     }
@@ -346,6 +347,7 @@ var _tools = (function () {
             });
 
         $('#filter-form')
+            .toggle()
             .submit( function () {
 
                 var column, operation, query;
