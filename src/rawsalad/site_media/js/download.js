@@ -116,7 +116,30 @@ var _download = (function () {
     }
 
 
-    function add_row( node, columns, csv ) {
+    function add_row( node, columns ) {
+        var result = '';
+
+        result += node['idef'] + ';';
+        if( !!node['parent'] === false ) {
+            result += ';';
+        }
+        else {
+            result += node['parent'] + ';';
+        }
+        result += node['level'] + ';';
+
+        columns.forEach( function ( e ) {
+            result += node[ e['key'] ];
+            result += ';';
+        });
+
+        result += '|';
+
+        return result;
+    }
+
+
+    function add_child( node, columns, csv ) {
         var result = '';
         var parent_position = csv.indexOf( node['idef'] );
         var next_position;
@@ -141,14 +164,6 @@ var _download = (function () {
         }
 
         return csv;
-    }
-
-
-    function add_child( node, columns ) {
-        var result = '';
-
-
-        return '';
     }
 
 
