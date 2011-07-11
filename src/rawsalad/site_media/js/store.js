@@ -132,6 +132,8 @@ var _store = (function () {
         return that.active_group()['columns'];
     };
 
+
+    //TODO not needed
     that.basic_schema = function () {
         var full_schema = that.active_columns();
 

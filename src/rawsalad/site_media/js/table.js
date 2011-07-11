@@ -63,7 +63,7 @@ var _table = (function () {
 //  P R I V A T E   I N T E R F A C E
 
     function create_thead() {
-        var schema = _store.basic_schema();
+        var schema = _store.active_columns();
         var html = [ '<tr>' ];
 
         schema.forEach( function ( column ) {
@@ -104,7 +104,7 @@ var _table = (function () {
 
     function add_top_level( data ) {
         var i, len = data.length;
-        var schema = _store.basic_schema();
+        var schema = _store.active_columns();
 
         for( i = 0; i < len; ++i ) {
             $('#data-table > tbody').append( generate_row({
@@ -118,7 +118,7 @@ var _table = (function () {
 
     function add_rows( data ) {
         var i = data.length - 1;
-        var schema = _store.basic_schema();
+        var schema = _store.active_columns();
         var parent;
 
         for( ; i >= 0; i -= 1 ) {
@@ -182,7 +182,7 @@ var _table = (function () {
     }
     
     function create_filtered_thead() {
-        var schema = _store.basic_schema();
+        var schema = _store.active_columns();
         var html = [];
         schema.forEach( function ( column ) {
             html.push('<div class=', column['key'], ' ', column['type'], '">');
@@ -210,7 +210,7 @@ var _table = (function () {
     function add_filtered_rows( data ) {
         var parent;
         var new_node;
-        var schema = _store.basic_schema();
+        var schema = _store.active_columns();
         
         data.reverse().forEach( function ( row ) {
             parent = find_parent( row['data']['idef'] );
