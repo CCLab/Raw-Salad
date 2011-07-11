@@ -112,7 +112,15 @@ var _store = (function () {
 
      // add column to active_sheet or return 0
     that.add_column_to_sheet = function () {
-//	foreach
+    // TODO
+    };
+
+
+    that.get_column_from_group( id ) {
+        var columns = that.active_group()['columns'];
+        return columns.filter( function ( col ) {
+            return col['key'] === id;
+        }
     };
 
 
