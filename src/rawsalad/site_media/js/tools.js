@@ -251,7 +251,7 @@ var _tools = (function () {
                             $('#sort-form').slideDown( 400 );
                         })
                     } else {
-                        $('#sort-form').html('').toggle();
+                        $('#sort-form').html('');
                         add_sort_key();
                         $('#sort-form').slideDown( 400 );
                     }
@@ -338,7 +338,7 @@ var _tools = (function () {
                             $('#filter-form').slideDown( 400 );
                         })
                     } else {
-                        $('#filter-form').html('').toggle();
+                        $('#filter-form').html('');
                         add_filter_key();
                         $('#filter-form').slideDown( 400 );
                     }
