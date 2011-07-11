@@ -83,12 +83,22 @@ var _gui = (function () {
 
             $('#download-table .radio > input').hide();
             $('#download-table .check > input' ).change( function () {
-                if( $(this).attr('checked') ) {
-                    $(this).parent().parent().find('.radio > input').show();
+                if( $(this).attr('id').split('-')[1] === '0' ) {
+                    if( $(this).attr('checked') ) {
+                        $(this).parent().parent().find('.radio > input').show();
+                    }
+                    else {
+                        $(this).parent().parent().find('.radio > input').hide();
+                    }
                 }
-                else {
-                    $(this).parent().parent().find('.radio > input').hide();
-                }
+            });
+
+            $('#download-select-all').click( function () {
+                $('#download-table .check > input' ).trigger( $.Event('click') );
+            });
+
+            $('#download-unselect-all').click( function () {
+                $('#download-table .check > input' ).trigger( $.Event('click') );
             });
 
             $('#table-container').hide();

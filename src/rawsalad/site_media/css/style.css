@@ -325,10 +325,11 @@ body {
         padding-left: 10px;
         margin-left: 10px;
       }
+
       #download-button {
         float: left;
         padding: 5px;
-        background-color: #ff6000;
+        background-color: #4CBCEB;
         color: #fff;
         border-radius: 5px;
         -moz-border-radius: 5px;
@@ -339,6 +340,19 @@ body {
         cursor: pointer;
       }
 
+      #select-all {
+        float: left;
+        padding: 5px;
+        color: #4CBCEB;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        cursor: default;
+      }
+
+      #select-all:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
 #permalink-container {
   clear: both;
   width: 900px;
