@@ -376,6 +376,12 @@ body {
         color: #4CBCEB;
       }
 
+      .filtered-block {
+        clear: both;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+
       .filtered-data > div {
         float: left;
         padding: 5px;

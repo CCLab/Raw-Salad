@@ -231,7 +231,8 @@ var _table = (function () {
         var html = [];
         var node = args['node'];
 
-        html.push('<div id="', node['data']['idef'], '">');
+        html.push('<div id="', node['data']['idef'], '" ');
+        html.push( 'class="filtered-block">' );
 
         html.push('<div id="breadcrumb-', node['data']['idef'], '">');
         html.push( node['breadcrumb'] );
