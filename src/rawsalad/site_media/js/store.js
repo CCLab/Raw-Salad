@@ -119,7 +119,7 @@ var _store = (function () {
         var columns = that.active_group()['columns'];
         return columns.filter( function ( col ) {
             return col['key'] === id;
-        });
+        })[0];
     };
 
 
