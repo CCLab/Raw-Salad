@@ -426,7 +426,7 @@ var _tools = (function () {
 
         $('#manage-columns-form')
             .submit( function () {
-                checkboxes_list = $('#columns');
+                checkboxes_list = $('input[name=columns]');
                 alert("checkboxes_list " + checkboxes_list);
                 for ( i = 0; i < checkboxes_list.length; i=+1 ) {
                     alert ("Petelka - i ="+i);
