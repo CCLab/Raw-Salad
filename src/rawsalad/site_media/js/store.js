@@ -110,8 +110,8 @@ var _store = (function () {
     };
 
 
-     // add column to active_sheet or return 0
- //   that.add_column_to_sheet = function () {
+    that.add_columnes to active_sheet or return 0
+ //   that.add_columns_to_sheet = function () {
     // TODO
 //    };
 

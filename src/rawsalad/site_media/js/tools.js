@@ -109,21 +109,22 @@ var _tools = (function () {
         var i;
         var key;
         var html = [];
-	var active_columns = _store.active_columns();
-	var all_columns = _store.group_columns();
-	
-        
+	    var active_columns = _store.active_columns();
+	    var all_columns = _store.group_columns();
+
+
         for( i=0; i<all_columns.length; i+=1) {
             key = all_columns[i]['key'];
-	    html.push ( '<input type="checkbox" name="colum-', key,'" ' );
-            html.push ( ' value="column-',key,'" id="column-id-', key,'" ' );
-	    if (_store.is_column_in_active_sheet(key)){
+	        html.push ( '<input type="checkbox" name="columns"' );
+            html.push ( ' value="', key, '" id="column-id-', key, '" ' );
+	        if (_store.is_column_in_active_sheet(key)){
                 html.push('checked ');
             }
             html.push('>');
             html.push('<label for="column-id-', key,'" >');
             html.push(all_columns[i]['label'],'</label>');
         }
+        html.push('<input type="submit" value="Dodaj kolumny">');
         $('#manage-columns-form').append( $( html.join('') ));
 	//TODO add checkboxes to manage columns popup
     }
@@ -411,6 +412,12 @@ var _tools = (function () {
     };
 
     function 	prepare_manage_columns_interface(){
+	    var old_active_columns = _store.active_columns();
+	    var new_active_columns = [];
+	    var all_columns = _store.group_columns();
+        var i = 0;
+        var checkboxes_list = $('#manage-columns-form > input');
+
         $('#manage-columns-button')
             .click( function () {
                 $('#filter-form').hide();
@@ -421,7 +428,13 @@ var _tools = (function () {
 
         $('#manage-columns-form')
             .submit( function () {
-		//TODO changes in _store
+                for ( i = 0; i < checkboxes_list.length; i=+1 ) {
+                    if( checkbox_list[i].checked ) {
+                        new_active_columns.
+                            push( _store.get_column_from_group(checkboxes_list[i].value) );
+                    }                
+                } 
+		        _store.set_active_columnes( new_active_columns );
                 $(this).hide();
 		return false;
         });   
