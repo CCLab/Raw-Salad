@@ -426,9 +426,10 @@ var _tools = (function () {
 
         $('#manage-columns-form')
             .submit( function () {
-                checkboxes_list = $('#manage-columns-form > input');
+                checkboxes_list = $('#columns');
+                alert("checkboxes_list " + checkboxes_list);
                 for ( i = 0; i < checkboxes_list.length; i=+1 ) {
-                    alert ("Petelka - i =".i);
+                    alert ("Petelka - i ="+i);
                     if( checkbox_list[i].checked ) {
                         new_active_columns.
                             push( _store.get_column_from_group(checkboxes_list[i].value) );
