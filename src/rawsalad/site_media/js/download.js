@@ -99,7 +99,7 @@ var _download = (function () {
                                return a['data']['idef'] > b['data']['idef'];
                            })
                            .forEach( function ( e ) {
-                               result += add_row( e, sheet['columns'] );
+                               result += add_row( e['data'], sheet['columns'] );
                            });
 
         // children levels
@@ -108,7 +108,7 @@ var _download = (function () {
                                 return a['data']['idef'] < b['data']['idef'];
                            })
                            .forEach( function ( e ) {
-                                result += add_child( e, sheet['columns'] );
+                                result = add_child( e['data'], sheet['columns'], result );
                            });
         });
 
@@ -116,16 +116,13 @@ var _download = (function () {
     }
 
 
-    function add_row( node, columns ) {
+    function add_row( node, columns, csv ) {
         var result = '';
+        var parent_position = csv.indexOf( node['idef'] );
+        var next_position;
 
         result += node['idef'] + ';';
-        if( !!node['parent'] === false ) {
-            result += ';';
-        }
-        else {
-            result += node['parent'] + ';';
-        }
+        result += node['parent'] + ';';
         result += node['level'] + ';';
 
         columns.forEach( function ( e ) {
@@ -135,12 +132,22 @@ var _download = (function () {
 
         result += '|';
 
-        return result;
+        if( parent_position !== -1 ) {
+            next_position = csv.indexOf( '|', parent_position ) + 1;
+            csv = csv.slice( 0, next_position ) + result + csv.slice( next_position );
+        }
+        else {
+            csv += result;
+        }
+
+        return csv;
     }
 
 
     function add_child( node, columns ) {
-        // TODO code here
+        var result = '';
+
+
         return '';
     }
 
