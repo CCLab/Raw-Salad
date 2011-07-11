@@ -111,7 +111,7 @@ var _store = (function () {
 
 
     that.set_active_columnes = function ( columns ) {
-        that.active_sheet()['columns'] = columns;       
+ //       that.active_sheet()['columns'] = columns;       
     };
 
 
