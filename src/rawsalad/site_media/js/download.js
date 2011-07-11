@@ -141,7 +141,7 @@ var _download = (function () {
 
     function add_child( node, columns ) {
         // TODO code here
-        reutrn '';
+        return '';
     }
 
 
