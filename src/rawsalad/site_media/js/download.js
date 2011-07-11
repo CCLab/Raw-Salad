@@ -129,7 +129,7 @@ var _download = (function () {
         result += node['level'] + ';';
 
         columns.forEach( function ( e ) {
-            result += node[ columns[j]['key'] ];
+            result += node[ e['key'] ];
             result += ';';
         });
 
