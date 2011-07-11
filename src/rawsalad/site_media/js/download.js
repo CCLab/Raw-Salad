@@ -81,29 +81,67 @@ var _download = (function () {
 
     function add_filtered( sheet ) {
         var result = '';
-        var node_position;
-        var hashed_list = _utils.hash_list( sheet['rows'] );
+        var hashed = _utils.hash_list( sheet['rows'] );
+        var sorted_keys = (function () {
+            var key;
+            var result = [];
 
-        for( level in hashed_list ) {
-            hashed_list[ level ].forEach( function ( e ) {
-                node_position = result.indexOf( '|' + e['idef'] );
-
-                // if not added yet - add it
-                if( node_position === -1 ) {
-
-                }
-            });
-        }
-        while( rows_to_add > 0 ) {
-            rows_on_level = hashed_list[ level ];
-            if ( !!rows_on_level ) {
-                rows_to_add -= rows_on_level.length;
-                add_filtered_rows( rows_on_level );
+            for( key in hashed ) {
+                result.push( key );
             }
-            level = _utils.next_letter( level );
-        }
 
-        return '';
+            return result.sort();
+        })();
+        var top_level = sorted_key.shift();
+
+        // top level first
+        hashed[ top_level ].sort( function ( a, b ) {
+                               return a['data']['idef'] > b['data']['idef'];
+                           })
+                           .forEach( function ( e ) {
+                               result += add_row( e, sheed['columns'] );
+                           });
+
+        // children levels
+        sorted_keys.forEach( function ( level ) {
+            hashed[ level ].sort( function( a, b ) {
+                                return a['data']['idef'] < b['data']['idef'];
+                           })
+                           .forEach( function ( e ) {
+                                result += add_child( e, sheet['columns'] );
+                           });
+        });
+
+        return result;
+    }
+
+
+    function add_row( node, columns ) {
+        var result = '';
+
+        result += node['idef'] + ';';
+        if( !!node['parent'] === false ) {
+            result += ';';
+        }
+        else {
+            result += node['parent'] + ';';
+        }
+        result += node['level'] + ';';
+
+        columns.forEach( function ( e ) {
+            result += node[ columns[j]['key'] ];
+            result += ';';
+        });
+
+        result += '|';
+
+        return result;
+    }
+
+
+    function add_child( node, columns ) {
+        // TODO code here
+        reutrn '';
     }
 
 
