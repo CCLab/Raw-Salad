@@ -39,10 +39,11 @@ var _tools = (function () {
     };
 
     that.prepare_tools = function () {
-	prepare_manage_columns_interface();
+        prepare_manage_columns_interface();
         prepare_sorting_interface();
         prepare_filtering_interface();
         prepare_snapshot_interface();
+        prepare_search_interface();
     };
     
     that.show_search_results = function( results ) {
@@ -491,6 +492,22 @@ var _tools = (function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
     }
+    
+    function prepare_search_interface() {
+        $('#search-button')
+            .click( function () {
+                var query;
+                var scope;
+                var strict;
+
+                query = $('#search-text').val();
+                if ( !!query ) {
+                    scope = construct_scope();
+                    strict = $('#strict-match').is(':checked');
+                    _db.search( query, scope, strict );
+                }
+            });
+    }
 
     function create_filter_result( filtered_list ) {
         return filtered_list.filter( function ( e ) {
@@ -571,6 +588,19 @@ var _tools = (function () {
         var type_list;
         type_list = full_type.split(' ');
         return type_list.pop();
+    }
+    
+    function construct_scope() {
+        var scope = [];
+        _store.meta_datasets().forEach( function ( dataset, dset_id ) {
+            dataset['perspectives'].forEach( function ( perspective, per_id ) {
+                perspective['issues'].forEach( function ( issue ) {
+                    scope.push( dset_id + '-' + per_id + '-' + issue );
+                });
+            });
+        });
+        
+        return scope;
     }
 
 }) ();
