@@ -55,7 +55,7 @@ def search_data( request ):
     scope = request.GET.get( 'scope', '' )
     strict = request.GET.get( 'strict', 'false' )
 
-    return HttpResponse( json.dumps( 'I like vanilla!!' ))
+    return HttpResponse( json.dumps( [ query, scope, strict ] ))
 
 # list of possible ajax calls
 func_dict = {
