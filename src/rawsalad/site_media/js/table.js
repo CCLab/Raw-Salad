@@ -185,7 +185,8 @@ var _table = (function () {
         var schema = _store.active_columns();
         var html = [];
         schema.forEach( function ( column ) {
-            html.push('<div class="', column['key'], ' ', column['type'], '">');
+            html.push('<div class="', column['key'], ' ', column['type'], '" ');
+            html.push( 'class="filtered-data">' );
             html.push(column['label'], '</div>');
         });
         $('#filtered-thead').append( html.join('') );

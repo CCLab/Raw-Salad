@@ -376,7 +376,7 @@ body {
         color: #4CBCEB;
       }
 
-      .filtered-data {
+      .filtered-data > div {
         float: left;
         padding: 5px;
         background-color: #ccc;
