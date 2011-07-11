@@ -159,7 +159,7 @@ var _download = (function () {
         result += '|';
 
         if( parent_position !== -1 ) {
-            next_position = csv.indexOf( '|', parent_position ) + 1;
+            next_position = csv.indexOf( '|', parent_position+1 ) + 1;
             csv = csv.slice( 0, next_position ) + result + csv.slice( next_position );
         }
         else {
