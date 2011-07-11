@@ -103,7 +103,7 @@ var _db = (function () {
             data = {
                 dataset: e['dataset'],
                 view: e['view'],
-                issue: e['issue']
+                issue: e['issue'],
                 data: e['data'].map( function ( elem ) {
                           return elem['idef'];
                       })
