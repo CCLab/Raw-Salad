@@ -105,10 +105,7 @@ var _download = (function () {
         // children levels
         sorted_keys.forEach( function ( level ) {
             hashed[ level ].sort( function( a, b ) {
-                                var a_id = a['data']['idef'].split('-').pop();
-                                var b_id = b['data']['idef'].split('-').pop();
-
-                                return parseInt( a_id, 10 ) < parseInt( b_id, 10 );
+                                return a['data']['idef'] < b['data']['idef'];
                            })
                            .forEach( function ( e ) {
                                 result = add_child( e['data'], sheet['columns'], result );

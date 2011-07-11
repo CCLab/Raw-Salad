@@ -341,7 +341,7 @@ body {
       }
 
       .select-all {
-        float: left;
+        float: right;
         padding: 5px;
         color: #4CBCEB;
         border-radius: 5px;
