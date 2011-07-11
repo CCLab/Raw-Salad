@@ -340,7 +340,7 @@ body {
         cursor: pointer;
       }
 
-      #select-all {
+      .select-all {
         float: left;
         padding: 5px;
         color: #4CBCEB;
@@ -349,7 +349,7 @@ body {
         cursor: default;
       }
 
-      #select-all:hover {
+      .select-all:hover {
         cursor: pointer;
         text-decoration: underline;
       }
