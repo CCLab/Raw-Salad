@@ -428,13 +428,13 @@ var _tools = (function () {
 
         $('#manage-columns-form')
             .submit( function () {
-                for ( i = 0; i < checkboxes_list.length; i=+1 ) {
-                    if( checkbox_list[i].checked ) {
-                        new_active_columns.
-                            push( _store.get_column_from_group(checkboxes_list[i].value) );
-                    }                
-                } 
-		        _store.set_active_columnes( new_active_columns );
+  //              for ( i = 0; i < checkboxes_list.length; i=+1 ) {
+  //                  if( checkbox_list[i].checked ) {
+  //                      new_active_columns.
+  //                          push( _store.get_column_from_group(checkboxes_list[i].value) );
+  //                  }                
+  //              } 
+//		        _store.set_active_columnes( new_active_columns );
                 $(this).hide();
 		return false;
         });   

@@ -110,10 +110,9 @@ var _store = (function () {
     };
 
 
-    that.add_columnes to active_sheet or return 0
- //   that.add_columns_to_sheet = function () {
-    // TODO
-//    };
+    that.set_active_columnes = function ( columns ) {
+        that.active_sheet()['columns'] = columns;       
+    };
 
 
     that.get_column_from_group = function( id ) {
