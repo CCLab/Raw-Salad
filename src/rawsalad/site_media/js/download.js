@@ -99,7 +99,7 @@ var _download = (function () {
                                return a['data']['idef'] > b['data']['idef'];
                            })
                            .forEach( function ( e ) {
-                               result += add_row( e, sheed['columns'] );
+                               result += add_row( e, sheet['columns'] );
                            });
 
         // children levels
