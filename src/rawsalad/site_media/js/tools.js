@@ -44,7 +44,7 @@ var _tools = (function () {
         prepare_filtering_interface();
         prepare_snapshot_interface();
     };
-    
+
     return that;
 
 //  P R I V A T E   I N T E R F A C E
@@ -104,7 +104,7 @@ var _tools = (function () {
         }
     }
 
-    
+
     function add_manage_checkbox()  {
         var i;
         var key;
@@ -129,14 +129,14 @@ var _tools = (function () {
 	//TODO add checkboxes to manage columns popup
     }
 
- 
+
     function add_filter_key() {
         var i, key;
         var html = [];
         var filter_part;
         var selected_column;
         var type;
-        var schema = _store.basic_schema();        
+        var schema = _store.basic_schema();
         var columns = schema
                         .filter( function ( e ) {
                             return e['processable'];
@@ -149,18 +149,18 @@ var _tools = (function () {
                         });
 
         key = $('#filter-form > div').length;
-        
+
         if ( key === 2 ) {
             $('#add-sort-key' ).remove();
         }
-        
+
         columns.unshift({
             name: 'null',
             label: 'Wybierz kolumnę'
         });
-        
+
         html.push( '<div id="filter-key-', key, '">' );
-        
+
         html.push( '<select id="filter-', key, '-columns"' );
         html.push( ' name="columns">');
         for ( i = 0; i < columns.length; i += 1 ) {
@@ -169,38 +169,38 @@ var _tools = (function () {
             html.push( columns[i]['label'], '</option>' );
         }
         html.push( '</select>' );
-        
+
         html.push( '<select id="filter-', key, '-operations"' );
         html.push( ' name="null-operation" disabled="true">' );
-        
+
         html.push( '</select>' );
-        
+
         if ( key === 0 ) {
             html.push( '<div id="add-filter-key">+</div>' );
             html.push( '<input type="submit" value="Filtruj" />' );
         }
-        
+
         html.push( '</div>' );
         $('#filter-form').append( $( html.join('') ) );
-        
+
         if( key === 0 ) {
             $('#add-filter-key').click( function () {
                 add_filter_key();
             });
         }
-        
+
         filter_part = $('#filter-' + key + '-columns');
         filter_part.change( function() {
             selected_column = $(this).val();
-            
+
             $('#filter-' + key + '-query').remove();
-            
+
             for ( i = 0; i < schema.length; i += 1 ) {
                 if ( schema[i]['key'] === selected_column ) {
                     type = schema[i]['type'];
-                    
+
                     $('#filter-' + key + '-operations').remove();
-                    
+
                     html = [ '<select id="filter-', key, '-operations"' ];
                     if ( schema[i]['type'] === 'number' ) {
                         html.push( ' name="number-operation">' );
@@ -217,17 +217,17 @@ var _tools = (function () {
                         html.push( '<option value="nst" class="filter-', key, '">Nie zaczyna się od</option>' );
                     }
                     html.push( '</select>' );
-                    
+
                     html.push( '<input type="text" name="query" id="filter-', key, '-query" />' );
-                    
+
                     $( html.join('') ).insertAfter( $('#filter-' + key + '-columns') );
-                    
+
                     break;
                 }
             }
         });
     }
-        
+
     function prepare_sorting_interface() {
 
         $('#sort-button')
@@ -243,7 +243,7 @@ var _tools = (function () {
                     } else if ( $('#manage-columns-form > input').length > 0 ) {
                         visible_form = $('#manage-columns-form');
                     }
-                    
+
                     if ( !!visible_form ) {
                         visible_form.slideUp( 400, function () {
                             visible_form.html('');
@@ -259,7 +259,7 @@ var _tools = (function () {
 
         $('#sort-form')
             .submit( function () {
-            
+
 //                _utils.create_preloader('Sortowanie');
 
                 var column, order;
@@ -328,7 +328,7 @@ var _tools = (function () {
                     } else if ( $('#manage-columns-form > input').length > 0 ) {
                         visible_form = $('#manage-columns-form');
                     }
-                    
+
                     if ( !!visible_form ) {
                         visible_form.slideUp( 400, function () {
                             visible_form.html('');
@@ -351,7 +351,7 @@ var _tools = (function () {
                 var tmp, type;
                 var new_sheet;
                 var filtered_rows;
-                
+
                 for( i = 0; i < len; ++i ) {
                     column = $('#filter-'+i+'-columns option:selected').val();
                     if( column === "null" ) {
@@ -412,7 +412,7 @@ var _tools = (function () {
     };
 
     function 	prepare_manage_columns_interface(){
-	    var new_active_columns = [];
+	    var new_active_columns;
         var i = 0;
         var checkboxes_list;
 
@@ -426,19 +426,20 @@ var _tools = (function () {
 
         $('#manage-columns-form')
             .submit( function () {
+                new_active_columns = [];
                 checkboxes_list = $('input[name=columns]');
                  for ( i = 0; i < checkboxes_list.length; i += 1 ) {
                     if( checkboxes_list[i].checked ) {
                         new_active_columns.
                             push( _store.get_column_from_group(checkboxes_list[i].value) );
-                    }                
-                } 
+                    }
+                }
 		        _store.set_active_columnes( new_active_columns );
                 _table.clean_table();
                 _table.init_table();
                 $(this).hide();
 		return false;
-        });   
+        });
     };
 
     function prepare_snapshot_interface() {
@@ -448,9 +449,9 @@ var _tools = (function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
     }
-    
-    function create_filter_result( filtered_list ) {        
-        return filtered_list.filter( function ( e ) {                   
+
+    function create_filter_result( filtered_list ) {
+        return filtered_list.filter( function ( e ) {
                                  var id = e['data']['idef'];
                                  return ! $('#'+id).is(':hidden');
                              })
@@ -460,20 +461,20 @@ var _tools = (function () {
                                  return e;
                              });
     }
-    
+
     function get_filtered_data( visual_list ) {
         visual_data_object = {};
-        
+
         var i;
         var id;
         for ( i = 0; i < visual_list.length; i += 1 ) {
             id = visual_list[i]['data']['idef'];
             visual_data_object[ id ] = visual_list[i];
         }
-        
+
         return visual_data_object;
     }
-    
+
     function create_breadcrumb( id ) {
         var tmp_id = id;
         var node;
@@ -482,24 +483,24 @@ var _tools = (function () {
         var name;
         var breadcrumb = [];
         var breadcrumb_list = [];
-        
+
         tmp_id = _utils.get_parent_id( id );
-        
+
         while ( !!tmp_id ) {
             node = $('#'+ tmp_id);
             full_type = node.children('.type').html();
             type = get_type_representation( full_type );
             name = node.children('.name').html();
-            
+
             tmp_id = _utils.get_parent_id( tmp_id );
             breadcrumb_list.push({
                 type: type,
                 name: name
             });
         }
-        
+
         breadcrumb_list = breadcrumb_list.reverse();
-        
+
         breadcrumb_list.forEach( function ( el, i ) {
             breadcrumb.push( el['type'] + ' ' );
             if ( i < breadcrumb_list.length - 1 ) {
@@ -520,16 +521,16 @@ var _tools = (function () {
                 breadcrumb.push(' > ');
             }
         });
-        
+
         return breadcrumb.join('');
     }
-    
+
     function get_type_representation( full_type ) {
         var type_list;
         type_list = full_type.split(' ');
         return type_list.pop();
     }
-    
+
 }) ();
 
 

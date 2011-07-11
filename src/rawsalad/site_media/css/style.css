@@ -190,8 +190,8 @@ body {
 
         .position .more {
             float: right;
-            color: #4abff7;
-            background-color: #ddd;            
+            color: #fff;
+            background-color: #4abff7;            
             font-size: 10px;
             margin-top: 10px;
             margin-bottom: 5px;
@@ -203,8 +203,8 @@ body {
 
         .position .more:hover {
             cursor: pointer;
-            color: #fff;
-            background-color: #4abff7;            
+            color: #4abff7;
+            background-color: #ddd;            
         }
        
         .more-desc {
@@ -364,8 +364,8 @@ body {
         padding: 5px;
         margin-bottom: 5px;
 /*        margin-top: 45px;*/
-        background-color: #ddd;
-        color: #4CBCEB;
+        color: #fff;
+        background-color: #4cbceb;
         border-radius: 5px;
         -moz-border-radius: 5px;
         cursor: default;
@@ -373,7 +373,8 @@ body {
 
       .select-all:hover {
         cursor: pointer;
-        background-color: #eee;
+        background-color: #ddd;
+        color: #4CBCEB;
       }
 
 #permalink-container {
