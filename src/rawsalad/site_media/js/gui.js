@@ -94,11 +94,11 @@ var _gui = (function () {
             });
 
             $('#download-select-all').click( function () {
-                $('#download-table .check > input' ).trigger( $.Event('click') );
+                $('#download-table:checkbox').not(':checked' ).trigger( $.Event('click') );
             });
 
             $('#download-unselect-all').click( function () {
-                $('#download-table .check > input' ).trigger( $.Event('click') );
+                $('#download-table:checkbox:checked' ).trigger( $.Event('click') );
             });
 
             $('#table-container').hide();
