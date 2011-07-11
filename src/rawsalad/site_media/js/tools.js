@@ -259,7 +259,6 @@ var _tools = (function () {
             });
 
         $('#sort-form')
-            .toggle()
             .submit( function () {
             
 //                _utils.create_preloader('Sortowanie');
@@ -347,7 +346,6 @@ var _tools = (function () {
             });
 
         $('#filter-form')
-            .toggle()
             .submit( function () {
 
                 var column, operation, query;
