@@ -303,7 +303,7 @@ body {
       }
 
       #download-container td, th {
-        height: 45px;
+        height: 40px;
       }
 
       #download-container td, th {
@@ -363,7 +363,6 @@ body {
         float: right;
         padding: 5px;
         margin-bottom: 5px;
-/*        margin-top: 45px;*/
         color: #fff;
         background-color: #4cbceb;
         border-radius: 5px;
@@ -375,6 +374,12 @@ body {
         cursor: pointer;
         background-color: #ddd;
         color: #4CBCEB;
+      }
+
+      .filtered-data {
+        float: left;
+        padding: 5px;
+        background-color: #ccc;
       }
 
 #permalink-container {

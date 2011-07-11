@@ -180,17 +180,17 @@ var _table = (function () {
 
         return row;
     }
-    
+
     function create_filtered_thead() {
         var schema = _store.active_columns();
         var html = [];
         schema.forEach( function ( column ) {
-            html.push('<div class=', column['key'], ' ', column['type'], '">');
+            html.push('<div class="', column['key'], ' ', column['type'], '">');
             html.push(column['label'], '</div>');
         });
         $('#filtered-thead').append( html.join('') );
     }
-    
+
     function create_filtered_tbody() {
         var level = 'a';
         var hashed_list = _utils.hash_list( _store.active_rows() );
@@ -206,12 +206,12 @@ var _table = (function () {
             level = _utils.next_letter( level );
         }
     }
-    
+
     function add_filtered_rows( data ) {
         var parent;
         var new_node;
         var schema = _store.active_columns();
-        
+
         data.reverse().forEach( function ( row ) {
             parent = find_parent( row['data']['idef'] );
             new_node = generate_filtered_row({
@@ -225,34 +225,35 @@ var _table = (function () {
             }
         });
     }
-    
+
     function generate_filtered_row( args ) {
         var html = [];
         var node = args['node'];
-            
+
         html.push('<div id="', node['data']['idef'], '">');
-        
+
         html.push('<div id="breadcrumb-', node['data']['idef'], '">');
         html.push( node['breadcrumb'] );
         html.push('</div>');
-        
-        html.push('<div id="filter-data-', node['data']['idef'], '">');
+
+        html.push('<div id="filter-data-', node['data']['idef'], '" ');
+        html.push('class="filtered-data">' );
         args['schema'].forEach( function ( column ) {
             html.push('<div class="', column['type'], '">');
             html.push( node['data'][ column['key'] ] );
             html.push('</div>');
         });
         html.push('</div>');
-        
+
         html.push('</div>');
-        
+
         return $( html.join('') );
     }
-    
+
     function find_parent( id ) {
         var parent_id = _utils.get_parent_id( id );
         var parent;
-        
+
         while ( !!parent_id ) {
             parent = $('#' + parent_id);
             if ( !!parent.length ) {
