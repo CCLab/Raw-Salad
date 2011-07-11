@@ -32,9 +32,25 @@ var _gui = (function () {
     that.init_gui = function () {
         $('#table-tab').click( function () {
             $('#table-container').show();
+            $('#search-container').hide();
             $('#download-container').hide();
             $('#permalink-container').hide();
 
+            $('#tabs')
+                .find('div')
+                .removeClass('active')
+                .addClass('inactive');
+
+            $(this)
+                .addClass('active')
+                .removeClass('inactive');
+        });
+        $('#search-tab').click( function () {
+            $('#table-container').hide();
+            $('#search-container').show();
+            $('#download-container').hide();
+            $('#permalink-container').hide();
+            
             $('#tabs')
                 .find('div')
                 .removeClass('active')
@@ -102,6 +118,7 @@ var _gui = (function () {
             });
 
             $('#table-container').hide();
+            $('#search-container').hide();
             $('#download-container').show();
             $('#permalink-container').hide();
 
@@ -116,6 +133,7 @@ var _gui = (function () {
         });
         $('#permalink-tab').click( function () {
             $('#table-container').hide();
+            $('#search-container').hide();
             $('#download-container').hide();
             $('#permalink-container').show();
 

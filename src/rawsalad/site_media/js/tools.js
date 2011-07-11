@@ -44,6 +44,48 @@ var _tools = (function () {
         prepare_filtering_interface();
         prepare_snapshot_interface();
     };
+    
+    that.show_search_results = function( results ) {
+        var meta = _store.meta_datasets();
+        var collection_name;
+        var dataset;
+        var view;
+        var issue;
+        var i;
+        var html = ['<div id="search-title">Wyniki w kolekcjach danych</div>'];
+        html.push('<div id="show-found-button">Przejdź do zaznaczonych</div>');
+        
+        results.forEach( function( col, col_i ) {
+            dataset = meta[ col['dataset'] ];
+            view = dataset['perspectives'][ col['view'] ];
+            collection_name = view['name'] + ' ' + col['issue'];
+            
+            issue = -1;
+            for ( i = 0; i < view['issues'].length; i += 1 ) {
+                if ( parseInt( view['issues'][i] ) === col['issue'] ) {
+                    issue = i;
+                    break;
+                }
+            }
+            
+            _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
+            
+            html.push('<div id="search-collection-', col_i, '">');
+            html.push('<input type="checkbox" id="search-checkbox-', col_i);
+            html.push(' name="search-result" value="', collection_name, '"/>');
+            
+            col['data'].forEach( function( row, row_i ) {
+                html.push('<div id="search-result-', col_i, '-', row_i, '">');
+                html.push('<div class="search-type">', row['type'], '</div>');
+                html.push('<div class="search-name">', row['name'], '</div>');
+                html.push('</div>');
+            });
+            
+            html.push('</div>');
+        });
+        
+        $('#search-container').append( html.join('') );
+    };
 
     return that;
 
