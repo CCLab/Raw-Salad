@@ -430,7 +430,7 @@ var _tools = (function () {
                  for ( i = 0; i < checkboxes_list.length; i += 1 ) {
                     if( checkboxes_list[i].checked ) {
                         new_active_columns.
-                            push( _store.get_column_from_group(checkboxes_list[i].value)[0] );
+                            push( _store.get_column_from_group(checkboxes_list[i].value) );
                     }                
                 } 
 		        _store.set_active_columnes( new_active_columns );
