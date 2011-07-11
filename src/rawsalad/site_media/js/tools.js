@@ -234,7 +234,8 @@ var _tools = (function () {
                 var visible_form;
                 if ( $('#sort-form > div').length > 0 ) {
                     $('#sort-form').slideUp( 400, function () {
-                        $('#sort-form').html('').toggle();
+                        $('#sort-form').html('');
+                        //$('#sort-form').html('').toggle();
                     });
                 } else {
                     if ( $('#filter-form > div').length > 0 ) {
@@ -251,9 +252,13 @@ var _tools = (function () {
                             $('#sort-form').slideDown( 400 );
                         })
                     } else {
-                        $('#sort-form').html('').toggle();
                         add_sort_key();
                         $('#sort-form').slideDown( 400 );
+                    
+                    
+                        //$('#sort-form').html('').toggle();
+                        //add_sort_key();
+                        //$('#sort-form').slideDown( 400 );
                     }
                 }
             });
