@@ -140,6 +140,24 @@ var _db = (function () {
                         received_data = {"rows": [{"info": null, "leaf": false, "name": "ZARZ\u0104DZANIE PA\u0143STWEM", "parent": null, "level": "a", "idef": "1", "czesc": null, "czesc_name": null, "v_nation": 1343628, "type": "FUNKCJA 1"}, {"info": null, "leaf": false, "name": "BEZPIECZE\u0143STWO WEWN\u0118TRZNE I PORZ\u0104DEK PUBLICZNY", "parent": null, "level": "a", "idef": "2", "czesc": null, "czesc_name": null, "v_nation": 15764059, "type": "FUNKCJA 2"}, {"info": null, "leaf": false, "name": "EDUKACJA, WYCHOWANIE I OPIEKA", "parent": null, "level": "a", "idef": "3", "czesc": null, "czesc_name": null, "v_nation": 52368661, "type": "FUNKCJA 3"}, {"info": null, "leaf": false, "name": "Ochrona obywateli, utrzymanie porz\u0105dku publicznego oraz dzia\u0142ania na rzecz poprawy bezpiecze\u0144stwa", "parent": "2", "level": "b", "idef": "2-1", "czesc": null, "czesc_name": null, "v_nation": 5829003, "type": "Zadanie 2.1"}, {"info": null, "leaf": false, "name": "Redukowanie przest\u0119pczo\u015bci", "parent": "2", "level": "b", "idef": "2-2", "czesc": null, "czesc_name": null, "v_nation": 3015132, "type": "Zadanie 2.2"}, {"info": null, "leaf": false, "name": "Strze\u017cenie praworz\u0105dno\u015bci i czuwanie nad \u015bciganiem przest\u0119pstw przez prokuratur\u0119", "parent": "2", "level": "b", "idef": "2-3", "czesc": null, "czesc_name": null, "v_nation": 1066093, "type": "Zadanie 2.3"}, {"info": null, "leaf": false, "name": "Ochrona przeciwpo\u017carowa, dzia\u0142alno\u015b\u0107 zapobiegawcza, ratownicza i ga\u015bnicza", "parent": "2", "level": "b", "idef": "2-4", "czesc": null, "czesc_name": null, "v_nation": 2225298, "type": "Zadanie 2.4"}, {"info": null, "leaf": false, "name": "Zarz\u0105dzanie kryzysowe i obrona cywilna", "parent": "2", "level": "b", "idef": "2-5", "czesc": null, "czesc_name": null, "v_nation": 2131002, "type": "Zadanie 2.5"}, {"info": null, "leaf": false, "name": "Ochrona granicy pa\u0144stwowej, kontrola ruchu granicznego i przeciwdzia\u0142anie nielegalnej migracji", "parent": "2", "level": "b", "idef": "2-6", "czesc": null, "czesc_name": null, "v_nation": 1497531, "type": "Zadanie 2.6"}], "perspective": {"sort": {"1": {"parent_sort": 1}, "0": {"idef_sort": 1}, "2": {"level": 1}}, "name": "budzet_zadaniowy_podzadania_2012", "max_level": "d", "idef": 1, "dataset": 0, "explorable": "type", "perspective": "Bud\u017cet zadaniowy 2012 - Podzadanie", "aux": {"idef": 1, "leaf": 1, "parent": 1, "level": 1}, "query": {"node": {"$in": [null, 1]}, "level": "a"}, "ns": "dd_budg2012_go", "issue": "2012", "columns": [{"type": "string", "label": "Typ", "processable": false, "key": "type", "basic": true}, {"type": "string", "label": "Nazwa", "processable": true, "key": "name", "basic": true}, {"type": "string", "processable": true, "key": "czesc", "label": "Cz\u0119\u015b\u0107"}, {"type": "string", "processable": true, "key": "czesc_name", "label": "Cz\u0119\u015b\u0107 w bud\u017aecie ksi\u0119gowym"}, {"type": "string", "label": "Cel & Miernik", "processable": false, "key": "info", "basic": false}, {"label": "Bud\u017cet Pa\u0144stwa", "processable": true, "key": "v_nation", "basic": true, "checkable": true, "type": "number"}]}};
                     }
                     
+                    sheets_left -= 1;
+                    // if it is the last sheet to create, show table
+                    if ( sheets_left === 0 ) {
+                        $('#table-container').show();
+                        $('#search-container').hide();
+                        $('#download-container').hide();
+                        $('#permalink-container').hide();
+
+                        $('#tabs')
+                            .find('div')
+                            .removeClass('active')
+                            .addClass('inactive');
+
+                        $('#table-tab')
+                            .addClass('active')
+                            .removeClass('inactive');
+                    }
+                    
                     // TODO: shouldnt value returned by group_exists be changed?
                     if ( !_store.group_exists(col_id) ) {
                         groups = _store.get_all_groups;
@@ -210,25 +228,6 @@ var _db = (function () {
                         // initialize an application
                         _gui.init_app( basic_data['name'] );
                     }
-                    
-                    sheets_left -= 1;
-                    // if it is the last sheet to create, show table
-                    if ( sheets_left === 0 ) {
-                        $('#table-container').show();
-                        $('#search-container').hide();
-                        $('#download-container').hide();
-                        $('#permalink-container').hide();
-
-                        $('#tabs')
-                            .find('div')
-                            .removeClass('active')
-                            .addClass('inactive');
-
-                        $('#table-tab')
-                            .addClass('active')
-                            .removeClass('inactive');
-                    }
-                    
                 } // function( received_data )
             }); // $.ajax
         }); // forEach
