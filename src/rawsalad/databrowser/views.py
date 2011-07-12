@@ -64,7 +64,7 @@ def get_searched_data( request ):
         'view': request.GET.get( 'view', -1 ),
         'issue': request.GET.get( 'issue', -1 )
     }
-    return HttpResponse( json.dumps([ response_dict ]) )
+    return HttpResponse( json.dumps(response_dict) )
     
 
 # list of possible ajax calls
