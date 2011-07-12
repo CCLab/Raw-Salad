@@ -621,7 +621,7 @@ var _tools = (function () {
         return scope;
     }
     
-    function generate_search_results() {
+    function generate_search_results( results ) {
         var meta = _store.meta_datasets();
         var collection_name;
         var dataset;
