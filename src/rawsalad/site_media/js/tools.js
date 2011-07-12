@@ -45,7 +45,7 @@ var _tools = (function () {
         prepare_snapshot_interface();
         prepare_search_interface();
     };
-    
+
     that.show_search_results = function( results ) {
         var meta = _store.meta_datasets();
         var collection_name;
@@ -55,12 +55,12 @@ var _tools = (function () {
         var i;
         var html = ['<div id="search-title">Wyniki w kolekcjach danych</div>'];
         html.push('<div id="show-found-button">Przejdź do zaznaczonych</div>');
-        
+
         results.forEach( function( col, col_i ) {
             dataset = meta[ col['dataset'] ];
             view = dataset['perspectives'][ col['view'] ];
             collection_name = view['name'] + ' ' + col['issue'];
-            
+
             issue = -1;
             for ( i = 0; i < view['issues'].length; i += 1 ) {
                 if ( parseInt( view['issues'][i] ) === col['issue'] ) {
@@ -68,23 +68,23 @@ var _tools = (function () {
                     break;
                 }
             }
-            
+
             _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
-            
+
             html.push('<div id="search-collection-', col_i, '">');
             html.push('<input type="checkbox" id="search-checkbox-', col_i);
             html.push(' name="search-result" value="', collection_name, '"/>');
-            
+
             col['data'].forEach( function( row, row_i ) {
                 html.push('<div id="search-result-', col_i, '-', row_i, '">');
                 html.push('<div class="search-type">', row['type'], '</div>');
                 html.push('<div class="search-name">', row['name'], '</div>');
                 html.push('</div>');
             });
-            
+
             html.push('</div>');
         });
-        
+
         $('#search-container').append( html.join('') );
     };
 
@@ -362,7 +362,7 @@ var _tools = (function () {
             .click( function () {
                 var visible_form;
                 if ( $('#filter-form > div').length > 0 ) {
-                    $('#filter-form').slideUp( 400, function () {
+                    $('#filter-form').slideUp( 200, function () {
                         $('#filter-form').html('');
                     });
                 } else {
@@ -373,14 +373,14 @@ var _tools = (function () {
                     }
 
                     if ( !!visible_form ) {
-                        visible_form.slideUp( 400, function () {
+                        visible_form.slideUp( 200, function () {
                             visible_form.html('');
                             add_filter_key();
-                            $('#filter-form').slideDown( 400 );
+                            $('#filter-form').slideDown( 200 );
                         })
                     } else {
                         add_filter_key();
-                        $('#filter-form').slideDown( 400 );
+                        $('#filter-form').slideDown( 200 );
                     }
                 }
             });
@@ -463,7 +463,7 @@ var _tools = (function () {
             .click( function () {
                 $('#filter-form').hide();
                 $('#sort-form').hide();
-                $('#manage-columns-form').html('').toggle();
+                $('#manage-columns-form').toggle();
                 add_manage_checkbox();
             });
 
@@ -492,7 +492,7 @@ var _tools = (function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });
     }
-    
+
     function prepare_search_interface() {
         $('#search-form')
             .submit( function () {
@@ -506,7 +506,7 @@ var _tools = (function () {
                     strict = $('#strict-match').is(':checked');
                     _db.search( query, scope, strict );
                 }
-                
+
                 return false;
             });
     }
@@ -591,7 +591,7 @@ var _tools = (function () {
         type_list = full_type.split(' ');
         return type_list.pop();
     }
-    
+
     function construct_scope() {
         var scope = [];
         _store.meta_datasets().forEach( function ( dataset, dset_id ) {
@@ -601,7 +601,7 @@ var _tools = (function () {
                 });
             });
         });
-        
+
         return scope;
     }
 

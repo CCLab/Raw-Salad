@@ -15,6 +15,10 @@
   background-color: #98d39f;
 }
 
+#data-table tbody > tr.dim:hover {
+  color: #7b7b7b !important;
+}
+
 #data-table td {
   cursor: default;
   vertical-align: top;
@@ -40,6 +44,10 @@
 
 .click:hover {
   cursor: pointer;
+}
+
+.dim .click:hover {
+  color: #1a7aad;
 }
 
 .name {

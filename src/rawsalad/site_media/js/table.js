@@ -64,8 +64,13 @@ var _table = (function () {
 
     function create_thead() {
         var schema = _store.active_columns();
+        var total = _store.active_rows().filter( function ( e ) {
+                                            return e['type'] === 'Total';
+                                        })
+                                        .shift();
         var html = [ '<tr>' ];
 
+        // create header
         schema.forEach( function ( column ) {
             html.push( '<td class="', column['key'], ' ' );
             html.push( column['type'], '">' );
@@ -74,6 +79,20 @@ var _table = (function () {
         });
 
         html.push( '</tr>' );
+
+        // create total row
+        if( !!total ) {
+            html.push( '<tr style="background-color: #3b3b3b">' );
+
+            schema.forEach( function ( column ) {
+                html.push( '<td class="', column['key'], ' ' );
+                html.push( column['type'], '">' );
+                html.push( total[ column['key'] ] );
+                html.push( '</td>' );
+            });
+
+            html.push( '</tr>' );
+        }
         $('#data-table > thead').append( html.join('') );
     }
 
