@@ -507,6 +507,9 @@ var _tools = (function () {
                 var query;
                 var scope;
                 var strict;
+                
+                $('#search-results').remove();
+                $('#show-found-button').hide();
 
                 query = $('#search-text').val();
                 if ( !!query ) {
@@ -520,7 +523,33 @@ var _tools = (function () {
             
         $('#show-found-button')
             .click( function () {
-                // show results in sheets
+                // var search_list = get_search_list_using_checkboxes();
+                var search_list = [
+                    {
+                        dataset: 0,
+                        view: 0,
+                        issue: 2011,
+                        data: [
+                            {
+                                idef: "01-921",
+                                parent: "01"
+                            }
+                        ]
+                    },
+                    {
+                        dataset: 0,
+                        view: 1,
+                        issue: 2012,
+                        data: [
+                            {
+                                idef: "2-2",
+                                parent: "2"
+                            }
+                        ]
+                    }
+                ];
+                
+                _db.add_search_data( search_list );
             });
     }
 
