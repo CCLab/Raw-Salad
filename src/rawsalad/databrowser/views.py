@@ -56,6 +56,12 @@ def search_data( request ):
     strict = request.GET.get( 'strict', 'false' )
 
     return HttpResponse( json.dumps( [ query, scope, strict ] ))
+    
+# get initial_data + subtrees to searched nodes
+def get_searched_data( request ):
+    
+    return HttpResponse( json.dumps(['TODO']) )
+    
 
 # list of possible ajax calls
 func_dict = {

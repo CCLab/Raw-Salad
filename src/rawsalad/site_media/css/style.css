@@ -524,15 +524,13 @@ body {
             }
             
             #tools {
-                position: absolute;
-                bottom: 7px;
+                position: relative;
+                float: right;
                 right: 10px;
+                top: 10px;
                 width: auto;
-                background-color: #fff;
-                padding-left: 5px;
-                border-bottom: solid 1px #555;
                 border-radius: 3px 3px 0px 0px;
-                -moz-border-radius: 3px 3px 0px 0px;                
+                -moz-border-radius: 3px 3px 0px 0px;      
             }
                 
                 #tools > div {         
@@ -542,8 +540,12 @@ body {
                     background-color: #fff;
                     color: #4cbceb;
                     
+                    border-radius: 3px 3px 3px 3px;
+                    -moz-border-radius: 3px 3px 3px 3px;
+                }
+                
+                #manage-columns-button{
                     border-radius: 3px 3px 0px 0px;
-                    -moz-border-radius: 3px 3px 0px 0px;
                 }
                 
                 #tools > div:hover {

@@ -9,6 +9,24 @@
     "max_level": "d",
     "columns": [
         {
+            "key": "idef_sort",
+            "label": "ID",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "parent_sort",
+            "label": "Rodzic",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "level",
+            "label": "Poziom",
+            "type": "string",
+            "processable": true
+            },
+        {
             "key": "type",
             "label": "Typ",
             "type": "string",
@@ -33,13 +51,6 @@
             "label": "Część w budźecie księgowym",
             "type": "string",
             "processable": true
-            },
-        {
-            "key": "info",
-            "label": "Cel & Miernik",
-            "type": "string",
-            "processable": false,
-            "basic": false
             },
         {
             "key": "v_eu",
