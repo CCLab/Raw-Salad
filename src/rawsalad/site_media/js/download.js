@@ -58,6 +58,7 @@ var _download = (function () {
                         csv_string += add_filtered( sheet );
                     }
                     else {
+                        csv_string += add_total( sheet );
                         csv_string += add_children( sheet );
                     }
                 }
@@ -207,6 +208,28 @@ var _download = (function () {
             }
         }
         return result;
+    }
+
+    function add_total( sheet ) {
+        var result = '';
+        var total = sheet['rows']['total']['data'];
+        var columns = sheet['columns'];
+
+        // if no total in the collecion...
+        if( !total ) {
+            return '';
+        }
+
+        result += total['idef'] + ';';
+        result += ';';
+        result += total['level'] + ';';
+
+        columns.forEach( function ( e ) {
+            result += total[ e['key'] ];
+            result += ';';
+        });
+        result += '|';
+
     }
 
 })();
