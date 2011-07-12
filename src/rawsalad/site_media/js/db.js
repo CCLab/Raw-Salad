@@ -47,26 +47,12 @@ var _db = (function () {
                         dataset: 0,
                         view: 0,
                         issue: 2011,
-                        name: 'gospodarka',
                         data: [
                             {
-                                czesc: "1",
-                                dot_sub: 42000,
                                 idef: "01-921",
-                                leaf: false,
-                                level: "b",
-                                name: "Kultura i ochrona dziedzictwa narodowego",
-                                numer: 921,
                                 parent: "01",
-                                pozycja: 7,
-                                sw_eu: 0,
-                                swiad_fiz: 0,
                                 type: "Dzia³ 921",
-                                v_total: 42000,
-                                wspolfin_eu: 0,
-                                wyd_dlug: 0,
-                                wyd_jednostek: 0,
-                                wyd_majatk: 0
+                                name: "Kultura i ochrona dziedzictwa narodowego"
                             }
                         ]
                     },
@@ -74,25 +60,17 @@ var _db = (function () {
                         dataset: 0,
                         view: 1,
                         issue: 2012,
-                        name: 'gospodarka',
                         data: [
                             {
-                                czesc: null,
-                                czesc_name: null,
                                 idef: "2-2",
-                                info: null,
-                                leaf: false,
-                                level: "b",
-                                name: "Redukowanie przestêpczoœci",
                                 parent: "2",
                                 type: "Zadanie 2.2",
-                                v_nation: 3015132
+                                name: "Redukowanie przestêpczoœci"
                             }
                         ]
                     }
                 ];
                 _tools.show_search_results( tmp_data );
-                console.log( tmp_data );
             }
         });
     };

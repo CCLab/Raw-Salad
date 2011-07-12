@@ -76,7 +76,7 @@ var _tools = (function () {
                 _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
 
                 html.push('<div id="search-collection-', col_i, '">');
-                html.push('<input type="checkbox" id="search-checkbox-', col_i);
+                html.push('<input type="checkbox" id="search-checkbox-', col_i, '"');
                 html.push(' name="search-result" value="', collection_name, '"/>');
 
                 col['data'].forEach( function( row, row_i ) {
@@ -94,6 +94,48 @@ var _tools = (function () {
 
         $( html.join('') ).insertBefore( $('#show-found-button') );
         $('#show-found-button').show();
+        
+        $('#show-found-button')
+            .click( function () {
+                // var search_list = get_search_list_using_checkboxes();
+                var search_list = [
+                    {
+                        dataset: 0,
+                        view: 0,
+                        issue: 2011,
+                        data: [
+                            {
+                                idef: "01-921",
+                                parent: "01"
+                            }
+                        ]
+                    },
+                    {
+                        dataset: 0,
+                        view: 1,
+                        issue: 2012,
+                        data: [
+                            {
+                                idef: "2-2",
+                                parent: "2"
+                            }
+                        ]
+                    }
+                ];
+                
+                var checkboxes_nr = $('#search-results > div').length - 1;
+                var checked_list = [];
+                var i;
+                
+                for ( i = 0; i < checkboxes_nr; i += 1 ) {
+                    if ( $('#search-checkbox-' + i).is(':checked') ) {
+                        check
+                    }
+                }
+                
+
+                _db.add_search_data( search_list );
+            });
     };
 
     return that;
