@@ -12,21 +12,60 @@ meta_src= "md_budg_scheme"
 nav_schema= "ms_nav"
 conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/rawsdata.conf"
 
-class Error(object):
+class Response(object):
+    """
+    response object
+    returns dict with http response and description
+    """
     def __init__(self):
-        self.error_dict= {
-            '10': 'ERROR: No such data!',
-            '20': 'ERROR: No such meta-data!',
-            '30': 'ERROR: Wrong request!',
-            '31': 'ERROR: Scope +TO+ is applicable to the same level!',
-            '32': 'ERROR: Wrong sequence in the scope +TO+!',
-            '33': 'ERROR: Scope +TO+ should include only 2 elements!',
-            '34': 'ERROR: Syntax error in scope definition!',
-            '35': 'ERROR: Format missing!'
+        self.code= 0 # Response class is optimistic
+        self.response_dict= {
+            '0': {
+                'httpresp': 200,
+                'descr': 'OK'
+                },
+            '10': {
+                'httpresp': 404,
+                'descr': 'ERROR: No such data!'
+                },
+            '20': {
+                'httpresp': 404,
+                'descr': 'ERROR: No such meta-data!'
+                },
+            '30': {
+                'httpresp': 400,
+                'descr': 'ERROR: Bad request!'
+                },
+            '31': {
+                'httpresp': 400,
+                'descr': 'ERROR: Scope +TO+ is applicable to the codes on the same level!'
+                },
+            '32': {
+                'httpresp': 400,
+                'descr': 'ERROR: Wrong sequence in the scope +TO+!'
+                },
+            '33': {
+                'httpresp': 400,
+                'descr': 'ERROR: Scope +TO+ should include only 2 elements!'
+                },
+            '34': {
+                'httpresp': 400,
+                'descr': 'ERROR: Syntax error in scope definition!',
+                },
+            '35': {
+                'httpresp': 400,
+                'descr': 'ERROR: Format not specified!'
+                }
             }
 
-    def throw_error(self, code):
-        return self.error_dict[str(code)]
+    def __del__(self):
+        pass
+
+    def get_response(self, code):
+        self.code= code
+        self.http_resp= self.response_dict[str(code)]['httpresp']
+        self.descr= self.response_dict[str(code)]['descr']
+        return self.response_dict[str(code)]
 
 class DBconnect(object):
     def __init__(self, db_type):
@@ -73,7 +112,7 @@ class Navtree(object): # Navigator tree
         """
         self.fields= parms.pop("fields_aux", {}) # before match against metadata
         self.query= parms.pop("query_aux", {}) # before update from metadata
-        self.response= 'OK' # Navtree class is optimistic
+        self.response= Response().get_response(0) # Navtree class is optimistic
 
     def __del__(self):
         pass
@@ -92,11 +131,11 @@ class Navtree(object): # Navigator tree
         
         cursor_data= datasrc[nav_schema].find(query, nav_fields)
         if cursor_data is not None:
-            self.response= 'OK'
+            self.response= Response().get_response(0)
             for row in cursor_data:
                 out.append(row)
         else: # error
-            self.response= Error().throw_error(10)
+            self.response= Response().get_response(10)
 
         return out
 
@@ -106,11 +145,11 @@ class Navtree(object): # Navigator tree
 
         cursor_data= datasrc[nav_schema].find({}, { '_id':0, 'perspectives':0 })
         if cursor_data.count() > 0:
-            self.response= 'OK'
+            self.response= Response().get_response(0) # no error
             for row in cursor_data:
                 out.append(row)
         else:
-            self.response= Error().throw_error(10)
+            self.response= Response().get_response(10)
 
         return out
 
@@ -128,10 +167,10 @@ class Navtree(object): # Navigator tree
         query= { 'idef': int(dataset_idef) }
         cursor_data= datasrc[nav_schema].find_one(query, nav_fields)
         if cursor_data is not None:
-            self.response= 'OK'
+            self.response= Response().get_response(0)
             out= cursor_data['perspectives']
         else: # error
-            self.response= Error().throw_error(10)
+            self.response= Response().get_response(10)
 
         return out
 
@@ -146,10 +185,10 @@ class Navtree(object): # Navigator tree
             }
         cursor_data= datasrc[nav_schema].find_one(query, nav_fields)
         if cursor_data is not None:
-            self.response= 'OK'
+            self.response= Response().get_response(0)
             out= cursor_data['perspectives'][int(view_idef)]['issues']
         else: # error
-            self.response= Error().throw_error(10)
+            self.response= Response().get_response(10)
 
         return out
 
@@ -160,13 +199,13 @@ class Navtree(object): # Navigator tree
             element_list= self.get_dataset(datasrc)
         elif dataset_idef is not None and view_idef is None: # views count
             element_list= self.get_view(datasrc, dataset_idef)
-        else:
+        else: # issues count
             element_list= self.get_issue(datasrc, dataset_idef, view_idef)        
             
-        if self.response == 'OK':
+        if self.response['httpresp'] == 200:
             count= len(element_list)
         else:
-            self.response= Error().throw_error(20)
+            self.response= Response().get_response(20)
 
         return count
 
@@ -181,7 +220,7 @@ class Collection(object):
         self.raw_usrdef_fields= parms.pop("fields", []) # before match against metadata
         self.raw_query= parms.pop("query", {}) # before update from metadata
         self.warning= None # non-critical errors and typos
-        self.response= 'OK' # Collection class is optimistic
+        self.response= Response().get_response(0) # Collection class is optimistic
         self.count= 0
 
     def __del__(self):
@@ -194,10 +233,10 @@ class Collection(object):
             )
 
         if metadata_complete is None: # no such source
-            self.response= Error().throw_error(20)
+            self.response= Response().get_response(20)
             self.request= "unknown"
         else:
-            self.response= "OK"
+            self.response= Response().get_response(0)
             self.request= metadata_complete['name']
 
             count_query= metadata_complete['query'] # used for counting
@@ -212,7 +251,7 @@ class Collection(object):
             # but before delete useless keys - counting children of a given parent
             count= self.get_count(datasrc, metadata_complete['ns'], count_query)
             if count == 0:
-                self.response= Error().throw_error(10)
+                self.response= Response().get_response(10)
             else:
                 metadata_complete['count']= count
 
@@ -253,10 +292,10 @@ class Collection(object):
             )
 
         if metadata_complete is None: # no such source
-            self.response= Error().throw_error(20)
+            self.response= Response().get_response(20)
             self.request= "unknown"
         else:
-            self.response= "OK"
+            self.response= Response().get_response(0)
             self.request= metadata_complete['name']
 
             conn_coll= metadata_complete['ns'] # collection name
@@ -284,7 +323,7 @@ class Collection(object):
                 for row in cursor_data:
                     data.append(row)
             else:
-                self.response= Error().throw_error(10)
+                self.response= Response().get_response(10)
 
         self.count= elm_count
         return data
@@ -298,10 +337,10 @@ class Collection(object):
             )
 
         if metadata_complete is None: # no such source
-            self.response= Error().throw_error(20)
+            self.response= Response().get_response(20)
             self.request= "unknown"
         else:
-            self.response= "OK"
+            self.response= Response().get_response(0)
             self.request= metadata_complete['name']
 
             conn_coll= metadata_complete['ns'] # collection name
@@ -325,9 +364,9 @@ class Collection(object):
                     if result_tree is not None:
                         tree.append(result_tree)
                     else: # error
-                        self.response= Error().throw_error(10)
+                        self.response= Response().get_response(10)
                 else: # means we deal with URL like /a/X/b/ or /a/X/b/Y/c - which is nonesense for a tree
-                    self.response= Error().throw_error(30)
+                    self.response= Response().get_response(30)
 
         return tree
 
@@ -404,7 +443,7 @@ class Collection(object):
     def fill_warning(self, field_names_list):
         """
         check if there are user defined fields
-        that are not listed in metadataint
+        that are not listed in metadata
         """
         warning_list= [] 
         for fld in self.raw_usrdef_fields:
@@ -413,6 +452,6 @@ class Collection(object):
         if len(warning_list) == 0:
             pass
         elif len(warning_list) == 1:
-            self.warning= "Column '%s' is not listed in the meta-data!" % warning_list[0]
+            self.warning= "There is no such column as '%s' in meta-data!" % warning_list[0]
         elif len(warning_list) > 1:
-            self.warning= "Columns ['%s'] are not listed in the meta-data!" % "', '".join(warning_list)
+            self.warning= "There are no such columns as ['%s'] in meta-data!" % "', '".join(warning_list)
