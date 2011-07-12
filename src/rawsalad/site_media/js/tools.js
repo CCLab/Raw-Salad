@@ -463,7 +463,7 @@ var _tools = (function () {
             .click( function () {
                 $('#filter-form').hide();
                 $('#sort-form').hide();
-                $('#manage-columns-form').toggle();
+                $('#manage-columns-form').html('').toggle();
                 add_manage_checkbox();
             });
 

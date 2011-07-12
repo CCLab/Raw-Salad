@@ -1,8 +1,6 @@
 #data-table {
   width: 960px;
   border-collapse: collapse;
-  border-right: 2px solid #8b8b8b;
-  border-left: 2px solid #8b8b8b;
 }
 
 
@@ -11,8 +9,18 @@
   color: #fff;
 }
 
+#data-table tbody > tr.dim {
+  border-right: 2px solid #8b8b8b;
+  border-left: 2px solid #8b8b8b;
+}
+
 #data-table tbody > tr:hover {
   background-color: #98d39f;
+}
+
+#data-table tbody > tr.dim {
+  border-right: 2px solid #ababab;
+  border-left: 2px solid #ababab;
 }
 
 #data-table tbody > tr.dim:hover {
