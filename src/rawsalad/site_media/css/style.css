@@ -388,16 +388,9 @@ body {
         text-align: left;
       }
        
-       .filtered-block {
-         clear: both;
-         margin-bottom: 10px;
-         width: 100%;
-       }
        
        .filtered-breadcrumb {
          color: #5b5b5b;
-         margin-left: 15px;
-         margin-bottom: 5px;
          padding-top: 15px;
        }
  
@@ -407,14 +400,6 @@ body {
          border: 1px solid #a3a3a3;
        }
  
-       .filtered-data td.type {
-         width: 138px !important;
-       }
-
-       .filtered-data td.number {
-         width: 100px !important;
-       }
-
 
 #permalink-container {
   clear: both;
