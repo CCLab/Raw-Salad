@@ -13,11 +13,22 @@ body {
 
 header {
   overflow: auto;
+  margin: auto;
   margin-bottom: 15px;
 }
 
+  header > * {
+    float: left;
+  }
+
+  header > nav {
+    width: 610px;
+    margin: 0px 5px;
+  }
+
   header ul {
     list-style-type: none;
+    display: inline;
   }
 
   header li {
@@ -44,8 +55,14 @@ header {
   }
 
   header .selected {
-    color: #fff;
-    background-color: #888;
+    color: #4abff7;
+    background-color: #fff;
+  }
+
+  header .selected:hover {
+    cursor: pointer;
+    color: #555;
+    background-color: #fff;
   }
 
 .left {
