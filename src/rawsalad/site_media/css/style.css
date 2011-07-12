@@ -22,6 +22,7 @@ header {
   }
 
   header > nav {
+    width: 610px;
     margin: 0px 5px;
   }
 
@@ -55,13 +56,13 @@ header {
 
   header .selected {
     color: #4abff7;
-    background-color: #888;
+    background-color: #fff;
   }
 
   header .selected:hover {
     cursor: pointer;
     color: #555;
-    background-color: #888;
+    background-color: #fff;
   }
 
 .left {
