@@ -329,7 +329,7 @@ var _store = (function () {
 
         // if total present in collection move it to special position
         if( rows[ rows.length - 1 ]['data']['type'] === 'Total' ) {
-            rows['total'] = rows['data'].pop();
+            rows['total'] = rows[ rows.length - 1 ]['data'].pop();
         }
 
         if( !!basic ) {
