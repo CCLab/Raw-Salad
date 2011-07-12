@@ -379,8 +379,8 @@ body {
       #filtered-table {
          width: 940px;
          background-color: #fff;
-         margin: 0px 10px;
          border-collapse: collapse;
+         border: 10px solid #fff;
       }
 
       #filtered-table th {
@@ -389,9 +389,10 @@ body {
       }
        
        
-       .filtered-breadcrumb {
+       .filtered-breadcrumb td {
          color: #5b5b5b;
          padding-top: 15px;
+         font-size: 10px;
        }
  
        .filtered-data td {
