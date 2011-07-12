@@ -88,7 +88,7 @@ var _utils = (function () {
         cut( value );
         return value === '0' ? '0' : result.reverse().join(' ') + " 000";
     };
-    
+
     that.create_preloader = function( text ) {
         var html = [];
         var preloader;
@@ -102,17 +102,18 @@ var _utils = (function () {
     that.clean_preloader = function() {
         $('#preloader').remove();
     };
-    
+
     that.get_parent_id = function( id ) {
         var parent_id;
-        var last_index = id.lastIndexOf('-');
-        
+        var last_index = id.lastIndexOf( '-' );
+
         if ( last_index === -1 ) {
-            parent_id = '';
-        } else {
+            parent_id = null;
+        }
+        else {
             parent_id = id.slice( 0, last_index );
         }
-        
+
         return parent_id;
     }
 

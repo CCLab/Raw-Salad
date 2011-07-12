@@ -201,73 +201,72 @@ var _table = (function () {
         var schema = _store.active_columns();
         var html = [];
 
-        html.push( '<table><tr>' );
+        html.push( '<tr>' );
         schema.forEach( function ( column ) {
-            html.push( '<td class="', column['key'], ' ', column['type'], '" ' );
+            html.push( '<th class="', column['key'], ' ', column['type'], '" ' );
             html.push( 'class="filtered-data">' );
-            html.push( column['label'], '</td>' );
+            html.push( column['label'], '</th>' );
         });
-        html.push( '</tr></table>' );
+        html.push( '</tr>' );
 
         $('#filtered-thead').append( html.join('') );
     }
 
     function create_filtered_tbody() {
-        var level = 'a';
+        var level;
         var hashed_list = _utils.hash_list( _store.active_rows() );
-        var rows_to_add = _store.active_rows().length;
-        var rows_on_level;
 
-        while( rows_to_add > 0 ) {
-            rows_on_level = hashed_list[ level ];
-            if ( !!rows_on_level ) {
-                rows_to_add -= rows_on_level.length;
-                add_filtered_rows( rows_on_level );
+        for( level in hashed_list ) {
+            if( hashed_list.hasOwnProperty( level )) {
+                add_filtered_rows( hashed_list[ level ] );
             }
-            level = _utils.next_letter( level );
         }
     }
 
     function add_filtered_rows( data ) {
-        var parent;
-        var new_node;
         var schema = _store.active_columns();
 
-        data.reverse().forEach( function ( row ) {
-            parent = find_parent( row['data']['idef'] );
-            new_node = generate_filtered_row({
-                node: row,
-                schema: schema
+        data.sort( function ( a, b ) {
+                return a['data']['idef_sort'] < b['data']['idef_sort'];
+            })
+            .forEach( function ( row ) {
+                var parent = find_parent( row['data']['idef'] );
+                var new_node = generate_filtered_row({
+                                    node: row,
+                                    schema: schema
+                                });
+
+                if ( !!parent ) {
+                    parent.after( new_node );
+                }
+                else {
+                    $('#filtered-tbody').prepend( new_node );
+                }
             });
-            if ( !!parent ) {
-                parent.after( new_node );
-            } else {
-                $('#filtered-tbody').prepend( new_node );
-            }
-        });
     }
 
     function generate_filtered_row( args ) {
-        var html = [];
         var node = args['node'];
+        var breadcrumb = node['breadcrumb'] || '';
+        var html = [];
 
-        html.push('<div id="', node['data']['idef'], '" ');
-        html.push( 'class="filtered-block">' );
+        // breadcrumb
+        html.push( '<tr class="filtered-breadcrumb">' );
+        html.push( '<td colspan="', args['schema'].length, '" ' );
+        html.push( 'id="breadcrumb-', node['data']['idef'], '">');
+        html.push( breadcrumb );
+        html.push( '</td>' );
+        html.push( '</tr>');
 
-        html.push('<div id="breadcrumb-', node['data']['idef'], '" ');
-        html.push( 'class="filtered-breadcrumb">' );
-        html.push( node['breadcrumb'] );
-        html.push('</div>');
-
-        html.push( '<table class="filtered-data"><tr>' );
+        // filtered row
+        html.push( '<tr id="', node['data']['idef'], '" ' );
+        html.push( 'class="filtered-data">' );
         args['schema'].forEach( function ( column ) {
             html.push( '<td class="', column['key'], ' ', column['type'], '">' );
             html.push( node['data'][ column['key'] ] );
-            html.push('</div>');
+            html.push('</td>');
         });
-        html.push( '</tr></table>' );
-
-        html.push('</div>');
+        html.push( '</tr>' );
 
         return $( html.join('') );
     }
@@ -277,14 +276,14 @@ var _table = (function () {
         var parent;
 
         while ( !!parent_id ) {
-            parent = $('#' + parent_id);
+            parent = $( '#' + parent_id );
             if ( !!parent.length ) {
                 return parent;
             }
             parent_id = _utils.get_parent_id( parent_id );
         }
-        // if parent not found, return []
-        return '';
+        // if parent not found, return ''
+        return null;
     }
 
     function apply_selection( id ) {

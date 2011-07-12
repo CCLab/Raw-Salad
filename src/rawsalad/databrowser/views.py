@@ -59,8 +59,12 @@ def search_data( request ):
     
 # get initial_data + subtrees to searched nodes
 def get_searched_data( request ):
-    
-    return HttpResponse( json.dumps(['TODO']) )
+    response_dict = {
+        'dataset': request.GET.get( 'dataset', -1 ),
+        'view': request.GET.get( 'view', -1 ),
+        'issue': request.GET.get( 'issue', -1 )
+    }
+    return HttpResponse( json.dumps(response_dict) )
     
 
 # list of possible ajax calls

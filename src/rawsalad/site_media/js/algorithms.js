@@ -56,7 +56,7 @@ var _algorithms = (function () {
     // filters collection
     that.filter = function ( data, filter_mask ) {
         var i;
-        var result = [ ];
+        var result = [];
         var passed_filter_object = {};
 
         prepare_mask( filter_mask );
@@ -342,7 +342,7 @@ var _algorithms = (function () {
     var check_attr = function( obj, attr, pref, value ) {
         var obj_val = obj[attr];
         var type = typeof obj_val;
-        
+
 
         if ( type === "number" ) {
             if ( pref === 'lt' && obj_val < value) {

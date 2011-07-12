@@ -8,43 +8,24 @@
   </head>
   <body>
     <div id="wraper">
-      <div id="header">
-        <div id="upper-header" class="header">
-          <div id="logo">
-            poukładane
-          </div>
-          <div id="upper-menu">
-            <div class="menu-position">
-              pomoc
-            </div>
-            <div class="menu-position">
-              baza wiedzy
-            </div>
-            <div class="menu-position">
-              API
-            </div>
-            <div class="menu-position">
-              napisz do nas
-            </div>
-          </div>
-        </div>
-        <div id="lower-header" class="header">
-          <div id="back-to-main" class="left">
-            powrót do portalu
-          </div>
-          <div id="search" class="left">
-            <img src="/site_media/img/search.png" />
-          </div>
-          <div id="lower-menu">
-            <div class="menu-position">
-              drukuj
-            </div>          
-            <div class="menu-position">
-              wczytaj sesję
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <header>
+        <img src="/site_media/img/cc_logo.png" alt="Raw Salad logo" title="Raw Salad logo" />
+        <nav>
+          <ul>
+            <li id="top-collections" class="selected">
+              Przeglądaj dane
+            </li>
+            <li id="top-search">
+              Wyszukaj danych
+            </li>
+            <li id="top-download">
+              Pobierz dane
+            </li>
+          </ul>
+        </nav>
+        <img src="/site_media/img/cc_logo.png" alt="Logo Centrum Cyfrowego" title="Logo Centrum Cyfrowego" />
+      </header>
 
     {% block app %}
     {% endblock %}

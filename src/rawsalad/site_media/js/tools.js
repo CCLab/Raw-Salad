@@ -47,54 +47,43 @@ var _tools = (function () {
     };
 
     that.show_search_results = function( results ) {
-        var meta = _store.meta_datasets();
-        var collection_name;
-        var dataset;
-        var view;
-        var issue;
-        var i;
-        var html = ['<div id="search-results">'];
-
-        if ( results.length === 0 ) {
-            html.push('<div id="search-title">Nic nie znaleziono</div></div>');
-        } else {
-            html.push('<div id="search-title">Wyniki w kolekcjach danych</div>');
-
-            results.forEach( function( col, col_i ) {
-                dataset = meta[ col['dataset'] ];
-                view = dataset['perspectives'][ col['view'] ];
-                collection_name = view['name'] + ' ' + col['issue'];
-
-                issue = -1;
-                for ( i = 0; i < view['issues'].length; i += 1 ) {
-                    if ( parseInt( view['issues'][i] ) === col['issue'] ) {
-                        issue = i;
-                        break;
-                    }
-                }
-
-                _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
-
-                html.push('<div id="search-collection-', col_i, '">');
-                html.push('<input type="checkbox" id="search-checkbox-', col_i);
-                html.push(' name="search-result" value="', collection_name, '"/>');
-
-                col['data'].forEach( function( row, row_i ) {
-                    html.push('<div id="search-result-', col_i, '-', row_i, '">');
-                    html.push('<div class="search-type">', row['type'], '</div>');
-                    html.push('<div class="search-name">', row['name'], '</div>');
-                    html.push('</div>');
-                });
-
-                html.push('</div>');
-            });
-
-            html.push('</div>');
-        }
-
-        $( html.join('') ).insertBefore( $('#show-found-button') );
+        var search_results = generate_search_results( results );
+        
+        search_results.insertBefore( $('#show-found-button') );
         $('#show-found-button').show();
+        
+        // unbind to avoid multi event handlers on show-found-button
+        $('#show-found-button')
+            .unbind('click')
+            .click( function () {                
+                var search_list = [];
+                var checkboxes = $("input[name=search-checkbox]");
+                
+                checkboxes.each( function ( i ) {
+                    if ( $(this).is(':checked') ) {
+                        search_list.push( results[i] );
+                    }
+                });
+                _db.add_search_data( search_list );
+            });
     };
+    
+    that.open_subtrees = function( basic_rows, subtree_rows ) {
+        var nodes_to_open = {};
+        
+        // remember which nodes must be opened
+        subtree_rows.forEach( function ( row ) {
+            nodes_to_open[ row['parent'] ] = true;
+        });
+        
+        // open nodes to show downloaded subtrees
+        basic_rows.forEach( function ( store_row ) {
+            id = store_row['data']['idef'];
+            if ( !!nodes_to_open[ id ] ) {
+                store_row['state']['open'] = true;
+            }
+        });
+    }
 
     return that;
 
@@ -163,7 +152,8 @@ var _tools = (function () {
 	    var active_columns = _store.active_columns();
 	    var all_columns = _store.group_columns();
 
-
+        html.push ( '<input type="button" value="Zaznacz" id="check-all" >' );
+        html.push ( '<input type="button" value="Odznacz" id="uncheck-all" >' ); 
         for( i=0; i<all_columns.length; i+=1) {
             key = all_columns[i]['key'];
 	        html.push ( '<input type="checkbox" name="columns"' );
@@ -177,6 +167,22 @@ var _tools = (function () {
         }
         html.push('<input type="submit" value="Dodaj kolumny">');
         $('#manage-columns-form').append( $( html.join('') ));
+
+        $('#check-all')
+            .click( function () {
+                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
+                    $('input[name=columns]')[i].checked=true; 
+                }
+            });
+               
+        $('#uncheck-all')
+            .click( function () {
+                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
+                    $('input[name=columns]')[i].checked=false; 
+                }
+            });
+
+
     }
 
 
@@ -460,59 +466,7 @@ var _tools = (function () {
                 return false;
            });
     };
-/*
- *
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *
- */
+
     function 	prepare_manage_columns_interface(){
 	    var new_active_columns;
         var i = 0;
@@ -542,6 +496,23 @@ var _tools = (function () {
                 $(this).hide();
 		return false;
         });
+        
+        $('#check-all')
+            .click( function () {
+                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
+                    $('input[name=columns]')[i].checked=true; 
+                }
+            });
+               
+        $('#uncheck-all')
+            .click( function () {
+                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
+                    $('input[name=columns]')[i].checked=false; 
+                }
+            });
+
+
+
     };
 
     function prepare_snapshot_interface() {
@@ -570,37 +541,6 @@ var _tools = (function () {
                 }
 
                 return false;
-            });
-
-        $('#show-found-button')
-            .click( function () {
-                // var search_list = get_search_list_using_checkboxes();
-                var search_list = [
-                    {
-                        dataset: 0,
-                        view: 0,
-                        issue: 2011,
-                        data: [
-                            {
-                                idef: "01-921",
-                                parent: "01"
-                            }
-                        ]
-                    },
-                    {
-                        dataset: 0,
-                        view: 1,
-                        issue: 2012,
-                        data: [
-                            {
-                                idef: "2-2",
-                                parent: "2"
-                            }
-                        ]
-                    }
-                ];
-
-                _db.add_search_data( search_list );
             });
     }
 
@@ -696,6 +636,56 @@ var _tools = (function () {
         });
 
         return scope;
+    }
+    
+    function generate_search_results( results ) {
+        var meta = _store.meta_datasets();
+        var collection_name;
+        var dataset;
+        var view;
+        var issue;
+        var i;
+        var html = ['<div id="search-results">'];
+
+        if ( results.length === 0 ) {
+            html.push('<div id="search-title">Nic nie znaleziono</div></div>');
+        } else {
+            html.push('<div id="search-title">Wyniki w kolekcjach danych</div>');
+
+            results.forEach( function( col, col_i ) {
+                dataset = meta[ col['dataset'] ];
+                view = dataset['perspectives'][ col['view'] ];
+                collection_name = view['name'] + ' ' + col['issue'];
+
+                issue = -1;
+                for ( i = 0; i < view['issues'].length; i += 1 ) {
+                    if ( parseInt( view['issues'][i] ) === col['issue'] ) {
+                        issue = i;
+                        break;
+                    }
+                }
+
+                _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
+
+                html.push('<div id="search-collection-', col_i, '">');
+                html.push('<input type="checkbox" id="search-checkbox-', col_i, '"');
+                html.push(' name="search-checkbox" value="', collection_name, '"/>');
+                html.push( collection_name );
+
+                col['data'].forEach( function( row, row_i ) {
+                    html.push('<div id="search-result-', col_i, '-', row_i, '">');
+                    html.push('<div class="search-type">', row['type'], '</div>');
+                    html.push('<div class="search-name">', row['name'], '</div>');
+                    html.push('</div>');
+                });
+
+                html.push('</div>');
+            });
+
+            html.push('</div>');
+        }
+
+        return $( html.join('') );
     }
 
 }) ();

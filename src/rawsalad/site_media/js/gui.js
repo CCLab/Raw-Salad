@@ -46,15 +46,15 @@ var _gui = (function () {
                 .removeClass('inactive');
         });
         $('#search-tab').click( function () {
-            
+
             $('#search-results').remove();
             $('#show-found-button').hide();
-            
+
             $('#table-container').hide();
             $('#search-container').show();
             $('#download-container').hide();
             $('#permalink-container').hide();
-            
+
             $('#tabs')
                 .find('div')
                 .removeClass('active')
@@ -182,6 +182,9 @@ var _gui = (function () {
 
         // arm open/close button and hide it!
         $('#open-close-choose-panel')
+            .click( hide_choose_panel );
+
+        $('#top-collections')
             .click( function () {
                 // if choose panel is open
                 if( $('#choose-panel:visible').length > 0 ) {
@@ -230,9 +233,6 @@ var _gui = (function () {
 
     // used once when some perspective is chosen for the very first time
     that.init_app = function ( collection_name ) {
-        $('#open-close-choose-panel')
-            .show();
-
         that.create_sheet_tab({
             // TODO move name from func arg to store!!
             name: collection_name,
@@ -247,6 +247,13 @@ var _gui = (function () {
 
 
     that.create_sheet_tab = function ( args ) {
+        that.create_only_sheet_tab( args );
+        _table.clean_table();
+        _table.init_table();
+    };
+    
+    
+    that.create_only_sheet_tab = function ( args ) {
         var html = [];
 
         var group_nr = args.group_nr || _store.active_group_index();
@@ -303,8 +310,6 @@ var _gui = (function () {
 
         $('#sort-form').hide().html('');
         $('#filter-form').hide().html('');
-        _table.clean_table();
-        _table.init_table();
     };
 
 
@@ -359,6 +364,22 @@ var _gui = (function () {
 
 //        that.make_zebra();
     }
+    
+    that.show_table_tab = function() {
+        $('#table-container').show();
+        $('#search-container').hide();
+        $('#download-container').hide();
+        $('#permalink-container').hide();
+
+        $('#tabs')
+            .find('div')
+            .removeClass('active')
+            .addClass('inactive');
+
+        $('#table-tab')
+            .addClass('active')
+            .removeClass('inactive');
+    };
 
 
     return that;
@@ -373,7 +394,11 @@ var _gui = (function () {
             .animate({ opacity: 0.25 }, 300 );
 
         $('#open-close-choose-panel')
-            .html('zwiń');
+            .show();
+
+        $('#top-collections')
+            .addClass( 'selected' )
+            .html( 'zwiń menu' );
     }
 
 
@@ -385,7 +410,11 @@ var _gui = (function () {
             .animate({ opacity: 1 }, 300 );
 
         $('#open-close-choose-panel')
-            .html('zmień dane');
+            .hide();
+
+        $('#top-collections')
+            .removeClass( 'selected' )
+            .html( 'Przeglądaj dane' );
     };
 
 

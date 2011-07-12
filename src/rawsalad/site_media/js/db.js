@@ -42,31 +42,18 @@ var _db = (function () {
             data: data,
             dataType: 'json',
             success: function ( received_data ) {
+                // use received_data when db search is ready
                 var tmp_data = [
                     {
                         dataset: 0,
                         view: 0,
                         issue: 2011,
-                        name: 'gospodarka',
                         data: [
                             {
-                                czesc: "1",
-                                dot_sub: 42000,
                                 idef: "01-921",
-                                leaf: false,
-                                level: "b",
-                                name: "Kultura i ochrona dziedzictwa narodowego",
-                                numer: 921,
                                 parent: "01",
-                                pozycja: 7,
-                                sw_eu: 0,
-                                swiad_fiz: 0,
-                                type: "Dzia³ 921",
-                                v_total: 42000,
-                                wspolfin_eu: 0,
-                                wyd_dlug: 0,
-                                wyd_jednostek: 0,
-                                wyd_majatk: 0
+                                type: "Dzia\u0142 921",
+                                name: "Kultura i ochrona dziedzictwa narodowego"
                             }
                         ]
                     },
@@ -74,32 +61,38 @@ var _db = (function () {
                         dataset: 0,
                         view: 1,
                         issue: 2012,
-                        name: 'gospodarka',
                         data: [
                             {
-                                czesc: null,
-                                czesc_name: null,
                                 idef: "2-2",
-                                info: null,
-                                leaf: false,
-                                level: "b",
-                                name: "Redukowanie przestêpczoœci",
                                 parent: "2",
                                 type: "Zadanie 2.2",
-                                v_nation: 3015132
+                                name: "Redukowanie przest\u0119pczo\u015bci"
+                            },
+                            {
+                                idef: "3-2",
+                                parent: "3",
+                                type: "Zadanie 3.2",
+                                name: "Szkolnictwo wy\u017csze"
+                            },
+                            {
+                                idef: "3-2-3",
+                                parent: "3-2",
+                                type: "Podzadanie 3.2.3",
+                                name: "Wsparcie procesu studiowania"
                             }
                         ]
                     }
                 ];
                 _tools.show_search_results( tmp_data );
-                console.log( tmp_data );
             }
         });
     };
     
     that.add_search_data = function ( search_list ) {
-        var data;
+        var sheets_left = search_list.length;
+        
         search_list.forEach( function ( e ) {
+            var data;
             data = {
                 dataset: e['dataset'],
                 view: e['view'],
@@ -114,85 +107,33 @@ var _db = (function () {
                 data: data,
                 dataType: 'json',
                 success: function ( received_data ) {
+                    var col_id = {
+                        'dataset': received_data['dataset'],
+                        'perspective': received_data['view'],
+                        'issue': received_data['issue']
+                    };
+                    
                     // to test it
-                    if ( data['dataset'] === 0 && data['view'] === 0 ) {
+                    if ( received_data['dataset'] === '0' && received_data['view'] === '0' ) {
                         received_data = {"rows": [{"wspolfin_eu": 0, "leaf": false, "name": "KANCELARIA PREZYDENTA RP", "parent": null, "level": "a", "numer": 1, "idef": "01", "swiad_fiz": 953, "wyd_majatk": 6850, "v_total": 171524, "czesc": "1", "wyd_jednostek": 121721, "dot_sub": 42000, "pozycja": 1, "type": "Cz\u0119\u015b\u0107 1", "sw_eu": 0, "wyd_dlug": 0}, {"wspolfin_eu": 0, "leaf": false, "name": "KANCELARIA SEJMU", "parent": null, "level": "a", "numer": 2, "idef": "02", "swiad_fiz": 80741, "wyd_majatk": 21276, "v_total": 430780, "czesc": "2", "wyd_jednostek": 328763, "dot_sub": 0, "pozycja": 1, "type": "Cz\u0119\u015b\u0107 2", "sw_eu": 0, "wyd_dlug": 0}, {"wspolfin_eu": 0, "leaf": false, "name": "Urz\u0119dy naczelnych organ\u00f3w w\u0142adzy pa\u0144stwowej, kontroli i ochrony prawa oraz s\u0105downictwa", "parent": "01", "level": "b", "numer": 751, "idef": "01-751", "swiad_fiz": 953, "wyd_majatk": 6850, "v_total": 129524, "czesc": "1", "wyd_jednostek": 121721, "dot_sub": 0, "pozycja": 2, "type": "Dzia\u0142 751", "sw_eu": 0, "wyd_dlug": 0}, {"wspolfin_eu": 0, "leaf": false, "name": "Kultura i ochrona dziedzictwa narodowego", "parent": "01", "level": "b", "numer": 921, "idef": "01-921", "swiad_fiz": 0, "wyd_majatk": 0, "v_total": 42000, "czesc": "1", "wyd_jednostek": 0, "dot_sub": 42000, "pozycja": 7, "type": "Dzia\u0142 921", "sw_eu": 0, "wyd_dlug": 0}], "perspective": {"sort": {"1": {"level": 1}, "0": {"idef": 1}}, "name": "budzet_ksiegowy_2011", "idef": 0, "dataset": 0, "explorable": "type", "perspective": "Bud\u017cet ksi\u0119gowy 2011", "aux": {"leaf": 1, "parent": 1, "level": 1}, "query": {"level": "a"}, "ns": "dd_budg2011_tr", "issue": "2011", "columns": [{"type": "string", "key": "idef", "label": "ID"}, {"type": "string", "processable": true, "key": "numer", "label": "Numer"}, {"type": "number", "processable": true, "key": "czesc", "label": "Cz\u0119\u015b\u0107"}, {"type": "string", "label": "Typ", "processable": true, "key": "type", "basic": true}, {"type": "string", "label": "Tre\u015b\u0107", "processable": true, "key": "name", "basic": true}, {"type": "string", "processable": true, "key": "pozycja", "label": "Pozycja"}, {"label": "Dotacje i subwencje", "processable": true, "key": "dot_sub", "basic": false, "checkable": true, "type": "number"}, {"label": "\u015awiadczenia na rzecz os\u00f3b fizycznych", "processable": true, "key": "swiad_fiz", "basic": false, "checkable": true, "type": "number"}, {"label": "Wydatki bie\u017c\u0105ce jednostek bud\u017cetowych", "processable": true, "key": "wyd_jednostek", "basic": false, "checkable": true, "type": "number"}, {"label": "Wydatki maj\u0105tkowe", "processable": true, "key": "wyd_majatk", "basic": false, "checkable": true, "type": "number"}, {"label": "Wydatki na obs\u0142ug\u0119 d\u0142ugu Skarbu Pa\u0144stwa", "processable": true, "key": "wyd_dlug", "basic": false, "checkable": true, "type": "number"}, {"label": "\u015arodki w\u0142asne Unii Europejskiej", "processable": true, "key": "sw_eu", "basic": false, "checkable": true, "type": "number"}, {"label": "Wsp\u00f3\u0142finansowanie projekt\u00f3w z udzia\u0142em \u015brodk\u00f3w Unii Europejskiej", "processable": true, "key": "wspolfin_eu", "basic": false, "checkable": true, "type": "number"}, {"label": "OG\u00d3\u0141EM", "processable": true, "key": "v_total", "basic": true, "checkable": true, "type": "number"}]}}
                     }
-                    else if ( data['dataset'] === 0 && data['view'] === 1 ) {
-                        received_data = {"rows": [{"info": null, "leaf": false, "name": "ZARZ\u0104DZANIE PA\u0143STWEM", "parent": null, "level": "a", "idef": "1", "czesc": null, "czesc_name": null, "v_nation": 1343628, "type": "FUNKCJA 1"}, {"info": null, "leaf": false, "name": "BEZPIECZE\u0143STWO WEWN\u0118TRZNE I PORZ\u0104DEK PUBLICZNY", "parent": null, "level": "a", "idef": "2", "czesc": null, "czesc_name": null, "v_nation": 15764059, "type": "FUNKCJA 2"}, {"info": null, "leaf": false, "name": "EDUKACJA, WYCHOWANIE I OPIEKA", "parent": null, "level": "a", "idef": "3", "czesc": null, "czesc_name": null, "v_nation": 52368661, "type": "FUNKCJA 3"}, {"info": null, "leaf": false, "name": "Ochrona obywateli, utrzymanie porz\u0105dku publicznego oraz dzia\u0142ania na rzecz poprawy bezpiecze\u0144stwa", "parent": "2", "level": "b", "idef": "2-1", "czesc": null, "czesc_name": null, "v_nation": 5829003, "type": "Zadanie 2.1"}, {"info": null, "leaf": false, "name": "Redukowanie przest\u0119pczo\u015bci", "parent": "2", "level": "b", "idef": "2-2", "czesc": null, "czesc_name": null, "v_nation": 3015132, "type": "Zadanie 2.2"}, {"info": null, "leaf": false, "name": "Strze\u017cenie praworz\u0105dno\u015bci i czuwanie nad \u015bciganiem przest\u0119pstw przez prokuratur\u0119", "parent": "2", "level": "b", "idef": "2-3", "czesc": null, "czesc_name": null, "v_nation": 1066093, "type": "Zadanie 2.3"}, {"info": null, "leaf": false, "name": "Ochrona przeciwpo\u017carowa, dzia\u0142alno\u015b\u0107 zapobiegawcza, ratownicza i ga\u015bnicza", "parent": "2", "level": "b", "idef": "2-4", "czesc": null, "czesc_name": null, "v_nation": 2225298, "type": "Zadanie 2.4"}, {"info": null, "leaf": false, "name": "Zarz\u0105dzanie kryzysowe i obrona cywilna", "parent": "2", "level": "b", "idef": "2-5", "czesc": null, "czesc_name": null, "v_nation": 2131002, "type": "Zadanie 2.5"}, {"info": null, "leaf": false, "name": "Ochrona granicy pa\u0144stwowej, kontrola ruchu granicznego i przeciwdzia\u0142anie nielegalnej migracji", "parent": "2", "level": "b", "idef": "2-6", "czesc": null, "czesc_name": null, "v_nation": 1497531, "type": "Zadanie 2.6"}], "perspective": {"sort": {"1": {"parent_sort": 1}, "0": {"idef_sort": 1}, "2": {"level": 1}}, "name": "budzet_zadaniowy_podzadania_2012", "max_level": "d", "idef": 1, "dataset": 0, "explorable": "type", "perspective": "Bud\u017cet zadaniowy 2012 - Podzadanie", "aux": {"idef": 1, "leaf": 1, "parent": 1, "level": 1}, "query": {"node": {"$in": [null, 1]}, "level": "a"}, "ns": "dd_budg2012_go", "issue": "2012", "columns": [{"type": "string", "label": "Typ", "processable": false, "key": "type", "basic": true}, {"type": "string", "label": "Nazwa", "processable": true, "key": "name", "basic": true}, {"type": "string", "processable": true, "key": "czesc", "label": "Cz\u0119\u015b\u0107"}, {"type": "string", "processable": true, "key": "czesc_name", "label": "Cz\u0119\u015b\u0107 w bud\u017aecie ksi\u0119gowym"}, {"type": "string", "label": "Cel & Miernik", "processable": false, "key": "info", "basic": false}, {"label": "Bud\u017cet Pa\u0144stwa", "processable": true, "key": "v_nation", "basic": true, "checkable": true, "type": "number"}]}};
+                    else if ( received_data['dataset'] === '0' && received_data['view'] === '1' ) {
+                        received_data = {"rows": [{"info": null, "leaf": false, "name": "ZARZ\u0104DZANIE PA\u0143STWEM", "parent": null, "level": "a", "idef": "1", "czesc": null, "czesc_name": null, "v_nation": 1343628, "type": "FUNKCJA 1"}, {"info": null, "leaf": false, "name": "BEZPIECZE\u0143STWO WEWN\u0118TRZNE I PORZ\u0104DEK PUBLICZNY", "parent": null, "level": "a", "idef": "2", "czesc": null, "czesc_name": null, "v_nation": 15764059, "type": "FUNKCJA 2"}, {"info": null, "leaf": false, "name": "EDUKACJA, WYCHOWANIE I OPIEKA", "parent": null, "level": "a", "idef": "3", "czesc": null, "czesc_name": null, "v_nation": 52368661, "type": "FUNKCJA 3"}, {"info": null, "leaf": false, "name": "Ochrona obywateli, utrzymanie porz\u0105dku publicznego oraz dzia\u0142ania na rzecz poprawy bezpiecze\u0144stwa", "parent": "2", "level": "b", "idef": "2-1", "czesc": null, "czesc_name": null, "v_nation": 5829003, "type": "Zadanie 2.1"}, {"info": null, "leaf": false, "name": "Redukowanie przest\u0119pczo\u015bci", "parent": "2", "level": "b", "idef": "2-2", "czesc": null, "czesc_name": null, "v_nation": 3015132, "type": "Zadanie 2.2"}, {"info": null, "leaf": false, "name": "Strze\u017cenie praworz\u0105dno\u015bci i czuwanie nad \u015bciganiem przest\u0119pstw przez prokuratur\u0119", "parent": "2", "level": "b", "idef": "2-3", "czesc": null, "czesc_name": null, "v_nation": 1066093, "type": "Zadanie 2.3"}, {"info": null, "leaf": false, "name": "Ochrona przeciwpo\u017carowa, dzia\u0142alno\u015b\u0107 zapobiegawcza, ratownicza i ga\u015bnicza", "parent": "2", "level": "b", "idef": "2-4", "czesc": null, "czesc_name": null, "v_nation": 2225298, "type": "Zadanie 2.4"}, {"info": null, "leaf": false, "name": "Zarz\u0105dzanie kryzysowe i obrona cywilna", "parent": "2", "level": "b", "idef": "2-5", "czesc": null, "czesc_name": null, "v_nation": 2131002, "type": "Zadanie 2.5"}, {"info": null, "leaf": false, "name": "Ochrona granicy pa\u0144stwowej, kontrola ruchu granicznego i przeciwdzia\u0142anie nielegalnej migracji", "parent": "2", "level": "b", "idef": "2-6", "czesc": null, "czesc_name": null, "v_nation": 1497531, "type": "Zadanie 2.6"}, {"idef_sort": "0003-0001", "name": "O\u015bwiata i wychowanie", "parent": "3", "level": "b", "parent_sort": "0003", "idef": "3-1", "czesc": null, "czesc_name": null, "v_nation": 40384231, "leaf": false, "type": "Zadanie 3.1"}, {"idef_sort": "0003-0002", "name": "Szkolnictwo wy\u017csze", "parent": "3", "level": "b", "parent_sort": "0003", "idef": "3-2", "czesc": null, "czesc_name": null, "v_nation": 11984430, "leaf": false, "type": "Zadanie 3.2"}, {"idef_sort": "0003-0002-0001", "name": "Zarz\u0105dzanie systemem szkolnictwa wy\u017cszego", "parent": "3-2", "level": "c", "parent_sort": "0003-0002", "idef": "3-2-1", "czesc": null, "czesc_name": null, "v_nation": 35793, "leaf": false, "type": "Podzadanie 3.2.1"}, {"idef_sort": "0003-0002-0002", "name": "Kszta\u0142cenie w szkolnictwie wy\u017cszym", "parent": "3-2", "level": "c", "parent_sort": "0003-0002", "idef": "3-2-2", "czesc": null, "czesc_name": null, "v_nation": 9620851, "leaf": false, "type": "Podzadanie 3.2.2"}, {"idef_sort": "0003-0002-0003", "name": "Wsparcie procesu studiowania", "parent": "3-2", "level": "c", "parent_sort": "0003-0002", "idef": "3-2-3", "czesc": null, "czesc_name": null, "v_nation": 1795244, "leaf": false, "type": "Podzadanie 3.2.3"}, {"idef_sort": "0003-0002-0004", "name": "Utrzymanie i rozbudowa infrastruktury szkolnictwa wy\u017cszego", "parent": "3-2", "level": "c", "parent_sort": "0003-0002", "idef": "3-2-4", "czesc": null, "czesc_name": null, "v_nation": 532542, "leaf": false, "type": "Podzadanie 3.2.4"}], "perspective": {"sort": {"1": {"parent_sort": 1}, "0": {"idef_sort": 1}, "2": {"level": 1}}, "name": "budzet_zadaniowy_podzadania_2012", "max_level": "d", "idef": 1, "dataset": 0, "explorable": "type", "perspective": "Bud\u017cet zadaniowy 2012 - Podzadanie", "aux": {"idef": 1, "leaf": 1, "parent": 1, "level": 1}, "query": {"node": {"$in": [null, 1]}, "level": "a"}, "ns": "dd_budg2012_go", "issue": "2012", "columns": [{"type": "string", "label": "Typ", "processable": false, "key": "type", "basic": true}, {"type": "string", "label": "Nazwa", "processable": true, "key": "name", "basic": true}, {"type": "string", "processable": true, "key": "czesc", "label": "Cz\u0119\u015b\u0107"}, {"type": "string", "processable": true, "key": "czesc_name", "label": "Cz\u0119\u015b\u0107 w bud\u017aecie ksi\u0119gowym"}, {"type": "string", "label": "Cel & Miernik", "processable": false, "key": "info", "basic": false}, {"label": "Bud\u017cet Pa\u0144stwa", "processable": true, "key": "v_nation", "basic": true, "checkable": true, "type": "number"}]}};
                     }
                     
-                    var col_id = {
-                        'dataset': data['dataset'],
-                        'perspective': data['view'],
-                        'issue': data['issue']
-                    };
-                    var basic_data;
-                    var basic_rows;
-                    var additional_rows;
-                    var i;
-                    var groups;
-                    var group_nr;
-                    var new_sheet;
+                    sheets_left -= 1;
+                    // if it is the last sheet to create, show table
+                    if ( sheets_left === 0 ) {
+                        _gui.show_table_tab();
+                    }
                     
-                    if ( _store.group_exists(col_id) ) {
-                        groups = _store.get_all_groups;
-                        for ( i = 0; i < groups.length; i += 1 ) {
-                            if ( col_id['dataset'] === groups[i]['dataset'] &&
-                                 col_id['perspective'] === groups[i]['perspective'] &&
-                                 col_id['issue'] === groups[i]['issue'] ) {
-                                group_nr = i;
-                                break;
-                            }
-                        }
-                            
-                        _assert.assert( (group_nr === 0 || !!group_nr),
-                                        'Collection not found');
-                        
-                        // set active group number to index of group with
-                        // the same dataset, view and issue as chosen collection
-                        _store.active_group( group_nr );
-                        
-                        new_sheet = {
-                            'rows': received_data['rows'],
-                            'name': 'Arkusz ' + _store.next_sheet_number()
-                        };
-                        
-                        // create new sheet containing search data
-                        _sheet.create_new_sheet( new_sheet, "Arkusz" );                        
+                    // TODO: shouldnt value returned by group_exists be changed?
+                    if ( !_store.group_exists(col_id) ) {
+                        _sheet.create_searched_sheet( col_id, received_data, sheets_left );
                     } else {
-                        basic_rows = received_data.rows.filter( function ( e ) {
-                            return e['level'] === 'a';
-                        });
-                        additional_rows = received_data.rows.filter( function ( e ) {
-                            return e['level'] !== 'a';
-                        });
-                        
-                        basic_data = {
-                            rows: basic_rows,
-                            name: received_data.perspective.perspective
-                        };
-
-                        // create group
-                        _store.create_group({
-                           "dataset": col_id.dataset,
-                           "perspective": col_id.perspective,
-                           "issue": col_id.issue,
-                           "columns": received_data.perspective.columns
-                        });
-                        
-                        // create basic sheet with basic rows
-                        _store.init_basic_sheet( basic_data );
-                        
-                        // add subtrees needed to show nodes found by search
-                        if ( !!additional_rows ) {
-                            _store.add_data( additional_rows );
-                        }
-                        
-                        // initialize an application
-                        _gui.init_app( basic_data['name'] );
+                        _sheet.add_searched_group( col_id, received_data, sheets_left );
                     }
-                } // function( received_data )
+                }
             }); // $.ajax
         }); // forEach
     };

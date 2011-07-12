@@ -31,35 +31,33 @@ var _assert = (function () {
 
     that.assert = function ( exp, message ) {
         if( !Boolean( exp )) {
-            print_error( "assert", message );
+            show_error( "assert", message );
         }
     };
 
     that.is_true = function ( obj, message ) {
         if( !obj ) {
-            print_error( "true", message );
+            show_error( "true", message );
         }
     };
 
     that.is_false = function ( obj, message ) {
         if( !!obj ) {
-            print_error( "false", message );
+            show_error( "false", message );
         }
     };
 
     that.is_equal = function ( obj1, obj2, message ) {
         if( obj1 !== obj2 ) {
-            print_error( "equal", message );
+            show_error( "equal", message );
         }
     };
 
     that.not_equal = function ( obj1, obj2, message ) {
         if( obj1 === obj2 ) {
-            print_error( "not equal", message );
+            show_error( "not equal", message );
         }
     };
-
-    return that;
 
 
 //  P R I V A T E   I N T E R F A C E
@@ -75,7 +73,9 @@ var _assert = (function () {
     })();
 
 
-    function print_error( type, message ) {
+    return that;
+
+    function show_error( type, message ) {
         var html = [];
         var error;
         var msg;
@@ -121,7 +121,7 @@ var _assert = (function () {
                 msg += ">> Type: " + type + " ";
                 msg += ">> Message: " + message;
 
-                print( msg );
+                console.log( msg );
 
                 throw new AssertException( type );
             }

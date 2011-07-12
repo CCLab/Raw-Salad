@@ -11,4 +11,5 @@
     $('#open-close-choose-panel').hide();
     $('#back-to-datasets').hide();
     $('#choose-perspectives').hide();
+    $('#search-panel').hide();
 })();
