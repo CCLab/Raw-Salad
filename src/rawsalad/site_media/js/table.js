@@ -64,10 +64,7 @@ var _table = (function () {
 
     function create_thead() {
         var schema = _store.active_columns();
-        var total = _store.active_rows().filter( function ( e ) {
-                                            return e['type'] === 'Total';
-                                        })
-                                        .shift();
+        var total = _store.active_rows()['total'];
         var html = [ '<tr>' ];
 
         // create header
@@ -87,7 +84,7 @@ var _table = (function () {
             schema.forEach( function ( column ) {
                 html.push( '<td class="', column['key'], ' ' );
                 html.push( column['type'], '">' );
-                html.push( total[ column['key'] ] );
+                html.push( total['data'][ column['key'] ] );
                 html.push( '</td>' );
             });
 

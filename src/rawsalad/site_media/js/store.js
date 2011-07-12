@@ -111,7 +111,7 @@ var _store = (function () {
 
 
     that.set_active_columnes = function ( columns ) {
-        that.active_sheet()['columns'] = columns;       
+        that.active_sheet()['columns'] = columns;
     };
 
 
@@ -321,11 +321,16 @@ var _store = (function () {
                     return e['basic'] === true;
                 });
         var rows = data['rows'].map( function ( row ) {
-                    return {
-                        data: row,
-                        state: { open: false, selected: false }
-                    };
-                });
+                                    return {
+                                        data: row,
+                                        state: { open: false, selected: false }
+                                    };
+                                });
+
+        // if total present in collection move it to special position
+        if( rows[ rows.length - 1 ]['data']['type'] === 'Total' ) {
+            rows['total'] = rows['data'].pop();
+        }
 
         if( !!basic ) {
             return rows;
