@@ -96,32 +96,7 @@ var _tools = (function () {
         $('#show-found-button').show();
         
         $('#show-found-button')
-            .click( function () {
-                /*var search_list = [
-                    {
-                        dataset: 0,
-                        view: 0,
-                        issue: 2011,
-                        data: [
-                            {
-                                idef: "01-921",
-                                parent: "01"
-                            }
-                        ]
-                    },
-                    {
-                        dataset: 0,
-                        view: 1,
-                        issue: 2012,
-                        data: [
-                            {
-                                idef: "2-2",
-                                parent: "2"
-                            }
-                        ]
-                    }
-                ];*/
-                
+            .click( function () {                
                 var search_list = [];
                 var checkboxes = $("input[name=search-checkbox]");
                 
@@ -131,6 +106,8 @@ var _tools = (function () {
                     }
                 });
                 _db.add_search_data( search_list );
+                // to avoid multi event handlers on show-found-button
+                $(this).unbind('click');
             });
     };
 
