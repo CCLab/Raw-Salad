@@ -54,7 +54,7 @@
         "idef": 1,
         "leaf": 1,
         "parent": 1,
-        "level": 1
+        "info": 1
         },
     "query": { "node": 1 },
     "sort": {

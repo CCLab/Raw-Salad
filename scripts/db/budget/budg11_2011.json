@@ -64,8 +64,8 @@
     "aux": {
         "leaf": 1,
         "parent": 1,
-        "level": 1,
-        "idef": 1
+        "idef": 1,
+        "info": 1
         },
     "query": {
         "node": { "$in" : [ null, 1 ] }
