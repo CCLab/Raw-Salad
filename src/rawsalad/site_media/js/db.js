@@ -178,10 +178,13 @@ var _db = (function () {
                         _store.active_group( group_nr );
                         
                         new_sheet = {
+                            'columns': _store.active_group()['columns'].filter( function ( e ) {
+                                return e['basic'] === true;
+                            }),
                             'rows': received_data['rows'],
-                            'name': 'Arkusz ' + _store.next_sheet_number()
+                            'filtered': false,
                         };
-                        
+
                         // create new sheet containing search data
                         _sheet.create_new_sheet( new_sheet, "Arkusz" );                        
                     } else {
