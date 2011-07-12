@@ -47,58 +47,14 @@ var _tools = (function () {
     };
 
     that.show_search_results = function( results ) {
-        var meta = _store.meta_datasets();
-        var collection_name;
-        var dataset;
-        var view;
-        var issue;
-        var i;
-        var html = ['<div id="search-results">'];
-
-        if ( results.length === 0 ) {
-            html.push('<div id="search-title">Nic nie znaleziono</div></div>');
-        } else {
-            html.push('<div id="search-title">Wyniki w kolekcjach danych</div>');
-
-            results.forEach( function( col, col_i ) {
-                dataset = meta[ col['dataset'] ];
-                view = dataset['perspectives'][ col['view'] ];
-                collection_name = view['name'] + ' ' + col['issue'];
-
-                issue = -1;
-                for ( i = 0; i < view['issues'].length; i += 1 ) {
-                    if ( parseInt( view['issues'][i] ) === col['issue'] ) {
-                        issue = i;
-                        break;
-                    }
-                }
-
-                _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
-
-                html.push('<div id="search-collection-', col_i, '">');
-                html.push('<input type="checkbox" id="search-checkbox-', col_i, '"');
-                html.push(' name="search-checkbox" value="', collection_name, '"/>');
-
-                col['data'].forEach( function( row, row_i ) {
-                    html.push('<div id="search-result-', col_i, '-', row_i, '">');
-                    html.push('<div class="search-type">', row['type'], '</div>');
-                    html.push('<div class="search-name">', row['name'], '</div>');
-                    html.push('</div>');
-                });
-
-                html.push('</div>');
-            });
-
-            html.push('</div>');
-        }
-
-        $( html.join('') ).insertBefore( $('#show-found-button') );
+        var search_results = generate_search_results( results );
+        
+        search_results.insertBefore( $('#show-found-button') );
         $('#show-found-button').show();
         
-        // to avoid multi event handlers on show-found-button
-        $('#show-found-button').unbind('click');
-        
+        // unbind to avoid multi event handlers on show-found-button
         $('#show-found-button')
+            .unbind('click')
             .click( function () {                
                 var search_list = [];
                 var checkboxes = $("input[name=search-checkbox]");
@@ -569,37 +525,6 @@ var _tools = (function () {
 
                 return false;
             });
-
-        /*$('#show-found-button')
-            .click( function () {
-                // var search_list = get_search_list_using_checkboxes();
-                var search_list = [
-                    {
-                        dataset: 0,
-                        view: 0,
-                        issue: 2011,
-                        data: [
-                            {
-                                idef: "01-921",
-                                parent: "01"
-                            }
-                        ]
-                    },
-                    {
-                        dataset: 0,
-                        view: 1,
-                        issue: 2012,
-                        data: [
-                            {
-                                idef: "2-2",
-                                parent: "2"
-                            }
-                        ]
-                    }
-                ];
-
-                _db.add_search_data( search_list );
-            });*/
     }
 
     function create_filter_result( filtered_list ) {
@@ -694,6 +619,56 @@ var _tools = (function () {
         });
 
         return scope;
+    }
+    
+    function generate_search_results() {
+        var meta = _store.meta_datasets();
+        var collection_name;
+        var dataset;
+        var view;
+        var issue;
+        var i;
+        var html = ['<div id="search-results">'];
+
+        if ( results.length === 0 ) {
+            html.push('<div id="search-title">Nic nie znaleziono</div></div>');
+        } else {
+            html.push('<div id="search-title">Wyniki w kolekcjach danych</div>');
+
+            results.forEach( function( col, col_i ) {
+                dataset = meta[ col['dataset'] ];
+                view = dataset['perspectives'][ col['view'] ];
+                collection_name = view['name'] + ' ' + col['issue'];
+
+                issue = -1;
+                for ( i = 0; i < view['issues'].length; i += 1 ) {
+                    if ( parseInt( view['issues'][i] ) === col['issue'] ) {
+                        issue = i;
+                        break;
+                    }
+                }
+
+                _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
+
+                html.push('<div id="search-collection-', col_i, '">');
+                html.push('<input type="checkbox" id="search-checkbox-', col_i, '"');
+                html.push(' name="search-checkbox" value="', collection_name, '"/>');
+                html.push( collection_name );
+
+                col['data'].forEach( function( row, row_i ) {
+                    html.push('<div id="search-result-', col_i, '-', row_i, '">');
+                    html.push('<div class="search-type">', row['type'], '</div>');
+                    html.push('<div class="search-name">', row['name'], '</div>');
+                    html.push('</div>');
+                });
+
+                html.push('</div>');
+            });
+
+            html.push('</div>');
+        }
+
+        return $( html.join('') );
     }
 
 }) ();
