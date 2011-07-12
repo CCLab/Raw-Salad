@@ -46,15 +46,15 @@ var _gui = (function () {
                 .removeClass('inactive');
         });
         $('#search-tab').click( function () {
-            
+
             $('#search-results').remove();
             $('#show-found-button').hide();
-            
+
             $('#table-container').hide();
             $('#search-container').show();
             $('#download-container').hide();
             $('#permalink-container').hide();
-            
+
             $('#tabs')
                 .find('div')
                 .removeClass('active')
@@ -182,6 +182,9 @@ var _gui = (function () {
 
         // arm open/close button and hide it!
         $('#open-close-choose-panel')
+            .click( hide_choose_panel );
+
+        $('#top-collections')
             .click( function () {
                 // if choose panel is open
                 if( $('#choose-panel:visible').length > 0 ) {
@@ -230,9 +233,6 @@ var _gui = (function () {
 
     // used once when some perspective is chosen for the very first time
     that.init_app = function ( collection_name ) {
-        $('#open-close-choose-panel')
-            .show();
-
         that.create_sheet_tab({
             // TODO move name from func arg to store!!
             name: collection_name,
@@ -373,7 +373,7 @@ var _gui = (function () {
             .animate({ opacity: 0.25 }, 300 );
 
         $('#open-close-choose-panel')
-            .html('zwiń');
+            .show();
     }
 
 
@@ -385,7 +385,7 @@ var _gui = (function () {
             .animate({ opacity: 1 }, 300 );
 
         $('#open-close-choose-panel')
-            .html('zmień dane');
+            .hide();
     };
 
 
