@@ -540,12 +540,12 @@ body {
                     background-color: #fff;
                     color: #4cbceb;
                     
-                    border-radius: 3px 3px 0px 0px;
-                    -moz-border-radius: 3px 3px 0px 0px;
+                    border-radius: 3px 3px 3px 3px;
+                    -moz-border-radius: 3px 3px 3px 3px;
                 }
                 
-                #tools > div:manage-columns-button{
-                    border-radius: 0px 0px 3px 3px;
+                #manage-columns-button{
+                    border-radius: 3px 3px 0px 0px;
                 }
                 
                 #tools > div:hover {
