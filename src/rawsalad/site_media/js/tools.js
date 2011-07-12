@@ -95,6 +95,9 @@ var _tools = (function () {
         $( html.join('') ).insertBefore( $('#show-found-button') );
         $('#show-found-button').show();
         
+        // to avoid multi event handlers on show-found-button
+        $('#show-found-button').unbind('click');
+        
         $('#show-found-button')
             .click( function () {                
                 var search_list = [];
@@ -106,8 +109,6 @@ var _tools = (function () {
                     }
                 });
                 _db.add_search_data( search_list );
-                // to avoid multi event handlers on show-found-button
-                $(this).unbind('click');
             });
     };
 
