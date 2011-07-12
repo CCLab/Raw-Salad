@@ -77,7 +77,7 @@ var _tools = (function () {
 
                 html.push('<div id="search-collection-', col_i, '">');
                 html.push('<input type="checkbox" id="search-checkbox-', col_i, '"');
-                html.push(' name="search-result" value="', collection_name, '"/>');
+                html.push(' name="search-checkbox" value="', collection_name, '"/>');
 
                 col['data'].forEach( function( row, row_i ) {
                     html.push('<div id="search-result-', col_i, '-', row_i, '">');
@@ -97,8 +97,7 @@ var _tools = (function () {
         
         $('#show-found-button')
             .click( function () {
-                // var search_list = get_search_list_using_checkboxes();
-                var search_list = [
+                /*var search_list = [
                     {
                         dataset: 0,
                         view: 0,
@@ -121,19 +120,16 @@ var _tools = (function () {
                             }
                         ]
                     }
-                ];
+                ];*/
                 
-                var checkboxes_nr = $('#search-results > div').length - 1;
-                var checked_list = [];
-                var i;
+                var search_list = [];
+                var checkboxes = $("input[name=search-checkbox]");
                 
-                for ( i = 0; i < checkboxes_nr; i += 1 ) {
-                    if ( $('#search-checkbox-' + i).is(':checked') ) {
-                        check
+                checkboxes.forEach( function ( checkbox, i ) {
+                    if ( checkbox.is(':checked') ) {
+                        search_list.push( results[i] );
                     }
-                }
-                
-
+                });
                 _db.add_search_data( search_list );
             });
     };
@@ -596,7 +592,7 @@ var _tools = (function () {
                 return false;
             });
 
-        $('#show-found-button')
+        /*$('#show-found-button')
             .click( function () {
                 // var search_list = get_search_list_using_checkboxes();
                 var search_list = [
@@ -625,7 +621,7 @@ var _tools = (function () {
                 ];
 
                 _db.add_search_data( search_list );
-            });
+            });*/
     }
 
     function create_filter_result( filtered_list ) {
