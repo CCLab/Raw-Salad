@@ -9,9 +9,22 @@
     "max_level": "e",
     "columns": [
         {
-            "key": "idef",
+            "key": "idef_sort",
             "label": "ID",
-            "type": "string"
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "parent_sort",
+            "label": "Rodzic",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "level",
+            "label": "Poziom",
+            "type": "string",
+            "processable": true
             },
         {
             "key": "type",
@@ -39,7 +52,8 @@
     "aux": {
         "leaf": 1,
         "parent": 1,
-        "level": 1
+        "level": 1,
+        "idef": 1
         },
     "query": {
         "node": { "$in" : [ null, 0 ] },

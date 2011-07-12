@@ -13,6 +13,18 @@
       "type": "string"
     },
     {
+      "key": "parent",
+      "label": "Rodzic",
+      "type": "string",
+      "processable": true
+    },
+    {
+      "key": "level",
+      "label": "Poziom",
+      "type": "string",
+      "processable": true
+    },
+    {
       "key": "numer",
       "label": "Numer",
       "type": "string",
@@ -110,9 +122,7 @@
     }
   ],
   "aux": {
-      "leaf": 1,
-      "parent": 1,
-      "level": 1
+      "leaf": 1
   },
   "query": {},
   "sort": {
