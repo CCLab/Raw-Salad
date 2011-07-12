@@ -160,7 +160,7 @@ var _db = (function () {
                     
                     // TODO: shouldnt value returned by group_exists be changed?
                     if ( !_store.group_exists(col_id) ) {
-                        groups = _store.get_all_groups;
+                        groups = _store.get_all_groups();
                         for ( i = 0; i < groups.length; i += 1 ) {
                             if ( col_id['dataset'] === groups[i]['dataset'] &&
                                  col_id['perspective'] === groups[i]['perspective'] &&
