@@ -125,8 +125,8 @@ var _tools = (function () {
                 var search_list = [];
                 var checkboxes = $("input[name=search-checkbox]");
                 
-                checkboxes.forEach( function ( checkbox, i ) {
-                    if ( checkbox.is(':checked') ) {
+                checkboxes.each( function ( i ) {
+                    if ( $(this).is(':checked') ) {
                         search_list.push( results[i] );
                     }
                 });
