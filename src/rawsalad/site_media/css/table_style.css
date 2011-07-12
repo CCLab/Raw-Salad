@@ -9,7 +9,7 @@
   color: #fff;
 }
 
-#data-table tbody > tr {
+#data-table tr {
   border-right: 2px solid #5b5b5b;
   border-left: 2px solid #5b5b5b;
 }
@@ -99,6 +99,8 @@
 .root {
   color: #fff;
   background-color: #5b5b5b !important; 
+  border-right: 2px solid #5b5b5b;
+  border-left: 2px solid #5b5b5b;
 }
 
 .dim {
@@ -106,7 +108,7 @@
 }
 
 .next {
-  border-top: 1px solid #5b5b5b;
+  border-top: 2px solid #5b5b5b;
 }
 
 .number {
