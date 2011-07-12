@@ -201,13 +201,13 @@ var _table = (function () {
         var schema = _store.active_columns();
         var html = [];
 
-        html.push( '<table><tr>' );
+        html.push( '<tr>' );
         schema.forEach( function ( column ) {
-            html.push( '<td class="', column['key'], ' ', column['type'], '" ' );
+            html.push( '<th class="', column['key'], ' ', column['type'], '" ' );
             html.push( 'class="filtered-data">' );
-            html.push( column['label'], '</td>' );
+            html.push( column['label'], '</th>' );
         });
-        html.push( '</tr></table>' );
+        html.push( '</tr>' );
 
         $('#filtered-thead').append( html.join('') );
     }
@@ -251,23 +251,22 @@ var _table = (function () {
         var html = [];
         var node = args['node'];
 
-        html.push('<div id="', node['data']['idef'], '" ');
+        html.push('<tr id="', node['data']['idef'], '" ');
         html.push( 'class="filtered-block">' );
 
-        html.push('<div id="breadcrumb-', node['data']['idef'], '" ');
+        html.push( '<td colspan="', args['schema'].length, '" ' );
+        html.push( 'id="breadcrumb-', node['data']['idef'], '" ');
         html.push( 'class="filtered-breadcrumb">' );
         html.push( node['breadcrumb'] );
-        html.push('</div>');
+        html.push('</td></tr>');
 
-        html.push( '<table class="filtered-data"><tr>' );
+        html.push( '<tr class="filtered-data">' );
         args['schema'].forEach( function ( column ) {
             html.push( '<td class="', column['key'], ' ', column['type'], '">' );
             html.push( node['data'][ column['key'] ] );
-            html.push('</div>');
+            html.push('</td>');
         });
-        html.push( '</tr></table>' );
-
-        html.push('</div>');
+        html.push( '</tr>' );
 
         return $( html.join('') );
     }
