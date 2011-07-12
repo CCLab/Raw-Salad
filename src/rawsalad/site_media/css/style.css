@@ -11,11 +11,6 @@ body {
     margin: 0px auto;
 }
 
-header {
-  overflow: auto;
-  height: 18px;
-  padding: 5px 12px;
-}
 
   header ul {
     list-style-type: none;
@@ -27,8 +22,8 @@ header {
     width: 200px;
     padding: 5px;
     
-    color: #fff;
-    background-color: #4abff7;
+    color: #4abff7;
+    background-color: #ddd;
 
     border-radius: 5px;
     -moz-border-radius: 5px;
@@ -37,7 +32,12 @@ header {
   header li:hover {
     cursor: pointer;
     color: #4abff7;
-    background-color: #ddd;            
+    background-color: #eee;            
+  }
+
+  header .selected {
+    color: #fff;
+    background-color: #888;
   }
 
 .left {
