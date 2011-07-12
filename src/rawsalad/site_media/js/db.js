@@ -93,7 +93,6 @@ var _db = (function () {
                 ];
                 _tools.show_search_results( tmp_data );
                 console.log( tmp_data );
-                return false;
             }
         });
     };

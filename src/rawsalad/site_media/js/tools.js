@@ -494,8 +494,8 @@ var _tools = (function () {
     }
     
     function prepare_search_interface() {
-        $('#search-button')
-            .click( function () {
+        $('#search-form')
+            .submit( function () {
                 var query;
                 var scope;
                 var strict;
@@ -506,6 +506,8 @@ var _tools = (function () {
                     strict = $('#strict-match').is(':checked');
                     _db.search( query, scope, strict );
                 }
+                
+                return false;
             });
     }
 
