@@ -389,7 +389,8 @@ body {
        }
        
        .filtered-breadcrumb {
-           margin-left: 15px;
+         color: #5b5b5b;
+         margin-left: 15px;
          margin-bottom: 5px;
          margin-top: 15px;
        }
@@ -406,9 +407,12 @@ body {
        }
  
        .filtered-data td.type {
-         width: 138px;
+         width: 138px !important;
        }
- 
+
+       .filtered-data td.number {
+         width: 100px !important;
+       }
 
 
 #permalink-container {
