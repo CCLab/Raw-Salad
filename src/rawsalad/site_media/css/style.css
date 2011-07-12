@@ -379,12 +379,8 @@ body {
       #filtered-table {
          width: 940px;
          background-color: #fff;
-         padding: 10px;
-       }
-
-      #filtered-table {
+         margin: 0px 10px;
          border-collapse: collapse;
-         width: 100%;
       }
 
       #filtered-table th {
@@ -402,7 +398,7 @@ body {
          color: #5b5b5b;
          margin-left: 15px;
          margin-bottom: 5px;
-         margin-top: 15px;
+         padding-top: 15px;
        }
  
        .filtered-data td {
