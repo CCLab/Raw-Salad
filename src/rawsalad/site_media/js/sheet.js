@@ -29,7 +29,7 @@ var _sheet = (function () {
     //  P U B L I C   I N T E R F A C E
     var that = {};
 
-    that.create_new_sheet = function ( sheet_data, sheet_name, show_table ) {
+    that.create_new_sheet = function ( sheet_data, sheet_name, no_table ) {
         var group_nr = _store.active_group_index();
         var sheet_nr = _store.next_sheet_number();
         var new_sheet = {};
@@ -40,20 +40,20 @@ var _sheet = (function () {
         new_sheet["name"] = sheet_name + ' ' + sheet_nr;
 
         _store.add_new_sheet( new_sheet );
-        if ( !!show_table ) {
-            _gui.create_sheet_tab({
-                'name': new_sheet['name'],
-                'sheet_nr': sheet_nr,
-                'group_nr': group_nr,
-            });
-        } else {
+        if ( !!no_table ) {
             _gui.create_only_sheet_tab({
                 'name': new_sheet['name'],
                 'sheet_nr': sheet_nr,
                 'group_nr': group_nr,
             });
+        } else {
+            _gui.create_sheet_tab({
+                'name': new_sheet['name'],
+                'sheet_nr': sheet_nr,
+                'group_nr': group_nr,
+            });
         }
-    }
+    };
     
     that.add_searched_group = function ( col_id, data, sheets_left ) {
         var basic_rows;
@@ -100,7 +100,7 @@ var _sheet = (function () {
                 sheet_nr: _store.active_sheet_index()
             });
         }
-    }
+    };
     
     that.create_searched_sheet = function ( col_id, data, sheets_left ) {
         var new_sheet;
@@ -137,11 +137,10 @@ var _sheet = (function () {
         if ( sheets_left === 0 ) {
             that.create_new_sheet( new_sheet, "Arkusz" );
         } else {
-            // TODO: function that adds only sheet tab
-            that.create_new_sheet( new_sheet, "Arkusz" );
+            that.create_new_sheet( new_sheet, "Arkusz", true );
         }
         
-    }
+    };
 
     return that;
 
