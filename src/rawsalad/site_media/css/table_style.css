@@ -9,9 +9,9 @@
   color: #fff;
 }
 
-#data-table tbody > tr.dim {
-  border-right: 2px solid #8b8b8b;
-  border-left: 2px solid #8b8b8b;
+#data-table tbody > tr {
+  border-right: 2px solid #5b5b5b;
+  border-left: 2px solid #5b5b5b;
 }
 
 #data-table tbody > tr:hover {
