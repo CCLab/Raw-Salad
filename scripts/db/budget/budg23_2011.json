@@ -1,55 +1,73 @@
 {
-  "name": "agencji_tradycijny_2011",
-  "perspective": "Wydatky i koszty państwowych Agencij 2011 - 2013 (w układzie tradycyjnym)",
-  "ns": "dd_agnc2011_tr",
-  "dataset": 2,
-  "idef": 3,
-  "issue": "2011",
-  "explorable": "type",
-  "max_level": "d",
-  "batchsize": null,
-  "columns": [
-    {
-      "key": "type",
-      "label": "Numer",
-      "basic": true,
-      "type": "string",
-      "processable": true
-    },
-    {
-      "key": "name",
-      "label": "Treść",
-      "type": "string",
-      "basic": true,
-      "processable": true
-    },
-    {
-      "key": "frst_popr",
-      "label": "Przewidywane wykonanie w 2010",
-      "type": "number",
-      "basic": true,
-      "processable": true,
-      "checkable": true
-    },
-    {
-      "key": "plan_nast",
-      "label": "Plan na 2011",
-      "processable": true,
-      "basic": true,
-      "type": "number",
-      "checkable": true
-    }
-  ],
-  "aux": {
-      "leaf": 1,
-      "parent": 1,
-      "level": 1,
-      "idef": 1
-  },
-  "query": {},
-  "sort": {
+    "name": "agencji_tradycijny_2011",
+    "perspective": "Wydatky i koszty państwowych Agencij 2011 - 2013 (w układzie tradycyjnym)",
+    "ns": "dd_agnc2011_tr",
+    "dataset": 2,
+    "idef": 3,
+    "issue": "2011",
+    "explorable": "type",
+    "max_level": "d",
+    "batchsize": null,
+    "columns": [
+        {
+            "key": "idef_sort",
+            "label": "ID",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "parent_sort",
+            "label": "Rodzic",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "level",
+            "label": "Poziom",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "type",
+            "label": "Numer",
+            "basic": true,
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "name",
+            "label": "Treść",
+            "type": "string",
+            "basic": true,
+            "processable": true
+            },
+        {
+            "key": "frst_popr",
+            "label": "Przewidywane wykonanie w 2010",
+            "type": "number",
+            "basic": true,
+            "processable": true,
+            "checkable": true
+            },
+        {
+            "key": "plan_nast",
+            "label": "Plan na 2011",
+            "processable": true,
+            "basic": true,
+            "type": "number",
+            "checkable": true
+            }
+        ],
+    "aux": {
+        "leaf": 1,
+        "parent": 1,
+        "level": 1,
+        "idef": 1
+        },
+    "query": {},
+    "sort": {
         "0": {"idef_sort": 1},
         "1": {"parent_sort": 1},
         "2": {"level": 1}
-  }
-}
+        }
+    }

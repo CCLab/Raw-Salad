@@ -163,7 +163,8 @@ var _tools = (function () {
 	    var active_columns = _store.active_columns();
 	    var all_columns = _store.group_columns();
 
-
+        html.push ( '<input type="button" value="Zaznacz" id="check-all" >' );
+        html.push ( '<input type="button" value="Odznacz" id="uncheck-all" >' ); 
         for( i=0; i<all_columns.length; i+=1) {
             key = all_columns[i]['key'];
 	        html.push ( '<input type="checkbox" name="columns"' );
@@ -177,7 +178,6 @@ var _tools = (function () {
         }
         html.push('<input type="submit" value="Dodaj kolumny">');
         $('#manage-columns-form').append( $( html.join('') ));
-	//TODO add checkboxes to manage columns popup
     }
 
 
@@ -491,6 +491,23 @@ var _tools = (function () {
                 $(this).hide();
 		return false;
         });
+        
+        $('#check-all')
+            .click( function () {
+                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
+                    $('input[name=columns]')[i].checked=true; 
+                }
+            });
+               
+        $('#uncheck-all')
+            .click( function () {
+                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
+                    $('input[name=columns]')[i].checked=false; 
+                }
+            });
+
+
+
     };
 
     function prepare_snapshot_interface() {

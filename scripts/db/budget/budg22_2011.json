@@ -10,6 +10,24 @@
     "batchsize": null,
     "columns": [
         {
+            "key": "idef_sort",
+            "label": "ID",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "parent_sort",
+            "label": "Rodzic",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "level",
+            "label": "Poziom",
+            "type": "string",
+            "processable": true
+            },
+        {
             "key": "type",
             "label": "Typ",
             "type": "string",
@@ -22,13 +40,6 @@
             "type": "string",
             "basic": true,
             "processable": true
-            },
-        {
-            "key": "info",
-            "label": "Cel & Miernik",
-            "type": "string",
-            "processable": false,
-            "basic": false
             },
         {
             "key": "val_2011",
