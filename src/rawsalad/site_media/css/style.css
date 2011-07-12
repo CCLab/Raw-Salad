@@ -524,15 +524,13 @@ body {
             }
             
             #tools {
-                position: absolute;
+                position: relative;
+                float: right;
                 bottom: 7px;
                 right: 10px;
                 width: auto;
-                background-color: #fff;
-                padding-left: 5px;
-                border-bottom: solid 1px #555;
                 border-radius: 3px 3px 0px 0px;
-                -moz-border-radius: 3px 3px 0px 0px;                
+                -moz-border-radius: 3px 3px 0px 0px;      
             }
                 
                 #tools > div {         
