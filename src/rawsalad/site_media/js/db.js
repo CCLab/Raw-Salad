@@ -194,7 +194,7 @@ var _db = (function () {
                         if ( !!additional_rows ) {
                             _store.add_data( additional_rows );
 
-                            aditional_rows.forEach( function ( row ) {
+                            additional_rows.forEach( function ( row ) {
                                 nodes_to_open[ row['parent'] ] = true;
                             });
                             
