@@ -255,14 +255,22 @@ var _table = (function () {
         html.push( node['breadcrumb'] );
         html.push('</div>');
 
-        html.push('<div id="filter-data-', node['data']['idef'], '" ');
-        html.push('class="filtered-data">' );
+        html.push( '<table class="filtered-data"><tr>' );
         args['schema'].forEach( function ( column ) {
-            html.push('<div class="', column['key'], ' ', column['type'], '">');
+            html.push( '<td class="', column['key'], ' ', column['type'], '">' );
             html.push( node['data'][ column['key'] ] );
             html.push('</div>');
         });
-        html.push('</div>');
+        html.push( '</tr></table>' );
+
+//        html.push('<div id="filter-data-', node['data']['idef'], '" ');
+//        html.push('class="filtered-data">' );
+//        args['schema'].forEach( function ( column ) {
+//            html.push('<div class="', column['key'], ' ', column['type'], '">');
+//            html.push( node['data'][ column['key'] ] );
+//            html.push('</div>');
+//        });
+//        html.push('</div>');
 
         html.push('</div>');
 
@@ -297,8 +305,9 @@ var _table = (function () {
         // dim everything outside this a-rooted subtree
         a_root
             .siblings()
-//            .not(':hidden')
-            .addClass('dim');
+            .addClass('dim')
+            .end()
+            .removeClass('dim');
 
         // make a-root background black
         $('tr.root').removeClass('root');
