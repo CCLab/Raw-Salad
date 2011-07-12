@@ -54,7 +54,7 @@ var _tools = (function () {
         var issue;
         var i;
         var html = ['<div id="search-results">'];
-        
+
         if ( results.length === 0 ) {
             html.push('<div id="search-title">Nic nie znaleziono</div></div>');
         } else {
@@ -88,7 +88,7 @@ var _tools = (function () {
 
                 html.push('</div>');
             });
-            
+
             html.push('</div>');
         }
 
@@ -461,7 +461,59 @@ var _tools = (function () {
                 return false;
            });
     };
-
+/*
+ *
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
+ *
+ */
     function 	prepare_manage_columns_interface(){
 	    var new_active_columns;
         var i = 0;
@@ -507,7 +559,7 @@ var _tools = (function () {
                 var query;
                 var scope;
                 var strict;
-                
+
                 $('#search-results').remove();
                 $('#show-found-button').hide();
 
@@ -520,7 +572,7 @@ var _tools = (function () {
 
                 return false;
             });
-            
+
         $('#show-found-button')
             .click( function () {
                 // var search_list = get_search_list_using_checkboxes();
@@ -548,7 +600,7 @@ var _tools = (function () {
                         ]
                     }
                 ];
-                
+
                 _db.add_search_data( search_list );
             });
     }
