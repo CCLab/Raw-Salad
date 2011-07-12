@@ -263,15 +263,6 @@ var _table = (function () {
         });
         html.push( '</tr></table>' );
 
-//        html.push('<div id="filter-data-', node['data']['idef'], '" ');
-//        html.push('class="filtered-data">' );
-//        args['schema'].forEach( function ( column ) {
-//            html.push('<div class="', column['key'], ' ', column['type'], '">');
-//            html.push( node['data'][ column['key'] ] );
-//            html.push('</div>');
-//        });
-//        html.push('</div>');
-
         html.push('</div>');
 
         return $( html.join('') );

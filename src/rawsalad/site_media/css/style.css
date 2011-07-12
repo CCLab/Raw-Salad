@@ -376,6 +376,11 @@ body {
         color: #4CBCEB;
       }
 
+      #filtered-table {
+            width: 960px;
+          background-color: #fff;
+      }
+
       .filtered-block {
         clear: both;
         margin-bottom: 10px;
@@ -387,15 +392,16 @@ body {
         margin-top: 15px;
       }
 
-      .filtered-data > div {
-        float: left;
+      .filtered-data td {
         padding: 5px;
         background-color: #ccc;
+        border: 1px solid #5b5b5b;
       }
 
       .filtered-data .type {
         width: 138px;
       }
+
 
 #permalink-container {
   clear: both;
