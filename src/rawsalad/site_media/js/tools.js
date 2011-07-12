@@ -86,8 +86,10 @@ var _tools = (function () {
                     html.push('</div>');
                 });
 
-                html.push('</div></div>');
+                html.push('</div>');
             });
+            
+            html.push('</div>');
         }
 
         $( html.join('') ).insertBefore( $('#show-found-button') );
