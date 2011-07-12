@@ -250,6 +250,7 @@ var _table = (function () {
     function generate_filtered_row( args ) {
         var html = [];
         var node = args['node'];
+        var breadcrumb = node['breadcrumb'] || '';
 
         html.push('<tr id="', node['data']['idef'], '" ');
         html.push( 'class="filtered-block">' );
@@ -257,7 +258,7 @@ var _table = (function () {
         html.push( '<td colspan="', args['schema'].length, '" ' );
         html.push( 'id="breadcrumb-', node['data']['idef'], '" ');
         html.push( 'class="filtered-breadcrumb">' );
-        html.push( node['breadcrumb'] );
+        html.push( breadcrumb );
         html.push('</td></tr>');
 
         html.push( '<tr class="filtered-data">' );
