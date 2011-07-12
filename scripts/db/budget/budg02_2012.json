@@ -5,13 +5,27 @@
     "dataset": 0,
     "idef": 2,
     "issue": "2012",
+    "max_level": "e",
     "explorable": "type",
     "batchsize": 40,
     "columns": [
         {
-            "key": "idef",
+            "key": "idef_sort",
             "label": "ID",
-            "type": "string"
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "parent_sort",
+            "label": "Rodzic",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "level",
+            "label": "Poziom",
+            "type": "string",
+            "processable": true
             },
         {
             "key": "type",
@@ -38,6 +52,7 @@
         ],
     "aux": {
         "leaf": 1,
+        "idef": 1,
         "parent": 1,
         "level": 1
         },

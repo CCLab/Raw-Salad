@@ -9,6 +9,24 @@
     "max_level": "d",
     "columns": [
         {
+            "key": "idef_sort",
+            "label": "ID",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "parent_sort",
+            "label": "Rodzic",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "level",
+            "label": "Poziom",
+            "type": "string",
+            "processable": true
+            },
+        {
             "key": "type",
             "label": "Typ",
             "type": "string",
@@ -35,13 +53,6 @@
             "processable": true
             },
         {
-            "key": "info",
-            "label": "Cel & Miernik",
-            "type": "string",
-            "processable": false,
-            "basic": false
-            },
-        {
             "key": "v_nation",
             "label": "Budżet Państwa",
             "processable": true,
@@ -53,7 +64,6 @@
     "aux": {
         "leaf": 1,
         "parent": 1,
-        "level": 1,
         "idef": 1
         },
     "query": {

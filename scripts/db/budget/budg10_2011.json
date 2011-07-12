@@ -9,6 +9,24 @@
     "max_level": "b",
     "columns": [
         {
+            "key": "idef_sort",
+            "label": "ID",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "parent_sort",
+            "label": "Rodzic",
+            "type": "string",
+            "processable": true
+            },
+        {
+            "key": "level",
+            "label": "Poziom",
+            "type": "string",
+            "processable": true
+            },
+        {
             "key": "type",
             "label": "Typ",
             "type": "string",
