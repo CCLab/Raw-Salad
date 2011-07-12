@@ -55,7 +55,9 @@ def _convert_dict_to_xml_recurse(parent, dict_item, list_names):
         parent.text = unicode(dict_item)
 
 
-def format_result(result, srz, rt_tag= None):
+def format_result(result, srz, httpresp= None, rt_tag= None):
+    if httpresp is None:
+        httpresp= 200    
     if srz == 'json':
         res= json.dumps( result, ensure_ascii=False, indent=4 )
         mime_tp= "application/json"
@@ -67,12 +69,14 @@ def format_result(result, srz, rt_tag= None):
         res= "".join([ xml_header, res_raw ])
         mime_tp= "application/xml"
     else: # error: format missing (like ../api/dataset/ instead of /api/<format>/dataset/)
+        format_error= rsdb.Response().get_response(35)
         res= json.dumps( {
-            "response": rsdb.Error().throw_error(35),
+            "response": format_error["descr"],
             "request": srz
             }, ensure_ascii=False, indent=4 )
         mime_tp= "application/json"
-    return res, mime_tp
+        httpresp= format_error["httpresp"]
+    return res, mime_tp, httpresp
 
 
 def path2query(path_str):
@@ -104,13 +108,13 @@ def get_datasets(request, serializer, db=None):
     nav= rsdb.Navtree()
     data= nav.get_dataset(db)
 
-    result= { 'request': nav.request, 'response': nav.response }
-    if result['response'] == 'OK':
+    result= { 'request': nav.request, 'response': nav.response['descr'] }
+    if nav.response['httpresp'] == 200:
         result['data']= data
         result['uri']= request.build_absolute_uri()
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response = format_result(result, serializer, nav.response['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
 def get_datasets_meta(request, serializer, db=None):
     if db is None:
@@ -119,13 +123,13 @@ def get_datasets_meta(request, serializer, db=None):
     nav= rsdb.Navtree()
     count= nav.get_count(db)
 
-    result= { 'request': nav.request, 'response': nav.response }
-    if result['response'] == 'OK':
+    result= { 'request': nav.request, 'response': nav.response['descr'] }
+    if nav.response['httpresp'] == 200:
         result['metadata']= { 'count': count }
         result['uri']= request.build_absolute_uri()
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response = format_result(result, serializer, nav.response['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
 
 def get_views(request, serializer, dataset_idef, db=None):
@@ -135,13 +139,13 @@ def get_views(request, serializer, dataset_idef, db=None):
     nav= rsdb.Navtree()
     data= nav.get_view(db, dataset_idef)
 
-    result= { 'request': nav.request, 'response': nav.response }
-    if result['response'] == 'OK':
+    result= { 'request': nav.request, 'response': nav.response['descr'] }
+    if nav.response['httpresp'] == 200:
         result['data']= data
         result['uri']= request.build_absolute_uri()
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response = format_result(result, serializer, nav.response['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
 def get_views_meta(request, serializer, dataset_idef, db=None):
     if db is None:
@@ -150,13 +154,13 @@ def get_views_meta(request, serializer, dataset_idef, db=None):
     nav= rsdb.Navtree()
     count= nav.get_count(db, dataset_idef)
 
-    result= { 'request': nav.request, 'response': nav.response }
-    if result['response'] == 'OK':
+    result= { 'request': nav.request, 'response': nav.response['descr'] }
+    if nav.response['httpresp'] == 200:
         result['metadata']= { 'count': count }
         result['uri']= request.build_absolute_uri()
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response= format_result(result, serializer, nav.response['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
 def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
@@ -165,13 +169,13 @@ def get_issues(request, serializer, dataset_idef, view_idef, db=None):
     nav= rsdb.Navtree()
     data= nav.get_issue(db, dataset_idef, view_idef)
 
-    result= { 'request': nav.request, 'response': nav.response }
-    if result['response'] == 'OK':
+    result= { 'request': nav.request, 'response': nav.response['descr'] }
+    if nav.response['httpresp'] == 200:
         result['data']= data
         result['uri']= request.build_absolute_uri()
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response = format_result(result, serializer, nav.response['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
 def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     if db is None:
@@ -180,13 +184,13 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     nav= rsdb.Navtree()
     count= nav.get_count(db, dataset_idef, view_idef)
 
-    result= { 'request': nav.request, 'response': nav.response }
-    if result['response'] == 'OK':
+    result= { 'request': nav.request, 'response': nav.response['descr'] }
+    if nav.response['httpresp'] == 200:
         result['metadata']= { 'count': count }
         result['uri']= request.build_absolute_uri()
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response = format_result(result, serializer, nav.response['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
 def get_userdef_fields(rq):
     """
@@ -292,16 +296,18 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         'issue': issue
         }
 
+    httpresp_dict= {}
     userdef_query= parse_conditions(path)
     if 'error' in userdef_query: # already an error
-        result['response']= rsdb.Error().throw_error(userdef_query['error'])
-
+        httpresp_dict= rsdb.Response().get_response(userdef_query['error'])
+        result['response']= httpresp_dict['descr']
     else:
         userdef_fields= get_userdef_fields(request)
 
         coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
         data= coll.get_data(db, dataset_idef, view_idef, issue)
-        if coll.response == 'OK':
+        httpresp_dict= coll.response
+        if httpresp_dict['httpresp'] == 200:
             result['data']= data
             result['count']= coll.count
             result['uri']= request.build_absolute_uri()
@@ -309,13 +315,13 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         if coll.warning:
             result['warning']= coll.warning
 
-        result['response']= coll.response
+        result['response']= httpresp_dict['descr']
         result['request']= coll.request
 
         coll= None
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response = format_result(result, serializer, httpresp_dict['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
 
 def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
@@ -335,18 +341,18 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
 
     coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
     metadata= coll.get_metadata(db, dataset_idef, view_idef, issue)
-    if coll.response == 'OK':
+    if coll.response['httpresp'] == 200:
         result['metadata']= metadata
         result['uri']= request.build_absolute_uri()
 
     if coll.warning:
         result['warning']= coll.warning
 
-    result['response']= coll.response
+    result['response']= coll.response['descr']
     result['request']= coll.request
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response = format_result(result, serializer, coll.response['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
 
 def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
@@ -359,24 +365,26 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         'issue': issue,
         }
 
+    httpresp_dict= {}
     userdef_query= parse_conditions(path)
     if 'error' in userdef_query: # already an error
-        result['response']= rsdb.Error().throw_error(userdef_query['error'])
-
+        httpresp_dict= rsdb.Response().get_response(userdef_query['error'])
+        result['response']= httpresp_dict['descr']
     else:
         userdef_fields= get_userdef_fields(request)
 
         coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
         tree= coll.get_tree(db, dataset_idef, view_idef, issue)
-        if coll.response == 'OK':
+        httpresp_dict= coll.response
+        if httpresp_dict['httpresp'] == 200:
             result['tree']= tree
             result['uri']= request.build_absolute_uri()
 
         if coll.warning:
             result['warning']= coll.warning
 
-        result['response']= coll.response
+        result['response']= httpresp_dict['descr']
         result['request']= coll.request
 
-    out, mime_tp = format_result(result, serializer)
-    return HttpResponse( out, mimetype=mime_tp )
+    out, mime_tp, http_response = format_result(result, serializer, httpresp_dict['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
