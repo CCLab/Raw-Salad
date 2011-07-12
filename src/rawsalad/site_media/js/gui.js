@@ -46,6 +46,9 @@ var _gui = (function () {
                 .removeClass('inactive');
         });
         $('#search-tab').click( function () {
+        
+            $('#show-found-button').hide();
+            
             $('#table-container').hide();
             $('#search-container').show();
             $('#download-container').hide();

@@ -53,40 +53,45 @@ var _tools = (function () {
         var view;
         var issue;
         var i;
-        var html = ['<div id="search-title">Wyniki w kolekcjach danych</div>'];
-        html.push('<button id="show-found-button" type="button">');
-        html.push('Przejdź do zaznaczonych</button>');
+        var html = ['<div id="search-results">'];
+        
+        if ( results.length === 0 ) {
+            html.push('<div id="search-title">Nic nie znaleziono</div></div>');
+        } else {
+            html.push('<div id="search-title">Wyniki w kolekcjach danych</div>');
 
-        results.forEach( function( col, col_i ) {
-            dataset = meta[ col['dataset'] ];
-            view = dataset['perspectives'][ col['view'] ];
-            collection_name = view['name'] + ' ' + col['issue'];
+            results.forEach( function( col, col_i ) {
+                dataset = meta[ col['dataset'] ];
+                view = dataset['perspectives'][ col['view'] ];
+                collection_name = view['name'] + ' ' + col['issue'];
 
-            issue = -1;
-            for ( i = 0; i < view['issues'].length; i += 1 ) {
-                if ( parseInt( view['issues'][i] ) === col['issue'] ) {
-                    issue = i;
-                    break;
+                issue = -1;
+                for ( i = 0; i < view['issues'].length; i += 1 ) {
+                    if ( parseInt( view['issues'][i] ) === col['issue'] ) {
+                        issue = i;
+                        break;
+                    }
                 }
-            }
 
-            _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
+                _assert.not_equal( issue, -1, 'Issue: ' + col['issue'] + ' not found');
 
-            html.push('<div id="search-collection-', col_i, '">');
-            html.push('<input type="checkbox" id="search-checkbox-', col_i);
-            html.push(' name="search-result" value="', collection_name, '"/>');
+                html.push('<div id="search-collection-', col_i, '">');
+                html.push('<input type="checkbox" id="search-checkbox-', col_i);
+                html.push(' name="search-result" value="', collection_name, '"/>');
 
-            col['data'].forEach( function( row, row_i ) {
-                html.push('<div id="search-result-', col_i, '-', row_i, '">');
-                html.push('<div class="search-type">', row['type'], '</div>');
-                html.push('<div class="search-name">', row['name'], '</div>');
-                html.push('</div>');
+                col['data'].forEach( function( row, row_i ) {
+                    html.push('<div id="search-result-', col_i, '-', row_i, '">');
+                    html.push('<div class="search-type">', row['type'], '</div>');
+                    html.push('<div class="search-name">', row['name'], '</div>');
+                    html.push('</div>');
+                });
+
+                html.push('</div></div>');
             });
+        }
 
-            html.push('</div>');
-        });
-
-        $('#search-container').append( html.join('') );
+        $( html.join('') ).insertBefore( $('#show-found-button') );
+        $('#show-found-button').show();
     };
 
     return that;
@@ -509,6 +514,11 @@ var _tools = (function () {
                 }
 
                 return false;
+            });
+            
+        $('#show-found-button')
+            .click( function () {
+                // show results in sheets
             });
     }
 
