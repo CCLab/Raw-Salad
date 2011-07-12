@@ -230,6 +230,7 @@ var _download = (function () {
         });
         result += '|';
 
+        return result;
     }
 
 })();
