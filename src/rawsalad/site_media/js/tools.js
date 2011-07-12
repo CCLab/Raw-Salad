@@ -54,7 +54,8 @@ var _tools = (function () {
         var issue;
         var i;
         var html = ['<div id="search-title">Wyniki w kolekcjach danych</div>'];
-        html.push('<div id="show-found-button">Przejdź do zaznaczonych</div>');
+        html.push('<button id="show-found-button" type="button">');
+        html.push('Przejdź do zaznaczonych</button>');
 
         results.forEach( function( col, col_i ) {
             dataset = meta[ col['dataset'] ];
