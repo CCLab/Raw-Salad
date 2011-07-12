@@ -461,59 +461,7 @@ var _tools = (function () {
                 return false;
            });
     };
-/*
- *
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *                   WŁĄCZ SKYPE"A !!!!!!!!!!!!
- *
- */
+
     function 	prepare_manage_columns_interface(){
 	    var new_active_columns;
         var i = 0;

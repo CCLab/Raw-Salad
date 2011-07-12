@@ -135,7 +135,8 @@ var _db = (function () {
                     var group_nr;
                     var new_sheet;
                     
-                    if ( _store.group_exists(col_id) ) {
+                    // TODO: shouldnt value returned by group_exists be changed?
+                    if ( !_store.group_exists(col_id) ) {
                         groups = _store.get_all_groups;
                         for ( i = 0; i < groups.length; i += 1 ) {
                             if ( col_id['dataset'] === groups[i]['dataset'] &&
