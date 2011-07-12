@@ -178,6 +178,22 @@ var _tools = (function () {
         }
         html.push('<input type="submit" value="Dodaj kolumny">');
         $('#manage-columns-form').append( $( html.join('') ));
+
+        $('#check-all')
+            .click( function () {
+                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
+                    $('input[name=columns]')[i].checked=true; 
+                }
+            });
+               
+        $('#uncheck-all')
+            .click( function () {
+                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
+                    $('input[name=columns]')[i].checked=false; 
+                }
+            });
+
+
     }
 
 
