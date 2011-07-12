@@ -59,8 +59,6 @@ var _assert = (function () {
         }
     };
 
-    return that;
-
 
 //  P R I V A T E   I N T E R F A C E
     var is_browser = (function () {
@@ -74,6 +72,8 @@ var _assert = (function () {
         }
     })();
 
+
+    return that;
 
     function show_error( type, message ) {
         var html = [];
@@ -121,7 +121,7 @@ var _assert = (function () {
                 msg += ">> Type: " + type + " ";
                 msg += ">> Message: " + message;
 
-                print( msg );
+                console.log( msg );
 
                 throw new AssertException( type );
             }
