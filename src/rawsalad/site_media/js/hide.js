@@ -3,6 +3,7 @@
     $('#sort-form').hide();
     $('#filter-form').hide();
     $('#manage-columns-form').hide();
+    $('#search-container').hide();
     $('#download-container').hide();
     $('#permalink-container').hide();
     $('#download-form').hide();
