@@ -107,16 +107,6 @@ var _db = (function () {
                 data: data,
                 dataType: 'json',
                 success: function ( received_data ) {
-                    var basic_data;
-                    var basic_rows;
-                    var additional_rows;
-                    var i;
-                    var groups;
-                    var group_nr;
-                    var new_sheet;
-                    var id;
-                    var nodes_to_open = {};
-                    
                     var col_id = {
                         'dataset': received_data['dataset'],
                         'perspective': received_data['view'],
@@ -131,120 +121,19 @@ var _db = (function () {
                         received_data = {"rows": [{"info": null, "leaf": false, "name": "ZARZ\u0104DZANIE PA\u0143STWEM", "parent": null, "level": "a", "idef": "1", "czesc": null, "czesc_name": null, "v_nation": 1343628, "type": "FUNKCJA 1"}, {"info": null, "leaf": false, "name": "BEZPIECZE\u0143STWO WEWN\u0118TRZNE I PORZ\u0104DEK PUBLICZNY", "parent": null, "level": "a", "idef": "2", "czesc": null, "czesc_name": null, "v_nation": 15764059, "type": "FUNKCJA 2"}, {"info": null, "leaf": false, "name": "EDUKACJA, WYCHOWANIE I OPIEKA", "parent": null, "level": "a", "idef": "3", "czesc": null, "czesc_name": null, "v_nation": 52368661, "type": "FUNKCJA 3"}, {"info": null, "leaf": false, "name": "Ochrona obywateli, utrzymanie porz\u0105dku publicznego oraz dzia\u0142ania na rzecz poprawy bezpiecze\u0144stwa", "parent": "2", "level": "b", "idef": "2-1", "czesc": null, "czesc_name": null, "v_nation": 5829003, "type": "Zadanie 2.1"}, {"info": null, "leaf": false, "name": "Redukowanie przest\u0119pczo\u015bci", "parent": "2", "level": "b", "idef": "2-2", "czesc": null, "czesc_name": null, "v_nation": 3015132, "type": "Zadanie 2.2"}, {"info": null, "leaf": false, "name": "Strze\u017cenie praworz\u0105dno\u015bci i czuwanie nad \u015bciganiem przest\u0119pstw przez prokuratur\u0119", "parent": "2", "level": "b", "idef": "2-3", "czesc": null, "czesc_name": null, "v_nation": 1066093, "type": "Zadanie 2.3"}, {"info": null, "leaf": false, "name": "Ochrona przeciwpo\u017carowa, dzia\u0142alno\u015b\u0107 zapobiegawcza, ratownicza i ga\u015bnicza", "parent": "2", "level": "b", "idef": "2-4", "czesc": null, "czesc_name": null, "v_nation": 2225298, "type": "Zadanie 2.4"}, {"info": null, "leaf": false, "name": "Zarz\u0105dzanie kryzysowe i obrona cywilna", "parent": "2", "level": "b", "idef": "2-5", "czesc": null, "czesc_name": null, "v_nation": 2131002, "type": "Zadanie 2.5"}, {"info": null, "leaf": false, "name": "Ochrona granicy pa\u0144stwowej, kontrola ruchu granicznego i przeciwdzia\u0142anie nielegalnej migracji", "parent": "2", "level": "b", "idef": "2-6", "czesc": null, "czesc_name": null, "v_nation": 1497531, "type": "Zadanie 2.6"}, {"idef_sort": "0003-0001", "name": "O\u015bwiata i wychowanie", "parent": "3", "level": "b", "parent_sort": "0003", "idef": "3-1", "czesc": null, "czesc_name": null, "v_nation": 40384231, "leaf": false, "type": "Zadanie 3.1"}, {"idef_sort": "0003-0002", "name": "Szkolnictwo wy\u017csze", "parent": "3", "level": "b", "parent_sort": "0003", "idef": "3-2", "czesc": null, "czesc_name": null, "v_nation": 11984430, "leaf": false, "type": "Zadanie 3.2"}, {"idef_sort": "0003-0002-0001", "name": "Zarz\u0105dzanie systemem szkolnictwa wy\u017cszego", "parent": "3-2", "level": "c", "parent_sort": "0003-0002", "idef": "3-2-1", "czesc": null, "czesc_name": null, "v_nation": 35793, "leaf": false, "type": "Podzadanie 3.2.1"}, {"idef_sort": "0003-0002-0002", "name": "Kszta\u0142cenie w szkolnictwie wy\u017cszym", "parent": "3-2", "level": "c", "parent_sort": "0003-0002", "idef": "3-2-2", "czesc": null, "czesc_name": null, "v_nation": 9620851, "leaf": false, "type": "Podzadanie 3.2.2"}, {"idef_sort": "0003-0002-0003", "name": "Wsparcie procesu studiowania", "parent": "3-2", "level": "c", "parent_sort": "0003-0002", "idef": "3-2-3", "czesc": null, "czesc_name": null, "v_nation": 1795244, "leaf": false, "type": "Podzadanie 3.2.3"}, {"idef_sort": "0003-0002-0004", "name": "Utrzymanie i rozbudowa infrastruktury szkolnictwa wy\u017cszego", "parent": "3-2", "level": "c", "parent_sort": "0003-0002", "idef": "3-2-4", "czesc": null, "czesc_name": null, "v_nation": 532542, "leaf": false, "type": "Podzadanie 3.2.4"}], "perspective": {"sort": {"1": {"parent_sort": 1}, "0": {"idef_sort": 1}, "2": {"level": 1}}, "name": "budzet_zadaniowy_podzadania_2012", "max_level": "d", "idef": 1, "dataset": 0, "explorable": "type", "perspective": "Bud\u017cet zadaniowy 2012 - Podzadanie", "aux": {"idef": 1, "leaf": 1, "parent": 1, "level": 1}, "query": {"node": {"$in": [null, 1]}, "level": "a"}, "ns": "dd_budg2012_go", "issue": "2012", "columns": [{"type": "string", "label": "Typ", "processable": false, "key": "type", "basic": true}, {"type": "string", "label": "Nazwa", "processable": true, "key": "name", "basic": true}, {"type": "string", "processable": true, "key": "czesc", "label": "Cz\u0119\u015b\u0107"}, {"type": "string", "processable": true, "key": "czesc_name", "label": "Cz\u0119\u015b\u0107 w bud\u017aecie ksi\u0119gowym"}, {"type": "string", "label": "Cel & Miernik", "processable": false, "key": "info", "basic": false}, {"label": "Bud\u017cet Pa\u0144stwa", "processable": true, "key": "v_nation", "basic": true, "checkable": true, "type": "number"}]}};
                     }
                     
-                    basic_rows = received_data.rows.filter( function ( e ) {
-                        return e['level'] === 'a';
-                    });
-                    additional_rows = received_data.rows.filter( function ( e ) {
-                        return e['level'] !== 'a';
-                    });
-                    
-                    basic_data = {
-                        rows: basic_rows,
-                        name: received_data.perspective.perspective
-                    };
-                    
                     sheets_left -= 1;
                     // if it is the last sheet to create, show table
                     if ( sheets_left === 0 ) {
-                        $('#table-container').show();
-                        $('#search-container').hide();
-                        $('#download-container').hide();
-                        $('#permalink-container').hide();
-
-                        $('#tabs')
-                            .find('div')
-                            .removeClass('active')
-                            .addClass('inactive');
-
-                        $('#table-tab')
-                            .addClass('active')
-                            .removeClass('inactive');
+                        _gui.show_table_tab();
                     }
                     
                     // TODO: shouldnt value returned by group_exists be changed?
                     if ( !_store.group_exists(col_id) ) {
-                        groups = _store.get_all_groups();
-                        for ( i = 0; i < groups.length; i += 1 ) {
-                            if ( col_id['dataset'] === groups[i]['dataset'] &&
-                                 col_id['perspective'] === groups[i]['perspective'] &&
-                                 col_id['issue'] === groups[i]['issue'] ) {
-                                group_nr = i;
-                                break;
-                            }
-                        }
-                            
-                        _assert.assert( (group_nr === 0 || !!group_nr),
-                                        'Collection not found');
-                        
-                        // set active group number to index of group with
-                        // the same dataset, view and issue as chosen collection
-                        _store.active_group( group_nr );
-                        
-                        new_sheet = {
-                            'columns': _store.active_group()['columns'].filter( function ( e ) {
-                                           return e['basic'] === true;
-                                       }),
-                            'rows': received_data['rows'].map( function ( row ) {
-                                        return {
-                                            data: row,
-                                            state: { open: false, selected: false }
-                                        };
-                                    }),
-                            'filtered': false,
-                        };
-                        
-                        // add subtrees needed to show nodes found by search
-                        if ( !!additional_rows ) {
-                            additional_rows.forEach( function ( row ) {
-                                nodes_to_open[ row['parent'] ] = true;
-                            });
-                            
-                            // open nodes to show downloaded subtrees
-                            new_sheet['rows'].forEach( function ( store_row ) {
-                                id = store_row['data']['idef'];
-                                if ( !!nodes_to_open[ id ] ) {
-                                    store_row['state']['open'] = true;
-                                }
-                            });
-                        }
-
-                        // create new sheet containing search data
-                        _sheet.create_new_sheet( new_sheet, "Arkusz" );                        
+                        _sheet.create_searched_sheet( col_id, received_data, sheets_left );
                     } else {
-                        
-
-                        // create group
-                        _store.create_group({
-                           "dataset": col_id.dataset,
-                           "perspective": col_id.perspective,
-                           "issue": col_id.issue,
-                           "columns": received_data.perspective.columns
-                        });
-                        
-                        // create basic sheet with basic rows
-                        _store.init_basic_sheet( basic_data );
-                        
-                        // add subtrees needed to show nodes found by search
-                        if ( !!additional_rows ) {
-                            _store.add_data( additional_rows );
-
-                            additional_rows.forEach( function ( row ) {
-                                nodes_to_open[ row['parent'] ] = true;
-                            });
-                            
-                            // open nodes to show downloaded subtrees
-                            _store.active_rows().forEach( function ( store_row ) {
-                                id = store_row['data']['idef'];
-                                if ( !!nodes_to_open[ id ] ) {
-                                    store_row['state']['open'] = true;
-                                }
-                            });
-                        }
-                        
-                        // initialize an application
-                        _gui.init_app( basic_data['name'] );
+                        _sheet.add_searched_group( col_id, received_data, sheets_left );
                     }
-                } // function( received_data )
+                }
             }); // $.ajax
         }); // forEach
     };

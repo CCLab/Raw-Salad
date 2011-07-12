@@ -67,6 +67,23 @@ var _tools = (function () {
                 _db.add_search_data( search_list );
             });
     };
+    
+    that.open_subtrees = function( basic_rows, subtree_rows ) {
+        var nodes_to_open = {};
+        
+        // remember which nodes must be opened
+        subtree_rows.forEach( function ( row ) {
+            nodes_to_open[ row['parent'] ] = true;
+        });
+        
+        // open nodes to show downloaded subtrees
+        basic_rows.forEach( function ( store_row ) {
+            id = store_row['data']['idef'];
+            if ( !!nodes_to_open[ id ] ) {
+                store_row['state']['open'] = true;
+            }
+        });
+    }
 
     return that;
 

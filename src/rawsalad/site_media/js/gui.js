@@ -247,6 +247,13 @@ var _gui = (function () {
 
 
     that.create_sheet_tab = function ( args ) {
+        that.create_only_sheet_tab( args );
+        _table.clean_table();
+        _table.init_table();
+    };
+    
+    
+    that.create_only_sheet_tab = function ( args ) {
         var html = [];
 
         var group_nr = args.group_nr || _store.active_group_index();
@@ -303,8 +310,6 @@ var _gui = (function () {
 
         $('#sort-form').hide().html('');
         $('#filter-form').hide().html('');
-        _table.clean_table();
-        _table.init_table();
     };
 
 
@@ -359,6 +364,22 @@ var _gui = (function () {
 
 //        that.make_zebra();
     }
+    
+    that.show_table_tab = function() {
+        $('#table-container').show();
+        $('#search-container').hide();
+        $('#download-container').hide();
+        $('#permalink-container').hide();
+
+        $('#tabs')
+            .find('div')
+            .removeClass('active')
+            .addClass('inactive');
+
+        $('#table-tab')
+            .addClass('active')
+            .removeClass('inactive');
+    };
 
 
     return that;
