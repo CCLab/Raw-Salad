@@ -526,8 +526,8 @@ body {
             #tools {
                 position: relative;
                 float: right;
-                bottom: 7px;
                 right: 10px;
+                top: 10px;
                 width: auto;
                 border-radius: 3px 3px 0px 0px;
                 -moz-border-radius: 3px 3px 0px 0px;      
@@ -542,6 +542,10 @@ body {
                     
                     border-radius: 3px 3px 0px 0px;
                     -moz-border-radius: 3px 3px 0px 0px;
+                }
+                
+                #tools > div:manage-columns-button{
+                    border-radius: 0px 0px 3px 3px;
                 }
                 
                 #tools > div:hover {
