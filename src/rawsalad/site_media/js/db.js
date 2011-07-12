@@ -98,8 +98,10 @@ var _db = (function () {
     };
     
     that.add_search_data = function ( search_list ) {
-        var data;
+        var sheets_left = search_list.length;
+        
         search_list.forEach( function ( e ) {
+            var data;
             data = {
                 dataset: e['dataset'],
                 view: e['view'],
@@ -121,6 +123,8 @@ var _db = (function () {
                     var groups;
                     var group_nr;
                     var new_sheet;
+                    var id;
+                    var nodes_to_open = {};
                     
                     var col_id = {
                         'dataset': received_data['dataset'],
@@ -189,11 +193,42 @@ var _db = (function () {
                         // add subtrees needed to show nodes found by search
                         if ( !!additional_rows ) {
                             _store.add_data( additional_rows );
+
+                            aditional_rows.forEach( function ( row ) {
+                                nodes_to_open[ row['parent'] ] = true;
+                            });
+                            
+                            // open nodes to show downloaded subtrees
+                            _store.active_rows().forEach( function ( store_row ) {
+                                id = store_row['data']['idef'];
+                                if ( !!nodes_to_open[ id ] ) {
+                                    store_row['state']['open'] = true;
+                                }
+                            });
                         }
                         
                         // initialize an application
                         _gui.init_app( basic_data['name'] );
                     }
+                    
+                    sheets_left -= 1;
+                    // if it is the last sheet to create, show table
+                    if ( sheets_left === 0 ) {
+                        $('#table-container').show();
+                        $('#search-container').hide();
+                        $('#download-container').hide();
+                        $('#permalink-container').hide();
+
+                        $('#tabs')
+                            .find('div')
+                            .removeClass('active')
+                            .addClass('inactive');
+
+                        $('#table-tab')
+                            .addClass('active')
+                            .removeClass('inactive');
+                    }
+                    
                 } // function( received_data )
             }); // $.ajax
         }); // forEach
