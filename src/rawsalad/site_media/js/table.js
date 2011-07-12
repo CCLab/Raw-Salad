@@ -259,7 +259,8 @@ var _table = (function () {
         html.push( '</tr>');
 
         // filtered row
-        html.push( '<tr class="filtered-data">' );
+        html.push( '<tr id="', node['data']['idef'], '" ' );
+        html.push( 'class="filtered-data">' );
         args['schema'].forEach( function ( column ) {
             html.push( '<td class="', column['key'], ' ', column['type'], '">' );
             html.push( node['data'][ column['key'] ] );
@@ -276,7 +277,7 @@ var _table = (function () {
 
         while ( !!parent_id ) {
             parent = $( '#' + parent_id );
-            if ( !!parent ) {
+            if ( !!parent.length ) {
                 return parent;
             }
             parent_id = _utils.get_parent_id( parent_id );
