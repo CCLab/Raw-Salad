@@ -177,7 +177,6 @@ var _tools = (function () {
         }
         html.push('<input type="submit" value="Dodaj kolumny">');
         $('#manage-columns-form').append( $( html.join('') ));
-	//TODO add checkboxes to manage columns popup
     }
 
 
