@@ -13,7 +13,7 @@ body {
 
 header {
   overflow: auto;
-  width: 660px;
+  width: 700px;
   margin: auto;
   margin-bottom: 15px;
 }
@@ -55,13 +55,13 @@ header {
   }
 
   header .selected {
-    color: #fff;
+    color: #4abff7;
     background-color: #888;
   }
 
   header .selected:hover {
-    cursor: default;
-    color: #fff;
+    cursor: pointer;
+    color: #555;
     background-color: #888;
   }
 

@@ -376,7 +376,8 @@ var _gui = (function () {
             .show();
 
         $('#top-collections')
-            .addClass( 'selected' );
+            .addClass( 'selected' )
+            .html( 'zwiń menu' );
     }
 
 
@@ -391,7 +392,8 @@ var _gui = (function () {
             .hide();
 
         $('#top-collections')
-            .removeClass( 'selected' );
+            .removeClass( 'selected' )
+            .html( 'Przeglądaj dane' );
     };
 
 
