@@ -16,6 +16,14 @@ header {
   margin-bottom: 15px;
 }
 
+  header > * {
+    float: left;
+  }
+
+  header > nav {
+    margin: 0px 5px;
+  }
+
   header ul {
     list-style-type: none;
     display: inline;

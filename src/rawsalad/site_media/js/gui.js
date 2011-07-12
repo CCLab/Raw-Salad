@@ -374,6 +374,9 @@ var _gui = (function () {
 
         $('#open-close-choose-panel')
             .show();
+
+        $('#top-collections')
+            .addClass( 'selected' );
     }
 
 
@@ -386,6 +389,9 @@ var _gui = (function () {
 
         $('#open-close-choose-panel')
             .hide();
+
+        $('#top-collections')
+            .removeClass( 'selected' );
     };
 
 
