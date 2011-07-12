@@ -200,11 +200,15 @@ var _table = (function () {
     function create_filtered_thead() {
         var schema = _store.active_columns();
         var html = [];
+
+        html.push( '<table><tr>' );
         schema.forEach( function ( column ) {
-            html.push('<div class="', column['key'], ' ', column['type'], '" ');
+            html.push( '<td class="', column['key'], ' ', column['type'], '" ' );
             html.push( 'class="filtered-data">' );
-            html.push(column['label'], '</div>');
+            html.push( column['label'], '</td>' );
         });
+        html.push( '</tr></table>' );
+
         $('#filtered-thead').append( html.join('') );
     }
 

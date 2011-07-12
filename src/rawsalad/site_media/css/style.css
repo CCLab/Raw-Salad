@@ -381,6 +381,11 @@ body {
          background-color: #fff;
          padding: 10px;
        }
+
+      #filtered-table table {
+         border-collapse: collapse;
+         width: 100%;
+      }
        
        .filtered-block {
          clear: both;
@@ -395,11 +400,6 @@ body {
          margin-top: 15px;
        }
  
-       .filtered-data {
-         width: 100%;
-           border-collapse: collapse;
-       }
-       
        .filtered-data td {
          padding: 5px;
          background-color: #e4e4e4;
