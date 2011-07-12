@@ -377,7 +377,7 @@ body {
       }
 
       #filtered-table {
-         width: 940px;
+         width: 960px;
          background-color: #fff;
          border-collapse: collapse;
          border: 10px solid #fff;
@@ -386,6 +386,7 @@ body {
       #filtered-table th {
         background-color: #d4d4d4;
         text-align: left;
+        border: 1px solid #a3a3a3;
       }
        
        
