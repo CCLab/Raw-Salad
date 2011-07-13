@@ -285,8 +285,8 @@ width: 650px;
 
 #download-main-panel {
   clear: both;
-  width: 900px;
-  min-height: 120px;
+/*  width: 900px;*/
+/*  min-height: 120px;*/
   padding: 30px;
   background-color: #fff;
   border-radius: 0px 0px 5px 5px;

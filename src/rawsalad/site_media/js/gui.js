@@ -378,6 +378,7 @@ var _gui = (function () {
 
     function do_panels( button ) {
         var creation_funcs = {
+            choose: function () {},
             download: create_download_panel,
             search: create_search_panel
         }
