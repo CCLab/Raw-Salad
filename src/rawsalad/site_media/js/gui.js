@@ -261,13 +261,21 @@ var _gui = (function () {
         var sheet_changed = _store.active_sheet_index() !== sheet_nr;
         var new_tab;
 
-        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
+//        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
+//        html.push( 'class="snapshot active" ' );
+//        html.push( 'title="', sheet_name, '">' );
+//        html.push( sheet_name.length > 20 ?
+//                   sheet_name.slice( 0, 17 ) + '...' :
+//                   sheet_name );
+//        html.push( '</div>' );
+
+        html.push( '<li id="snap-' + group_nr + '-' + sheet_nr + '" ' );
         html.push( 'class="snapshot active" ' );
         html.push( 'title="', sheet_name, '">' );
         html.push( sheet_name.length > 20 ?
                    sheet_name.slice( 0, 17 ) + '...' :
                    sheet_name );
-        html.push( '</div>' );
+        html.push( '</li>' );
 
         new_tab = $( html.join('') );
 
@@ -292,7 +300,8 @@ var _gui = (function () {
             });
 
         if( sheet_nr === 0 ) {
-            new_tab.insertBefore( '#save-snapshot' );
+            $('#tabs-list').append( new_tab );
+//            new_tab.insertBefore( '#save-snapshot' );
         }
         else {
             new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
