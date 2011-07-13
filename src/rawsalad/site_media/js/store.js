@@ -250,7 +250,6 @@ var _store = (function () {
             });
     };
 
-
     that.add_new_sheet = function ( sheet ) {
         var active_grp = that.active_group();
         var next_sheet_number = that.next_sheet_number() ;
@@ -262,7 +261,6 @@ var _store = (function () {
     that.get_all_groups = function () {
         return groups;
     };
-
 
     // check if column exists in active_sheet
     that.is_column_in_active_sheet = function( key ){
@@ -284,7 +282,32 @@ var _store = (function () {
     that.get_sheet = function ( group, sheet ) {
         return groups[group]['sheets'][sheet];
     };
+    
+    that.remove_active_group = function() {
+        if (groups.length === 1){
+            return false;
+        } 
+        groups.splice ( active_group_index(), 1 );  
+        if (active_group_index() !== 0){
+            active_group_number = active_group_index()-1;   
+        }
+        return true;
+    }
 
+    that.remove_active_sheet = function () {
+        var active_grp = that.active_group();
+        var active_sheet_num = active_sheet_index();
+        if (groups.length === 1 && active_grp['sheets'].length === 1 ){
+            return false; 
+        }
+        active_grp.splice(active_sheet_num,1);    
+        active_grp['sheets'].length === 0 ?
+            remove_active_group():
+            if (active_sheet_index !==0 ) {
+                active_grp['active_sheet_number'] = active_sheet_index-1);                  
+            };            
+    //TODO - remove_sheet
+    };
 
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
