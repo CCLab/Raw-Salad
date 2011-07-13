@@ -287,22 +287,22 @@ var _store = (function () {
         if (groups.length === 1){
             return false;
         } 
-        groups.splice ( active_group_index(), 1 );  
-        if (active_group_index() !== 0){
-            active_group_number = active_group_index()-1;   
+        groups.splice ( that.active_group_index(), 1 );  
+        if (that.active_group_index() !== 0){
+            active_group_number = that.active_group_index()-1;   
         }
         return true;
     }
 
     that.remove_active_sheet = function () {
         var active_grp = that.active_group();
-        var active_sheet_num = active_sheet_index();
+        var active_sheet_num = that.active_sheet_index();
         if (groups.length === 1 && active_grp['sheets'].length === 1 ){
             return false; 
         }
         active_grp.splice(active_sheet_num, 1 );    
         if (active_grp['sheets'].length === 0 ){
-            remove_active_group();
+            that.remove_active_group();
         }else if (active_sheet_index !== 0 ) {
                 active_grp['active_sheet_number'] = active_sheet_index - 1  ;                  
             };            
