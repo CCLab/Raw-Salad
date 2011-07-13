@@ -240,7 +240,7 @@ var _table = (function () {
                 else {
                     $('#filtered-tbody').prepend( new_node );
                 }*/
-                $('#filtered-body').append( new_node );
+                $('#filtered-tbody').append( new_node );
             });
         
         /*var level;
