@@ -248,8 +248,8 @@ var _gui = (function () {
         _table.clean_table();
         _table.init_table();
     };
-    
-    
+
+
     that.create_only_sheet_tab = function ( args ) {
         var html = [];
 
@@ -361,7 +361,7 @@ var _gui = (function () {
 
 //        that.make_zebra();
     }
-    
+
     that.show_table_tab = function() {
         $('#table-container').show();
         $('#search-container').hide();
@@ -384,13 +384,21 @@ var _gui = (function () {
 
 // P R I V A T E   I N T E R F A C E
     function do_panels( button ) {
+        var selected = button.hasClass( 'selected' );
         var panel = $('#'+ button.attr('id').split('-').pop()  +'-panel');
+
+        if( selected && $('#application').is(':hidden') ) {
+            return;
+        }
+
 
         $('#top-menu')
             .find('.selected')
             .removeClass( 'selected' );
 
-        button.addClass( 'selected' );
+        if( !selected ) {
+            button.addClass( 'selected' );
+        }
 
         if( panel.is(':visible') ) {
             hide_top_panel( panel );
@@ -411,8 +419,10 @@ var _gui = (function () {
         $('#application')
             .animate({ opacity: 0.25 }, 300 );
 
-        $('#open-close-choose-panel')
-            .show();
+        if( $('#application').not(':hidden') ) {
+            $('#open-close-choose-panel')
+                .show();
+        }
     }
 
 
