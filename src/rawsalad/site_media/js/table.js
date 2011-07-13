@@ -42,11 +42,11 @@ var _table = (function () {
             create_thead();
             create_tbody();
             _gui.make_zebra();
-            $('#manage-columns-button').hide();
+            $('#manage-columns-button').show();
         } else {
             create_filtered_thead();
             create_filtered_tbody();
-            $('#manage-columns-button').show();
+            $('#manage-columns-button').hide();
         }
         $('#table-toolbar-collection-name')
             .html( _store.active_sheet()['name'] );

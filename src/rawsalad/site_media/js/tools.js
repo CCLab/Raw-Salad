@@ -48,17 +48,17 @@ var _tools = (function () {
 
     that.show_search_results = function( results ) {
         var search_results = generate_search_results( results );
-        
+
         search_results.insertBefore( $('#show-found-button') );
         $('#show-found-button').show();
-        
+
         // unbind to avoid multi event handlers on show-found-button
         $('#show-found-button')
             .unbind('click')
-            .click( function () {                
+            .click( function () {
                 var search_list = [];
                 var checkboxes = $("input[name=search-checkbox]");
-                
+
                 checkboxes.each( function ( i ) {
                     if ( $(this).is(':checked') ) {
                         search_list.push( results[i] );
@@ -67,15 +67,15 @@ var _tools = (function () {
                 _db.add_search_data( search_list );
             });
     };
-    
+
     that.open_subtrees = function( basic_rows, subtree_rows ) {
         var nodes_to_open = {};
-        
+
         // remember which nodes must be opened
         subtree_rows.forEach( function ( row ) {
             nodes_to_open[ row['parent'] ] = true;
         });
-        
+
         // open nodes to show downloaded subtrees
         basic_rows.forEach( function ( store_row ) {
             id = store_row['data']['idef'];
@@ -153,7 +153,7 @@ var _tools = (function () {
 	    var all_columns = _store.group_columns();
 
         html.push ( '<input type="button" value="Zaznacz" id="check-all" >' );
-        html.push ( '<input type="button" value="Odznacz" id="uncheck-all" >' ); 
+        html.push ( '<input type="button" value="Odznacz" id="uncheck-all" >' );
         for( i=0; i<all_columns.length; i+=1) {
             key = all_columns[i]['key'];
 	        html.push ( '<input type="checkbox" name="columns"' );
@@ -170,15 +170,15 @@ var _tools = (function () {
 
         $('#check-all')
             .click( function () {
-                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
-                    $('input[name=columns]')[i].checked=true; 
+                for (i = 0; i < $('input[name=columns]').length; i += 1){
+                    $('input[name=columns]')[i].checked=true;
                 }
             });
-               
+
         $('#uncheck-all')
             .click( function () {
-                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
-                    $('input[name=columns]')[i].checked=false; 
+                for (i = 0; i < $('input[name=columns]').length; i += 1){
+                    $('input[name=columns]')[i].checked=false;
                 }
             });
 
@@ -467,7 +467,7 @@ var _tools = (function () {
            });
     };
 
-    function 	prepare_manage_columns_interface(){
+    function prepare_manage_columns_interface(){
 	    var new_active_columns;
         var i = 0;
         var checkboxes_list;
@@ -496,18 +496,18 @@ var _tools = (function () {
                 $(this).hide();
 		return false;
         });
-        
+
         $('#check-all')
             .click( function () {
-                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
-                    $('input[name=columns]')[i].checked=true; 
+                for (i = 0; i < $('input[name=columns]').length; i += 1){
+                    $('input[name=columns]')[i].checked=true;
                 }
             });
-               
+
         $('#uncheck-all')
             .click( function () {
-                for (i = 0; i < $('input[name=columns]').length; i += 1){ 
-                    $('input[name=columns]')[i].checked=false; 
+                for (i = 0; i < $('input[name=columns]').length; i += 1){
+                    $('input[name=columns]')[i].checked=false;
                 }
             });
 
@@ -637,7 +637,7 @@ var _tools = (function () {
 
         return scope;
     }
-    
+
     function generate_search_results( results ) {
         var meta = _store.meta_datasets();
         var collection_name;

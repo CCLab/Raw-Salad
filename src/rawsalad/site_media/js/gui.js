@@ -64,77 +64,6 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#download-tab').click( function () {
-            var html = [];
-
-            $('.snapshot').each( function () {
-                var id = $(this).attr('id').split('-');
-                var group = id[1];
-                var sheet = id[2];
-                var name = $(this).attr('title');
-
-                html.push( '<tr>' );
-                html.push( '<td class="check">' );
-                html.push( '<input type="checkbox" ');
-                html.push( 'id="', ( group + '-' + sheet ));
-                html.push( '" /></td>' );
-                html.push( '<td class="radio">' );
-                html.push( '<input type="radio" name="scope-', group, '-', sheet );
-                html.push( '" value="sheet" checked />' )
-                html.push( '</td>' );
-                html.push( '<td class="space"></td>' );
-                html.push( '<td class="radio">' );
-                if( sheet === '0' ) {
-                    html.push( '<input type="radio" name="scope-', group, '-', sheet );
-                    html.push( '" value="full" />' )
-                    html.push( '</td>' );
-                    html.push( '<td class="name group">' );
-                    html.push( name );
-                }
-                else {
-                    html.push( '</td>' );
-                    html.push( '<td class="name indent">' );
-                    html.push( ' > ' + name );
-                }
-                html.push( '</td>' );
-                html.push( '</tr>' );
-            });
-            $('#download-table > tbody').empty().append( html.join('') );
-
-            $('#download-table .radio > input').hide();
-            $('#download-table .check > input' ).change( function () {
-                if( $(this).attr('id').split('-')[1] === '0' ) {
-                    if( $(this).attr('checked') ) {
-                        $(this).parent().parent().find('.radio > input').show();
-                    }
-                    else {
-                        $(this).parent().parent().find('.radio > input').hide();
-                    }
-                }
-            });
-
-            $('#download-select-all').click( function () {
-                $('#download-table').find(':checkbox').not(':checked' ).trigger( $.Event('click') );
-            });
-
-            $('#download-unselect-all').click( function () {
-                $('#download-table').find(':checkbox:checked' ).trigger( $.Event('click') );
-            });
-
-            $('#table-container').hide();
-            $('#search-container').hide();
-            $('#download-container').show();
-            $('#permalink-container').hide();
-
-            $('#tabs')
-                .find('div')
-                .removeClass('active')
-                .addClass('inactive');
-
-            $(this)
-                .addClass('active')
-                .removeClass('inactive');
-        });
         $('#permalink-tab').click( function () {
             $('#table-container').hide();
             $('#search-container').hide();
@@ -383,14 +312,83 @@ var _gui = (function () {
 
 
 // P R I V A T E   I N T E R F A C E
+
+
+
+    function create_download_panel() {
+        var html = [];
+
+        $('.snapshot').each( function () {
+            var id = $(this).attr('id').split('-');
+            var group = id[1];
+            var sheet = id[2];
+            var name = $(this).attr('title');
+
+            html.push( '<tr>' );
+            html.push( '<td class="check">' );
+            html.push( '<input type="checkbox" ');
+            html.push( 'id="', ( group + '-' + sheet ));
+            html.push( '" /></td>' );
+            html.push( '<td class="radio">' );
+            html.push( '<input type="radio" name="scope-', group, '-', sheet );
+            html.push( '" value="sheet" checked />' )
+            html.push( '</td>' );
+            html.push( '<td class="space"></td>' );
+            html.push( '<td class="radio">' );
+            if( sheet === '0' ) {
+                html.push( '<input type="radio" name="scope-', group, '-', sheet );
+                html.push( '" value="full" />' )
+                html.push( '</td>' );
+                html.push( '<td class="name group">' );
+                html.push( name );
+            }
+            else {
+                html.push( '</td>' );
+                html.push( '<td class="name indent">' );
+                html.push( ' > ' + name );
+            }
+            html.push( '</td>' );
+            html.push( '</tr>' );
+        });
+        $('#download-table > tbody').empty().append( html.join('') );
+
+        $('#download-table .radio > input').hide();
+        $('#download-table .check > input' ).change( function () {
+            if( $(this).attr('id').split('-')[1] === '0' ) {
+                if( $(this).attr('checked') ) {
+                    $(this).parent().parent().find('.radio > input').show();
+                }
+                else {
+                    $(this).parent().parent().find('.radio > input').hide();
+                }
+            }
+        });
+
+        $('#download-select-all').click( function () {
+            $('#download-table').find(':checkbox').not(':checked' ).trigger( $.Event('click') );
+        });
+
+        $('#download-unselect-all').click( function () {
+            $('#download-table').find(':checkbox:checked' ).trigger( $.Event('click') );
+        });
+    }
+
+    function create_search_panel () {
+    }
+
     function do_panels( button ) {
+        var creation_funcs = {
+            download: create_download_panel,
+            search: create_search_panel
+        }
+
         var selected = button.hasClass( 'selected' );
-        var panel = $('#'+ button.attr('id').split('-').pop()  +'-panel');
+        var action = button.attr('id').split('-').pop();
+        var panel = $('#'+ action +'-panel');
 
         if( selected && $('#application').is(':hidden') ) {
             return;
         }
-
 
         $('#top-menu')
             .find('.selected')
@@ -404,10 +402,12 @@ var _gui = (function () {
             hide_top_panel( panel );
         }
         else if( !$('#top-panels > div:visible').length ) {
+            creation_funcs[ action ]();
             show_top_panel( panel );
         }
         else {
             $('#top-panels > div:visible').slideUp( 400, function () {
+                creation_funcs[ action ]();
                 show_top_panel( panel );
             });
         }

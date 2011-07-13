@@ -283,7 +283,7 @@ width: 650px;
         cursor: pointer;
     }
 
-#download-container {
+#download-main-panel {
   clear: both;
   width: 900px;
   min-height: 120px;
@@ -293,54 +293,54 @@ width: 650px;
   -moz-border-radius: 0px 0px 5px 5px;
 }
 
-      #download-container p {
+      #download-main-panel p {
         padding-left: 5px;
       }
 
-      #download-container table {
+      #download-main-panel table {
         border-collapse: collapse;
         font-family: Arial, sans-serif;
         font-size: 11px;
       }
 
-      #download-container td, th {
+      #download-main-panel td, th {
         height: 40px;
       }
 
-      #download-container td, th {
+      #download-main-panel td, th {
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 10px;
         padding-top: 10px;
       }
 
-      #download-container th.under {
+      #download-main-panel th.under {
         border-bottom: 1px solid #5b5b5b;
       }
 
-      #download-container td.check {
+      #download-main-panel td.check {
         width: 20px;
       }
 
-      #download-container td.radio {
+      #download-main-panel td.radio {
         width: 120px;
         border-bottom: 1px solid #bbbbbb;
         text-align: center;
       }
 
-      #download-container td.space {
+      #download-main-panel td.space {
         width: 1px;
       }
 
-      #download-container td.name {
+      #download-main-panel td.name {
         border-bottom: 1px solid #bbbbbb;
       }
 
-      #download-container td.group {
+      #download-main-panel td.group {
         font-weight: bold;
       }
 
-      #download-container td.indent {
+      #download-main-panel td.indent {
         padding-left: 10px;
         margin-left: 10px;
       }
