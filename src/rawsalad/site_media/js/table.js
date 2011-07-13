@@ -214,6 +214,7 @@ var _table = (function () {
 
     function create_filtered_tbody() {
         var copy_rows = [];
+        var schema = _store.active_columns();
         $.extend( true, copy_rows, _store.active_rows() );
         
         copy_rows.sort( function ( a, b ) {
