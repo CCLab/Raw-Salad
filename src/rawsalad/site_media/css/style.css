@@ -514,6 +514,7 @@ width: 650px;
 
             #tools {
                 padding: 10px;
+                padding-bottom: 5px;
                 float: right;
                 width: auto;
                 border-radius: 3px 3px 0px 0px;
@@ -552,7 +553,7 @@ width: 650px;
 
                 #manage-columns-button {
                     float: right;
-                    padding: 5px 10px;
+                    padding: 0px 10px;
                     color: #4cbceb;
                     background-color: #000;
 

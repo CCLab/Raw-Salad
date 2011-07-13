@@ -42,9 +42,11 @@ var _table = (function () {
             create_thead();
             create_tbody();
             _gui.make_zebra();
+            $('#manage-columns-button').hide();
         } else {
             create_filtered_thead();
             create_filtered_tbody();
+            $('#manage-columns-button').show();
         }
         $('#table-toolbar-collection-name')
             .html( _store.active_sheet()['name'] );
@@ -220,7 +222,7 @@ var _table = (function () {
         // deep copy is made to ensure that _store is not changed by sort
         var rows_copy = [];
         $.extend( true, rows_copy, _store.active_rows() );
-        
+
         rows_copy.sort( function ( a, b ) {
                      var return_value;
                      if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
