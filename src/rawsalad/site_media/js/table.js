@@ -213,11 +213,12 @@ var _table = (function () {
     }
 
     function create_filtered_tbody() {
-        var copy_rows = [];
         var schema = _store.active_columns();
-        $.extend( true, copy_rows, _store.active_rows() );
+        // deep copy is made to ensure that _store is not changed by sort
+        var rows_copy = [];
+        $.extend( true, rows_copy, _store.active_rows() );
         
-        copy_rows.sort( function ( a, b ) {
+        rows_copy.sort( function ( a, b ) {
                      var return_value;
                      if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
                          return_value = -1;
@@ -229,59 +230,11 @@ var _table = (function () {
                 return return_value;
             })
             .forEach( function ( row ) {
-                //var parent = find_parent( row['data']['idef'] );
                 var new_node = generate_filtered_row({
                                     node: row,
                                     schema: schema
                                 });
-
-                /*if ( !!parent ) {
-                    parent.after( new_node );
-                }
-                else {
-                    $('#filtered-tbody').prepend( new_node );
-                }*/
                 $('#filtered-tbody').append( new_node );
-            });
-        
-        /*var level;
-        var hashed_list = _utils.hash_list( _store.active_rows() );
-
-        for( level in hashed_list ) {
-            if( hashed_list.hasOwnProperty( level )) {
-                add_filtered_rows( hashed_list[ level ] );
-            }
-        }*/
-    }
-
-    function add_filtered_rows( data ) {
-        var schema = _store.active_columns();
-
-        data.sort( function ( a, b ) {
-                var return_value;
-                if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
-                    return_value = -1;
-                } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
-                    return_value = 1;
-                } else {
-                    return_value = 0;
-                }
-                
-                return return_value;
-            })
-            .forEach( function ( row ) {
-                var parent = find_parent( row['data']['idef'] );
-                var new_node = generate_filtered_row({
-                                    node: row,
-                                    schema: schema
-                                });
-
-                if ( !!parent ) {
-                    parent.after( new_node );
-                }
-                else {
-                    $('#filtered-tbody').prepend( new_node );
-                }
             });
     }
 
