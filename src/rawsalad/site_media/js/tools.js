@@ -152,9 +152,11 @@ var _tools = (function () {
 	    var active_columns = _store.active_columns();
 	    var all_columns = _store.group_columns();
 
-        html.push( '<input type="button" value="Zaznacz wszystkie" id="check-all" >' );
-        html.push( '<input type="button" value="Odznacz wszystkie" id="uncheck-all" style="margin-left: 5px;">' );
-        html.push( '<input type="submit" value="Dodaj/Odejmij kolumny" style="margin-left: 10px;">');
+//        html.push( '<input type="button" value="Zaznacz wszystkie" id="check-all" >' );
+//        html.push( '<input type="button" value="Odznacz wszystkie" id="uncheck-all" style="margin-left: 5px;">' );
+        html.push( '<div class="select-all" id="check-all">Zaznacz wszystkie</div>' );
+        html.push( '<div class="select-all" id="uncheck-all">Odznacz wszystkie</div>' );
+        html.push( '<div class="select-all" id="manage-columns-submit" style="margin-left: 10px">Dodaj/Usuń kolumny</div>' );
 
         for( i = 0; i < all_columns.length; i += 1 ) {
             key = all_columns[i]['key'];
@@ -184,6 +186,9 @@ var _tools = (function () {
                 }
             });
 
+        $('#manage-columns-submit').click( function () {
+                $('#manage-columns-form').submit();
+        });
 
     }
 
