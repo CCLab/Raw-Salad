@@ -419,7 +419,7 @@ var _gui = (function () {
         $('#application')
             .animate({ opacity: 0.25 }, 300 );
 
-        if( $('#application').not(':hidden') ) {
+        if( $('#application').is(':visible') ) {
             $('#open-close-choose-panel')
                 .show();
         }
