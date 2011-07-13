@@ -152,25 +152,27 @@ var _tools = (function () {
 	    var active_columns = _store.active_columns();
 	    var all_columns = _store.group_columns();
 
-        html.push ( '<input type="button" value="Zaznacz" id="check-all" >' );
-        html.push ( '<input type="button" value="Odznacz" id="uncheck-all" >' );
-        for( i=0; i<all_columns.length; i+=1) {
+        html.push( '<input type="button" value="Zaznacz wszystkie" id="check-all" >' );
+        html.push( '<input type="button" value="Odznacz wszystkie" id="uncheck-all" style="margin-left: 5px;">' );
+        html.push( '<input type="submit" value="Dodaj/Odejmij kolumny" style="margin-left: 10px;">');
+
+        for( i = 0; i < all_columns.length; i += 1 ) {
             key = all_columns[i]['key'];
-	        html.push ( '<input type="checkbox" name="columns"' );
-            html.push ( ' value="', key, '" id="column-id-', key, '" ' );
-	        if (_store.is_column_in_active_sheet(key)){
-                html.push('checked ');
+            html.push( '<br />' );
+	        html.push( '<input type="checkbox" name="columns"' );
+            html.push( ' value="', key, '" id="column-id-', key, '"' );
+	        if( _store.is_column_in_active_sheet( key ) ) {
+                html.push( 'checked');
             }
             html.push('>');
             html.push('<label for="column-id-', key,'" >');
             html.push(all_columns[i]['label'],'</label>');
         }
-        html.push('<input type="submit" value="Dodaj kolumny">');
         $('#manage-columns-form').append( $( html.join('') ));
 
         $('#check-all')
             .click( function () {
-                for (i = 0; i < $('input[name=columns]').length; i += 1){
+                for( i = 0; i < $('input[name=columns]').length; i += 1){
                     $('input[name=columns]')[i].checked=true;
                 }
             });
