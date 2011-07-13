@@ -68,7 +68,40 @@
   </div>
  <br /> 
   <div id="download-main-panel" style="clear: both; background-color: #fff">
-    DOWNLOAD GOES HERE!
+    <p>Zaznacz kolekcje danych, ktore chcesz zapisac na dysku</p>
+    <hr />
+    <table>
+      <tr>
+        <td style="width: 150px; padding-top: 45px;">
+            <div id="download-select-all" class="select-all">Zaznacz wszystkie</div><br />
+            <div id="download-unselect-all" class="select-all">Odznacz wszystkie</div>
+        </td>
+        <td>
+            <form>
+              <table id="download-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th class="under">Dane w arkuszu</th>
+                    <th></th>
+                    <th class="under">Cala kolekcja</th>
+                    <th class="under"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </form>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <hr />
+    <br />
+    <div id="download-button">Pobierz</div>
+    <form id="download-form" action="/download/" method="post">
+        <input type="text" name="sheets" />
+    </form>
   </div>
     
 </div>
