@@ -1,4 +1,6 @@
+<section id="top-panels">
 <div id="choose-panel">
+
 
   <div id="choose-header">
     <div id="info-info" class="left"></div>
@@ -22,7 +24,7 @@
     
 </div>
 
-<div id="search-panel">
+<div id="search-panel" style="background-color: #fff; padding: 5px;">
 
   <div id="search-header">
     <div id="info-info" class="left"></div>
@@ -36,12 +38,41 @@
         Wpisz interesujące cię hasło.    
     </div>
   </div>
-  
-  <div id="search-main-panel">
+ <br /> 
+  <div id="search-main-panel" style="clear: both; background-color: #fff">
+    <form id="search-form">
+        <input type="text" name="search-query" id="search-text">
+        <input type="submit" value="Wyszukaj" id="search-button">
+        <input type="checkbox" id="strict-match">Dopasowanie dokładne
+    </form>
+
+    <button id="show-found-button" type="button">Przejdź do zaznaczonych</button>
+
   </div>
     
 </div>
 
+<div id="download-panel" style="background-color: #fff; padding: 5px;">
+
+  <div id="download-header">
+    <div id="info-info" class="left"></div>
+    <div id="info-title" class="left">
+        Wyszukaj danych
+    </div>
+    <div id="info-icon" class="left">
+      <img src="/site_media/img/info.png" />
+    </div>
+    <div id="info-text" class="left">
+        Wpisz interesujące cię hasło.    
+    </div>
+  </div>
+ <br /> 
+  <div id="download-main-panel" style="clear: both; background-color: #fff">
+    DOWNLOAD GOES HERE!
+  </div>
+    
+</div>
 <div id="open-close-choose-panel">
    zwiń menu
 </div>
+</section>

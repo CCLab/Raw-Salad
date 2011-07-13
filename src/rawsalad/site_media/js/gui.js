@@ -182,18 +182,15 @@ var _gui = (function () {
 
         // arm open/close button and hide it!
         $('#open-close-choose-panel')
-            .click( hide_choose_panel );
+            .click( hide_top_panels );
 
-        $('#top-collections')
+        $('#download-panel').hide();
+        $('#top-menu')
+            .find('li')
             .click( function () {
-                // if choose panel is open
-                if( $('#choose-panel:visible').length > 0 ) {
-                    hide_choose_panel();
-                }
-                else {
-                    show_choose_panel();
-                }
+                do_panels( $(this) );
             });
+
 
         // arm back-to-datasets button
         $('#back-to-datasets')
@@ -242,7 +239,7 @@ var _gui = (function () {
 
         $('#application').show();
         that.make_zebra();
-        hide_choose_panel();
+        hide_top_panels();
     }
 
 
@@ -386,24 +383,51 @@ var _gui = (function () {
 
 
 // P R I V A T E   I N T E R F A C E
-    function show_choose_panel() {
-        $('#choose-panel')
-            .slideDown( 400 );
+    function do_panels( button ) {
+        var panel = $('#'+ button.attr('id').split('-').pop()  +'-panel');
+
+        $('#top-menu')
+            .find('.selected')
+            .removeClass( 'selected' );
+
+        button.addClass( 'selected' );
+
+        if( panel.is(':visible') ) {
+            hide_top_panel( panel );
+        }
+        else if( !$('#top-panels > div:visible').length ) {
+            show_top_panel( panel );
+        }
+        else {
+            $('#top-panels > div:visible').slideUp( 400, function () {
+                show_top_panel( panel );
+            });
+        }
+    }
+
+    function show_top_panel( panel ) {
+        panel.slideDown( 400 );
 
         $('#application')
             .animate({ opacity: 0.25 }, 300 );
 
         $('#open-close-choose-panel')
             .show();
-
-        $('#top-collections')
-            .addClass( 'selected' )
-            .html( 'zwiń menu' );
     }
 
 
-    function hide_choose_panel() {
-        $('#choose-panel')
+    function hide_top_panel( panel ) {
+        panel.slideUp( 400 );
+
+        $('#application')
+            .animate({ opacity: 1 }, 300 );
+
+        $('#open-close-choose-panel')
+            .hide();
+    }
+
+    function hide_top_panels() {
+        $('#top-panels > div:visible')
             .slideUp( 400 );
 
         $('#application')
@@ -411,10 +435,6 @@ var _gui = (function () {
 
         $('#open-close-choose-panel')
             .hide();
-
-        $('#top-collections')
-            .removeClass( 'selected' )
-            .html( 'Przeglądaj dane' );
     };
 
 
@@ -522,11 +542,11 @@ var _gui = (function () {
                 // if new group is created, get data and show table
                 if( _store.group_exists( col_id ) ) {
                     // get top-level data from db
-                    _db.get_init_data(col_id);
+                    _db.get_init_data( col_id );
                 }
                 else {
                     // go back to application with focus on requested sheet
-                    hide_choose_panel();
+                    hide_top_panels();
                 }
             });
     };
