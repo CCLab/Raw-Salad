@@ -304,7 +304,7 @@ var _store = (function () {
         if (active_grp['sheets'].length === 0 ){
             remove_active_group();
         }else if (active_sheet_index !== 0 ) {
-                active_grp['active_sheet_number'] = active_sheet_index - 1 );                  
+                active_grp['active_sheet_number'] = active_sheet_index - 1 ;                  
             };            
     //TODO - remove_sheet
     };
