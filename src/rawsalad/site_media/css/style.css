@@ -495,28 +495,26 @@ width: 650px;
         }
     
     #table-toolbar {
-        position: relative;
-        
-        height: 30px;
-        padding-bottom: 5px;
+        height: 100%;
         background-color: #c8c8c8;
     }
     
-            #breadcrumb {
-                position: absolute;
-                bottom: 8px;
-                left: 0px;
-                width: 595px;
-                padding: 3px 15px;
-                font-weight: bold;
-                color: #fff;
+        #table-toolbar > div {
+            clear:both;
+        }
+
+            #table-toolbar-upper {
             }
-            
+
+            #table-toolbar-collection-name {
+                float: left;
+                font-weight: bold;
+                padding: 10px;
+            }
+
             #tools {
-                position: relative;
+                padding: 10px;
                 float: right;
-                right: 10px;
-                top: 10px;
                 width: auto;
                 border-radius: 3px 3px 0px 0px;
                 -moz-border-radius: 3px 3px 0px 0px;      
@@ -525,17 +523,22 @@ width: 650px;
                 #tools > div {         
                     float: left;
                     padding: 3px 10px;
-                    margin-right: 5px;
                     background-color: #fff;
                     color: #4cbceb;
                     
-                    border-radius: 3px 3px 3px 3px;
-                    -moz-border-radius: 3px 3px 3px 3px;
                 }
                 
-                #manage-columns-button{
-                    border-radius: 3px 3px 0px 0px;
+                #sort-button {
+                  border-radius: 3px 0px 0px 3px;
+                  -moz-border-radius: 3px 0px 0px 3px;
+                  border-right: 1px solid #8b8b8b;
                 }
+
+                #filter-button {
+                  border-radius: 0px 3px 3px 0px;
+                  -moz-border-radius: 0px 3px 3px 0px;
+                }
+
                 
                 #tools > div:hover {
                     cursor: pointer;
@@ -543,9 +546,27 @@ width: 650px;
                     color: #fff;
                 }
 
+            #table-toolbar-lower {
+                padding: 10px;
+            }
+
+                #manage-columns-button {
+                    float: right;
+                    padding: 5px 10px;
+                    color: #4cbceb;
+                    background-color: #000;
+
+                    border-radius: 3px 3px 0px 0px;
+                }
+
+                #manage-columns-button:hover {
+                    color: #fff;
+                    cursor: pointer;
+                }
+
 #sort-popup {
     background-color: #C8C8C8;
-    padding: 5px 20px;
+    padding: 0px 20px;
 }                     
                         
     select {
@@ -566,7 +587,12 @@ width: 650px;
 
 #filter-popup {
     background-color: #C8C8C8;
-    padding: 5px 20px;
+    padding: 0px 20px;
+}                     
+
+#manage-columns-popup {
+    background-color: #C8C8C8;
+    padding: 0px 20px;
 }                     
 
 #add-sort-key {

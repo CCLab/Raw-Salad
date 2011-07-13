@@ -46,6 +46,9 @@ var _table = (function () {
             create_filtered_thead();
             create_filtered_tbody();
         }
+        $('#table-toolbar-collection-name')
+            .html( _store.active_sheet()['name'] );
+
         _utils.clean_preloader();
     };
 
