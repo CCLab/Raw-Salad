@@ -213,21 +213,60 @@ var _table = (function () {
     }
 
     function create_filtered_tbody() {
-        var level;
+        var copy_rows = [];
+        $.extend( true, copy_rows, _store.active_rows() );
+        
+        copy_rows.sort( function ( a, b ) {
+                     var return_value;
+                     if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
+                         return_value = -1;
+                     } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
+                         return_value = 1;
+                     } else {
+                         return_value = 0;
+                     }
+                return return_value;
+            })
+            .forEach( function ( row ) {
+                //var parent = find_parent( row['data']['idef'] );
+                var new_node = generate_filtered_row({
+                                    node: row,
+                                    schema: schema
+                                });
+
+                /*if ( !!parent ) {
+                    parent.after( new_node );
+                }
+                else {
+                    $('#filtered-tbody').prepend( new_node );
+                }*/
+                $('#filtered-body').append( new_node );
+            });
+        
+        /*var level;
         var hashed_list = _utils.hash_list( _store.active_rows() );
 
         for( level in hashed_list ) {
             if( hashed_list.hasOwnProperty( level )) {
                 add_filtered_rows( hashed_list[ level ] );
             }
-        }
+        }*/
     }
 
     function add_filtered_rows( data ) {
         var schema = _store.active_columns();
 
         data.sort( function ( a, b ) {
-                return a['data']['idef_sort'] < b['data']['idef_sort'];
+                var return_value;
+                if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
+                    return_value = -1;
+                } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
+                    return_value = 1;
+                } else {
+                    return_value = 0;
+                }
+                
+                return return_value;
             })
             .forEach( function ( row ) {
                 var parent = find_parent( row['data']['idef'] );
