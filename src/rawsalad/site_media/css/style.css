@@ -285,8 +285,6 @@ width: 650px;
 
 #download-main-panel {
   clear: both;
-/*  width: 900px;*/
-/*  min-height: 120px;*/
   padding: 30px;
   background-color: #fff;
   border-radius: 0px 0px 5px 5px;
@@ -304,7 +302,7 @@ width: 650px;
       }
 
       #download-main-panel td, th {
-        height: 40px;
+/*        height: 40px;*/
       }
 
       #download-main-panel td, th {
@@ -553,7 +551,7 @@ width: 650px;
 
                 #manage-columns-button {
                     float: right;
-                    padding: 0px 10px;
+                    padding: 5px 10px;
                     color: #4cbceb;
                     background-color: #000;
 
