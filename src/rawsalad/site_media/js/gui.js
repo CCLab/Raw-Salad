@@ -185,7 +185,7 @@ var _gui = (function () {
         $('.snapshot').removeClass('active');
 
         new_tab
-            .append('<div class="close-sheet-button" >b</div>')
+            .append('<div class="close-sheet-button" >x</div>')
             .addClass( 'active' )
             .click( function () {
                 var id_elements = $(this).attr('id').split('-');
@@ -199,10 +199,17 @@ var _gui = (function () {
                 _store.active_sheet( sheet_nr );
 
                 $('#sort-form').hide().html('');
-                $('#filter-form').hide().html('');
+                $('#filter-form').hide().html('');a
                 _table.clean_table();
                 _table.init_table();
             });
+
+        $('.close-sheet-button').click( function(){
+            _store.remove_active_sheet();
+            allert("Sheet dleyted");
+            // add reload        
+        });
+
 
         if( sheet_nr === 0 ) {
             $('#snapshots').append( new_tab );
