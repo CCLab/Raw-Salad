@@ -192,8 +192,8 @@ var _gui = (function () {
                 var group_nr = id_elements[1];
                 var sheet_nr = id_elements[2];
 
-                $('.snapshot').removeClass('active')
-                    .remove('.close-sheet-button');
+                $('.snapshot').removeClass('active');
+                $('.close-sheet-button').remove();
                 $(this).addClass('active');
 
                 _store.active_group( group_nr );
