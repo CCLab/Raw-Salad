@@ -154,9 +154,10 @@ var _tools = (function () {
 
 //        html.push( '<input type="button" value="Zaznacz wszystkie" id="check-all" >' );
 //        html.push( '<input type="button" value="Odznacz wszystkie" id="uncheck-all" style="margin-left: 5px;">' );
-        html.push( '<div class="select-all" id="check-all">Zaznacz wszystkie</div>' );
-        html.push( '<div class="select-all" id="uncheck-all">Odznacz wszystkie</div>' );
         html.push( '<div class="select-all" id="manage-columns-submit" style="margin-left: 10px">Dodaj/Usuń kolumny</div>' );
+        html.push( '<div class="select-all" id="uncheck-all" style="background-color: #eee; color: #333; margin-left: 5px">Odznacz wszystkie</div>' );
+        html.push( '<div class="select-all" id="check-all" style="background-color: #eee; color: #333">Zaznacz wszystkie</div>' );
+
 
         for( i = 0; i < all_columns.length; i += 1 ) {
             key = all_columns[i]['key'];
@@ -187,7 +188,7 @@ var _tools = (function () {
             });
 
         $('#manage-columns-submit').click( function () {
-                $('#manage-columns-form').submit();
+            $('#manage-columns-form').submit();
         });
 
     }
@@ -481,10 +482,19 @@ var _tools = (function () {
 
         $('#manage-columns-button')
             .click( function () {
+                var columns_form = $('#manage-columns-form');
+
                 $('#filter-form').hide();
                 $('#sort-form').hide();
-                $('#manage-columns-form').html('').toggle();
-                add_manage_checkbox();
+
+                if( columns_form.is( ':hidden' ) ) {
+                    columns_form.html('');
+                    add_manage_checkbox();
+                    columns_form.slideDown( 200 );
+                }
+                else {
+                    columns_form.slideUp( 200 );
+                }
             });
 
         $('#manage-columns-form')
