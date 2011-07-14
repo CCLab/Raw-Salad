@@ -319,6 +319,11 @@ var _tools = (function () {
                         $('#sort-form').slideDown( 200 );
                     }
                 }
+
+                $(this)
+                    .addClass('selected')
+                    .siblings()
+                    .removeClass('selected');
             });
 
         $('#sort-form')
@@ -404,6 +409,11 @@ var _tools = (function () {
                         $('#filter-form').slideDown( 200 );
                     }
                 }
+
+                $(this)
+                    .addClass('selected')
+                    .siblings()
+                    .removeClass('selected');
             });
 
         $('#filter-form')

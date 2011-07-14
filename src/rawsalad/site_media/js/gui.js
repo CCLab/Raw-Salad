@@ -45,25 +45,7 @@ var _gui = (function () {
                 .addClass('active')
                 .removeClass('inactive');
         });
-        $('#search-tab').click( function () {
 
-            $('#search-results').remove();
-            $('#show-found-button').hide();
-
-            $('#table-container').hide();
-            $('#search-container').show();
-            $('#download-container').hide();
-            $('#permalink-container').hide();
-
-            $('#tabs')
-                .find('div')
-                .removeClass('active')
-                .addClass('inactive');
-
-            $(this)
-                .addClass('active')
-                .removeClass('inactive');
-        });
         $('#permalink-tab').click( function () {
             $('#table-container').hide();
             $('#search-container').hide();
@@ -221,7 +203,8 @@ var _gui = (function () {
             });
 
         if( sheet_nr === 0 ) {
-            new_tab.insertBefore( '#save-snapshot' );
+//            new_tab.insertBefore( '#save-snapshot' );
+            $('#snapshots').append( new_tab );
         }
         else {
             new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));

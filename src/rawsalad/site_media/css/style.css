@@ -382,6 +382,10 @@ width: 650px;
          border: 10px solid #fff;
       }
 
+      #filtered-table tr {
+        border: 1px solid #a3a3a3;
+      }
+
       #filtered-table th {
         background-color: #d4d4d4;
         text-align: left;
@@ -530,17 +534,24 @@ width: 650px;
                 #sort-button {
                   border-radius: 3px 0px 0px 3px;
                   -moz-border-radius: 3px 0px 0px 3px;
-                  border-right: 1px solid #8b8b8b;
+                  -webkit-border-radius: 0px 3px 3px 0px;
                 }
 
                 #filter-button {
                   border-radius: 0px 3px 3px 0px;
                   -moz-border-radius: 0px 3px 3px 0px;
+                  -webkit-border-radius: 0px 3px 3px 0px;
+                  border-left: 1px solid #8b8b8b;
                 }
 
                 
                 #tools > div:hover {
                     cursor: pointer;
+                    background-color: #b7b7b7;
+                    color: #fff;
+                }
+
+                #tools > div.selected {
                     background-color: #b7b7b7;
                     color: #fff;
                 }
