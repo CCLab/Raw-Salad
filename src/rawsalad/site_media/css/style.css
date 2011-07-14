@@ -495,7 +495,9 @@ header {
             color: #555;
             cursor: pointer;
         }
-    
+            #snapshots > div > div {
+                display: inline;
+            }    
     #table-toolbar {
         height: 100%;
         background-color: #c8c8c8;
