@@ -172,11 +172,11 @@ var _tools = (function () {
             html.push( '>' );
             html.push( '<label for="column-id-', key, '">' );
             html.push( e['label'], '</label>' );
-        }
+        });
         $('#manage-columns-form').append( $( html.join('') ));
 
         $('#check-all')
-            .click( function () {
+            .click( fnction () {
                 $('input[name=columns]').attr( 'checked', 'true' );
             });
 
