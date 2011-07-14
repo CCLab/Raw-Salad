@@ -203,7 +203,6 @@ var _gui = (function () {
             });
 
         if( sheet_nr === 0 ) {
-//            new_tab.insertBefore( '#save-snapshot' );
             $('#snapshots').append( new_tab );
         }
         else {
@@ -254,7 +253,6 @@ var _gui = (function () {
 
         a_root
             .siblings()
-//            .not(':hidden')
             .addClass('dim');
 
         // make a-root background black
@@ -270,8 +268,6 @@ var _gui = (function () {
         // add the bottom border
         $('.next').removeClass('next');
         next.addClass('next');
-
-//        that.make_zebra();
     }
 
     that.show_table_tab = function() {
@@ -421,6 +417,10 @@ var _gui = (function () {
     }
 
     function hide_top_panels() {
+        $('#top-menu')
+            .find('.selected')
+            .removeClass('selected');
+
         $('#top-panels > div:visible')
             .slideUp( 400 );
 

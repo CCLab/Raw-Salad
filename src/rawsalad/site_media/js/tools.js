@@ -321,7 +321,7 @@ var _tools = (function () {
                 }
 
                 $(this)
-                    .addClass('selected')
+                    .toggleClass('selected')
                     .siblings()
                     .removeClass('selected');
             });
@@ -411,7 +411,7 @@ var _tools = (function () {
                 }
 
                 $(this)
-                    .addClass('selected')
+                    .toggleClass('selected')
                     .siblings()
                     .removeClass('selected');
             });

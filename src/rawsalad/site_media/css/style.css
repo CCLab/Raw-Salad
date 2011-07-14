@@ -487,8 +487,10 @@ width: 650px;
             background-color: #4abff7;
             color: white;
             padding: 3px 5px;
+            margin-right: 5px;
             border-radius: 3px 3px 3px 3px;
             -moz-border-radius: 3px 3px 3px 3px;
+            -webkit-border-radius: 3px 3px 3px 3px;
         }
         #save-snapshot:hover {
             background-color: #4cbceb;
