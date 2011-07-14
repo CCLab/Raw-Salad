@@ -200,7 +200,7 @@ var _gui = (function () {
                 _store.active_sheet( sheet_nr );
 
                 $('#sort-form').hide().html('');
-                $('#filter-form').hide().html('');a
+                $('#filter-form').hide().html('');
                 _table.clean_table();
                 _table.init_table();
             });
