@@ -375,7 +375,7 @@ var _tools = (function () {
                     .find('form:visible')
                     .slideUp( 200 );
 
-                if( form.is( ':hidden' ) {
+                if( form.is( ':hidden' ) ) {
                     form.html('');
                     add_filter_key();
                     form.slideDown( 200 );
