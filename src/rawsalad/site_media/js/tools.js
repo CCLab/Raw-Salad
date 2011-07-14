@@ -176,7 +176,7 @@ var _tools = (function () {
         $('#manage-columns-form').append( $( html.join('') ));
 
         $('#check-all')
-            .click( fnction () {
+            .click( function () {
                 $('input[name=columns]').attr( 'checked', 'true' );
             });
 
