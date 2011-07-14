@@ -303,9 +303,9 @@ var _store = (function () {
         active_grp.splice(active_sheet_num, 1 );    
         if (active_grp['sheets'].length === 0 ){
             that.remove_active_group();
-        }else if (active_sheet_index !== 0 ) {
+        }else if (active_sheet_num !== 0 ) {
                 active_grp['active_sheet_number'] = active_sheet_index - 1  ;                  
-            };            
+            }            
         return true;
     };
 
