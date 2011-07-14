@@ -194,7 +194,8 @@ var _gui = (function () {
 
                 $('.snapshot').removeClass('active');
                 $('.close-sheet-button').remove();
-                $(this).addClass('active');
+                $(this).addClass('active')
+                    .append('<div class="close-sheet-button" >x</div>');
 
                 _store.active_group( group_nr );
                 _store.active_sheet( sheet_nr );
