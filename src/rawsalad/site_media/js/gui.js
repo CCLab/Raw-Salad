@@ -183,6 +183,7 @@ var _gui = (function () {
         new_tab = $( html.join('') );
 
         $('.snapshot').removeClass('active');
+        $('.close-sheet-button').remove();
 
         new_tab
             .append('<div class="close-sheet-button" >x</div>')
