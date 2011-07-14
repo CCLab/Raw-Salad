@@ -173,7 +173,7 @@ var _gui = (function () {
         var new_tab;
 
         html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
-        html.push( 'class="snapshot active" ' );
+        html.push( 'class="snapshot" ' );
         html.push( 'title="', sheet_name, '">' );
         html.push( sheet_name.length > 20 ?
                    sheet_name.slice( 0, 17 ) + '...' :
@@ -183,14 +183,16 @@ var _gui = (function () {
         new_tab = $( html.join('') );
 
         $('.snapshot').removeClass('active');
+
         new_tab
+            .append('<div class="close-sheet-button" > G </div>')
             .addClass( 'active' )
             .click( function () {
                 var id_elements = $(this).attr('id').split('-');
                 var group_nr = id_elements[1];
                 var sheet_nr = id_elements[2];
 
-                $('.snapshot').removeClass('active');
+                $('.snapshot').removeClass('active');// 
                 $(this).addClass('active');
 
                 _store.active_group( group_nr );
