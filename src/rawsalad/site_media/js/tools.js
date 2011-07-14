@@ -298,7 +298,8 @@ var _tools = (function () {
 
                 $('#table-toolbar')
                     .find('form:visible')
-                    .slideUp( 200 );
+                    .slideUp( 200 )
+                    .removeClass('selected');
 
                 if( form.is(':hidden') ) {
                     form.html('');
@@ -306,10 +307,7 @@ var _tools = (function () {
                     form.slideDown( 200 );
                 }
 
-                $(this)
-                    .toggleClass('selected')
-                    .siblings()
-                    .removeClass('selected');
+                $(this).toggleClass('selected');
             });
 
         $('#sort-form')
@@ -373,7 +371,8 @@ var _tools = (function () {
 
                 $('#table-toolbar')
                     .find('form:visible')
-                    .slideUp( 200 );
+                    .slideUp( 200 )
+                    .removeClass('selected');
 
                 if( form.is( ':hidden' ) ) {
                     form.html('');
@@ -381,10 +380,7 @@ var _tools = (function () {
                     form.slideDown( 200 );
                 }
 
-                $(this)
-                    .toggleClass('selected')
-                    .siblings()
-                    .removeClass('selected');
+                $(this).toggleClass('selected');
             });
 
         $('#filter-form')
@@ -467,7 +463,8 @@ var _tools = (function () {
 
                 $('#table-toolbar')
                     .find('form:visible')
-                    .slideUp( 200 );
+                    .slideUp( 200 )
+                    .removeClass('selected');
 
                 if( columns_form.is( ':hidden' ) ) {
                     columns_form.html('');
