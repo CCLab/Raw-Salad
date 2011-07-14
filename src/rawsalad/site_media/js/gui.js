@@ -185,7 +185,7 @@ var _gui = (function () {
         $('.snapshot').removeClass('active');
 
         new_tab
-            .append('<div class="close-sheet-button" > G </div>')
+            .append('<div class="close-sheet-button" ></div>')
             .addClass( 'active' )
             .click( function () {
                 var id_elements = $(this).attr('id').split('-');
