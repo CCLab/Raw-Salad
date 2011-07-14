@@ -370,28 +370,17 @@ var _tools = (function () {
     function prepare_filtering_interface() {
         $('#filter-button')
             .click( function () {
-                var visible_form;
-                if ( $('#filter-form > div').length > 0 ) {
-                    $('#filter-form').slideUp( 200, function () {
-                        $('#filter-form').html('');
-                    });
-                } else {
-                    if ( $('#sort-form > div').length > 0 ) {
-                        visible_form = $('#sort-form');
-                    } else if ( $('#manage-columns-form > input').length > 0 ) {
-                        visible_form = $('#manage-columns-form');
-                    }
+                var hidden = $('#filter-form').is(':hidden');
 
-                    if ( !!visible_form ) {
-                        visible_form.slideUp( 200, function () {
-                            visible_form.html('');
-                            add_filter_key();
-                            $('#filter-form').slideDown( 200 );
-                        })
-                    } else {
-                        add_filter_key();
-                        $('#filter-form').slideDown( 200 );
-                    }
+                $('#table-toolbar')
+                    .find('form:visible')
+                    .slideUp( 200, function () {
+                        $(this).html('');
+                    });
+
+                if( hidden ) {
+                    add_filter_key();
+                    $('#filter-form').slideDown( 200 );
                 }
 
                 $(this)
@@ -478,17 +467,15 @@ var _tools = (function () {
             .click( function () {
                 var columns_form = $('#manage-columns-form');
 
-                $('#sort-filter-forms')
-                    .find('form')
-                    .slideUp( 200 );
+                $('#table-toolbar')
+                    .find('form:visible')
+                    .slideUp( 200, function () {
+                        $(this).html('');
+                    });
 
                 if( columns_form.is( ':hidden' ) ) {
-                    columns_form.html('');
                     add_manage_checkbox();
                     columns_form.slideDown( 200 );
-                }
-                else {
-                    columns_form.slideUp( 200 );
                 }
             });
 
