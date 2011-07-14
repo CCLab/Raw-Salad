@@ -146,45 +146,43 @@ var _tools = (function () {
 
 
     function add_manage_checkbox()  {
-        var i;
-        var key;
         var html = [];
-	    var active_columns = _store.active_columns();
 	    var all_columns = _store.group_columns();
 
-//        html.push( '<input type="button" value="Zaznacz wszystkie" id="check-all" >' );
-//        html.push( '<input type="button" value="Odznacz wszystkie" id="uncheck-all" style="margin-left: 5px;">' );
-        html.push( '<div class="select-all" id="manage-columns-submit" style="margin-left: 10px">Dodaj/Usuń kolumny</div>' );
-        html.push( '<div class="select-all" id="uncheck-all" style="background-color: #eee; color: #333; margin-left: 5px">Odznacz wszystkie</div>' );
-        html.push( '<div class="select-all" id="check-all" style="background-color: #eee; color: #333">Zaznacz wszystkie</div>' );
+        html.push( '<div class="select-all" id="manage-columns-submit" ' );
+        html.push( 'style="margin-left: 10px">Dodaj/Usuń kolumny</div>' );
 
+        html.push( '<div class="select-all" id="uncheck-all" ');
+        html.push( 'style="background-color: #eee; color: #333; margin-left: 5px">' );
+        html.push( 'Odznacz wszystkie</div>' );
 
-        for( i = 0; i < all_columns.length; i += 1 ) {
-            key = all_columns[i]['key'];
+        html.push( '<div class="select-all" id="check-all" ');
+        html.push( 'style="background-color: #eee; color: #333">' );
+        html.push( 'Zaznacz wszystkie</div>' );
+
+        all_columns.forEach( function ( e ) {
+            var key = e['key'];
+
             html.push( '<br />' );
-	        html.push( '<input type="checkbox" name="columns"' );
-            html.push( ' value="', key, '" id="column-id-', key, '"' );
+	        html.push( '<input type="checkbox" name="columns" ' );
+            html.push( 'value="', key, '" id="column-id-', key, '"' );
 	        if( _store.is_column_in_active_sheet( key ) ) {
-                html.push( 'checked');
+                html.push( ' checked');
             }
-            html.push('>');
-            html.push('<label for="column-id-', key,'" >');
-            html.push(all_columns[i]['label'],'</label>');
+            html.push( '>' );
+            html.push( '<label for="column-id-', key, '">' );
+            html.push( e['label'], '</label>' );
         }
         $('#manage-columns-form').append( $( html.join('') ));
 
         $('#check-all')
             .click( function () {
-                for( i = 0; i < $('input[name=columns]').length; i += 1){
-                    $('input[name=columns]')[i].checked=true;
-                }
+                $('input[name=columns]').attr( 'checked', 'true' );
             });
 
         $('#uncheck-all')
             .click( function () {
-                for (i = 0; i < $('input[name=columns]').length; i += 1){
-                    $('input[name=columns]')[i].checked=false;
-                }
+                $('input[name=columns]').removeAttr( 'checked' );
             });
 
         $('#manage-columns-submit').click( function () {
@@ -296,28 +294,17 @@ var _tools = (function () {
 
         $('#sort-button')
             .click( function () {
-                var visible_form;
-                if ( $('#sort-form > div').length > 0 ) {
-                    $('#sort-form').slideUp( 200, function () {
-                        $('#sort-form').html('');
-                    });
-                } else {
-                    if ( $('#filter-form > div').length > 0 ) {
-                        visible_form = $('#filter-form');
-                    } else if ( $('#manage-columns-form > input').length > 0 ) {
-                        visible_form = $('#manage-columns-form');
-                    }
+                var hidden = $('#sort-form').is(':hidden');
 
-                    if ( !!visible_form ) {
-                        visible_form.slideUp( 200, function () {
-                            visible_form.html('');
-                            add_sort_key();
-                            $('#sort-form').slideDown( 200 );
-                        })
-                    } else {
-                        add_sort_key();
-                        $('#sort-form').slideDown( 200 );
-                    }
+                $('#table-toolbar')
+                    .find('form:visible')
+                    .slideUp( 200, function () {
+                        $(this).html('');
+                    });
+
+                if( hidden ) {
+                    add_sort_key();
+                    $('#sort-form').slideDown( 200 );
                 }
 
                 $(this)
@@ -328,9 +315,6 @@ var _tools = (function () {
 
         $('#sort-form')
             .submit( function () {
-
-//                _utils.create_preloader('Sortowanie');
-
                 var column, order;
                 var settings = [];
                 var i, len = $('#sort-form select').length;
