@@ -484,8 +484,9 @@ var _tools = (function () {
             .click( function () {
                 var columns_form = $('#manage-columns-form');
 
-                $('#filter-form').hide();
-                $('#sort-form').hide();
+                $('#sort-filter-forms')
+                    .find('form')
+                    .slideUp( 200 );
 
                 if( columns_form.is( ':hidden' ) ) {
                     columns_form.html('');
