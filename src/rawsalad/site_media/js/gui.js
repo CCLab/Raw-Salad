@@ -171,6 +171,7 @@ var _gui = (function () {
         var group_changed = _store.active_group_index() !== group_nr;
         var sheet_changed = _store.active_sheet_index() !== sheet_nr;
         var new_tab;
+        var clos_sheet;
 
         html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
         html.push( 'class="snapshot" ' );
@@ -181,11 +182,19 @@ var _gui = (function () {
         html.push( '</div>' );
 
         new_tab = $( html.join('') );
+        clos_sheet = $( '<div class="close-sheet-button" >x</div>' );
+        clos_sheet
+            .click( function(){
+            _store.remove_active_sheet();
+            allert("Sheet dleyted");
+            // add reload        
+        });
 
         $('.snapshot').removeClass('active');
         $('.close-sheet-button').remove();
         new_tab
-            .append('<div class="close-sheet-button" >x</div>')
+//            .append('<div class="close-sheet-button" >x</div>')
+            .append(clos_sheet)
             .addClass( 'active' )
             .click( function () {
                 var id_elements = $(this).attr('id').split('-');
@@ -206,11 +215,11 @@ var _gui = (function () {
                 _table.init_table();
             });
 
-        $('.close-sheet-button').click( function(){
-            _store.remove_active_sheet();
-            allert("Sheet dleyted");
+ //       $('.close-sheet-button').click( function(){
+ //           _store.remove_active_sheet();
+ //           allert("Sheet dleyted");
             // add reload        
-        });
+ //       });
 
 
         if( sheet_nr === 0 ) {
