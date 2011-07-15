@@ -203,7 +203,7 @@ var _gui = (function () {
                 var sheet_nr = id_elements[2];
 
                 $('.snapshot').removeClass('active');
-                clos_sheet.remove();
+                $('.close-sheet-button').remove();
                 $(this).addClass('active')
                     .append(clos_sheet);
 
