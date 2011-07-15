@@ -171,7 +171,7 @@ var _gui = (function () {
         var group_changed = _store.active_group_index() !== group_nr;
         var sheet_changed = _store.active_sheet_index() !== sheet_nr;
         var new_tab;
-        var clos_sheet;
+        var close_sheet;
 
         html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
         html.push( 'class="snapshot" ' );
@@ -182,8 +182,9 @@ var _gui = (function () {
         html.push( '</div>' );
 
         new_tab = $( html.join('') );
-        clos_sheet = $( '<div class="close-sheet-button" >x</div>' );
-        clos_sheet
+
+        close_sheet = $( '<div class="close-sheet-button" >x</div>' );
+        close_sheet
             .click( function(){
                 _store.remove_active_sheet();
                 alert("Sheet dleyted");
@@ -195,7 +196,7 @@ var _gui = (function () {
         $('.close-sheet-button').remove();
         new_tab
 //            .append('<div class="close-sheet-button" >x</div>')
-            .append(clos_sheet)
+            .append(close_sheet)
             .addClass( 'active' )
             .click( function () {
                 var id_elements = $(this).attr('id').split('-');
@@ -205,7 +206,7 @@ var _gui = (function () {
                 $('.snapshot').removeClass('active');
                 $('.close-sheet-button').remove();
                 $(this).addClass('active')
-                    .append(clos_sheet);
+                    .append(close_sheet);
 
                 _store.active_group( group_nr );//
                 _store.active_sheet( sheet_nr );//
