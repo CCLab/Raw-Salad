@@ -203,12 +203,12 @@ var _gui = (function () {
                 var sheet_nr = id_elements[2];
 
                 $('.snapshot').removeClass('active');
-                $('.close-sheet-button').remove();
+                clos_sheet.remove();
                 $(this).addClass('active')
-                    .append('<div class="close-sheet-button" >x</div>');
+                    .append(clos_sheet);
 
-                _store.active_group( group_nr );
-                _store.active_sheet( sheet_nr );
+                _store.active_group( group_nr );//
+                _store.active_sheet( sheet_nr );//
 
                 $('#sort-form').hide().html('');
                 $('#filter-form').hide().html('');
