@@ -185,9 +185,10 @@ var _gui = (function () {
         clos_sheet = $( '<div class="close-sheet-button" >x</div>' );
         clos_sheet
             .click( function(){
-            _store.remove_active_sheet();
-            allert("Sheet dleyted");
-            // add reload        
+                _store.remove_active_sheet();
+                alert("Sheet dleyted");
+                _table.clean_table();
+                _table.init_table();
         });
 
         $('.snapshot').removeClass('active');
