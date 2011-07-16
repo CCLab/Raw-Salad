@@ -43,10 +43,22 @@ var _table = (function () {
             create_tbody();
             _gui.make_zebra();
             $('#manage-columns-button').show();
+            $('#filter-button').show();
+            $('#sort-button').css({
+                'border-radius': '5px 0px 0px 5px',
+                '-moz-border-radius': '5px 0px 0px 5px',
+                '-webkit-border-radius': '5px 0px 0px 5px'
+            });
         } else {
             create_filtered_thead();
             create_filtered_tbody();
             $('#manage-columns-button').hide();
+            $('#filter-button').hide();
+            $('#sort-button').css({
+                'border-radius': '5px',
+                '-moz-border-radius': '5px',
+                '-webkit-border-radius': '5px'
+            });
         }
         $('#table-toolbar-collection-name')
             .html( _store.active_sheet()['name'] );

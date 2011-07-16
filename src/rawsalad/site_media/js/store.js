@@ -296,16 +296,17 @@ var _store = (function () {
 
     that.remove_active_sheet = function () {
         var active_grp = that.active_group();
+        var active_group_sheets = active_grp['sheets'];
         var active_sheet_num = that.active_sheet_index();
-        if (groups.length === 1 && active_grp['sheets'].length === 1 ){
+        if (groups.length === 1 && active_group_sheets.length === 1 ){
             return false; 
         }
-        active_grp.splice(active_sheet_num, 1 );    
-        if (active_grp['sheets'].length === 0 ){
+        active_group_sheets.splice(active_sheet_num, 1 );    
+        if (active_group_sheets.length === 0 ){
             that.remove_active_group();
-        }else if (active_sheet_index !== 0 ) {
-                active_grp['active_sheet_number'] = active_sheet_index - 1  ;                  
-            };            
+        }else if (active_sheet_num !== 0 ) {
+                active_grp['active_sheet_number'] = active_sheet_num - 1  ;                  
+            }            
         return true;
     };
 

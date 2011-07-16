@@ -30,54 +30,29 @@ var _gui = (function () {
     var that = {};
 
     that.init_gui = function () {
+        // TODO refactor this with general function like do_panels
         $('#table-tab').click( function () {
             $('#table-container').show();
-            $('#search-container').hide();
-            $('#download-container').hide();
             $('#permalink-container').hide();
 
-            $('#tabs')
+            $('#app-tabs')
                 .find('div')
-                .removeClass('active')
-                .addClass('inactive');
+                .removeClass('active');
 
             $(this)
-                .addClass('active')
-                .removeClass('inactive');
+                .addClass('active');
         });
-        $('#search-tab').click( function () {
-
-            $('#search-results').remove();
-            $('#show-found-button').hide();
-
-            $('#table-container').hide();
-            $('#search-container').show();
-            $('#download-container').hide();
-            $('#permalink-container').hide();
-
-            $('#tabs')
-                .find('div')
-                .removeClass('active')
-                .addClass('inactive');
-
-            $(this)
-                .addClass('active')
-                .removeClass('inactive');
-        });
+        // TODO see above
         $('#permalink-tab').click( function () {
             $('#table-container').hide();
-            $('#search-container').hide();
-            $('#download-container').hide();
             $('#permalink-container').show();
 
-            $('#tabs')
+            $('#app-tabs')
                 .find('div')
-                .removeClass('active')
-                .addClass('inactive');
+                .removeClass('active');
 
             $(this)
-                .addClass('active')
-                .removeClass('inactive');
+                .addClass('active');
         });
 
         $('#download-button').click( function () {
@@ -115,7 +90,7 @@ var _gui = (function () {
 
         $('#download-panel').hide();
         $('#top-menu')
-            .find('li')
+            .find('div')
             .click( function () {
                 do_panels( $(this) );
             });
@@ -189,9 +164,10 @@ var _gui = (function () {
         var group_changed = _store.active_group_index() !== group_nr;
         var sheet_changed = _store.active_sheet_index() !== sheet_nr;
         var new_tab;
+        var close_sheet;
 
         html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
-        html.push( 'class="snapshot active" ' );
+        html.push( 'class="snapshot" ' );
         html.push( 'title="', sheet_name, '">' );
         html.push( sheet_name.length > 20 ?
                    sheet_name.slice( 0, 17 ) + '...' :
@@ -200,8 +176,20 @@ var _gui = (function () {
 
         new_tab = $( html.join('') );
 
+        close_sheet = $( '<div class="close-sheet-button" >x</div>' );
+        close_sheet
+            .click( function(){
+                _store.remove_active_sheet();
+                alert("Sheet dleyted");
+                _table.clean_table();
+                _table.init_table();
+        });
+
         $('.snapshot').removeClass('active');
+        $('.close-sheet-button').remove();
         new_tab
+//            .append('<div class="close-sheet-button" >x</div>')
+            .append(close_sheet)
             .addClass( 'active' )
             .click( function () {
                 var id_elements = $(this).attr('id').split('-');
@@ -209,10 +197,12 @@ var _gui = (function () {
                 var sheet_nr = id_elements[2];
 
                 $('.snapshot').removeClass('active');
-                $(this).addClass('active');
+                $('.close-sheet-button').remove();
+                $(this).addClass('active')
+                    .append(close_sheet);
 
-                _store.active_group( group_nr );
-                _store.active_sheet( sheet_nr );
+                _store.active_group( group_nr );//
+                _store.active_sheet( sheet_nr );//
 
                 $('#sort-form').hide().html('');
                 $('#filter-form').hide().html('');
@@ -220,8 +210,15 @@ var _gui = (function () {
                 _table.init_table();
             });
 
+ //       $('.close-sheet-button').click( function(){
+ //           _store.remove_active_sheet();
+ //           allert("Sheet dleyted");
+            // add reload        
+ //       });
+
+
         if( sheet_nr === 0 ) {
-            new_tab.insertBefore( '#save-snapshot' );
+            $('#snapshots').append( new_tab );
         }
         else {
             new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
@@ -271,7 +268,6 @@ var _gui = (function () {
 
         a_root
             .siblings()
-//            .not(':hidden')
             .addClass('dim');
 
         // make a-root background black
@@ -287,8 +283,6 @@ var _gui = (function () {
         // add the bottom border
         $('.next').removeClass('next');
         next.addClass('next');
-
-//        that.make_zebra();
     }
 
     that.show_table_tab = function() {
@@ -383,20 +377,20 @@ var _gui = (function () {
             search: create_search_panel
         }
 
-        var selected = button.hasClass( 'selected' );
+        var active = button.hasClass( 'active' );
         var action = button.attr('id').split('-').pop();
         var panel = $('#'+ action +'-panel');
 
-        if( selected && $('#application').is(':hidden') ) {
+        if( active && $('#application').is(':hidden') ) {
             return;
         }
 
         $('#top-menu')
-            .find('.selected')
-            .removeClass( 'selected' );
+            .find('.active')
+            .removeClass( 'active' );
 
-        if( !selected ) {
-            button.addClass( 'selected' );
+        if( !active ) {
+            button.addClass( 'active' );
         }
 
         if( panel.is(':visible') ) {
@@ -438,6 +432,10 @@ var _gui = (function () {
     }
 
     function hide_top_panels() {
+        $('#top-menu')
+            .find('.active')
+            .removeClass('active');
+
         $('#top-panels > div:visible')
             .slideUp( 400 );
 
@@ -466,7 +464,7 @@ var _gui = (function () {
             html.push( '<div class="description">' );
             html.push( datasets[i]['description'] );
             html.push( '</div>' );
-            html.push( '<div class="more">Zobacz dane</div>' );
+            html.push( '<div class="more blue button">Zobacz dane</div>' );
             html.push( '</div>' );
 
             if( i === mid ) {
@@ -512,7 +510,7 @@ var _gui = (function () {
             html.push( '</div>' );
             // iterates in revers order because of CSS "float: right"
             for( j = issues.length-1; j >= 0; j -= 1 ) {
-                html.push( '<div class="more" ' );
+                html.push( '<div class="more blue button" ' );
                 html.push( 'data-issue="', issues[j], '">' );
                 html.push( issues[j] );
                 html.push( '</div>' );

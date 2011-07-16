@@ -1,0 +1,71 @@
+/* G E N E R A L   B U T T O N  */
+
+.button {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.button:hover {
+    cursor: pointer !important;
+}
+
+.blue {
+    color: #fff !important;
+    background-color: #4abff7 !important;
+}
+
+.blue:hover {
+    color: #1ea3e8 !important;
+    background-color: #c8c8c8 !important;
+}
+
+/*  T O G G L E   B U T T O N */
+.pushed {
+    color: #fff !important;
+    background-color: #767676 !important;
+}
+
+
+/*  S H E E T   T A B S  */
+.selected {
+    color: #fff !important;
+    background-color: #767676 !important;
+}
+
+.selected:hover {
+    cursor: default !important;
+}
+
+
+/* T O P   M E N U   A N D   T A B L E / S H A R E   T A B S */
+.tab {
+    color: #1ea3e8 !important;
+    background-color: #e1e1e1 !important;
+    font-weight: normal !important;
+}
+
+.tab:hover {
+    color: #fff !important;
+    background-color: #1ea3e8 !important;
+}
+
+.active {
+    color: #3b3b3b !important;
+    background-color: #c8c8c8 !important;
+}
+
+.active:hover {
+    cursor: default !important;
+    color: #3b3b3b !important;
+    background-color: #c8c8c8 !important;
+}
+
+/* G E N E R A L   C L A S S E S */ 
+.left {
+    float: left !important;
+}
+
+
