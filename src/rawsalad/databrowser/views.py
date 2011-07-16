@@ -8,6 +8,8 @@ from django.utils import simplejson as json
 
 import rsdbapi as rsdb
 import csv, codecs, cStringIO
+import re
+from time import time
 
 from StringIO import StringIO
 from zipfile import ZipFile
@@ -16,7 +18,7 @@ from zipfile import ZipFile
 # to be removed soon
 def choose_collection( data ):
     # getting data from db using col_nr
-    return_data = get_perspectives( data["col_nr"] )
+    return_data = get_perspectives( data['col_nr'] )
     json_data = json.dumps( return_data )
     return HttpResponse( json_data )
 
@@ -26,10 +28,10 @@ def get_init_data( data ):
     coll= rsdb.Collection(query= { 'level': 'a' })
 
     return_data = {}
-    return_data["rows"]= coll.get_data(
-        db, data["dataset"], data["perspective"], data["issue"]
+    return_data['rows']= coll.get_data(
+        db, data['dataset'], data['perspective'], data['issue']
         )
-    return_data["perspective"]= coll.metadata_complete
+    return_data['perspective']= coll.metadata_complete
 
     json_data = json.dumps( return_data )
 
@@ -38,10 +40,10 @@ def get_init_data( data ):
 # get the subtree of the next level
 def get_node( data ):
     db= rsdb.DBconnect("mongodb").dbconnect
-    coll= rsdb.Collection(query= { 'parent': data["parent"] })
+    coll= rsdb.Collection(query= { 'parent': data['parent'] })
 
     return_data= coll.get_data(
-        db, data["dataset"], data["perspective"], data["issue"]
+        db, data['dataset'], data['perspective'], data['issue']
         )
 
     json_data = json.dumps( return_data )
@@ -51,11 +53,76 @@ def get_node( data ):
 
 # search engine enter point
 def search_data( request ):
-    query = request.GET.get( 'query', '' )
+    lookup = request.GET.get( 'query', '' )
     scope = request.GET.get( 'scope', '' )
     strict = request.GET.get( 'strict', 'false' )
 
-    return HttpResponse( json.dumps( [ query, scope, strict ] ))
+    # converting scope and strict to objects
+    scope_list= scope.split(',')
+    if strict == 'false':
+        strict= False
+    else:
+        strict= True
+
+    # building regexp for search
+    if strict:
+        # ver 0.0
+        # lookup= "^%(lookupstr)s\s|\s%(lookupstr)s\s|\s%(lookupstr)s$" % { "lookupstr": lookup }
+
+        # ver 0.1
+        lookup= "^%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s$" % { "lookupstr": lookup }
+    # print lookup
+    regx= re.compile(lookup, re.IGNORECASE)
+
+    ns_list= [] # list of results
+    stat_dict= { "errors": [] }
+    found_num= 0 # number of records found
+    tl= time()
+    # not all fields are searchable
+    exclude_fields= ['idef', 'idef_sort', 'parent', 'parent_sort', 'level']
+    db= rsdb.DBconnect('mongodb').dbconnect
+
+    for sc in scope_list: # fill the list of collections
+        sc_list= sc.split('-')
+        dataset, idef, issue= int(sc_list[0]), int(sc_list[1]), str(sc_list[2])
+        coll= rsdb.Collection(fields=["perspective", "ns", "columns"])
+        metadata= coll.get_complete_metadata(dataset, idef, issue, db)
+        if metadata is None:
+            stat_dict['errors'].append('collection not found %s' % sc)
+        else:
+            curr_coll_dict= {
+                'perspective': metadata['perspective'],
+                'dataset': dataset,
+                'view': idef,
+                'issue': issue,
+                'data': []
+                }
+
+            coll.set_fields(None) # for search we need all fields, except for exclude_fields
+            for fld in metadata['columns']:
+                if 'processable' in fld:
+                    check_str= fld['type'] == 'string'
+                    check_excl= fld['key'] not in exclude_fields
+                    if fld['processable'] and check_str and check_excl:
+                        search_query= { fld['key']: regx }
+                        coll.set_query(search_query)
+                        found= coll.get_data(db, dataset, idef, issue)
+                        if len(found) > 0:
+                            for found_elt in found:
+                                curr_coll_dict['data'].append({
+                                    'key': fld['key'],
+                                    'text': found_elt[str(fld['key'])],
+                                    'idef': found_elt['idef'],
+                                    'parent': found_elt['parent']
+                                    })
+                                found_num += 1
+            if len(curr_coll_dict['data']) > 0:
+                ns_list.append(curr_coll_dict)
+
+    tlap= time()-tl
+    stat_dict.update({ "records_found": found_num, "search_time": "%10.6f" % tlap })
+
+    return HttpResponse( json.dumps( { "stat": stat_dict, "result": ns_list } ))
     
 # get initial_data + subtrees to searched nodes
 def get_searched_data( request ):
@@ -95,7 +162,7 @@ def app_page( request ):
     if data == {}:
         return get_page( request )
     else:
-        function_id = data["action"]
+        function_id = data['action']
         return func_dict[function_id]( data )
 
 def redirect( request ):
@@ -134,7 +201,7 @@ def download_data( request ):
         zip.close()
 
         response['Content-Type'] = 'application/zip'
-        response["Content-Disposition"] = "attachment; filename=collected_data.zip"
+        response['Content-Disposition'] = "attachment; filename=collected_data.zip"
 
         in_memory.seek( 0 )
         response.write( in_memory.read() )
