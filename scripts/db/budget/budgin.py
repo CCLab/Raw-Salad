@@ -9,7 +9,6 @@ import json
 
 import optparse
 from ConfigParser import ConfigParser
-from time import time
 
 #-----------------------------
 def db_insert(data_bulk, db, collname, clean_first=False):
