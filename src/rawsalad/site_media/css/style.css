@@ -1,4 +1,6 @@
-body {
+html, body {
+    margin: 0px;
+    padding: 0px;
     color: #333;
     background-color: #a3a3a3;    
     
@@ -14,60 +16,37 @@ body {
 header {
   overflow: auto;
   margin: auto;
-  width: 750px;
+  width: 680px;
   margin-bottom: 15px;
 }
 
-  header > * {
-    float: left;
-  }
-
-  header > nav {
-    width: 650px;
-    margin: 0px 5px;
-  }
-
-  header ul {
-    list-style-type: none;
-    display: inline;
-  }
-
-  header li {
+  header div {
     float: left;
 
-    width: 200px;
+    width: 205px;
+    height: 12px;
     padding: 5px;
-    margin-left: 5px;
+    padding-top: 4px;
+    padding-bottom: 6px;
     
-    color: #4abff7;
-    background-color: #ddd;
+    color: #1ea3e8;
+    background-color: #e1e1e1;
 
     text-align: center;
-    font-weight: bold;
 
-    border-radius: 5px;
-    -moz-border-radius: 5px;
+    border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
   }
 
-  header li:hover {
-    cursor: pointer;
-    color: #4abff7;
-    background-color: #eee;            
+  header div + div {
+      margin-left: 8px;
   }
 
-  header .selected {
-    color: #555;
-    background-color: #fff;
+  header .active {
+    height: 15px;
+    padding: 8px 5px;
   }
-
-  header .selected:hover {
-    cursor: pointer;
-  }
-
-.left {
-    float: left;
-}
-
 
 .menu-position {
     display: inline;
@@ -83,10 +62,6 @@ header {
 
 #choose-panel {
     background-color: #fff;
-    margin: 15px 0px;    
-
-    -moz-border-radius: 3px 3px 3px 3px;
-    border-radius: 3px 3px 3px 3px;
 }
 
     #choose-header {
@@ -215,22 +190,21 @@ header {
         }        
 
 #open-close-choose-panel {
-    margin-top: 10px;
-
     height: 14px;
     padding: 3px 0px;
 
     text-align: center;
-    color: #4abff7;
-    background-color: #fff;
+    color: #fff;
+    background-color: #1ea3e8;
     font-size: 12px;
-    font-weight: bold;bold
-    border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;    
+    font-weight: bold;
+    border-top: 1px solid #1ea3e8;
 }
+
 #open-close-choose-panel:hover {
     cursor: pointer;
-    color: #555;
+    background-color: #fff;
+    color: #1ea3e8;
 }
 
 #application {
@@ -244,41 +218,40 @@ header {
     -moz-border-radius: 3px 3px 3px 3px;
 }
 
-#tabs {
+#app-tabs {
   padding-left: 5px;
 }
 
-    .tab {
+    .app-tab {
         float: left;
-        width: 230px;
+        width: 215px;
+        height: 18px;
+        margin-top: 8px;
+        margin-right: 5px;
+
         text-align: center;
         font-size: 14px;
-        margin-right: 5px;
+        font-weight: bold;
+
+        border-bottom: 1px solid #e1e1e1;
+
         border-radius: 3px 3px 0px 0px;
         -moz-border-radius: 3px 3px 0px 0px;    
-        font-weight: bold;
+        -webkit-border-radius: 3px 3px 0px 0px;
     }
 
-    .tab.active {
+    .app-tab:hover {
         height: 18px;
         padding: 4px 0px;
+        margin-top: 0px;
         background-color: white;
     }
 
-    .tab.inactive {
-        margin-top: 6px;
-        height: 18px;
-        padding: 1px 0px;
-        background-color: #c8c8c8;
-        color: #4cbceb;
-    }
-
-    .tab.inactive:hover {
+    .app-tab.active {
         margin-top: 0px;
-        height: 18px;
         padding: 4px 0px;
-        background-color: #c8c8c8;
-        cursor: pointer;
+
+        border-bottom: 1px solid #c8c8c8;
     }
 
 #download-main-panel {
@@ -553,10 +526,6 @@ header {
                     color: #fff;
                 }
 
-                #tools > div.selected {
-                    background-color: #b7b7b7;
-                    color: #fff;
-                }
 
             #table-toolbar-lower {
                 padding: 10px;
@@ -639,6 +608,21 @@ header {
 #add-filter-key:hover {
     cursor: pointer;
     background-color: #ddd;
+}
+
+.close-sheet-button {
+        z-index: 30;
+        margin-left: 5px;
+        font-weight: bold;
+        background-color: #969696;
+        padding: 3px 5px;
+    border-radius: 3px;    
+    -moz-border-radius: 3px;    
+    -webkit-border-radius: 3px;    
+}
+
+.close-sheet-button:hover {
+    background-color: #b6b6b6;
 }
 
 

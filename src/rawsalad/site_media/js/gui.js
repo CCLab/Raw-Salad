@@ -30,36 +30,29 @@ var _gui = (function () {
     var that = {};
 
     that.init_gui = function () {
+        // TODO refactor this with general function like do_panels
         $('#table-tab').click( function () {
             $('#table-container').show();
-            $('#search-container').hide();
-            $('#download-container').hide();
             $('#permalink-container').hide();
 
-            $('#tabs')
+            $('#app-tabs')
                 .find('div')
-                .removeClass('active')
-                .addClass('inactive');
+                .removeClass('active');
 
             $(this)
-                .addClass('active')
-                .removeClass('inactive');
+                .addClass('active');
         });
-
+        // TODO see above
         $('#permalink-tab').click( function () {
             $('#table-container').hide();
-            $('#search-container').hide();
-            $('#download-container').hide();
             $('#permalink-container').show();
 
-            $('#tabs')
+            $('#app-tabs')
                 .find('div')
-                .removeClass('active')
-                .addClass('inactive');
+                .removeClass('active');
 
             $(this)
-                .addClass('active')
-                .removeClass('inactive');
+                .addClass('active');
         });
 
         $('#download-button').click( function () {
@@ -97,7 +90,7 @@ var _gui = (function () {
 
         $('#download-panel').hide();
         $('#top-menu')
-            .find('li')
+            .find('div')
             .click( function () {
                 do_panels( $(this) );
             });
@@ -384,20 +377,20 @@ var _gui = (function () {
             search: create_search_panel
         }
 
-        var selected = button.hasClass( 'selected' );
+        var active = button.hasClass( 'active' );
         var action = button.attr('id').split('-').pop();
         var panel = $('#'+ action +'-panel');
 
-        if( selected && $('#application').is(':hidden') ) {
+        if( active && $('#application').is(':hidden') ) {
             return;
         }
 
         $('#top-menu')
-            .find('.selected')
-            .removeClass( 'selected' );
+            .find('.active')
+            .removeClass( 'active' );
 
-        if( !selected ) {
-            button.addClass( 'selected' );
+        if( !active ) {
+            button.addClass( 'active' );
         }
 
         if( panel.is(':visible') ) {
@@ -440,8 +433,8 @@ var _gui = (function () {
 
     function hide_top_panels() {
         $('#top-menu')
-            .find('.selected')
-            .removeClass('selected');
+            .find('.active')
+            .removeClass('active');
 
         $('#top-panels > div:visible')
             .slideUp( 400 );
@@ -471,7 +464,7 @@ var _gui = (function () {
             html.push( '<div class="description">' );
             html.push( datasets[i]['description'] );
             html.push( '</div>' );
-            html.push( '<div class="more">Zobacz dane</div>' );
+            html.push( '<div class="more blue button">Zobacz dane</div>' );
             html.push( '</div>' );
 
             if( i === mid ) {
@@ -517,7 +510,7 @@ var _gui = (function () {
             html.push( '</div>' );
             // iterates in revers order because of CSS "float: right"
             for( j = issues.length-1; j >= 0; j -= 1 ) {
-                html.push( '<div class="more" ' );
+                html.push( '<div class="more blue button" ' );
                 html.push( 'data-issue="', issues[j], '">' );
                 html.push( issues[j] );
                 html.push( '</div>' );

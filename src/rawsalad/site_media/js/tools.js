@@ -307,9 +307,9 @@ var _tools = (function () {
                 }
 
                 $(this)
-                    .toggleClass('selected')
+                    .toggleClass('pushed')
                     .siblings()
-                    .removeClass('selected');
+                    .removeClass('pushed');
             });
 
         $('#sort-form')
@@ -383,9 +383,9 @@ var _tools = (function () {
                 }
 
                 $(this)
-                    .toggleClass('selected')
+                    .toggleClass('pushed')
                     .siblings()
-                    .removeClass('selected');
+                    .removeClass('pushed');
             });
 
         $('#filter-form')

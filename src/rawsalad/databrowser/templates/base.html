@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="/site_media/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/site_media/css/classes.css" />
     <link rel="stylesheet" type="text/css" href="/site_media/css/table_style.css" />
     <title>Raw Salad: surowe dane w różnych smakach</title>
   </head>
@@ -10,21 +11,17 @@
     <div id="wraper">
 
       <header>
-        <img src="/site_media/img/cc_logo.png" alt="Raw Salad logo" title="Raw Salad logo" />
         <nav id="top-menu">
-          <ul>
-            <li id="top-choose" class="selected">
-              Przeglądaj dane
-            </li>
-            <li id="top-search">
-              Wyszukaj danych
-            </li>
-            <li id="top-download">
-              Pobierz dane
-            </li>
-          </ul>
+            <div id="top-choose" class="tab button active">
+              Kolekcje danych 
+            </div>
+            <div id="top-search" class="tab button">
+              Szukaj
+            </div>
+            <div id="top-download" class="tab button">
+              Pobierz
+            </div>
         </nav>
-        <img src="/site_media/img/cc_logo.png" alt="Logo Centrum Cyfrowego" title="Logo Centrum Cyfrowego" />
       </header>
 
     {% block app %}
