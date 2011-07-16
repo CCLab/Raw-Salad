@@ -218,6 +218,9 @@ class Collection(object):
         - query - {} or None (query to db before defined in meta-data)
         """
         self.raw_usrdef_fields= parms.pop("fields", []) # before match against metadata
+        self.request_fields= {}
+        if len(self.raw_usrdef_fields) > 0:
+            self.set_fields(self.raw_usrdef_fields) # for queries
         self.raw_query= parms.pop("query", {}) # before update from metadata
         self.warning= None # non-critical errors and typos
         self.response= Response().get_response(0) # Collection class is optimistic
@@ -225,6 +228,16 @@ class Collection(object):
 
     def __del__(self):
         pass
+
+    def set_query(self, query):
+        if query is not None:
+            self.raw_query= query
+
+    def set_fields(self, field_list= None):
+        if field_list is not None:
+            self.request_fields= { k:1 for k in field_list }
+        else:
+            self.request_fields= { }
 
     def get_metadata(self, datasrc, dataset_id, view_id, issue):
         metadata= {}
@@ -276,10 +289,13 @@ class Collection(object):
 
         return metadata
 
-    def get_complete_metadata(self, ds_id, ps_id, iss, dbase):
+    def get_complete_metadata(self, ds_id, ps_id, iss, dbase, use_fields= False):
+        field_dict= { '_id' : 0 }
+        if use_fields: # return only the fields specified in self.request_fields
+            field_dict.update(self.request_fields)
         self.metadata_complete= dbase[meta_src].find_one(
             { 'dataset': ds_id, 'idef' : ps_id, 'issue': iss },
-            { '_id' : 0 }
+            field_dict
             )
         return self.metadata_complete
 
@@ -409,9 +425,8 @@ class Collection(object):
         fields_dict= {'_id':0} # _id is never returned
         fields_dict.update(meta_data['aux']) # list of fields to be returned in any case
 
-        if len(self.raw_usrdef_fields) > 0:
-            for fl in self.raw_usrdef_fields: # list of user defined fields to be returned
-                fields_dict[fl]= 1
+        if len(self.request_fields) > 0:
+            fields_dict.update(self.request_fields)
 
             field_names_complete= [] # reverse check
             for fl in meta_data['columns']:
