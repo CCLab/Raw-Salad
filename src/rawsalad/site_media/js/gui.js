@@ -204,7 +204,7 @@ var _gui = (function () {
                     _table.init_table();
                 })             
             )
-            .addClass( 'active' ) raw
+            .addClass( 'active' )
             .click( function () {
                 var id_elements = $(this).attr('id').split('-');
                 var group_nr = id_elements[1];
