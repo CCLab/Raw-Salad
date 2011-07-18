@@ -202,7 +202,7 @@ var _gui = (function () {
                     alert("Sheet dleyted");
                     _table.clean_table();
                     _table.init_table();
-                });             
+                })             
             )
             .addClass( 'active' ) raw
             .click( function () {
@@ -218,8 +218,8 @@ var _gui = (function () {
                     alert("Sheet dleyted");
                     _table.clean_table();
                     _table.init_table();
-                    });
-                );
+                    })
+                )
 
                 _store.active_group( group_nr );//
                 _store.active_sheet( sheet_nr );//
