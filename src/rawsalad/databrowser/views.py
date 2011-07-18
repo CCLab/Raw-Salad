@@ -164,8 +164,6 @@ def search_data( request ):
 
     result['stat'].update( { "search_time": "%0.6f" % tlap } )
 
-    print result
-
     return HttpResponse( json.dumps( result ))
     
 # get initial_data + subtrees to searched nodes
