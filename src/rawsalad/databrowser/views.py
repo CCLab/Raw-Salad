@@ -50,43 +50,37 @@ def get_node( data ):
 
     return HttpResponse(json_data)
 
-
-# search engine enter point
-def search_data( request ):
-    lookup = request.GET.get( 'query', '' )
-    scope = request.GET.get( 'scope', '' )
-    strict = request.GET.get( 'strict', 'false' )
-
-    # converting scope and strict to objects
-    scope_list= scope.split(',')
-    if strict == 'false':
-        strict= False
-    else:
-        strict= True
-
+def build_regexp(searchline, strictsearch):
+    """ construct regexp for search """
     # building regexp for search
-    if strict:
+    if strictsearch:
         # ver 0.0
-        # lookup= "^%(lookupstr)s\s|\s%(lookupstr)s\s|\s%(lookupstr)s$" % { "lookupstr": lookup }
-
+        # searchline= "^%(lookupstr)s\s|\s%(lookupstr)s\s|\s%(lookupstr)s$" % { "lookupstr": searchline }
         # ver 0.1
-        lookup= "^%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s$" % { "lookupstr": lookup }
-    # print lookup
-    regx= re.compile(lookup, re.IGNORECASE)
+        searchline= "^%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s$" % { "lookupstr": searchline }
+        
+    return searchline
 
+def do_search(scope_list, regx, dbconn):
+    """
+    TO-DO:
+    - search with automatic substitution of specific polish letters
+      (lowercase & uppercase): user can enter 'lodz', but the search
+      should find 'Łódż'
+    - search with flexible processing of prefixes and suffixes
+      (see str.endswith and startswith)
+    - search in 'info' keys
+    """
     ns_list= [] # list of results
     stat_dict= { "errors": [] }
     found_num= 0 # number of records found
-    tl= time()
-    # not all fields are searchable
-    exclude_fields= ['idef', 'idef_sort', 'parent', 'parent_sort', 'level']
-    db= rsdb.DBconnect('mongodb').dbconnect
-
+    exclude_fields= ['idef', 'idef_sort', 'parent', 'parent_sort', 'level'] # not all fields are searchable
+    
     for sc in scope_list: # fill the list of collections
         sc_list= sc.split('-')
         dataset, idef, issue= int(sc_list[0]), int(sc_list[1]), str(sc_list[2])
         coll= rsdb.Collection(fields=["perspective", "ns", "columns"])
-        metadata= coll.get_complete_metadata(dataset, idef, issue, db)
+        metadata= coll.get_complete_metadata(dataset, idef, issue, dbconn)
         if metadata is None:
             stat_dict['errors'].append('collection not found %s' % sc)
         else:
@@ -98,6 +92,7 @@ def search_data( request ):
                 'data': []
                 }
 
+
             coll.set_fields(None) # for search we need all fields, except for exclude_fields
             for fld in metadata['columns']:
                 if 'processable' in fld:
@@ -106,7 +101,7 @@ def search_data( request ):
                     if fld['processable'] and check_str and check_excl:
                         search_query= { fld['key']: regx }
                         coll.set_query(search_query)
-                        found= coll.get_data(db, dataset, idef, issue)
+                        found= coll.get_data(dbconn, dataset, idef, issue)
                         if len(found) > 0:
                             for found_elt in found:
                                 curr_coll_dict['data'].append({
@@ -119,10 +114,59 @@ def search_data( request ):
             if len(curr_coll_dict['data']) > 0:
                 ns_list.append(curr_coll_dict)
 
-    tlap= time()-tl
-    stat_dict.update({ "records_found": found_num, "search_time": "%10.6f" % tlap })
+    stat_dict.update( { 'records_found': found_num } )
 
-    return HttpResponse( json.dumps( { "stat": stat_dict, "result": ns_list } ))
+    return { 'stat': stat_dict, 'result': ns_list }
+
+def search_data( request ):
+    """
+    search engine enter point
+    """
+    usrqry = request.GET.get( 'query', '' )
+    scope = request.GET.get( 'scope', '' )
+    strict = request.GET.get( 'strict', 'false' )
+    # converting scope and strict to objects
+    scope_list= scope.split(',')
+    if strict == 'false':
+        strict= False
+    else:
+        strict= True
+    # cleaning user query
+    usrqry= usrqry.strip()
+    usrqry= re.sub('\s+', ' ', usrqry) # cleaning multiple spaces
+
+    lookup= build_regexp(usrqry, strict)
+    regx= re.compile(lookup, re.IGNORECASE)
+
+    db= rsdb.DBconnect('mongodb').dbconnect
+
+    # 1st PASS
+    tl= time() # starting to search
+    result= do_search(scope_list, regx, db)
+    tlap= time()-tl # 1st pass finished
+
+    # 2nd PASS
+    second_pass_list= []
+    if result['stat']['records_found'] == 0:
+        if not strict: # second pass makes sense
+            second_pass_list= usrqry.split(' ')
+    if len(second_pass_list) > 0:
+        for wrd in second_pass_list:
+            lookup= build_regexp(wrd, True) # we look for separate words using strict
+            regx= re.compile(lookup, re.IGNORECASE)
+            result_second_pass= do_search(scope_list, regx, db)
+
+            if result_second_pass['stat']['records_found'] > 0:
+                result['result'].append( result_second_pass['result'] )
+                result['stat']['records_found'] += result_second_pass['stat']['records_found']
+
+            tlap= time()-tl # 2nd pass finished
+
+    result['stat'].update( { "search_time": "%0.6f" % tlap } )
+
+    print result
+
+    return HttpResponse( json.dumps( result ))
     
 # get initial_data + subtrees to searched nodes
 def get_searched_data( request ):
