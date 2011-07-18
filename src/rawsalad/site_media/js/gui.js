@@ -161,6 +161,35 @@ var _gui = (function () {
     };
 
 
+    that.refresh_gui = function (args) {   
+        var groups = _store.get_all_groups();
+        var html_snapshots = [];
+ 
+        // 1  clear gui, 
+        $('#snapshots').empty();
+        
+        // 2 clear tabs
+        _table.clean_table();
+
+        // 3 and create gui
+        groups.forEach( function ( group, group_num ){
+            forEach( function (sheet, sheet_nr){
+                html_snapshots.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
+                html.push( 'class="snapshot" ' );
+                html.push( 'title="', sheet['name'], '">' );
+                html.push( sheet_name.length > 20 ?
+                    sheet_name.slice( 0, 17 ) + '...' :
+                    sheet_name );
+                html.push( '</div>' );            
+            })                
+        });           
+        // TODO - finish this
+        // 4 tabs from _store
+        _table.init_table();
+
+    }
+
+
     that.create_only_sheet_tab = function ( args ) {
         var html = [];
 
@@ -173,6 +202,8 @@ var _gui = (function () {
         var new_tab;
         var close_sheet;
 
+
+        //to refresh_gui 
         html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
         html.push( 'class="snapshot" ' );
         html.push( 'title="', sheet_name, '">' );
@@ -184,13 +215,6 @@ var _gui = (function () {
         new_tab = $( html.join('') );
 
         close_sheet = $( '<div class="close-sheet-button" >x</div>' );
-//        close_sheet
-//            .click( function(){
-//                _store.remove_active_sheet();
-//                alert("Sheet dleyted");
-//                _table.clean_table();
-//                _table.init_table();
-//        });
 
         $('.snapshot').removeClass('active');
         $('.close-sheet-button').remove();
@@ -200,6 +224,7 @@ var _gui = (function () {
                 .click( function(){
                     _store.remove_active_sheet();
                     alert("Sheet dleyted");
+                    
                     _table.clean_table();
                     _table.init_table();
                 })             
@@ -214,10 +239,10 @@ var _gui = (function () {
                 $('.close-sheet-button').remove();
                 $(this).addClass('active')
                     .append(close_sheet.click( function(){
-                    _store.remove_active_sheet();
-                    alert("Sheet dleyted");
-                    _table.clean_table();
-                    _table.init_table();
+                        _store.remove_active_sheet();
+                        alert("Sheet dleyted");
+                        _table.clean_table();
+                        _table.init_table();
                     })
                 )
 
@@ -226,6 +251,8 @@ var _gui = (function () {
 
                 $('#sort-form').hide().html('');
                 $('#filter-form').hide().html('');
+                
+                
                 _table.clean_table();
                 _table.init_table();
             });
