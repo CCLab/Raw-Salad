@@ -97,7 +97,7 @@ var _gui = (function () {
 
         $('#download-panel').hide();
         $('#top-menu')
-            .find('li')
+            .find('div')
             .click( function () {
                 do_panels( $(this) );
             });
