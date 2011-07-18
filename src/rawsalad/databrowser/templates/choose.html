@@ -26,7 +26,7 @@
 </div>
 
 <!--  S E A R C H   P A N E L  --> 
-<div id="search-panel" class="panel" style="background-color: #fff; padding: 5px;">
+<div id="search-panel" class="panel">
 
   <div id="search-header" class="panel-header">
     <div id="info-info" class="panel-info left"></div>
@@ -40,8 +40,8 @@
         Wpisz interesujące cię hasło
     </div>
   </div>
- <br /> 
-  <div id="search-main-panel" class="panel-main" style="clear: both; background-color: #fff">
+  
+  <div id="search-main-panel" class="panel-main">
     <form id="search-form">
         <input type="text" name="search-query" id="search-text">
         <input type="submit" value="Wyszukaj" id="search-button">
@@ -55,7 +55,7 @@
 </div>
 
 <!--  D O W N L O A D   P A N E L  -->
-<div id="download-panel" class="panel" style="background-color: #fff; padding: 5px;">
+<div id="download-panel" class="panel">
 
   <div id="download-header" class="panel-header">
     <div id="info-info" class="panel-info left"></div>
@@ -69,10 +69,10 @@
         Zaznacz arkusze lub kolekcje danych, by móc je pobrać
     </div>
   </div>
-  <br /> 
-  <div id="download-main-panel" class="panel-main" style="clear: both; background-color: #fff">
+  
+  <div id="download-main-panel" class="panel-main">
     <div id="sheets-download">
-      <p>Zaznacz kolekcje danych, ktore chcesz zapisac na dysku</p>
+      <p>Zaznacz arkusze, które chcesz zapisać na dysku</p>
       <hr />
       <table>
         <tr>
@@ -97,17 +97,40 @@
         </tr>
       </table>
       <br />
+    </div> <!-- EO: sheets-download -->
+    <br />
+    <div id="collections-download" style="clear: both;">
+      <p>Pobierz pełne kolekcje danych</p>
+      <hr />
+      <table>
+        <tr>
+          <td style="width: 150px; padding-top: 45px;">
+              <div id="download-select-all" class="grey button select-all">Zaznacz wszystkie</div><br />
+              <div id="download-unselect-all" class="grey button select-all">Odznacz wszystkie</div>
+          </td>
+          <td>
+              <form>
+                <table>
+                  <tbody>
+                    <tr> <td>Budżet centralny > Budżet tradycyjny > 2011</td> </tr>
+                    <tr> <td>Budżet centralny > Budżet zadaniowy > 2011</td> </tr>
+                    <tr> <td>Budżet centralny > Budżet zadaniowy > 2012</td> </tr>
+                    <tr> <td>Budżet centralny > Budżet instytucjonalny > 2011</td> </tr>
+                    <tr> <td>Budżet centralny > Budżet instytucjonalny > 2012</td> </tr>
+                  </tbody>
+                </table>
+              </form>
+          </td>
+        </tr>
+    </div> <!-- EO: collections-download -->
+    <br />
+
       <hr />
       <br />
       <div id="download-button" class="blue button">Pobierz</div>
       <form id="download-form" action="/download/" method="post">
           <input type="text" name="sheets" />
       </form>
-    </div> <!-- EO: sheets-download -->
-    <br />
-    <div id="collections-download">
-      Pobierz pełne kolekcje danych.
-    </div> <!-- EO: collections-download -->
   </div>
 </div>
 

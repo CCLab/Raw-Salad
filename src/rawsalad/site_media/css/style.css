@@ -75,67 +75,69 @@ header {
       color: #e8e8e8;
     }
 
-.menu-position {
-    display: inline;
-    margin-left: 36px;
-}
-
-.menu-position:hover {
-    color: #4abff7 !important;
-    cursor: pointer;
-}
-
+/*.menu-position {*/
+/*    display: inline;*/
+/*    margin-left: 36px;*/
+/*}*/
+/**/
+/*.menu-position:hover {*/
+/*    color: #4abff7 !important;*/
+/*    cursor: pointer;*/
+/*}*/
+/**/
 
 
 .panel {
-    background-color: #fff;
+overflow: auto;
+  background-color: #fff;
 }
 
-    .panel-header {
-        height: 38px;
-        padding-top: 3px;
-        padding-left: 4px;
-        border-bottom: solid #767676 2px;
+  .panel-header {
+    height: 38px;
+    padding-top: 3px;
+    padding-left: 4px;
+    border-bottom: solid #767676 2px;
 
-        -moz-border-radius: 3px 3px 0px 0px;
-        border-radius: 3px 3px 0px 0px;
-    }
+    -moz-border-radius: 3px 3px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+  }
 
-        .panel-title {
-            background-color: #767676;
-            height: 14px;
-            padding: 12px 10px;
+  .panel-title {
+    background-color: #767676;
+    height: 14px;
+    padding: 12px 10px;
 
-            color: #fff;
-            font-weight: bold;
-            font-size: 15px;
-            -moz-border-radius: 3px 3px 0px 0px;
-            border-radius: 3px 3px 0px 0px;
-        }
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    -moz-border-radius: 3px 3px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+  }
 
-        .panel-icon {
-            margin: 8px 7px;
-        }
+  .panel-icon {
+    margin: 8px 7px;
+  }
 
-        .panel-info {
-            font-weight: bold;
-            margin: 11px 5px;
-            color: #8b8b8b;
-        }
+  .panel-info {
+    font-weight: bold;
+    margin: 11px 5px;
+    color: #8b8b8b;
+  }
 
-        .panel-text {
-            font-weight: bold;
-            margin: 11px 0px;
-        }
+  .panel-text {
+    font-weight: bold;
+    margin: 11px 0px;
+  }
 
     .panel-main {
-        overflow: auto;
-        background-color: #fff;
-        padding-top: 10px;
-        padding-bottom: 20px;
+      overflow: auto;
+      background-color: #c8c8c8;
+      margin: 10px;
+      padding: 10px;
 
-        -moz-border-radius: 0px 0px 3px 3px;
-        border-radius: 0px 0px 3px 3px;
+      border-radius: 5px 5px 5px 5px;
+      -moz-border-radius: 5px 5px 5px 5px;
+      -webkit-border-radius: 5px 5px 5px 5px;
     }
     
         #back-to-datasets {
@@ -176,7 +178,7 @@ header {
         }
         
         .position .title {
-            border-bottom: #ccc 1px solid;
+            border-bottom: #eee 1px solid;
             color: #5b5b5b;
             font-size: 15px;
             font-weight: bold;
@@ -281,13 +283,13 @@ header {
         border-bottom: 1px solid #c8c8c8;
     }
 
-#download-main-panel {
-  clear: both;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 0px 0px 5px 5px;
-  -moz-border-radius: 0px 0px 5px 5px;
-}
+/*#download-main-panel {*/
+/*  clear: both; */
+/*  padding: 30px;*/
+/*  background-color: #fff;*/
+/*  border-radius: 0px 0px 5px 5px;*/
+/*  -moz-border-radius: 0px 0px 5px 5px;*/
+/*}*/
 
       #download-main-panel p {
         padding-left: 5px;
