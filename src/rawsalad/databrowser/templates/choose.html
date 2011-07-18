@@ -1,21 +1,22 @@
 <section id="top-panels">
-<div id="choose-panel">
 
+<!--  C O L L E C T I O N S   P A N E L  --> 
+<div id="choose-panel" class="panel">
 
-  <div id="choose-header">
-    <div id="info-info" class="left"></div>
-    <div id="info-title" class="left">
+  <div id="choose-header" class="panel-header">
+    <div id="info-info" class="panel-info left"></div>
+    <div id="info-title" class="panel-title left">
         Dostępne kolekcje
     </div>
-    <div id="info-icon" class="left">
+    <div id="info-icon" class="panel-icon left">
       <img src="/site_media/img/info.png" />
     </div>
-    <div id="info-text" class="left">
+    <div id="info-text" class="panel-info-text left">
         Wybierz jedną z dostępnych kolekcji danych
     </div>
   </div>
   
-  <div id="choose-main-panel">
+  <div id="choose-main-panel" class="panel-main">
     <img id="back-to-datasets" src="/site_media/img/datasets.png" class="left" />
 
     <div id="choose-datasets" class="left"></div>
@@ -24,22 +25,23 @@
     
 </div>
 
-<div id="search-panel" style="background-color: #fff; padding: 5px;">
+<!--  S E A R C H   P A N E L  --> 
+<div id="search-panel" class="panel" style="background-color: #fff; padding: 5px;">
 
-  <div id="search-header">
-    <div id="info-info" class="left"></div>
-    <div id="info-title" class="left">
+  <div id="search-header" class="panel-header">
+    <div id="info-info" class="panel-info left"></div>
+    <div id="info-title" class="panel-title left">
         Wyszukaj danych
     </div>
-    <div id="info-icon" class="left">
+    <div id="info-icon" class="panel-icon left">
       <img src="/site_media/img/info.png" />
     </div>
-    <div id="info-text" class="left">
+    <div id="info-text" class="panel-info-text left">
         Wpisz interesujące cię hasło
     </div>
   </div>
  <br /> 
-  <div id="search-main-panel" style="clear: both; background-color: #fff">
+  <div id="search-main-panel" class="panel-main" style="clear: both; background-color: #fff">
     <form id="search-form">
         <input type="text" name="search-query" id="search-text">
         <input type="submit" value="Wyszukaj" id="search-button">
@@ -52,6 +54,7 @@
     
 </div>
 
+<!--  D O W N L O A D   P A N E L  -->
 <div id="download-panel" style="background-color: #fff; padding: 5px;">
 
   <div id="download-header">
@@ -66,45 +69,48 @@
         Zaznacz arkusze lub kolekcje danych, by móc je pobrać
     </div>
   </div>
- <br /> 
+  <br /> 
   <div id="download-main-panel" style="clear: both; background-color: #fff">
-    <p>Zaznacz kolekcje danych, ktore chcesz zapisac na dysku</p>
-    <hr />
-    <table>
-      <tr>
-        <td style="width: 150px; padding-top: 45px;">
-            <div id="download-select-all" class="button select-all">Zaznacz wszystkie</div><br />
-            <div id="download-unselect-all" class="button select-all">Odznacz wszystkie</div>
-        </td>
-        <td>
-            <form>
-              <table id="download-table">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th class="under">Dane w arkuszu</th>
-                    <th></th>
-                    <th class="under">Cala kolekcja</th>
-                    <th class="under"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </form>
-        </td>
-      </tr>
-    </table>
+    <div id="sheets-download">
+      <p>Zaznacz kolekcje danych, ktore chcesz zapisac na dysku</p>
+      <hr />
+      <table>
+        <tr>
+          <td style="width: 150px; padding-top: 45px;">
+              <div id="download-select-all" class="grey button select-all">Zaznacz wszystkie</div><br />
+              <div id="download-unselect-all" class="grey button select-all">Odznacz wszystkie</div>
+          </td>
+          <td>
+              <form>
+                <table id="download-table">
+                  <thead>
+                    <tr>
+                      <th></th> <th class="under">Dane w arkuszu</th> <th></th> 
+                      <th class="under">Cala kolekcja</th> <th class="under"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </form>
+          </td>
+        </tr>
+      </table>
+      <br />
+      <hr />
+      <br />
+      <div id="download-button" class="blue button">Pobierz</div>
+      <form id="download-form" action="/download/" method="post">
+          <input type="text" name="sheets" />
+      </form>
+    </div> <!-- EO: sheets-download -->
     <br />
-    <hr />
-    <br />
-    <div id="download-button" class="button">Pobierz</div>
-    <form id="download-form" action="/download/" method="post">
-        <input type="text" name="sheets" />
-    </form>
+    <div id="collections-download">
+      Pobierz pełne kolekcje danych.
+    </div> <!-- EO: collections-download -->
   </div>
-    
 </div>
+
 <div id="open-close-choose-panel" class="button">
    zamknij panel
 </div>

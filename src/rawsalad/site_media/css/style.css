@@ -14,39 +14,66 @@ html, body {
 }
 
 header {
+  width: 900px;
   overflow: auto;
   margin: auto;
-  width: 680px;
   margin-bottom: 15px;
 }
 
-  header div {
+  #top-menu {
     float: left;
-
-    width: 205px;
-    height: 12px;
-    padding: 5px;
-    padding-top: 4px;
-    padding-bottom: 6px;
-    
-    color: #1ea3e8;
-    background-color: #e1e1e1;
-
-    text-align: center;
-
-    border-radius: 0px 0px 5px 5px;
-    -moz-border-radius: 0px 0px 5px 5px;
-    -webkit-border-radius: 0px 0px 5px 5px;
   }
 
-  header div + div {
-      margin-left: 8px;
+    #top-menu div {
+      float: left;
+
+      width: 165px;
+      height: 12px;
+      padding: 5px;
+      padding-top: 4px;
+      padding-bottom: 6px;
+      
+      color: #1ea3e8;
+      background-color: #e1e1e1;
+
+      text-align: center;
+
+      border-radius: 0px 0px 5px 5px;
+      -moz-border-radius: 0px 0px 5px 5px;
+      -webkit-border-radius: 0px 0px 5px 5px;
+    }
+
+    #top-menu div + div {
+        margin-left: 8px;
+    }
+
+    #top-menu .active {
+      height: 15px;
+      padding: 8px 5px;
+    }
+
+  #side-menu {
+    float: left;
+    margin-left: 15px;
   }
 
-  header .active {
-    height: 15px;
-    padding: 8px 5px;
-  }
+    #side-menu div {
+      float: left;
+
+      height: 12px;
+      padding: 10px;
+      padding-top: 4px;
+      padding-bottom: 6px;
+      
+      color: #fff;
+
+      font-family: Verdana,sans-serif;
+      font-size: 11px;
+    }
+
+    #side-menu div:hover {
+      color: #e8e8e8;
+    }
 
 .menu-position {
     display: inline;

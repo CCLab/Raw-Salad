@@ -312,6 +312,12 @@ var _gui = (function () {
     function create_download_panel() {
         var html = [];
 
+        if( $('#application').is(':hidden') ) {
+            $('#sheets-download').hide();
+            return;
+        }
+
+        $('#sheets-download').show();
         $('.snapshot').each( function () {
             var id = $(this).attr('id').split('-');
             var group = id[1];

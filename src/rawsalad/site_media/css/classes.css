@@ -19,7 +19,17 @@
 
 .blue:hover {
     color: #1ea3e8 !important;
+    background-color: #e1e1e1 !important;
+}
+
+.grey {
+    color: #fff !important;
     background-color: #c8c8c8 !important;
+}
+
+.grey:hover {
+    color: #1ea3e8 !important;
+    background-color: #e1e1e1 !important;
 }
 
 /*  T O G G L E   B U T T O N */
