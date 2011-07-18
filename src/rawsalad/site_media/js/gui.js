@@ -202,7 +202,7 @@ var _gui = (function () {
                     alert("Sheet dleyted");
                     _table.clean_table();
                     _table.init_table();
-                })             
+                });             
             )
             .addClass( 'active' ) raw
             .click( function () {
