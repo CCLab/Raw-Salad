@@ -124,7 +124,7 @@ overflow: auto;
     color: #8b8b8b;
   }
 
-  .panel-text {
+  .panel-info-text {
     font-weight: bold;
     margin: 11px 0px;
   }
@@ -296,6 +296,7 @@ overflow: auto;
       }
 
       #download-main-panel table {
+        clear: both;
         border-collapse: collapse;
         font-family: Arial, sans-serif;
         font-size: 11px;

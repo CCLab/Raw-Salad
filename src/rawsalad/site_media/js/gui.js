@@ -358,7 +358,12 @@ var _gui = (function () {
 
     function create_download_panel() {
         var html = [];
+        if( !_store.active_group() ) {
+            $('#sheets-download').hide();
+            return;
+        }
 
+        $('#sheets-download').show();
         $('.snapshot').each( function () {
             var id = $(this).attr('id').split('-');
             var group = id[1];
@@ -424,20 +429,20 @@ var _gui = (function () {
             search: create_search_panel
         }
 
-        var selected = button.hasClass( 'selected' );
+        var active = button.hasClass( 'active' );
         var action = button.attr('id').split('-').pop();
         var panel = $('#'+ action +'-panel');
 
-        if( selected && $('#application').is(':hidden') ) {
+        if( active && $('#application').is(':hidden') ) {
             return;
         }
 
         $('#top-menu')
-            .find('.selected')
-            .removeClass( 'selected' );
+            .find('.active')
+            .removeClass( 'active' );
 
-        if( !selected ) {
-            button.addClass( 'selected' );
+        if( !active ) {
+            button.addClass( 'active' );
         }
 
         if( panel.is(':visible') ) {
