@@ -1,0 +1,349 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <link rel="stylesheet" type="text/css" href="./classes.css" />
+</head>
+<body>
+
+  <!--  H E A D E R  -->
+  <header id="top">
+    <nav id="top-menu">
+      <ul>
+        <li id="tm-choose" class="tab button">Kolekcje danych</li>
+        <li id="tm-search" class="tab button">Wyszukaj</li>
+        <li id="tm-download" class="tab button">Pobierz</li>
+      </ul>
+    </nav>
+    <nav id="meta-menu">
+      <ul>
+        <li id="mm-more" class="text button">Dowiedz się więcej</li>
+        <li id="mm-english" class="text button">English summary</li>
+        <li id="mm-feedback" class="text button">Wyraź swoją opinię</li>
+      </ul>
+    </nav>
+  </header>
+   
+  <br class="clear" /> 
+
+  <!-- P A N E L S -->
+  <section id="panels">
+    <!-- C H O O S E   P A N E L --> 
+    <section class="panel" id="pl-choose">
+      <header>
+        <p class="panel-title">Dostępne kolekcje danych</p>
+        <img src="info.png" 
+             alt="Ikona informacji" 
+             class="panel-icon" />
+        <p class="panel-desc">W tym miejscu możesz wybrać kolekcje danych, które chciałbyś przejrzeć</p>
+      </header>
+      <!-- D A T A S E T S --> 
+      <section id="pl-ch-datsets" class="panel-main">
+        <p class="pl-ch-back left">
+        </p>
+        <ul>
+        	<li>
+        		<header>
+        			<h3>Budżet centralny</h3>
+        		</header>
+        		<section>
+        			<p>Główna część centralnych finansów publicznych</p>
+        		  <div class="right blue button">Zobacz dane</div>
+        		</section>
+        	</li>
+        	<li>
+        		<header>
+        			<h3>Budżet środków europejskich</h3>
+        		</header>
+        		<section>
+        			<p>Wkład finansowy Unii Europejskiej</p>
+        			<div>
+        				<div class="blue button">Zobacz dane</div>
+        			</div>
+        		</section>
+        	</li>
+        </ul>
+        <ul class="left">
+        	<li>
+        		<header>
+        			<h3>Fundusze celowe i agencje narodowe</h3>
+        		</header>
+        		<section>
+        			<p>Plany finansowe funduszy celowych i agencji państwowych</p>
+        			<div>
+        				<div class="blue button">Zobacz dane</div>
+        			</div>
+        		</section>
+        	</li>
+        	<li>
+        		<header>
+        			<h3>Narodowy Fundusz Zdrowia</h3>
+        		</header>
+        		<section>
+        			<p>Budżet Narodowego Funduszu Zdrowia</p>
+        			<div>
+        				<div class="blue button">Zobacz dane</div>
+        			</div>
+        		</section>
+        	</li>
+        </ul>
+      </section>
+      <!-- V I E W S -->
+      <section id="pl-ch-views" class="panel-main">
+        <p class="pl-ch-back left">
+          <img src="datasets.png" class="left" /> 
+        </p>
+        <ul>
+        	<li>
+        		<header>
+        			<h3>Budżet tradycyjny</h3>
+        		</header>
+        		<section>
+        			<p>Budżet centralny w układzie zapisanym w ustawie budżetowej</p>
+        		  <div class="right blue button">2011</div><p class="right pl-ch-more">Zobacz dane: </p>
+        		</section>
+        	</li>
+        	<li>
+        		<header>
+        			<h3>Budżet zadaniowy</h3>
+        		</header>
+        		<section>
+        			<p>Budżet centralny w układzie zapisanym w ustawie budżetowej</p>
+        		  <div class="right blue button">2012</div>
+              <div class="right blue button">2011</div>
+              <p class="right pl-ch-more">Zobacz dane: </p>
+        		</section>
+        	</li>
+        </ul>
+        <ul class="left">
+        	<li>
+        		<header>
+        			<h3>Budżet instytucjonalny</h3>
+        		</header>
+        		<section>
+        			<p>Budżet centralny w układzie zapisanym w ustawie budżetowej</p>
+        		  <div class="right blue button">2012</div>
+        		  <div class="right blue button">2011</div>
+              <p class="right pl-ch-more">Zobacz dane: </p>
+        		</section>
+        	</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- S E A R C H   P A N E L -->
+    <section class="panel" id="pl-search">
+      <header>
+        <p class="panel-title">Wyszukaj</p>
+        <img src="info.png" 
+             alt="Ikona informacji" 
+             class="panel-icon" />
+        <p class="panel-desc">Przeszukaj naszą bazę danych w poszukiwaniu interesujących informacji</p>
+      </header>
+
+      <!-- S E A R C H   F O R M -->
+      <section class="panel-main">
+        <form action="">
+          <label for="pl-sr-query">Znajdź:</label>
+          <input type="text" name="pl-sr-query" />
+          <input type="checkbox" name="pl-sr-strict" value="pl-sr-strict" />
+          <label for="pl-sr-strict">Dokładne dopasowanie</label>
+          <!-- <br /> -->
+          <!-- <label for="pl-sr-full">w kolekcjach danych</label> -->
+          <!-- <input type="radio" name="pl-sr-full" /> -->
+          <!-- <label for="pl-sr-sheet">w aktualnym arkuszu</label> -->
+          <!-- <input type="radio" name="pl-sr-sheet" /> -->
+        </form>
+      </section>
+
+      <!-- S E A R C H   B U T T O N -->
+      <div class="pl-bt-container">
+        <div id="pl-sr-button" class="blue button">Szukaj</div>
+      </div>
+    </section>
+
+    <!-- D O W N L O A D   P A N E L -->
+    <section class="panel" id="pl-download">
+      <header>
+        <p class="panel-title">Pobierz dane</p>
+        <img src="info.png" 
+             alt="Ikona informacji" 
+             class="panel-icon" />
+        <p class="panel-desc">Zaznacz interesujące cię dane, by zapisać je na dysku w plikach CSV</p>
+      </header>
+
+      <form>
+        <!-- S H E E T S -->
+        <section id="pl-dl-sheets" class="panel-main">
+          <p>Pobierz wybrane arkusze w otwartych plikach CSV</p>
+          <hr />
+          <table id="pl-dl-sh-table"><!-- generated dynamically -->
+            <tbody></tbody>
+          </table>
+        </section>
+      
+        <!-- F U L L   C O L L E C T I O N S -->
+        <section id="pl-dl-full" class="panel-main">
+          <p>Pobierz pełne kolekcje danych w otwartych plikach CSV</p>
+          <hr />
+          <table id="pl-dl-fl-table">
+            <tbody>
+            <tr>
+              <td class="pl-dn-select-buttons" rowspan="16">
+                <div id="pl-dn-fl-tb-select" class="grey button">Zaznacz wszystkie</div><br />
+                <div id="pl-dn-fl-tb-unselect" class="grey button">Odznacz wszystkie</div>
+              </td>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet centralny w ujęciu tradycyjnym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet centralny w ujęciu zadaniowym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet centralny w ujęciu zadaniowym 2012</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet centralny w ujęciu instytucjonalnym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet centralny w ujęciu instytucjonalnym 2012</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet środków europejskich w ujęciu tradycyjnym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet środków europejskich w ujęciu zadaniowym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet środków europejskich w ujęciu zadaniowym 2012</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet środków europejskich w ujęciu instytucjonalnym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Budżet środków europejskich w ujęciu instytucjonalnym 2012</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Fundusze celowe w ujęciu tradycyjnym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Fundusze celowe w ujęciu zadaniowym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Agencje państwowe w ujęciu tradycyjnym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Agencje państwowe w ujęciu zadaniowym 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Wydatki Narodowego Funduszu Zdrowia - dane zagregowane na rok 2011</td>
+            </tr>
+            <tr>
+              <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
+              <td>Wydatki Narodowego Funduszu Zdrowia - dane ośrodków regionalnych na rok 2011</td>
+            </tr>
+            </tbody>
+          </table>
+        </section>
+      </form>
+      <!-- D O W N L O A D   B U T T O N -->
+      <div class="pl-bt-container">
+        <div id="pl-dl-button" class="blue button">Pobierz</div>
+      </div>
+
+      <!-- H I D D E N   D O W N L O A D   F O R M -->
+      <!-- <form id="pl-dl-hidden-form" action="/download/" method="post">
+        <input type="text" name="csv_string" />
+      </form> -->
+    </section> <!-- E O:  D O W N L O A D   P A N E L -->
+
+
+    <!-- M O R E   I N F O   P A N E L -->
+    <section class="panel" id="pl-more">
+      <header>
+        <p class="panel-title">O projekcie</p>
+        <img src="info.png" 
+             alt="Ikona informacji" 
+             class="panel-icon" />
+        <p class="panel-desc">Przeczytaj, w jaki sposób pracowaliśmy nad tym projektem</p>
+      </header>
+
+      <!-- S E A R C H   F O R M -->
+      <section class="panel-main">
+        <p>Tu będą informacje na temat projektu i odniesienia do innych projektów <a href="http://centrumcyfrowe.pl">Centrum Cyfrowego</a>!</p>
+        <p>Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. Ile cię stracił. Dziś człowieka rodu, obyczajów! Dość, że zamczysko wzięliśmy w drugim końcu stoła naprzód dzieci mało w zamkowej sieni siadł przy stole. To nie może Białopiotrowiczowi samemu odmówił! Bo nie miał wielką, i raptem boczne drzwi poglądał jakby za dozorcę księdza, który teraz wzrostem dorodniejsza bo tak zawsze Wam tam nie miał głos miły: Witaj nam, ach! tak i stają mu i ziemię orzę gdy potem w Wilnie, wielkim mieście miał i bagnami skradał się zaczęły wpółgłośne rozmowy. Mężczyźni rozsądzali swe trzymał pod lasem zwaliska. Po cóż kłócić się zatrudniał i potrząsając głową rzekł półgłosem: Przepraszam, musieliśmy siadać niepodobna wieczerzy na świętych obrazku. Twarzy nie dostrzegł, nazbyt rychło znikła ale widzę i o nie! Więc szlachcic bez grzeczności i niech Jaśnie Wielmożny Podkomorzy i mniej był portret króla Stanisława. Ojcu Podkomorzego zdał się zdołał. Prostym ludziom wokanda zda się kiedyś demokratą. Bo nie uchybił gospodarskiej, ważnej powinności udał się rówiennicą a potem się sploty. Kolor musiał pochodzić od stołu. pierwszy Podkomorzy i że go miało być siedzeniem. Rumienił się, że się.</p>
+      </section>
+    </section>
+
+    <!-- E N G L I S H   S U M M A R Y   P A N E L -->
+    <section class="panel" id="pl-english">
+      <header>
+        <p class="panel-title">English summary</p>
+        <img src="info.png" 
+             alt="Ikona informacji" 
+             class="panel-icon" />
+        <p class="panel-desc">Read about the project</p>
+      </header>
+
+      <!-- S E A R C H   F O R M -->
+      <section class="panel-main">
+        <p>Lorem ipsum dolor sit amet erat. Integer euismod scelerisque urna tellus quis wisi. Phasellus facilisis at, egestas sit amet, pretium vitae, nunc. Vivamus risus. Vivamus nec lorem eu lectus id enim. Duis sed enim. Phasellus pulvinar sit amet, nonummy at, metus. Nullam laoreet, nulla bibendum pede bibendum vel, luctus et luctus et netus et nisl. Cras dolor tincidunt wisi at mauris sit amet mauris. Mauris molestie quis, interdum sem ut nunc eu mollis neque ut sapien id eleifend et, accumsan et, porttitor eros eros malesuada dolor. Vestibulum commodo a, posuere eget, nunc. Sed eget orci massa, nonummy commodo ac, tempus ac, porta sit amet, aliquam ac, urna. Nunc gravida. Duis quis ante. Mauris nec tristique tellus. Integer adipiscing. Nam dolor sit amet metus ac ornare lobortis laoreet diam. Aliquam at porta ligula erat volutpat. Maecenas facilisis libero. Cum sociis natoque penatibus et luctus ullamcorper libero at justo quis placerat ante. Morbi a elit. Lorem ipsum dolor sit amet magna. Vestibulum aliquam odio. Nunc id mi. Pellentesque orci luctus a, fermentum sem ac diam. Duis vel quam purus, dictum accumsan nisl.</p>
+      </section>
+    </section>
+    
+    <!-- F E E D B A C K  P A N E L -->
+    <section class="panel" id="pl-feedback">
+      <header>
+        <p class="panel-title">Wyraź opinię</p>
+        <img src="info.png" 
+             alt="Ikona informacji" 
+             class="panel-icon" />
+        <p class="panel-desc">Podziel się z nami swoimi spostrzeżeniami na temat portalu</p>
+      </header>
+
+      <!-- F E E D B A C K   F O R M -->
+      <section class="panel-main">
+        <form action="/feedback/">
+        	<label for="pl-fb-email">Podaj swój email (opcjonalnie)</label><br />
+        	<input type="text" name="pl-fb-email" /><br />
+        	<textarea name="pl-fb-message" rows="10" cols="30"></textarea><br />
+        </form>
+      </section>
+      <!-- F E E D B A C K   B U T T O N -->
+      <div class="pl-bt-container">
+        <div id="pl-fb-button" class="blue button">Wyślij opinię</div>
+      </div>
+    </section>
+  </section> <!-- E O:  P A N E L S -->
+
+
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  <script type="text/javascript">
+//    $('#pl-dl-sheets').hide();
+//    $('.panel-main').find('img').hide();
+    var bro = $.browser;
+    if( bro.mozilla && parseFloat( bro.version, 10 ) < 4.0 ) {
+      alert( 'Korzystasz ze starej wersji Mozilli - ZMIEŃ JĄ NATYCHMIAST GNIDO!!' );
+    }
+  </script>
+
+</body>
+</html>
+
