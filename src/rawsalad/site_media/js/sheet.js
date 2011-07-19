@@ -40,19 +40,20 @@ var _sheet = (function () {
         new_sheet["name"] = sheet_name + ' ' + sheet_nr;
 
         _store.add_new_sheet( new_sheet );
-        if ( !!no_table ) {
-            _gui.create_only_sheet_tab({
-                'name': new_sheet['name'],
-                'sheet_nr': sheet_nr,
-                'group_nr': group_nr,
-            });
-        } else {
-            _gui.create_sheet_tab({
-                'name': new_sheet['name'],
-                'sheet_nr': sheet_nr,
-                'group_nr': group_nr,
-            });
-        }
+        _gui.refresh_gui();
+ //       if ( !!no_table ) {
+ //           _gui.create_only_sheet_tab({
+ //               'name': new_sheet['name'],
+ //               'sheet_nr': sheet_nr,
+ //               'group_nr': group_nr,
+ //           });
+ //       } else {
+ //           _gui.create_sheet_tab({
+ //               'name': new_sheet['name'],
+ //               'sheet_nr': sheet_nr,
+ //               'group_nr': group_nr,
+ //           });
+ //       }
     };
     
     that.add_searched_group = function ( col_id, data, sheets_left ) {
@@ -91,15 +92,16 @@ var _sheet = (function () {
         
         // if it's the last sheet, create tab and show table,
         // otherwise create only tab
-        if ( sheets_left === 0 ) {
-            _gui.init_app( basic_data['name'] );
-        } else {
-            _gui.create_only_sheet_tab({
-                name: basic_data['name'],
-                group_nr: _store.active_group_index(),
-                sheet_nr: _store.active_sheet_index()
-            });
-        }
+        _gui.refresh_gui();
+//        if ( sheets_left === 0 ) {
+//            _gui.init_app( basic_data['name'] );
+//        } else {
+//            _gui.create_only_sheet_tab({
+//                name: basic_data['name'],
+//                group_nr: _store.active_group_index(),
+//                sheet_nr: _store.active_sheet_index()
+//            });
+//        }
     };
     
     that.create_searched_sheet = function ( col_id, data, sheets_left ) {
