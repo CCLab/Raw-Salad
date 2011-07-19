@@ -142,7 +142,9 @@ var _gui = (function () {
     // used once when some perspective is chosen for the very first time
     that.init_app = function ( collection_name ) {
 
-        
+        if( arguments.length !== 0 ){
+            _store.set_active_sheet_name( collection_name );        
+        }        
         that.refresh_gui();        
                 
 //        that.create_sheet_tab({
