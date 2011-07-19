@@ -142,14 +142,15 @@ var _gui = (function () {
     // used once when some perspective is chosen for the very first time
     that.init_app = function ( collection_name ) {
 
-//        that.refresh_gui();        
+        
+        that.refresh_gui();        
                 
-        that.create_sheet_tab({
-            // TODO move name from func arg to store!!
-            name: collection_name,
-            group_nr: _store.active_group_index(),
-            sheet_nr: _store.active_sheet_index()
-        });
+//        that.create_sheet_tab({
+//            // TODO move name from func arg to store!!
+//            name: collection_name,
+//            group_nr: _store.active_group_index(),
+//            sheet_nr: _store.active_sheet_index()
+//        });
 
         $('#application').show();
         that.make_zebra();
