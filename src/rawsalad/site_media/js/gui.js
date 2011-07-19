@@ -141,12 +141,15 @@ var _gui = (function () {
 
     // used once when some perspective is chosen for the very first time
     that.init_app = function ( collection_name ) {
-        that.create_sheet_tab({
+
+        that.refresh_gui();        
+                
+//        that.create_sheet_tab({
             // TODO move name from func arg to store!!
-            name: collection_name,
-            group_nr: _store.active_group_index(),
-            sheet_nr: _store.active_sheet_index()
-        });
+//            name: collection_name,
+//            group_nr: _store.active_group_index(),
+//            sheet_nr: _store.active_sheet_index()
+//        });
 
         $('#application').show();
         that.make_zebra();
@@ -161,33 +164,64 @@ var _gui = (function () {
     };
 
 
-    that.refresh_gui = function (args) {   
+    that.refresh_gui = function () {   
         var groups = _store.get_all_groups();
-        var html_snapshots = [];
- 
+        var all_snapshots = [];
+        var close_sheet;
+        var active_group = _store.active_group_index();
+        var active_sheet = _store.active_sheet_index();
         // 1  clear gui, 
-        $('#snapshots').empty();
-        
-        // 2 clear tabs
-        _table.clean_table();
-
-        // 3 and create gui
+        $('.snapshots').remove();        
+        // 2 create new gui
         groups.forEach( function ( group, group_num ){
-            forEach( function (sheet, sheet_nr){
-                html_snapshots.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
+            forEach( function (sheet, sheet_num){
+                var  sheet_name = sheet['name'];
+                var html = [];
+                var new_snap;
+                html.push( '<div ' );
+                html.push( 'id="snap-' + group_num + '-' + sheet_num + '" ' );
                 html.push( 'class="snapshot" ' );
-                html.push( 'title="', sheet['name'], '">' );
+                html.push( 'title="', sheet_name, '">' );
                 html.push( sheet_name.length > 20 ?
                     sheet_name.slice( 0, 17 ) + '...' :
                     sheet_name );
-                html.push( '</div>' );            
+                html.push( '</div>' );
+
+                new_snap = $( html.join('') );
+                new_snap
+                    .click( function () {
+                        _store.active_group( group_num );//
+                        _store.active_sheet( sheet_num );//
+                        refresh_gui();                    
+                    });
+                    
+                if ( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {      
+                    close_sheet = $( '<div class="close-sheet-button" >x</div>' );
+                    new_snap
+                        .append(close_sheet
+                            .click( function(){
+                                _store.remove_active_sheet();
+                                alert('Sheet deleyted');
+                                that.refresh_gui();
+                            })
+                       )
+                       .addClass( 'active' );
+                }
+                all_snapshots.append(new_snap);  
             })                
         });           
         // TODO - finish this
-        // 4 tabs from _store
-        _table.init_table();
+        // 3 clear and get new tabs from _store
+        $('#snapshots').append( all_snapshots );
+        if( $('.snapshot').length == 10 ) {
+            $('#save-snapshot' ).hide();
+        }
 
-    }
+         $('#sort-form').hide().html('');
+         $('#filter-form').hide().html('');
+        _table.clean_table();     
+        _table.init_table();
+    };
 
 
     that.create_only_sheet_tab = function ( args ) {
@@ -537,6 +571,7 @@ var _gui = (function () {
                     .hide();
             });
     };
+    
 
     function create_perspectives_panel( dataset_id ) {
         var i, j;
@@ -611,5 +646,5 @@ var _gui = (function () {
                 }
             });
     };
-
+   
 })();
