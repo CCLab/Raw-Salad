@@ -200,15 +200,16 @@ var _gui = (function () {
                     
                 if ( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {      
                     close_sheet = $( '<div class="close-sheet-button" >x</div>' );
-                    new_snap
-                        .append(close_sheet
-                            .click( function(){
-                                _store.remove_active_sheet();
-                                alert('Sheet deleyted');
-                                that.refresh_gui();
-                            })
-                       )
-                       .addClass( 'active' );
+                    if ( !(groups.length == 1 && group.get_sheets( group_num ).length == 1) ){
+                        new_snap
+                            .append(close_sheet
+                                .click( function(){
+                                    _store.remove_active_sheet();
+                                    that.refresh_gui();
+                                })
+                           );
+                   }
+                    new_snap.addClass( 'active' );
                 }
 //                all_snapshots.append();  
                 $('#snapshots').append( new_snap );
