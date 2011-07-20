@@ -323,7 +323,7 @@ var _store = (function () {
                 arkusz_name = true;
                 sheet_name = sheet['name'].split(' ');
                 if ( sheet_name[1] > next_num ){
-                    next_num = sheet_name[1] + 1;
+                    next_num++ = sheet_name[1];
                    }; 
             }
         });
