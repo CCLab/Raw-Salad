@@ -283,8 +283,8 @@ var _store = (function () {
         return groups[group]['sheets'][sheet];
     };
 
-    that.get_sheets = function ( group ) {
-        var sheets = groups[group]['sheets'] 
+    that.get_sheets = function ( group_num ) {
+        var sheets = groups[group_num]['sheets'] 
         return sheets;
     };
     
