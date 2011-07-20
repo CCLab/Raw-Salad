@@ -138,31 +138,50 @@ def search_data( request ):
     lookup= build_regexp(usrqry, strict)
     regx= re.compile(lookup, re.IGNORECASE)
 
+    result= { }
+    total_rec= 0
+
     db= rsdb.DBconnect('mongodb').dbconnect
 
     # 1st PASS
-    tl= time() # starting to search
-    result= do_search(scope_list, regx, db)
-    tlap= time()-tl # 1st pass finished
+    tl1= time() # starting to search
+    result_1= do_search(scope_list, regx, db)
+    total_rec += result_1['stat']['records_found']
+    tlap1= time()-tl1 # 1st pass finished
+    result_1['stat'].update( { "search_time": "%0.6f" % tlap1 } )
+    result['strict']= result_1
 
     # 2nd PASS
     second_pass_list= []
-    if result['stat']['records_found'] == 0:
-        if not strict: # second pass makes sense
-            second_pass_list= usrqry.split(' ')
-    if len(second_pass_list) > 0:
-        for wrd in second_pass_list:
-            lookup= build_regexp(wrd, True) # we look for separate words using strict
-            regx= re.compile(lookup, re.IGNORECASE)
-            result_second_pass= do_search(scope_list, regx, db)
+    if not strict: # second pass makes sense
+        second_pass_list= usrqry.split(' ')
 
-            if result_second_pass['stat']['records_found'] > 0:
-                result['result'].append( result_second_pass['result'] )
-                result['stat']['records_found'] += result_second_pass['stat']['records_found']
+        result_2= { 'stat': { 'records_found': 0 }, 'result': [] } # blank dict for 2nd pass
+        if len(second_pass_list) > 0:
+            tl2= time() # starting to search
 
-            tlap= time()-tl # 2nd pass finished
+            for wrd in second_pass_list:
+                lookup= build_regexp(wrd, True) # we look for separate words using strict
+                regx= re.compile(lookup, re.IGNORECASE)
+                result_2_curr= do_search(scope_list, regx, db)
 
-    result['stat'].update( { "search_time": "%0.6f" % tlap } )
+                if result_2_curr['stat']['records_found'] > 0:
+                    result_2['result'].append( result_2_curr['result'] )
+                    result_2['stat']['records_found'] += result_2_curr['stat']['records_found']
+
+                total_rec += result_2_curr['stat']['records_found']
+                tlap2= time()-tl2 # 2nd pass finished
+                result_2['stat'].update( { "search_time": "%0.6f" % tlap2 } )
+
+            result['loose']= result_2
+
+    tlap= time()-tl1
+    result.update( {
+        "search_time_total": "%0.6f" % tlap,
+        'records_found_total': total_rec
+        } )
+    for k, v in result.iteritems():
+        print "'%s' : '%s'" % (k, v)
 
     return HttpResponse( json.dumps( result ))
     
