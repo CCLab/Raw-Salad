@@ -12,7 +12,7 @@
   <header id="top">
     <nav id="top-menu">
       <ul>
-        <li id="tm-choose" class="tab button">Kolekcje danych</li>
+        <li id="tm-choose" class="tab button active">Kolekcje danych</li>
         <li id="tm-search" class="tab button">Wyszukaj</li>
         <li id="tm-download" class="tab button">Pobierz</li>
       </ul>
@@ -42,6 +42,7 @@
       <!-- D A T A S E T S --> 
       <section id="pl-ch-datsets" class="panel-main">
         <p class="pl-ch-back left">
+          <!-- empty on purpose: used as a spacer! -->
         </p>
         <ul>
         	<li>
@@ -180,7 +181,6 @@
           <p>Pobierz wybrane arkusze w otwartych plikach CSV</p>
           <hr />
           <table id="pl-dl-sh-table"><!-- generated dynamically -->
-            <tbody></tbody>
           </table>
         </section>
       
@@ -192,7 +192,8 @@
             <tbody>
             <tr>
               <td class="pl-dn-select-buttons" rowspan="16">
-                <div id="pl-dn-fl-tb-select" class="grey button">Zaznacz wszystkie</div><br />
+                <div id="pl-dn-fl-tb-select" class="grey button">Zaznacz wszystkie</div>
+                <br class="clear"/>
                 <div id="pl-dn-fl-tb-unselect" class="grey button">Odznacz wszystkie</div>
               </td>
               <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
@@ -330,8 +331,69 @@
         <div id="pl-fb-button" class="blue button">Wyślij opinię</div>
       </div>
     </section>
+    
+    <div id="pl-close-bar" class="button">
+      Zamknij panel
+    </div>
   </section> <!-- E O:  P A N E L S -->
 
+  <!-- A P P L I C A T I O N -->
+  <section id="application">
+    <header>
+      <nav id="app-tabs">
+        <ul>
+          <li id="app-tbs-table" class="tab button active">tabela</li>
+          <li id="app-tbs-share" class="tab button">podziel się</li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="panel-main">
+      <!-- T A B L E -->
+      <section id="app-table" class="app-container">
+
+        <!-- T A B L E   T O O L S -->
+        <section id="app-tb-tools">
+          <section>
+            <h3 id="app-tb-tl-title" class="left">Budżet centralny w ujęciu zadaniowym 2011</h3>
+            <div id="app-tb-tl-bt-container" class="right">
+              <div id="app-tb-tl-sort-button" class="button left">Sortuj</div>
+              <div id="app-tb-tl-filter-button" class="button left">Filtruj</div>
+            </div>
+          </section>
+          <section>
+            <div id="app-tb-tl-columns-button" class="button right">Dodaj/Usuń kolumny</div>
+            <br class="clear"/>
+            <div id="app-tb-tl-columns-list" class="right">
+              <form action="">    
+                <div id="app-tb-tl-lt-select" class="grey button left">Zaznacz wszystkie</div>
+                <div id="app-tb-tl-lt-unselect" class="grey button left">Odznacz wszystkie</div>
+                <div id="app-tb-tl-lt-submit" class="blue button left">Dodaj/Usuń</div>
+                <br class="clear" />
+                Lista kolumn goes here
+              </form>
+          </section>
+        </section>
+
+        <!-- D A T A   T A B L E  --> 
+        <table id="app-tb-datatable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+        
+        <!-- F I L T E R E D   T A B L E -->
+        <table id="app-tb-filteredtable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+
+      </section> <!-- E O:  T A B L E -->
+
+      <!-- S H A R E -->
+      <section id="app-share" class="app-container">
+      </section> <!-- E O:  S H A R E -->
+    </section>
+  </section> <!-- E O:  A P P L I C A T I O N -->
 
 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
