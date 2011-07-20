@@ -177,7 +177,8 @@ var _gui = (function () {
         $('.snapshot').remove();        
         // 2 create new gui
         groups.forEach( function ( group, group_num ){
-            _store.get_sheets( group_num ).forEach( function (sheet, sheet_num){
+            var sheets = _store.get_sheets( group_num );
+            sheets.forEach( function (sheet, sheet_num){
                 var  sheet_name = sheet['name'];
                 var html = [];
                 var new_snap;
@@ -200,7 +201,7 @@ var _gui = (function () {
                     
                 if ( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {      
                     close_sheet = $( '<div class="close-sheet-button" >x</div>' );
-                    if ( !(groups.length == 1 && group.get_sheets( group_num ).length == 1) ){
+                    if ( !(groups.length == 1 && sheets.length == 1) ){
                         new_snap
                             .append(close_sheet
                                 .click( function(){
