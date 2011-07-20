@@ -201,7 +201,7 @@ var _gui = (function () {
                     
                 if ( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {      
                     close_sheet = $( '<div class="close-sheet-button" >x</div>' );
-                    if ( !(groups.length == 1 && sheets.length == 1) ){
+//                    if ( !(groups.length == 1 && sheets.length == 1) ){
                         new_snap
                             .append(close_sheet
                                 .click( function(){
@@ -209,7 +209,7 @@ var _gui = (function () {
                                     that.refresh_gui();
                                 })
                            );
-                   }
+  //                 }
                     new_snap.addClass( 'active' );
                 }
 //                all_snapshots.append();  
