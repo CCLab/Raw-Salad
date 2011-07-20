@@ -284,7 +284,8 @@ var _store = (function () {
     };
 
     that.get_sheets = function ( group ) {
-        return groups[group]['sheets'];
+        var sheets = groups[group]['sheets'] 
+        return sheets;
     };
     
     that.remove_active_group = function() {
