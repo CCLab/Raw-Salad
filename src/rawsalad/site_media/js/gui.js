@@ -195,7 +195,7 @@ var _gui = (function () {
                     .click( function () {
                         _store.active_group( group_num );//
                         _store.active_sheet( sheet_num );//
-                        refresh_gui();                    
+                        that.refresh_gui();                    
                     });
                     
                 if ( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {      
