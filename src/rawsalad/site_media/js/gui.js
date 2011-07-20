@@ -169,7 +169,7 @@ var _gui = (function () {
 
     that.refresh_gui = function () {   
         var groups = _store.get_all_groups();
-        var all_snapshots = [];
+//        var all_snapshots = [];
         var close_sheet;
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
@@ -210,12 +210,12 @@ var _gui = (function () {
                        )
                        .addClass( 'active' );
                 }
-                all_snapshots.append(new_snap);  
+//                all_snapshots.append();  
+                $('#snapshots').append( new_snap );
             })                
         });           
         // TODO - finish this
         // 3 clear and get new tabs from _store
-        $('#snapshots').append( all_snapshots );
         if( $('.snapshot').length == 10 ) {
             $('#save-snapshot' ).hide();
         }
