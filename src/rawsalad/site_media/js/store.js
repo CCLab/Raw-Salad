@@ -282,6 +282,10 @@ var _store = (function () {
     that.get_sheet = function ( group, sheet ) {
         return groups[group]['sheets'][sheet];
     };
+
+    that.get_sheets = function ( group ) {
+        return groups[group]['sheets'];
+    };
     
     that.remove_active_group = function() {
         if (groups.length === 1){

@@ -177,7 +177,7 @@ var _gui = (function () {
         $('.snapshots').remove();        
         // 2 create new gui
         groups.forEach( function ( group, group_num ){
-            group.forEach( function (sheet, sheet_num){
+            _store.get_sheets().forEach( function (sheet, sheet_num){
                 var  sheet_name = sheet['name'];
                 var html = [];
                 var new_snap;
