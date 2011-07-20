@@ -326,7 +326,7 @@ var _store = (function () {
                     next_num = sheet_name[1] + 1;
                    }; 
             }
-        }
+        });
          return 'Arkusz ' + next_num; 
         
     };
