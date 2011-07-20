@@ -29,19 +29,18 @@ var _sheet = (function () {
     //  P U B L I C   I N T E R F A C E
     var that = {};
 
-    that.create_new_sheet = function ( sheet_data ) {
-//        var group_nr = _store.active_group_index();
-//        var sheet_nr = _store.next_sheet_number();
+    that.create_new_sheet = function ( sheet_data, sheet_name, no_table ) {
+        var group_nr = _store.active_group_index();
+        var sheet_nr = _store.next_sheet_number();
         var new_sheet = {};
 
         // TODO check if it's needed, because sheet_data may be not reference, but
         // deep a copied object
         $.extend( true, new_sheet, sheet_data );
-        new_sheet["name"] = _store.next_sheet_name();           ;
+        new_sheet["name"] = sheet_name + ' ' + sheet_nr;
 
         _store.add_new_sheet( new_sheet );
         _gui.refresh_gui();
-        //TODO to remove:
  //       if ( !!no_table ) {
  //           _gui.create_only_sheet_tab({
  //               'name': new_sheet['name'],
@@ -90,12 +89,10 @@ var _sheet = (function () {
             _store.add_data( additional_rows );
             _tools.open_subtrees( _store.active_rows(), additional_rows );
         }
-
-        _gui.refresh_gui();        
-
-        // TODO remove:
+        
         // if it's the last sheet, create tab and show table,
-        // otherwise create only tab     
+        // otherwise create only tab
+        _gui.refresh_gui();
 //        if ( sheets_left === 0 ) {
 //            _gui.init_app( basic_data['name'] );
 //        } else {
@@ -137,16 +134,13 @@ var _sheet = (function () {
             _tools.open_subtrees( new_sheet['rows'], additional_rows );
         }
 
-        that.create_new_sheet( new_sheet );
-
-        // TODO remove:
         // create new sheet containing search data
         // and if it is the last sheet to create, show table
-//        if ( sheets_left === 0 ) {
-//            that.create_new_sheet( new_sheet, "Arkusz" );
-//        } else {
-//            that.create_new_sheet( new_sheet, "Arkusz", true );
-//        }
+        if ( sheets_left === 0 ) {
+            that.create_new_sheet( new_sheet, "Arkusz" );
+        } else {
+            that.create_new_sheet( new_sheet, "Arkusz", true );
+        }
         
     };
 

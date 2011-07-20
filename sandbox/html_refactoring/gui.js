@@ -30,109 +30,103 @@ var _gui = (function () {
     var that = {};
 
     that.init_gui = function () {
-        $('#table-tab').click( function () {
-            $('#table-container').show();
-            $('#search-container').hide();
-            $('#download-container').hide();
-            $('#permalink-container').hide();
 
-            $('#tabs')
-                .find('div')
-                .removeClass('active')
-                .addClass('inactive');
-
-            $(this)
-                .addClass('active')
-                .removeClass('inactive');
-        });
-
-        $('#permalink-tab').click( function () {
-            $('#table-container').hide();
-            $('#search-container').hide();
-            $('#download-container').hide();
-            $('#permalink-container').show();
-
-            $('#tabs')
-                .find('div')
-                .removeClass('active')
-                .addClass('inactive');
-
-            $(this)
-                .addClass('active')
-                .removeClass('inactive');
-        });
-
-        $('#download-button').click( function () {
-            var ids = {};
-            var table = $('#download-table');
-            var checkboxes = table.find('input:checkbox:checked');
-
-            checkboxes.each( function () {
-                var box = $(this);
-                var box_id = box.attr('id');
-                var group = box_id.split('-')[0];
-                var sheet = box_id.split('-')[1];
-                var scope = table
-                                .find('input:radio[name=scope-'+box_id+']:checked')
-                                .val();
-
-                if( !ids[group] ) {
-                    ids[group] = [];
-                }
-
-                ids[group].push({
-                    id: sheet,
-                    scope: scope
-                });
-            });
-
-            _download.selected( ids );
-        });
-
-        _tools.prepare_tools();
-
-        // arm open/close button and hide it!
-        $('#open-close-choose-panel')
-            .click( hide_top_panels );
-
-        $('#download-panel').hide();
+        // arm top menu
         $('#top-menu')
-            .find('div')
+            .find('li')
             .click( function () {
                 do_panels( $(this) );
             });
 
+        // arm close bar
+        $('#pl-close-bar')
+            .click( hide_top_panels );
+
+        // arm application tabs (table/share)
+        $('#app-tabs')
+            .find('li')
+            .click( function () {
+                // TODO don't do that if tab already active
+                var action = $(this).attr('id').split('-').pop();
+                var tabs = $('#app-tabs').find('li');
+
+                tabs.removeClass('active');
+                $(this).addClass('active');
+
+                $('.app-container:visible').hide();
+                $('#app-' + action).show();
+            });
 
         // arm back-to-datasets button
-        $('#back-to-datasets')
+        $('.pl-ch-back > img')
             .hover(
                 function () {
                     $(this)
                         .attr( 'src', '/site_media/img/datasets_over.png' )
-                        .css('cursor', 'pointer');
+                        .css( 'cursor', 'pointer' );
                 },
                 function () {
                     $(this).attr( 'src', '/site_media/img/datasets.png' );
                 }
             )
             .click( function () {
-                $('#info-info')
-                    .html('');
-                $('#info-title')
-                    .html('Dostępne kolekcje');
-                $('#info-text')
+                var panel = $('#pl-choose');
+
+                panel
+                    .find('.panel-title')
+                    .html('Dostępne kolekcje')
+                panel
+                    .find('.panel-desc')
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
 
-                $(this)
-                    .hide();
-                $('#choose-perspectives')
-                    .hide();
-                $('#choose-datasets')
-                    .show();
+                $('#pl-ch-views')
+                    .hide()
+                    .empty();
 
-                // clear the perspectives list
-                $('#choose-perspectives')
-                    .html('');
+                $('#pl-ch-datasets')
+                    .show();
+            });
+
+// go back to _tools!!!
+throw( new Error() );
+        _tools.prepare_tools();
+
+        $('#pl-dl-button')
+            .click( function () {
+                var ids = {};
+                var panel = $('#pl-download');
+                var checkboxes = panel.find('input:checkbox:checked');
+
+                checkboxes.each( function () {
+                    var val = $(this).val();
+                    var group;
+                    var sheet;
+
+                    // it's a full collection
+                    if( val.indexOf( 'csv' ) !== -1 ) {
+                        try {
+                            ids['full'].push( val );
+                        }
+                        catch {
+                            ids['full'] = [ val ];
+
+                        }
+                    }
+                    else {
+                        group = val.split('-')[0];
+                        sheet = val.split('-')[1];
+                        try {
+                            ids[ group ].push( sheet );
+                        }
+                        catch {
+                            ids[ group ] = [ sheet ];
+                        }
+                    }
+                });
+
+// go back to _download!!!
+throw( new Error() );
+                _download.selected( ids );
             });
 
         init_choose_panel();
@@ -143,10 +137,10 @@ var _gui = (function () {
     that.init_app = function ( collection_name ) {
 
         if( arguments.length !== 0 ){
-            _store.set_active_sheet_name( collection_name );        
-        }        
-        that.refresh_gui();        
-                
+            _store.set_active_sheet_name( collection_name );
+        }
+        that.refresh_gui();
+
 //        that.create_sheet_tab({
 //            // TODO move name from func arg to store!!
 //            name: collection_name,
@@ -159,26 +153,25 @@ var _gui = (function () {
         hide_top_panels();
     }
 
-// TODO remove this:
-//    that.create_sheet_tab = function ( args ) {
-//        that.create_only_sheet_tab( args );
-//        _table.clean_table();
-//        _table.init_table();
-//    };
+
+    that.create_sheet_tab = function ( args ) {
+        that.create_only_sheet_tab( args );
+        _table.clean_table();
+        _table.init_table();
+    };
 
 
-    that.refresh_gui = function () {   
+    that.refresh_gui = function () {
         var groups = _store.get_all_groups();
-//        var all_snapshots = [];
+        var all_snapshots = [];
         var close_sheet;
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
-        // 1  clear gui, 
-        $('.snapshot').remove();        
+        // 1  clear gui,
+        $('.snapshots').remove();
         // 2 create new gui
         groups.forEach( function ( group, group_num ){
-            var sheets = _store.get_sheets( group_num );
-            sheets.forEach( function (sheet, sheet_num){
+            group.forEach( function (sheet, sheet_num){
                 var  sheet_name = sheet['name'];
                 var html = [];
                 var new_snap;
@@ -196,132 +189,129 @@ var _gui = (function () {
                     .click( function () {
                         _store.active_group( group_num );//
                         _store.active_sheet( sheet_num );//
-                        that.refresh_gui();                    
+                        refresh_gui();
                     });
-                    
-                if ( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {      
+
+                if ( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
                     close_sheet = $( '<div class="close-sheet-button" >x</div>' );
-                    if ( !(groups.length == 1 && sheets.length == 1) ){
-                        new_snap
-                            .append(close_sheet
-                                .click( function(){
-                                    _store.remove_active_sheet();
-                                    that.refresh_gui();
-                                })
-                           )
-                           .addClass( 'active' );
-                    }else{
-                        new_snap.addClass( 'active' );
-                    }
+                    new_snap
+                        .append(close_sheet
+                            .click( function(){
+                                _store.remove_active_sheet();
+                                alert('Sheet deleyted');
+                                that.refresh_gui();
+                            })
+                       )
+                       .addClass( 'active' );
                 }
-//                all_snapshots.append();  
-                $('#snapshots').append( new_snap );
-            })                
-        });           
+                all_snapshots.append(new_snap);
+            })
+        });
         // TODO - finish this
         // 3 clear and get new tabs from _store
+        $('#snapshots').append( all_snapshots );
         if( $('.snapshot').length == 10 ) {
             $('#save-snapshot' ).hide();
         }
 
          $('#sort-form').hide().html('');
          $('#filter-form').hide().html('');
-        _table.clean_table();     
+        _table.clean_table();
         _table.init_table();
     };
 
-// TODO remove this:
-//    that.create_only_sheet_tab = function ( args ) {
-//        var html = [];
 
-//        var group_nr = args.group_nr || _store.active_group_index();
-//        var sheet_nr = args.sheet_nr || _store.active_sheet_index();
-//        var sheet_name = args.name || "Arkusz " + group_nr + '-' + sheet_nr;
+    that.create_only_sheet_tab = function ( args ) {
+        var html = [];
 
-//        var group_changed = _store.active_group_index() !== group_nr;
-//        var sheet_changed = _store.active_sheet_index() !== sheet_nr;
-//        var new_tab;
-//        var close_sheet;
+        var group_nr = args.group_nr || _store.active_group_index();
+        var sheet_nr = args.sheet_nr || _store.active_sheet_index();
+        var sheet_name = args.name || "Arkusz " + group_nr + '-' + sheet_nr;
+
+        var group_changed = _store.active_group_index() !== group_nr;
+        var sheet_changed = _store.active_sheet_index() !== sheet_nr;
+        var new_tab;
+        var close_sheet;
 
 
-//        to refresh_gui 
-//        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
-//        html.push( 'class="snapshot" ' );
-//        html.push( 'title="', sheet_name, '">' );
-//        html.push( sheet_name.length > 20 ?
-//                   sheet_name.slice( 0, 17 ) + '...' :
-//                   sheet_name );
-//        html.push( '</div>' );
+        //to refresh_gui
+        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
+        html.push( 'class="snapshot" ' );
+        html.push( 'title="', sheet_name, '">' );
+        html.push( sheet_name.length > 20 ?
+                   sheet_name.slice( 0, 17 ) + '...' :
+                   sheet_name );
+        html.push( '</div>' );
 
-//        new_tab = $( html.join('') );
+        new_tab = $( html.join('') );
 
-//        close_sheet = $( '<div class="close-sheet-button" >x</div>' );
+        close_sheet = $( '<div class="close-sheet-button" >x</div>' );
 
-//        $('.snapshot').removeClass('active');
-//        $('.close-sheet-button').remove();
-//        
-//        new_tab
-//            .append(close_sheet
-//                .click( function(){
-//                    _store.remove_active_sheet();
-//                    alert("Sheet dleyted");
-//                    
-//                    _table.clean_table();
-//                    _table.init_table();
-//                })             
-//            )
-//            .addClass( 'active' )
-//            .click( function () {
-//                var id_elements = $(this).attr('id').split('-');
-//                var group_nr = id_elements[1];
-//                var sheet_nr = id_elements[2];
+        $('.snapshot').removeClass('active');
+        $('.close-sheet-button').remove();
 
-//                $('.snapshot').removeClass('active');
-//                $('.close-sheet-button').remove();
-//                $(this).addClass('active')
-//                    .append(close_sheet.click( function(){
-//                        _store.remove_active_sheet();
-//                        alert("Sheet dleyted");
-//                        _table.clean_table();
-//                        _table.init_table();
-//                    })
-//                )
+        new_tab
+            .append(close_sheet
+                .click( function(){
+                    _store.remove_active_sheet();
+                    alert("Sheet dleyted");
 
-//                _store.active_group( group_nr );
-//                _store.active_sheet( sheet_nr );
+                    _table.clean_table();
+                    _table.init_table();
+                })
+            )
+            .addClass( 'active' )
+            .click( function () {
+                var id_elements = $(this).attr('id').split('-');
+                var group_nr = id_elements[1];
+                var sheet_nr = id_elements[2];
 
-//                $('#sort-form').hide().html('');
-//                $('#filter-form').hide().html('');
-//                
-//                
-//                _table.clean_table();
-//                _table.init_table();
-//            });
+                $('.snapshot').removeClass('active');
+                $('.close-sheet-button').remove();
+                $(this).addClass('active')
+                    .append(close_sheet.click( function(){
+                        _store.remove_active_sheet();
+                        alert("Sheet dleyted");
+                        _table.clean_table();
+                        _table.init_table();
+                    })
+                )
+
+                _store.active_group( group_nr );//
+                _store.active_sheet( sheet_nr );//
+
+                $('#sort-form').hide().html('');
+                $('#filter-form').hide().html('');
+
+
+                _table.clean_table();
+                _table.init_table();
+            });
 
  //       $('.close-sheet-button').click( function(){
  //           _store.remove_active_sheet();
  //           allert("Sheet dleyted");
-            // add reload        
+            // add reload
  //       });
 
 
-//        if( sheet_nr === 0 ) {
-//            $('#snapshots').append( new_tab );
-//        }
-//        else {
-//            new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
-//        }
+        if( sheet_nr === 0 ) {
+            $('#snapshots').append( new_tab );
+        }
+        else {
+            new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
+        }
 
-//        if( $('.snapshot').length == 10 ) {
-//            $('#save-snapshot' ).hide();
-//        }
+        if( $('.snapshot').length == 10 ) {
+            $('#save-snapshot' ).hide();
+        }
 
-//        _store.active_sheet( sheet_nr );
-//        _store.active_group( group_nr );
+        _store.active_sheet( sheet_nr );
+        _store.active_group( group_nr );
 
-//        $('#sort-form').hide().html('');
-//        $('#filter-form').hide().html('');
-//    };
+        $('#sort-form').hide().html('');
+        $('#filter-form').hide().html('');
+    };
 
 
     that.make_zebra = function () {
@@ -395,84 +385,20 @@ var _gui = (function () {
 
 // P R I V A T E   I N T E R F A C E
 
-
-
-    function create_download_panel() {
-        var html = [];
-        if( !_store.active_group() ) {
-            $('#sheets-download').hide();
-            return;
-        }
-
-        $('#sheets-download').show();
-        $('.snapshot').each( function () {
-            var id = $(this).attr('id').split('-');
-            var group = id[1];
-            var sheet = id[2];
-            var name = $(this).attr('title');
-
-            html.push( '<tr>' );
-            html.push( '<td class="check">' );
-            html.push( '<input type="checkbox" ');
-            html.push( 'id="', ( group + '-' + sheet ));
-            html.push( '" /></td>' );
-            html.push( '<td class="radio">' );
-            html.push( '<input type="radio" name="scope-', group, '-', sheet );
-            html.push( '" value="sheet" checked />' )
-            html.push( '</td>' );
-            html.push( '<td class="space"></td>' );
-            html.push( '<td class="radio">' );
-            if( sheet === '0' ) {
-                html.push( '<input type="radio" name="scope-', group, '-', sheet );
-                html.push( '" value="full" />' )
-                html.push( '</td>' );
-                html.push( '<td class="name group">' );
-                html.push( name );
-            }
-            else {
-                html.push( '</td>' );
-                html.push( '<td class="name indent">' );
-                html.push( ' > ' + name );
-            }
-            html.push( '</td>' );
-            html.push( '</tr>' );
-        });
-        $('#download-table > tbody').empty().append( html.join('') );
-
-        $('#download-table .radio > input').hide();
-        $('#download-table .check > input' ).change( function () {
-            if( $(this).attr('id').split('-')[1] === '0' ) {
-                if( $(this).attr('checked') ) {
-                    $(this).parent().parent().find('.radio > input').show();
-                }
-                else {
-                    $(this).parent().parent().find('.radio > input').hide();
-                }
-            }
-        });
-
-        $('#download-select-all').click( function () {
-            $('#download-table').find(':checkbox').not(':checked' ).trigger( $.Event('click') );
-        });
-
-        $('#download-unselect-all').click( function () {
-            $('#download-table').find(':checkbox:checked' ).trigger( $.Event('click') );
-        });
-    }
-
-    function create_search_panel () {
-    }
-
     function do_panels( button ) {
+        // TODO refactor this - it's stupid!
         var creation_funcs = {
-            choose: function () {},
-            download: create_download_panel,
-            search: create_search_panel
+            choose: no_action,
+            download: update_download_panel,
+            search: no_action,
+            more: no_action,
+            english: no_action,
+            feedback: no_action
         }
 
         var active = button.hasClass( 'active' );
         var action = button.attr('id').split('-').pop();
-        var panel = $('#'+ action +'-panel');
+        var panel = $('#pl-' + action );
 
         if( active && $('#application').is(':hidden') ) {
             return;
@@ -489,12 +415,12 @@ var _gui = (function () {
         if( panel.is(':visible') ) {
             hide_top_panel( panel );
         }
-        else if( !$('#top-panels > div:visible').length ) {
+        else if( !$('.panel:visible').length ) {
             creation_funcs[ action ]();
             show_top_panel( panel );
         }
         else {
-            $('#top-panels > div:visible').slideUp( 400, function () {
+            $('.panel:visible').slideUp( 400, function () {
                 creation_funcs[ action ]();
                 show_top_panel( panel );
             });
@@ -502,42 +428,115 @@ var _gui = (function () {
     }
 
     function show_top_panel( panel ) {
+        // show panel
         panel.slideDown( 400 );
 
-        $('#application')
-            .animate({ opacity: 0.25 }, 300 );
-
         if( $('#application').is(':visible') ) {
-            $('#open-close-choose-panel')
+            // dim the application
+            $('#application')
+                .animate({ opacity: 0.25 }, 300 );
+
+            // show close panels bar
+            $('#pl-close-bar')
                 .show();
         }
     }
 
 
     function hide_top_panel( panel ) {
+        // hide panel
         panel.slideUp( 400 );
 
+        // undim the application
         $('#application')
             .animate({ opacity: 1 }, 300 );
 
-        $('#open-close-choose-panel')
+        // hide close bar
+        $('#pl-close-bar')
             .hide();
     }
 
-    function hide_top_panels() {
-        $('#top-menu')
-            .find('.selected')
-            .removeClass('selected');
 
-        $('#top-panels > div:visible')
+    function hide_top_panels() {
+        // deactivate menu positions
+        $('#top-menu')
+            .find('.active')
+            .removeClass('active');
+
+        // close active panel
+        $('.panel:visible')
             .slideUp( 400 );
 
+        // undim the application
         $('#application')
             .animate({ opacity: 1 }, 300 );
 
-        $('#open-close-choose-panel')
+        // hide close bar
+        $('#pl-close-bar')
             .hide();
-    };
+    }
+
+    // update download panel with currently open sheets
+    function update_download_panel() {
+        var html = [];
+        // if no sheets available yet, hide sheets download panel and quit
+        if( !_store.active_group() ) {
+            $('#pl-dl-sheets').hide();
+            return;
+        }
+        $('#pl-dl-sheets').show();
+
+        html.push( '<tbody>' );
+        $('.snapshot').each( function ( sheet, i ) {
+            var id = $(this).attr('id').split('-');
+            var group = id[1];
+            var sheet = id[2];
+            var name = $(this).attr('title');
+
+            html.push( '<tr>' );
+            // add (un)select all buttons
+            if( i === 0 ) {
+                html.push( '<td class="pl-dn-select-buttons" ' );
+                html.push( 'rowspan="', $('.snapshots').length, '">' );
+                html.push( '<div id="pl-dn-sh-select" class="grey button"> ');
+                html.push( 'Zaznacz wszystkie</div>' );
+                html.push( '<br class="clear"/>' );
+                html.push( '<div id="pl-dn-sh-unselect" class="grey button"> ');
+                html.push( 'Odznacz wszystkie</div>' );
+                html.push( '</td>' );
+            }
+            html.push( '<td class="check">' );
+            html.push( '<input type="checkbox" ');
+            html.push( 'value="', ( group + '-' + sheet ));
+            html.push( '" /></td>' );
+            html.push( '<td>', name, '</td>' );
+            html.push( '</tr>' );
+        });
+        html.push( '</tbody>' );
+
+        $('#pl-dl-sh-table')
+            .empty()
+            .append( html.join('') );
+
+        $('#pl-dl-sh-select').click( function () {
+            // select all checkboxes
+            $('#pl-dl-sh-table')
+                .find(':checkbox')
+                .attr( 'checked', 'true' );
+        });
+
+        $('#pl-dl-sh-unselect').click( function () {
+            // unselect all checkboxes
+            $('#pl-dl-sh-table')
+                .find(':checkbox')
+                .removeAttr( 'checked' );
+        });
+    }
+
+
+    function no_action() {
+        // left empty on purpose :)
+    }
 
 
     function init_choose_panel() {
@@ -578,7 +577,7 @@ var _gui = (function () {
                     .hide();
             });
     };
-    
+
 
     function create_perspectives_panel( dataset_id ) {
         var i, j;
@@ -653,5 +652,5 @@ var _gui = (function () {
                 }
             });
     };
-   
+
 })();
