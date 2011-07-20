@@ -301,23 +301,23 @@ var _gui = (function () {
  //       });
 
 
-        if( sheet_nr === 0 ) {
-            $('#snapshots').append( new_tab );
-        }
-        else {
-            new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
-        }
+//        if( sheet_nr === 0 ) {
+//            $('#snapshots').append( new_tab );
+//        }
+//        else {
+//            new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
+//        }
 
-        if( $('.snapshot').length == 10 ) {
-            $('#save-snapshot' ).hide();
-        }
+//        if( $('.snapshot').length == 10 ) {
+//            $('#save-snapshot' ).hide();
+//        }
 
-        _store.active_sheet( sheet_nr );
-        _store.active_group( group_nr );
+//        _store.active_sheet( sheet_nr );
+//        _store.active_group( group_nr );
 
-        $('#sort-form').hide().html('');
-        $('#filter-form').hide().html('');
-    };
+//        $('#sort-form').hide().html('');
+//        $('#filter-form').hide().html('');
+//    };
 
 
     that.make_zebra = function () {
