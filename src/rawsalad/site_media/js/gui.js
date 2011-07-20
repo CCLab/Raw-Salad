@@ -159,12 +159,12 @@ var _gui = (function () {
         hide_top_panels();
     }
 
-
-    that.create_sheet_tab = function ( args ) {
-        that.create_only_sheet_tab( args );
-        _table.clean_table();
-        _table.init_table();
-    };
+// TODO remove this:
+//    that.create_sheet_tab = function ( args ) {
+//        that.create_only_sheet_tab( args );
+//        _table.clean_table();
+//        _table.init_table();
+//    };
 
 
     that.refresh_gui = function () {   
@@ -226,73 +226,73 @@ var _gui = (function () {
         _table.init_table();
     };
 
+// TODO remove this:
+//    that.create_only_sheet_tab = function ( args ) {
+//        var html = [];
 
-    that.create_only_sheet_tab = function ( args ) {
-        var html = [];
+//        var group_nr = args.group_nr || _store.active_group_index();
+//        var sheet_nr = args.sheet_nr || _store.active_sheet_index();
+//        var sheet_name = args.name || "Arkusz " + group_nr + '-' + sheet_nr;
 
-        var group_nr = args.group_nr || _store.active_group_index();
-        var sheet_nr = args.sheet_nr || _store.active_sheet_index();
-        var sheet_name = args.name || "Arkusz " + group_nr + '-' + sheet_nr;
-
-        var group_changed = _store.active_group_index() !== group_nr;
-        var sheet_changed = _store.active_sheet_index() !== sheet_nr;
-        var new_tab;
-        var close_sheet;
+//        var group_changed = _store.active_group_index() !== group_nr;
+//        var sheet_changed = _store.active_sheet_index() !== sheet_nr;
+//        var new_tab;
+//        var close_sheet;
 
 
-        //to refresh_gui 
-        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
-        html.push( 'class="snapshot" ' );
-        html.push( 'title="', sheet_name, '">' );
-        html.push( sheet_name.length > 20 ?
-                   sheet_name.slice( 0, 17 ) + '...' :
-                   sheet_name );
-        html.push( '</div>' );
+//        to refresh_gui 
+//        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
+//        html.push( 'class="snapshot" ' );
+//        html.push( 'title="', sheet_name, '">' );
+//        html.push( sheet_name.length > 20 ?
+//                   sheet_name.slice( 0, 17 ) + '...' :
+//                   sheet_name );
+//        html.push( '</div>' );
 
-        new_tab = $( html.join('') );
+//        new_tab = $( html.join('') );
 
-        close_sheet = $( '<div class="close-sheet-button" >x</div>' );
+//        close_sheet = $( '<div class="close-sheet-button" >x</div>' );
 
-        $('.snapshot').removeClass('active');
-        $('.close-sheet-button').remove();
-        
-        new_tab
-            .append(close_sheet
-                .click( function(){
-                    _store.remove_active_sheet();
-                    alert("Sheet dleyted");
-                    
-                    _table.clean_table();
-                    _table.init_table();
-                })             
-            )
-            .addClass( 'active' )
-            .click( function () {
-                var id_elements = $(this).attr('id').split('-');
-                var group_nr = id_elements[1];
-                var sheet_nr = id_elements[2];
+//        $('.snapshot').removeClass('active');
+//        $('.close-sheet-button').remove();
+//        
+//        new_tab
+//            .append(close_sheet
+//                .click( function(){
+//                    _store.remove_active_sheet();
+//                    alert("Sheet dleyted");
+//                    
+//                    _table.clean_table();
+//                    _table.init_table();
+//                })             
+//            )
+//            .addClass( 'active' )
+//            .click( function () {
+//                var id_elements = $(this).attr('id').split('-');
+//                var group_nr = id_elements[1];
+//                var sheet_nr = id_elements[2];
 
-                $('.snapshot').removeClass('active');
-                $('.close-sheet-button').remove();
-                $(this).addClass('active')
-                    .append(close_sheet.click( function(){
-                        _store.remove_active_sheet();
-                        alert("Sheet dleyted");
-                        _table.clean_table();
-                        _table.init_table();
-                    })
-                )
+//                $('.snapshot').removeClass('active');
+//                $('.close-sheet-button').remove();
+//                $(this).addClass('active')
+//                    .append(close_sheet.click( function(){
+//                        _store.remove_active_sheet();
+//                        alert("Sheet dleyted");
+//                        _table.clean_table();
+//                        _table.init_table();
+//                    })
+//                )
 
-                _store.active_group( group_nr );//
-                _store.active_sheet( sheet_nr );//
+//                _store.active_group( group_nr );
+//                _store.active_sheet( sheet_nr );
 
-                $('#sort-form').hide().html('');
-                $('#filter-form').hide().html('');
-                
-                
-                _table.clean_table();
-                _table.init_table();
-            });
+//                $('#sort-form').hide().html('');
+//                $('#filter-form').hide().html('');
+//                
+//                
+//                _table.clean_table();
+//                _table.init_table();
+//            });
 
  //       $('.close-sheet-button').click( function(){
  //           _store.remove_active_sheet();

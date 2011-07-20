@@ -446,7 +446,7 @@ var _tools = (function () {
                 new_sheet['rows'] = create_filter_result( filtered_rows );
                 new_sheet['filtered'] = true;
 
-                _sheet.create_new_sheet( new_sheet, "Arkusz", true );
+                _sheet.create_new_sheet( new_sheet );
 
                 _table.clean_table();
                 _table.init_table();
@@ -518,7 +518,7 @@ var _tools = (function () {
 
         $('#save-snapshot')
             .click( function () {
-                _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
+                _sheet.create_new_sheet( _store.active_sheet() );
             });
     }
 
