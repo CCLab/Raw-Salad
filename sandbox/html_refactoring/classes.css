@@ -9,76 +9,76 @@
 }
 
 .button:hover {
-    cursor: pointer !important;
+    cursor: pointer;
 }
 
 .blue {
-    color: #fff !important;
-    background-color: #4abff7 !important;
+    color: #fff;
+    background-color: #4abff7;
 }
 
 .blue:hover {
-    color: #1ea3e8 !important;
-    background-color: #fff !important;
+    color: #1ea3e8;
+    background-color: #fff;
 }
 
 .grey {
-    color: #fff !important;
-    background-color: #c8c8c8 !important;
+    color: #fff;
+    background-color: #c8c8c8;
 }
 
 .grey:hover {
-    color: #1ea3e8 !important;
-    background-color: #fff !important;
+    color: #1ea3e8;
+    background-color: #fff;
 }
 
 .text {
-    color: #fff !important;
+    color: #fff;
 }
 
 .text:hover {
-    color: #d8d8d8 !important;
+    color: #d8d8d8;
 }
 
 /*  T O G G L E   B U T T O N */
 .pushed {
-    color: #fff !important;
-    background-color: #767676 !important;
+    color: #fff;
+    background-color: #767676;
 }
 
 
 /*  S H E E T   T A B S  */
 .selected {
-    color: #fff !important;
-    background-color: #767676 !important;
+    color: #fff;
+    background-color: #767676;
 }
 
 .selected:hover {
-    cursor: default !important;
+    cursor: default;
 }
 
 
 /* T O P   M E N U   A N D   T A B L E / S H A R E   T A B S */
 .tab {
-    color: #1ea3e8 !important;
-    background-color: #e1e1e1 !important;
-    font-weight: normal !important;
+    color: #1ea3e8;
+    background-color: #e1e1e1;
+    font-weight: normal;
 }
 
 .tab:hover {
-    color: #fff !important;
-    background-color: #1ea3e8 !important;
+    color: #fff;
+    background-color: #1ea3e8;
 }
 
 .active {
-    color: #3b3b3b !important;
-    background-color: #c8c8c8 !important;
+    color: #3b3b3b;
+    background-color: #c8c8c8;
 }
 
 .active:hover {
-    cursor: default !important;
-    color: #3b3b3b !important;
-    background-color: #c8c8c8 !important;
+    cursor: default;
+    color: #3b3b3b;
+    background-color: #c8c8c8;
 }
 
 /* G E N E R A L   C L A S S E S */ 
