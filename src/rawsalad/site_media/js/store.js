@@ -320,9 +320,8 @@ var _store = (function () {
         var sheet_name;
         that.active_group()['sheets'].forEach( function (sheet, sheet_num){
             if ( sheet['name'].indexOf('Arkusz') !== -1 ) {
-                arkusz_name = true;
                 sheet_name = sheet['name'].split(' ');
-                if ( sheet_name[1] > next_num ){
+                if ( sheet_name[1] >= next_num ){
                     next_num = sheet_name[1];
                     next_num++;
                    }; 
