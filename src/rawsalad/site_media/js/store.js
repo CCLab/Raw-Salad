@@ -310,10 +310,27 @@ var _store = (function () {
         if (active_group_sheets.length === 0 ){
             that.remove_active_group();
         }else if (active_sheet_num !== 0 ) {
-                active_grp['active_sheet_number'] = active_sheet_num - 1  ;                  
+                active_grp['active_sheet_number'] = active_sheet_num - 1;
             }            
         return true;
     };
+    
+    that.next_sheet_name = function () {    
+        var next_num=1;
+        var sheet_name;
+        that.active_group()['sheets'].forEach( function (sheet, sheet_num){
+            if ( sheet['name'].indexOf('Arkusz') !== -1 ) {
+                arkusz_name = true;
+                sheet_name = sheet['name'].split(' ');
+                if ( sheet_name[1] > next_num ){
+                    next_num = sheet_name[1] + 1;
+                   }; 
+            }
+         return 'Arkusz ' + next_num; 
+        }
+    };
+        
+    
     
     that.set_active_sheet_name = function (sheet_name) {
         that.active_sheet()['name'] = sheet_name;
