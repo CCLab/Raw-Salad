@@ -72,14 +72,14 @@
 "Rozdział 75502";75502;"15-01-755";"15-01-755-02";"15/01";3;"Jednostki sądownictwa powszechnego";5;183796;;;92296;91500;;;
 "Dział 801";801;"15-01";"15-01-801";"15/01";2;"Oświata i wychowanie";6;2398;;;2398;;;;
 "Rozdział 80144";80144;"15-01-801";"15-01-801-44";"15/01";3;"Inne formy kształcenia osobno niewymienione";7;2398;;;2398;;;;
-"Część 15/02";"15/02";"15";"15-02";"15/02";1;"Sąd Apelacyjny w Warszawie";1;627874;;54163;640378;;;;
-"Dział 753";753;"15-02";"15-02-753";"15/02";2;"Obowiązkowe ubezpieczenia społeczne";2;22743;;22743;;;;;
-"Rozdział 75312";75312;"15-02-753";"15-02-753-12";"15/02";3;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;22743;;22743;;;;;
-"Dział 755";755;"15-02";"15-02-755";"15/02";2;"Wymiar sprawiedliwości";4;680386;;31409;634957;;;;
-"Rozdział 75502";75502;"15-02-755";"15-02-755-02";"15/02";3;"Jednostki sądownictwa powszechnego";5;668840;;31409;623411;;;;
-"Rozdział 75595";75595;"15-02-755";"15-02-755-95";"15/02";3;"Pozostała działalność";6;11546;;;11546;;;;
-"Dział 801";801;"15-02";"15-02-801";"15/02";2;"Oświata i wychowanie";7;5432;;11;5421;;;;
-"Rozdział 80144";80144;"15-02-801";"15-02-801-44";"15/02";3;"Inne formy kształcenia osobno niewymienione";8;5432;;11;5421;;;;
+"Część 15/02";"15/02";"15";"15-02";"15/02";1;"Sąd Apelacyjny w Warszawie";1;627874;;36102;520463;71309;;;
+"Dział 753";753;"15-02";"15-02-753";"15/02";2;"Obowiązkowe ubezpieczenia społeczne";2;20691;;20691;;;;;
+"Rozdział 75312";75312;"15-02-753";"15-02-753-12";"15/02";3;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;20691;;20691;;;;;
+"Dział 755";755;"15-02";"15-02-755";"15/02";2;"Wymiar sprawiedliwości";4;604412;;15408;517695;71309;;;
+"Rozdział 75502";75502;"15-02-755";"15-02-755-02";"15/02";3;"Jednostki sądownictwa powszechnego";5;596271;;15408;509554;71309;;;
+"Rozdział 75595";75595;"15-02-755";"15-02-755-95";"15/02";3;"Pozostała działalność";6;8141;;;8141;;;;
+"Dział 801";801;"15-02";"15-02-801";"15/02";2;"Oświata i wychowanie";7;2771;;3;2768;;;;
+"Rozdział 80144";80144;"15-02-801";"15-02-801-44";"15/02";3;"Inne formy kształcenia osobno niewymienione";8;2771;;3;2768;;;;
 "Część 15/03";"15/03";"15";"15-03";"15/03";1;"Sąd Apelacyjny w Katowicach";1;683152;;46948;614095;22109;;;
 "Dział 753";753;"15-03";"15-03-753";"15/03";2;"Obowiązkowe ubezpieczenia społeczne";2;19655;;19655;;;;;
 "Rozdział 75312";75312;"15-03-753";"15-03-753-12";"15/03";3;"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;19655;;19655;;;;;
@@ -392,8 +392,8 @@
 "Rozdział 75219";75219;"29-752";"29-752-19";"29";2;"Wojska Specjalne";24;242448;;11278;231170;;;;
 "Rozdział 75220";75220;"29-752";"29-752-20";"29";2;"Zabezpieczenie  wojsk";25;3765284;;49684;3715600;;;;
 "Rozdział 75295";75295;"29-752";"29-752-95";"29";2;"Pozostała działalność";26;765820;151175;92568;522077;;;;
-"Dział 753";753;"29";"29-753";"29";1;"Obowiązkowe ubezpieczenia społeczne";27;6019216;;705936;307545;5735;;;
-"Rozdział 75301";75301;"29-753";"29-753-01";"29";2;"Świadczenia pieniężne z zaopatrzenia emerytalnego ";28;6018897;;705617;307545;5735;;;
+"Dział 753";753;"29";"29-753";"29";1;"Obowiązkowe ubezpieczenia społeczne";27;6019216;;5705936;307545;5735;;;
+"Rozdział 75301";75301;"29-753";"29-753-01";"29";2;"Świadczenia pieniężne z zaopatrzenia emerytalnego ";28;6018897;;5705617;307545;5735;;;
 "Rozdział 75302";75302;"29-753";"29-753-02";"29";2;"Uposażenia prokuratorów w stanie spoczynku oraz uposażenia rodzinne";29;319;;319;;;;;
 "Dział 755";755;"29";"29-755";"29";1;"Wymiar sprawiedliwości";30;59565;;1327;56401;1837;;;
 "Rozdział 75503";75503;"29-755";"29-755-03";"29";2;"Sądy wojskowe";31;20289;;620;18852;817;;;
@@ -545,8 +545,8 @@
 "Rozdział 75512";75512;"37-755";"37-755-12";"37";2;"Więziennictwo";13;2373267;;122655;2168248;80000;;;2364
 "Rozdział 75513";75513;"37-755";"37-755-13";"37";2;"Zakłady dla nieletnich";14;98914;;1680;85313;11100;;;821
 "Rozdział 75514";75514;"37-755";"37-755-14";"37";2;"Krajowa Szkoła Sądownictwa i Prokuratury";15;40310;40310;;;;;;
-"Dział 801";801;"37";"37-801";"37";1;"Oświata i wychowanie";16;123142;;;121458;;;;22
-"Rozdział 80144";80144;"37-801";"37-801-44";"37";2;"Inne formy kształcenia osobno niewymienione";17;123142;;;121458;;;;22
+"Dział 801";801;"37";"37-801";"37";1;"Oświata i wychowanie";16;123142;;1662;121458;;;;22
+"Rozdział 80144";80144;"37-801";"37-801-44";"37";2;"Inne formy kształcenia osobno niewymienione";17;123142;;1662;121458;;;;22
 "Dział 851";851;"37";"37-851";"37";1;"Ochrona zdrowia";18;1196;;;1196;;;;
 "Rozdział 85156";85156;"37-851";"37-851-56";"37";2;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";19;1196;;;1196;;;;
 "Część 38";"38";;"38";"38";0;"SZKOLNICTWO  WYśSZE";1;9594987;8894344;134143;47008;410349;;;109143
@@ -566,8 +566,8 @@
 "Dział 851";851;"38";"38-851";"38";1;"Ochrona zdrowia";15;10131;;;10131;;;;
 "Rozdział 85156";85156;"38-851";"38-851-56";"38";2;"Składki na ubezpieczenie zdrowotne oraz świadczenia dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego";16;10131;;;10131;;;;
 "Część 39";"39";;"39";"39";0;"TRANSPORT";1;5876766;1638151;4559;2404084;1521929;;;308043
-"Dział 600";600;"39";"39-600";"39";1;"Transport i łączność";2;5734356;1628178;;2345015;1502212;;;254417
-"Rozdział 60001";60001;"39-600";"39-600-01";"39";2;"Krajowe pasażerskie przewozy kolejowe";3;620000;620000;4534;;;;;
+"Dział 600";600;"39";"39-600";"39";1;"Transport i łączność";2;5734356;1628178;4534;2345015;1502212;;;254417
+"Rozdział 60001";60001;"39-600";"39-600-01";"39";2;"Krajowe pasażerskie przewozy kolejowe";3;620000;620000;;;;;;
 "Rozdział 60002";60002;"39-600";"39-600-02";"39";2;"Infrastruktura kolejowa";4;2011867;1000000;;;905257;;;106610
 "Rozdział 60004";60004;"39-600";"39-600-04";"39";2;"Lokalny transport zbiorowy";5;7566;;;;;;;7566
 "Rozdział 60005";60005;"39-600";"39-600-05";"39";2;"Autostrady płatne";6;186819;;;117542;68431;;;846
@@ -941,7 +941,7 @@
 "Podrozdział 16";16;"83-758-18";"83-758-18-016";"83";3;"Rezerwa płacowa na zmiany organizacyjne i nowe zadania oraz na wynagrodzenia osób zajmujących się programami finansowanymi z budżetu UE oraz środkami z pomocy udzielanej przez państwa członkowskie EFTA";19;50672;;;15220;;;;35452
 "Podrozdział 17";17;"83-758-18";"83-758-18-017";"83";3;"Środki na szkolenia i wynagrodzenia na nowe mianowania urzędników służby cywilnej oraz skutki przechodzące z 2010 r. oraz zwiększenie wynagrodzeń nowo powołanych ekspertów w Urzędzie Patentowym Rzeczypospolitej Polskiej";20;13958;;;13958;;;;
 "Podrozdział 18";18;"83-758-18";"83-758-18-018";"83";3;"Rezerwa na zwiększenie wynagrodzeń przeznaczonych na wypłaty wynagrodzeń dla osób odwołanych z kierowniczych stanowisk państwowych, a także nagród jubileuszowych, odpraw emerytalnych i odpraw w związku z przejściem na rentę z tytułu niezdolności do pracy oraz ekwiwalentów za niewykorzystany urlop wypoczynkowy dla osób zajmujących kierownicze stanowiska państwowe, dla pracowników jednostek organizacyjnych stanowiących wyodrębnioną część budżetową, w których średnioroczne zatrudnienie w roku poprzednim nie przekracza 50 osób, wraz z pochodnymi od wynagrodzeń.";21;5217;;;5217;;;;
-"Podrozdział 19";19;"83-758-18";"83-758-18-019";"83";3;"Budowa, modernizacja i utrzymanie przejść granicznych (w tym na sfinansowanie zobowiązań wynikających z umów dwustronnych dotyczących przejść granicznych) oraz utrzymanie obiektów pozostałych po przejściach granicznych na wewnętrznych granicach Schengen";22;51000;;30000;21000;;;;
+"Podrozdział 19";19;"83-758-18";"83-758-18-019";"83";3;"Budowa, modernizacja i utrzymanie przejść granicznych (w tym na sfinansowanie zobowiązań wynikających z umów dwustronnych dotyczących przejść granicznych) oraz utrzymanie obiektów pozostałych po przejściach granicznych na wewnętrznych granicach Schengen";22;51000;;;30000;21000;;;
 "Podrozdział 20";20;"83-758-18";"83-758-18-020";"83";3;"Środki na realizację Oświęcimskiego Strategicznego Programu Rządowego - III Etap 2007-2011";23;7323;100;;;7223;;;
 "Podrozdział 21";21;"83-758-18";"83-758-18-021";"83";3;"Wydatki finansowane ze zwrotów niewykorzystanych środków kredytowych z Międzynarodowych Instytucji Finansowych";24;5000;;;5000;;;;
 "Podrozdział 22";22;"83-758-18";"83-758-18-022";"83";3;"Dotacje celowe na finansowanie lub dofinansowanie zadań z zakresu pomocy społecznej";25;251970;251970;;;;;;
@@ -1019,7 +1019,7 @@
 "Rozdział 50001";50001;"85-500";"85-500-01";"85";2;"Inspekcja Handlowa";24;63950;;214;63266;470;;;
 "Dział 600";600;"85";"85-600";"85";1;"Transport i łączność";25;826031;573994;2006;124969;124634;;;428
 "Rozdział 60003";60003;"85-600";"85-600-03";"85";2;"Krajowe pasażerskie przewozy autobusowe";26;573994;573994;;;;;;
-"Rozdział 60031";60031;"85-600";"85-600-31";"85";2;"Przejścia graniczne";27;184866;;268;65170;120000;;;428
+"Rozdział 60031";60031;"85-600";"85-600-31";"85";2;"Przejścia graniczne";27;184866;;268;64170;120000;;;428
 "Rozdział 60055";60055;"85-600";"85-600-55";"85";2;"Inspejcja Transportu Drogowego";28;67021;;1588;60799;4634;;;
 "Rozdział 60095";60095;"85-600";"85-600-95";"85";2;"Pozostała działalność";29;150;;150;;;;;
 "Dział 700";700;"85";"85-700";"85";1;"Gospodarka mieszkaniowa";30;47087;36051;29;7987;3020;;;
@@ -1091,7 +1091,7 @@
 "Rozdział 85231";85231;"85-852";"85-852-31";"85";2;"Pomoc dla cudzoziemców";96;7783;7783;;;;;;
 "Rozdział 85295";85295;"85-852";"85-852-95";"85";2;"Pozostała działalność";97;356764;356720;9;35;;;;
 "Dział 853";853;"85";"85-853";"85";1;"Pozostałe zadania w zakresie polityki społecznej";98;73649;64024;3;9622;;;;
-"Rozdział 85321";85321;"85-853";"85-853-21";"85";2;"Zespoły do spraw orzekania o niepełnosprawności";99;554;554;;;;;;
+"Rozdział 85321";85321;"85-853";"85-853-21";"85";2;"Zespoły do spraw orzekania o niepełnosprawności";99;73095;63470;3;9622;;;;
 "Rozdział 85332";85332;"85-853";"85-853-32";"85";2;"Wojewódzkie urzędy pracy";100;554;554;;;;;;
 "Dział 854";854;"85";"85-854";"85";1;"Edukacyjna opieka wychowawcza";101;29194;16226;;12968;;;;
 "Rozdział 85412";85412;"85-854";"85-854-12";"85";2;"Kolonie i obozy oraz inne formy wypoczynku dzieci i młodzieży szkolnej, a także szkolenia młodzieży";102;29194;16226;;12968;;;;
@@ -1102,7 +1102,7 @@
 "Rozdział 90014";90014;"85-900";"85-900-14";"85";2;"Inspekcja Ochrony Środowiska";107;130175;;268;127294;2376;;;237
 "Rozdział 90095";90095;"85-900";"85-900-95";"85";2;"Pozostała działalność";108;49;19;;30;;;;
 "Dział 921";921;"85";"85-921";"85";1;"Kultura i ochrona dziedzictwa narodowego";109;80792;26541;84;53797;370;;;
-"Rozdział 92120";92120;"85-921";"85-921-20";"85";2;"Ochrona zabytków i opieka nad zabytkami";110;331484;26391;;5093;;;;
+"Rozdział 92120";92120;"85-921";"85-921-20";"85";2;"Ochrona zabytków i opieka nad zabytkami";110;31484;26391;;5093;;;;
 "Rozdział 92121";92121;"85-921";"85-921-21";"85";2;"Wojewódzkie Urzędy Ochrony Zabytków ";111;49217;150;84;48613;370;;;
 "Rozdział 92195";92195;"85-921";"85-921-95";"85";2;"Pozostała działalność";112;91;;;91;;;;
 "Dział 925";925;"85";"85-925";"85";1;"Ogrody botaniczne i zoologiczne oraz naturalne obszary i obiekty chronionej przyrody";113;17896;17886;10;;;;;

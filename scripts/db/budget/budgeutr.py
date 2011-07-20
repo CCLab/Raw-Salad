@@ -83,7 +83,7 @@ def complete_elt_a(src):
     return rst
 
 #-----------------------------
-def fill_elt_a(idef):
+def fill_elt_a(idef, curr_type):
     # filling program
     return {
         "idef": str(idef),
@@ -91,7 +91,7 @@ def fill_elt_a(idef):
         "parent": None,
         "parent_sort": None,
         "level": "a",
-        "type": " ".join(["Program", str(idef)]),
+        "type": " ".join([curr_type, str(idef)]),
         "leaf": False
         }
 
@@ -108,9 +108,12 @@ def fill_elt_b(src, idef_b, parent, db):
         czesc_idef= src["czesc"].split("/")[0].strip()
         suppl_idef= src["czesc"].split("/")[1].strip()
 
-    elm_name= db[collection_budgtr].find_one({ "level" : "a", "idef" : czesc_idef }, { "_id": 0, "name": 1 })["name"]
-    if len(suppl_idef) > 0:
-        elm_name= ": ".join([ elm_name.encode('utf-8'), teryt_dict()[suppl_idef] ])
+    if len(src['name']) > 0:
+        elm_name= src['name']
+    else:
+        elm_name= db[collection_budgtr].find_one({ "level" : "a", "idef" : czesc_idef }, { "_id": 0, "name": 1 })["name"]
+        if len(suppl_idef) > 0:
+            elm_name= ": ".join([ elm_name.encode('utf-8'), teryt_dict()[suppl_idef] ])
 
     return {
         "idef": idef,
@@ -136,7 +139,7 @@ def fill_docs(budg_data, db):
     nss= True # whether a program of NSS (Narodowa Strategia Spójności)
     
     for row_doc in budg_data:
-        if len(row_doc['name'].strip()) != 0: # name is not empty, meaning it's either a program name or 'total' field
+        if len(row_doc['type'].strip()) > 0: # type is not empty, meaning it's either a program name or 'total' field
             idef_level_b= 0
             if "OGółEM" in row_doc['name'].strip().upper():
                 row_dict_a.update(complete_elt_a(row_doc))
@@ -147,9 +150,10 @@ def fill_docs(budg_data, db):
             elif "OGÓŁEM PROGRAMY" in row_doc['name'].strip().upper(): # grand total
                 row_dict_a= row_doc.copy()
                 row_dict_a['nss']= False
-                row_dict_a.update(fill_elt_a("9999"))
+                row_dict_a.update(fill_elt_a("9999", "Total"))
                 row_dict_a.update(complete_elt_a(row_doc))
                 row_dict_a["type"]= "Total"
+                row_dict_a["name"]= "OGÓŁEM"
                 row_dict_a["leaf"]= True
                 row_dict_a["czesc"]= None
                 out.append(row_dict_a)
@@ -161,14 +165,14 @@ def fill_docs(budg_data, db):
                 row_dict_a['name']= row_dict_a['name'].replace('Ŝ', 'ż')
                 row_dict_a['name']= row_dict_a['name'].replace("  ", " ").strip()
                 row_dict_a['nss']= nss
-                row_dict_a.update(fill_elt_a(idef_level_a)) # idef, parent, leaf, level, etc.
+                row_dict_a.update(fill_elt_a(idef_level_a, row_dict_a['type'])) # idef, parent, leaf, level, etc.
 
                 # immediately creating and saving elt level b
                 idef_level_b += 1
                 row_dict_b= row_doc.copy()
                 row_dict_b.update(fill_elt_b(row_doc, idef_level_b, idef_level_a, db)) # idef, parent, leaf, level, etc.
                 out.append(row_dict_b)
-        else: # name is empty, dealing with czesc here
+        else: # type is empty, dealing with czesc here
             idef_level_b += 1
             row_dict_b= row_doc.copy()
             row_dict_b.update(fill_elt_b(row_doc, idef_level_b, idef_level_a, db)) # idef, parent, leaf, level, etc.
@@ -229,17 +233,14 @@ def csv_parse(csv_read):
 def schema_dict():
     return {
         "alias": {
-            "0":"name",
-            "1":"czesc",
-            "2":"v_eu",
-            "3":"v_nation_fin",
-            "4":"v_nation_cofin"
+            "0":"type",
+            "1":"name",
+            "2":"czesc",
+            "3":"v_eu"
             },
         "type": {
             "czesc": "string",
-            "v_eu": "int",
-            "v_nation_fin": "int",
-            "v_nation_cofin": "int"
+            "v_eu": "int"
             }
         }
 

@@ -53,22 +53,6 @@
             "basic": true,
             "type": "number",
             "checkable": true
-            },
-        {
-            "key": "v_nation_fin",
-            "label": "Wydatki budżetu państwa - Finansowanie",
-            "processable": true,
-            "basic": true,
-            "type": "number",
-            "checkable": true
-            },
-        {
-            "key": "v_nation_cofin",
-            "label": "Wydatki budżetu państwa - Współfinansowane",
-            "processable": true,
-            "basic": true,
-            "type": "number",
-            "checkable": true
             }
         ],
     "aux": {
@@ -76,7 +60,7 @@
         "parent": 1,
         "idef": 1
         },
-    "query": { },
+    "query": { "v_eu": {"$gt": 0 } },
     "sort": {
         "2": {"level": 1},
         "1": {"parent_sort": 1},
