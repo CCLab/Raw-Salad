@@ -174,7 +174,7 @@ var _gui = (function () {
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
         // 1  clear gui, 
-        $('.snapshots').remove();        
+        $('.snapshot').remove();        
         // 2 create new gui
         groups.forEach( function ( group, group_num ){
             _store.get_sheets( group_num ).forEach( function (sheet, sheet_num){
