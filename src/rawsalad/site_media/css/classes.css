@@ -32,6 +32,14 @@
     background-color: #e1e1e1 !important;
 }
 
+.text {
+    color: #fff !important;
+}
+
+.text:hover {
+    color: #d8d8d8 !important;
+}
+
 /*  T O G G L E   B U T T O N */
 .pushed {
     color: #fff !important;
