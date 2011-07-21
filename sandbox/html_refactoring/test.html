@@ -3,8 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-  <link rel="stylesheet" type="text/css" href="./style.css" />
-  <link rel="stylesheet" type="text/css" href="./classes.css" />
+  <link rel="stylesheet" type="text/css" href="/site_media/test/style.css" />
+  <link rel="stylesheet" type="text/css" href="/site_media/test/classes.css" />
+  <link rel="stylesheet" type="text/css" href="/site_media/test/table_style.css" />
 </head>
 <body>
 
@@ -34,103 +35,24 @@
     <section class="panel" id="pl-choose">
       <header>
         <p class="panel-title">Dostępne kolekcje danych</p>
-        <img src="info.png" 
+        <img src="/site_media/img/info.png" 
              alt="Ikona informacji" 
              class="panel-icon" />
         <p class="panel-desc">W tym miejscu możesz wybrać kolekcje danych, które chciałbyś przejrzeć</p>
       </header>
+      
       <!-- D A T A S E T S --> 
-      <section id="pl-ch-datsets" class="panel-main">
+      <section id="pl-ch-datasets" class="panel-main">
         <p class="pl-ch-back left">
           <!-- empty on purpose: used as a spacer! -->
         </p>
-        <ul>
-        	<li>
-        		<header>
-        			<h3>Budżet centralny</h3>
-        		</header>
-        		<section>
-        			<p>Główna część centralnych finansów publicznych</p>
-        		  <div class="right blue button">Zobacz dane</div>
-        		</section>
-        	</li>
-        	<li>
-        		<header>
-        			<h3>Budżet środków europejskich</h3>
-        		</header>
-        		<section>
-        			<p>Wkład finansowy Unii Europejskiej</p>
-        			<div>
-        				<div class="blue button">Zobacz dane</div>
-        			</div>
-        		</section>
-        	</li>
-        </ul>
-        <ul class="left">
-        	<li>
-        		<header>
-        			<h3>Fundusze celowe i agencje narodowe</h3>
-        		</header>
-        		<section>
-        			<p>Plany finansowe funduszy celowych i agencji państwowych</p>
-        			<div>
-        				<div class="blue button">Zobacz dane</div>
-        			</div>
-        		</section>
-        	</li>
-        	<li>
-        		<header>
-        			<h3>Narodowy Fundusz Zdrowia</h3>
-        		</header>
-        		<section>
-        			<p>Budżet Narodowego Funduszu Zdrowia</p>
-        			<div>
-        				<div class="blue button">Zobacz dane</div>
-        			</div>
-        		</section>
-        	</li>
-        </ul>
       </section>
+
       <!-- V I E W S -->
       <section id="pl-ch-views" class="panel-main">
         <p class="pl-ch-back left">
-          <img src="datasets.png" class="left" /> 
+          <img src="/site_media/img/datasets.png" class="left" /> 
         </p>
-        <ul>
-        	<li>
-        		<header>
-        			<h3>Budżet tradycyjny</h3>
-        		</header>
-        		<section>
-        			<p>Budżet centralny w układzie zapisanym w ustawie budżetowej</p>
-        		  <div class="right blue button">2011</div><p class="right pl-ch-more">Zobacz dane: </p>
-        		</section>
-        	</li>
-        	<li>
-        		<header>
-        			<h3>Budżet zadaniowy</h3>
-        		</header>
-        		<section>
-        			<p>Budżet centralny w układzie zapisanym w ustawie budżetowej</p>
-        		  <div class="right blue button">2012</div>
-              <div class="right blue button">2011</div>
-              <p class="right pl-ch-more">Zobacz dane: </p>
-        		</section>
-        	</li>
-        </ul>
-        <ul class="left">
-        	<li>
-        		<header>
-        			<h3>Budżet instytucjonalny</h3>
-        		</header>
-        		<section>
-        			<p>Budżet centralny w układzie zapisanym w ustawie budżetowej</p>
-        		  <div class="right blue button">2012</div>
-        		  <div class="right blue button">2011</div>
-              <p class="right pl-ch-more">Zobacz dane: </p>
-        		</section>
-        	</li>
-        </ul>
       </section>
     </section>
 
@@ -138,7 +60,7 @@
     <section class="panel" id="pl-search">
       <header>
         <p class="panel-title">Wyszukaj</p>
-        <img src="info.png" 
+        <img src="/site_media/img/info.png" 
              alt="Ikona informacji" 
              class="panel-icon" />
         <p class="panel-desc">Przeszukaj naszą bazę danych w poszukiwaniu interesujących informacji</p>
@@ -147,8 +69,8 @@
       <!-- S E A R C H   F O R M -->
       <section class="panel-main">
         <form action="">
-          <label for="pl-sr-query">Znajdź:</label>
-          <input type="text" name="pl-sr-query" />
+          <!-- <label for="pl-sr-query">Znajdź:</label> -->
+          <input type="text" class="input-text" placeholder="Szukana fraza" name="pl-sr-query" />
           <input type="checkbox" name="pl-sr-strict" value="pl-sr-strict" />
           <label for="pl-sr-strict">Dokładne dopasowanie</label>
           <!-- <br /> -->
@@ -169,7 +91,7 @@
     <section class="panel" id="pl-download">
       <header>
         <p class="panel-title">Pobierz dane</p>
-        <img src="info.png" 
+        <img src="/site_media/img/info.png" 
              alt="Ikona informacji" 
              class="panel-icon" />
         <p class="panel-desc">Zaznacz interesujące cię dane, by zapisać je na dysku w plikach CSV</p>
@@ -269,9 +191,9 @@
       </div>
 
       <!-- H I D D E N   D O W N L O A D   F O R M -->
-      <!-- <form id="pl-dl-hidden-form" action="/download/" method="post">
+      <form id="pl-dl-hidden-form" action="/download/" method="post" style="display: none;">
         <input type="text" name="csv_string" />
-      </form> -->
+      </form>
     </section> <!-- E O:  D O W N L O A D   P A N E L -->
 
 
@@ -279,16 +201,14 @@
     <section class="panel" id="pl-more">
       <header>
         <p class="panel-title">O projekcie</p>
-        <img src="info.png" 
+        <img src="/site_media/img/info.png" 
              alt="Ikona informacji" 
              class="panel-icon" />
         <p class="panel-desc">Przeczytaj, w jaki sposób pracowaliśmy nad tym projektem</p>
       </header>
 
-      <!-- S E A R C H   F O R M -->
-      <section class="panel-main">
-        <p>Tu będą informacje na temat projektu i odniesienia do innych projektów <a href="http://centrumcyfrowe.pl">Centrum Cyfrowego</a>!</p>
-        <p>Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. Ile cię stracił. Dziś człowieka rodu, obyczajów! Dość, że zamczysko wzięliśmy w drugim końcu stoła naprzód dzieci mało w zamkowej sieni siadł przy stole. To nie może Białopiotrowiczowi samemu odmówił! Bo nie miał wielką, i raptem boczne drzwi poglądał jakby za dozorcę księdza, który teraz wzrostem dorodniejsza bo tak zawsze Wam tam nie miał głos miły: Witaj nam, ach! tak i stają mu i ziemię orzę gdy potem w Wilnie, wielkim mieście miał i bagnami skradał się zaczęły wpółgłośne rozmowy. Mężczyźni rozsądzali swe trzymał pod lasem zwaliska. Po cóż kłócić się zatrudniał i potrząsając głową rzekł półgłosem: Przepraszam, musieliśmy siadać niepodobna wieczerzy na świętych obrazku. Twarzy nie dostrzegł, nazbyt rychło znikła ale widzę i o nie! Więc szlachcic bez grzeczności i niech Jaśnie Wielmożny Podkomorzy i mniej był portret króla Stanisława. Ojcu Podkomorzego zdał się zdołał. Prostym ludziom wokanda zda się kiedyś demokratą. Bo nie uchybił gospodarskiej, ważnej powinności udał się rówiennicą a potem się sploty. Kolor musiał pochodzić od stołu. pierwszy Podkomorzy i że go miało być siedzeniem. Rumienił się, że się.</p>
+      <section class="panel-main plate">
+        <p>Dostęp do danych publicznych w Polsce jest coraz lepszy, jednak wciąż brakuje standardów ich prezentacji. Potrzebie szybkiego, efektywnego i ustandaryzowanego dostępu do danych publicznych wychodzi naprzeciw Raw Salad (Surówka), projekt Centrum Cyfrowego. Raw Salad to sieciowa przeglądarka danych, pozwalająca na łatwy dostęp do danych publicznych. Głównym przedmiotem wysiłków twórców Raw Salad jest stworzenie efektywnego i przejrzystego systemu poruszania się w gąszczu danych. Dzięki zastosowaniu nowoczesnych technologii informatycznych użytkownicy Raw Salad dostaną do ręki narzędzie pozwalające łatwo dobrać dane potrzebne im do pracy i dostosować sposób prezentacji danych do ich potrzeb.
       </section>
     </section>
 
@@ -296,14 +216,13 @@
     <section class="panel" id="pl-english">
       <header>
         <p class="panel-title">English summary</p>
-        <img src="info.png" 
+        <img src="/site_media/img/info.png" 
              alt="Ikona informacji" 
              class="panel-icon" />
         <p class="panel-desc">Read about the project</p>
       </header>
 
-      <!-- S E A R C H   F O R M -->
-      <section class="panel-main">
+      <section class="panel-main plate">
         <p>Lorem ipsum dolor sit amet erat. Integer euismod scelerisque urna tellus quis wisi. Phasellus facilisis at, egestas sit amet, pretium vitae, nunc. Vivamus risus. Vivamus nec lorem eu lectus id enim. Duis sed enim. Phasellus pulvinar sit amet, nonummy at, metus. Nullam laoreet, nulla bibendum pede bibendum vel, luctus et luctus et netus et nisl. Cras dolor tincidunt wisi at mauris sit amet mauris. Mauris molestie quis, interdum sem ut nunc eu mollis neque ut sapien id eleifend et, accumsan et, porttitor eros eros malesuada dolor. Vestibulum commodo a, posuere eget, nunc. Sed eget orci massa, nonummy commodo ac, tempus ac, porta sit amet, aliquam ac, urna. Nunc gravida. Duis quis ante. Mauris nec tristique tellus. Integer adipiscing. Nam dolor sit amet metus ac ornare lobortis laoreet diam. Aliquam at porta ligula erat volutpat. Maecenas facilisis libero. Cum sociis natoque penatibus et luctus ullamcorper libero at justo quis placerat ante. Morbi a elit. Lorem ipsum dolor sit amet magna. Vestibulum aliquam odio. Nunc id mi. Pellentesque orci luctus a, fermentum sem ac diam. Duis vel quam purus, dictum accumsan nisl.</p>
       </section>
     </section>
@@ -312,7 +231,7 @@
     <section class="panel" id="pl-feedback">
       <header>
         <p class="panel-title">Wyraź opinię</p>
-        <img src="info.png" 
+        <img src="/site_media/img/info.png" 
              alt="Ikona informacji" 
              class="panel-icon" />
         <p class="panel-desc">Podziel się z nami swoimi spostrzeżeniami na temat portalu</p>
@@ -321,9 +240,8 @@
       <!-- F E E D B A C K   F O R M -->
       <section class="panel-main">
         <form action="/feedback/">
-        	<label for="pl-fb-email">Podaj swój email (opcjonalnie)</label><br />
-        	<input type="text" name="pl-fb-email" /><br />
-        	<textarea name="pl-fb-message" rows="10" cols="30"></textarea><br />
+        	<input id="pl-fb-email" type="text" placeholder="Twój adres email" class="input-text" name="pl-fb-email" value="" /><br />
+        	<textarea name="pl-fb-message" placeholder="Twoje uwagi" class="input-text" rows="10" cols="30"></textarea><br />
         </form>
       </section>
       <!-- F E E D B A C K   B U T T O N -->
@@ -348,29 +266,79 @@
       </nav>
     </header>
 
-    <section class="panel-main">
-      <!-- T A B L E -->
-      <section id="app-table" class="app-container">
-
+    <!-- T A B L E -->
+    <section id="app-table" class="app-container">
+      <header> 
+        <div id="app-tb-save-sheet" class="blue button left">Zapisz arkusz</div>
+        <ul id="app-tb-sheets">
+        	<!-- <li class="tab button active">Budżet zadanio...</li>
+        	<li class="tab button">Arkusz 1</li>
+        	<li class="tab button">Narodowy Fun...</li>-->
+        </ul>
+      </header>
+      <section class="panel-main">
         <!-- T A B L E   T O O L S -->
         <section id="app-tb-tools">
           <section>
             <h3 id="app-tb-tl-title" class="left">Budżet centralny w ujęciu zadaniowym 2011</h3>
             <div id="app-tb-tl-bt-container" class="right">
+              <div id="app-tb-tl-clear-button" class="button left">Wyczyść tabelę</div>
               <div id="app-tb-tl-sort-button" class="button left">Sortuj</div>
               <div id="app-tb-tl-filter-button" class="button left">Filtruj</div>
             </div>
           </section>
+          <!-- S O R T   F O R M -->
+          <section id="app-tb-tl-srft-forms">
+            <form id="app-tb-tl-sort-form" class="sort-filter-form left">
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Wybierz kolumnę</th>
+                    <th>Wybierz porządek</th>
+                  </tr>
+              	</thead>
+                <tbody>
+                </tbody>
+              </table>
+
+              <div id="app-tb-tl-sort-add" class="grey button">Dodaj kolejny klucz</div>
+              <div id="app-tb-tl-sort-submit" class="blue button">Sortuj</div>
+
+            </form>
+            <!-- F I L T E R   F O R M -->
+            <form id="app-tb-tl-filter-form" class="sort-filter-form left">
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Wybierz kolumnę</th>
+                    <th>Wybierz operację</th>
+                    <th>Wpisz treść filtra</th>
+                  </tr>
+              	</thead>
+              	<tbody>
+              	</tbody>
+              </table>
+
+              <div id="app-tb-tl-filter-add" class="grey button">Dodaj kolejny klucz</div>
+              <div id="app-tb-tl-filter-submit" class="blue button">Filtruj</div>
+              
+            </form>
+          </section>
+          <!-- C O L U M N S -->
           <section>
             <div id="app-tb-tl-columns-button" class="button right">Dodaj/Usuń kolumny</div>
             <br class="clear"/>
             <div id="app-tb-tl-columns-list" class="right">
-              <form action="">    
+              <form id="app-tb-tl-columns-form">    
                 <div id="app-tb-tl-lt-select" class="grey button left">Zaznacz wszystkie</div>
                 <div id="app-tb-tl-lt-unselect" class="grey button left">Odznacz wszystkie</div>
                 <div id="app-tb-tl-lt-submit" class="blue button left">Dodaj/Usuń</div>
                 <br class="clear" />
-                Lista kolumn goes here
+                <table>
+                	<tbody></tbody>
+                </table>
               </form>
           </section>
         </section>
@@ -387,24 +355,35 @@
           <tbody></tbody>
         </table>
 
-      </section> <!-- E O:  T A B L E -->
+      </section> <!-- E O:  M A I N   P A N E L --> 
+    </section> <!-- E O:  T A B L E -->
+    <!-- S H A R E -->
+    <section id="app-share" class="app-container">
+      <section class="panel-main">
+        Share form goes here!!
+      </section>
+    </section> <!-- E O:  S H A R E -->
 
-      <!-- S H A R E -->
-      <section id="app-share" class="app-container">
-      </section> <!-- E O:  S H A R E -->
-    </section>
   </section> <!-- E O:  A P P L I C A T I O N -->
 
-
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-  <script type="text/javascript">
-//    $('#pl-dl-sheets').hide();
-//    $('.panel-main').find('img').hide();
-    var bro = $.browser;
-    if( bro.mozilla && parseFloat( bro.version, 10 ) < 4.0 ) {
-      alert( 'Korzystasz ze starej wersji Mozilli - ZMIEŃ JĄ NATYCHMIAST GNIDO!!' );
-    }
-  </script>
+    <script src="http://code.jquery.com/jquery-1.6.1.js"></script>
+    <script src="/site_media/test/hide.js"></script>
+    <script src="/site_media/test/assert.js"></script>
+    <script src="/site_media/test/store.js"></script>
+    <script src="/site_media/test/db.js"></script>
+    <script src="/site_media/test/gui.js"></script>
+    <script src="/site_media/test/table.js"></script>
+    <script src="/site_media/test/sheet.js"></script>
+    <script src="/site_media/test/utils.js"></script>
+    <script src="/site_media/test/tools.js"></script>    
+    <script src="/site_media/test/algorithms.js"></script>
+    <script src="/site_media/test/download.js"></script>
+    <script type="text/javascript" language="javascript" charset="utf-8">
+    // <![CDATA[
+        _store.meta_data( {{ meta_data|safe }} );       
+        _gui.init_gui(); 
+    // ]]>
+    </script> 
 
 </body>
 </html>

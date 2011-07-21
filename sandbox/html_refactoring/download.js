@@ -68,7 +68,7 @@ var _download = (function () {
         }
 
         // send it to server for further processing!!
-        $('#download-form')
+        $('#pl-dl-hidden-form')
             .find('input')
             .val( csv_string )
             .end()

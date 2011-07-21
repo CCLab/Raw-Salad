@@ -241,14 +241,14 @@ var _tools = (function () {
         all_columns.forEach( function ( e ) {
             var key = e['key'];
 
-            html.push( '<tr><td>' );
+            html.push( '<tr><td class="columns">' );
 	        html.push( '<input type="checkbox" name="app-tb-tl-columns" ' );
             html.push( 'value="', key, '" id="column-id-', key, '"' );
 	        if( _store.is_column_in_active_sheet( key ) ) {
                 html.push( ' checked');
             }
             html.push( '>' );
-            html.push( '</td><td>' );
+            html.push( '</td><td class="columns">' );
             html.push( '<label for="column-id-', key, '">' );
             html.push( e['label'], '</label>' );
             html.push( '</td></tr>' );
@@ -440,7 +440,7 @@ var _tools = (function () {
     };
 
     function prepare_manage_columns_interface(){
-	    var new_active_columns;
+        var new_active_columns;
         var i = 0;
         var checkboxes_list;
 

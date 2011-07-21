@@ -31,6 +31,7 @@ ul {
   display: block;
 }
 
+
 td {
   padding: 5px 0px;
 }
@@ -70,6 +71,7 @@ h3 {
   #top-menu .active {
     height: 15px;
     padding: 8px 5px;
+    margin-bottom: 5px;
   }
 
   #top-menu li+li {
@@ -78,6 +80,10 @@ h3 {
 
   #meta-menu li {
     margin-left: 10px;
+  }
+
+  #meta-menu li.active {
+    background-color: transparent;
   }
 
   #mm-feedback {
@@ -96,7 +102,6 @@ h3 {
 /*  P A N E L S  */
 #panels {
   width: 960px;
-  margin-top: 35px;
 }
 
   .panel {
@@ -219,6 +224,14 @@ h3 {
     margin-bottom: 5px;
   }
 
+  #pl-fb-email {
+    color: #1b1b1b;
+  }
+
+  #pl-fb-email.info {
+    color: #aaa;
+  }
+
   #pl-close-bar {
     height: 14px;
     padding: 3px 0px;
@@ -239,17 +252,28 @@ h3 {
     color: #1ea3e8;
   }
 
+  .plate {
+    line-height: 17px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 80px;
+    padding-left: 150px;
+  }
+
 /*  A P P L I C A T I O N  */
 #application {
+  overflow: visible;
   width: 960px;
   margin: 0px auto;
+  margin-top: 10px;
   padding-bottom: 5px;
 
   background-color: #fff;
 }
 
   #application > header {
-    overflow: hidden;
+    overflow: auto;
     background-color: #8b8b8b; /* same as bodyu bgcolor */
   }
 
@@ -286,9 +310,64 @@ h3 {
     border-bottom: 1px solid #fff;
   }
 
+  #app-tb-save-sheet {
+    margin: 9px;
+    margin-bottom: 0px;
+    padding: 3px;
+
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+  }
+
+  #app-table > .panel-main {
+    overflow: visible;
+  }
+
+  #app-table header li {
+    float: left;
+
+    padding: 4px 5px;
+    margin: 9px 3px;
+    margin-bottom: 0px;
+
+    background-color: #fff;
+    border: 1px solid #c8c8c8;
+    border-bottom: 1px solid #1ea3e8;
+    
+    border-radius: 3px 3px 0px 0px;
+    -moz-border-radius: 3px 3px 0px 0px;
+    -webkit-border-radius: 3px 3px 0px 0px;
+    -o-border-radius: 3px 3px 0px 0px;
+  }
+
+  #app-table header li:hover {
+    border: 1px solid #1ea3e8;
+    background-color: #1ea3e8;
+  }
+
+  #app-table header li.active {
+    padding: 6px 5px;
+    margin: 5px 3px;
+    margin-bottom: 0px;
+    background-color: #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  #app-table header li.active:hover {
+    border: 1px solid #c8c8c8;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  #app-table > .main-panel {
+    overflow: visible;
+  }
+
   #app-tb-tools > section {
     clear: both;
     padding: 10px;
+    padding-bottom: 0px;
   }
 
   #app-tb-tl-bt-container > div {
@@ -301,6 +380,15 @@ h3 {
   #app-tb-tl-bt-container > div:hover {
     color: #fff;
     background-color: #b7b7b7;
+  }
+
+  #app-tb-tl-clear-button {
+    margin-right: 10px;
+
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
   }
 
   #app-tb-tl-sort-button {
@@ -317,6 +405,38 @@ h3 {
     -moz-border-radius: 0px 3px 3px 0px;
     -webkit-border-radius: 0px 3px 3px 0px;
     -o-border-radius: 0px 3px 3px 0px;
+  }
+
+  #app-tb-tl-srft-forms > form > *  {
+    float: left;
+    margin-right: 5px;
+  }
+
+  #app-tb-tl-srft-forms > table td {
+    vertical-align: top;
+    padding: 0px 5px;
+  }
+
+  .input-text {
+    min-width: 100px;
+    background-color: #fff;
+
+    border: 1px solid #4cbceb;
+
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+  }
+
+  #app-tb-tl-srft-forms .button {
+    margin-top: 25px;
+    padding: 5px;
+
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
   }
 
   #app-tb-tl-columns-button {
@@ -355,6 +475,10 @@ h3 {
     -o-border-radius: 5px 0px 5px 5px;
   }
 
+  #app-tb-tl-columns-list td {
+    padding: 0px;
+  }
+
   #app-tb-tl-columns-list .button {
     padding: 5px;
     margin-right: 5px;
@@ -365,8 +489,24 @@ h3 {
     -o-border-radius: 5px;
   }
 
+.close-sheet-button {
+  float: right;
+  margin: -2px -2px;
+  margin-left: 5px;
+  padding: 1px 3px;
 
-  #app-share {
-    height: 300px;
-  }
+  font-weight: bold;
+  background-color: #969696;
+  color: #fff;
+
+  border-radius: 3px;    
+  -moz-border-radius: 3px;    
+  -webkit-border-radius: 3px;    
+  -o-border-radius: 3px;    
+}
+
+.close-sheet-button:hover {
+  color: #5b5b5b;
+  background-color: #b6b6b6;
+}
 

@@ -30,8 +30,8 @@ var _table = (function () {
     var that = {};
 
     that.clean_table = function () {
-        $('#data-table > thead').empty();
-        $('#data-table > tbody').empty();
+        $('#app-tb-datatable > thead').empty();
+        $('#app-tb-datatable > tbody').empty();
         $('#filtered-thead').empty();
         $('#filtered-tbody').empty();
     };
@@ -107,7 +107,7 @@ var _table = (function () {
 
             html.push( '</tr>' );
         }
-        $('#data-table > thead').append( html.join('') );
+        $('#app-tb-datatable > thead').append( html.join('') );
     }
 
     function create_tbody() {
@@ -140,7 +140,7 @@ var _table = (function () {
         var schema = _store.active_columns();
 
         for( i = 0; i < len; ++i ) {
-            $('#data-table > tbody').append( generate_row({
+            $('#app-tb-datatable > tbody').append( generate_row({
                 node: data[i],
                 index: i,
                 schema: schema

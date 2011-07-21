@@ -1,15 +1,14 @@
 (function () {
     // hide what's not needed now
-    $('#sort-form').hide();
-    $('#filter-form').hide();
-    $('#manage-columns-form').hide();
-    $('#search-container').hide();
-    $('#download-container').hide();
-    $('#permalink-container').hide();
-    $('#download-form').hide();
+    $('#pl-ch-views').hide();
+    $('#pl-search').hide();
+    $('#pl-download').hide();
+    $('#pl-more').hide();
+    $('#pl-english').hide();
+    $('#pl-feedback').hide();
+    $('#pl-close-bar').hide();
     $('#application').hide();
-    $('#open-close-choose-panel').hide();
-    $('#back-to-datasets').hide();
-    $('#choose-perspectives').hide();
-    $('#search-panel').hide();
+    $('#app-share').hide();
+    $('#app-tb-tl-srft-forms').find('form').hide();
+    $('#app-tb-tl-columns-form').hide();
 })();
