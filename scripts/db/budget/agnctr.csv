@@ -67,13 +67,13 @@
 "3.1.6";"3-1-6";"Ubezpieczenia społeczne i inne świadczenia";7538;7617
 "3.1.6.1";"3-1-6-1";"składki na ubezpieczenie społeczne";5202;5202
 "3.1.6.2";"3-1-6-2";"składki na Fundusz Pracy";835;835
-"3.1.6.3";"3-1-6-3";"składka na Fundusz Gwarantowanych Świadczeń Pracowniczych";34;715
-"3.1.6.4";"3-1-6-4";"świadczenia socjalne";715;865
-"3.1.6.5";"3-1-6-5";"inne";752;2864
-"3.1.7";"3-1-7";"pozostałe";3299;750
+"3.1.6.3";"3-1-6-3";"składka na Fundusz Gwarantowanych Świadczeń Pracowniczych";34;
+"3.1.6.4";"3-1-6-4";"świadczenia socjalne";715;715
+"3.1.6.5";"3-1-6-5";"inne";752;865
+"3.1.7";"3-1-7";"pozostałe";3299;2864
 "3.2";"3-2";"Koszty finansowe";1500;750
-"3.2.1";"3-2-1";"inne";1500;119595
-"3.3";"3-3";"Pozostałe koszty";204312;
+"3.2.1";"3-2-1";"inne";1500;750
+"3.3";"3-3";"Pozostałe koszty";204312;119595
 "4";"4";"AGENCJA RYNKU ROLNEGO";364661;359312
 "4.1";"4-1";"Koszty według rodzaju";139284;140584
 "4.1.1";"4-1-1";"Materiały i energia";4100;4228
@@ -140,6 +140,11 @@
 "7.2.2";"7-2-2";"jednostek niezaliczanych do sektora finansów publicznych";2186;4284
 "7.3";"7-3";"Środki przekazane na realizację zadań bieŜących dla jednostek zaliczanych do sektora finansów publicznych";18329;13336
 "7.4";"7-4";"Środki przekazane na realizację zadań bieŜących dla jednostek niezaliczanych do sektora finansów publicznych";352997;241030
+"7.5";"7-5";"Środki przekazane na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek zaliczanych do sektora finansów publicznych";76106;80732
+"7.6";"7-6";"Środki przekazane na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek niezaliczanych do sektora finansów publicznych";290547;353753
+"7.7";"7-7";"Koszty finansowe";12;12
+"7.7.1";"7-7-1";"obsługa długu";12;12
+"7.8";"7-8";"Pozostałe koszty";5132;13817
 "8";"8";"AGENCJA OCENY TECHNOLOGII MEDYCZNYCH";9690;10290
 "8.1";"8-1";"Koszty funkcjonowania";9690;10290
 "8.1.1";"8-1-1";"Amortyzacja";140;150
@@ -341,6 +346,15 @@
 "20.1.5";"20-1-5";"wynagrodzenia";2063106;2064139
 "20.1.5.1";"20-1-5-1";"osobowe";2042130;2042130
 "20.1.5.2";"20-1-5-2";"pozostałe";20976;22009
+"20.1.6";"20-1-6";"ubezpieczenia społeczne i inne świadczenia";418820;424612
+"20.1.6.1";"20-1-6-1";"składki na ubezpieczenie społeczne";304538;304538
+"20.1.6.2";"20-1-6-2";"składki na Fundusz Pracy";49119;49119
+"20.1.6.3";"20-1-6-3";"świadczenia socjalne";54900;58266
+"20.1.6.4";"20-1-6-4";"inne";10263;12689
+"20.1.7";"20-1-7";"pozostałe";34531;38872
+"20.2";"20-2";"Koszty finansowe";1631;1631
+"20.2.1";"20-2-1";"inne";1631;1631
+"20.3";"20-3";"Pozostałe koszty";1756;1756
 "21";"21";"NARODOWY FUNDUSZ OCHRONY ŚRODOWISKA I GOSPODARKI WODNEJ";1262190;1412805
 "21.1";"21-1";"Koszty stałe";111800;116975
 "21.1.1";"21-1-1";"Koszty bieŜące, z tego:";104370;110015

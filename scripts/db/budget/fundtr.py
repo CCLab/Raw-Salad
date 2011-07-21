@@ -79,6 +79,52 @@ def db_insert(data_bulk, db, collname, clean_first=False):
 
 
 #-----------------------------
+def clean_info(lst, info_idefs, cut_prefix):
+    fin_list= lst[:]
+    print "...move defined elements to the info key of their parents: %s" % info_idefs
+    for info_idef in info_idefs:
+        parent_idef= info_idef.rsplit("-",1)[0]
+        index_parent, index_info= -1, -1
+        i= 0
+        print "...looking for idefs: info %s; parent %s" % (info_idef, parent_idef)
+        for curr_doc in fin_list:
+            if cut_prefix:
+                curr_idef= curr_doc["idef"].split("-",1)[1]
+            else:
+                curr_idef= curr_doc["idef"]
+
+            if curr_idef == parent_idef:
+                index_parent= i
+                parent_dict= curr_doc
+            if curr_idef == info_idef:
+                index_info= i
+                info_dict= curr_doc
+            if index_parent > 0 and index_info > 0: # ok, we've got them both
+                break
+            i += 1
+
+        if index_parent < 0 and index_info < 0:
+            print "ERROR: can't move elements to the info key - impossible to find them and/or their parents!"
+        else:
+            if parent_dict["info"] is None:
+                parent_dict["info"]= []
+            print "...setting up info key for element %s" % parent_dict["idef"]
+            del info_dict["info"]
+            parent_dict["info"].append(info_dict)
+            del fin_list[index_info]
+
+    # filling leaves
+    print '-- correcting leaves'
+    fund_data_children= fin_list[:]
+    for fund_data_row in fin_list:
+        for fund_data_child in fund_data_children:
+            if fund_data_row['idef'] == fund_data_child['parent']:
+                fund_data_row['leaf']= False
+                break
+
+    return fin_list
+
+#-----------------------------
 def fill_docs(fund_data):
     print '-- filling out missing information'
 
@@ -127,18 +173,10 @@ def fill_docs(fund_data):
     total_doc['type']= 'Total'
     total_doc['name']= 'Ogółem'
     total_doc['paragrafy']= None
+    total_doc['info']= None
     total_doc['frst_popr']= total_frst_popr
     total_doc['plan_nast']= total_plan_nast
     fund_data. append(total_doc)
-
-    # filling leaves
-    print '-- correcting leaves'
-    fund_data_children= fund_data[:]
-    for fund_data_row in fund_data:
-        for fund_data_child in fund_data_children:
-            if fund_data_row['idef'] == fund_data_child['parent']:
-                fund_data_row['leaf']= False
-                break
 
     return fund_data
 
@@ -184,6 +222,8 @@ def csv_parse(csv_read, schema):
                         dict_row[new_key] = field # no, it is a string
 
                 i += 1
+
+            dict_row['info']= None # filling only for those who have info key
 
             out.append(dict_row)
 
@@ -277,10 +317,20 @@ if __name__ == "__main__":
 
     # fill it out with real data
     obj_rep= fill_docs(obj_parsed) # processing and inserting the data
-    for ii in obj_rep:
-        print "%-15s %-20s %-15s %-20s %5s %-7s %-10s %-50s %10d %10d" % (
-            ii['idef'], ii['idef_sort'], ii['parent'], ii['parent_sort'], ii['level'], ii['leaf'], ii['type'], ii['name'], ii['plan_nast'], ii['frst_popr']
-            )
+    # for ii in obj_rep:
+    #     print "%-15s %-20s %-15s %-20s %5s %-7s %-10s %-50s %10d %10d" % (
+    #         ii['idef'], ii['idef_sort'], ii['parent'], ii['parent_sort'], ii['level'], ii['leaf'], ii['type'], ii['name'], ii['plan_nast'], ii['frst_popr']
+    #         )
+
+    # WARNING! pecularity: move defined elements to the info key of their parents
+    info_idef_list= []
+    try:
+        info_idef_list= schema['info']
+    except:
+        pass
+    if len(info_idef_list) > 0:
+        obj_rep= clean_info(obj_rep, info_idef_list, cut_prefix=False)
+
     print '-- inserting into the db'
     print '-- ', db_insert(obj_rep, db, collectname, clean_db), 'records inserted'
 
