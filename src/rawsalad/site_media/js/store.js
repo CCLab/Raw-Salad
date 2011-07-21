@@ -165,6 +165,17 @@ var _store = (function () {
     };
 
 
+    that.is_node_in_store = function ( id ) {
+        var i;
+        var rows = that.active_rows();
+        for ( i= rows.length - 1; i >= 0; i-= 1 ){
+            if( rows[i]['data']['parent'] === id ){
+                return true;
+            }        
+        }
+        return false;        
+    };
+
     that.set_open = function ( id, state ) {
         var node, rows = that.active_rows();
         var i, len = rows.length;
@@ -335,7 +346,7 @@ var _store = (function () {
     };
         
     
-    
+    // TODO not needed yet    
     that.set_active_sheet_name = function (sheet_name) {
         that.active_sheet()['name'] = sheet_name;
     };
