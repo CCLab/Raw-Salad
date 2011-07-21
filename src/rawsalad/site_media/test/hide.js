@@ -8,4 +8,6 @@
     $('#pl-feedback').hide();
     $('#pl-close-bar').hide();
     $('#application').hide();
+    $('#app-tb-tl-srft-forms').find('form').hide();
+    $('#app-tb-tl-columns-form').hide();
 })();

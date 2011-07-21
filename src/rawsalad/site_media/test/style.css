@@ -81,6 +81,10 @@ h3 {
     margin-left: 10px;
   }
 
+  #meta-menu li.active {
+    background-color: transparent;
+  }
+
   #mm-feedback {
     margin-top: 4px;
     padding: 2px 5px !important;
@@ -384,7 +388,7 @@ h3 {
     margin-right: 5px;
   }
 
-  #app-tb-tl-filter-form > table td {
+  #app-tb-tl-srft-forms > table td {
     vertical-align: top;
     padding: 5px;
   }
@@ -402,16 +406,13 @@ h3 {
   }
 
   #app-tb-tl-srft-forms .button {
+    margin-top: 25px;
     padding: 5px;
 
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     -o-border-radius: 5px;
-  }
-
-  #app-tb-tl-filter-form .button {
-    margin-top: 25px;
   }
 
   #app-tb-tl-columns-button {

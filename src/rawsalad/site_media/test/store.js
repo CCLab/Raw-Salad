@@ -311,7 +311,7 @@ var _store = (function () {
     };
     
     that.set_active_sheet_name = function (sheet_name) {
-        that.active_sheet().['name'] = sheet_name;
+        that.active_sheet()['name'] = sheet_name;
     };
 
 // P R I V A T E   I N T E R F A C E

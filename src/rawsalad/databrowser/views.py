@@ -212,7 +212,7 @@ func_dict = {
 
 
 def get_page( data ):
-    template = loader.get_template( "test.html" )#app.html" )
+    template = loader.get_template( "app.html" )
 #     context = Context( tmp_solution_for_metadata() )
     context = Context( get_ms_nav() )
     return HttpResponse( template.render( context ))

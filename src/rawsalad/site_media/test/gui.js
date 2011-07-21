@@ -32,7 +32,7 @@ var _gui = (function () {
     that.init_gui = function () {
 
         // arm top menu
-        $('#top-menu')
+        $('#top')
             .find('li')
             .click( function () {
                 do_panels( $(this) );
@@ -81,7 +81,8 @@ var _gui = (function () {
 
                 $('#pl-ch-views')
                     .hide()
-                    .empty();
+                    .find('ul')
+                    .remove();
 
                 $('#pl-ch-datasets')
                     .show();
@@ -167,7 +168,7 @@ var _gui = (function () {
         $('.snapshots').remove();
         // 2 create new gui
         groups.forEach( function ( group, group_num ){
-            group.forEach( function (sheet, sheet_num){
+            group['sheets'].forEach( function (sheet, sheet_num){
                 var  sheet_name = sheet['name'];
                 var html = [];
                 var new_snap;
@@ -200,7 +201,7 @@ var _gui = (function () {
                        )
                        .addClass( 'active' );
                 }
-                all_snapshots.append(new_snap);
+                //all_snapshots.append(new_snap);
             })
         });
         // TODO - finish this
@@ -392,7 +393,7 @@ var _gui = (function () {
             return;
         }
 
-        $('#top-menu')
+        $('#top')
             .find('.active')
             .removeClass( 'active' );
 
@@ -543,7 +544,7 @@ var _gui = (function () {
             html.push( '<section>' );
             html.push( '<p>', set['description'], '</p>' );
             html.push( '<div class="blue button right" ');
-            html.push( 'data-set-id="', set['idef'], ">' );
+            html.push( 'data-set-id="', set['idef'], '">' );
             html.push( 'Zobacz dane</div>' );
             html.push( '</section>' );
             html.push( '</li>' );
@@ -551,7 +552,7 @@ var _gui = (function () {
             if( i === mid ) {
                 html.push( '</ul><ul class="left">' );
             }
-        }
+        });
         html.push( '</ul>' );
 
         $('#pl-ch-datasets')
@@ -591,7 +592,7 @@ var _gui = (function () {
                     html.push( 'data-set-id="', dataset_id, '" ' );
                     html.push( 'data-view-id="', view['idef'], '" ' );
                     html.push( 'data-issue="', issue, '">' );
-                    html.push( 'issue' );
+                    html.push( issue );
                     html.push( '</div>' );
                 });
 

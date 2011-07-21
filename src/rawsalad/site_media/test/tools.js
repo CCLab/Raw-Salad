@@ -102,16 +102,17 @@ var _tools = (function () {
                                 name: e['key'],
                                 label: e['label']
                             };
-                        })
-                        .unshift({
-                            name: 'null',
-                            label: ''
                         });
+
+        columns.unshift({
+                    name: 'null',
+                    label: ''
+                });
 
         key = $('#app-tb-tl-sort-form').find('tbody > tr').length;
 
         if( key === 2 ) {
-            $('#app-tb-tl-sort-add' ).remove();
+            $('#app-tb-tl-sort-add' ).hide();
         }
 
         html.push( '<tr id="sort-key-', key, '">' );
@@ -129,6 +130,7 @@ var _tools = (function () {
         html.push( '<td>' );
         html.push( '<select name="app-tb-tl-sort-order" ' );
         html.push( 'class="input-text key-', key, '">' );
+        html.push( '<option value="null"></option>' );
         html.push( '<option value="-1">Rosnąco</option>' );
         html.push( '<option value="1">Malejąco</option>' );
         html.push( '</select>' );
@@ -137,7 +139,6 @@ var _tools = (function () {
 
         $('#app-tb-tl-sort-form')
             .find('tbody')
-            .empty()
             .append( $( html.join('') ));
     }
 
@@ -158,11 +159,12 @@ var _tools = (function () {
                                 name: e['key'],
                                 label: e['label']
                             };
-                        })
-                        .unshift({
-                            name: 'null',
-                            label: ''
                         });
+
+        columns.unshift({
+                    name: 'null',
+                    label: ''
+                });
 
         key = $('#app-tb-tl-filter-form').find('tbody > tr').length;
 
@@ -173,7 +175,8 @@ var _tools = (function () {
         html.push( '<tr id="filter-key-', key, '">' );
         html.push( '<td>' );
         html.push( '<select name="app-tb-tl-filter-form-columns" ');
-        html.push( 'class="input-text key-', key, '">' );
+        html.push( 'class="input-text key-', key, '" ' );
+        html.push( 'id="filter-', key, '-columns">' );
         // add columns as select options
         columns.forEach( function ( column ) {
             html.push( '<option value="', column['name'], '" class="key-', key, '">' );
@@ -184,12 +187,12 @@ var _tools = (function () {
 
         html.push( '<td>' );
         html.push( '<select id="filter-', key, '-operations"' );
-        html.push( ' name="null-operation" disabled>' );
+        html.push( ' name="null-operation" class="input-text" disabled>' );
         html.push( '</select>' );
         html.push( '</td>' );
 
         html.push( '<td>' );
-        html.push( '<input type="text" name="query" id="filter-', key, '-query" />' );
+        html.push( '<input type="text" name="query" id="filter-', key, '-query" class="input-text"/>' );
 
         $('#app-tb-tl-filter-form')
             .find('tbody')
@@ -208,13 +211,13 @@ var _tools = (function () {
 
                         html = [ '<select id="filter-', key, '-operations"' ];
                         if ( schema[i]['type'] === 'number' ) {
-                            html.push( ' name="number-operation">' );
+                            html.push( ' name="number-operation" class="input-text">' );
                             html.push( '<option value="null" class="filter-', key, '" selected></option>' );
                             html.push( '<option value="gt" class="filter-', key, '">&gt;</option>' );
                             html.push( '<option value="eq" class="filter-', key, '">=</option>' );
                             html.push( '<option value="lt" class="filter-', key, '">&lt;</option>' );
                         } else {
-                            html.push( ' name="string-operation">' );
+                            html.push( ' name="string-operation" class="input-text">' );
                             html.push( '<option value="null" class="filter-', key, '" selected></option>' );
                             html.push( '<option value="cnt" class="filter-', key, '">Zawiera</option>' );
                             html.push( '<option value="st" class="filter-', key, '">Zaczyna się od</option>' );
@@ -223,7 +226,7 @@ var _tools = (function () {
                         }
                         html.push( '</select>' );
 
-                        $( html.join('') ).insertAfter( $('#filter-' + key + '-columns') );
+                        $(this).parent().next().append( $( html.join('') ));//.insertAfter( $('#filter-' + key + '-columns') );
                         break;
                     }
                 }
@@ -276,6 +279,8 @@ var _tools = (function () {
                     .toggleClass('pushed')
                     .siblings()
                     .removeClass('pushed');
+
+                $('#app-tb-tl-sort-add' ).show();
             });
 
         $('#app-tb-tl-sort-add').click( function () {
@@ -337,17 +342,17 @@ var _tools = (function () {
 
 
     function prepare_filtering_interface() {
-        $('#filter-button')
-            .click( function () {
-                var form = $('#filter-form');
 
-                $('#table-toolbar')
+        $('#app-tb-tl-filter-button')
+            .click( function () {
+                var form = $('#app-tb-tl-filter-form');
+
+                $('#app-tb-tools')
                     .find('form:visible')
-                    .slideUp( 200 )
-                    .removeClass('selected');
+                    .slideUp( 200 );
 
                 if( form.is( ':hidden' ) ) {
-                    form.html('');
+                    form.find('tbody').empty();
                     add_filter_key();
                     form.slideDown( 200 );
                 }
@@ -356,11 +361,14 @@ var _tools = (function () {
                     .toggleClass('pushed')
                     .siblings()
                     .removeClass('pushed');
+                
+                $('#app-tb-tl-filter-add' ).show();
             });
 
-        $('#app-tb-tl-filter-add').click( function () {
-            add_filter_key();
-        });
+        $('#app-tb-tl-filter-add')
+            .click( function () {
+                add_filter_key();
+            });
 
         $('#filter-form')
             .submit( function () {
