@@ -167,9 +167,11 @@ var _store = (function () {
 
     that.is_node_in_store = function ( id ) {
         var i;
+        var parent;
         var rows = that.active_rows();
-        for ( i= rows.length - 1; i >= 0; i-= 1 ){
-            if( rows[i]['data']['parent'] === id ){
+        for ( i= rows.length - 1; i >= 0; i-- ){
+            parent = rows[i]['data']['parent']; 
+            if( parent === id ){
                 return true;
             }        
         }
