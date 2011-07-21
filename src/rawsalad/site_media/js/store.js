@@ -179,8 +179,11 @@ var _store = (function () {
     };
 
 
-    that.active_sheet_index = function () {
-        return that.active_group()['active_sheet_number'];
+    that.active_sheet_index = function ( new_active_sheet_num ) {
+        if( arguments.length === 0 ) {
+            return that.active_group()['active_sheet_number'];
+        }
+        that.active_group()['active_sheet_number'] = new_active_sheet_num;
     };
 
     that.active_group_index = function () {
