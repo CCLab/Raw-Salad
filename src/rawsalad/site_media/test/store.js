@@ -165,19 +165,6 @@ var _store = (function () {
     };
 
 
-    that.is_node_in_store = function ( id ) {
-        var i;
-        var parent;
-        var rows = that.active_rows();
-        for ( i= rows.length - 1; i >= 0; i-- ){
-            parent = rows[i]['data']['parent']; 
-            if( parent === id ){
-                return true;
-            }        
-        }
-        return false;        
-    };
-
     that.set_open = function ( id, state ) {
         var node, rows = that.active_rows();
         var i, len = rows.length;
@@ -192,11 +179,8 @@ var _store = (function () {
     };
 
 
-    that.active_sheet_index = function ( new_active_sheet_num ) {
-        if( arguments.length === 0 ) {
-            return that.active_group()['active_sheet_number'];
-        }
-        that.active_group()['active_sheet_number'] = new_active_sheet_num;
+    that.active_sheet_index = function () {
+        return that.active_group()['active_sheet_number'];
     };
 
     that.active_group_index = function () {
@@ -298,11 +282,6 @@ var _store = (function () {
     that.get_sheet = function ( group, sheet ) {
         return groups[group]['sheets'][sheet];
     };
-
-    that.get_sheets = function ( group_num ) {
-        var sheets = groups[group_num]['sheets'] 
-        return sheets;
-    };
     
     that.remove_active_group = function() {
         if (groups.length === 1){
@@ -326,29 +305,11 @@ var _store = (function () {
         if (active_group_sheets.length === 0 ){
             that.remove_active_group();
         }else if (active_sheet_num !== 0 ) {
-                active_grp['active_sheet_number'] = active_sheet_num - 1;
+                active_grp['active_sheet_number'] = active_sheet_num - 1  ;                  
             }            
         return true;
     };
     
-    that.next_sheet_name = function () {    
-        var next_num=1;
-        var sheet_name;
-        that.active_group()['sheets'].forEach( function (sheet, sheet_num){
-            if ( sheet['name'].indexOf('Arkusz') !== -1 ) {
-                sheet_name = sheet['name'].split(' ');
-                if ( sheet_name[1] >= next_num ){
-                    next_num = sheet_name[1];
-                    next_num++;
-                   }; 
-            }
-        });
-         return 'Arkusz ' + next_num; 
-        
-    };
-        
-    
-    // TODO not needed yet    
     that.set_active_sheet_name = function (sheet_name) {
         that.active_sheet()['name'] = sheet_name;
     };

@@ -343,7 +343,7 @@ var _table = (function () {
             if( node.attr( 'data-open' ) === 'false' ) {
 
                 // if children are hidden
-                if( _store.is_node_in_store( id ) ) {
+                if( $('.'+id).length !== 0 ) {
                     _utils.with_subtree( id, $.fn.show );
                 }
                 // if children not loaded yet
