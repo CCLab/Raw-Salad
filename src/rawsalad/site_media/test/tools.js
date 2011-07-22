@@ -504,14 +504,9 @@ var _tools = (function () {
                 new_active_columns = [];
                 checkboxes = $('input[name=app-tb-tl-columns]:checked');
 
-                //checkboxes.forEach( function ( box ) {
-                 for ( i = 0; i < checkboxes.length; i += 1 ) {
+                checkboxes.each( function () {
                     new_active_columns.
-<<<<<<< HEAD
-                        push( _store.get_column_from_group( checkboxes[i].val() ));
-=======
-                        push( _store.get_column_from_group( checkboxes[i].value ));                 
->>>>>>> 9df3cc8b726447ff8b97cdcc76a1c4b28a1ef539
+                        push( _store.get_column_from_group( this.val() ));
                  }
 
 		        _store.set_active_columnes( new_active_columns );
