@@ -330,13 +330,13 @@ var _table = (function () {
 
 
     function show_selected_subtree( id ) {
-       $('tr.'+id).each( function ( node ) {
-            if ( node.attr( 'data-open' ) === 'true' ) {
-                that.show_selected_subtree( $(this).attr('id') );
-            }
-            node.show();
+     $('tr.'+id).each( function () {
+                    var node = $(this);
+             if ( node.attr( 'data-open' ) === 'true' ) {
+                 show_selected_subtree( node.attr('id') );
+             }
+             node.show();
         });
-    
     }
 
     function open_close_subtree( node, root ) {
