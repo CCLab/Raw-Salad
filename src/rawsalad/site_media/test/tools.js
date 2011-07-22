@@ -505,7 +505,7 @@ var _tools = (function () {
                 checkboxes = $('input[name=app-tb-tl-columns]:checked');
 
                 //checkboxes.forEach( function ( box ) {
-                 for ( i = 0; i < checkboxes_list.length; i += 1 ) {
+                 for ( i = 0; i < checkboxes.length; i += 1 ) {
                     new_active_columns.
                         push( _store.get_column_from_group( checkboxes[i].val() ));                 
                  }
