@@ -209,11 +209,13 @@ var _download = (function () {
 
     function add_total( sheet ) {
         var result = '';
-        var total = sheet['rows']['total']['data'];
         var columns = sheet['columns'];
+        var total;
 
-        // if no total in the collecion...
-        if( !total ) {
+        try {
+            total = sheet['rows']['total']['data'];
+        }
+        catch ( err ) {
             return '';
         }
 
