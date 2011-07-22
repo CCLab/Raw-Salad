@@ -66,6 +66,12 @@ var _gui = (function () {
                 $('#app-' + action).show();
             });
 
+        $('#app-tb-tl-clear-button')
+            .click( function () {
+                _store.reset_sheet();
+                that.refresh_gui();
+            });
+
         // arm back-to-datasets button
         $('.pl-ch-back > img')
             .hover(
@@ -169,13 +175,14 @@ var _gui = (function () {
                 var html = [];
                 var new_sheet;
 
+
                 html.push( '<li ' );
                 html.push( 'id="snap-' + group_num + '-' + sheet_num + '" ' );
-                html.push( 'class="snapshot tab button" ' );
+                html.push( 'class="sheet tab button" ' );
                 html.push( 'title="', sheet_name, '">' );
                 html.push( sheet_name.length > 20 ?
-                    sheet_name.slice( 0, 17 ) + '...' :
-                    sheet_name );
+                           sheet_name.slice( 0, 17 ) + '...' :
+                           sheet_name );
                 html.push( '</li>' );
 
                 new_snap = $( html.join('') );
@@ -183,12 +190,12 @@ var _gui = (function () {
                     .click( function () {
                         _store.active_group( group_num );
                         _store.active_sheet( sheet_num );
-                        refresh_gui();
+                        that.refresh_gui();
                     });
 
                 if( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
                     close_sheet = $( '<div class="close-sheet-button button" >x</div>' );
-                    if( !( groups.lenght === 1 && sheets.length === 1 ) ) {
+                    if( !( groups.length === 1 && group['sheets'].length === 1 ) ) {
                         new_snap
                             .append( close_sheet
                                         .click( function() {
@@ -198,6 +205,7 @@ var _gui = (function () {
                             )
                     }
                     new_snap.addClass('active');
+                    $('#app-tb-tl-title').html( sheet_name );
                 }
                 $('#app-tb-sheets').append( new_snap );
             })
@@ -205,9 +213,9 @@ var _gui = (function () {
 
         // TODO - finish this
         // 3 clear and get new tabs from _store
-        if( $('.snapshot').length == 10 ) {
-            $('#save-snapshot' ).hide();
-        }
+        //if( $('.snapshot').length == 10 ) {
+        //    $('#save-snapshot' ).hide();
+        //}
 
         // close all unnecessary tools
         //that.clear_app();
@@ -382,7 +390,7 @@ var _gui = (function () {
         $('#pl-dl-sheets').show();
 
         html.push( '<tbody>' );
-        $('.snapshot').each( function ( sheet, i ) {
+        $('.sheet').each( function ( i, sheet ) {
             var id = $(this).attr('id').split('-');
             var group = id[1];
             var sheet = id[2];
@@ -391,12 +399,12 @@ var _gui = (function () {
             html.push( '<tr>' );
             // add (un)select all buttons
             if( i === 0 ) {
-                html.push( '<td class="pl-dn-select-buttons" ' );
-                html.push( 'rowspan="', $('.snapshots').length, '">' );
-                html.push( '<div id="pl-dn-sh-select" class="grey button"> ');
+                html.push( '<td class="pl-dl-select-buttons" ' );
+                html.push( 'rowspan="', $('.sheet').length, '">' );
+                html.push( '<div id="pl-dl-sh-select" class="grey button">');
                 html.push( 'Zaznacz wszystkie</div>' );
                 html.push( '<br class="clear"/>' );
-                html.push( '<div id="pl-dn-sh-unselect" class="grey button"> ');
+                html.push( '<div id="pl-dl-sh-unselect" class="grey button"> ');
                 html.push( 'Odznacz wszystkie</div>' );
                 html.push( '</td>' );
             }
@@ -411,7 +419,7 @@ var _gui = (function () {
 
         $('#pl-dl-sh-table')
             .empty()
-            .append( html.join('') );
+            .append( $( html.join('') ));
 
         $('#pl-dl-sh-select').click( function () {
             // select all checkboxes

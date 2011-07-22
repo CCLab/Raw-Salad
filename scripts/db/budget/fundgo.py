@@ -372,6 +372,9 @@ def csv_parse(csv_read):
                         except:
                             dict_row[new_key] = field # no, it is a string
                 i += 1
+
+            dict_row['info']= None # filling only for those who have info key
+
             out.append(dict_row)
 
     return out

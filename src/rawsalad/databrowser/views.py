@@ -58,7 +58,7 @@ def build_regexp(searchline, strictsearch):
         # searchline= "^%(lookupstr)s\s|\s%(lookupstr)s\s|\s%(lookupstr)s$" % { "lookupstr": searchline }
         # ver 0.1
         searchline= "^%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s$" % { "lookupstr": searchline }
-        
+
     return searchline
 
 def do_search(scope_list, regx, dbconn):
@@ -75,7 +75,7 @@ def do_search(scope_list, regx, dbconn):
     stat_dict= { "errors": [] }
     found_num= 0 # number of records found
     exclude_fields= ['idef', 'idef_sort', 'parent', 'parent_sort', 'level'] # not all fields are searchable
-    
+
     for sc in scope_list: # fill the list of collections
         sc_list= sc.split('-')
         dataset, idef, issue= int(sc_list[0]), int(sc_list[1]), str(sc_list[2])
@@ -184,7 +184,7 @@ def search_data( request ):
         print "'%s' : '%s'" % (k, v)
 
     return HttpResponse( json.dumps( result ))
-    
+
 # get initial_data + subtrees to searched nodes
 def get_searched_data( request ):
     response_dict = {
@@ -193,7 +193,7 @@ def get_searched_data( request ):
         'issue': request.GET.get( 'issue', -1 )
     }
     return HttpResponse( json.dumps(response_dict) )
-    
+
 
 # list of possible ajax calls
 func_dict = {
@@ -212,7 +212,7 @@ func_dict = {
 
 
 def get_page( data ):
-    template = loader.get_template( "app.html" )
+    template = loader.get_template( "test.html" )
 #     context = Context( tmp_solution_for_metadata() )
     context = Context( get_ms_nav() )
     return HttpResponse( template.render( context ))

@@ -170,9 +170,8 @@
 "9.4.4.1";"9-4-4-1";"środki na zadania ustawowe  (bez współfinansowania)";4170;1280;1200
 "9.4.5";"9-4-5";"pozostałe";"x";88002;82664
 "9.4.5.1";"9-4-5-1";"środki na zadania ustawowe  (bez współfinansowania)";"x";88002;82664
-"9.4.5.2";"9-4-5-2";"środki na współfinansowanie programów i projektów  realizowanych ze środków  UE";"x";;
-"9.4.5.2.a";"9-4-5-2-a";"zakup usług remontowych";4270;1960;1925
-"9.4.5.2.b";"9-4-5-2-b";"amortyzacja majątku trwałego";4720;22100;22300
+"9.4.5.1.1";"9-4-5-1-1";"zakup usług remontowych";4270;1960;1925
+"9.4.5.1.2";"9-4-5-1-2";"amortyzacja majątku trwałego";4720;22100;22300
 "9.4.6";"9-4-6";"- odpis aktualizujący wartość  naleŜności z tytułu wpłat na PFRON, poŜyczek, odsetek od poŜyczek oraz innych naleŜności";4810;71067;79000
 "9.5";"9-5";"Wydatki inwestycyjne";"x";25920;40143
 "9.5.1";"9-5-1";"wydatki inwestycyjne (własne)  i wydatki na zakupy inwestycyjne (własne)";;17124;40061
@@ -181,7 +180,6 @@
 "9.5.2.1";"9-5-2-1";"dla sektora finansów  publicznych";6260;1688;
 "9.5.2.2";"9-5-2-2";"dla jednostek  niezaliczanych do sektora finansów  publicznych";6270;7108;82
 "9.6";"9-6";"Przelewy redystrybucyjne";2960;708019;640004
-"9.6.a";"9-6-a";"z tego dla :";;;
 "9.6.1";"9-6-1";"samorządów wojewódzkich na realizację  zadań";;75050;89025
 "9.6.2";"9-6-2";"samorządów wojewódzkich na pokrycie  kosztów obsługi realizowanych zadań";;1876;2240
 "9.6.3";"9-6-3";"samorządów powiatowych na realizację  zadań";;615700;535363
@@ -194,8 +192,8 @@
 "11.1";"11-1";"Dotacje na realizacje zadań bieżących";"2440, 2450";12996;14496
 "11.2";"11-2";"Wydatki bieŜące (własne)";"x";4;4
 "11.2.1";"11-2-1";"pozostałe";"x";4;4
-"11.2.1.a";"11-2-1-a";"inne";"x";4;4
-"11.2.1.b";"11-2-1-b";"opłaty bankowe";4300;4;4
+"11.2.1.1";"11-2-1-1";"inne";"x";4;4
+"11.2.1.1.1";"11-2-1-1-1";"opłaty bankowe";4300;4;4
 "12";"12";"PLAN FINANSOWY FUNDUSZU WSPARCIA POLICJI";;78579;88744
 "12.1";"12-1";"Wydatki bieŜące (własne)";"x";51961;46913
 "12.1.1";"12-1-1";"wynagrodzenia";"4010-4100,4170, 4180";27164;26136
@@ -224,8 +222,8 @@
 "13.1";"13-1";"Dotacje na realizację  zadań bieŜących";"2440, 2450";245115;197750
 "13.2";"13-2";"Wydatki bieŜące (własne)";"x";2580;380
 "13.2.1";"13-2-1";"pozostałe";"x";2580;380
-"13.2.1.a";"13-2-1-a";"inne";"x";2580;380
-"13.2.1.b";"13-2-1-b";"- obsługa umów o dofinansowanie przebudowy, remontów i inwestycji  obiektów  sportowych oraz opłaty bankowe";4300;2580;380
+"13.2.1.1";"13-2-1-1";"inne";"x";2580;380
+"13.2.1.1.1";"13-2-1-1-1";"- obsługa umów o dofinansowanie przebudowy, remontów i inwestycji  obiektów  sportowych oraz opłaty bankowe";4300;2580;380
 "13.3";"13-3";"Wydatki inwestycyjne";"x";501442;367250
 "13.3.1";"13-3-1";"dotacje inwestycyjne";"6260, 6270";501442;367250
 "14";"14";"PLAN FINANSOWY FUNDUSZU PROMOCJI KULTURY";;265480;145270
@@ -239,8 +237,8 @@
 "14.1.7";"14-1-7";"przekazanie Polskiemu  Instytutowi  Sztuki Filmowej";2890;11821;8700
 "14.2";"14-2";"Wydatki bieŜące (własne)";"x";10;10
 "14.2.1";"14-2-1";"pozostałe";"x";10;10
-"14.2.1.a";"14-2-1-a";"inne";"x";10;10
-"14.2.1.b";"14-2-1-b";"koszty obsługi Funduszu";4300;10;10
+"14.2.1.1";"14-2-1-1";"inne";"x";10;10
+"14.2.1.1.1";"14-2-1-1-1";"koszty obsługi Funduszu";4300;10;10
 "14.3";"14-3";"Transfery  na rzecz ludności - nagrody z FPK";3040;3000;3000
 "14.4";"14-4";"Wydatki inwestycyjne";"x";115810;66156
 "14.4.1";"14-4-1";"dotacje inwestycyjne";"x";115810;66156
@@ -267,7 +265,7 @@
 "17.1";"17-1";"Dotacje na realizację zadań bieŜących";2440;3360;2880
 "17.2";"17-2";"Wydatki bieŜące (własne)";"x";1;1
 "17.2.1";"17-2-1";"inne";"x";1;1
-"17.2.1.a";"17-2-1-a";"opłaty bankowe";4300;1;1
+"17.2.1.1";"17-2-1-1";"opłaty bankowe";4300;1;1
 "17.3";"17-3";"Wydatki inwestycyjne";"x";50;
 "17.3.1";"17-3-1";"wydatki inwestycyjne (własne) i wydatki na zakupy inwestycyjne (własne)";6110.612;50;
 "17.4";"17-4";"Przelewy redystrybucyjne";2960;28745;21120
@@ -290,7 +288,7 @@
 "19";"19";"PLAN FINANSOWY FUNDUSZU ROZWOJU PRZYWIĘZIENNYCH ZAKŁADÓW PRACY";;1951;821
 "19.1";"19-1";"Dotacje na realizację zadań bieŜących";"2440, 2450";50;
 "19.2";"19-2";"Wydatki bieŜące (własne)";"x";1;121
-"19.2.1";"19-2-1";"pozostałe, w tym:";;;
+"19.2.1";"19-2-1";"pozostałe, w tym:";;1;121
 "19.2.1.1";"19-2-1-1";"umorzenia";;;120
 "19.2.1.2";"19-2-1-2";"inne";;1;1
 "19.2.1.2.1";"19-2-1-2-1";"opłaty i prowizje bankowe";4300;1;1
@@ -316,8 +314,8 @@
 "22.1";"22-1";"Dotacje na realizację zadań bieŜących";"2440, 2450";4000;22340
 "23";"23";"PLAN FINANSOWY FUNDUSZU REPRYWATYZACJI";;1579696;732700
 "23.1";"23-1";"Wydatki bieŜące (własne)";"x";1579696;732700
-"23.1.1";"23-1-1";"- pozostałe, w tym";"x";;
-"23.1.1.1";"23-1-1-1";"inne";;;
+"23.1.1";"23-1-1";"- pozostałe, w tym";"x";1579696;732700
+"23.1.1.1";"23-1-1-1";"inne";;1579696;732700
 "23.1.1.1.1";"23-1-1-1-1";"przelewy róŜne";2970;1000000;
 "23.1.1.1.2";"23-1-1-1-2";"wynagrodzenia bezosobowe";4170;100;100
 "23.1.1.1.3";"23-1-1-1-3";"zakup usług pozostałych";4300;10;5000
@@ -331,7 +329,7 @@
 "24";"24";"PLAN FINANSOWY FUNDUSZU RESTRUKTURYZACJI PRZEDSIĘBIORCÓW";;1835986;865772
 "24.1";"24-1";"Wydatki bieŜące (własne)";"x";1834156;862844
 "24.1.1";"24-1-1";"- pozostałe, w tym";"x";1834156;862844
-"24.1.1.1";"24-1-1-1";"- inne, w tym:";;;
+"24.1.1.1";"24-1-1-1";"- inne, w tym:";;1834156;862844
 "24.1.1.1.1";"24-1-1-1-1";"dotacje na realizację zadań bieŜących dla jednostek niezaliczanych do sektora finansów publicznych";2450;50670;32300
 "24.1.1.1.2";"24-1-1-1-2";"wydatki na zakup i objęcie akcji oraz wniesienie wkładów do spółek prawa handlowego";6010;1678978;776219
 "24.1.1.1.3";"24-1-1-1-3";"udzielone poŜyczki i kredyty";9910;34008;36325
@@ -340,8 +338,8 @@
 "24.2.1";"24-2-1";"-dotacja na remont tęŜni w Ciechocinku";6270;1830;2928
 "25";"25";"PLAN FINANSOWY FUNDUSZU SKARBU PAŃSTWA";;339184;182159
 "25.1";"25-1";"Wydatki bieŜące (własne)";"x";334684;179039
-"25.1.1";"25-1-1";"- pozostałe, w tym";"x";;
-"25.1.1.1";"25-1-1-1";"inne";;;
+"25.1.1";"25-1-1";"- pozostałe, w tym";"x";334684;179039
+"25.1.1.1";"25-1-1-1";"inne";;334684;179039
 "25.1.1.1.1";"25-1-1-1-1";"róŜne przelewy";2970;95793;
 "25.1.1.1.2";"25-1-1-1-2";"składki na ubezpieczenia społeczne";4110;16;136
 "25.1.1.1.3";"25-1-1-1-3";"składki na fundusz Pracy";4120;2;23
@@ -386,7 +384,7 @@
 "26.4.1";"26-4-1";"wydatki inwestycyjne (własne) i wydatki na zakupy inwestycyjne (własne)";"6110, 6120";304;340
 "27";"27";"PLAN FINANSOWY FUNDUSZU REKOMPENSACYJNEGO";;920490;703000
 "27.1";"27-1";"Wydatki bieŜące (własne)";"x";920090;702000
-"27.1.1";"27-1-1";"inne";"x";;
+"27.1.1";"27-1-1";"inne";"x";920090;702000
 "27.1.1.1";"27-1-1-1";"zakup usług pozostałych";4300;2090;2000
 "27.1.1.2";"27-1-1-2";"kary i odszkodowania wypłacone na rzecz osób fizycznych";4590;918000;700000
 "27.2";"27-2";"Wydatki inwestycyjne";"x";400;1000
