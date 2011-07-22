@@ -506,7 +506,7 @@ var _tools = (function () {
 
                 checkboxes.each( function () {
                     new_active_columns.
-                        push( _store.get_column_from_group( this.val() ));
+                        push( _store.get_column_from_group( $(this).val() ));
                  });
 
 		        _store.set_active_columnes( new_active_columns );
