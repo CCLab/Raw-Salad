@@ -329,6 +329,16 @@ var _table = (function () {
     }
 
 
+    function show_selected_subtree( id ) {
+       $('tr.'+id).each( function ( node ) {
+            if ( node.attr( 'data-open' ) === 'true' ) {
+                that.show_selected_subtree( $(this).attr('id') );
+            }
+            node.show();
+        });
+    
+    }
+
     function open_close_subtree( node, root ) {
         var a_root = root || a_parent( node );
         var a_root_id = a_root.attr('id');
@@ -343,8 +353,10 @@ var _table = (function () {
             if( node.attr( 'data-open' ) === 'false' ) {
 
                 // if children are hidden
+                var test = $('.'+id);
                 if( $('.'+id).length !== 0 ) {
-                    _utils.with_subtree( id, $.fn.show );
+                   // _utils.with_subtree( id, $.fn.show );
+                   show_selected_subtree( id );
                 }
                 // if children not loaded yet
                 else {
