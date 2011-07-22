@@ -172,14 +172,14 @@ var _tools = (function () {
             $('#app-tb-tl-filter-add' ).remove();
         }
 
-        html.push( '<tr id="filter-key-', key, '">' );
+        html.push( '<tr>' );
         html.push( '<td>' );
         html.push( '<select name="app-tb-tl-filter-form-columns" ');
         html.push( 'class="input-text key-', key, '" ' );
         html.push( 'id="filter-', key, '-columns">' );
         // add columns as select options
         columns.forEach( function ( column ) {
-            html.push( '<option value="', column['name'], '" class="key-', key, '">' );
+            html.push( '<option value="', column['name'], '" class="filter-column-key-', key, '">' );
             html.push( column['label'], '</option>' );
         });
         html.push( '</select>' );
@@ -212,17 +212,17 @@ var _tools = (function () {
                         html = [ '<select id="filter-', key, '-operations"' ];
                         if ( schema[i]['type'] === 'number' ) {
                             html.push( ' name="number-operation" class="input-text">' );
-                            html.push( '<option value="null" class="filter-', key, '" selected></option>' );
-                            html.push( '<option value="gt" class="filter-', key, '">&gt;</option>' );
-                            html.push( '<option value="eq" class="filter-', key, '">=</option>' );
-                            html.push( '<option value="lt" class="filter-', key, '">&lt;</option>' );
+                            html.push( '<option value="null" class="filter-operation-', key, '" selected></option>' );
+                            html.push( '<option value="gt" class="filter-operation-', key, '">&gt;</option>' );
+                            html.push( '<option value="eq" class="filter-operation-', key, '">=</option>' );
+                            html.push( '<option value="lt" class="filter-operation-', key, '">&lt;</option>' );
                         } else {
                             html.push( ' name="string-operation" class="input-text">' );
-                            html.push( '<option value="null" class="filter-', key, '" selected></option>' );
-                            html.push( '<option value="cnt" class="filter-', key, '">Zawiera</option>' );
-                            html.push( '<option value="st" class="filter-', key, '">Zaczyna się od</option>' );
-                            html.push( '<option value="ncnt" class="filter-', key, '">Nie zawiera</option>' );
-                            html.push( '<option value="nst" class="filter-', key, '">Nie zaczyna się od</option>' );
+                            html.push( '<option value="null" class="filter-operation-', key, '" selected></option>' );
+                            html.push( '<option value="cnt" class="filter-operation-', key, '">Zawiera</option>' );
+                            html.push( '<option value="st" class="filter-operation-', key, '">Zaczyna się od</option>' );
+                            html.push( '<option value="ncnt" class="filter-operation-', key, '">Nie zawiera</option>' );
+                            html.push( '<option value="nst" class="filter-operation-', key, '">Nie zaczyna się od</option>' );
                         }
                         html.push( '</select>' );
 
@@ -260,7 +260,7 @@ var _tools = (function () {
 
 // >>
     function prepare_sorting_interface() {
-           
+
         $('#app-tb-tl-sort-button')
             .click( function () {
                 var form = $('#app-tb-tl-sort-form');
@@ -372,7 +372,7 @@ var _tools = (function () {
                     .toggleClass('pushed')
                     .siblings()
                     .removeClass('pushed');
-                
+
                 $('#app-tb-tl-filter-add' ).show();
             });
 
@@ -381,18 +381,24 @@ var _tools = (function () {
                 add_filter_key();
             });
 
-        $('#filter-form')
+        $('#app-tb-tl-filter-submit')
+            .click( function () {
+                $('#app-tb-tl-filter-form').submit();
+            });
+
+        $('#app-tb-tl-filter-form')
             .submit( function () {
 
                 var column, operation, query;
-                var mask = [];
-                var i, len = $('#filter-form select').length / 2;
-                var tmp, type;
-                var new_sheet;
                 var filtered_rows;
+                var i;
+                var keys_num = $('#app-tb-tl-filter-form').find('tbody > tr').length;
+                var mask = [];
+                var new_sheet;
+                var tmp, type;
 
                 for( i = 0; i < len; ++i ) {
-                    column = $('#filter-'+i+'-columns option:selected').val();
+                    column = $('#filter-column-'+ i +':selected').val();
                     if( column === "null" ) {
                         if( i === 1 ) {
                             $(this).hide();
@@ -407,7 +413,7 @@ var _tools = (function () {
                         return e['key'] === column;
                     })[0]['type'];
 
-                    operation = $('#filter-'+i+'-operations option:selected').val();;
+                    operation = $('#filter-operation-'+i+':selected').val();;
                     query = $('#filter-'+i+'-query').val();
 
                     tmp = parseInt( query, 10 );
