@@ -226,7 +226,7 @@ var _table = (function () {
         });
         html.push( '</tr>' );
 
-        $('#filtered-thead').append( html.join('') );
+        $('#app-tb-filteredtable > thead').append( html.join('') );
     }
 
     function create_filtered_tbody() {
@@ -251,7 +251,7 @@ var _table = (function () {
                                     node: row,
                                     schema: schema
                                 });
-                $('#filtered-tbody').append( new_node );
+                $('#app-tb-filteredtable > tbody').append( new_node );
             });
     }
 
