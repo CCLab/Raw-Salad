@@ -232,7 +232,7 @@ def redirect( request ):
 @csrf_exempt
 def download_data( request ):
     response = HttpResponse()
-    files = request.POST.get( 'sheets' ).split( '--file--' )[:-1]
+    files = request.POST.get( 'csv_string' ).split( '--file--' )[:-1]
 
     # send one sheet as CSV and collection of sheets as ZIP
     if len( files ) == 1:

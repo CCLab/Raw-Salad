@@ -507,7 +507,11 @@ var _tools = (function () {
                 //checkboxes.forEach( function ( box ) {
                  for ( i = 0; i < checkboxes.length; i += 1 ) {
                     new_active_columns.
+<<<<<<< HEAD
                         push( _store.get_column_from_group( checkboxes[i].val() ));
+=======
+                        push( _store.get_column_from_group( checkboxes[i].value ));                 
+>>>>>>> 9df3cc8b726447ff8b97cdcc76a1c4b28a1ef539
                  }
 
 		        _store.set_active_columnes( new_active_columns );
