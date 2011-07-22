@@ -46,7 +46,7 @@ var _gui = (function () {
                         .removeClass('info');
                 }
             });
-        
+
         // arm close bar
         $('#pl-close-bar')
             .click( hide_top_panels );
@@ -105,11 +105,30 @@ var _gui = (function () {
 
         _tools.prepare_tools();
 
+
+        $('#pl-dl-fl-tb-select')
+            .click( function () {
+                $('#pl-dl-fl-table')
+                    .find('input')
+                    .attr( 'checked', 'true' );
+            });
+
+        $('#pl-dl-fl-tb-unselect')
+            .click( function () {
+                $('#pl-dl-fl-table')
+                    .find('input')
+                    .removeAttr( 'checked' );
+            });
+
         $('#pl-dl-button')
             .click( function () {
                 var ids = {};
                 var panel = $('#pl-download');
                 var checkboxes = panel.find('input:checkbox:checked');
+
+                if( checkboxes.length === 0 ) {
+                    return;
+                }
 
                 checkboxes.each( function () {
                     var val = $(this).val();
@@ -139,6 +158,7 @@ var _gui = (function () {
                 });
 
                 _download.selected( ids );
+                hide_top_panels();
             });
 
         init_choose_panel();
@@ -167,7 +187,7 @@ var _gui = (function () {
 
         // 1  clear gui,
         $('#app-tb-sheets').empty();
-        
+
         // 2  new gui
         groups.forEach( function ( group, group_num ){
             group['sheets'].forEach( function ( sheet, sheet_num ) {
@@ -382,6 +402,9 @@ var _gui = (function () {
     // update download panel with currently open sheets
     function update_download_panel() {
         var html = [];
+
+        $('#pl-download').find('input:checked').removeAttr('checked');
+
         // if no sheets available yet, hide sheets download panel and quit
         if( !_store.active_group() ) {
             $('#pl-dl-sheets').hide();

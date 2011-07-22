@@ -38,6 +38,17 @@ h3 {
   margin: 0px;
 }
 
+input {
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+}
+
+textarea {
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+}
+
+
 #wrapper {
   width: 960px;
   margin: 0px auto;
