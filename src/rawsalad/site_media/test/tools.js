@@ -509,9 +509,7 @@ var _tools = (function () {
                     new_active_columns.
                         push( _store.get_column_from_group( checkboxes[i].val() ));                 
                  }
-                });
-
-
+                
 		        _store.set_active_columnes( new_active_columns );
                 // TODO _gui.refresh() ?!
                 _table.clean_table();
