@@ -121,7 +121,7 @@ var _tools = (function () {
         html.push( 'class="input-text key-', key, '">' );
         // TODO don't include already selected colmuns
         columns.forEach( function ( column ) {
-            html.push( '<option value="', column['name'], '" class="key-', key, '">' );
+            html.push( '<option value="', column['name'], '" class="column-key-', key, '">' );
             html.push( column['label'], '</option>' );
         });
         html.push( '</select>' );
@@ -130,9 +130,9 @@ var _tools = (function () {
         html.push( '<td>' );
         html.push( '<select name="app-tb-tl-sort-order" ' );
         html.push( 'class="input-text key-', key, '">' );
-        html.push( '<option value="null"></option>' );
-        html.push( '<option value="-1">Rosnąco</option>' );
-        html.push( '<option value="1">Malejąco</option>' );
+        html.push( '<option class="order-key-', key, '" value="null"></option>' );
+        html.push( '<option class="order-key-', key, '" value="-1">Rosnąco</option>' );
+        html.push( '<option class="order-key-', key, '" value="1">Malejąco</option>' );
         html.push( '</select>' );
         html.push( '</td>' );
         html.push( '</tr>' );
@@ -260,7 +260,7 @@ var _tools = (function () {
 
 // >>
     function prepare_sorting_interface() {
-
+           
         $('#app-tb-tl-sort-button')
             .click( function () {
                 var form = $('#app-tb-tl-sort-form');
@@ -287,26 +287,37 @@ var _tools = (function () {
             add_sort_key();
         });
 
-        $('#sort-form')
+        $('#app-tb-tl-sort-submit')
+            .click( function () {
+                $('#app-tb-tl-sort-form').submit();
+            });
+
+        $('#app-tb-tl-sort-form')
             .submit( function () {
                 var column, order;
                 var settings = [];
-                var i, len = $('#app-tb-tl-sort-form select').length;
+                var i;
+                var keys_num = $('#app-tb-tl-sort-form').find('tbody > tr').length;
 
-                for( i = 0; i < len; i += 1 ) {
-                    column = $( '.key-'+ i +' option:selected' ).val();
-                    // TODO what does this condition mean?!
+                for( i = 0; i < keys_num; i += 1 ) {
+                    column = $( '.column-key-'+ i +':selected' ).val();
+                    // if column not selected by user
                     if( column === "null" ) {
+                        // if it's a first key - quit
                         if( i === 1 ) {
                             $(this).hide();
                             return false;
                         }
+                        // process the previous keys
                         else {
                             break;
                         }
                     }
-                    order = parseInt( $('.key-'+ i +':radio:checked').val() );
-
+                    order = parseInt( $('.order-key-'+ i +':selected').val() );
+                    // if order not set, set it to ascending
+                    if( !order ) {
+                        order = 1;
+                    }
                     settings.push(
                         {
                             "pref": order,
@@ -482,7 +493,7 @@ var _tools = (function () {
                 $('#app-tb-tl-columns-form').submit();
             });
 
-        $('#manage-columns-form')
+        $('#app-tb-tl-columns-form')
             .submit( function () {
                 new_active_columns = [];
                 checkboxes = $('input[name=app-tb-tl-columns]:checked');
@@ -503,7 +514,7 @@ var _tools = (function () {
 
     function prepare_snapshot_interface() {
 
-        $('#save-snapshot')
+        $('#app-tb-save-sheet')
             .click( function () {
                 _sheet.create_new_sheet( _store.active_sheet(), "Arkusz" );
             });

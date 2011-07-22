@@ -314,6 +314,31 @@ var _store = (function () {
         that.active_sheet()['name'] = sheet_name;
     };
 
+    that.reset_sheet = function () {
+        var active_sheet = that.active_sheet();
+        var basic_rows = that.active_group()['basic_rows'].slice();
+        var total = active_sheet['rows']['total'];
+
+        active_sheet['rows'] = basic_rows;
+        active_sheet['rows']['total'] = total;
+    };
+
+    that.next_sheet_name = function () {    
+        var next_num=1;
+        var sheet_name;
+        that.active_group()['sheets'].forEach( function (sheet, sheet_num){
+            if ( sheet['name'].indexOf('Arkusz') !== -1 ) {
+                sheet_name = sheet['name'].split(' ');
+                if ( sheet_name[1] >= next_num ){
+                    next_num = sheet_name[1];
+                    next_num++;
+                   }; 
+            }
+        });
+
+        return 'Arkusz ' + next_num; 
+    };
+
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
     var meta_data = [];
@@ -356,7 +381,7 @@ var _store = (function () {
                                 });
 
         // if total present in collection move it to special position
-        if( rows[ rows.length - 1 ]['data']['type'] === 'Total' ) {
+        if( rows[ rows.length - 1 ]['data']['idef'].indexOf( '9999' ) !== -1 ) {
             rows['total'] = rows.pop();
         }
 

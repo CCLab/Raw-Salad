@@ -8,8 +8,9 @@
   <link rel="stylesheet" type="text/css" href="/site_media/test/table_style.css" />
 </head>
 <body>
-
-  <!--  H E A D E R  -->
+ <div id="wrapper">
+ 
+ <!--  H E A D E R  -->
   <header id="top">
     <nav id="top-menu">
       <ul>
@@ -113,10 +114,10 @@
           <table id="pl-dl-fl-table">
             <tbody>
             <tr>
-              <td class="pl-dn-select-buttons" rowspan="16">
-                <div id="pl-dn-fl-tb-select" class="grey button">Zaznacz wszystkie</div>
+              <td class="pl-dl-select-buttons" rowspan="16">
+                <div id="pl-dl-fl-tb-select" class="grey button">Zaznacz wszystkie</div>
                 <br class="clear"/>
-                <div id="pl-dn-fl-tb-unselect" class="grey button">Odznacz wszystkie</div>
+                <div id="pl-dl-fl-tb-unselect" class="grey button">Odznacz wszystkie</div>
               </td>
               <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
               <td>Budżet centralny w ujęciu tradycyjnym 2011</td>
@@ -280,7 +281,7 @@
         <!-- T A B L E   T O O L S -->
         <section id="app-tb-tools">
           <section>
-            <h3 id="app-tb-tl-title" class="left">Budżet centralny w ujęciu zadaniowym 2011</h3>
+            <h3 id="app-tb-tl-title" class="left"></h3>
             <div id="app-tb-tl-bt-container" class="right">
               <div id="app-tb-tl-clear-button" class="button left">Wyczyść tabelę</div>
               <div id="app-tb-tl-sort-button" class="button left">Sortuj</div>
@@ -365,25 +366,26 @@
     </section> <!-- E O:  S H A R E -->
 
   </section> <!-- E O:  A P P L I C A T I O N -->
+ </div>
 
-    <script src="http://code.jquery.com/jquery-1.6.1.js"></script>
-    <script src="/site_media/test/hide.js"></script>
-    <script src="/site_media/test/assert.js"></script>
-    <script src="/site_media/test/store.js"></script>
-    <script src="/site_media/test/db.js"></script>
-    <script src="/site_media/test/gui.js"></script>
-    <script src="/site_media/test/table.js"></script>
-    <script src="/site_media/test/sheet.js"></script>
-    <script src="/site_media/test/utils.js"></script>
-    <script src="/site_media/test/tools.js"></script>    
-    <script src="/site_media/test/algorithms.js"></script>
-    <script src="/site_media/test/download.js"></script>
-    <script type="text/javascript" language="javascript" charset="utf-8">
-    // <![CDATA[
-        _store.meta_data( {{ meta_data|safe }} );       
-        _gui.init_gui(); 
-    // ]]>
-    </script> 
+  <script src="http://code.jquery.com/jquery-1.6.1.js"></script>
+  <script src="/site_media/test/hide.js"></script>
+  <script src="/site_media/test/assert.js"></script>
+  <script src="/site_media/test/store.js"></script>
+  <script src="/site_media/test/db.js"></script>
+  <script src="/site_media/test/gui.js"></script>
+  <script src="/site_media/test/table.js"></script>
+  <script src="/site_media/test/sheet.js"></script>
+  <script src="/site_media/test/utils.js"></script>
+  <script src="/site_media/test/tools.js"></script>    
+  <script src="/site_media/test/algorithms.js"></script>
+  <script src="/site_media/test/download.js"></script>
+  <script type="text/javascript" language="javascript" charset="utf-8">
+  // <![CDATA[
+      _store.meta_data( {{ meta_data|safe }} );       
+      _gui.init_gui(); 
+  // ]]>
+  </script> 
 
 </body>
 </html>

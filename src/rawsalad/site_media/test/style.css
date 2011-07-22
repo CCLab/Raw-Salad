@@ -1,8 +1,6 @@
 /*  G E N E R A L   H T M L   T A G S  */
 body {
-  width: 960px;
-
-  margin: 0px auto;
+  margin: 0px;
   padding: 0px;
 
   background-color: #8b8b8b;
@@ -38,6 +36,12 @@ td {
 
 h3 {
   margin: 0px;
+}
+
+#wrapper {
+  width: 960px;
+  margin: 0px auto;
+  padding: 0px;
 }
 
 /*  T O P   M E N U  */
@@ -220,7 +224,7 @@ h3 {
     padding-bottom: 5px;
   }
 
-  .pl-dn-select-buttons > div {
+  .pl-dl-select-buttons > div {
     margin-bottom: 5px;
   }
 
