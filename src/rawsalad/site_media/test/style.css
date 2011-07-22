@@ -525,3 +525,35 @@ textarea {
   background-color: #b6b6b6;
 }
 
+      #app-tb-filteredtable {
+         width: 940px;
+         border-collapse: collapse;
+      }
+
+      #app-tb-filteredtable tr {
+        border: 1px solid #a3a3a3;
+      }
+
+      #app-tb-filteredtable th {
+        background-color: #d4d4d4;
+        text-align: left;
+        border: 1px solid #a3a3a3;
+      }
+       
+      .filtered-breadcrumb {
+        border-left: #e4e4e4 !important;
+        border-right: #e4e4e4 !important;
+      }
+
+       .filtered-breadcrumb td {
+         color: #5b5b5b;
+         padding-top: 15px;
+         padding-left: 5px;
+         font-size: 9px;
+       }
+ 
+       .filtered-data td {
+         padding: 5px;
+         background-color: #fff;
+         border: 1px solid #a3a3a3;
+       }

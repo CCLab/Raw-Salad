@@ -32,8 +32,8 @@ var _table = (function () {
     that.clean_table = function () {
         $('#app-tb-datatable > thead').empty();
         $('#app-tb-datatable > tbody').empty();
-        $('#filtered-thead').empty();
-        $('#filtered-tbody').empty();
+        $('#app-tb-filteredtable > thead').empty();
+        $('#app-tb-filteredtable > tbody').empty();
     };
 
     that.init_table = function () {
@@ -42,26 +42,28 @@ var _table = (function () {
             create_thead();
             create_tbody();
             _gui.make_zebra();
-            $('#manage-columns-button').show();
-            $('#filter-button').show();
-            $('#sort-button').css({
-                'border-radius': '5px 0px 0px 5px',
-                '-moz-border-radius': '5px 0px 0px 5px',
-                '-webkit-border-radius': '5px 0px 0px 5px'
-            });
+            $('#app-tb-tl-columns-button').show();
+            $('#app-tb-tl-clear-button').show();
+            $('#app-tb-tl-filter-button').show();
+            $('#app-tb-tl-sort-button').show();
+//            $('#app-tb-tl-sort-button').css({
+//                'border-radius': '5px 0px 0px 5px',
+//                '-moz-border-radius': '5px 0px 0px 5px',
+//                '-webkit-border-radius': '5px 0px 0px 5px'
+//            });
         } else {
             create_filtered_thead();
             create_filtered_tbody();
-            $('#manage-columns-button').hide();
-            $('#filter-button').hide();
-            $('#sort-button').css({
-                'border-radius': '5px',
-                '-moz-border-radius': '5px',
-                '-webkit-border-radius': '5px'
-            });
+            $('#app-tb-tl-columns-button').hide();
+            $('#app-tb-tl-clear-button').hide();
+            $('#app-tb-tl-filter-button').hide();
+            $('#app-tb-tl-sort-button').hide();
+//            $('#app-tb-tl-sort-button').css({
+//                'border-radius': '5px',
+//                '-moz-border-radius': '5px',
+//                '-webkit-border-radius': '5px'
+//            });
         }
-        $('#table-toolbar-collection-name')
-            .html( _store.active_sheet()['name'] );
 
         _utils.clean_preloader();
     };

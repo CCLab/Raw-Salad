@@ -179,7 +179,7 @@ var _tools = (function () {
         html.push( 'id="filter-', key, '-columns">' );
         // add columns as select options
         columns.forEach( function ( column ) {
-            html.push( '<option value="', column['name'], '" class="filter-column-key-', key, '">' );
+            html.push( '<option value="', column['name'], '" class="filter-column-', key, '">' );
             html.push( column['label'], '</option>' );
         });
         html.push( '</select>' );
@@ -328,8 +328,9 @@ var _tools = (function () {
 
                 that.sort( _store.active_rows(), settings );
 
-                _table.clean_table();
-                _table.init_table();
+                _gui.refresh_gui();
+                //_table.clean_table();
+                //_table.init_table();
                 $(this).hide();
 
                 return false;
@@ -397,8 +398,8 @@ var _tools = (function () {
                 var new_sheet;
                 var tmp, type;
 
-                for( i = 0; i < len; ++i ) {
-                    column = $('#filter-column-'+ i +':selected').val();
+                for( i = 0; i < keys_num; ++i ) {
+                    column = $('.filter-column-'+ i +':selected').val();
                     if( column === "null" ) {
                         if( i === 1 ) {
                             $(this).hide();
@@ -413,7 +414,7 @@ var _tools = (function () {
                         return e['key'] === column;
                     })[0]['type'];
 
-                    operation = $('#filter-operation-'+i+':selected').val();;
+                    operation = $('.filter-operation-'+i+':selected').val();;
                     query = $('#filter-'+i+'-query').val();
 
                     tmp = parseInt( query, 10 );
