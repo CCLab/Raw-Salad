@@ -28,7 +28,7 @@ var _download = (function () {
 
     var that = {};
 
-    // ids = { '0': [{ id: 2, scope: 'full' }, { id: 3, scope: 'sheet' }], '4': [{ id: 1, scope: 'sheet' }] }
+    // ids = { '0': [ '2', '4' ], '4': [ '1' ], 'full': [ '0-1-2012.csv', '3-2-2011.csv' ] }
     that.selected = function ( ids ) {
         var i, columns;
         var group, sheet;
@@ -36,14 +36,11 @@ var _download = (function () {
 
         for( group_id in ids ) {
             ids[group_id].forEach( function ( e ) {
-                if( e['scope'] === 'full' ) {
-                    group = _store.get_group( group_id );
-                    csv_string += group['dataset'] + '-';
-                    csv_string += group['perspective'] + '-';
-                    csv_string += group['issue'] + '.csv';
+                if( group_id === 'full' ) {
+                    csv_string += e;
                 }
                 else {
-                    sheet = _store.get_sheet( group_id, e['id'] );
+                    sheet = _store.get_sheet( group_id, e );
                     columns = sheet['columns'];
 
                     csv_string += 'ID;Rodzic;Poziom;';
@@ -212,11 +209,13 @@ var _download = (function () {
 
     function add_total( sheet ) {
         var result = '';
-        var total = sheet['rows']['total']['data'];
         var columns = sheet['columns'];
+        var total;
 
-        // if no total in the collecion...
-        if( !total ) {
+        try {
+            total = sheet['rows']['total']['data'];
+        }
+        catch ( err ) {
             return '';
         }
 

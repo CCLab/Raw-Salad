@@ -38,6 +38,15 @@ var _gui = (function () {
                 do_panels( $(this) );
             });
 
+        $('#pl-fb-email.info')
+            .focus( function () {
+                if( $(this).hasClass( 'info' ) ) {
+                    $(this)
+                        .val( '' )
+                        .removeClass('info');
+                }
+            });
+
         // arm close bar
         $('#pl-close-bar')
             .click( hide_top_panels );
@@ -55,6 +64,12 @@ var _gui = (function () {
 
                 $('.app-container:visible').hide();
                 $('#app-' + action).show();
+            });
+
+        $('#app-tb-tl-clear-button')
+            .click( function () {
+                _store.reset_sheet();
+                that.refresh_gui();
             });
 
         // arm back-to-datasets button
@@ -90,11 +105,30 @@ var _gui = (function () {
 
         _tools.prepare_tools();
 
+
+        $('#pl-dl-fl-tb-select')
+            .click( function () {
+                $('#pl-dl-fl-table')
+                    .find('input')
+                    .attr( 'checked', 'true' );
+            });
+
+        $('#pl-dl-fl-tb-unselect')
+            .click( function () {
+                $('#pl-dl-fl-table')
+                    .find('input')
+                    .removeAttr( 'checked' );
+            });
+
         $('#pl-dl-button')
             .click( function () {
                 var ids = {};
                 var panel = $('#pl-download');
                 var checkboxes = panel.find('input:checkbox:checked');
+
+                if( checkboxes.length === 0 ) {
+                    return;
+                }
 
                 checkboxes.each( function () {
                     var val = $(this).val();
@@ -124,6 +158,7 @@ var _gui = (function () {
                 });
 
                 _download.selected( ids );
+                hide_top_panels();
             });
 
         init_choose_panel();
@@ -138,176 +173,75 @@ var _gui = (function () {
         }
         that.refresh_gui();
 
-//        that.create_sheet_tab({
-//            // TODO move name from func arg to store!!
-//            name: collection_name,
-//            group_nr: _store.active_group_index(),
-//            sheet_nr: _store.active_sheet_index()
-//        });
-
         $('#application').show();
         that.make_zebra();
         hide_top_panels();
-    }
-
-
-    that.create_sheet_tab = function ( args ) {
-        that.create_only_sheet_tab( args );
-        _table.clean_table();
-        _table.init_table();
     };
 
 
     that.refresh_gui = function () {
         var groups = _store.get_all_groups();
-        var all_snapshots = [];
         var close_sheet;
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
+
         // 1  clear gui,
-        $('.snapshots').remove();
-        // 2 create new gui
+        $('#app-tb-sheets').empty();
+
+        // 2  new gui
         groups.forEach( function ( group, group_num ){
-            group['sheets'].forEach( function (sheet, sheet_num){
-                var  sheet_name = sheet['name'];
+            group['sheets'].forEach( function ( sheet, sheet_num ) {
+                var sheet_name = sheet['name'];
                 var html = [];
-                var new_snap;
-                html.push( '<div ' );
+                var new_sheet;
+
+
+                html.push( '<li ' );
                 html.push( 'id="snap-' + group_num + '-' + sheet_num + '" ' );
-                html.push( 'class="snapshot" ' );
+                html.push( 'class="sheet tab button" ' );
                 html.push( 'title="', sheet_name, '">' );
                 html.push( sheet_name.length > 20 ?
-                    sheet_name.slice( 0, 17 ) + '...' :
-                    sheet_name );
-                html.push( '</div>' );
+                           sheet_name.slice( 0, 17 ) + '...' :
+                           sheet_name );
+                html.push( '</li>' );
 
                 new_snap = $( html.join('') );
                 new_snap
                     .click( function () {
-                        _store.active_group( group_num );//
-                        _store.active_sheet( sheet_num );//
-                        refresh_gui();
+                        _store.active_group( group_num );
+                        _store.active_sheet( sheet_num );
+                        that.refresh_gui();
                     });
 
-                if ( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
-                    close_sheet = $( '<div class="close-sheet-button" >x</div>' );
-                    new_snap
-                        .append(close_sheet
-                            .click( function(){
-                                _store.remove_active_sheet();
-                                alert('Sheet deleyted');
-                                that.refresh_gui();
-                            })
-                       )
-                       .addClass( 'active' );
+                if( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
+                    close_sheet = $( '<div class="close-sheet-button button" >x</div>' );
+                    if( !( groups.length === 1 && group['sheets'].length === 1 ) ) {
+                        new_snap
+                            .append( close_sheet
+                                        .click( function() {
+                                            _store.remove_active_sheet();
+                                            that.refresh_gui();
+                                        })
+                            )
+                    }
+                    new_snap.addClass('active');
+                    $('#app-tb-tl-title').html( sheet_name );
                 }
-                //all_snapshots.append(new_snap);
+                $('#app-tb-sheets').append( new_snap );
             })
         });
+
         // TODO - finish this
         // 3 clear and get new tabs from _store
-        $('#snapshots').append( all_snapshots );
-        if( $('.snapshot').length == 10 ) {
-            $('#save-snapshot' ).hide();
-        }
+        //if( $('.snapshot').length == 10 ) {
+        //    $('#save-snapshot' ).hide();
+        //}
 
-         $('#sort-form').hide().html('');
-         $('#filter-form').hide().html('');
+        // close all unnecessary tools
+        //that.clear_app();
+        // show some data finally
         _table.clean_table();
         _table.init_table();
-    };
-
-
-    that.create_only_sheet_tab = function ( args ) {
-        var html = [];
-
-        var group_nr = args.group_nr || _store.active_group_index();
-        var sheet_nr = args.sheet_nr || _store.active_sheet_index();
-        var sheet_name = args.name || "Arkusz " + group_nr + '-' + sheet_nr;
-
-        var group_changed = _store.active_group_index() !== group_nr;
-        var sheet_changed = _store.active_sheet_index() !== sheet_nr;
-        var new_tab;
-        var close_sheet;
-
-
-        //to refresh_gui
-        html.push( '<div id="snap-' + group_nr + '-' + sheet_nr + '" ' );
-        html.push( 'class="snapshot" ' );
-        html.push( 'title="', sheet_name, '">' );
-        html.push( sheet_name.length > 20 ?
-                   sheet_name.slice( 0, 17 ) + '...' :
-                   sheet_name );
-        html.push( '</div>' );
-
-        new_tab = $( html.join('') );
-
-        close_sheet = $( '<div class="close-sheet-button" >x</div>' );
-
-        $('.snapshot').removeClass('active');
-        $('.close-sheet-button').remove();
-
-        new_tab
-            .append(close_sheet
-                .click( function(){
-                    _store.remove_active_sheet();
-                    alert("Sheet dleyted");
-
-                    _table.clean_table();
-                    _table.init_table();
-                })
-            )
-            .addClass( 'active' )
-            .click( function () {
-                var id_elements = $(this).attr('id').split('-');
-                var group_nr = id_elements[1];
-                var sheet_nr = id_elements[2];
-
-                $('.snapshot').removeClass('active');
-                $('.close-sheet-button').remove();
-                $(this).addClass('active')
-                    .append(close_sheet.click( function(){
-                        _store.remove_active_sheet();
-                        alert("Sheet dleyted");
-                        _table.clean_table();
-                        _table.init_table();
-                    })
-                )
-
-                _store.active_group( group_nr );//
-                _store.active_sheet( sheet_nr );//
-
-                $('#sort-form').hide().html('');
-                $('#filter-form').hide().html('');
-
-
-                _table.clean_table();
-                _table.init_table();
-            });
-
- //       $('.close-sheet-button').click( function(){
- //           _store.remove_active_sheet();
- //           allert("Sheet dleyted");
-            // add reload
- //       });
-
-
-        if( sheet_nr === 0 ) {
-            $('#snapshots').append( new_tab );
-        }
-        else {
-            new_tab.insertAfter( '#snap-'+group_nr+'-'+(sheet_nr-1));
-        }
-
-        if( $('.snapshot').length == 10 ) {
-            $('#save-snapshot' ).hide();
-        }
-
-        _store.active_sheet( sheet_nr );
-        _store.active_group( group_nr );
-
-        $('#sort-form').hide().html('');
-        $('#filter-form').hide().html('');
     };
 
 
@@ -468,6 +402,9 @@ var _gui = (function () {
     // update download panel with currently open sheets
     function update_download_panel() {
         var html = [];
+
+        $('#pl-download').find('input:checked').removeAttr('checked');
+
         // if no sheets available yet, hide sheets download panel and quit
         if( !_store.active_group() ) {
             $('#pl-dl-sheets').hide();
@@ -476,7 +413,7 @@ var _gui = (function () {
         $('#pl-dl-sheets').show();
 
         html.push( '<tbody>' );
-        $('.snapshot').each( function ( sheet, i ) {
+        $('.sheet').each( function ( i, sheet ) {
             var id = $(this).attr('id').split('-');
             var group = id[1];
             var sheet = id[2];
@@ -485,12 +422,12 @@ var _gui = (function () {
             html.push( '<tr>' );
             // add (un)select all buttons
             if( i === 0 ) {
-                html.push( '<td class="pl-dn-select-buttons" ' );
-                html.push( 'rowspan="', $('.snapshots').length, '">' );
-                html.push( '<div id="pl-dn-sh-select" class="grey button"> ');
+                html.push( '<td class="pl-dl-select-buttons" ' );
+                html.push( 'rowspan="', $('.sheet').length, '">' );
+                html.push( '<div id="pl-dl-sh-select" class="grey button">');
                 html.push( 'Zaznacz wszystkie</div>' );
                 html.push( '<br class="clear"/>' );
-                html.push( '<div id="pl-dn-sh-unselect" class="grey button"> ');
+                html.push( '<div id="pl-dl-sh-unselect" class="grey button"> ');
                 html.push( 'Odznacz wszystkie</div>' );
                 html.push( '</td>' );
             }
@@ -505,7 +442,7 @@ var _gui = (function () {
 
         $('#pl-dl-sh-table')
             .empty()
-            .append( html.join('') );
+            .append( $( html.join('') ));
 
         $('#pl-dl-sh-select').click( function () {
             // select all checkboxes

@@ -90,9 +90,9 @@ var _tools = (function () {
 //  P R I V A T E   I N T E R F A C E
 
     function add_sort_key() {
-        var i, key;
+        var key;
         var html = [];
-        var schema = _store.basic_schema();
+        var schema = _store.active_columns();
         var columns = schema
                         .filter( function ( e ) {
                             return e['processable'];
@@ -104,91 +104,42 @@ var _tools = (function () {
                             };
                         });
 
-        key = $('#sort-form > div').length;
+        columns.unshift({
+                    name: 'null',
+                    label: ''
+                });
+
+        key = $('#app-tb-tl-sort-form').find('tbody > tr').length;
 
         if( key === 2 ) {
-            $('#add-sort-key' ).remove();
+            $('#app-tb-tl-sort-add' ).hide();
         }
 
-        html.push( '<div id="key-', key, '">' );
-        // columns select list
-        html.push( '<select name="columns" class="key-', key, '">' );
-        html.push( '<option value="null" class="key-', key, '" selected>' );
-        html.push( 'Wybierz kolumnę</option>' );
-
+        html.push( '<tr id="sort-key-', key, '">' );
+        html.push( '<td>' );
+        html.push( '<select name="app-tb-tl-sort-form-columns" ');
+        html.push( 'class="input-text key-', key, '">' );
         // TODO don't include already selected colmuns
-        for( i = 0; i < columns.length; ++i ) {
-            html.push( '<option value="', columns[i]['name'], '" class="key-', key, '">' );
-            html.push( columns[i]['label'], '</option>' );
-        }
-
+        columns.forEach( function ( column ) {
+            html.push( '<option value="', column['name'], '" class="key-', key, '">' );
+            html.push( column['label'], '</option>' );
+        });
         html.push( '</select>' );
-        // ascending/descending radio buttons
-        html.push( 'Rosnąco <input class="radio key-', key, '" type="radio" ' );
-        html.push( 'name="key-', key, '-order" value="-1" checked />' );
-        html.push( 'Malejąco <input class="radio key-', key, '" type="radio" ' );
-        html.push( 'name="key-', key, '-order" value="1" />' );
+        html.push( '</td>' );
 
-        if( key === 0 ) {
-            html.push( '<div id="add-sort-key">+</div>' );
-            html.push( '<input type="submit" value="Sortuj" />' );
-        }
-        html.push( '</div>' );
+        html.push( '<td>' );
+        html.push( '<select name="app-tb-tl-sort-order" ' );
+        html.push( 'class="input-text key-', key, '">' );
+        html.push( '<option value="null"></option>' );
+        html.push( '<option value="-1">Rosnąco</option>' );
+        html.push( '<option value="1">Malejąco</option>' );
+        html.push( '</select>' );
+        html.push( '</td>' );
+        html.push( '</tr>' );
 
-        $('#sort-form').append( $( html.join('') ));
-
-        if( key === 0 ) {
-            $('#add-sort-key').click( function () {
-                add_sort_key();
-            });
-        }
-    }
-
-
-    function add_manage_checkbox()  {
-        var html = [];
-	    var all_columns = _store.group_columns();
-
-        html.push( '<div class="select-all" id="manage-columns-submit" ' );
-        html.push( 'style="margin-left: 10px">Dodaj/Usuń kolumny</div>' );
-
-        html.push( '<div class="select-all" id="uncheck-all" ');
-        html.push( 'style="background-color: #eee; color: #333; margin-left: 5px">' );
-        html.push( 'Odznacz wszystkie</div>' );
-
-        html.push( '<div class="select-all" id="check-all" ');
-        html.push( 'style="background-color: #eee; color: #333">' );
-        html.push( 'Zaznacz wszystkie</div>' );
-
-        all_columns.forEach( function ( e ) {
-            var key = e['key'];
-
-            html.push( '<br />' );
-	        html.push( '<input type="checkbox" name="columns" ' );
-            html.push( 'value="', key, '" id="column-id-', key, '"' );
-	        if( _store.is_column_in_active_sheet( key ) ) {
-                html.push( ' checked');
-            }
-            html.push( '>' );
-            html.push( '<label for="column-id-', key, '">' );
-            html.push( e['label'], '</label>' );
-        });
-        $('#manage-columns-form').append( $( html.join('') ));
-
-        $('#check-all')
-            .click( function () {
-                $('input[name=columns]').attr( 'checked', 'true' );
-            });
-
-        $('#uncheck-all')
-            .click( function () {
-                $('input[name=columns]').removeAttr( 'checked' );
-            });
-
-        $('#manage-columns-submit').click( function () {
-            $('#manage-columns-form').submit();
-        });
-
+        $('#app-tb-tl-sort-form')
+            .find('tbody')
+            .append( $( html.join('') ));
     }
 
 
@@ -198,7 +149,7 @@ var _tools = (function () {
         var filter_part;
         var selected_column;
         var type;
-        var schema = _store.basic_schema();
+        var schema = _store.active_columns();
         var columns = schema
                         .filter( function ( e ) {
                             return e['processable'];
@@ -210,98 +161,116 @@ var _tools = (function () {
                             };
                         });
 
-        key = $('#filter-form > div').length;
-
-        if ( key === 2 ) {
-            $('#add-sort-key' ).remove();
-        }
-
         columns.unshift({
-            name: 'null',
-            label: 'Wybierz kolumnę'
-        });
+                    name: 'null',
+                    label: ''
+                });
 
-        html.push( '<div id="filter-key-', key, '">' );
+        key = $('#app-tb-tl-filter-form').find('tbody > tr').length;
 
-        html.push( '<select id="filter-', key, '-columns"' );
-        html.push( ' name="columns">');
-        for ( i = 0; i < columns.length; i += 1 ) {
-            html.push( '<option value="', columns[i]['name']);
-            html.push( '" class="filter-', key, '" >');
-            html.push( columns[i]['label'], '</option>' );
+        if( key === 2 ) {
+            $('#app-tb-tl-filter-add' ).remove();
         }
-        html.push( '</select>' );
 
+        html.push( '<tr id="filter-key-', key, '">' );
+        html.push( '<td>' );
+        html.push( '<select name="app-tb-tl-filter-form-columns" ');
+        html.push( 'class="input-text key-', key, '" ' );
+        html.push( 'id="filter-', key, '-columns">' );
+        // add columns as select options
+        columns.forEach( function ( column ) {
+            html.push( '<option value="', column['name'], '" class="key-', key, '">' );
+            html.push( column['label'], '</option>' );
+        });
+        html.push( '</select>' );
+        html.push( '</td>' );
+
+        html.push( '<td>' );
         html.push( '<select id="filter-', key, '-operations"' );
-        html.push( ' name="null-operation" disabled="true">' );
-
+        html.push( ' name="null-operation" class="input-text" disabled>' );
         html.push( '</select>' );
+        html.push( '</td>' );
 
-        if ( key === 0 ) {
-            html.push( '<div id="add-filter-key">+</div>' );
-            html.push( '<input type="submit" value="Filtruj" />' );
-        }
+        html.push( '<td>' );
+        html.push( '<input type="text" name="query" id="filter-', key, '-query" class="input-text"/>' );
 
-        html.push( '</div>' );
-        $('#filter-form').append( $( html.join('') ) );
+        $('#app-tb-tl-filter-form')
+            .find('tbody')
+            .append( $( html.join('') ));
 
-        if( key === 0 ) {
-            $('#add-filter-key').click( function () {
-                add_filter_key();
-            });
-        }
 
-        filter_part = $('#filter-' + key + '-columns');
-        filter_part.change( function() {
-            selected_column = $(this).val();
+        $('#filter-'+ key +'-columns')
+            .change( function() {
+                selected_column = $(this).val();
 
-            $('#filter-' + key + '-query').remove();
+                for ( i = 0; i < schema.length; i += 1 ) {
+                    if ( schema[i]['key'] === selected_column ) {
+                        type = schema[i]['type'];
 
-            for ( i = 0; i < schema.length; i += 1 ) {
-                if ( schema[i]['key'] === selected_column ) {
-                    type = schema[i]['type'];
+                        $('#filter-' + key + '-operations').remove();
 
-                    $('#filter-' + key + '-operations').remove();
+                        html = [ '<select id="filter-', key, '-operations"' ];
+                        if ( schema[i]['type'] === 'number' ) {
+                            html.push( ' name="number-operation" class="input-text">' );
+                            html.push( '<option value="null" class="filter-', key, '" selected></option>' );
+                            html.push( '<option value="gt" class="filter-', key, '">&gt;</option>' );
+                            html.push( '<option value="eq" class="filter-', key, '">=</option>' );
+                            html.push( '<option value="lt" class="filter-', key, '">&lt;</option>' );
+                        } else {
+                            html.push( ' name="string-operation" class="input-text">' );
+                            html.push( '<option value="null" class="filter-', key, '" selected></option>' );
+                            html.push( '<option value="cnt" class="filter-', key, '">Zawiera</option>' );
+                            html.push( '<option value="st" class="filter-', key, '">Zaczyna się od</option>' );
+                            html.push( '<option value="ncnt" class="filter-', key, '">Nie zawiera</option>' );
+                            html.push( '<option value="nst" class="filter-', key, '">Nie zaczyna się od</option>' );
+                        }
+                        html.push( '</select>' );
 
-                    html = [ '<select id="filter-', key, '-operations"' ];
-                    if ( schema[i]['type'] === 'number' ) {
-                        html.push( ' name="number-operation">' );
-                        html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
-                        html.push( '<option value="gt" class="filter-', key, '">></option>' );
-                        html.push( '<option value="eq" class="filter-', key, '">=</option>' );
-                        html.push( '<option value="lt" class="filter-', key, '"><</option>' );
-                    } else {
-                        html.push( ' name="string-operation">' );
-                        html.push( '<option value="null" class="filter-', key, '" selected>Wybierz operację</option>' );
-                        html.push( '<option value="cnt" class="filter-', key, '">Zawiera</option>' );
-                        html.push( '<option value="st" class="filter-', key, '">Zaczyna się od</option>' );
-                        html.push( '<option value="ncnt" class="filter-', key, '">Nie zawiera</option>' );
-                        html.push( '<option value="nst" class="filter-', key, '">Nie zaczyna się od</option>' );
+                        $(this).parent().next().append( $( html.join('') ));//.insertAfter( $('#filter-' + key + '-columns') );
+                        break;
                     }
-                    html.push( '</select>' );
-
-                    html.push( '<input type="text" name="query" id="filter-', key, '-query" />' );
-
-                    $( html.join('') ).insertAfter( $('#filter-' + key + '-columns') );
-
-                    break;
                 }
-            }
-        });
+            });
     }
 
+
+    function update_columns_form()  {
+        var html = [];
+	    var all_columns = _store.group_columns();
+
+        all_columns.forEach( function ( e ) {
+            var key = e['key'];
+
+            html.push( '<tr><td class="columns">' );
+	        html.push( '<input type="checkbox" name="app-tb-tl-columns" ' );
+            html.push( 'value="', key, '" id="column-id-', key, '"' );
+	        if( _store.is_column_in_active_sheet( key ) ) {
+                html.push( ' checked');
+            }
+            html.push( '>' );
+            html.push( '</td><td class="columns">' );
+            html.push( '<label for="column-id-', key, '">' );
+            html.push( e['label'], '</label>' );
+            html.push( '</td></tr>' );
+        });
+        $('#app-tb-tl-columns-form')
+            .find('tbody')
+            .append( $( html.join('') ));
+    }
+
+// >>
     function prepare_sorting_interface() {
 
-        $('#sort-button')
+        $('#app-tb-tl-sort-button')
             .click( function () {
-                var form = $('#sort-form');
+                var form = $('#app-tb-tl-sort-form');
 
-                $('#table-toolbar')
+                $('#app-tb-tools')
                     .find('form:visible')
                     .slideUp( 200 );
 
                 if( form.is(':hidden') ) {
-                    form.html('');
+                    form.find('tbody').empty();
                     add_sort_key();
                     form.slideDown( 200 );
                 }
@@ -310,13 +279,19 @@ var _tools = (function () {
                     .toggleClass('pushed')
                     .siblings()
                     .removeClass('pushed');
+
+                $('#app-tb-tl-sort-add' ).show();
             });
+
+        $('#app-tb-tl-sort-add').click( function () {
+            add_sort_key();
+        });
 
         $('#sort-form')
             .submit( function () {
                 var column, order;
                 var settings = [];
-                var i, len = $('#sort-form select').length;
+                var i, len = $('#app-tb-tl-sort-form select').length;
 
                 for( i = 0; i < len; i += 1 ) {
                     column = $( '.key-'+ i +' option:selected' ).val();
@@ -346,18 +321,17 @@ var _tools = (function () {
                 _table.init_table();
                 $(this).hide();
 
-                // TODO why false?!
                 return false;
             });
 
         var i;
-        for( i = 1; i <= $('#sort-form select').length; ++i ) {
+        for( i = 1; i <= $('#app-tb-tl-sort-form select').length; ++i ) {
             if( i > 1 ) {
                 $('#key-'+i).hide();
             }
 
             (function (i) {
-                $('#sort-form select.key-'+i).change( function () {
+                $('#app-tb-tl-sort-form select.key-'+i).change( function () {
                     if( $('.key-'+i+' option:selected').val() !== "null" ) {
                         $('#key-'+(i+1)).show();
                     }
@@ -366,18 +340,19 @@ var _tools = (function () {
         }
     };
 
-    function prepare_filtering_interface() {
-        $('#filter-button')
-            .click( function () {
-                var form = $('#filter-form');
 
-                $('#table-toolbar')
+    function prepare_filtering_interface() {
+
+        $('#app-tb-tl-filter-button')
+            .click( function () {
+                var form = $('#app-tb-tl-filter-form');
+
+                $('#app-tb-tools')
                     .find('form:visible')
-                    .slideUp( 200 )
-                    .removeClass('selected');
+                    .slideUp( 200 );
 
                 if( form.is( ':hidden' ) ) {
-                    form.html('');
+                    form.find('tbody').empty();
                     add_filter_key();
                     form.slideDown( 200 );
                 }
@@ -386,6 +361,13 @@ var _tools = (function () {
                     .toggleClass('pushed')
                     .siblings()
                     .removeClass('pushed');
+                
+                $('#app-tb-tl-filter-add' ).show();
+            });
+
+        $('#app-tb-tl-filter-add')
+            .click( function () {
+                add_filter_key();
             });
 
         $('#filter-form')
@@ -458,61 +440,66 @@ var _tools = (function () {
     };
 
     function prepare_manage_columns_interface(){
-	    var new_active_columns;
+        var new_active_columns;
         var i = 0;
         var checkboxes_list;
 
-        $('#manage-columns-button')
+        $('#app-tb-tl-columns-button')
             .click( function () {
-                var columns_form = $('#manage-columns-form');
+                var columns_form = $('#app-tb-tl-columns-form');
 
-                $('#table-toolbar')
+                $('#app-tb-tools')
                     .find('form:visible')
                     .slideUp( 200 );
 
+                $('#app-tb-tl-bt-container')
+                    .find('div')
+                    .removeClass('selected');
+
                 if( columns_form.is( ':hidden' ) ) {
-                    columns_form.html('');
-                    add_manage_checkbox();
+                    // clear previous columns list
+                    columns_form.find('tbody').empty();
+                    // add new positions to the list
+                    update_columns_form();
+                    // show the form
                     columns_form.slideDown( 200 );
                 }
+            });
 
-                $('#tools > div').removeClass('selected');
+
+        $('#app-tb-tl-lt-select')
+            .click( function () {
+                $('input[name=app-tb-tl-columns]').attr( 'checked', 'true' );
+            });
+
+        $('#app-tb-tl-lt-unselect')
+            .click( function () {
+                $('input[name=app-tb-tl-columns]').removeAttr( 'checked' );
+            });
+
+        $('#app-tb-tl-lt-submit')
+            .click( function () {
+                $('#app-tb-tl-columns-form').submit();
             });
 
         $('#manage-columns-form')
             .submit( function () {
                 new_active_columns = [];
-                checkboxes_list = $('input[name=columns]');
-                 for ( i = 0; i < checkboxes_list.length; i += 1 ) {
-                    if( checkboxes_list[i].checked ) {
-                        new_active_columns.
-                            push( _store.get_column_from_group(checkboxes_list[i].value) );
-                    }
-                }
+                checkboxes = $('input[name=app-tb-tl-columns]:checked');
+                checkboxes.forEach( function ( box ) {// for ( i = 0; i < checkboxes_list.length; i += 1 ) {
+                    new_active_columns.
+                        push( _store.get_column_from_group( box.val() ));
+                });
 		        _store.set_active_columnes( new_active_columns );
+                // TODO _gui.refresh() ?!
                 _table.clean_table();
                 _table.init_table();
                 $(this).hide();
-		return false;
-        });
 
-        $('#check-all')
-            .click( function () {
-                for (i = 0; i < $('input[name=columns]').length; i += 1){
-                    $('input[name=columns]')[i].checked=true;
-                }
+                // to prevent form's action!!
+                return false;
             });
-
-        $('#uncheck-all')
-            .click( function () {
-                for (i = 0; i < $('input[name=columns]').length; i += 1){
-                    $('input[name=columns]')[i].checked=false;
-                }
-            });
-
-
-
-    };
+    }
 
     function prepare_snapshot_interface() {
 

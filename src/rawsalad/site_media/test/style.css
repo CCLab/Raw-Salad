@@ -1,8 +1,6 @@
 /*  G E N E R A L   H T M L   T A G S  */
 body {
-  width: 960px;
-
-  margin: 0px auto;
+  margin: 0px;
   padding: 0px;
 
   background-color: #8b8b8b;
@@ -40,6 +38,23 @@ h3 {
   margin: 0px;
 }
 
+input {
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+}
+
+textarea {
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+}
+
+
+#wrapper {
+  width: 960px;
+  margin: 0px auto;
+  padding: 0px;
+}
+
 /*  T O P   M E N U  */
 #top {
     width: 920px;
@@ -71,6 +86,7 @@ h3 {
   #top-menu .active {
     height: 15px;
     padding: 8px 5px;
+    margin-bottom: 5px;
   }
 
   #top-menu li+li {
@@ -101,7 +117,6 @@ h3 {
 /*  P A N E L S  */
 #panels {
   width: 960px;
-  margin-top: 35px;
 }
 
   .panel {
@@ -220,8 +235,16 @@ h3 {
     padding-bottom: 5px;
   }
 
-  .pl-dn-select-buttons > div {
+  .pl-dl-select-buttons > div {
     margin-bottom: 5px;
+  }
+
+  #pl-fb-email {
+    color: #1b1b1b;
+  }
+
+  #pl-fb-email.info {
+    color: #aaa;
   }
 
   #pl-close-bar {
@@ -244,17 +267,28 @@ h3 {
     color: #1ea3e8;
   }
 
+  .plate {
+    line-height: 17px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 80px;
+    padding-left: 150px;
+  }
+
 /*  A P P L I C A T I O N  */
 #application {
+  overflow: visible;
   width: 960px;
   margin: 0px auto;
+  margin-top: 10px;
   padding-bottom: 5px;
 
   background-color: #fff;
 }
 
   #application > header {
-    overflow: hidden;
+    overflow: auto;
     background-color: #8b8b8b; /* same as bodyu bgcolor */
   }
 
@@ -291,10 +325,6 @@ h3 {
     border-bottom: 1px solid #fff;
   }
 
-  #app-table > .panel-main {
-    min-height: 300px;
-  }
-
   #app-tb-save-sheet {
     margin: 9px;
     margin-bottom: 0px;
@@ -304,6 +334,10 @@ h3 {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     -o-border-radius: 3px;
+  }
+
+  #app-table > .panel-main {
+    overflow: visible;
   }
 
   #app-table header li {
@@ -341,9 +375,14 @@ h3 {
     border-bottom: 1px solid #e1e1e1;
   }
 
+  #app-table > .main-panel {
+    overflow: visible;
+  }
+
   #app-tb-tools > section {
     clear: both;
     padding: 10px;
+    padding-bottom: 0px;
   }
 
   #app-tb-tl-bt-container > div {
@@ -390,7 +429,7 @@ h3 {
 
   #app-tb-tl-srft-forms > table td {
     vertical-align: top;
-    padding: 5px;
+    padding: 0px 5px;
   }
 
   .input-text {
@@ -451,6 +490,10 @@ h3 {
     -o-border-radius: 5px 0px 5px 5px;
   }
 
+  #app-tb-tl-columns-list td {
+    padding: 0px;
+  }
+
   #app-tb-tl-columns-list .button {
     padding: 5px;
     margin-right: 5px;
@@ -461,8 +504,56 @@ h3 {
     -o-border-radius: 5px;
   }
 
+.close-sheet-button {
+  float: right;
+  margin: -2px -2px;
+  margin-left: 5px;
+  padding: 1px 3px;
 
-  #app-share {
-    height: 300px;
-  }
+  font-weight: bold;
+  background-color: #969696;
+  color: #fff;
 
+  border-radius: 3px;    
+  -moz-border-radius: 3px;    
+  -webkit-border-radius: 3px;    
+  -o-border-radius: 3px;    
+}
+
+.close-sheet-button:hover {
+  color: #5b5b5b;
+  background-color: #b6b6b6;
+}
+
+      #app-tb-filteredtable {
+         width: 940px;
+         border-collapse: collapse;
+      }
+
+      #app-tb-filteredtable tr {
+        border: 1px solid #a3a3a3;
+      }
+
+      #app-tb-filteredtable th {
+        background-color: #d4d4d4;
+        text-align: left;
+        border: 1px solid #a3a3a3;
+      }
+       
+      .filtered-breadcrumb {
+        border-left: #e4e4e4 !important;
+        border-right: #e4e4e4 !important;
+      }
+
+       .filtered-breadcrumb td {
+         color: #5b5b5b;
+         padding-top: 15px;
+         padding-left: 5px;
+         font-size: 9px;
+       }
+ 
+       .filtered-data td {
+         padding: 5px;
+         background-color: #fff;
+         border: 1px solid #a3a3a3;
+       }

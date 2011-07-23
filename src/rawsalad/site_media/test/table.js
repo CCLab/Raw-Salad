@@ -30,10 +30,10 @@ var _table = (function () {
     var that = {};
 
     that.clean_table = function () {
-        $('#data-table > thead').empty();
-        $('#data-table > tbody').empty();
-        $('#filtered-thead').empty();
-        $('#filtered-tbody').empty();
+        $('#app-tb-datatable > thead').empty();
+        $('#app-tb-datatable > tbody').empty();
+        $('#app-tb-filteredtable > thead').empty();
+        $('#app-tb-filteredtable > tbody').empty();
     };
 
     that.init_table = function () {
@@ -42,26 +42,28 @@ var _table = (function () {
             create_thead();
             create_tbody();
             _gui.make_zebra();
-            $('#manage-columns-button').show();
-            $('#filter-button').show();
-            $('#sort-button').css({
-                'border-radius': '5px 0px 0px 5px',
-                '-moz-border-radius': '5px 0px 0px 5px',
-                '-webkit-border-radius': '5px 0px 0px 5px'
-            });
+            $('#app-tb-tl-columns-button').show();
+            $('#app-tb-tl-clear-button').show();
+            $('#app-tb-tl-filter-button').show();
+            $('#app-tb-tl-sort-button').show();
+//            $('#app-tb-tl-sort-button').css({
+//                'border-radius': '5px 0px 0px 5px',
+//                '-moz-border-radius': '5px 0px 0px 5px',
+//                '-webkit-border-radius': '5px 0px 0px 5px'
+//            });
         } else {
             create_filtered_thead();
             create_filtered_tbody();
-            $('#manage-columns-button').hide();
-            $('#filter-button').hide();
-            $('#sort-button').css({
-                'border-radius': '5px',
-                '-moz-border-radius': '5px',
-                '-webkit-border-radius': '5px'
-            });
+            $('#app-tb-tl-columns-button').hide();
+            $('#app-tb-tl-clear-button').hide();
+            $('#app-tb-tl-filter-button').hide();
+            $('#app-tb-tl-sort-button').hide();
+//            $('#app-tb-tl-sort-button').css({
+//                'border-radius': '5px',
+//                '-moz-border-radius': '5px',
+//                '-webkit-border-radius': '5px'
+//            });
         }
-        $('#table-toolbar-collection-name')
-            .html( _store.active_sheet()['name'] );
 
         _utils.clean_preloader();
     };
@@ -107,7 +109,7 @@ var _table = (function () {
 
             html.push( '</tr>' );
         }
-        $('#data-table > thead').append( html.join('') );
+        $('#app-tb-datatable > thead').append( html.join('') );
     }
 
     function create_tbody() {
@@ -140,7 +142,7 @@ var _table = (function () {
         var schema = _store.active_columns();
 
         for( i = 0; i < len; ++i ) {
-            $('#data-table > tbody').append( generate_row({
+            $('#app-tb-datatable > tbody').append( generate_row({
                 node: data[i],
                 index: i,
                 schema: schema
@@ -226,7 +228,7 @@ var _table = (function () {
         });
         html.push( '</tr>' );
 
-        $('#filtered-thead').append( html.join('') );
+        $('#app-tb-filteredtable > thead').append( html.join('') );
     }
 
     function create_filtered_tbody() {
@@ -251,7 +253,7 @@ var _table = (function () {
                                     node: row,
                                     schema: schema
                                 });
-                $('#filtered-tbody').append( new_node );
+                $('#app-tb-filteredtable > tbody').append( new_node );
             });
     }
 
@@ -329,6 +331,16 @@ var _table = (function () {
     }
 
 
+    function show_selected_subtree( id ) {
+     $('tr.'+id).each( function () {
+                    var node = $(this);
+             if ( node.attr( 'data-open' ) === 'true' ) {
+                 show_selected_subtree( node.attr('id') );
+             }
+             node.show();
+        });
+    }
+
     function open_close_subtree( node, root ) {
         var a_root = root || a_parent( node );
         var a_root_id = a_root.attr('id');
@@ -343,8 +355,10 @@ var _table = (function () {
             if( node.attr( 'data-open' ) === 'false' ) {
 
                 // if children are hidden
+                var test = $('.'+id);
                 if( $('.'+id).length !== 0 ) {
-                    _utils.with_subtree( id, $.fn.show );
+                   // _utils.with_subtree( id, $.fn.show );
+                   show_selected_subtree( id );
                 }
                 // if children not loaded yet
                 else {

@@ -212,7 +212,7 @@ func_dict = {
 
 
 def get_page( data ):
-    template = loader.get_template( "app.html" )
+    template = loader.get_template( "test.html" )
 #     context = Context( tmp_solution_for_metadata() )
     context = Context( get_ms_nav() )
     return HttpResponse( template.render( context ))
@@ -232,7 +232,7 @@ def redirect( request ):
 @csrf_exempt
 def download_data( request ):
     response = HttpResponse()
-    files = request.POST.get( 'sheets' ).split( '--file--' )[:-1]
+    files = request.POST.get( 'csv_string' ).split( '--file--' )[:-1]
 
     # send one sheet as CSV and collection of sheets as ZIP
     if len( files ) == 1:

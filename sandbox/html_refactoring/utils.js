@@ -96,7 +96,7 @@ var _utils = (function () {
         html.push( text );
         html.push('</div>');
         preloader = $( html.join('') );
-        $('#filter-popup').after( preloader );
+        $('#app-table > .panel-main').after( preloader );
     };
 
     that.clean_preloader = function() {

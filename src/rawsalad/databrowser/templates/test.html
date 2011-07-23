@@ -5,11 +5,12 @@
 	<title></title>
   <link rel="stylesheet" type="text/css" href="/site_media/test/style.css" />
   <link rel="stylesheet" type="text/css" href="/site_media/test/classes.css" />
-  <link rel="stylesheet" type="text/css" href="/site_media/css/table_style.css" />
+  <link rel="stylesheet" type="text/css" href="/site_media/test/table_style.css" />
 </head>
 <body>
-
-  <!--  H E A D E R  -->
+ <div id="wrapper">
+ 
+ <!--  H E A D E R  -->
   <header id="top">
     <nav id="top-menu">
       <ul>
@@ -69,8 +70,8 @@
       <!-- S E A R C H   F O R M -->
       <section class="panel-main">
         <form action="">
-          <label for="pl-sr-query">Znajdź:</label>
-          <input type="text" class="input-text" name="pl-sr-query" />
+          <!-- <label for="pl-sr-query">Znajdź:</label> -->
+          <input type="text" class="input-text" placeholder="Szukana fraza" name="pl-sr-query" />
           <input type="checkbox" name="pl-sr-strict" value="pl-sr-strict" />
           <label for="pl-sr-strict">Dokładne dopasowanie</label>
           <!-- <br /> -->
@@ -113,10 +114,10 @@
           <table id="pl-dl-fl-table">
             <tbody>
             <tr>
-              <td class="pl-dn-select-buttons" rowspan="16">
-                <div id="pl-dn-fl-tb-select" class="grey button">Zaznacz wszystkie</div>
+              <td class="pl-dl-select-buttons" rowspan="16">
+                <div id="pl-dl-fl-tb-select" class="grey button">Zaznacz wszystkie</div>
                 <br class="clear"/>
-                <div id="pl-dn-fl-tb-unselect" class="grey button">Odznacz wszystkie</div>
+                <div id="pl-dl-fl-tb-unselect" class="grey button">Odznacz wszystkie</div>
               </td>
               <td class="check"><input value="0-0-2011.csv" type="checkbox" /></td>
               <td>Budżet centralny w ujęciu tradycyjnym 2011</td>
@@ -207,9 +208,8 @@
         <p class="panel-desc">Przeczytaj, w jaki sposób pracowaliśmy nad tym projektem</p>
       </header>
 
-      <section class="panel-main">
-        <p>Tu będą informacje na temat projektu i odniesienia do innych projektów <a href="http://centrumcyfrowe.pl">Centrum Cyfrowego</a>!</p>
-        <p>Litwo! Ojczyzno moja! Ty jesteś jak zdrowie. Ile cię stracił. Dziś człowieka rodu, obyczajów! Dość, że zamczysko wzięliśmy w drugim końcu stoła naprzód dzieci mało w zamkowej sieni siadł przy stole. To nie może Białopiotrowiczowi samemu odmówił! Bo nie miał wielką, i raptem boczne drzwi poglądał jakby za dozorcę księdza, który teraz wzrostem dorodniejsza bo tak zawsze Wam tam nie miał głos miły: Witaj nam, ach! tak i stają mu i ziemię orzę gdy potem w Wilnie, wielkim mieście miał i bagnami skradał się zaczęły wpółgłośne rozmowy. Mężczyźni rozsądzali swe trzymał pod lasem zwaliska. Po cóż kłócić się zatrudniał i potrząsając głową rzekł półgłosem: Przepraszam, musieliśmy siadać niepodobna wieczerzy na świętych obrazku. Twarzy nie dostrzegł, nazbyt rychło znikła ale widzę i o nie! Więc szlachcic bez grzeczności i niech Jaśnie Wielmożny Podkomorzy i mniej był portret króla Stanisława. Ojcu Podkomorzego zdał się zdołał. Prostym ludziom wokanda zda się kiedyś demokratą. Bo nie uchybił gospodarskiej, ważnej powinności udał się rówiennicą a potem się sploty. Kolor musiał pochodzić od stołu. pierwszy Podkomorzy i że go miało być siedzeniem. Rumienił się, że się.</p>
+      <section class="panel-main plate">
+        <p>Dostęp do danych publicznych w Polsce jest coraz lepszy, jednak wciąż brakuje standardów ich prezentacji. Potrzebie szybkiego, efektywnego i ustandaryzowanego dostępu do danych publicznych wychodzi naprzeciw Raw Salad (Surówka), projekt Centrum Cyfrowego. Raw Salad to sieciowa przeglądarka danych, pozwalająca na łatwy dostęp do danych publicznych. Głównym przedmiotem wysiłków twórców Raw Salad jest stworzenie efektywnego i przejrzystego systemu poruszania się w gąszczu danych. Dzięki zastosowaniu nowoczesnych technologii informatycznych użytkownicy Raw Salad dostaną do ręki narzędzie pozwalające łatwo dobrać dane potrzebne im do pracy i dostosować sposób prezentacji danych do ich potrzeb.
       </section>
     </section>
 
@@ -223,7 +223,7 @@
         <p class="panel-desc">Read about the project</p>
       </header>
 
-      <section class="panel-main">
+      <section class="panel-main plate">
         <p>Lorem ipsum dolor sit amet erat. Integer euismod scelerisque urna tellus quis wisi. Phasellus facilisis at, egestas sit amet, pretium vitae, nunc. Vivamus risus. Vivamus nec lorem eu lectus id enim. Duis sed enim. Phasellus pulvinar sit amet, nonummy at, metus. Nullam laoreet, nulla bibendum pede bibendum vel, luctus et luctus et netus et nisl. Cras dolor tincidunt wisi at mauris sit amet mauris. Mauris molestie quis, interdum sem ut nunc eu mollis neque ut sapien id eleifend et, accumsan et, porttitor eros eros malesuada dolor. Vestibulum commodo a, posuere eget, nunc. Sed eget orci massa, nonummy commodo ac, tempus ac, porta sit amet, aliquam ac, urna. Nunc gravida. Duis quis ante. Mauris nec tristique tellus. Integer adipiscing. Nam dolor sit amet metus ac ornare lobortis laoreet diam. Aliquam at porta ligula erat volutpat. Maecenas facilisis libero. Cum sociis natoque penatibus et luctus ullamcorper libero at justo quis placerat ante. Morbi a elit. Lorem ipsum dolor sit amet magna. Vestibulum aliquam odio. Nunc id mi. Pellentesque orci luctus a, fermentum sem ac diam. Duis vel quam purus, dictum accumsan nisl.</p>
       </section>
     </section>
@@ -241,9 +241,8 @@
       <!-- F E E D B A C K   F O R M -->
       <section class="panel-main">
         <form action="/feedback/">
-        	<label for="pl-fb-email">Podaj swój email (opcjonalnie)</label><br />
-        	<input type="text" class="input-text" name="pl-fb-email" /><br />
-        	<textarea name="pl-fb-message" class="input-text" rows="10" cols="30"></textarea><br />
+        	<input id="pl-fb-email" type="text" placeholder="Twój adres email" class="input-text" name="pl-fb-email" value="" /><br />
+        	<textarea name="pl-fb-message" placeholder="Twoje uwagi" class="input-text" rows="10" cols="30"></textarea><br />
         </form>
       </section>
       <!-- F E E D B A C K   B U T T O N -->
@@ -272,17 +271,17 @@
     <section id="app-table" class="app-container">
       <header> 
         <div id="app-tb-save-sheet" class="blue button left">Zapisz arkusz</div>
-        <ul>
-        	<li class="tab button active">Budżet zadanio...</li>
+        <ul id="app-tb-sheets">
+        	<!-- <li class="tab button active">Budżet zadanio...</li>
         	<li class="tab button">Arkusz 1</li>
-        	<li class="tab button">Narodowy Fun...</li>
+        	<li class="tab button">Narodowy Fun...</li>-->
         </ul>
       </header>
       <section class="panel-main">
         <!-- T A B L E   T O O L S -->
         <section id="app-tb-tools">
           <section>
-            <h3 id="app-tb-tl-title" class="left">Budżet centralny w ujęciu zadaniowym 2011</h3>
+            <h3 id="app-tb-tl-title" class="left"></h3>
             <div id="app-tb-tl-bt-container" class="right">
               <div id="app-tb-tl-clear-button" class="button left">Wyczyść tabelę</div>
               <div id="app-tb-tl-sort-button" class="button left">Sortuj</div>
@@ -328,6 +327,7 @@
               
             </form>
           </section>
+          <!-- C O L U M N S -->
           <section>
             <div id="app-tb-tl-columns-button" class="button right">Dodaj/Usuń kolumny</div>
             <br class="clear"/>
@@ -356,32 +356,36 @@
           <tbody></tbody>
         </table>
 
-      </section> <!-- E O:  T A B L E -->
+      </section> <!-- E O:  M A I N   P A N E L --> 
+    </section> <!-- E O:  T A B L E -->
+    <!-- S H A R E -->
+    <section id="app-share" class="app-container">
+      <section class="panel-main">
+        Share form goes here!!
+      </section>
+    </section> <!-- E O:  S H A R E -->
 
-      <!-- S H A R E -->
-      <section id="app-share" class="app-container">
-      </section> <!-- E O:  S H A R E -->
-    </section>
   </section> <!-- E O:  A P P L I C A T I O N -->
+ </div>
 
-    <script src="http://code.jquery.com/jquery-1.6.1.js"></script>
-    <script src="/site_media/test/hide.js"></script>
-    <script src="/site_media/test/assert.js"></script>
-    <script src="/site_media/test/store.js"></script>
-    <script src="/site_media/test/db.js"></script>
-    <script src="/site_media/test/gui.js"></script>
-    <script src="/site_media/test/table.js"></script>
-    <script src="/site_media/test/sheet.js"></script>
-    <script src="/site_media/test/utils.js"></script>
-    <script src="/site_media/test/tools.js"></script>    
-    <script src="/site_media/test/algorithms.js"></script>
-    <script src="/site_media/test/download.js"></script>
-    <script type="text/javascript" language="javascript" charset="utf-8">
-    // <![CDATA[
-        _store.meta_data( {{ meta_data|safe }} );       
-        _gui.init_gui(); 
-    // ]]>
-    </script> 
+  <script src="http://code.jquery.com/jquery-1.6.1.js"></script>
+  <script src="/site_media/test/hide.js"></script>
+  <script src="/site_media/test/assert.js"></script>
+  <script src="/site_media/test/store.js"></script>
+  <script src="/site_media/test/db.js"></script>
+  <script src="/site_media/test/gui.js"></script>
+  <script src="/site_media/test/table.js"></script>
+  <script src="/site_media/test/sheet.js"></script>
+  <script src="/site_media/test/utils.js"></script>
+  <script src="/site_media/test/tools.js"></script>    
+  <script src="/site_media/test/algorithms.js"></script>
+  <script src="/site_media/test/download.js"></script>
+  <script type="text/javascript" language="javascript" charset="utf-8">
+  // <![CDATA[
+      _store.meta_data( {{ meta_data|safe }} );       
+      _gui.init_gui(); 
+  // ]]>
+  </script> 
 
 </body>
 </html>
