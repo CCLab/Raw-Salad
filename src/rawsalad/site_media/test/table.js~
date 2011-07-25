@@ -177,6 +177,7 @@ var _table = (function () {
         var schema = args['schema'];
         var is_open = node['state']['open'];
         var is_selected = node['state']['selected'];
+        var is_visible = node['state']['selected'];
         var html = [];
         var row;
 
@@ -354,8 +355,8 @@ var _table = (function () {
         $('tr.'+id).each( function () {
             var node = $(this);
             set_invisible_subtree( node.attr('id') );
-           _store.set_visible( id, false );
         });      
+        _store.set_visible( id, false );
     }
 
 
@@ -401,7 +402,7 @@ var _table = (function () {
             // the node is closed
             else {
                 // hide subtree
-                set_invisable_subtree( id );
+                set_invisible_subtree( id );
                 _utils.with_subtree( id, $.fn.hide );
 
                 // mark subtree as closed
