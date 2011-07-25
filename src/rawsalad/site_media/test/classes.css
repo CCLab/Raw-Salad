@@ -43,6 +43,7 @@
 .rounded {
   padding: 5px;
   margin: 5px;
+  margin-bottom: 0px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;

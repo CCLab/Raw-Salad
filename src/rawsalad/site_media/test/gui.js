@@ -196,8 +196,20 @@ var _gui = (function () {
                 });
             });
 
-        $('#pl-sr-results')
-            .hide();
+        $('#pl-sr-more')
+            .click( function () {
+                if( $('#pl-sr-full').is(':visible') ) {
+                    $('#pl-sr-full').show();
+                    $(this).html( 'Pokaż zaawansowane' );
+                }
+                else {
+                    $('#pl-sr-full').hide();
+                    $(this).html( 'Zamknij zaawansowane' );
+                }
+            });
+
+        $('#pl-sr-full').hide();
+        $('#pl-sr-results').hide();
 
         $('#pl-sr-button')
             .click( function () {
@@ -489,14 +501,7 @@ var _gui = (function () {
             html.push( '<input type="checkbox" ');
             html.push( 'value="', ( group + '-' + sheet ));
             html.push( '" /></td>' );
-            html.push( '<td ' );
-            if( sheet === 0 ) {
-                html.push( 'style="font-weight: bold"' );
-            }
-            else {
-                html.push( 'style="padding-left: 10px;"' );
-            }
-            html.push( '>', name, '</td>' );
+            html.push( '<td>', name, '</td>' );
             html.push( '</tr>' );
         });
         html.push( '</tbody>' );
@@ -667,14 +672,7 @@ var _gui = (function () {
             html.push( '<input type="checkbox" ');
             html.push( 'value="', ( group + '-' + sheet ));
             html.push( '" /></td>' );
-            html.push( '<td ' );
-            if( sheet === 0 ) {
-                html.push( 'style="font-weight: bold"' );
-            }
-            else {
-                html.push( 'style="padding-left: 10px;"' );
-            }
-            html.push( '>', name, '</td>' );
+            html.push( '<td>', name, '</td>' );
             html.push( '</tr>' );
         });
         html.push( '</tbody>' );

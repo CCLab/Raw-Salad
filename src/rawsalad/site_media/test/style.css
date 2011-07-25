@@ -290,6 +290,11 @@ textarea {
     margin-top: -5px;
   }
 
+  #pl-sr-more:hover {
+    background-color: #1ea3e8;
+    color: #fff;
+  }
+
 /*  A P P L I C A T I O N  */
 #application {
   overflow: visible;
