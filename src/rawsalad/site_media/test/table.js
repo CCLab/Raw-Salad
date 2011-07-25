@@ -198,7 +198,7 @@ var _table = (function () {
             html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
             html.push( data[column['key']] );
             if( data['info'] !== null ) {
-                html.push( '<img src="/site_media/img/info_small.png" />' );
+                html.push( '<img src="/site_media/img/info_small.png" border="0"/>' );
             }
             html.push( '</td>' );
         });
