@@ -158,7 +158,35 @@ var _gui = (function () {
                 });
 
                 _download.selected( ids );
-                hide_top_panels();
+
+                // close download panel
+                if( $('#application').is(':visible') {
+                    hide_top_panels();
+                }
+                else {
+                    $('#tm-choose').trigger( $.Event( 'click' ) );
+                }
+            });
+
+        $('#pl-fb-button')
+            .click( function () {
+                $.ajax({
+                    url:'feedback/',
+                    type: 'POST',
+                    data: {
+                        email: $('#pl-fb-email').val(),
+                        message: $('#pl-fb-message').val()
+                    },
+                    success: function () {
+                        // close feedback panel
+                        if( $('#application').is(':visible') {
+                            hide_top_panels();
+                        }
+                        else {
+                            $('#tm-choose').trigger( $.Event( 'click' ) );
+                        }
+                    }
+                });
             });
 
         init_choose_panel();

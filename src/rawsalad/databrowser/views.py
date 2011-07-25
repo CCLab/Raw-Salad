@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import Context, loader
 from django.utils import simplejson as json
+from django.core.mail import send_mail
 
 import rsdbapi as rsdb
 import csv, codecs, cStringIO
@@ -228,6 +229,19 @@ def app_page( request ):
 
 def redirect( request ):
     return HttpResponseRedirect('/app')
+
+@csrf_exempt
+def feedback_email( request ):
+    from_email = request.POST.get( 'email', 'NO EMAIL PROVIDED' )
+    message = request.POST.get( 'message', 'MESSAGE LEFT EMPTY' )
+
+    send_mail( 'Raw Salad Feedback',
+                message,
+                from_email,
+                ['ktrzewiczek@centrumcyfrowe.pl'] )
+
+    return HttpResponse()
+
 
 @csrf_exempt
 def download_data( request ):
