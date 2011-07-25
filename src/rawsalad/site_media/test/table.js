@@ -177,6 +177,7 @@ var _table = (function () {
         var schema = args['schema'];
         var is_open = node['state']['open'];
         var is_selected = node['state']['selected'];
+        var is_visible = node['state']['visible'];
         var html = [];
         var row;
 
@@ -222,6 +223,10 @@ var _table = (function () {
                     raw.find('.click').css('color', '#1a7aad' );
                 }
             );
+        if( !!is_visible ){
+            row.hide();
+        }
+
 
         return row;
     }
@@ -357,8 +362,8 @@ var _table = (function () {
         $('tr.'+id).each( function () {
             var node = $(this);
             set_invisible_subtree( node.attr('id') );
-           _store.set_visible( id, false );
         });
+        _store.set_visible( id, false );
     }
 
 
