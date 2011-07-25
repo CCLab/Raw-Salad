@@ -177,6 +177,21 @@ var _store = (function () {
             }
         }
     };
+    
+    
+    that.set_visible = function ( id, state ) {
+        var node, rows = that.active_rows();
+        var i, len = rows.length;
+        for ( i = 0; i < len; i += 1 ) {
+            node = rows[i];
+            if ( node['data']['idef'] === id ) {
+                node['state']['visible'] = state;
+                return;
+            }
+        
+        }
+        
+    };
 
 
     that.active_sheet_index = function ( new_active_sheet_num ) {
@@ -379,7 +394,11 @@ var _store = (function () {
         var rows = data['rows'].map( function ( row ) {
                                     return {
                                         data: row,
-                                        state: { open: false, selected: false }
+                                        state: { 
+                                            open: false, 
+                                            selected: false, 
+                                            visible: true 
+                                        }
                                     };
                                 });
 

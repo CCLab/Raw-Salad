@@ -158,9 +158,9 @@ var _table = (function () {
 
         for( ; i >= 0; i -= 1 ) {
             parent = $( '#' + data[i]['data']['parent'] );
-            if( parent.attr( 'data-open' ) === 'false' ) {
-                continue;
-            }
+//            if( parent.attr( 'data-open' ) === 'false' ) {
+//                continue;
+//            }
             parent.after( generate_row({
                 node: data[i],
                 schema: schema
@@ -344,6 +344,7 @@ var _table = (function () {
              if ( node.attr( 'data-open' ) === 'true' ) {
                  show_selected_subtree( node.attr('id') );
              }
+             _store.set_visible( id, true );
              node.show();
         });
     }
@@ -370,7 +371,7 @@ var _table = (function () {
                 // if children not loaded yet
                 else {
                     _db.download_node( id );
-                }
+                
 
                 // if there is previously selected node, unselect it in _store
                 previously_selected_id = $('tr[data-selected=true]').attr('id');
