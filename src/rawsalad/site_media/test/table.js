@@ -401,7 +401,7 @@ var _table = (function () {
             // the node is closed
             else {
                 // hide subtree
-                set_invisable_subtree( id );
+                set_invisible_subtree( id );
                 _utils.with_subtree( id, $.fn.hide );
 
                 // mark subtree as closed
