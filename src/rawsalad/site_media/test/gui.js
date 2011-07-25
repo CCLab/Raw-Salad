@@ -160,7 +160,7 @@ var _gui = (function () {
                 _download.selected( ids );
 
                 // close download panel
-                if( $('#application').is(':visible') {
+                if( $('#application').is(':visible') ) {
                     hide_top_panels();
                 }
                 else {
@@ -179,7 +179,7 @@ var _gui = (function () {
                     },
                     success: function () {
                         // close feedback panel
-                        if( $('#application').is(':visible') {
+                        if( $('#application').is(':visible') ) {
                             hide_top_panels();
                         }
                         else {
