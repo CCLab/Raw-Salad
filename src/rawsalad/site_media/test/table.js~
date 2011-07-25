@@ -371,7 +371,7 @@ var _table = (function () {
                 // if children not loaded yet
                 else {
                     _db.download_node( id );
-                
+                }
 
                 // if there is previously selected node, unselect it in _store
                 previously_selected_id = $('tr[data-selected=true]').attr('id');
