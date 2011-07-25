@@ -42,47 +42,8 @@ var _db = (function () {
             data: data,
             dataType: 'json',
             success: function ( received_data ) {
-                // use received_data when db search is ready
-                var tmp_data = [
-                    {
-                        dataset: 0,
-                        view: 0,
-                        issue: 2011,
-                        data: [
-                            {
-                                idef: "01-921",
-                                parent: "01",
-                                type: "Dzia\u0142 921",
-                                name: "Kultura i ochrona dziedzictwa narodowego"
-                            }
-                        ]
-                    },
-                    {
-                        dataset: 0,
-                        view: 1,
-                        issue: 2012,
-                        data: [
-                            {
-                                idef: "2-2",
-                                parent: "2",
-                                type: "Zadanie 2.2",
-                                name: "Redukowanie przest\u0119pczo\u015bci"
-                            },
-                            {
-                                idef: "3-2",
-                                parent: "3",
-                                type: "Zadanie 3.2",
-                                name: "Szkolnictwo wy\u017csze"
-                            },
-                            {
-                                idef: "3-2-3",
-                                parent: "3-2",
-                                type: "Podzadanie 3.2.3",
-                                name: "Wsparcie procesu studiowania"
-                            }
-                        ]
-                    }
-                ];
+                $('#pl-search').append( $('<section class="panel-main">'+received_data+'</section>') );
+
                 _tools.show_search_results( tmp_data );
             }
         });
