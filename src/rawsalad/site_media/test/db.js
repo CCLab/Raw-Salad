@@ -42,9 +42,22 @@ var _db = (function () {
             data: data,
             dataType: 'json',
             success: function ( received_data ) {
-                $('#pl-search').append( $('<section class="panel-main">'+received_data+'</section>') );
+                var html = [];
+                received_data['strict']['result'].forEach( function ( collection ) {
+                    html.push( '<h3>', collection['perspective'], '</h3>' );
+                    collection['data'].forEach( function ( result ) {
+                        html.push( '<p>', result['text'], '</p>' );
+                    });
+                });
 
-                _tools.show_search_results( tmp_data );
+                $('#pl-sr-form-panel')
+                    .slideUp( 200 );
+
+                $('#pl-sr-results')
+                    .append( $( html.join('') ))
+                    .slideDown( 200 );
+
+            //    _tools.show_search_results( tmp_data );
             }
         });
     };

@@ -68,24 +68,30 @@
       </header>
 
       <!-- S E A R C H   F O R M -->
-      <section class="panel-main">
-        <form action="">
-          <!-- <label for="pl-sr-query">Znajdź:</label> -->
-          <input type="text" class="input-text" placeholder="Szukana fraza" id="pl-sr-query" name="pl-sr-query" />
-          <input type="checkbox" name="pl-sr-strict" value="pl-sr-strict" />
-          <label for="pl-sr-strict">Dokładne dopasowanie</label>
-          <!-- <br /> -->
-          <!-- <label for="pl-sr-full">w kolekcjach danych</label> -->
-          <!-- <input type="radio" name="pl-sr-full" /> -->
-          <!-- <label for="pl-sr-sheet">w aktualnym arkuszu</label> -->
-          <!-- <input type="radio" name="pl-sr-sheet" /> -->
-        </form>
-      </section>
+      <section id="pl-sr-form-panel">
+        <section class="panel-main">
+          <form id="pl-sc-form" action="">
+            <!-- <label for="pl-sr-query">Znajdź:</label> -->
+            <input type="text" class="input-text" placeholder="Szukana fraza" id="pl-sr-query" name="pl-sr-query" />
+            <input type="checkbox" name="pl-sr-strict" value="pl-sr-strict" />
+            <label for="pl-sr-strict">Dokładne dopasowanie</label>
+            <!-- <br /> -->
+            <!-- <label for="pl-sr-full">w kolekcjach danych</label> -->
+            <!-- <input type="radio" name="pl-sr-full" /> -->
+            <!-- <label for="pl-sr-sheet">w aktualnym arkuszu</label> -->
+            <!-- <input type="radio" name="pl-sr-sheet" /> -->
+          </form>
+        </section>
 
-      <!-- S E A R C H   B U T T O N -->
-      <div class="pl-bt-container">
-        <div id="pl-sr-button" class="blue button">Szukaj</div>
-      </div>
+        <!-- S E A R C H   B U T T O N -->
+        <div class="pl-bt-container">
+          <div id="pl-sr-button" class="blue button">Szukaj</div>
+        </div>
+      </section>
+      <section id="pl-sr-results-panel">
+        <section id="pl-sr-results" class="panel-main">
+        </section>
+      </section>
     </section>
 
     <!-- D O W N L O A D   P A N E L -->
