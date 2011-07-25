@@ -236,13 +236,19 @@ def download_data( request ):
 
     # send one sheet as CSV and collection of sheets as ZIP
     if len( files ) == 1:
-        data = files[0].split( '|' )[:-1]
+        f = files[0]
         response['Content-Type'] = 'text/csv'
         response['Content-Disposition'] = 'attachment; filename=data.csv'
 
-        writer = UnicodeWriter( response )
-        for row in data:
-            writer.writerow( row.split(';') )
+        if '.csv' in f:
+            response.write( open( 'site_media/csv/' + f ).read() )
+        else:
+            data = f.split( '|' )[:-1]
+
+            writer = UnicodeWriter( response )
+            for row in data:
+                writer.writerow( row.split(';') )
+
     else:
         in_memory = StringIO()
         zip = ZipFile( in_memory, 'a' )
