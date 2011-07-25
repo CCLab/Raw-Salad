@@ -229,7 +229,7 @@ var _gui = (function () {
 
         $('#pl-sr-button')
             .click( function () {
-                if(  $('#pl-sr-query').val() !== '' ) {
+                if(  $('#pl-sr-query').val() === '' ) {
                     return;
                 }
 
