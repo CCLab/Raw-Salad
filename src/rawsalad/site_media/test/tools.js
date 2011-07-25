@@ -264,15 +264,23 @@ var _tools = (function () {
         $('#app-tb-tl-sort-button')
             .click( function () {
                 var form = $('#app-tb-tl-sort-form');
+                var others = $('#app-tb-tools').find('form:visible');
 
-                $('#app-tb-tools')
-                    .find('form:visible')
-                    .slideUp( 200 );
-
-                if( form.is(':hidden') ) {
+                if( form.is(':hidden' )) {
                     form.find('tbody').empty();
                     add_sort_key();
-                    form.slideDown( 200 );
+                    
+                    if( others.length === 0 ) {
+                        form.slideDown( 200 );
+                    }
+                    else {
+                        others.slideUp( 200, function () {
+                            form.slideDown( 200 );
+                        });
+                    }
+                }
+                else {
+                    form.slideUp( 200 );
                 }
 
                 $(this)
@@ -280,7 +288,7 @@ var _tools = (function () {
                     .siblings()
                     .removeClass('pushed');
 
-                $('#app-tb-tl-sort-add' ).show();
+                $('#app-tb-tl-sort-add').show();
             });
 
         $('#app-tb-tl-sort-add').click( function () {
@@ -358,15 +366,23 @@ var _tools = (function () {
         $('#app-tb-tl-filter-button')
             .click( function () {
                 var form = $('#app-tb-tl-filter-form');
+                var others = $('#app-tb-tools').find('form:visible');
 
-                $('#app-tb-tools')
-                    .find('form:visible')
-                    .slideUp( 200 );
-
-                if( form.is( ':hidden' ) ) {
+                if( form.is(':hidden' )) {
                     form.find('tbody').empty();
                     add_filter_key();
-                    form.slideDown( 200 );
+                    
+                    if( others.length === 0 ) {
+                        form.slideDown( 200 );
+                    }
+                    else {
+                        others.slideUp( 200, function () {
+                            form.slideDown( 200 );
+                        });
+                    }
+                }
+                else {
+                    form.slideUp( 200 );
                 }
 
                 $(this)

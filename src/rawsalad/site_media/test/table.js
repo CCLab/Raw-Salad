@@ -204,14 +204,21 @@ var _table = (function () {
         // create & arm row
         row = $( html.join('') );
         row.click( function ( event ) {
-            // update css classes connected with node selection
-            apply_selection( $(this).attr('id') );
+                // update css classes connected with node selection
+                apply_selection( $(this).attr('id') );
 
-            // open/close a subtree if it's a-level or already selected/open
-            open_close_subtree( $(this), a_parent( $(this) ) );
+                // open/close a subtree if it's a-level or already selected/open
+                open_close_subtree( $(this), a_parent( $(this) ) );
 
-//            _gui.make_zebra();
-        });
+            })
+            .hover(
+                function () {
+                    row.find('.click').css('color', '#11a8f7' );
+                },
+                function () {
+                    raw.find('.click').css('color', '#1a7aad' );
+                }
+            );
 
         return row;
     }
