@@ -276,6 +276,19 @@ textarea {
     padding-left: 150px;
   }
 
+  #pl-sr-more {
+    margin: 0px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #e1e1e1;
+    color: #1ea3e8;
+    border-radius: 0px 0px 3px 3px;
+    -moz-border-radius: 0px 0px 3px 3px;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    -o-border-radius: 0px 0px 3px 3px;
+    margin-left: 10px;
+  }
+
 /*  A P P L I C A T I O N  */
 #application {
   overflow: visible;
