@@ -223,7 +223,8 @@ var _table = (function () {
                     raw.find('.click').css('color', '#1a7aad' );
                 }
             );
-        if( !!is_visible ){
+
+        if( !is_visible ){
             row.hide();
         }
 
