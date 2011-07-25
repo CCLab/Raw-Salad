@@ -46,11 +46,11 @@ var _db = (function () {
                 received_data['strict']['result'].forEach( function ( collection ) {
                     html.push( '<h3>', collection['perspective'], '</h3>' );
                     collection['data'].forEach( function ( result ) {
-                        html.push( '<p>', result['text'], '</p>' );
+                        html.push( '<p style="margin-left: 10px;">', result['text'], '</p>' );
                     });
                 });
 
-                $('#pl-sr-form-panel')
+                $('#pl-sr-full')
                     .slideUp( 200 );
 
                 $('#pl-sr-results')

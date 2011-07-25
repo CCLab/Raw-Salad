@@ -203,16 +203,36 @@ var _gui = (function () {
                     $(this).html( 'Pokaż zaawansowane' );
                 }
                 else {
+                    $('#pl-sr-unselect').trigger( $.Event( 'click' ));
                     $('#pl-sr-full').slideDown( 200 );
                     $(this).html( 'Zamknij zaawansowane' );
                 }
             });
+
+
+        $('#pl-sr-select').click( function () {
+            // select all checkboxes
+            $('#pl-sr-table')
+                .find(':checkbox')
+                .attr( 'checked', 'true' );
+        });
+
+        $('#pl-sr-unselect').click( function () {
+            // unselect all checkboxes
+            $('#pl-sr-table')
+                .find(':checkbox')
+                .removeAttr( 'checked' );
+        });
 
         $('#pl-sr-full').hide();
         $('#pl-sr-results').hide();
 
         $('#pl-sr-button')
             .click( function () {
+                if(  $('#pl-sr-query').val() !== '' ) {
+                    return;
+                }
+
                 _db.search( $('#pl-sr-query').val(), ['0-0-2011', '0-1-2011', '0-1-2012',
                                                       '0-2-2011', '0-2-2012', '1-0-2011',
                                                       '1-1-2011', '1-1-2012', '1-2-2011',
