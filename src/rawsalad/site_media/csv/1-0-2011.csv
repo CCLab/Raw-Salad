@@ -1,0 +1,158 @@
+ID;Rodzic;Poziom;Typ;Nazwa;Część;Wydatki budżetu środków europejskich
+0001;;a;Program 1;Program Operacyjny Infrastruktura i Środowisko;;12093750
+0001-0001;0001;b;Część 20;Program Operacyjny Infrastruktura i Środowisko;20 ;300000
+0001-0002;0001;b;Część 21;GOSPODARKA MORSKA;21 ;163199
+0001-0003;0001;b;Część 22;GOSPODARKA WODNA;22 ;146326
+0001-0004;0001;b;Część 24;KULTURA I OCHRONA DZIEDZICTWA NARODOWEGO;24 ;400000
+0001-0006;0001;b;Część 38;SZKOLNICTWO WYśSZE;38 ;264006
+0001-0007;0001;b;Część 39;TRANSPORT;39 ;7556350
+0001-0008;0001;b;Część 41;ŚRODOWISKO;41 ;2849541
+0001-0009;0001;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;7906
+0001-0010;0001;b;Część 46;ZDROWIE;46 ;377548
+0001-0011;0001;b;Część 85/06;Budżety wojewodów ogółem: Lubelskie;85/06;1870
+0001-0012;0001;b;Część 85/18;Budżety wojewodów ogółem: Podkarpackie;85/18;12446
+0001-0013;0001;b;Część 85/22;Budżety wojewodów ogółem: Pomorskie;85/22;14558
+0002;;a;Program 2;Program Operacyjny Innowacyjna Gospodarka;;2616587
+0002-0001;0002;b;Część 17;Program Operacyjny Innowacyjna Gospodarka;17 ;58749
+0002-0002;0002;b;Część 19;BUDŻET, FINANSE PUBLICZNE I INSTYTUCJE FINANSOWE;19 ;56109
+0002-0003;0002;b;Część 20;GOSPODARKA;20 ;1232813
+0002-0004;0002;b;Część 22;GOSPODARKA WODNA;22 ;10742
+0002-0005;0002;b;Część 26;ŁĄCZNOŚĆ;26 ;191
+0002-0006;0002;b;Część 27;INFORMATYZACJA;27 ;226361
+0002-0007;0002;b;Część 28;NAUKA;28 ;750700
+0002-0008;0002;b;Część 34;ROZWÓJ REGIONALNY;34 ;52437
+0002-0009;0002;b;Część 37;SPRAWIEDLIWOŚĆ;37 ;14014
+0002-0010;0002;b;Część 41;ŚRODOWISKO;41 ;2758
+0002-0011;0002;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;141963
+0002-0012;0002;b;Część 44;ZABEZPIECZENIE SPOŁECZNE;44 ;3996
+0002-0013;0002;b;Część 46;ZDROWIE;46 ;20459
+0002-0014;0002;b;Część 58;GŁÓWNY URZĄD STATYSTYCZNY;58 ;30906
+0002-0015;0002;b;Część 76;URZĄD KOMUNIKACJI ELEKTRONICZNEJ;76 ;14389
+0003;;a;Program 3;Program Operacyjny Kapitał Ludzki;;4601920
+0003-0001;0003;b;Część 16;Program Operacyjny Kapitał Ludzki;16 ;27062
+0003-0002;0003;b;Część 17;ADMINISTRACJA PUBLICZNA;17 ;123733
+0003-0003;0003;b;Część 19;BUDŻET, FINANSE PUBLICZNE I INSTYTUCJE FINANSOWE;19 ;18959
+0003-0004;0003;b;Część 20;GOSPODARKA;20 ;7892
+0003-0005;0003;b;Część 28;NAUKA;28 ;12281
+0003-0006;0003;b;Część 30;OŚWIATA I WYCHOWANIE;30 ;342590
+0003-0007;0003;b;Część 31;PRACA;31 ;889510
+0003-0008;0003;b;Część 32;ROLNICTWO;32 ;1510
+0003-0009;0003;b;Część 34;ROZWÓJ REGIONALNY;34 ;2687859
+0003-0010;0003;b;Część 37;SPRAWIEDLIWOŚĆ;37 ;39296
+0003-0011;0003;b;Część 38;SZKOLNICTWO WYśSZE;38 ;356795
+0003-0012;0003;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;3815
+0003-0013;0003;b;Część 43;WYZNANIA RELIGIJNE ORAZ MNIEJSZOŚCI NARODOWE I ETNICZNE;43 ;9180
+0003-0014;0003;b;Część 44;ZABEZPIECZENIE SPOŁECZNE;44 ;36253
+0003-0015;0003;b;Część 46;ZDROWIE;46 ;41296
+0003-0016;0003;b;Część 49;URZĄD ZAMÓWIEŃ PUBLICZNYCH;49 ;454
+0003-0017;0003;b;Część 75;RZĄDOWE CENTRUM LEGISLACJI;75 ;354
+0003-0018;0003;b;Część 80;REGIONALNE IZBY OBRACHUNKOWE;80 ;500
+0003-0019;0003;b;Część 85/04;Budżety wojewodów ogółem: Kujawsko-pomorskie;85/04;83
+0003-0020;0003;b;Część 85/06;Budżety wojewodów ogółem: Lubelskie;85/06;51
+0003-0023;0003;b;Część 85/26;Budżety wojewodów ogółem: Świętokrzyskie;85/26;310
+0003-0024;0003;b;Część 85/28;Budżety wojewodów ogółem: Warmińsko-mazurskie;85/28;153
+0003-0025;0003;b;Część 85/30;Budżety wojewodów ogółem: Wielkopolskie;85/30;300
+0003-0026;0003;b;Część 85/32;Budżety wojewodów ogółem: Zachodniopomorskie;85/32;1437
+0003-0027;0003;b;Część 86;Samorządowe kolegia odwoławcze ogółem;86;247
+0005;;a;Program 5;Program Operacyjny Rozwój Polski Wschodniej;;1224676
+0005-0001;0005;b;Część 34;Program Operacyjny Rozwój Polski Wschodniej;34 ;1224676
+0006;;a;Program 6;Regionalny Program Operacyjny dla Województwa Dolnośląskiego 2007-2013;;595522
+0006-0001;0006;b;Część 22;"Regionalny Program Operacyjny dla Województwa Dolnośląskiego
+2007-2013";22 ;14417
+0006-0003;0006;b;Część 34;ROZWÓJ REGIONALNY;34 ;562439
+0006-0005;0006;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;18411
+0006-0006;0006;b;Część 85/02;Budżety wojewodów ogółem: Dolnośląskie;85/02;255
+0007;;a;Program 7;Regionalny Program Operacyjny Województwa Kujawsko- Pomorskiego na lata 2007-2013;;421497
+0007-0001;0007;b;Część 34;Regionalny Program Operacyjny Województwa Kujawsko- Pomorskiego na lata 2007-2013;34 ;415605
+0007-0002;0007;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;590
+0007-0003;0007;b;Część 85/04;Budżety wojewodów ogółem: Kujawsko-pomorskie;85/04;5302
+0008;;a;Program 8;Regionalny Program Operacyjny Województwa Lubelskiego na lata 2007-2013;;474396
+0008-0001;0008;b;Część 34;"Regionalny Program Operacyjny Województwa Lubelskiego na lata
+2007-2013";34 ;463715
+0008-0002;0008;b;Część 85/06;Budżety wojewodów ogółem: Lubelskie;85/06;10681
+0009;;a;Program 9;Lubuski Regionalny Program Operacyjny na lata 2007-2013;;184912
+0009-0001;0009;b;Część 31;Lubuski Regionalny Program Operacyjny na lata 2007-2013;31 ;1476
+0009-0002;0009;b;Część 34;ROZWÓJ REGIONALNY;34 ;180238
+0009-0003;0009;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;3198
+0010;;a;Program 10;Regionalny Program Operacyjny Województwa Łódzkiego na lata 2007-2013;;465686
+0010-0002;0010;b;Część 34;ROZWÓJ REGIONALNY;34 ;462307
+0010-0003;0010;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;3379
+0011;;a;Program 11;Małopolski Regionalny Program Operacyjny na lata 2007 - 2013;;629661
+0011-0001;0011;b;Część 32;Małopolski Regionalny Program Operacyjny na lata 2007 - 2013;32 ;2000
+0011-0002;0011;b;Część 34;ROZWÓJ REGIONALNY;34 ;613611
+0011-0004;0011;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;14050
+0012;;a;Program 12;Regionalny Program Operacyjny Województwa Mazowieckiego na lata 2007-2013;;748535
+0012-0001;0012;b;Część 22;Regionalny Program Operacyjny Województwa Mazowieckiego na lata 2007-2013;22 ;765
+0012-0003;0012;b;Część 31;PRACA;31 ;7820
+0012-0004;0012;b;Część 32;ROLNICTWO;32 ;7225
+0012-0005;0012;b;Część 34;ROZWÓJ REGIONALNY;34 ;726741
+0012-0006;0012;b;Część 85/14;Budżety wojewodów ogółem: Mazowieckie;85/14;5984
+0013;;a;Program 13;Regionalny Program Operacyjny Województwa Opolskiego na lata 2007 - 2013;;236747
+0013-0001;0013;b;Część 34;"Regionalny Program Operacyjny Województwa Opolskiego na lata
+2007 - 2013";34 ;236747
+0014;;a;Program 14;Regionalny Program Operacyjny Województwa Podkarpackiego na lata 2007-2013;;628470
+0014-0001;0014;b;Część 34;Regionalny Program Operacyjny Województwa Podkarpackiego na lata 2007-2013;34 ;624719
+0014-0003;0014;b;Część 85/18;Budżety wojewodów ogółem: Podkarpackie;85/18;3751
+0015;;a;Program 15;Regionalny Program Operacyjny Województwa Podlaskiego na lata 2007-2013;;298606
+0015-0001;0015;b;Część 32;"Regionalny Program Operacyjny Województwa Podlaskiego na lata
+2007-2013";32 ;4286
+0015-0002;0015;b;Część 34;ROZWÓJ REGIONALNY;34 ;287276
+0015-0003;0015;b;Część 41;ŚRODOWISKO;41 ;748
+0015-0004;0015;b;Część 85/20;Budżety wojewodów ogółem: Podlaskie;85/20;6296
+0016;;a;Program 16;Regionalny Program Operacyjny dla Województwa Pomorskiego na lata 2007-2013;;410546
+0016-0002;0016;b;Część 34;ROZWÓJ REGIONALNY;34 ;383310
+0016-0003;0016;b;Część 41;ŚRODOWISKO;41 ;329
+0016-0004;0016;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;8925
+0016-0005;0016;b;Część 85/22;Budżety wojewodów ogółem: Pomorskie;85/22;17982
+0017;;a;Program 17;Regionalny Program Operacyjny Województwa Śląskiego na lata 2007-2013;;822947
+0017-0002;0017;b;Część 34;ROZWÓJ REGIONALNY;34 ;820149
+0017-0004;0017;b;Część 85/24;Budżety wojewodów ogółem: Śląskie;85/24;2798
+0018;;a;Program 18;Regionalny Program Operacyjny Województwa Świętokrzyskiego na lata 2007 - 2013;;351168
+0018-0001;0018;b;Część 22;Regionalny Program Operacyjny Województwa Świętokrzyskiego na lata 2007 - 2013;22 ;1168
+0018-0002;0018;b;Część 34;ROZWÓJ REGIONALNY;34 ;350000
+0019;;a;Program 19;Regionalny Program Operacyjny Warmia i Mazury na lata 2007 - 2013;;513395
+0019-0001;0019;b;Część 32;"Regionalny Program Operacyjny Warmia i Mazury na lata 2007 -
+2013";32 ;1832
+0019-0002;0019;b;Część 34;ROZWÓJ REGIONALNY;34 ;509548
+0019-0003;0019;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;2015
+0020;;a;Program 20;Wielkopolski Regionalny Program Operacyjny na lata 2007 - 2013;;619918
+0020-0001;0020;b;Część 22;Wielkopolski Regionalny Program Operacyjny na lata 2007 - 2013;22 ;1429
+0020-0002;0020;b;Część 34;ROZWÓJ REGIONALNY;34 ;618489
+0021;;a;Program 21;Regionalny Program Operacyjny Województwa Zachodniopomorskiego na lata 2007-2013;;320144
+0021-0001;0021;b;Część 22;"Regionalny Program Operacyjny Województwa
+Zachodniopomorskiego na lata 2007-2013";22 ;5802
+0021-0002;0021;b;Część 34;ROZWÓJ REGIONALNY;34 ;307970
+0021-0004;0021;b;Część 85/32;Budżety wojewodów ogółem: Zachodniopomorskie;85/32;6372
+0024;;a;Granty 24;GRANTY EFS;;693
+0024-0001;0024;b;Część 34;GRANTY EFS;34 ;693
+0025;;a;Program 25;Szwajcarsko-Polski Program Współpracy;;100714
+0025-0001;0025;b;Część 19;Szwajcarsko-Polski Program Współpracy;19 ;7309
+0025-0002;0025;b;Część 20;GOSPODARKA;20 ;4839
+0025-0003;0025;b;Część 34;ROZWÓJ REGIONALNY;34 ;58063
+0025-0004;0025;b;Część 42;SPRAWY WEWNĘTRZNE;42 ;30503
+0026;;a;Program 26;Program Operacyjny Zrównoważony Rozwój Sektora Rybołówstwa i Nadbrzeżnych Obszarów Rybackich;;356502
+0026-0001;0026;b;Część 62;"Program Operacyjny ZrównowaŜony Rozwój Sektora Rybołówstwa i
+NadbrzeŜnych Obszarów Rybackich";62 ;356502
+0027;;a;Program 27;Wspólna Polityka Rolna;;18583060
+0027-0003;0027;b;Część 33;ROZWÓJ WSI;33 ;17710415
+0027-0004;0027;b;Część 35;RYNKI ROLNE;35 ;550000
+0027-0006;0027;b;Część 85/02;Budżety wojewodów ogółem: Dolnośląskie;85/02;40468
+0027-0007;0027;b;Część 85/04;Budżety wojewodów ogółem: Kujawsko-pomorskie;85/04;14625
+0027-0008;0027;b;Część 85/06;Budżety wojewodów ogółem: Lubelskie;85/06;34946
+0027-0009;0027;b;Część 85/08;Budżety wojewodów ogółem: Lubuskie;85/08;25782
+0027-0010;0027;b;Część 85/10;Budżety wojewodów ogółem: Łódzkie;85/10;6300
+0027-0011;0027;b;Część 85/12;Budżety wojewodów ogółem: Małopolskie;85/12;15730
+0027-0012;0027;b;Część 85/14;Budżety wojewodów ogółem: Mazowieckie;85/14;35589
+0027-0013;0027;b;Część 85/16;Budżety wojewodów ogółem: Opolskie;85/16;7556
+0027-0014;0027;b;Część 85/18;Budżety wojewodów ogółem: Podkarpackie;85/18;3339
+0027-0015;0027;b;Część 85/20;Budżety wojewodów ogółem: Podlaskie;85/20;14035
+0027-0016;0027;b;Część 85/22;Budżety wojewodów ogółem: Pomorskie;85/22;20836
+0027-0017;0027;b;Część 85/24;Budżety wojewodów ogółem: Śląskie;85/24;22194
+0027-0018;0027;b;Część 85/26;Budżety wojewodów ogółem: Świętokrzyskie;85/26;13252
+0027-0019;0027;b;Część 85/28;Budżety wojewodów ogółem: Warmińsko-mazurskie;85/28;20271
+0027-0020;0027;b;Część 85/30;Budżety wojewodów ogółem: Wielkopolskie;85/30;33890
+0027-0021;0027;b;Część 85/32;Budżety wojewodów ogółem: Zachodniopomorskie;85/32;13832
+0028;;a;Różne rozliczenia 28;Finansowanie programów z budżetu środków europejskich;;18583060
+0028-0001;0028;b;Część 83;Finansowanie programów z budżetu środków europejskich;83;36674500
+0028-0002;0028;b;Część 83;Finansowanie wynagrodzeń w ramach budżetu środków europejskich;83;29494
+9999;;a;Total;OGÓŁEM;;84004046

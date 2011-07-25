@@ -382,7 +382,7 @@ var _gui = (function () {
 
     function hide_top_panels() {
         // deactivate menu positions
-        $('#top-menu')
+        $('#top')
             .find('.active')
             .removeClass('active');
 

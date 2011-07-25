@@ -1,0 +1,1823 @@
+ID;Rodzic;Poziom;Typ;Nazwa;Część;Część w budźecie księgowym;Środki europejskie
+0001;;a;FUNKCJA 1;ZARZĄDZANIE PAŃSTWEM;;;25140
+0001-0001;0001;b;Zadanie 1.1;Obsługa merytoryczna i kancelaryjno-biurowa Prezydenta Rzeczypospolitej Polskiej;;;0
+0001-0001-0001;0001-0001;c;Podzadanie 1.1.1;Obsługa i koordynacja urzędu Prezydenta RP;;;0
+0001-0001-0001-0001;0001-0001-0001;d;Dysponent;Kancelaria Prezydenta RP;01;;0
+0001-0001-0002;0001-0001;c;Podzadanie 1.1.2;Obsługa prawna urzędu Prezydenta RP;;;0
+0001-0001-0002-0001;0001-0001-0002;d;Dysponent;Kancelaria Prezydenta RP;01;;0
+0001-0001-0003;0001-0001;c;Podzadanie 1.1.3;Obsługa merytoryczna Biura Bezpieczeństwa Narodowego;;;0
+0001-0001-0003-0001;0001-0001-0003;d;Dysponent;Kancelaria Prezydenta RP;01;;0
+0001-0002;0001;b;Zadanie 1.2;Obsługa Parlamentu i jego organów w zakresie merytorycznym i organizacyjnym;;;0
+0001-0002-0001;0001-0002;c;Podzadanie 1.2.1;Wsparcie merytoryczne parlamentarzystów;;;0
+0001-0002-0001-0001;0001-0002-0001;d;Dysponent;Kancelaria Sejmu;02;;0
+0001-0002-0001-0002;0001-0002-0001;d;Dysponent;Kancelaria Senatu;03;;0
+0001-0002-0002;0001-0002;c;Podzadanie 1.2.2;Zapewnianie warunków wykonywania mandatu posła i senatora;;;0
+0001-0002-0002-0001;0001-0002-0002;d;Dysponent;Kancelaria Sejmu;02;;0
+0001-0002-0002-0002;0001-0002-0002;d;Dysponent;Kancelaria Senatu;03;;0
+0001-0003;0001;b;Zadanie 1.3;Obsługa merytoryczna i kancelaryjno-biurowa Prezesa Rady Ministrów i Rady Ministrów;;;24186
+0001-0003-0001;0001-0003;c;Podzadanie 1.3.1;Obsługa i koordynacja prac rządu;;;0
+0001-0003-0001-0001;0001-0003-0001;d;Dysponent;Kancelaria Prezesa Rady Ministrów;16;;0
+0001-0003-0002;0001-0003;c;Podzadanie 1.3.2;Obsługa prawna Rady Ministrów;;;296
+0001-0003-0002-0001;0001-0003-0002;d;Dysponent;Rządowe Centrum Legislacji;75;;296
+0001-0003-0003;0001-0003;c;Podzadanie 1.3.3;Zarządzanie korpusem służby cywilnej oraz podnoszenie jakości pracy w urzędach administracji rządowej;;;23832
+0001-0003-0003-0001;0001-0003-0003;d;Dysponent;Kancelaria Prezesa Rady Ministrów;16;;23832
+0001-0003-0004;0001-0003;c;Podzadanie 1.3.4;Redagowanie i udostępnianie Dziennika Ustaw Rzeczypospolitej Polskiej oraz Dziennika Urzędowego Rzeczypospolitej Polskiej ``Monitor Polski``;;;58
+0001-0003-0004-0001;0001-0003-0004;d;Dysponent;Rządowe Centrum Legislacji;75;;58
+0001-0004;0001;b;Zadanie 1.4;Obsługa Trybunału Konstytucyjnego w zakresie merytorycznym i organizacyjnym;;;0
+0001-0004-0001;0001-0004;c;Podzadanie 1.4.1;Działalność orzecznicza Trybunału Konstytucyjnego;;;0
+0001-0004-0001-0001;0001-0004-0001;d;Dysponent;Trybunał Konstytucyjny;06;;0
+0001-0004-0002;0001-0004;c;Podzadanie 1.4.2;Obsługa i koordynacja prac Trybunału Konstytucyjnego;;;0
+0001-0004-0002-0001;0001-0004-0002;d;Dysponent;Trybunał Konstytucyjny;06;;0
+0001-0005;0001;b;Zadanie 1.5;Organizacja i przeprowadzanie wyborów;;;0
+0001-0005-0001;0001-0005;c;Podzadanie 1.5.1;Wybory Prezydenta Rzeczpospolitej Polskiej;;;0
+0001-0005-0001-0001;0001-0005-0001;d;Dysponent;Krajowe Biuro Wyborcze;11;;0
+0001-0005-0002;0001-0005;c;Podzadanie 1.5.2;Wybory do Sejmu i Senatu;;;0
+0001-0005-0002-0001;0001-0005-0002;d;Dysponent;Krajowe Biuro Wyborcze;11;;0
+0001-0005-0004;0001-0005;c;Podzadanie 1.5.4;Wybory do rad gmin, rad powiatów i sejmików województw, wybory wójtów, burmistrzów i prezydentów miast oraz referenda gminne, powiatowe i wojewódzkie;;;0
+0001-0005-0004-0001;0001-0005-0004;d;Dysponent;Krajowe Biuro Wyborcze;11;;0
+0001-0005-0004-0002;0001-0005-0004;d;Dysponent;Wojewodowie;85;;0
+0001-0005-0005;0001-0005;c;Podzadanie 1.5.5;Referenda ogólnokrajowe i konstytucyjne w tym obsługa pod względem merytorycznym, finansowym, technicznym i organizacyjnym PKW i Komisarzy wyborczych;;;0
+0001-0005-0005-0001;0001-0005-0005;d;Dysponent;Krajowe Biuro Wyborcze;11;;0
+0001-0005-0006;0001-0005;c;Podzadanie 1.5.6;Finansowanie partii politycznych;;;0
+0001-0005-0006-0001;0001-0005-0006;d;Dysponent;Ministerstwo Finansów;19;;0
+0001-0006;0001;b;Zadanie 1.6;Nadzór nad systemem zamówień publicznych;;;454
+0001-0006-0001;0001-0006;c;Podzadanie 1.6.1;Nadzór nad przestrzeganiem zasad systemu zamówień w szczególności dokonywanie kontroli procesu udzielania zamówień w zakresie przewidzianym ustawą;;;454
+0001-0006-0001-0001;0001-0006-0001;d;Dysponent;Urząd Zamówień Publicznych;49;;454
+0001-0006-0002;0001-0006;c;Podzadanie 1.6.2;System odwołań;;;0
+0001-0006-0002-0001;0001-0006-0002;d;Dysponent;Urząd Zamówień Publicznych;49;;0
+0001-0007;0001;b;Zadanie 1.7;Ocena działalności organów administracji publicznej, Narodowego Banku Polskiego oraz jednostek organizacyjnych wydatkujących środki publiczne z punktu widzenia ustawowych kryteriów NIK;;;0
+0001-0007-0001;0001-0007;c;Podzadanie 1.7.1;Przygotowanie i wykonanie kontroli oraz upublicznienie ich wyników;;;0
+0001-0007-0001-0001;0001-0007-0001;d;Dysponent;Najwyższa Izba Kontroli;07;;0
+0001-0007-0002;0001-0007;c;Podzadanie 1.7.2;Przygotowanie analizy wykonania budżetu państwa i założeń polityki pieniężnej oraz innych opracowań sektorowych;;;0
+0001-0007-0002-0001;0001-0007-0002;d;Dysponent;Najwyższa Izba Kontroli;07;;0
+0001-0007-0003;0001-0007;c;Podzadanie 1.7.3;Wykonywanie nie kontrolnych funkcji naczelnego organu kontroli państwowej;;;0
+0001-0007-0003-0001;0001-0007-0003;d;Dysponent;Najwyższa Izba Kontroli;07;;0
+0001-0007-0004;0001-0007;c;Podzadanie 1.7.4;Zarządzanie kapitałem ludzkim;;;0
+0001-0007-0004-0001;0001-0007-0004;d;Dysponent;Najwyższa Izba Kontroli;07;;0
+0001-0008;0001;b;Zadanie 1.8;Ochrona wolności słowa, prawo do informacji oraz interes publiczny w radiofonii i telewizji;;;0
+0001-0008-0001;0001-0008;c;Podzadanie 1.8.1;Koncesje na rozpowszechnianie programów radiowych i telewizyjnych oraz rejestrowanie programów rozprowadzanych w sieciach kablowych;;;0
+0001-0008-0001-0001;0001-0008-0001;d;Dysponent;Krajowa Rada Radiofonii i Telewizji;09;;0
+0001-0008-0002;0001-0008;c;Podzadanie 1.8.2;Kontrola programów radiowych i telewizyjnych oraz organizowanie badań treści i odbioru tych programów;;;0
+0001-0008-0002-0001;0001-0008-0002;d;Dysponent;Krajowa Rada Radiofonii i Telewizji;09;;0
+0001-0008-0003;0001-0008;c;Podzadanie 1.8.3;Działalność KRRiT w zakresie środków abonamentowych;;;0
+0001-0008-0003-0001;0001-0008-0003;d;Dysponent;Krajowa Rada Radiofonii i Telewizji;09;;0
+0001-0009;0001;b;Zadanie 1.9;Gromadzenie i zarządzanie dokumentami organów bezpieczeństwa państwa oraz organów bezpieczeństwa III Rzeszy Niemieckiej i Związku Socjalistycznych Republik Radzieckich sporządzonymi od 1 września 1939 r. do 31 lipca 1990 r., prowadzenie śledztw w sprawie zbrodni nazistowskich, komunistycznych, zbrodni przeciwko ludzkości i innych, działalność lustracyjna;;;0
+0001-0009-0001;0001-0009;c;Podzadanie 1.9.1;Udostępnianie dokumentów i informacji o zbiorach zgromadzonych w archiwach IPN;;;0
+0001-0009-0001-0001;0001-0009-0001;d;Dysponent;Instytut Pamięci Narodowej - Komisja Ścigania Zbrodni przeciwko Narodowi Polskiemu;13;;0
+0001-0009-0002;0001-0009;c;Podzadanie 1.9.2;Prowadzenie śledztw w sprawie zbrodni nazistowskich, komunistycznych oraz przeciwko ludzkości i innych;;;0
+0001-0009-0002-0001;0001-0009-0002;d;Dysponent;Instytut Pamięci Narodowej - Komisja Ścigania Zbrodni przeciwko Narodowi Polskiemu;13;;0
+0001-0009-0003;0001-0009;c;Podzadanie 1.9.3;Przygotowywanie i publikowanie informacji dotyczących funkcjonariuszy organów bezpieczeństwa państwa, osób rozpracowywanych, funkcjonariuszy państwowych i partyjnych w latach 1944-1990 oraz osób publicznych wg art. 22 tzw. ustawy lustracyjnej z 2006 roku, prowadzenie rejestru oświadczeń lustracyjnych i jego analiza, przygotowanie postępowań lustracyjnych;;;0
+0001-0009-0003-0001;0001-0009-0003;d;Dysponent;Instytut Pamięci Narodowej - Komisja Ścigania Zbrodni przeciwko Narodowi Polskiemu;13;;0
+0001-0010;0001;b;Zadanie 1.10;Ocena gospodarki finansowej jednostek samorządu terytorialnego z punktu widzenia kryteriów ustawowych;;;500
+0001-0010-0001;0001-0010;c;Podzadanie 1.10.1;Przygotowanie i wykonanie kontroli oraz upublicznienie ich wyników;;;205
+0001-0010-0001-0001;0001-0010-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;80;;205
+0001-0010-0002;0001-0010;c;Podzadanie 1.10.2;Sprawowanie nadzoru nad jednostkami samorządu terytorialnego oraz działalność opiniodawcza;;;295
+0001-0010-0002-0001;0001-0010-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;80;;295
+0001-0011;0001;b;Zadanie 1.11;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;0
+0001-0011-0001;0001-0011;c;Podzadanie 1.11.1;Utrzymanie systemów informatycznych;;;0
+0001-0011-0001-0001;0001-0011-0001;d;Dysponent;Urząd Zamówień Publicznych;49;;0
+0002;;a;FUNKCJA 2;BEZPIECZEŃSTWO WEWNĘTRZNE I PORZĄDEK PUBLICZNY;;;58779
+0002-0001;0002;b;Zadanie 2.1;Ochrona obywateli i utrzymanie porządku publicznego;;;37059
+0002-0001-0001;0002-0001;c;Podzadanie 2.1.1;Zapewnienie bezpieczeństwa wewnętrznego państwa;;;0
+0002-0001-0001-0001;0002-0001-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0001-0001-0002;0002-0001-0001;d;Dysponent;Agencja Bezpieczeństwa Wewnętrznego;57;;0
+0002-0001-0001-0003;0002-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0002-0001-0002;0002-0001;c;Podzadanie 2.1.2;Zapewnienie bezpieczeństwa najważniejszym osobom, obiektom i urządzeniom w państwie;;;0
+0002-0001-0002-0001;0002-0001-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0001-0003;0002-0001;c;Podzadanie 2.1.3;Zapewnienie działania służby prewencyjnej;;;31751
+0002-0001-0003-0001;0002-0001-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;31751
+0002-0001-0004;0002-0001;c;Podzadanie 2.1.4;Zapewnienie działania służby ruchu drogowego;;;5308
+0002-0001-0004-0001;0002-0001-0004;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;5308
+0002-0001-0005;0002-0001;c;Podzadanie 2.1.5;Wydawanie zezwoleń, koncesji, wpisu do rejestru działalności regulowanej oraz kontrola własna działalności koncesjonowanej, regulowanej i legalności nabycia nieruchomości, akcji i udziałów przez cudzoziemców;;;0
+0002-0001-0005-0001;0002-0001-0005;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0001-0006;0002-0001;c;Podzadanie 2.1.6;Wykonywanie zadań z zakresu postępowania mandatowego w sprawach o wykroczenia;;;0
+0002-0001-0006-0001;0002-0001-0006;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0001-0007;0002-0001;c;Podzadanie 2.1.7;Program wieloletni ``Program modernizacji Policji, Straży Granicznej, Państwowej Straży Pożarnej i Biura Ochrony Rządu w latach 2007-2011``;;;0
+0002-0001-0007-0001;0002-0001-0007;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0002;0002;b;Zadanie 2.2;Redukowanie przestępczości i działania na rzecz poprawy społecznego poczucia bezpieczeństwa;;;21650
+0002-0002-0001;0002-0002;c;Podzadanie 2.2.1;Zapewnienie działania służby śledczej i kryminalnej;;;21650
+0002-0002-0001-0001;0002-0002-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;21650
+0002-0002-0002;0002-0002;c;Podzadanie 2.2.2;Zwalczanie korupcji;;;0
+0002-0002-0002-0001;0002-0002-0002;d;Dysponent;Centralne Biuro Antykorupcyjne;56;;0
+0002-0002-0003;0002-0002;c;Podzadanie 2.2.3;Zapobieganie przestępczości i aspołecznym zachowaniom oraz przeciwdziałanie przemocy i patologiom społecznym;;;0
+0002-0002-0003-0001;0002-0002-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0002-0003-0002;0002-0002-0003;d;Dysponent;Wojewodowie;85;;0
+0002-0002-0004;0002-0002;c;Podzadanie 2.2.4;Wsparcie i ochrona ofiar handlu ludźmi;;;0
+0002-0002-0004-0001;0002-0002-0004;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0002-0006;0002-0002;c;Podzadanie 2.2.6;Program wieloletni ``Program modernizacji Policji, Straży Granicznej, Państwowej Straży Pożarnej i Biura Ochrony Rządu w latach 2007-2011``;;;0
+0002-0002-0006-0001;0002-0002-0006;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0003;0002;b;Zadanie 2.3;Strzeżenie praworządności i czuwanie nad ściganiem przestępstw przez prokuraturę;;;0
+0002-0003-0001;0002-0003;c;Podzadanie 2.3.1;Przygotowanie postępowania przygotowawczego i procesowego;;;0
+0002-0003-0001-0001;0002-0003-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0002-0003-0001-0002;0002-0003-0001;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0002-0003-0001-0003;0002-0003-0001;d;Dysponent;Prokuratura Generalna;88;;0
+0002-0003-0002;0002-0003;c;Podzadanie 2.3.2;Zwalczanie przestępczości zorganizowanej;;;0
+0002-0003-0002-0001;0002-0003-0002;d;Dysponent;Prokuratura Generalna;88;;0
+0002-0003-0003;0002-0003;c;Podzadanie 2.3.3;Realizacja zadań Prokuratora Generalnego w postępowaniach przed SN, TK, NSA oraz innych przewidzianych w ustawach;;;0
+0002-0003-0003-0001;0002-0003-0003;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0002-0003-0003-0002;0002-0003-0003;d;Dysponent;Prokuratura Generalna;88;;0
+0002-0004;0002;b;Zadanie 2.4;Ochrona przeciwpożarowa, działalność ratowniczo-gaśnicza oraz zapobiegawcza;;;70
+0002-0004-0001;0002-0004;c;Podzadanie 2.4.1;Działalność ratowniczo-gaśnicza;;;0
+0002-0004-0001-0001;0002-0004-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0004-0001-0002;0002-0004-0001;d;Dysponent;Wojewodowie;85;;0
+0002-0004-0002;0002-0004;c;Podzadanie 2.4.2;Działalność ratownictwa górskiego i wodnego;;;0
+0002-0004-0002-0001;0002-0004-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0004-0003;0002-0004;c;Podzadanie 2.4.3;Rozpoznawanie zagrożeń;;;70
+0002-0004-0003-0001;0002-0004-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;70
+0002-0004-0003-0002;0002-0004-0003;d;Dysponent;Wojewodowie;85;;0
+0002-0004-0004;0002-0004;c;Podzadanie 2.4.4;Program wieloletni ``Program modernizacji Policji, Straży Granicznej, Państwowej Straży Pożarnej i Biura Ochrony Rządu w latach 2007-2011``;;;0
+0002-0004-0004-0001;0002-0004-0004;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0004-0004-0002;0002-0004-0004;d;Dysponent;Wojewodowie;85;;0
+0002-0005;0002;b;Zadanie 2.5; Zarządzanie kryzysowe i obrona cywilna;;;0
+0002-0005-0001;0002-0005;c;Podzadanie 2.5.1;Koordynacja przedsięwzięć z zakresu zarządzania kryzysowego;;;0
+0002-0005-0001-0001;0002-0005-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0002-0005-0001-0002;0002-0005-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0005-0001-0003;0002-0005-0001;d;Dysponent;Wojewodowie;85;;0
+0002-0005-0002;0002-0005;c;Podzadanie 2.5.2;Przeciwdziałanie i usuwanie skutków klęsk żywiołowych;;;0
+0002-0005-0002-0001;0002-0005-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0005-0002-0002;0002-0005-0002;d;Dysponent;Wojewodowie;85;;0
+0002-0005-0003;0002-0005;c;Podzadanie 2.5.3;Obrona cywilna;;;0
+0002-0005-0003-0001;0002-0005-0003;d;Dysponent;Ministerstwo Finansów;19;;0
+0002-0005-0003-0002;0002-0005-0003;d;Dysponent;Ministerstwo Środowiska;41;;0
+0002-0005-0003-0003;0002-0005-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0005-0003-0004;0002-0005-0003;d;Dysponent;Wojewodowie;85;;0
+0002-0006;0002;b;Zadanie 2.6;Ochrona granicy państwowej i kontrola ruchu granicznego;;;0
+0002-0006-0001;0002-0006;c;Podzadanie 2.6.1;Ochrona granicy państwowej;;;0
+0002-0006-0001-0001;0002-0006-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0006-0002;0002-0006;c;Podzadanie 2.6.2;Kontrola ruchu granicznego;;;0
+0002-0006-0002-0001;0002-0006-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0006-0003;0002-0006;c;Podzadanie 2.6.3;Zapobieganie nielegalnej migracji;;;0
+0002-0006-0003-0001;0002-0006-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0006-0004;0002-0006;c;Podzadanie 2.6.4;Budowa i utrzymanie przejść granicznych;;;0
+0002-0006-0004-0001;0002-0006-0004;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0006-0004-0002;0002-0006-0004;d;Dysponent;Wojewodowie;85;;0
+0002-0006-0005;0002-0006;c;Podzadanie 2.6.5;Rozpoznawanie, zapobieganie i wykrywanie przestępstw oraz ściganie ich sprawców, w zakresie właściwości SG;;;0
+0002-0006-0005-0001;0002-0006-0005;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0006-0006;0002-0006;c;Podzadanie 2.6.6;Program wieloletni ``Program modernizacji Policji, Straży Granicznej, Państwowej Straży Pożarnej i Biura Ochrony Rządu w latach 2007-2011``;;;0
+0002-0006-0006-0001;0002-0006-0006;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0007;0002;b;Zadanie 2.7;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;0
+0002-0007-0001;0002-0007;c;Podzadanie 2.7.1;Utrzymanie systemów informatycznych;;;0
+0002-0007-0001-0001;0002-0007-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0002-0007-0002;0002-0007;c;Podzadanie 2.7.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0002-0007-0002-0001;0002-0007-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0003;;a;FUNKCJA 3;EDUKACJA, WYCHOWANIE I OPIEKA;;;1016384
+0003-0001;0003;b;Zadanie 3.1;Edukacja i wychowanie;;;395308
+0003-0001-0001;0003-0001;c;Podzadanie 3.1.1;Zarządzanie i nadzór nad systemem edukacji i wychowania;;;52454
+0003-0001-0001-0001;0003-0001-0001;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;52454
+0003-0001-0001-0002;0003-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0003-0001-0002;0003-0001;c;Podzadanie 3.1.2;Kształcenie ogólne, zawodowe i ustawiczne;;;66980
+0003-0001-0002-0001;0003-0001-0002;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0003-0001-0002-0002;0003-0001-0002;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;12877
+0003-0001-0002-0003;0003-0001-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0003-0001-0002-0004;0003-0001-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;16853
+0003-0001-0002-0005;0003-0001-0002;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;2864
+0003-0001-0002-0006;0003-0001-0002;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0003-0001-0002-0007;0003-0001-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0003-0001-0002-0008;0003-0001-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0003-0001-0002-0009;0003-0001-0002;d;Dysponent;Ministerstwo Zdrowia;46;;34386
+0003-0001-0002-0010;0003-0001-0002;d;Dysponent;Wojewodowie;85;;0
+0003-0001-0003;0003-0001;c;Podzadanie 3.1.3;Kształcenie i doskonalenie nauczycieli oraz kształtowanie ich pragmatyki zawodowej;;;106433
+0003-0001-0003-0001;0003-0001-0003;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0003-0001-0003-0002;0003-0001-0003;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;106433
+0003-0001-0003-0003;0003-0001-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0003-0001-0003-0004;0003-0001-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0003-0001-0003-0005;0003-0001-0003;d;Dysponent;Ministerstwo Środowiska;41;;0
+0003-0001-0003-0006;0003-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0003-0001-0004;0003-0001;c;Podzadanie 3.1.4;Egzaminy zewnętrzne;;;40135
+0003-0001-0004-0001;0003-0001-0004;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;40135
+0003-0001-0004-0002;0003-0001-0004;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0003-0001-0004-0003;0003-0001-0004;d;Dysponent;Wojewodowie;85;;0
+0003-0001-0005;0003-0001;c;Podzadanie 3.1.5;Wspieranie uczniów zdolnych oraz dzieci i młodzieży ze specjalnymi potrzebami edukacyjnymi;;;42100
+0003-0001-0005-0001;0003-0001-0005;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;42100
+0003-0001-0005-0002;0003-0001-0005;d;Dysponent;Wojewodowie;85;;0
+0003-0001-0006;0003-0001;c;Podzadanie 3.1.6;Edukacja pozalekcyjna i pozaszkolna;;;87206
+0003-0001-0006-0001;0003-0001-0006;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;87206
+0003-0001-0006-0002;0003-0001-0006;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0003-0001-0006-0003;0003-0001-0006;d;Dysponent;Wojewodowie;85;;0
+0003-0001-0007;0003-0001;c;Podzadanie 3.1.7;Wspieranie dostępu do podręczników;;;0
+0003-0001-0007-0001;0003-0001-0007;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;0
+0003-0001-0007-0002;0003-0001-0007;d;Dysponent;Wojewodowie;85;;0
+0003-0001-0008;0003-0001;c;Podzadanie 3.1.8;Wsparcie działalności edukacyjno-wychowawczej;;;0
+0003-0001-0008-0001;0003-0001-0008;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0003-0001-0008-0002;0003-0001-0008;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;0
+0003-0001-0008-0003;0003-0001-0008;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0003-0001-0008-0004;0003-0001-0008;d;Dysponent;Wojewodowie;85;;0
+0003-0001-0009;0003-0001;c;Podzadanie 3.1.9;Prowadzenie działalności edukacyjnej, badawczej i popularyzatorskiej przez IPN;;;0
+0003-0001-0009-0001;0003-0001-0009;d;Dysponent;Instytut Pamięci Narodowej - Komisja Ścigania Zbrodni przeciwko Narodowi Polskiemu;13;;0
+0003-0001-0010;0003-0001;c;Podzadanie 3.1.10;Infrastruktura edukacji;;;0
+0003-0001-0010-0001;0003-0001-0010;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0003-0001-0010-0002;0003-0001-0010;d;Dysponent;Ministerstwo Środowiska;41;;0
+0003-0001-0010-0003;0003-0001-0010;d;Dysponent;Wojewodowie;85;;0
+0003-0002;0003;b;Zadanie 3.2;Szkolnictwo wyższe;;;619691
+0003-0002-0001;0003-0002;c;Podzadanie 3.2.1;Zarządzanie systemem szkolnictwa wyższego;;;0
+0003-0002-0001-0001;0003-0002-0001;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0003-0002-0002;0003-0002;c;Podzadanie 3.2.2;Kształcenie w szkolnictwie wyższym akademickim;;;355685
+0003-0002-0002-0001;0003-0002-0002;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0003-0002-0002-0002;0003-0002-0002;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0003-0002-0002-0003;0003-0002-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0003-0002-0002-0004;0003-0002-0002;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;355685
+0003-0002-0002-0005;0003-0002-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0003-0002-0002-0006;0003-0002-0002;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0003-0002-0003;0003-0002;c;Podzadanie 3.2.3;Kształcenie w szkolnictwie wyższym zawodowym;;;0
+0003-0002-0003-0001;0003-0002-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0003-0002-0004;0003-0002;c;Podzadanie 3.2.4;Wsparcie procesu studiowania;;;0
+0003-0002-0004-0001;0003-0002-0004;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0003-0002-0004-0002;0003-0002-0004;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0003-0002-0004-0003;0003-0002-0004;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0003-0002-0004-0004;0003-0002-0004;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0003-0002-0005;0003-0002;c;Podzadanie 3.2.5;Infrastruktura szkolnictwa wyższego;;;264006
+0003-0002-0005-0001;0003-0002-0005;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0003-0002-0005-0002;0003-0002-0005;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0003-0002-0005-0003;0003-0002-0005;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0003-0002-0005-0004;0003-0002-0005;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;264006
+0003-0002-0005-0005;0003-0002-0005;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0003-0002-0006;0003-0002;c;Podzadanie 3.2.6;Program wieloletni ``Budowa kampusu 600-lecia Odnowienia Uniwersytetu Jagiellońskiego``;;;0
+0003-0002-0006-0001;0003-0002-0006;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0003-0002-0007;0003-0002;c;Podzadanie 3.2.7;Program wieloletni ``Uniwersytet im. Adama Mickiewicza w Poznaniu 2004-2015``;;;0
+0003-0002-0007-0001;0003-0002-0007;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0003-0003;0003;b;Zadanie 3.3;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;1385
+0003-0003-0001;0003-0003;c;Podzadanie 3.3.1;Utrzymanie i rozwój systemów informatycznych;;;0
+0003-0003-0001-0001;0003-0003-0001;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;0
+0003-0003-0001-0002;0003-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0003-0003-0002;0003-0003;c;Podzadanie 3.3.2;Budowa i wdrożenie rozwiązań informatycznych;;;1385
+0003-0003-0002-0001;0003-0003-0002;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;1385
+0004;;a;FUNKCJA 4;ZARZĄDZANIE FINANSAMI PAŃSTWA;;;36781689
+0004-0001;0004;b;Zadanie 4.1;Opracowywanie i wykonywanie budżetu państwa;;;36720695
+0004-0001-0001;0004-0001;c;Podzadanie 4.1.1;Opracowanie metodologii i planowanie budżetowe;;;16701
+0004-0001-0001-0001;0004-0001-0001;d;Dysponent;Ministerstwo Finansów;19;;16701
+0004-0001-0001-0002;0004-0001-0001;d;Dysponent;Ministerstwo Finansów;81;;0
+0004-0001-0001-0003;0004-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0004-0001-0002;0004-0001;c;Podzadanie 4.1.2;Realizacja budżetu państwa;;;36703994
+0004-0001-0002-0001;0004-0001-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0001-0002-0002;0004-0001-0002;d;Dysponent;Ministerstwo Finansów;83;;36703994
+0004-0002;0004;b;Zadanie 4.2;Opracowanie systemu finansowania jednostek samorządu terytorialnego (jst) i sfery budżetowej;;;2258
+0004-0002-0001;0004-0002;c;Podzadanie 4.2.1;Zapewnienie spójności systemu finansów publicznych;;;0
+0004-0002-0001-0001;0004-0002-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0002-0001-0002;0004-0002-0001;d;Dysponent;Ministerstwo Finansów;82;;0
+0004-0002-0001-0003;0004-0002-0001;d;Dysponent;Wojewodowie;85;;0
+0004-0002-0002;0004-0002;c;Podzadanie 4.2.2;Analiza i ocena funkcjonowania systemu finansowania jst;;;2258
+0004-0002-0002-0001;0004-0002-0002;d;Dysponent;Ministerstwo Finansów;19;;2258
+0004-0002-0002-0002;0004-0002-0002;d;Dysponent;Wojewodowie;85;;0
+0004-0003;0004;b;Zadanie 4.3;Realizacja dochodów z podatków bezpośrednich, pośrednich oraz dochodów niepodatkowych;;;27555
+0004-0003-0001;0004-0003;c;Podzadanie 4.3.1;Pobór podatków w tym ustalanie i określanie zobowiązań podatkowych oraz niepodatkowych należności budżetu państwa i jednostek samorządu terytorialnego;;;0
+0004-0003-0001-0001;0004-0003-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0003-0001-0002;0004-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0004-0003-0002;0004-0003;c;Podzadanie 4.3.2;Zapewnienie sprawnej obsługi podatników;;;13312
+0004-0003-0002-0001;0004-0003-0002;d;Dysponent;Ministerstwo Finansów;19;;13312
+0004-0003-0003;0004-0003;c;Podzadanie 4.3.3;Pobór ceł i udogodnienia w handlu i podróżach przez granicę;;;14243
+0004-0003-0003-0001;0004-0003-0003;d;Dysponent;Ministerstwo Finansów;19;;14243
+0004-0003-0004;0004-0003;c;Podzadanie 4.3.4;Prowadzenie postępowań egzekucyjnych;;;0
+0004-0003-0004-0001;0004-0003-0004;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0004;0004;b;Zadanie 4.4;Zarządzanie długiem publicznym;;;0
+0004-0004-0001;0004-0004;c;Podzadanie 4.4.1;Zarządzanie i obsługa długu krajowego;;;0
+0004-0004-0001-0001;0004-0004-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0004-0001-0002;0004-0004-0001;d;Dysponent;Ministerstwo Finansów;79;;0
+0004-0004-0002;0004-0004;c;Podzadanie 4.4.2;Zarządzanie i obsługa długu zagranicznego;;;0
+0004-0004-0002-0001;0004-0004-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0004-0002-0002;0004-0004-0002;d;Dysponent;Ministerstwo Finansów;78;;0
+0004-0005;0004;b;Zadanie 4.5;Przeciwdziałanie zagrożeniom bezpieczeństwa finansowego państwa;;;1314
+0004-0005-0001;0004-0005;c;Podzadanie 4.5.1;Prowadzenie postępowań karnych skarbowych;;;0
+0004-0005-0001-0001;0004-0005-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0005-0002;0004-0005;c;Podzadanie 4.5.2;Przeciwdziałanie praniu pieniędzy i finansowaniu terroryzmu;;;0
+0004-0005-0002-0001;0004-0005-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0005-0002-0002;0004-0005-0002;d;Dysponent;Wojewodowie;85;;0
+0004-0005-0003;0004-0005;c;Podzadanie 4.5.3;Wywiad skarbowy;;;0
+0004-0005-0003-0001;0004-0005-0003;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0005-0004;0004-0005;c;Podzadanie 4.5.4;Ochrona rynku przed przemytem towarów;;;1314
+0004-0005-0004-0001;0004-0005-0004;d;Dysponent;Ministerstwo Finansów;19;;1314
+0004-0006;0004;b;Zadanie 4.6;Koordynowanie i organizowanie współpracy finansowej, kredytowej i płatniczej z zagranicą oraz w ramach Unii Europejskiej;;;0
+0004-0006-0001;0004-0006;c;Podzadanie 4.6.1;Nadzór w zakresie finansowych instrumentów wspierania eksportu;;;0
+0004-0006-0001-0001;0004-0006-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0006-0002;0004-0006;c;Podzadanie 4.6.2;Środki własne UE;;;0
+0004-0006-0002-0001;0004-0006-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0006-0002-0002;0004-0006-0002;d;Dysponent;Ministerstwo Finansów;84;;0
+0004-0007;0004;b;Zadanie 4.7;Działania kontrolne w zakresie poboru należności budżetu państwa;;;0
+0004-0007-0001;0004-0007;c;Podzadanie 4.7.1;Prowadzenie kontroli podatkowych;;;0
+0004-0007-0001-0001;0004-0007-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0007-0002;0004-0007;c;Podzadanie 4.7.2;Prowadzenie kontroli wykonywanej przez Służbę Celną;;;0
+0004-0007-0002-0001;0004-0007-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0007-0003;0004-0007;c;Podzadanie 4.7.3;Prowadzenie czynności sprawdzających;;;0
+0004-0007-0003-0001;0004-0007-0003;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0008;0004;b;Zadanie 4.8;Kontrola skarbowa oraz nadzór nad organami kontroli skarbowej;;;0
+0004-0008-0001;0004-0008;c;Podzadanie 4.8.1;Analiza, zarządzanie i wykorzystywanie danych uzyskanych w wyniku działań organów kontroli skarbowej;;;0
+0004-0008-0001-0001;0004-0008-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0008-0002;0004-0008;c;Podzadanie 4.8.2;Inicjowanie i prowadzenie postępowań kontrolnych prowadzonych przez organ kontroli skarbowej;;;0
+0004-0008-0002-0001;0004-0008-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0008-0003;0004-0008;c;Podzadanie 4.8.3;Audyt i kontrola środków pochodzących z UE;;;0
+0004-0008-0003-0001;0004-0008-0003;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0009;0004;b;Zadanie 4.9;Nadzór nad rynkiem kapitałowym, ubezpieczeniowym, emerytalnym i bankowym;;;0
+0004-0009-0001;0004-0009;c;Podzadanie 4.9.1;Nadzór nad podmiotami rynku kapitałowego;;;0
+0004-0009-0001-0001;0004-0009-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0009-0001-0002;0004-0009-0001;d;Dysponent;Komisja Nadzoru Finansowego;70;;0
+0004-0009-0002;0004-0009;c;Podzadanie 4.9.2;Nadzór nad działalnością zakładów ubezpieczeń;;;0
+0004-0009-0002-0001;0004-0009-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0009-0002-0002;0004-0009-0002;d;Dysponent;Komisja Nadzoru Finansowego;70;;0
+0004-0009-0003;0004-0009;c;Podzadanie 4.9.3;Nadzór nad działalnością rynku emerytalnego;;;0
+0004-0009-0003-0001;0004-0009-0003;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0009-0003-0002;0004-0009-0003;d;Dysponent;Komisja Nadzoru Finansowego;70;;0
+0004-0009-0004;0004-0009;c;Podzadanie 4.9.4;Nadzór bankowy;;;0
+0004-0009-0004-0001;0004-0009-0004;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0009-0004-0002;0004-0009-0004;d;Dysponent;Komisja Nadzoru Finansowego;70;;0
+0004-0009-0005;0004-0009;c;Podzadanie 4.9.5;Nadzór nad pośrednikami finansowymi;;;0
+0004-0009-0005-0001;0004-0009-0005;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0009-0006;0004-0009;c;Podzadanie 4.9.6;Ochrona interesów nieprofesjonalnych uczestników rynku finansowego;;;0
+0004-0009-0006-0001;0004-0009-0006;d;Dysponent;Ministerstwo Finansów;19;;0
+0004-0010;0004;b;Zadanie 4.10;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;29867
+0004-0010-0001;0004-0010;c;Podzadanie 4.10.1;Utrzymanie systemów informatycznych;;;20127
+0004-0010-0001-0001;0004-0010-0001;d;Dysponent;Ministerstwo Finansów;19;;20127
+0004-0010-0002;0004-0010;c;Podzadanie 4.10.2;Budowa i wdrożenie rozwiązań informatycznych;;;9740
+0004-0010-0002-0001;0004-0010-0002;d;Dysponent;Ministerstwo Finansów;19;;9740
+0005;;a;FUNKCJA 5;OCHRONA PRAW I INTERESÓW SKARBU PAŃSTWA;;;0
+0005-0001;0005;b;Zadanie 5.1;Gospodarowanie mieniem Skarbu Państwa;;;0
+0005-0001-0001;0005-0001;c;Podzadanie 5.1.1;Przekształcenia własnościowe (prywatyzacja);;;0
+0005-0001-0001-0001;0005-0001-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0005-0001-0001-0002;0005-0001-0001;d;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0005-0001-0001-0003;0005-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0005-0001-0002;0005-0001;c;Podzadanie 5.1.2;Nadzór właścicielski;;;0
+0005-0001-0002-0001;0005-0001-0002;d;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0005-0001-0002-0002;0005-0001-0002;d;Dysponent;Wojewodowie;85;;0
+0005-0001-0003;0005-0001;c;Podzadanie 5.1.3;Zarządzanie mieniem Skarbu Państwa;;;0
+0005-0001-0003-0001;0005-0001-0003;d;Dysponent;Ministerstwo Finansów;19;;0
+0005-0001-0003-0002;0005-0001-0003;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0005-0001-0003-0003;0005-0001-0003;d;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0005-0001-0003-0004;0005-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0005-0001-0004;0005-0001;c;Podzadanie 5.1.4;Regulacja stanu prawnego nieruchomości;;;0
+0005-0001-0004-0001;0005-0001-0004;d;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0005-0001-0004-0002;0005-0001-0004;d;Dysponent;Wojewodowie;85;;0
+0005-0002;0005;b;Zadanie 5.2;Roszczenia majątkowe wobec Skarbu Państwa (w tym za mienie pozostawione poza granicami państwa);;;0
+0005-0002-0001;0005-0002;c;Podzadanie 5.2.1;Zaspokajanie roszczeń majątkowych wobec Skarbu Państwa;;;0
+0005-0002-0001-0001;0005-0002-0001;d;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0005-0002-0001-0002;0005-0002-0001;d;Dysponent;Wojewodowie;85;;0
+0005-0002-0002;0005-0002;c;Podzadanie 5.2.2;Rewindykacja mienia i rekompensaty za mienie pozostawione poza granicami państwa;;;0
+0005-0002-0002-0001;0005-0002-0002;d;Dysponent;Wojewodowie;85;;0
+0005-0003;0005;b;Zadanie 5.3;Zastępstwo procesowe oraz działalność opiniodawcza i legislacyjna;;;0
+0005-0003-0001;0005-0003;c;Podzadanie 5.3.1;Wykonywanie zastępstwa procesowego;;;0
+0005-0003-0001-0001;0005-0003-0001;d;Dysponent;Prokuratoria Generalna Skarbu Państwa;74;;0
+0005-0003-0001-0002;0005-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0005-0003-0002;0005-0003;c;Podzadanie 5.3.2;Działalność opiniodawcza i legislacyjna;;;0
+0005-0003-0002-0001;0005-0003-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0005-0003-0002-0002;0005-0003-0002;d;Dysponent;Wojewodowie;85;;0
+0006;;a;FUNKCJA 6;POLITYKA GOSPODARCZA KRAJU;;;1643467
+0006-0001;0006;b;Zadanie 6.1;Wzrost konkurencyjności gospodarki;;;1245544
+0006-0001-0001;0006-0001;c;Podzadanie 6.1.1;Zmiana systemu stanowienia prawa i usprawnienie systemu oceny skutków regulacji;;;7892
+0006-0001-0001-0001;0006-0001-0001;d;Dysponent;Ministerstwo Gospodarki;20;;7892
+0006-0001-0002;0006-0001;c;Podzadanie 6.1.2;Tworzenie warunków do zwiększania innowacyjności przedsiębiorstw;;;1095013
+0006-0001-0002-0001;0006-0001-0002;d;Dysponent;Ministerstwo Gospodarki;20;;1095013
+0006-0001-0003;0006-0001;c;Podzadanie 6.1.3;Tworzenie warunków dla funkcjonowania przedsiębiorstw;;;22457
+0006-0001-0003-0001;0006-0001-0003;d;Dysponent;Ministerstwo Gospodarki;20;;22457
+0006-0001-0004;0006-0001;c;Podzadanie 6.1.4;Wspieranie mikro, małych i średnich przedsiębiorstw;;;0
+0006-0001-0004-0001;0006-0001-0004;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0006-0001-0005;0006-0001;c;Podzadanie 6.1.5;System wsparcia inwestorów;;;94093
+0006-0001-0005-0001;0006-0001-0005;d;Dysponent;Ministerstwo Gospodarki;20;;94093
+0006-0001-0006;0006-0001;c;Podzadanie 6.1.6;Współtworzenie polityki gospodarczej i wspólnej polityki handlowej Unii Europejskiej uwzgledniajacej interesy Polski;;;0
+0006-0001-0006-0001;0006-0001-0006;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0006-0001-0007;0006-0001;c;Podzadanie 6.1.7;Promocja gospodarcza Polski;;;4839
+0006-0001-0007-0001;0006-0001-0007;d;Dysponent;Ministerstwo Gospodarki;20;;4839
+0006-0001-0008;0006-0001;c;Podzadanie 6.1.8;Intensyfikacja wymiany handlowej w zakresie produktu, usług i kapitału;;;21250
+0006-0001-0008-0001;0006-0001-0008;d;Dysponent;Ministerstwo Gospodarki;20;;21250
+0006-0002;0006;b;Zadanie 6.2;Bezpieczeństwo gospodarcze państwa;;;300000
+0006-0002-0001;0006-0002;c;Podzadanie 6.2.1;Dywersyfikacja źródeł energii i tworzenie nowych zdolności przesyłowych i transportowych energii elektrycznej, gazu ziemnego i ropy naftowej oraz rozbudowa podziemnych magazynów gazu ziemnego;;;96332
+0006-0002-0001-0001;0006-0002-0001;d;Dysponent;Ministerstwo Gospodarki;20;;96332
+0006-0002-0002;0006-0002;c;Podzadanie 6.2.2;Tworzenie warunków dla funkcjonowania górnictwa węgla kamiennego;;;0
+0006-0002-0002-0001;0006-0002-0002;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0006-0002-0003;0006-0002;c;Podzadanie 6.2.3;Wspieranie bezpieczeństwa energetycznego;;;203668
+0006-0002-0003-0001;0006-0002-0003;d;Dysponent;Ministerstwo Gospodarki;20;;203668
+0006-0002-0003-0002;0006-0002-0003;d;Dysponent;Urząd Regulacji Energetyki;50;;0
+0006-0002-0003-0003;0006-0002-0003;d;Dysponent;Wojewodowie;85;;0
+0006-0002-0004;0006-0002;c;Podzadanie 6.2.4;Wspieranie wykorzystania odnawialnych źródeł energii i biopaliw ciekłych w transporcie;;;0
+0006-0002-0004-0001;0006-0002-0004;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0006-0002-0004-0002;0006-0002-0004;d;Dysponent;Ministerstwo Środowiska;41;;0
+0006-0002-0005;0006-0002;c;Podzadanie 6.2.5;Potencjał gospodarczy na rzecz bezpieczeństwa państwa;;;0
+0006-0002-0005-0001;0006-0002-0005;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0006-0002-0006;0006-0002;c;Podzadanie 6.2.6;Budowa infrastruktury dla energetyki jądrowej;;;0
+0006-0002-0006-0001;0006-0002-0006;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0006-0003;0006;b;Zadanie 6.3;Wspieranie i regulacja rynku telekomunikacyjnego i pocztowego;;;713
+0006-0003-0001;0006-0003;c;Podzadanie 6.3.1;Regulacja rynku usług telekomunikacyjnych i pocztowych;;;713
+0006-0003-0001-0001;0006-0003-0001;d;Dysponent;Ministerstwo Infrastruktury;26;;191
+0006-0003-0001-0002;0006-0003-0001;d;Dysponent;Urząd Komunikacji Elektronicznej;76;;522
+0006-0003-0002;0006-0003;c;Podzadanie 6.3.2;Rekompensowanie operatorom kosztów nieodpłatnego doręczania przesyłek pocztowych ustawowo zwolnionych z opłat;;;0
+0006-0003-0002-0001;0006-0003-0002;d;Dysponent;Ministerstwo Infrastruktury;26;;0
+0006-0004;0006;b;Zadanie 6.4;Wsparcie i promocja turystyki;;;52437
+0006-0004-0001;0006-0004;c;Podzadanie 6.4.1;Kreowanie polityki w obszarze turystyki;;;0
+0006-0004-0001-0001;0006-0004-0001;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0006-0004-0002;0006-0004;c;Podzadanie 6.4.2;Wsparcie produktów turystycznych;;;52437
+0006-0004-0002-0001;0006-0004-0002;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0006-0004-0002-0002;0006-0004-0002;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;52437
+0006-0004-0003;0006-0004;c;Podzadanie 6.4.3;Przygotowanie wykwalifikowanych kadr dla turystyki;;;0
+0006-0004-0003-0001;0006-0004-0003;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0006-0004-0003-0002;0006-0004-0003;d;Dysponent;Wojewodowie;85;;0
+0006-0004-0004;0006-0004;c;Podzadanie 6.4.4;Tworzenie i wspieranie systemu marketingu w turystyce;;;0
+0006-0004-0004-0001;0006-0004-0004;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0006-0005;0006;b;Zadanie 6.5;Wykonywanie czynności z dziedziny metrologii i probiernictwa;;;0
+0006-0005-0001;0006-0005;c;Podzadanie 6.5.1;Wykonywanie czynności z dziedziny metrologii na potrzeby podmiotów funkcjonujących w gospodarce;;;0
+0006-0005-0001-0001;0006-0005-0001;d;Dysponent;Główny Urząd Miar;64;;0
+0006-0005-0002;0006-0005;c;Podzadanie 6.5.2;Badanie i cechowanie wyrobów z metali szlachetnych oraz nadzór nad obrotem tymi wyrobami;;;0
+0006-0005-0002-0001;0006-0005-0002;d;Dysponent;Główny Urząd Miar;64;;0
+0006-0006;0006;b;Zadanie 6.6;Wykonywanie czynności z zakresu ochrony własności intelektualnej;;;0
+0006-0006-0001;0006-0006;c;Podzadanie 6.6.1;Prawa wyłączne;;;0
+0006-0006-0001-0001;0006-0006-0001;d;Dysponent;Urząd Patentowy RP;61;;0
+0006-0006-0002;0006-0006;c;Podzadanie 6.6.2;Upowszechnianie i promowanie ochrony własności przemysłowej oraz współpraca międzynarodowa;;;0
+0006-0006-0002-0001;0006-0006-0002;d;Dysponent;Urząd Patentowy RP;61;;0
+0006-0006-0003;0006-0006;c;Podzadanie 6.6.3;Egzekwowanie zakazów i ograniczeń związanych z posiadaniem, rozpowszechnianiem lub obrotem towarami;;;0
+0006-0006-0003-0001;0006-0006-0003;d;Dysponent;Ministerstwo Finansów;19;;0
+0006-0007;0006;b;Zadanie 6.7;Organizacja i promocja działalności normalizacyjnej;;;0
+0006-0007-0001;0006-0007;c;Podzadanie 6.7.1;Organizowanie działalności normalizacyjnej łącznie z realizacją zadań wynikających z członkostwa w Unii Europejskiej;;;0
+0006-0007-0001-0001;0006-0007-0001;d;Dysponent;Polski Komitet Normalizacyjny;65;;0
+0006-0007-0002;0006-0007;c;Podzadanie 6.7.2;Propagowanie informacji normalizacyjnej;;;0
+0006-0007-0002-0001;0006-0007-0002;d;Dysponent;Polski Komitet Normalizacyjny;65;;0
+0006-0008;0006;b;Zadanie 6.8;Nadzór nad rynkiem energii;;;0
+0006-0008-0001;0006-0008;c;Podzadanie 6.8.1;Regulacja działania przedsiębiorstw energetycznych w obszarach niekonkurencyjnych i reglamentowanych;;;0
+0006-0008-0001-0001;0006-0008-0001;d;Dysponent;Urząd Regulacji Energetyki;50;;0
+0006-0008-0002;0006-0008;c;Podzadanie 6.8.2;Promowanie konkurencji na rynku energii;;;0
+0006-0008-0002-0001;0006-0008-0002;d;Dysponent;Urząd Regulacji Energetyki;50;;0
+0006-0008-0003;0006-0008;c;Podzadanie 6.8.3;Realizacja polityki regulacyjnej z uwzględnieniem ochrony środowiska;;;0
+0006-0008-0003-0001;0006-0008-0003;d;Dysponent;Urząd Regulacji Energetyki;50;;0
+0006-0008-0004;0006-0008;c;Podzadanie 6.8.4;Współpraca w integracji rynku europejskiego;;;0
+0006-0008-0004-0001;0006-0008-0004;d;Dysponent;Urząd Regulacji Energetyki;50;;0
+0006-0009;0006;b;Zadanie 6.9;Nadzór i kontrola nad zakładami górniczymi oraz zakładami wykonującymi roboty geologiczne;;;0
+0006-0009-0001;0006-0009;c;Podzadanie 6.9.1;Nadzór i kontrola nad bezpieczeństwem, higieną pracy i ochroną zdrowia;;;0
+0006-0009-0001-0001;0006-0009-0001;d;Dysponent;Wyższy Urząd Górniczy;60;;0
+0006-0009-0002;0006-0009;c;Podzadanie 6.9.2;Nadzór i kontrola nad bezpieczeństwem wyrobów przeznaczonych do stosowania w zakładach górniczych;;;0
+0006-0009-0002-0001;0006-0009-0002;d;Dysponent;Wyższy Urząd Górniczy;60;;0
+0006-0009-0003;0006-0009;c;Podzadanie 6.9.3;Nadzór i kontrola nad zagospodarowaniem przestrzennym, ochroną środowiska i gospodarką złożem;;;0
+0006-0009-0003-0001;0006-0009-0003;d;Dysponent;Wyższy Urząd Górniczy;60;;0
+0006-0009-0004;0006-0009;c;Podzadanie 6.9.4;Nadzór i kontrola nad projektowaniem, budową, utrzymaniem i rozbiórką obiektów budowlanych zakładów górniczych;;;0
+0006-0009-0004-0001;0006-0009-0004;d;Dysponent;Ministerstwo Środowiska;41;;0
+0006-0009-0004-0002;0006-0009-0004;d;Dysponent;Wyższy Urząd Górniczy;60;;0
+0006-0010;0006;b;Zadanie 6.10;Statystyka publiczna;;;30906
+0006-0010-0001;0006-0010;c;Podzadanie 6.10.1;Organizowanie i prowadzenie badań statystycznych;;;30580
+0006-0010-0001-0001;0006-0010-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0006-0010-0001-0002;0006-0010-0001;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0006-0010-0001-0003;0006-0010-0001;d;Dysponent;Główny Urząd Statystyczny;58;;30580
+0006-0010-0002;0006-0010;c;Podzadanie 6.10.2;Badania i analizy statystyczne;;;0
+0006-0010-0002-0001;0006-0010-0002;d;Dysponent;Główny Urząd Statystyczny;58;;0
+0006-0010-0003;0006-0010;c;Podzadanie 6.10.3;Przeprowadzanie spisów powszechnych;;;0
+0006-0010-0003-0001;0006-0010-0003;d;Dysponent;Główny Urząd Statystyczny;58;;0
+0006-0010-0004;0006-0010;c;Podzadanie 6.10.4;Udostępnianie i upowszechnianie wyników informacji statystycznych oraz innych opracowań;;;0
+0006-0010-0004-0001;0006-0010-0004;d;Dysponent;Ministerstwo Finansów;19;;0
+0006-0010-0004-0002;0006-0010-0004;d;Dysponent;Główny Urząd Statystyczny;58;;0
+0006-0010-0005;0006-0010;c;Podzadanie 6.10.5;Prowadzenie krajowych rejestrów urzędowych;;;326
+0006-0010-0005-0001;0006-0010-0005;d;Dysponent;Główny Urząd Statystyczny;58;;326
+0006-0010-0005-0002;0006-0010-0005;d;Dysponent;Wojewodowie;85;;0
+0006-0011;0006;b;Zadanie 6.11;Nadzór nad bezpieczeństwem jądrowym i ochroną radiologiczną;;;0
+0006-0011-0001;0006-0011;c;Podzadanie 6.11.1;Nadzór nad spełnieniem warunków bezpieczeństwa jądrowego i ochrony radiologicznej w działalnościach związanych z pokojowym wykorzystaniem energii atomowej;;;0
+0006-0011-0001-0001;0006-0011-0001;d;Dysponent;Państwowa Agencja Atomistyki;68;;0
+0006-0011-0002;0006-0011;c;Podzadanie 6.11.2;Ocena sytuacji radiacyjnej kraju;;;0
+0006-0011-0002-0001;0006-0011-0002;d;Dysponent;Państwowa Agencja Atomistyki;68;;0
+0006-0011-0003;0006-0011;c;Podzadanie 6.11.3;Wypełnianie zobowiązań międzynarodowych Polski;;;0
+0006-0011-0003-0001;0006-0011-0003;d;Dysponent;Państwowa Agencja Atomistyki;68;;0
+0006-0012;0006;b;Zadanie 6.12;Ochrona konkurencji i konsumentów;;;0
+0006-0012-0001;0006-0012;c;Podzadanie 6.12.1;Ochrona konkurencji;;;0
+0006-0012-0001-0001;0006-0012-0001;d;Dysponent;Urząd Ochrony Konkurencji i Konsumentów;53;;0
+0006-0012-0001-0002;0006-0012-0001;d;Dysponent;Urząd Komunikacji Elektronicznej;76;;0
+0006-0012-0001-0003;0006-0012-0001;d;Dysponent;Wojewodowie;85;;0
+0006-0012-0002;0006-0012;c;Podzadanie 6.12.2;Ochrona konsumentów i nadzór rynku;;;0
+0006-0012-0002-0001;0006-0012-0002;d;Dysponent;Urząd Ochrony Konkurencji i Konsumentów;53;;0
+0006-0012-0002-0002;0006-0012-0002;d;Dysponent;Wojewodowie;85;;0
+0006-0012-0003;0006-0012;c;Podzadanie 6.12.3;Pomoc publiczna;;;0
+0006-0012-0003-0001;0006-0012-0003;d;Dysponent;Urząd Ochrony Konkurencji i Konsumentów;53;;0
+0006-0012-0004;0006-0012;c;Podzadanie 6.12.4;Realizacja zadań w zakresie jakości handlowej artykułów rolno-spożywczych;;;0
+0006-0012-0004-0001;0006-0012-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;35;;0
+0006-0012-0004-0002;0006-0012-0004;d;Dysponent;Wojewodowie;85;;0
+0006-0012-0005;0006-0012;c;Podzadanie 6.12.5;System oceny zgodności;;;0
+0006-0012-0005-0001;0006-0012-0005;d;Dysponent;Urząd Komunikacji Elektronicznej;76;;0
+0006-0013;0006;b;Zadanie 6.13;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;13867
+0006-0013-0001;0006-0013;c;Podzadanie 6.13.1;Utrzymanie systemów informatycznych;;;589
+0006-0013-0001-0001;0006-0013-0001;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0006-0013-0001-0002;0006-0013-0001;d;Dysponent;Urząd Komunikacji Elektronicznej;76;;589
+0006-0013-0002;0006-0013;c;Podzadanie 6.13.2;Budowa i wdrożenie rozwiązań informatycznych;;;13278
+0006-0013-0002-0001;0006-0013-0002;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0006-0013-0002-0002;0006-0013-0002;d;Dysponent;Urząd Komunikacji Elektronicznej;76;;13278
+0007;;a;FUNKCJA 7;GOSPODARKA PRZESTRZENNA, BUDOWNICTWO I MIESZKALNICTWO;;;63034
+0007-0001;0007;b;Zadanie 7.1;Wspieranie budownictwa;;;0
+0007-0001-0001;0007-0001;c;Podzadanie 7.1.1;Termomodernizacja i remonty zasobów mieszkaniowych;;;0
+0007-0001-0001-0001;0007-0001-0001;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0001-0001-0002;0007-0001-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0007-0001-0001-0003;0007-0001-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0007-0001-0002;0007-0001;c;Podzadanie 7.1.2;Budownictwo społeczne na wynajem;;;0
+0007-0001-0002-0001;0007-0001-0002;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0001-0003;0007-0001;c;Podzadanie 7.1.3;Infrastruktura techniczna towarzysząca budownictwu mieszkaniowemu;;;0
+0007-0001-0003-0001;0007-0001-0003;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0001-0003-0002;0007-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0007-0001-0004;0007-0001;c;Podzadanie 7.1.4;Budownictwo własnościowe;;;0
+0007-0001-0004-0001;0007-0001-0004;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0001-0005;0007-0001;c;Podzadanie 7.1.5;Certyfikacja budynków i lokali mieszkalnych;;;0
+0007-0001-0005-0001;0007-0001-0005;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0002;0007;b;Zadanie 7.2;Zagospodarowanie przestrzenne i gospodarka nieruchomościami;;;0
+0007-0002-0001;0007-0002;c;Podzadanie 7.2.1;Zagospodarowanie przestrzenne kraju;;;0
+0007-0002-0001-0001;0007-0002-0001;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0002-0001-0002;0007-0002-0001;d;Dysponent;Wojewodowie;85;;0
+0007-0002-0002;0007-0002;c;Podzadanie 7.2.2;Gospodarka nieruchomościami;;;0
+0007-0002-0002-0001;0007-0002-0002;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0003;0007;b;Zadanie 7.3;Geodezja i kartografia;;;63034
+0007-0003-0001;0007-0003;c;Podzadanie 7.3.1;Nadzór i kontrola w zakresie przestrzegania i stosowania przepisów w dziedzinie geodezji i kartografii;;;0
+0007-0003-0001-0001;0007-0003-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;17;;0
+0007-0003-0001-0002;0007-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0007-0003-0002;0007-0003;c;Podzadanie 7.3.2;Prowadzenie i przechowywanie baz danych przez wojewódzkiego inspektora nadzoru geodezyjnego i kartograficznego;;;0
+0007-0003-0002-0001;0007-0003-0002;d;Dysponent;Wojewodowie;85;;0
+0007-0003-0003;0007-0003;c;Podzadanie 7.3.3;Gromadzenie, prowadzenie, aktualizacja i udostępnienie zasobu geodezyjnego i kartograficznego;;;0
+0007-0003-0003-0001;0007-0003-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;17;;0
+0007-0003-0003-0002;0007-0003-0003;d;Dysponent;Wojewodowie;85;;0
+0007-0003-0004;0007-0003;c;Podzadanie 7.3.4;Budowa infrastruktury informacji przestrzennej;;;63034
+0007-0003-0004-0001;0007-0003-0004;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;17;;63034
+0007-0003-0004-0002;0007-0003-0004;d;Dysponent;Wojewodowie;85;;0
+0007-0004;0007;b;Zadanie 7.4;Nadzór budowlany;;;0
+0007-0004-0001;0007-0004;c;Podzadanie 7.4.1;Kontrola procesu budowlanego;;;0
+0007-0004-0001-0001;0007-0004-0001;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0004-0001-0002;0007-0004-0001;d;Dysponent;Wojewodowie;85;;0
+0007-0004-0002;0007-0004;c;Podzadanie 7.4.2;Kontrola rynku wyrobów budowlanych;;;0
+0007-0004-0002-0001;0007-0004-0002;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0004-0002-0002;0007-0004-0002;d;Dysponent;Wojewodowie;85;;0
+0007-0004-0003;0007-0004;c;Podzadanie 7.4.3;Orzecznictwo administracyjne;;;0
+0007-0004-0003-0001;0007-0004-0003;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0004-0003-0002;0007-0004-0003;d;Dysponent;Wojewodowie;85;;0
+0007-0005;0007;b;Zadanie 7.5;Realizacja zobowiązań państwa z okresu transformacji gospodarczej w zakresie finansowania mieszkalnictwa;;;0
+0007-0005-0001;0007-0005;c;Podzadanie 7.5.1;Wykup odsetek od tzw. starego portfela spółdzielczych kredytów mieszkaniowych;;;0
+0007-0005-0001-0001;0007-0005-0001;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0007-0005-0002;0007-0005;c;Podzadanie 7.5.2;Refundacja bankom wypłaconych premii gwarancyjnych;;;0
+0007-0005-0002-0001;0007-0005-0002;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0008;;a;FUNKCJA 8;KULTURA FIZYCZNA I SPORT;;;0
+0008-0001;0008;b;Zadanie 8.1;Popularyzacja i wspieranie rozwoju sportu dla wszystkich;;;0
+0008-0001-0001;0008-0001;c;Podzadanie 8.1.1;Upowszechnianie aktywności fizycznej dzieci i młodzieży;;;0
+0008-0001-0001-0001;0008-0001-0001;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0001-0002;0008-0001;c;Podzadanie 8.1.2;Upowszechnianie aktywności fizycznej różnych grup społecznych;;;0
+0008-0001-0002-0001;0008-0001-0002;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0001-0003;0008-0001;c;Podzadanie 8.1.3;Upowszechnianie sportu osób niepełnosprawnych;;;0
+0008-0001-0003-0001;0008-0001-0003;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0002;0008;b;Zadanie 8.2;Wspieranie sportu kwalifikowanego;;;0
+0008-0002-0001;0008-0002;c;Podzadanie 8.2.1;Wspieranie działań związków sportowych;;;0
+0008-0002-0001-0001;0008-0002-0001;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0002-0002;0008-0002;c;Podzadanie 8.2.2;Wspieranie sportu młodzieżowego;;;0
+0008-0002-0002-0001;0008-0002-0002;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0002-0003;0008-0002;c;Podzadanie 8.2.3;Wspieranie współzawodnictwa sportowego osób niepełnosprawnych;;;0
+0008-0002-0003-0001;0008-0002-0003;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0002-0004;0008-0002;c;Podzadanie 8.2.4;Wspieranie nauki i medycyny sportowej;;;0
+0008-0002-0004-0001;0008-0002-0004;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0002-0004-0002;0008-0002-0004;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0008-0003;0008;b;Zadanie 8.3;Wspieranie infrastruktury sportowej;;;0
+0008-0003-0001;0008-0003;c;Podzadanie 8.3.1;Infrastruktura w sporcie powszechnym;;;0
+0008-0003-0001-0001;0008-0003-0001;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0003-0002;0008-0003;c;Podzadanie 8.3.2;Infrastruktura w sporcie kwalifikowanym;;;0
+0008-0003-0002-0001;0008-0003-0002;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0003-0003;0008-0003;c;Podzadanie 8.3.3;Program ``Moje Boisko-Orlik 2012``;;;0
+0008-0003-0003-0001;0008-0003-0003;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0003-0003-0002;0008-0003-0003;d;Dysponent;Wojewodowie;85;;0
+0008-0003-0004;0008-0003;c;Podzadanie 8.3.4;Przygotowania Polski do współorganizacji Mistrzostw Europy w Piłce Nożnej UEFA EURO 2012;;;0
+0008-0003-0004-0001;0008-0003-0004;d;Dysponent;Wojewodowie;85;;0
+0008-0004;0008;b;Zadanie 8.4;Współorganizacja Mistrzostw Europy;;;0
+0008-0004-0001;0008-0004;c;Podzadanie 8.4.1;Program wieloletni ``Przygotowanie i wykonanie przedsięwzięć EURO 2012``;;;0
+0008-0004-0001-0001;0008-0004-0001;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0004-0002;0008-0004;c;Podzadanie 8.4.2;Zabezpieczenie medyczne i bezpieczeństwo;;;0
+0008-0004-0002-0001;0008-0004-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0008-0004-0003;0008-0004;c;Podzadanie 8.4.3;Działalność koordynacyjna i kontrolna;;;0
+0008-0004-0003-0001;0008-0004-0003;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0005;0008;b;Zadanie 8.5;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;0
+0008-0005-0001;0008-0005;c;Podzadanie 8.5.1;Utrzymanie systemów informatycznych;;;0
+0008-0005-0001-0001;0008-0005-0001;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0008-0005-0002;0008-0005;c;Podzadanie 8.5.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0008-0005-0002-0001;0008-0005-0002;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0009;;a;FUNKCJA 9;KULTURA I DZIEDZICTWO NARODOWE;;;0
+0009-0001;0009;b;Zadanie 9.1;Podtrzymywanie i rozpowszechnianie tradycji narodowej i państwowej;;;0
+0009-0001-0001;0009-0001;c;Podzadanie 9.1.1;Ochrona miejsc pamięci narodowej w kraju i za granicą;;;0
+0009-0001-0001-0001;0009-0001-0001;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0001-0001-0002;0009-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0009-0001-0002;0009-0001;c;Podzadanie 9.1.2;Restytucja dóbr kultury;;;0
+0009-0001-0002-0001;0009-0001-0002;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0001-0003;0009-0001;c;Podzadanie 9.1.3;Działalność naukowo-wydawnicza;;;0
+0009-0001-0003-0001;0009-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0009-0002;0009;b;Zadanie 9.2;Ochrona dziedzictwa narodowego;;;0
+0009-0002-0001;0009-0002;c;Podzadanie 9.2.1;Utrzymywanie muzeów;;;0
+0009-0002-0001-0001;0009-0002-0001;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0002-0001-0002;0009-0002-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0009-0002-0001-0003;0009-0002-0001;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0009-0002-0002;0009-0002;c;Podzadanie 9.2.2;Ochrona Polskiego dziedzictwa kulturowego w kraju i za granicą;;;0
+0009-0002-0002-0001;0009-0002-0002;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0002-0002-0002;0009-0002-0002;d;Dysponent;Wojewodowie;85;;0
+0009-0002-0003;0009-0002;c;Podzadanie 9.2.3;Zachowanie, utrzymanie i zagospodarowanie zabytków;;;0
+0009-0002-0003-0001;0009-0002-0003;d;Dysponent;Kancelaria Prezydenta RP;01;;0
+0009-0002-0003-0002;0009-0002-0003;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0002-0003-0003;0009-0002-0003;d;Dysponent;Wojewodowie;85;;0
+0009-0002-0004;0009-0002;c;Podzadanie 9.2.4;Dokumentacja, rejestry i ewidencja zabytków oraz dóbr kultury;;;0
+0009-0002-0004-0001;0009-0002-0004;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0002-0004-0002;0009-0002-0004;d;Dysponent;Wojewodowie;85;;0
+0009-0002-0005;0009-0002;c;Podzadanie 9.2.5;Utrzymywanie i powiększanie zasobów archiwalnych i filmowych;;;0
+0009-0002-0005-0001;0009-0002-0005;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0002-0006;0009-0002;c;Podzadanie 9.2.6;Utrzymywanie bibliotek oraz innych instytucji, działających w sektorze książki;;;0
+0009-0002-0006-0001;0009-0002-0006;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0002-0006-0002;0009-0002-0006;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0009-0002-0006-0003;0009-0002-0006;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0009-0003;0009;b;Zadanie 9.3;Działalność artystyczna i promocja kultury;;;0
+0009-0003-0001;0009-0003;c;Podzadanie 9.3.1;Wspieranie działalności artystycznej;;;0
+0009-0003-0001-0001;0009-0003-0001;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0003-0002;0009-0003;c;Podzadanie 9.3.2;Upowszechnianie i promocja kultury polskiej;;;0
+0009-0003-0002-0001;0009-0003-0002;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0003-0003;0009-0003;c;Podzadanie 9.3.3;Wspieranie kinematografii;;;0
+0009-0003-0003-0001;0009-0003-0003;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0004;0009;b;Zadanie 9.4;Budowa i modernizacja infrastruktury kultury;;;0
+0009-0004-0001;0009-0004;c;Podzadanie 9.4.1;Budowa obiektów w sferze kultury;;;0
+0009-0004-0001-0001;0009-0004-0001;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0004-0001-0002;0009-0004-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0009-0004-0002;0009-0004;c;Podzadanie 9.4.2;Modernizacja i wyposażanie obiektów służących kulturze;;;0
+0009-0004-0002-0001;0009-0004-0002;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0009-0004-0002-0002;0009-0004-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0010;;a;FUNKCJA 10;NAUKA POLSKA;;;760643
+0010-0001;0010;b;Zadanie 10.1;Prowadzenie badań naukowych;;;12281
+0010-0001-0001;0010-0001;c;Podzadanie 10.1.1;Wspieranie badań naukowych;;;12281
+0010-0001-0001-0001;0010-0001-0001;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;12281
+0010-0001-0003;0010-0001;c;Podzadanie 10.1.3;Działalność naukowo-badawcza w zakresie problematyki wymiaru sprawiedliwości;;;0
+0010-0001-0003-0001;0010-0001-0003;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0010-0001-0004;0010-0001;c;Podzadanie 10.1.4;Opinie i ekspertyzy na potrzeby sądów powszechnych i jednostek organizacyjnych prokuratury;;;0
+0010-0001-0004-0001;0010-0001-0004;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0010-0002;0010;b;Zadanie 10.2;Wzmocnienie badań naukowych służących praktycznym zastosowaniom;;;364362
+0010-0002-0001;0010-0002;c;Podzadanie 10.2.1;Wsparcie badań stosowanych i prac rozwojowych;;;364362
+0010-0002-0001-0001;0010-0002-0001;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;364362
+0010-0002-0002;0010-0002;c;Podzadanie 10.2.2;Program wieloletni ``Poprawa bezpieczeństwa i warunków pracy – I i II etap``;;;0
+0010-0002-0002-0001;0010-0002-0002;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;0
+0010-0002-0003;0010-0002;c;Podzadanie 10.2.3;Program wieloletni ``Polskie Sztuczne Serce``;;;0
+0010-0002-0003-0001;0010-0002-0003;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;0
+0010-0002-0003-0002;0010-0002-0003;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0010-0002-0004;0010-0002;c;Podzadanie 10.2.4;Badania naukowe w dziedzinie obronności;;;0
+0010-0002-0004-0001;0010-0002-0004;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;0
+0010-0002-0004-0002;0010-0002-0004;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0010-0003;0010;b;Zadanie 10.3;Rozbudowa infrastruktury nauki polskiej;;;330240
+0010-0003-0001;0010-0003;c;Podzadanie 10.3.1;Inwestycje wspierające badania naukowe;;;330240
+0010-0003-0001-0001;0010-0003-0001;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;330240
+0010-0004;0010;b;Zadanie 10.4;Upowszechnianie, promocja oraz popularyzacja nauki;;;0
+0010-0004-0001;0010-0004;c;Podzadanie 10.4.1;Wspieranie dyscyplin naukowych oraz placówek naukowych;;;0
+0010-0004-0001-0001;0010-0004-0001;d;Dysponent;Polska Akademia Nauk;67;;0
+0010-0004-0002;0010-0004;c;Podzadanie 10.4.2;Program wieloletni ``Ekspozycja Centrum Nauki Kopernik``;;;0
+0010-0004-0002-0001;0010-0004-0002;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;0
+0010-0004-0003;0010-0004;c;Podzadanie 10.4.3;Poszerzanie wiedzy o nauce polskiej oraz wzbogacanie kultury narodowej;;;0
+0010-0004-0003-0001;0010-0004-0003;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;0
+0010-0004-0003-0002;0010-0004-0003;d;Dysponent;Polska Akademia Nauk;67;;0
+0010-0004-0004;0010-0004;c;Podzadanie 10.4.4;Wspieranie współpracy naukowej z zagranicą;;;0
+0010-0004-0004-0001;0010-0004-0004;d;Dysponent;Polska Akademia Nauk;67;;0
+0010-0005;0010;b;Zadanie 10.5;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;53760
+0010-0005-0001;0010-0005;c;Podzadanie 10.5.1;Utrzymanie systemów informatycznych nauki;;;0
+0010-0005-0001-0001;0010-0005-0001;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;0
+0010-0005-0002;0010-0005;c;Podzadanie 10.5.2;Rozbudowa infrastruktury informatycznej nauki;;;53760
+0010-0005-0002-0001;0010-0005-0002;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;53760
+0011;;a;FUNKCJA 11;BEZPIECZEŃSTWO ZEWNĘTRZNE I NIENARUSZALNOŚĆ GRANIC;;;0
+0011-0001;0011;b;Zadanie 11.1;Utrzymanie zdolności obronnych;;;0
+0011-0001-0001;0011-0001;c;Podzadanie 11.1.1;Utrzymanie zdolności operacyjnych Wojsk Lądowych;;;0
+0011-0001-0001-0001;0011-0001-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0001-0001-0002;0011-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0011-0001-0002;0011-0001;c;Podzadanie 11.1.2;Utrzymanie zdolności operacyjnych Sił Powietrznych;;;0
+0011-0001-0002-0001;0011-0001-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0001-0003;0011-0001;c;Podzadanie 11.1.3;Utrzymanie zdolności operacyjnych Marynarki Wojennej;;;0
+0011-0001-0003-0001;0011-0001-0003;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0001-0004;0011-0001;c;Podzadanie 11.1.4;Utrzymanie zdolności operacyjnych Wojsk Specjalnych;;;0
+0011-0001-0004-0001;0011-0001-0004;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0001-0005;0011-0001;c;Podzadanie 11.1.5;Utrzymanie zdolności operacyjnych Żandarmerii Wojskowej;;;0
+0011-0001-0005-0001;0011-0001-0005;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0001-0006;0011-0001;c;Podzadanie 11.1.6;Zabezpieczenie dowodzenia Siłami Zbrojnymi RP;;;0
+0011-0001-0006-0001;0011-0001-0006;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0001-0007;0011-0001;c;Podzadanie 11.1.7;Zabezpieczenie logistyczne zdolności operacyjnych SZ;;;0
+0011-0001-0007-0001;0011-0001-0007;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0001-0008;0011-0001;c;Podzadanie 11.1.8;Zabezpieczenie medyczne zdolności operacyjnych SZ;;;0
+0011-0001-0008-0001;0011-0001-0008;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0001-0009;0011-0001;c;Podzadanie 11.1.9;Wsparcie utrzymania zdolności operacyjnych;;;0
+0011-0001-0009-0001;0011-0001-0009;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0011-0001-0010;0011-0001;c;Podzadanie 11.1.10;Zakwaterowanie Sił Zbrojnych;;;0
+0011-0001-0010-0001;0011-0001-0010;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0002;0011;b;Zadanie 11.2;Rozwój zdolności obronnych;;;0
+0011-0002-0001;0011-0002;c;Podzadanie 11.2.1;Programy operacyjne;;;0
+0011-0002-0001-0001;0011-0002-0001;d;Dysponent;Ministerstwo Finansów;78;;0
+0011-0002-0001-0002;0011-0002-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0002-0002;0011-0002;c;Podzadanie 11.2.2;Programy NATO i UE;;;0
+0011-0002-0002-0001;0011-0002-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0002-0003;0011-0002;c;Podzadanie 11.2.3;Pozyskiwanie zdolności poza programami operacyjnymi;;;0
+0011-0002-0003-0001;0011-0002-0003;d;Dysponent;Wojewodowie;85;;0
+0011-0003;0011;b;Zadanie 11.3;Wsparcie wywiadowcze i ochrona kontrwywiadowcza;;;0
+0011-0003-0001;0011-0003;c;Podzadanie 11.3.1;Wsparcie wywiadowcze;;;0
+0011-0003-0001-0001;0011-0003-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0003-0001-0002;0011-0003-0001;d;Dysponent;Agencja Wywiadu;59;;0
+0011-0003-0002;0011-0003;c;Podzadanie 11.3.2;Ochrona kontrwywiadowcza;;;0
+0011-0003-0002-0001;0011-0003-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0004;0011;b;Zadanie 11.4;Realizacja zobowiązań sojuszniczych i międzynarodowych oraz uczestnictwo w działaniach na rzecz pokoju i stabilizacji międzynarodowej;;;0
+0011-0004-0001;0011-0004;c;Podzadanie 11.4.1;Misje i operacje NATO, UE oraz koalicyjne;;;0
+0011-0004-0001-0001;0011-0004-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0004-0002;0011-0004;c;Podzadanie 11.4.2;Działalność w strukturach NATO, UE oraz przedstawicielstw dyplomatycznych i strukturach wielonarodowych;;;0
+0011-0004-0002-0001;0011-0004-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0005;0011;b;Zadanie 11.5;Gotowość struktur administracyjno-gospodarczych kraju do obrony państwa;;;0
+0011-0005-0001;0011-0005;c;Podzadanie 11.5.1;Mobilizacja gospodarki;;;0
+0011-0005-0001-0001;0011-0005-0001;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0011-0005-0001-0002;0011-0005-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0005-0002;0011-0005;c;Podzadanie 11.5.2;Pozamilitarne przygotowania obronne;;;0
+0011-0005-0002-0001;0011-0005-0002;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0011-0005-0002-0002;0011-0005-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0011-0005-0002-0003;0011-0005-0002;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0011-0005-0002-0004;0011-0005-0002;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0011-0005-0002-0005;0011-0005-0002;d;Dysponent;Ministerstwo Środowiska;22;;0
+0011-0005-0002-0006;0011-0005-0002;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0011-0005-0002-0007;0011-0005-0002;d;Dysponent;Ministerstwo Infrastruktury;26;;0
+0011-0005-0002-0008;0011-0005-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0005-0002-0009;0011-0005-0002;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0011-0005-0002-0010;0011-0005-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0011-0005-0002-0011;0011-0005-0002;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0011-0005-0002-0012;0011-0005-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0011-0005-0002-0013;0011-0005-0002;d;Dysponent;Urząd Ochrony Konkurencji i Konsumentów;53;;0
+0011-0005-0002-0014;0011-0005-0002;d;Dysponent;Agencja Bezpieczeństwa Wewnętrznego;57;;0
+0011-0005-0002-0015;0011-0005-0002;d;Dysponent;Urząd Komunikacji Elektronicznej;76;;0
+0011-0005-0002-0016;0011-0005-0002;d;Dysponent;Wojewodowie;85;;0
+0011-0006;0011;b;Zadanie 11.6;Posługa duszpasterska;;;0
+0011-0006-0001;0011-0006;c;Podzadanie 11.6.1;Posługa duszpasterska Ordynariatu Polowego WP;;;0
+0011-0006-0001-0001;0011-0006-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0006-0002;0011-0006;c;Podzadanie 11.6.2;Posługa duszpasterska Ordynariatu Prawosławnego;;;0
+0011-0006-0002-0001;0011-0006-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0006-0003;0011-0006;c;Podzadanie 11.6.3;Posługa duszpasterska Ewangelickiego Duszpasterstwa Wojskowego;;;0
+0011-0006-0003-0001;0011-0006-0003;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0007;0011;b;Zadanie 11.7;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;0
+0011-0007-0001;0011-0007;c;Podzadanie 11.7.1;Utrzymanie systemów informatycznych;;;0
+0011-0007-0001-0001;0011-0007-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0011-0007-0002;0011-0007;c;Podzadanie 11.7.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0011-0007-0002-0001;0011-0007-0002;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0012;;a;FUNKCJA 12;ŚRODOWISKO;;;3034025
+0012-0001;0012;b;Zadanie 12.1;Kształtowanie bioróżnorodności;;;109717
+0012-0001-0001;0012-0001;c;Podzadanie 12.1.1;Realizacja sieci Natura 2000;;;6010
+0012-0001-0001-0001;0012-0001-0001;d;Dysponent;Ministerstwo Środowiska;41;;6010
+0012-0001-0002;0012-0001;c;Podzadanie 12.1.2;Ochrona przyrody i krajobrazu, w tym parki narodowe;;;93849
+0012-0001-0002-0001;0012-0001-0002;d;Dysponent;Ministerstwo Środowiska;41;;93849
+0012-0001-0002-0002;0012-0001-0002;d;Dysponent;Wojewodowie;85;;0
+0012-0001-0003;0012-0001;c;Podzadanie 12.1.3;Ochrona i zrównoważony rozwój lasów oraz powiększanie zasobów leśnych;;;0
+0012-0001-0003-0001;0012-0001-0003;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0001-0003-0002;0012-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0012-0001-0004;0012-0001;c;Podzadanie 12.1.4;Ochrona funkcji gleb i przywrócenie gleb do stanu właściwego;;;0
+0012-0001-0004-0001;0012-0001-0004;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0001-0005;0012-0001;c;Podzadanie 12.1.5;Ochrona zwierząt łownych i gospodarowanie ich zasobami;;;0
+0012-0001-0005-0001;0012-0001-0005;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0001-0005-0002;0012-0001-0005;d;Dysponent;Wojewodowie;85;;0
+0012-0001-0006;0012-0001;c;Podzadanie 12.1.6;Przywracanie terenom zdegradowanym wartości przyrodniczych;;;9858
+0012-0001-0006-0001;0012-0001-0006;d;Dysponent;Ministerstwo Środowiska;41;;9858
+0012-0002;0012;b;Zadanie 12.2;Kształtowanie jakości powietrza atmosferycznego i przeciwdziałanie zmianom klimatu;;;0
+0012-0002-0001;0012-0002;c;Podzadanie 12.2.1;Ochrona powietrza przed zanieczyszczeniami oraz działania z zakresu handlu emisjami zanieczyszczeń innych niż gazy cieplarniane;;;0
+0012-0002-0001-0001;0012-0002-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0002-0002;0012-0002;c;Podzadanie 12.2.2;Ograniczenie emisji gazów cieplarnianych oraz działania z zakresu handlu emisjami CO2  i pakietu energetyczno-klimatycznego;;;0
+0012-0002-0002-0001;0012-0002-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0002-0003;0012-0002;c;Podzadanie 12.2.3;Ochrona klimatu, ochrona warstwy ozonowej oraz transgraniczne przemieszczanie zanieczyszczeń;;;0
+0012-0002-0003-0001;0012-0002-0003;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0002-0004;0012-0002;c;Podzadanie 12.2.4;Opracowanie programów ochrony powietrza;;;0
+0012-0002-0004-0001;0012-0002-0004;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0002-0004-0002;0012-0002-0004;d;Dysponent;Wojewodowie;85;;0
+0012-0003;0012;b;Zadanie 12.3;Racjonalne gospodarowanie zasobami i strukturami geologicznymi;;;0
+0012-0003-0001;0012-0003;c;Podzadanie 12.3.1;Gromadzenie i udostępnianie danych geologicznych oraz prowadzenie rejestru obszarów górniczych;;;0
+0012-0003-0001-0001;0012-0003-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0003-0001-0002;0012-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0012-0003-0002;0012-0003;c;Podzadanie 12.3.2;Badania geologiczne, gospodarowanie zasobami złóż kopalin oraz ustalanie dyspozycyjnych zasobów wód podziemnych;;;0
+0012-0003-0002-0001;0012-0003-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0003-0002-0002;0012-0003-0002;d;Dysponent;Wojewodowie;85;;0
+0012-0003-0003;0012-0003;c;Podzadanie 12.3.3;Promocja i upowszechnianie osiągnięć w dziedzinie geologii;;;0
+0012-0003-0003-0001;0012-0003-0003;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0004;0012;b;Zadanie 12.4;Gospodarka odpadami;;;205437
+0012-0004-0001;0012-0004;c;Podzadanie 12.4.1;Kształtowanie i realizacja polityki państwa w zakresie gospodarki odpadami;;;0
+0012-0004-0001-0001;0012-0004-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0004-0001-0002;0012-0004-0001;d;Dysponent;Wojewodowie;85;;0
+0012-0004-0002;0012-0004;c;Podzadanie 12.4.2;Ograniczanie wpływu odpadów na środowisko;;;205437
+0012-0004-0002-0001;0012-0004-0002;d;Dysponent;Ministerstwo Środowiska;41;;205437
+0012-0004-0003;0012-0004;c;Podzadanie 12.4.3;Nadzorowanie i koordynacja gospodarowania odpadami;;;0
+0012-0004-0003-0001;0012-0004-0003;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0004-0003-0002;0012-0004-0003;d;Dysponent;Wojewodowie;85;;0
+0012-0005;0012;b;Zadanie 12.5;Gospodarowanie zasobami wodnymi;;;282278
+0012-0005-0001;0012-0005;c;Podzadanie 12.5.1;Kształtowanie, ochrona i wykorzystanie zasobów wodnych;;;9085
+0012-0005-0001-0001;0012-0005-0001;d;Dysponent;Ministerstwo Środowiska;22;;9085
+0012-0005-0001-0002;0012-0005-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0005-0002;0012-0005;c;Podzadanie 12.5.2;Utrzymanie powierzonego majątku związanego z gospodarką wodną;;;27938
+0012-0005-0002-0001;0012-0005-0002;d;Dysponent;Ministerstwo Środowiska;22;;27938
+0012-0005-0003;0012-0005;c;Podzadanie 12.5.3;Ochrona przeciwpowodziowa oraz przeciwdziałanie skutkom suszy;;;245255
+0012-0005-0003-0001;0012-0005-0003;d;Dysponent;Ministerstwo Środowiska;22;;143626
+0012-0005-0003-0002;0012-0005-0003;d;Dysponent;Ministerstwo Środowiska;41;;101629
+0012-0005-0004;0012-0005;c;Podzadanie 12.5.4;Budowa i utrzymanie urządzeń melioracji wodnych podstawowych i szczegółowych;;;0
+0012-0005-0004-0001;0012-0005-0004;d;Dysponent;Wojewodowie;85;;0
+0012-0005-0005;0012-0005;c;Podzadanie 12.5.5;Program wieloletni ``Budowa Zbiornika Wodnego Świnna Poręba``;;;0
+0012-0005-0005-0001;0012-0005-0005;d;Dysponent;Ministerstwo Środowiska;22;;0
+0012-0005-0006;0012-0005;c;Podzadanie 12.5.6;Program wieloletni ``Program dla Odry 2006``;;;0
+0012-0005-0006-0001;0012-0005-0006;d;Dysponent;Ministerstwo Środowiska;22;;0
+0012-0005-0006-0002;0012-0005-0006;d;Dysponent;Wojewodowie;85;;0
+0012-0006;0012;b;Zadanie 12.6;Rozbudowa infrastruktury ochrony środowiska;;;2428826
+0012-0006-0001;0012-0006;c;Podzadanie 12.6.1;Gospodarka wodno-ściekowa;;;2288349
+0012-0006-0001-0001;0012-0006-0001;d;Dysponent;Ministerstwo Środowiska;41;;2288349
+0012-0006-0002;0012-0006;c;Podzadanie 12.6.2;Przedsięwzięcia dostosowujące przedsiębiorstwa do wymogów ochrony środowiska;;;122754
+0012-0006-0002-0001;0012-0006-0002;d;Dysponent;Ministerstwo Środowiska;41;;122754
+0012-0006-0003;0012-0006;c;Podzadanie 12.6.3;Zadania związane z realizacją projektów finansowanych z Funduszu Spójności;;;17723
+0012-0006-0003-0001;0012-0006-0003;d;Dysponent;Ministerstwo Środowiska;41;;17723
+0012-0006-0004;0012-0006;c;Podzadanie 12.6.4;Realizacja zadań w ramach Mechanizmu Finansowego EOG, Norweskiego Mechanizmu Finansowego, Polsko-Szwajcarskiej Ramowej Umowy Bilateralnej, Programów Instytucjonalnych i innych programów pomocowych;;;0
+0012-0006-0004-0001;0012-0006-0004;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0007;0012;b;Zadanie 12.7;Kontrola, monitoring stanu środowiska i przeciwdziałanie poważnym awariom;;;0
+0012-0007-0001;0012-0007;c;Podzadanie 12.7.1;Kontrola podmiotów korzystających ze środowiska w tym w zakresie zapobiegania poważnym awariom;;;0
+0012-0007-0001-0001;0012-0007-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0007-0001-0002;0012-0007-0001;d;Dysponent;Wojewodowie;85;;0
+0012-0007-0002;0012-0007;c;Podzadanie 12.7.2;Monitoring stanu środowiska;;;0
+0012-0007-0002-0001;0012-0007-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0007-0002-0002;0012-0007-0002;d;Dysponent;Wojewodowie;85;;0
+0012-0007-0003;0012-0007;c;Podzadanie 12.7.3;Kontrola przestrzegania prawa ochrony środowiska oraz prowadzenie postępowań administracyjnych;;;0
+0012-0007-0003-0001;0012-0007-0003;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0007-0003-0002;0012-0007-0003;d;Dysponent;Wojewodowie;85;;0
+0012-0007-0004;0012-0007;c;Podzadanie 12.7.4;Ochrona przed skutkami zagrożeń naturalnych;;;0
+0012-0007-0004-0001;0012-0007-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0012-0007-0004-0002;0012-0007-0004;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0007-0005;0012-0007;c;Podzadanie 12.7.5;Pozwolenia zintegrowane oraz najlepsze dostępne techniki;;;0
+0012-0007-0005-0001;0012-0007-0005;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0008;0012;b;Zadanie 12.8;Realizacja polityki ekologicznej państwa;;;5009
+0012-0008-0001;0012-0008;c;Podzadanie 12.8.1;Prowadzenie polityki ekologicznej państwa;;;0
+0012-0008-0001-0001;0012-0008-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0008-0002;0012-0008;c;Podzadanie 12.8.2;Prowadzenie polityki zrównoważonego rozwoju obszarów strategicznych;;;0
+0012-0008-0002-0001;0012-0008-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0008-0003;0012-0008;c;Podzadanie 12.8.3;Promocja postaw proekologicznych i edukacja środowiskowa;;;5009
+0012-0008-0003-0001;0012-0008-0003;d;Dysponent;Ministerstwo Środowiska;41;;5009
+0012-0009;0012;b;Zadanie 12.9;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;2758
+0012-0009-0001;0012-0009;c;Podzadanie 12.9.1;Utrzymanie systemów informatycznych;;;0
+0012-0009-0001-0001;0012-0009-0001;d;Dysponent;Ministerstwo Środowiska;22;;0
+0012-0009-0001-0002;0012-0009-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0012-0009-0002;0012-0009;c;Podzadanie 12.9.2;Budowa i wdrożenie rozwiązań informatycznych;;;2758
+0012-0009-0002-0001;0012-0009-0002;d;Dysponent;Ministerstwo Środowiska;22;;0
+0012-0009-0002-0002;0012-0009-0002;d;Dysponent;Ministerstwo Środowiska;41;;2758
+0013;;a;FUNKCJA 13;ZABEZPIECZENIE SPOŁECZNE I WSPIERANIE RODZINY;;;3996
+0013-0001;0013;b;Zadanie 13.1;Pomoc i integracja społeczna;;;0
+0013-0001-0001;0013-0001;c;Podzadanie 13.1.1;Wspieranie osób zagrożonych wykluczeniem społecznym;;;0
+0013-0001-0001-0001;0013-0001-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0013-0001-0001-0002;0013-0001-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0001-0001-0003;0013-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0013-0001-0002;0013-0001;c;Podzadanie 13.1.2;Tworzenie, wdrażanie oraz realizacja przepisów o pomocy społecznej;;;0
+0013-0001-0002-0001;0013-0001-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0001-0002-0002;0013-0001-0002;d;Dysponent;Wojewodowie;85;;0
+0013-0001-0003;0013-0001;c;Podzadanie 13.1.3;Zapewnienie jakości kształcenia i doskonalenia zawodowego służb społecznych;;;0
+0013-0001-0003-0001;0013-0001-0003;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0001-0004;0013-0001;c;Podzadanie 13.1.4;Działalność badawcza, doradcza i informacyjna;;;0
+0013-0001-0004-0001;0013-0001-0004;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0001-0005;0013-0001;c;Podzadanie 13.1.5;Nadzór nad jednostkami organizacyjnymi pomocy społecznej;;;0
+0013-0001-0005-0001;0013-0001-0005;d;Dysponent;Wojewodowie;85;;0
+0013-0001-0006;0013-0001;c;Podzadanie 13.1.6;Mieszkania socjalne, mieszkania chronione, noclegownie i domy dla bezdomnych;;;0
+0013-0001-0006-0001;0013-0001-0006;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0013-0002;0013;b;Zadanie 13.2;Aktywizacja społeczna osób niepełnosprawnych;;;0
+0013-0002-0001;0013-0002;c;Podzadanie 13.2.1;Wspomaganie aktywizacji społecznej osób niepełnosprawnych;;;0
+0013-0002-0001-0001;0013-0002-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0002-0002;0013-0002;c;Podzadanie 13.2.2;Prowadzenie dialogu obywatelskiego w zakresie aktywizacji społecznej osób niepełnosprawnych;;;0
+0013-0002-0002-0001;0013-0002-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0002-0003;0013-0002;c;Podzadanie 13.2.3;Orzekanie o niepełnosprawności;;;0
+0013-0002-0003-0001;0013-0002-0003;d;Dysponent;Wojewodowie;85;;0
+0013-0002-0004;0013-0002;c;Podzadanie 13.2.4;Nadzór nad ośrodkami i organizatorami turnusów rehabilitacyjnych;;;0
+0013-0002-0004-0001;0013-0002-0004;d;Dysponent;Wojewodowie;85;;0
+0013-0003;0013;b;Zadanie 13.3;Ubezpieczenia społeczne;;;0
+0013-0003-0001;0013-0003;c;Podzadanie 13.3.1;Świadczenia społeczne;;;0
+0013-0003-0001-0001;0013-0003-0001;d;Dysponent;Polska Akademia Nauk;67;;0
+0013-0003-0001-0002;0013-0003-0001;d;Dysponent;Kasa Rolniczego Ubezpieczenia Społecznego;72;;0
+0013-0003-0002;0013-0003;c;Podzadanie 13.3.2;Nadzór nad zgodnością działań Zakładu Ubezpieczeń Społecznych z obowiązującymi przepisami prawa;;;0
+0013-0003-0002-0001;0013-0003-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0003-0004;0013-0003;c;Podzadanie 13.3.4;Prewencja i rehabilitacja;;;0
+0013-0003-0004-0001;0013-0003-0004;d;Dysponent;Kasa Rolniczego Ubezpieczenia Społecznego;72;;0
+0013-0003-0005;0013-0003;c;Podzadanie 13.3.5;Świadczenia emerytalne dla funkcjonariuszy i żołnierzy;;;0
+0013-0003-0005-0001;0013-0003-0005;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0013-0003-0005-0002;0013-0003-0005;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0013-0003-0005-0003;0013-0003-0005;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0013-0003-0006;0013-0003;c;Podzadanie 13.3.6;Uposażenia dla sędziów i prokuratorów  w stanie spoczynku i uposażenia rodzinne;;;0
+0013-0003-0006-0001;0013-0003-0006;d;Dysponent;Sąd Najwyższy;04;;0
+0013-0003-0006-0002;0013-0003-0006;d;Dysponent;Naczelny Sąd Administracyjny;05;;0
+0013-0003-0006-0003;0013-0003-0006;d;Dysponent;Trybunał Konstytucyjny;06;;0
+0013-0003-0006-0004;0013-0003-0006;d;Dysponent;Instytut Pamięci Narodowej - Komisja Ścigania Zbrodni przeciwko Narodowi Polskiemu;13;;0
+0013-0003-0006-0005;0013-0003-0006;d;Dysponent;Ministerstwo Sprawiedliwości;15;;0
+0013-0003-0006-0006;0013-0003-0006;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0013-0003-0006-0007;0013-0003-0006;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0013-0003-0006-0008;0013-0003-0006;d;Dysponent;Prokuratura Generalna;88;;0
+0013-0003-0007;0013-0003;c;Podzadanie 13.3.7;Wypłata świadczeń zleconych do realizacji Zakładowi Ubezpieczeń Społecznych i Kasie Rolniczego Ubezpieczenia Społecznego;;;0
+0013-0003-0007-0001;0013-0003-0007;d;Dysponent;Kasa Rolniczego Ubezpieczenia Społecznego;72;;0
+0013-0003-0007-0002;0013-0003-0007;d;Dysponent;Zakład Ubezpieczeń Społecznych;73;;0
+0013-0003-0008;0013-0003;c;Podzadanie 13.3.8;Kształtowanie systemu repartycyjnego;;;0
+0013-0003-0008-0001;0013-0003-0008;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0003-0010;0013-0003;c;Podzadanie 13.3.10;Świadczenia pieniężne dla żołnierzy zwolnionych z zawodowej służby wojskowej;;;0
+0013-0003-0010-0001;0013-0003-0010;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0013-0003-0011;0013-0003;c;Podzadanie 13.3.11;Zapewnienie wypłacalności świadczeń z Funduszu Ubezpieczeń Społecznych;;;0
+0013-0003-0011-0001;0013-0003-0011;d;Dysponent;Zakład Ubezpieczeń Społecznych;73;;0
+0013-0003-0012;0013-0003;c;Podzadanie 13.3.12;Przekazywanie składek na ubezpieczenia społeczne;;;0
+0013-0003-0012-0001;0013-0003-0012;d;Dysponent;Zakład Ubezpieczeń Społecznych;73;;0
+0013-0003-0013;0013-0003;c;Podzadanie 13.3.13;Wspieranie działań Otwartych Funduszy Emerytalnych;;;0
+0013-0003-0013-0001;0013-0003-0013;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0003-0014;0013-0003;c;Podzadanie 13.3.14;Wspieranie Pracowniczych Programów Emerytalnych i Indywidualnych Kont Emerytalnych;;;0
+0013-0003-0014-0001;0013-0003-0014;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0003-0015;0013-0003;c;Podzadanie 13.3.15;Koordynacja systemów zabezpieczenia społecznego;;;0
+0013-0003-0015-0001;0013-0003-0015;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0004;0013;b;Zadanie 13.4;Sprawy kombatantów i osób represjonowanych;;;0
+0013-0004-0001;0013-0004;c;Podzadanie 13.4.1;Orzekanie o usprawnieniach kombatantów i innych osób uprawnionych oraz tworzenie zbiorów akt kombatanckich;;;0
+0013-0004-0001-0001;0013-0004-0001;d;Dysponent;Urząd ds. Kombatantów i Osób Represjonowanych;54;;0
+0013-0004-0002;0013-0004;c;Podzadanie 13.4.2;Wsparcie socjalne dla kombatantów, ofiar represji i innych osób uprawnionych;;;0
+0013-0004-0002-0001;0013-0004-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0013-0004-0002-0002;0013-0004-0002;d;Dysponent;Urząd ds. Kombatantów i Osób Represjonowanych;54;;0
+0013-0004-0002-0003;0013-0004-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0013-0004-0003;0013-0004;c;Podzadanie 13.4.3;Honorowanie kombatantów i ofiar represji oraz utrwalanie pamięci o nich;;;0
+0013-0004-0003-0001;0013-0004-0003;d;Dysponent;Urząd ds. Kombatantów i Osób Represjonowanych;54;;0
+0013-0005;0013;b;Zadanie 13.5;Wspieranie rodziny;;;0
+0013-0005-0001;0013-0005;c;Podzadanie 13.5.1;Świadczenia rodzinne;;;0
+0013-0005-0001-0001;0013-0005-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0013-0005-0001-0002;0013-0005-0001;d;Dysponent;Wojewodowie;85;;0
+0013-0005-0002;0013-0005;c;Podzadanie 13.5.2;Świadczenia z funduszu alimentacyjnego;;;0
+0013-0005-0002-0001;0013-0005-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0013-0005-0002-0002;0013-0005-0002;d;Dysponent;Wojewodowie;85;;0
+0013-0005-0003;0013-0005;c;Podzadanie 13.5.3;Żłobki i inne formy opieki nad dzieckiem w wieku do 3 lat;;;0
+0013-0005-0003-0001;0013-0005-0003;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0013-0005-0004;0013-0005;c;Podzadanie 13.5.4;Profilaktyka na rzecz dziecka i rodziny;;;0
+0013-0005-0004-0001;0013-0005-0004;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0013-0005-0004-0002;0013-0005-0004;d;Dysponent;Wojewodowie;85;;0
+0013-0005-0005;0013-0005;c;Podzadanie 13.5.5;Piecza zastępcza nad dzieckiem;;;0
+0013-0005-0005-0001;0013-0005-0005;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0013-0005-0005-0002;0013-0005-0005;d;Dysponent;Wojewodowie;85;;0
+0013-0005-0006;0013-0005;c;Podzadanie 13.5.6;Adopcja dziecka;;;0
+0013-0005-0006-0001;0013-0005-0006;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0013-0006;0013;b;Zadanie 13.6;Przeciwdziałanie dyskryminacji;;;0
+0013-0006-0002;0013-0006;c;Podzadanie 13.6.2;Wyrównywanie statusu kobiet i mężczyzn w życiu społeczno-gospodarczym;;;0
+0013-0006-0002-0001;0013-0006-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0013-0007;0013;b;Zadanie 13.7;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;3996
+0013-0007-0001;0013-0007;c;Podzadanie 13.7.1;Utrzymanie systemów informatycznych;;;3996
+0013-0007-0001-0001;0013-0007-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;3996
+0013-0007-0001-0002;0013-0007-0001;d;Dysponent;Wojewodowie;85;;0
+0013-0007-0002;0013-0007;c;Podzadanie 13.7.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0013-0007-0002-0001;0013-0007-0002;d;Dysponent;Kasa Rolniczego Ubezpieczenia Społecznego;72;;0
+0014;;a;FUNKCJA 14;RYNEK PRACY;;;376843
+0014-0001;0014;b;Zadanie 14.1;Wspieranie zatrudnienia i przeciwdziałanie bezrobociu;;;345043
+0014-0001-0001;0014-0001;c;Podzadanie 14.1.1;Wspieranie programów aktywizacji;;;345043
+0014-0001-0001-0001;0014-0001-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0014-0001-0001-0002;0014-0001-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;345043
+0014-0001-0001-0003;0014-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0014-0001-0002;0014-0001;c;Podzadanie 14.1.2;Wspieranie i modernizacja urzędów pracy;;;0
+0014-0001-0002-0001;0014-0001-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0014-0001-0002-0002;0014-0001-0002;d;Dysponent;Wojewodowie;85;;0
+0014-0001-0003;0014-0001;c;Podzadanie 14.1.3;Wspieranie i modernizacja instytucji rynku pracy z wyłączeniem publicznych służb zatrudnienia;;;0
+0014-0001-0003-0001;0014-0001-0003;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0014-0001-0004;0014-0001;c;Podzadanie 14.1.4;Kształtowanie zasad zatrudniania cudzoziemców;;;0
+0014-0001-0004-0001;0014-0001-0004;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0014-0001-0004-0002;0014-0001-0004;d;Dysponent;Wojewodowie;85;;0
+0014-0001-0005;0014-0001;c;Podzadanie 14.1.5;Zatrudnienie oraz przeciwdziałanie marginalizacji i wykluczeniu społecznemu młodzieży;;;0
+0014-0001-0005-0001;0014-0001-0005;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0014-0002;0014;b;Zadanie 14.2;Budowa nowoczesnych stosunków pracy;;;0
+0014-0002-0001;0014-0002;c;Podzadanie 14.2.1;Elastyczność i bezpieczeństwo w zatrudnieniu;;;0
+0014-0002-0001-0001;0014-0002-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0014-0002-0002;0014-0002;c;Podzadanie 14.2.2;Nadzór i kontrola;;;0
+0014-0002-0002-0001;0014-0002-0002;d;Dysponent;Państwowa Inspekcja Pracy;12;;0
+0014-0002-0002-0002;0014-0002-0002;d;Dysponent;Wojewodowie;85;;0
+0014-0002-0003;0014-0002;c;Podzadanie 14.2.3;Bezpieczeństwo i higiena pracy;;;0
+0014-0002-0003-0001;0014-0002-0003;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0014-0002-0004;0014-0002;c;Podzadanie 14.2.4;Prewencja i promocja ochrony pracy;;;0
+0014-0002-0004-0001;0014-0002-0004;d;Dysponent;Państwowa Inspekcja Pracy;12;;0
+0014-0003;0014;b;Zadanie 14.3;Aktywizacja zawodowa osób niepełnosprawnych;;;31800
+0014-0003-0001;0014-0003;c;Podzadanie 14.3.1;Analiza sytuacji osób niepełnosprawnych na rynku pracy;;;0
+0014-0003-0001-0001;0014-0003-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0014-0003-0001-0002;0014-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0014-0003-0002;0014-0003;c;Podzadanie 14.3.2;Wspomaganie aktywizacji zawodowej osób niepełnosprawnych;;;31800
+0014-0003-0002-0001;0014-0003-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;31800
+0014-0003-0003;0014-0003;c;Podzadanie 14.3.3;Nadzór nad zakładami pracy chronionej i zakładami aktywności zawodowej;;;0
+0014-0003-0003-0001;0014-0003-0003;d;Dysponent;Wojewodowie;85;;0
+0014-0004;0014;b;Zadanie 14.4;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;0
+0014-0004-0001;0014-0004;c;Podzadanie 14.4.1;Utrzymanie systemów informatycznych;;;0
+0014-0004-0001-0001;0014-0004-0001;d;Dysponent;Państwowa Inspekcja Pracy;12;;0
+0014-0004-0001-0002;0014-0004-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0014-0004-0001-0003;0014-0004-0001;d;Dysponent;Wojewodowie;85;;0
+0014-0004-0002;0014-0004;c;Podzadanie 14.4.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0014-0004-0002-0001;0014-0004-0002;d;Dysponent;Państwowa Inspekcja Pracy;12;;0
+0015;;a;FUNKCJA 15;POLITYKA ZAGRANICZNA;;;3230
+0015-0001;0015;b;Zadanie 15.1;Zapewnianie Polsce sprzyjających warunków rozwoju;;;0
+0015-0001-0001;0015-0001;c;Podzadanie 15.1.1;Rozwijanie stosunków dwustronnych i wielostronnych;;;0
+0015-0001-0001-0001;0015-0001-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0015-0001-0001-0002;0015-0001-0001;d;Dysponent;Ministerstwo Środowiska;22;;0
+0015-0001-0001-0003;0015-0001-0001;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0001-0002;0015-0001;c;Podzadanie 15.1.2;Udział Polski we współpracy na forum organizacji międzynarodowych;;;0
+0015-0001-0002-0001;0015-0001-0002;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0015-0001-0002-0002;0015-0001-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0015-0001-0002-0003;0015-0001-0002;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0015-0001-0002-0004;0015-0001-0002;d;Dysponent;Ministerstwo Środowiska;22;;0
+0015-0001-0002-0005;0015-0001-0002;d;Dysponent;Ministerstwo Infrastruktury;26;;0
+0015-0001-0002-0006;0015-0001-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0015-0001-0002-0007;0015-0001-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0015-0001-0002-0008;0015-0001-0002;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0001-0002-0009;0015-0001-0002;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0015-0001-0003;0015-0001;c;Podzadanie 15.1.3;Wykorzystanie środków pomocowych;;;0
+0015-0001-0003-0001;0015-0001-0003;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0002;0015;b;Zadanie 15.2;Zapewnianie bezpieczeństwa państwa;;;0
+0015-0002-0001;0015-0002;c;Podzadanie 15.2.1;Umacnianie bezpieczeństwa politycznego i wojskowego;;;0
+0015-0002-0001-0001;0015-0002-0001;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0002-0002;0015-0002;c;Podzadanie 15.2.2;Umacnianie międzynarodowego bezpieczeństwa i pokoju;;;0
+0015-0002-0002-0001;0015-0002-0002;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0002-0003;0015-0002;c;Podzadanie 15.2.3;Umacnianie bezpieczeństwa ekonomicznego i ekologicznego;;;0
+0015-0002-0003-0001;0015-0002-0003;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0002-0004;0015-0002;c;Podzadanie 15.2.4;Pozostałe wymiary bezpieczeństwa;;;0
+0015-0002-0004-0001;0015-0002-0004;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0003;0015;b;Zadanie 15.3;Reprezentowanie i ochrona międzynarodowych interesów RP i jej obywateli za granicą;;;0
+0015-0003-0001;0015-0003;c;Podzadanie 15.3.1;Wspieranie interesów polskich obywateli i polskich osób prawnych;;;0
+0015-0003-0001-0001;0015-0003-0001;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0003-0002;0015-0003;c;Podzadanie 15.3.2;Zapewnianie opieki i obsługi konsularnej;;;0
+0015-0003-0002-0001;0015-0003-0002;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0003-0003;0015-0003;c;Podzadanie 15.3.3;Reprezentowanie i ochrona interesów RP przed międzynarodowymi organami sądowymi;;;0
+0015-0003-0003-0001;0015-0003-0003;d;Dysponent;Ministerstwo Finansów;19;;0
+0015-0003-0003-0002;0015-0003-0003;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0003-0004;0015-0003;c;Podzadanie 15.3.4;Zapewnianie obsługi prawnej działań wynikających z członkowstwa Polski w UE;;;0
+0015-0003-0004-0001;0015-0003-0004;d;Dysponent;Ministerstwo Finansów;19;;0
+0015-0003-0004-0002;0015-0003-0004;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0004;0015;b;Zadanie 15.4;Kształtowanie międzynarodowego wizerunku RP;;;0
+0015-0004-0001;0015-0004;c;Podzadanie 15.4.1;Prowadzenie promocji kraju;;;0
+0015-0004-0001-0001;0015-0004-0001;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0015-0004-0001-0002;0015-0004-0001;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0004-0002;0015-0004;c;Podzadanie 15.4.2;Udział we współpracy rozwojowej i międzynarodowej pomocy humanitarnej;;;0
+0015-0004-0002-0001;0015-0004-0002;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0004-0003;0015-0004;c;Podzadanie 15.4.3;Wspieranie rozwoju demokracji, praw człowieka i rządów prawa;;;0
+0015-0004-0003-0001;0015-0004-0003;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0004-0004;0015-0004;c;Podzadanie 15.4.4;Zapewnianie obsługi cudzoziemców i zagranicznych osób prawnych;;;0
+0015-0004-0004-0001;0015-0004-0004;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0005;0015;b;Zadanie 15.5;Kształtowanie i koordynacja polityki zagranicznej;;;3230
+0015-0005-0001;0015-0005;c;Podzadanie 15.5.1;Kształtowanie i koordynacja współpracy międzynarodowej organów administracji rządowej w odniesieniu do spraw zagranicznych;;;0
+0015-0005-0001-0001;0015-0005-0001;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0005-0002;0015-0005;c;Podzadanie 15.5.2;Kształtowanie i koordynacja współpracy międzynarodowej organów administracji rządowej w odniesieniu do spraw członkowstwa Polski w UE;;;0
+0015-0005-0002-0001;0015-0005-0002;d;Dysponent;Ministerstwo Finansów;19;;0
+0015-0005-0002-0002;0015-0005-0002;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0005-0003;0015-0005;c;Podzadanie 15.5.3;Prowadzenie działalności edukacyjnej i informacyjnej;;;0
+0015-0005-0003-0001;0015-0005-0003;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0005-0004;0015-0005;c;Podzadanie 15.5.4;Przygotowanie, sprawowanie i obsługa Prezydencji RP w Radzie Unii Europejskiej;;;3230
+0015-0005-0004-0001;0015-0005-0004;d;Dysponent;Kancelaria Sejmu;02;;0
+0015-0005-0004-0002;0015-0005-0004;d;Dysponent;Kancelaria Senatu;03;;0
+0015-0005-0004-0003;0015-0005-0004;d;Dysponent;Kancelaria Prezesa Rady Ministrów;16;;3230
+0015-0005-0004-0004;0015-0005-0004;d;Dysponent;Ministerstwo Infrastruktury;18;;0
+0015-0005-0004-0005;0015-0005-0004;d;Dysponent;Ministerstwo Finansów;19;;0
+0015-0005-0004-0006;0015-0005-0004;d;Dysponent;Ministerstwo Gospodarki;20;;0
+0015-0005-0004-0007;0015-0005-0004;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0015-0005-0004-0008;0015-0005-0004;d;Dysponent;Ministerstwo Środowiska;22;;0
+0015-0005-0004-0009;0015-0005-0004;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0015-0005-0004-0010;0015-0005-0004;d;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0015-0005-0004-0011;0015-0005-0004;d;Dysponent;Ministerstwo Infrastruktury;26;;0
+0015-0005-0004-0012;0015-0005-0004;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;0
+0015-0005-0004-0013;0015-0005-0004;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;0
+0015-0005-0004-0014;0015-0005-0004;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0015-0005-0004-0015;0015-0005-0004;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;0
+0015-0005-0004-0016;0015-0005-0004;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0015-0005-0004-0017;0015-0005-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0015-0005-0004-0018;0015-0005-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0015-0005-0004-0019;0015-0005-0004;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0015-0005-0004-0020;0015-0005-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;35;;0
+0015-0005-0004-0021;0015-0005-0004;d;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0015-0005-0004-0022;0015-0005-0004;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0015-0005-0004-0023;0015-0005-0004;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0015-0005-0004-0024;0015-0005-0004;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0015-0005-0004-0025;0015-0005-0004;d;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0015-0005-0004-0026;0015-0005-0004;d;Dysponent;Ministerstwo Środowiska;41;;0
+0015-0005-0004-0027;0015-0005-0004;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0015-0005-0004-0028;0015-0005-0004;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0015-0005-0004-0029;0015-0005-0004;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0005-0004-0030;0015-0005-0004;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0015-0005-0004-0031;0015-0005-0004;d;Dysponent;Urząd Zamówień Publicznych;49;;0
+0015-0005-0004-0032;0015-0005-0004;d;Dysponent;Urząd Ochrony Konkurencji i Konsumentów;53;;0
+0015-0005-0004-0033;0015-0005-0004;d;Dysponent;Agencja Bezpieczeństwa Wewnętrznego;57;;0
+0015-0005-0004-0034;0015-0005-0004;d;Dysponent;Główny Urząd Statystyczny;58;;0
+0015-0005-0004-0035;0015-0005-0004;d;Dysponent;Wyższy Urząd Górniczy;60;;0
+0015-0005-0004-0036;0015-0005-0004;d;Dysponent;Urząd Patentowy RP;61;;0
+0015-0005-0004-0037;0015-0005-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;62;;0
+0015-0005-0004-0038;0015-0005-0004;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0015-0005-0004-0039;0015-0005-0004;d;Dysponent;Państwowa Agencja Atomistyki;68;;0
+0015-0006;0015;b;Zadanie 15.6;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;0
+0015-0006-0001;0015-0006;c;Podzadanie 15.6.1;Utrzymanie systemów informatycznych;;;0
+0015-0006-0001-0001;0015-0006-0001;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0015-0006-0002;0015-0006;c;Podzadanie 15.6.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0015-0006-0002-0001;0015-0006-0002;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0016;;a;FUNKCJA 16;SPRAWY OBYWATELSKIE;;;293988
+0016-0001;0016;b;Zadanie 16.1;Obsługa administracyjna obywatela;;;123112
+0016-0001-0001;0016-0001;c;Podzadanie 16.1.1;Ewidencja ludności i dowody osobiste, rejestracja stanu cywilnego oraz zmiana imion i nazwisk;;;0
+0016-0001-0001-0001;0016-0001-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0001-0001-0002;0016-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0016-0001-0002;0016-0001;c;Podzadanie 16.1.2;Wydawanie dokumentów paszportowych;;;0
+0016-0001-0002-0001;0016-0001-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0001-0002-0002;0016-0001-0002;d;Dysponent;Wojewodowie;85;;0
+0016-0001-0003;0016-0001;c;Podzadanie 16.1.3;Wzmacnianie potencjału administracji publicznej;;;123112
+0016-0001-0003-0001;0016-0001-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;17;;119448
+0016-0001-0003-0002;0016-0001-0003;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;3664
+0016-0001-0003-0003;0016-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0016-0001-0004;0016-0001;c;Podzadanie 16.1.4;Prowadzenie spraw z zakresu nadzoru sprawowanego przez ministra właściwego do spraw administracji publicznej oraz funkcjonowanie zespolonej administracji rządowej i jednostek samorządu terytorialnego;;;0
+0016-0001-0004-0001;0016-0001-0004;d;Dysponent;Wojewodowie;85;;0
+0016-0001-0005;0016-0001;c;Podzadanie 16.1.5;Prowadzenie spraw związanych z przyjmowaniem oraz rozpatrywaniem skarg i wniosków;;;0
+0016-0001-0005-0001;0016-0001-0005;d;Dysponent;Kancelaria Prezesa Rady Ministrów;16;;0
+0016-0001-0005-0002;0016-0001-0005;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0001-0005-0003;0016-0001-0005;d;Dysponent;Wojewodowie;85;;0
+0016-0001-0006;0016-0001;c;Podzadanie 16.1.6;Prowadzenie spraw dotyczących obywatelstwa polskiego;;;0
+0016-0001-0006-0001;0016-0001-0006;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0001-0006-0002;0016-0001-0006;d;Dysponent;Wojewodowie;85;;0
+0016-0001-0007;0016-0001;c;Podzadanie 16.1.7;Wydawanie zezwoleń na zbiórki publiczne oraz kontrola zbiórek publicznych;;;0
+0016-0001-0007-0001;0016-0001-0007;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0001-0007-0002;0016-0001-0007;d;Dysponent;Wojewodowie;85;;0
+0016-0001-0008;0016-0001;c;Podzadanie 16.1.8;Kontrola działalności tłumaczy przysięgłych;;;0
+0016-0001-0008-0001;0016-0001-0008;d;Dysponent;Wojewodowie;85;;0
+0016-0002;0016;b;Zadanie 16.2;Podtrzymywanie tożsamości kulturowej mniejszości narodowych i etnicznych;;;0
+0016-0002-0001;0016-0002;c;Podzadanie 16.2.1;Działania wobec mniejszości narodowych i etnicznych;;;0
+0016-0002-0001-0001;0016-0002-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;43;;0
+0016-0002-0001-0002;0016-0002-0001;d;Dysponent;Wojewodowie;85;;0
+0016-0002-0002;0016-0002;c;Podzadanie 16.2.2;Realizacja zasady równego traktowania osób bez względu na pochodzenie etniczne;;;0
+0016-0002-0002-0001;0016-0002-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0002-0002-0002;0016-0002-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;43;;0
+0016-0002-0002-0003;0016-0002-0002;d;Dysponent;Wojewodowie;85;;0
+0016-0002-0003;0016-0002;c;Podzadanie 16.2.3;Działania na rzecz społeczności romskiej w Polsce;;;0
+0016-0002-0003-0001;0016-0002-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;43;;0
+0016-0002-0003-0002;0016-0002-0003;d;Dysponent;Wojewodowie;85;;0
+0016-0003;0016;b;Zadanie 16.3;Utrzymanie stosunków między Państwem a kościołem i związkami wyznaniowymi;;;0
+0016-0003-0001;0016-0003;c;Podzadanie 16.3.1;Wydawanie zaświadczeń o osobowości prawnej jednostek kościelnych;;;0
+0016-0003-0001-0001;0016-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0016-0003-0002;0016-0003;c;Podzadanie 16.3.2;Realizacja zadań z zakresu stosunków pomiędzy Państwem a Kościołem;;;0
+0016-0003-0002-0001;0016-0003-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;43;;0
+0016-0003-0002-0002;0016-0003-0002;d;Dysponent;Wojewodowie;85;;0
+0016-0004;0016;b;Zadanie 16.4;Wspieranie Polonii i Polaków za granicą;;;0
+0016-0004-0001;0016-0004;c;Podzadanie 16.4.1;Współpraca i wspieranie Polonii i Polaków za granicą;;;0
+0016-0004-0001-0001;0016-0004-0001;d;Dysponent;Kancelaria Senatu;03;;0
+0016-0004-0001-0002;0016-0004-0001;d;Dysponent;Kancelaria Prezesa Rady Ministrów;16;;0
+0016-0004-0001-0003;0016-0004-0001;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0016-0004-0001-0004;0016-0004-0001;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0016-0005;0016;b;Zadanie 16.5;Obsługa cudzoziemców i ruchy migracyjne;;;1520
+0016-0005-0001;0016-0005;c;Podzadanie 16.5.1;Obsługa cudzoziemców;;;1520
+0016-0005-0001-0001;0016-0005-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;1520
+0016-0005-0001-0002;0016-0005-0001;d;Dysponent;Wojewodowie;85;;0
+0016-0005-0002;0016-0005;c;Podzadanie 16.5.2;Sprawy polityki migracyjnej państwa;;;0
+0016-0005-0002-0001;0016-0005-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0005-0003;0016-0005;c;Podzadanie 16.5.3;Sprawy repatriacji;;;0
+0016-0005-0003-0001;0016-0005-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0005-0003-0002;0016-0005-0003;d;Dysponent;Wojewodowie;85;;0
+0016-0005-0004;0016-0005;c;Podzadanie 16.5.4;Ochrona praw uchodźców na terytorium RP;;;0
+0016-0005-0004-0001;0016-0005-0004;d;Dysponent;Kancelaria Prezesa Rady Ministrów;16;;0
+0016-0006;0016;b;Zadanie 16.6;Ochrona Praw Obywatelskich i Praw Dziecka;;;0
+0016-0006-0001;0016-0006;c;Podzadanie 16.6.1;Zapewnienie ochrony wolności oraz praw człowieka i obywatela;;;0
+0016-0006-0001-0001;0016-0006-0001;d;Dysponent;Rzecznik Praw Obywatelskich;08;;0
+0016-0006-0002;0016-0006;c;Podzadanie 16.6.2;Zapewnienie ochrony i promocji praw dziecka;;;0
+0016-0006-0002-0001;0016-0006-0002;d;Dysponent;Rzecznik Praw Dziecka;14;;0
+0016-0006-0003;0016-0006;c;Podzadanie 16.6.3;Działalność naukowo-badawcza i edukacyjna oraz opinie i ekspertyzy;;;0
+0016-0006-0003-0001;0016-0006-0003;d;Dysponent;Rzecznik Praw Obywatelskich;08;;0
+0016-0006-0004;0016-0006;c;Podzadanie 16.6.4;Pełnienie funkcji Krajowego Mechanizmu Prewencji;;;0
+0016-0006-0004-0001;0016-0006-0004;d;Dysponent;Rzecznik Praw Obywatelskich;08;;0
+0016-0006-0005;0016-0006;c;Podzadanie 16.6.5;Ochrona danych osobowych;;;0
+0016-0006-0005-0001;0016-0006-0005;d;Dysponent;Generalny Inspektor Ochrony Danych Osobowych;10;;0
+0016-0007;0016;b;Zadanie 16.7;Sprawowanie funkcji organu wyższego stopnia w indywidualnych sprawach z zakresu administracji publicznej należących do właściwości jednostek samorządu terytorialnego;;;247
+0016-0007-0001;0016-0007;c;Podzadanie 16.7.1;Rozpatrywanie odwołań, zażaleń, żądań wznowienia postępowania, żądań stwierdzenia nieważności decyzji oraz wszczynanie z urzędu postępowań w trybach nadzwyczajnych;;;247
+0016-0007-0001-0001;0016-0007-0001;d;Dysponent;Wojewodowie;85;;0
+0016-0007-0001-0002;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Białej Podlaskiej;86;;0
+0016-0007-0001-0003;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Białymstoku;86;;0
+0016-0007-0001-0004;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Bielsku-Białej;86;;0
+0016-0007-0001-0005;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Bydgoszczy;86;;170
+0016-0007-0001-0006;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Częstochowie;86;;0
+0016-0007-0001-0007;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Warszawie;86;;0
+0016-0007-0001-0008;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Chełmie;86;;0
+0016-0007-0001-0009;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Ciechanowie;86;;0
+0016-0007-0001-0010;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Elblągu;86;;0
+0016-0007-0001-0011;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Gdańsku;86;;0
+0016-0007-0001-0012;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Gorzowie Wielkopolskim;86;;0
+0016-0007-0001-0013;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Jeleniej Górze;86;;0
+0016-0007-0001-0014;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Kaliszu;86;;0
+0016-0007-0001-0015;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Katowicach;86;;0
+0016-0007-0001-0016;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Kielcach;86;;0
+0016-0007-0001-0017;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Koninie;86;;0
+0016-0007-0001-0018;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Koszalinie;86;;0
+0016-0007-0001-0019;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Krakowie;86;;0
+0016-0007-0001-0020;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Krośnie;86;;0
+0016-0007-0001-0021;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Legnicy;86;;0
+0016-0007-0001-0022;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Lesznie;86;;0
+0016-0007-0001-0023;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Lublinie;86;;0
+0016-0007-0001-0024;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Łomży;86;;0
+0016-0007-0001-0025;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Łodzi;86;;0
+0016-0007-0001-0026;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Olsztynie;86;;0
+0016-0007-0001-0027;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Opolu;86;;0
+0016-0007-0001-0028;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Ostrołęce;86;;0
+0016-0007-0001-0029;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Pile;86;;0
+0016-0007-0001-0030;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Piotrkowie Trybunalskim;86;;0
+0016-0007-0001-0031;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Płocku;86;;0
+0016-0007-0001-0032;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Poznaniu;86;;0
+0016-0007-0001-0033;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Przemyślu;86;;0
+0016-0007-0001-0034;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Radomiu;86;;0
+0016-0007-0001-0035;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Rzeszowie;86;;0
+0016-0007-0001-0036;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Siedlcach;86;;0
+0016-0007-0001-0037;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Sieradzu;86;;0
+0016-0007-0001-0038;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Skierniewicach;86;;0
+0016-0007-0001-0039;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Słupsku;86;;0
+0016-0007-0001-0040;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Suwałkach;86;;0
+0016-0007-0001-0041;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Szczecinie;86;;0
+0016-0007-0001-0042;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Tarnobrzegu;86;;77
+0016-0007-0001-0043;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Tarnowie;86;;0
+0016-0007-0001-0044;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Toruniu;86;;0
+0016-0007-0001-0045;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Wałbrzychu;86;;0
+0016-0007-0001-0046;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze we Włocławku;86;;0
+0016-0007-0001-0047;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze we Wrocławiu;86;;0
+0016-0007-0001-0048;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Zielonej Górze;86;;0
+0016-0007-0001-0049;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Zamościu;86;;0
+0016-0007-0001-0050;0016-0007-0001;d;Dysponent;Samorządowe Kolegium Odwoławcze w Nowym Sączu;86;;0
+0016-0007-0002;0016-0007;c;Podzadanie 16.7.2;Rozpatrywanie sporów cywilno-prawnych dotyczących aktualizacji opłat rocznych za użytkowanie wieczyste nieruchomości gruntowych;;;0
+0016-0007-0002-0001;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Białej Podlaskiej;86;;0
+0016-0007-0002-0002;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Białymstoku;86;;0
+0016-0007-0002-0003;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Bielsku-Białej;86;;0
+0016-0007-0002-0004;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Częstochowie;86;;0
+0016-0007-0002-0005;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Warszawie;86;;0
+0016-0007-0002-0006;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Chełmie;86;;0
+0016-0007-0002-0007;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Ciechanowie;86;;0
+0016-0007-0002-0008;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Elblągu;86;;0
+0016-0007-0002-0009;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Gdańsku;86;;0
+0016-0007-0002-0010;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Gorzowie Wielkopolskim;86;;0
+0016-0007-0002-0011;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Jeleniej Górze;86;;0
+0016-0007-0002-0012;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Kaliszu;86;;0
+0016-0007-0002-0013;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Katowicach;86;;0
+0016-0007-0002-0014;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Kielcach;86;;0
+0016-0007-0002-0015;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Koninie;86;;0
+0016-0007-0002-0016;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Koszalinie;86;;0
+0016-0007-0002-0017;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Krakowie;86;;0
+0016-0007-0002-0018;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Krośnie;86;;0
+0016-0007-0002-0019;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Legnicy;86;;0
+0016-0007-0002-0020;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Lesznie;86;;0
+0016-0007-0002-0021;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Lublinie;86;;0
+0016-0007-0002-0022;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Łomży;86;;0
+0016-0007-0002-0023;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Łodzi;86;;0
+0016-0007-0002-0024;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Olsztynie;86;;0
+0016-0007-0002-0025;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Opolu;86;;0
+0016-0007-0002-0026;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Ostrołęce;86;;0
+0016-0007-0002-0027;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Pile;86;;0
+0016-0007-0002-0028;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Piotrkowie Trybunalskim;86;;0
+0016-0007-0002-0029;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Płocku;86;;0
+0016-0007-0002-0030;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Poznaniu;86;;0
+0016-0007-0002-0031;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Przemyślu;86;;0
+0016-0007-0002-0032;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Radomiu;86;;0
+0016-0007-0002-0033;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Rzeszowie;86;;0
+0016-0007-0002-0034;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Siedlcach;86;;0
+0016-0007-0002-0035;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Sieradzu;86;;0
+0016-0007-0002-0036;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Skierniewicach;86;;0
+0016-0007-0002-0037;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Słupsku;86;;0
+0016-0007-0002-0038;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Suwałkach;86;;0
+0016-0007-0002-0039;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Szczecinie;86;;0
+0016-0007-0002-0040;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Tarnobrzegu;86;;0
+0016-0007-0002-0041;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Tarnowie;86;;0
+0016-0007-0002-0042;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Toruniu;86;;0
+0016-0007-0002-0043;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Wałbrzychu;86;;0
+0016-0007-0002-0044;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze we Włocławku;86;;0
+0016-0007-0002-0045;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze we Wrocławiu;86;;0
+0016-0007-0002-0046;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Zielonej Górze;86;;0
+0016-0007-0002-0047;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Zamościu;86;;0
+0016-0007-0002-0048;0016-0007-0002;d;Dysponent;Samorządowe Kolegium Odwoławcze w Nowym Sączu;86;;0
+0016-0008;0016;b;Zadanie 16.8;Budowa społeczeństwa obywatelskiego;;;11916
+0016-0008-0001;0016-0008;c;Podzadanie 16.8.1;Tworzenie warunków dla rozwoju podmiotów prowadzących działalność pożytku publicznego, współpracy tych podmiotów z organami administracji publicznej oraz dialogu obywatelskiego;;;4453
+0016-0008-0001-0001;0016-0008-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0016-0008-0001-0002;0016-0008-0001;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;4453
+0016-0008-0002;0016-0008;c;Podzadanie 16.8.2;Wspieranie społeczeństwa obywatelskiego oraz instytucji gospodarki społecznej;;;3997
+0016-0008-0002-0001;0016-0008-0002;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;3997
+0016-0008-0002-0002;0016-0008-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0016-0008-0003;0016-0008;c;Podzadanie 16.8.3;Nadzór i kontrola nad organizacjami pożytku publicznego oraz fundacjami, dla których ministrem właściwym jest Minister Pracy i Polityki Społecznej;;;0
+0016-0008-0003-0001;0016-0008-0003;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0016-0008-0004;0016-0008;c;Podzadanie 16.8.4;Analiza i promocja informacji w zakresie dialogu społecznego;;;0
+0016-0008-0004-0001;0016-0008-0004;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0016-0008-0005;0016-0008;c;Podzadanie 16.8.5;Koordynacja współpracy z partnerami społecznymi i wzmocnienie instytucji dialogu społecznego;;;3466
+0016-0008-0005-0001;0016-0008-0005;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;3466
+0016-0008-0005-0002;0016-0008-0005;d;Dysponent;Wojewodowie;85;;0
+0016-0008-0006;0016-0008;c;Podzadanie 16.8.6;Nadzór nad fundacjami i stowarzyszeniami;;;0
+0016-0008-0006-0001;0016-0008-0006;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0008-0006-0002;0016-0008-0006;d;Dysponent;Wojewodowie;85;;0
+0016-0009;0016;b;Zadanie 16.9;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;157193
+0016-0009-0001;0016-0009;c;Podzadanie 16.9.1;Monitorowanie realizacji polityki w zakresie standardów informatyzacji administracji i zapewnienie dostępu do informacji publicznej w formie elektronicznej;;;0
+0016-0009-0001-0001;0016-0009-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;0
+0016-0009-0002;0016-0009;c;Podzadanie 16.9.2;Centralne systemy ewidencji państwowych;;;0
+0016-0009-0002-0001;0016-0009-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0009-0002-0002;0016-0009-0002;d;Dysponent;Wojewodowie;85;;0
+0016-0009-0003;0016-0009;c;Podzadanie 16.9.3;Wdrażanie przedsięwzięć informatycznych o publicznym zastosowaniu;;;145788
+0016-0009-0003-0001;0016-0009-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;0
+0016-0009-0003-0002;0016-0009-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;145788
+0016-0009-0005;0016-0009;c;Podzadanie 16.9.5;Upowszechnianie i wspieranie e-administracji usług administracji publicznej;;;11405
+0016-0009-0005-0001;0016-0009-0005;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;11405
+0016-0009-0005-0002;0016-0009-0005;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0016-0009-0005-0003;0016-0009-0005;d;Dysponent;Wojewodowie;85;;0
+0016-0009-0007;0016-0009;c;Podzadanie 16.9.7;Promocja społeczeństwa informacyjnego  i upowszechnianie umiejętności informatycznych w społeczeństwie;;;0
+0016-0009-0007-0001;0016-0009-0007;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;0
+0017;;a;FUNKCJA 17;RÓWNOMIERNY ROZWÓJ KRAJU;;;12822042
+0017-0001;0017;b;Zadanie 17.1;Wsparcie rozwoju regionalnego kraju;;;11534284
+0017-0001-0001;0017-0001;c;Podzadanie 17.1.1;Wsparcie regionów w zakresie wzrostu poziomu zatrudnienia i spójności gospodarczej;;;2678027
+0017-0001-0001-0001;0017-0001-0001;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;2678027
+0017-0001-0001-0002;0017-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0017-0001-0002;0017-0001;c;Podzadanie 17.1.2;Wsparcie rozwoju poszczególnych województw w ramach 16 RPO;;;7631581
+0017-0001-0002-0001;0017-0001-0002;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0017-0001-0002-0002;0017-0001-0002;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;9296
+0017-0001-0002-0003;0017-0001-0002;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;7562864
+0017-0001-0002-0004;0017-0001-0002;d;Dysponent;Wojewodowie;85;;59421
+0017-0001-0003;0017-0001;c;Podzadanie 17.1.3;Wsparcie województw Polski Wschodniej;;;1224676
+0017-0001-0003-0001;0017-0001-0003;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;1224676
+0017-0001-0003-0002;0017-0001-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0017-0002;0017;b;Zadanie 17.2;Zamykanie programów Narodowego Planu Rozwoju 2004-2006;;;0
+0017-0002-0001;0017-0002;c;Podzadanie 17.2.1;Certyfikacja wydatków w ramach programów NPR;;;0
+0017-0002-0001-0001;0017-0002-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0017-0002-0002;0017-0002;c;Podzadanie 17.2.2;Zamykanie pomocy w ramach programu SPOT;;;0
+0017-0002-0002-0001;0017-0002-0002;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0002-0002-0002;0017-0002-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0017-0002-0003;0017-0002;c;Podzadanie 17.2.3;Zamykanie pomocy w ramach programu ZPORR;;;0
+0017-0002-0003-0001;0017-0002-0003;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0002-0003-0002;0017-0002-0003;d;Dysponent;Wojewodowie;85;;0
+0017-0002-0004;0017-0002;c;Podzadanie 17.2.4;Zamykanie pomocy w ramach Inicjatywy Wspólnotowej INTERREG;;;0
+0017-0002-0004-0001;0017-0002-0004;d;Dysponent;Wojewodowie;85;;0
+0017-0003;0017;b;Zadanie 17.3;Koordynacja realizacji NSRO 2007-2013 oraz zarządzanie i wdrażanie programów operacyjnych;;;1196345
+0017-0003-0001;0017-0003;c;Podzadanie 17.3.1;Koordynacja NSRO 2007-2013 i zarządzanie realizacją PO Pomoc Techniczna;;;0
+0017-0003-0001-0001;0017-0003-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0017-0003-0001-0002;0017-0003-0001;d;Dysponent;Ministerstwo Edukacji Narodowej;30;;0
+0017-0003-0001-0003;0017-0003-0001;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0001-0004;0017-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0017-0003-0002;0017-0003;c;Podzadanie 17.3.2;Zarządzanie realizacją PO Innowacyjna Gospodarka;;;0
+0017-0003-0002-0001;0017-0003-0002;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0003;0017-0003;c;Podzadanie 17.3.3;Zarządzanie realizacją PO Infrastruktura i Środowisko;;;0
+0017-0003-0003-0001;0017-0003-0003;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0003-0002;0017-0003-0003;d;Dysponent;Wojewodowie;85;;0
+0017-0003-0004;0017-0003;c;Podzadanie 17.3.4;Zarządzanie realizacją PO Kapitał Ludzki;;;307823
+0017-0003-0004-0001;0017-0003-0004;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;307823
+0017-0003-0004-0002;0017-0003-0004;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0005;0017-0003;c;Podzadanie 17.3.5;Zarządzanie realizacją PO Rozwój Polski Wschodniej;;;0
+0017-0003-0005-0001;0017-0003-0005;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0006;0017-0003;c;Podzadanie 17.3.6;Zarządzanie realizacją PO Europejskiej Współpracy Terytorialnej i Europejskiego Instrumentu Sąsiedztwa i Partnerstwa;;;0
+0017-0003-0006-0001;0017-0003-0006;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0006-0002;0017-0003-0006;d;Dysponent;Wojewodowie;85;;0
+0017-0003-0007;0017-0003;c;Podzadanie 17.3.7;Rozliczanie środków pochodzących z UE w ramach NSRO;;;0
+0017-0003-0007-0001;0017-0003-0007;d;Dysponent;Ministerstwo Finansów;19;;0
+0017-0003-0007-0002;0017-0003-0007;d;Dysponent;Wojewodowie;85;;0
+0017-0003-0008;0017-0003;c;Podzadanie 17.3.8;Realizacja PO Pomoc Techniczna służąca wdrażaniu programów NSRO 2007-2013;;;0
+0017-0003-0008-0001;0017-0003-0008;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0017-0003-0008-0002;0017-0003-0008;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0017-0003-0008-0003;0017-0003-0008;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0017-0003-0008-0004;0017-0003-0008;d;Dysponent;Ministerstwo Środowiska;41;;0
+0017-0003-0008-0005;0017-0003-0008;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0017-0003-0008-0006;0017-0003-0008;d;Dysponent;Wojewodowie;85;;0
+0017-0003-0009;0017-0003;c;Podzadanie 17.3.9;Wdrażanie PO Innowacyjna Gospodarka;;;214956
+0017-0003-0009-0001;0017-0003-0009;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;214956
+0017-0003-0009-0002;0017-0003-0009;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0009-0003;0017-0003-0009;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0017-0003-0010;0017-0003;c;Podzadanie 17.3.10;Wdrażanie PO Infrastruktura i Środowisko;;;428874
+0017-0003-0010-0001;0017-0003-0010;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;400000
+0017-0003-0010-0002;0017-0003-0010;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0017-0003-0010-0003;0017-0003-0010;d;Dysponent;Ministerstwo Środowiska;41;;0
+0017-0003-0010-0004;0017-0003-0010;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0017-0003-0010-0005;0017-0003-0010;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0017-0003-0010-0006;0017-0003-0010;d;Dysponent;Wojewodowie;85;;28874
+0017-0003-0011;0017-0003;c;Podzadanie 17.3.11;Wdrażanie PO Kapitał Ludzki;;;244692
+0017-0003-0011-0001;0017-0003-0011;d;Dysponent;Kancelaria Prezesa Rady Ministrów;16;;0
+0017-0003-0011-0002;0017-0003-0011;d;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;233178
+0017-0003-0011-0003;0017-0003-0011;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0011-0004;0017-0003-0011;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0017-0003-0011-0005;0017-0003-0011;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;43;;9180
+0017-0003-0011-0006;0017-0003-0011;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0017-0003-0011-0007;0017-0003-0011;d;Dysponent;Wojewodowie;85;;2334
+0017-0003-0012;0017-0003;c;Podzadanie 17.3.12;Wdrażanie PO Rozwój Polski Wschodniej;;;0
+0017-0003-0012-0001;0017-0003-0012;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0003-0013;0017-0003;c;Podzadanie 17.3.13;Wdrażanie PO Europejskiej Współpracy Terytorialnej i Europejskiego Instrumentu Sąsiedztwa i Partnerstwa;;;0
+0017-0003-0013-0001;0017-0003-0013;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0017-0003-0013-0002;0017-0003-0013;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0017-0003-0013-0003;0017-0003-0013;d;Dysponent;Wojewodowie;85;;0
+0017-0004;0017;b;Zadanie 17.4;Zarządzanie realizacją pozostałych programów finansowanych z udziałem niepodlegających zwrotowi środków pomocowych;;;91413
+0017-0004-0001;0017-0004;c;Podzadanie 17.4.1;Zarządzanie realizacją zadań w ramach Mechanizmu Finansowego EOG oraz Norweskiego Mechanizmu Finansowego;;;0
+0017-0004-0001-0001;0017-0004-0001;d;Dysponent;Ministerstwo Finansów;19;;0
+0017-0004-0001-0002;0017-0004-0001;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0017-0004-0001-0003;0017-0004-0001;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0004-0001-0004;0017-0004-0001;d;Dysponent;Ministerstwo Środowiska;41;;0
+0017-0004-0001-0005;0017-0004-0001;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0017-0004-0002;0017-0004;c;Podzadanie 17.4.2;Zarządzanie realizacją zadań w ramach Szwajcarsko-Polskiego Programu Współpracy (SPPW);;;4682
+0017-0004-0002-0001;0017-0004-0002;d;Dysponent;Ministerstwo Finansów;19;;4682
+0017-0004-0002-0002;0017-0004-0002;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0004-0002-0003;0017-0004-0002;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0017-0004-0003;0017-0004;c;Podzadanie 17.4.3;Wdrażanie projektów w ramach Mechanizmu Finansowego EOG oraz Norweskiego Mechanizmu Finansowego;;;0
+0017-0004-0003-0001;0017-0004-0003;d;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0017-0004-0003-0002;0017-0004-0003;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0017-0004-0003-0003;0017-0004-0003;d;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0017-0004-0003-0004;0017-0004-0003;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0017-0004-0003-0005;0017-0004-0003;d;Dysponent;Komisja Nadzoru Finansowego;70;;0
+0017-0004-0004;0017-0004;c;Podzadanie 17.4.4;Wdrażanie Funduszu Stypendialnego i Szkoleniowego w ramach Mechanizmów Finansowych;;;0
+0017-0004-0004-0001;0017-0004-0004;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0017-0004-0005;0017-0004;c;Podzadanie 17.4.5;Wdrażanie projektów w ramach SPPW;;;34531
+0017-0004-0005-0001;0017-0004-0005;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;5863
+0017-0004-0005-0002;0017-0004-0005;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;28668
+0017-0004-0006;0017-0004;c;Podzadanie 17.4.6;Wsparcie organizacji pozarządowych w ramach Mechanizów Finansowych oraz SPPW;;;9948
+0017-0004-0006-0001;0017-0004-0006;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;9948
+0017-0004-0007;0017-0004;c;Podzadanie 17.4.7;Wsparcie sektora prywatnego w ramach SPPW;;;42252
+0017-0004-0007-0001;0017-0004-0007;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;42252
+0017-0004-0010;0017-0004;c;Podzadanie 17.4.10;Zarządzanie programem ogólnym ``Solidarność i zarządzanie przepływami migracyjnymi``;;;0
+0017-0004-0010-0001;0017-0004-0010;d;Dysponent;Ministerstwo Finansów;19;;0
+0017-0004-0010-0002;0017-0004-0010;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0017-0004-0011;0017-0004;c;Podzadanie 17.4.11;Zarządzanie realizacją pozostałych programów finansowanych z udziałem bezzwrotnej pomocy zagranicznej;;;0
+0017-0004-0011-0001;0017-0004-0011;d;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0018;;a;FUNKCJA 18;SPRAWIEDLIWOŚĆ;;;35727
+0018-0001;0018;b;Zadanie 18.1;Sprawowanie wymiaru sprawiedliwości przez sądy powszechne i wojskowe;;;0
+0018-0001-0001;0018-0001;c;Podzadanie 18.1.1;Działalność orzecznicza;;;0
+0018-0001-0001-0001;0018-0001-0001;d;Dysponent;Ministerstwo Sprawiedliwości;15;;0
+0018-0001-0001-0002;0018-0001-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0018-0001-0004;0018-0001;c;Podzadanie 18.1.4;Zapewnienie warunków organizacyjnych i technicznych funkcjonowania sądów;;;0
+0018-0001-0004-0001;0018-0001-0004;d;Dysponent;Ministerstwo Sprawiedliwości;15;;0
+0018-0001-0004-0002;0018-0001-0004;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0018-0001-0006;0018-0001;c;Podzadanie 18.1.6;Wypłata odszkodowań i zadośćuczynień orzekanych przez sądy;;;0
+0018-0001-0006-0001;0018-0001-0006;d;Dysponent;Ministerstwo Sprawiedliwości;15;;0
+0018-0002;0018;b;Zadanie 18.2;Sprawowanie wymiaru sprawiedliwości przez sądownictwo administracyjne;;;0
+0018-0002-0001;0018-0002;c;Podzadanie 18.2.1;Działalność orzecznicza;;;0
+0018-0002-0001-0001;0018-0002-0001;d;Dysponent;Naczelny Sąd Administracyjny;05;;0
+0018-0002-0002;0018-0002;c;Podzadanie 18.2.2;Nadzór administracyjny nad działalnością sądów;;;0
+0018-0002-0002-0001;0018-0002-0002;d;Dysponent;Naczelny Sąd Administracyjny;05;;0
+0018-0002-0003;0018-0002;c;Podzadanie 18.2.3;Działania na rzecz podnoszenia jakości orzecznictwa;;;0
+0018-0002-0003-0001;0018-0002-0003;d;Dysponent;Naczelny Sąd Administracyjny;05;;0
+0018-0002-0004;0018-0002;c;Podzadanie 18.2.4;Zapewnienie warunków organizacyjnych i technicznych funkcjonowania sądów;;;0
+0018-0002-0004-0001;0018-0002-0004;d;Dysponent;Naczelny Sąd Administracyjny;05;;0
+0018-0003;0018;b;Zadanie 18.3;Sprawowanie wymiaru sprawiedliwości przez Sąd Najwyższy oraz działalność KRS;;;0
+0018-0003-0001;0018-0003;c;Podzadanie 18.3.1;Działalność orzecznicza Sądu Najwyższego;;;0
+0018-0003-0001-0001;0018-0003-0001;d;Dysponent;Sąd Najwyższy;04;;0
+0018-0003-0002;0018-0003;c;Podzadanie 18.3.2;Strzeżenie niezależności sądów i niezawisłości sędziów;;;0
+0018-0003-0002-0001;0018-0003-0002;d;Dysponent;Krajowa Rada Sądownictwa;52;;0
+0018-0003-0004;0018-0003;c;Podzadanie 18.3.4;Zapewnienie warunków organizacyjnych i technicznych funkcjonowania sądów;;;0
+0018-0003-0004-0001;0018-0003-0004;d;Dysponent;Sąd Najwyższy;04;;0
+0018-0004;0018;b;Zadanie 18.4;Wykonywanie kary pozbawienia wolności i tymczasowego aresztowania;;;16598
+0018-0004-0001;0018-0004;c;Podzadanie 18.4.1;Wykonywanie obowiązków statutowych jednostek organizacyjnych Służby Więziennej;;;16598
+0018-0004-0001-0001;0018-0004-0001;d;Dysponent;Ministerstwo Sprawiedliwości;37;;16598
+0018-0004-0002;0018-0004;c;Podzadanie 18.4.2;Realizacja programu pozyskania 17 tys. miejsc w jednostkach organizacyjnych więziennictwa;;;0
+0018-0004-0002-0001;0018-0004-0002;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0018-0004-0003;0018-0004;c;Podzadanie 18.4.3;System Dozoru Elektronicznego;;;0
+0018-0004-0003-0001;0018-0004-0003;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0018-0004-0004;0018-0004;c;Podzadanie 18.4.4;Resocjalizacja osób pozbawionych wolności poprzez pracę;;;0
+0018-0004-0004-0001;0018-0004-0004;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0018-0004-0005;0018-0004;c;Podzadanie 18.4.5;Udzielanie pomocy osobom pozbawionym wolności, zwalnianym z zakładów karnych i aresztów śledczych, rodzinom tych osób, pokrzywdzonym przestępstwem i ich rodzinom;;;0
+0018-0004-0005-0001;0018-0004-0005;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0018-0005;0018;b;Zadanie 18.5;Przeciwdziałanie demoralizacji i przestępczości wśród nieletnich i stworzenie warunków do powrotu nieletnich do normalnego życia;;;4882
+0018-0005-0001;0018-0005;c;Podzadanie 18.5.1;Działalność zakładów poprawczych i schronisk dla nieletnich;;;4882
+0018-0005-0001-0001;0018-0005-0001;d;Dysponent;Ministerstwo Sprawiedliwości;37;;4882
+0018-0005-0002;0018-0005;c;Podzadanie 18.5.2;Nadzór nad procesem resocjalizacji nieletnich;;;0
+0018-0005-0002-0001;0018-0005-0002;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0018-0006;0018;b;Zadanie 18.6;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;14247
+0018-0006-0001;0018-0006;c;Podzadanie 18.6.1;Utrzymanie systemów informatycznych;;;14247
+0018-0006-0001-0001;0018-0006-0001;d;Dysponent;Naczelny Sąd Administracyjny;05;;0
+0018-0006-0001-0002;0018-0006-0001;d;Dysponent;Ministerstwo Sprawiedliwości;15;;0
+0018-0006-0001-0003;0018-0006-0001;d;Dysponent;Ministerstwo Sprawiedliwości;37;;14247
+0018-0006-0002;0018-0006;c;Podzadanie 18.6.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0018-0006-0002-0001;0018-0006-0002;d;Dysponent;Naczelny Sąd Administracyjny;05;;0
+0018-0006-0002-0002;0018-0006-0002;d;Dysponent;Ministerstwo Sprawiedliwości;15;;0
+0018-0006-0002-0003;0018-0006-0002;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0019;;a;FUNKCJA 19;INFRASTRUKTURA TRANSPORTOWA;;;7719549
+0019-0001;0019;b;Zadanie 19.1;Wspieranie transportu drogowego;;;6602
+0019-0001-0001;0019-0001;c;Podzadanie 19.1.1;Budowa i przebudowa sieci dróg krajowych;;;0
+0019-0001-0001-0001;0019-0001-0001;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0001-0001-0002;0019-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0019-0001-0002;0019-0001;c;Podzadanie 19.1.2;Utrzymanie i zarządzanie siecią dróg krajowych;;;0
+0019-0001-0002-0001;0019-0001-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0001-0003;0019-0001;c;Podzadanie 19.1.3;Zapewnienie bezpieczeństwa użytkownikom sieci drogowej;;;6602
+0019-0001-0003-0001;0019-0001-0003;d;Dysponent;Ministerstwo Infrastruktury;39;;6602
+0019-0001-0003-0002;0019-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0019-0001-0004;0019-0001;c;Podzadanie 19.1.4;Kształtowanie warunków dla rozwoju transportu drogowego;;;0
+0019-0001-0004-0001;0019-0001-0004;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0001-0004-0002;0019-0001-0004;d;Dysponent;Wojewodowie;85;;0
+0019-0001-0005;0019-0001;c;Podzadanie 19.1.5;Program wieloletni ``Narodowy program przebudowy dróg lokalnych 2008-2011``;;;0
+0019-0001-0005-0001;0019-0001-0005;d;Dysponent;Wojewodowie;85;;0
+0019-0002;0019;b;Zadanie 19.2;Wspieranie transportu kolejowego;;;2738828
+0019-0002-0001;0019-0002;c;Podzadanie 19.2.1;Budowa, rozbudowa i modernizacja infrastruktury kolejowej;;;2629395
+0019-0002-0001-0001;0019-0002-0001;d;Dysponent;Ministerstwo Infrastruktury;39;;2629395
+0019-0002-0001-0002;0019-0002-0001;d;Dysponent;Wojewodowie;85;;0
+0019-0002-0002;0019-0002;c;Podzadanie 19.2.2;Utrzymanie powszechnie dostępnej infrastruktury kolejowej;;;0
+0019-0002-0002-0001;0019-0002-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0002-0003;0019-0002;c;Podzadanie 19.2.3;Finansowania usług publicznych w pasażerskim transporcie kolejowym;;;0
+0019-0002-0003-0001;0019-0002-0003;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0002-0004;0019-0002;c;Podzadanie 19.2.4;Zakup i modernizacja taboru kolejowego;;;109433
+0019-0002-0004-0001;0019-0002-0004;d;Dysponent;Ministerstwo Infrastruktury;39;;109433
+0019-0002-0005;0019-0002;c;Podzadanie 19.2.5;Kształtowanie warunków dla rozwoju transportu kolejowego;;;0
+0019-0002-0005-0001;0019-0002-0005;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0002-0005-0002;0019-0002-0005;d;Dysponent;Urząd Transportu Kolejowego;71;;0
+0019-0003;0019;b;Zadanie 19.3;Wspieranie transportu morskiego i żeglugi śródlądowej;;;163199
+0019-0003-0001;0019-0003;c;Podzadanie 19.3.1;Bezpieczeństwo żeglugi morskiej, ochrona brzegów i środowiska morskiego;;;95802
+0019-0003-0001-0001;0019-0003-0001;d;Dysponent;Ministerstwo Infrastruktury;21;;95802
+0019-0003-0002;0019-0003;c;Podzadanie 19.3.2;Wspieranie infrastruktury morskiej i żeglugi śródlądowej;;;67397
+0019-0003-0002-0001;0019-0003-0002;d;Dysponent;Ministerstwo Infrastruktury;21;;67397
+0019-0003-0002-0002;0019-0003-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0019-0003-0002-0003;0019-0003-0002;d;Dysponent;Wojewodowie;85;;0
+0019-0003-0003;0019-0003;c;Podzadanie 19.3.3;Ratowanie życia ludzkiego oraz zwalczanie zagrożeń na morzu;;;0
+0019-0003-0003-0001;0019-0003-0003;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0019-0003-0004;0019-0003;c;Podzadanie 19.3.4;Administracja morska i żeglugi śródlądowej;;;0
+0019-0003-0004-0001;0019-0003-0004;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0019-0003-0004-0002;0019-0003-0004;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0003-0005;0019-0003;c;Podzadanie 19.3.5;Kształtowanie warunków dla rozwoju transportu morskiego i żeglugi śródlądowej;;;0
+0019-0003-0005-0001;0019-0003-0005;d;Dysponent;Ministerstwo Infrastruktury;21;;0
+0019-0003-0005-0002;0019-0003-0005;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0004;0019;b;Zadanie 19.4;Wspieranie transportu lotniczego i infrastruktury lotniczej;;;462742
+0019-0004-0001;0019-0004;c;Podzadanie 19.4.1;Wspieranie infrastruktury lotniskowej i nawigacyjnej;;;462742
+0019-0004-0001-0001;0019-0004-0001;d;Dysponent;Ministerstwo Infrastruktury;39;;462742
+0019-0004-0001-0002;0019-0004-0001;d;Dysponent;Wojewodowie;85;;0
+0019-0004-0002;0019-0004;c;Podzadanie 19.4.2;Regulowanie i nadzorowanie systemu lotnictwa cywilnego w Polsce;;;0
+0019-0004-0002-0001;0019-0004-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0004-0003;0019-0004;c;Podzadanie 19.4.3;Kształtowanie warunków dla rozwoju transportu lotniczego;;;0
+0019-0004-0003-0001;0019-0004-0003;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0005;0019;b;Zadanie 19.5;Wspieranie zrównoważonego rozwoju transportu;;;4348178
+0019-0005-0001;0019-0005;c;Podzadanie 19.5.1;Wspieranie infrastruktury portowej;;;394181
+0019-0005-0001-0001;0019-0005-0001;d;Dysponent;Ministerstwo Infrastruktury;39;;394181
+0019-0005-0002;0019-0005;c;Podzadanie 19.5.2;Wspieranie transportu intermodalnego;;;158159
+0019-0005-0002-0001;0019-0005-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;158159
+0019-0005-0002-0002;0019-0005-0002;d;Dysponent;Ministerstwo Środowiska;41;;0
+0019-0005-0003;0019-0005;c;Podzadanie 19.5.3;Wspieranie rozwoju transportu miejskiego;;;3795838
+0019-0005-0003-0001;0019-0005-0003;d;Dysponent;Ministerstwo Infrastruktury;39;;3795838
+0019-0005-0004;0019-0005;c;Podzadanie 19.5.4;Zapewnienie właściwych standardów bezpieczeństwa dla urządzeń technicznych w zakresie transportu drogowego, kolejowego, lotniczego oraz wodnego;;;0
+0019-0005-0004-0001;0019-0005-0004;d;Dysponent;Urząd Transportu Kolejowego;71;;0
+0019-0006;0019;b;Zadanie 19.6;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;0
+0019-0006-0001;0019-0006;c;Podzadanie 19.6.1;Utrzymanie systemów informatycznych;;;0
+0019-0006-0001-0001;0019-0006-0001;d;Dysponent;Urząd Transportu Kolejowego;71;;0
+0019-0006-0001-0002;0019-0006-0001;d;Dysponent;Wojewodowie;85;;0
+0019-0006-0002;0019-0006;c;Podzadanie 19.6.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0019-0006-0002-0001;0019-0006-0002;d;Dysponent;Ministerstwo Infrastruktury;39;;0
+0019-0006-0002-0002;0019-0006-0002;d;Dysponent;Urząd Transportu Kolejowego;71;;0
+0020;;a;FUNKCJA 20;ZDROWIE;;;404917
+0020-0001;0020;b;Zadanie 20.1;Zapewnianie dostępu do świadczeń opieki zdrowotnej;;;2025
+0020-0001-0001;0020-0001;c;Podzadanie 20.1.1;Organizacja oraz nadzór nad systemem opieki zdrowotnej;;;2025
+0020-0001-0001-0001;0020-0001-0001;d;Dysponent;Ministerstwo Zdrowia;46;;2025
+0020-0001-0001-0002;0020-0001-0001;d;Dysponent;Rzecznik Praw Pacjenta;66;;0
+0020-0001-0001-0003;0020-0001-0001;d;Dysponent;Wojewodowie;85;;0
+0020-0001-0002;0020-0001;c;Podzadanie 20.1.2;Realizacja programów polityki zdrowotnej ważnych dla zdrowia społeczeństwa;;;0
+0020-0001-0002-0001;0020-0001-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0020-0001-0002-0002;0020-0001-0002;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0001-0002-0003;0020-0001-0002;d;Dysponent;Wojewodowie;85;;0
+0020-0001-0003;0020-0001;c;Podzadanie 20.1.3;Świadczenia zdrowotne w zakresie lecznictwa;;;0
+0020-0001-0003-0001;0020-0001-0003;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0001-0003-0002;0020-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0020-0001-0004;0020-0001;c;Podzadanie 20.1.4;Świadczenia wysokospecjalistyczne finansowane z budżetu państwa;;;0
+0020-0001-0004-0001;0020-0001-0004;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0001-0005;0020-0001;c;Podzadanie 20.1.5;Zapewnianie funkcjonowania publicznej służby krwi;;;0
+0020-0001-0005-0001;0020-0001-0005;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0020-0001-0005-0002;0020-0001-0005;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0020-0001-0005-0003;0020-0001-0005;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0001-0006;0020-0001;c;Podzadanie 20.1.6;Składki na ubezpieczenia zdrowotne opłacane z budżetu państwa za osoby uprawnione;;;0
+0020-0001-0006-0001;0020-0001-0006;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0020-0001-0006-0002;0020-0001-0006;d;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0020-0001-0006-0003;0020-0001-0006;d;Dysponent;Kasa Rolniczego Ubezpieczenia Społecznego;72;;0
+0020-0001-0006-0004;0020-0001-0006;d;Dysponent;Zakład Ubezpieczeń Społecznych;73;;0
+0020-0001-0006-0005;0020-0001-0006;d;Dysponent;Wojewodowie;85;;0
+0020-0001-0007;0020-0001;c;Podzadanie 20.1.7;Udzielanie świadczeń medycznych dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego;;;0
+0020-0001-0007-0001;0020-0001-0007;d;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0020-0001-0007-0002;0020-0001-0007;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0020-0001-0007-0003;0020-0001-0007;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0002;0020;b;Zadanie 20.2;Ratownictwo medyczne;;;261118
+0020-0002-0001;0020-0002;c;Podzadanie 20.2.1;Zapewnianie prawidłowej działalności lotniczych zespołów ratownictwa medycznego;;;40842
+0020-0002-0001-0001;0020-0002-0001;d;Dysponent;Ministerstwo Zdrowia;46;;40842
+0020-0002-0001-0002;0020-0002-0001;d;Dysponent;Wojewodowie;85;;0
+0020-0002-0002;0020-0002;c;Podzadanie 20.2.2;Zapewnianie prawidłowej działalności szpitalnych oddziałów ratunkowych, centrów urazowych oraz zespołów ratownictwa medycznego, z wyłączeniem lotniczych zespołów ratownictwa medycznego;;;220276
+0020-0002-0002-0001;0020-0002-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0020-0002-0002-0002;0020-0002-0002;d;Dysponent;Ministerstwo Zdrowia;46;;220276
+0020-0002-0002-0003;0020-0002-0002;d;Dysponent;Wojewodowie;85;;0
+0020-0003;0020;b;Zadanie 20.3;Realizacja polityki lekowej państwa;;;0
+0020-0003-0001;0020-0003;c;Podzadanie 20.3.1;Zapewnianie możliwości rejestracji produktów leczniczych, wyrobów medycznych i produktów biobójczych;;;0
+0020-0003-0001-0001;0020-0003-0001;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0003-0002;0020-0003;c;Podzadanie 20.3.2;Zapewnianie nadzoru nad jakością i obrotem produktami leczniczymi, wyrobami medycznymi i produktami biobójczymi;;;0
+0020-0003-0002-0001;0020-0003-0002;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0003-0002-0002;0020-0003-0002;d;Dysponent;Wojewodowie;85;;0
+0020-0003-0003;0020-0003;c;Podzadanie 20.3.3;Zapewnianie dostępu do leków i wyrobów medycznych poprzez umożliwienie refundacji leków i wyrobów medycznych najistotniejszych dla zdrowia społeczeństwa;;;0
+0020-0003-0003-0001;0020-0003-0003;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0004;0020;b;Zadanie 20.4;Wspieranie rozwoju i restrukturyzacji systemu ochrony zdrowia;;;114372
+0020-0004-0001;0020-0004;c;Podzadanie 20.4.1;Inwestycje w infrastrukturę w ochronie zdrowia;;;114372
+0020-0004-0001-0001;0020-0004-0001;d;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0020-0004-0001-0002;0020-0004-0001;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0020-0004-0001-0003;0020-0004-0001;d;Dysponent;Ministerstwo Zdrowia;46;;114372
+0020-0004-0001-0004;0020-0004-0001;d;Dysponent;Wojewodowie;85;;0
+0020-0004-0002;0020-0004;c;Podzadanie 20.4.2;Wspieranie restrukturyzacji systemu ochrony zdrowia;;;0
+0020-0004-0002-0001;0020-0004-0002;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0004-0003;0020-0004;c;Podzadanie 20.4.3;Program wieloletni ``Wsparcie jednostek samorządu terytorialnego w działaniach stabilizujących system ochrony zdrowia``;;;0
+0020-0004-0003-0001;0020-0004-0003;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0005;0020;b;Zadanie 20.5;Nadzór sanitarno-epidemiologiczny, profilaktyka i promocja zdrowia;;;5424
+0020-0005-0001;0020-0005;c;Podzadanie 20.5.1;Profilaktyka zdrowotna;;;5424
+0020-0005-0001-0001;0020-0005-0001;d;Dysponent;Ministerstwo Zdrowia;46;;5424
+0020-0005-0001-0002;0020-0005-0001;d;Dysponent;Wojewodowie;85;;0
+0020-0005-0002;0020-0005;c;Podzadanie 20.5.2;Działalność kontrolno-inspekcyjna;;;0
+0020-0005-0002-0001;0020-0005-0002;d;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0020-0005-0002-0002;0020-0005-0002;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0005-0002-0003;0020-0005-0002;d;Dysponent;Wojewodowie;85;;0
+0020-0005-0003;0020-0005;c;Podzadanie 20.5.3;Nadzór sanitarny;;;0
+0020-0005-0003-0001;0020-0005-0003;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0005-0003-0002;0020-0005-0003;d;Dysponent;Wojewodowie;85;;0
+0020-0005-0004;0020-0005;c;Podzadanie 20.5.4;Zapobieganie i zwalczanie chorób zakaźnych;;;0
+0020-0005-0004-0001;0020-0005-0004;d;Dysponent;Wojewodowie;85;;0
+0020-0005-0005;0020-0005;c;Podzadanie 20.5.5;Zakup szczepionek zgodnie z kalendarzem obowiązkowych szczepień ochronnych;;;0
+0020-0005-0005-0001;0020-0005-0005;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0005-0006;0020-0005;c;Podzadanie 20.5.6;Ochrona zdrowia przed szkodliwym wpływem czynników środowiskowych;;;0
+0020-0005-0006-0001;0020-0005-0006;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0005-0006-0002;0020-0005-0006;d;Dysponent;Wojewodowie;85;;0
+0020-0005-0007;0020-0005;c;Podzadanie 20.5.7;Tworzenie i utrzymywanie rezerw państwowych;;;0
+0020-0005-0007-0001;0020-0005-0007;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0005-0008;0020-0005;c;Podzadanie 20.5.8;Ochrona zdrowia i promocja na rzecz osób niepełnosprawnych;;;0
+0020-0005-0008-0001;0020-0005-0008;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0005-0009;0020-0005;c;Podzadanie 20.5.9;Realizacja zadań edukacyjno-informacyjnych z zakresu programów zdrowotnych państwa dotyczących uzależnień;;;0
+0020-0005-0009-0001;0020-0005-0009;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0005-0009-0002;0020-0005-0009;d;Dysponent;Wojewodowie;85;;0
+0020-0006;0020;b;Zadanie 20.6;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;21978
+0020-0006-0001;0020-0006;c;Podzadanie 20.6.1;Utrzymanie systemów informatycznych;;;0
+0020-0006-0001-0001;0020-0006-0001;d;Dysponent;Ministerstwo Zdrowia;46;;0
+0020-0006-0002;0020-0006;c;Podzadanie 20.6.2;Budowa i wdrożenie rozwiązań informatycznych;;;21978
+0020-0006-0002-0001;0020-0006-0002;d;Dysponent;Ministerstwo Zdrowia;46;;21978
+0021;;a;FUNKCJA 21;POLITYKA ROLNA I RYBACKA;;;18939562
+0021-0001;0021;b;Zadanie 21.1;Wspieranie rozwoju produkcji roślinnej i ochrona roślin uprawnych;;;0
+0021-0001-0001;0021-0001;c;Podzadanie 21.1.1;Wspieranie postępu biologicznego w produkcji roślinnej;;;0
+0021-0001-0001-0001;0021-0001-0001;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0001-0002;0021-0001;c;Podzadanie 21.1.2;Badania, rejestracja, rekomendacja i ochrona prawna odmian roślin uprawnych;;;0
+0021-0001-0002-0001;0021-0001-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0001-0003;0021-0001;c;Podzadanie 21.1.3;Nadzór nad zdrowiem roślin, obrotem i stosowaniem środków ochrony roślin oraz wytwarzaniem, oceną i obrotem materiałem siewnym;;;0
+0021-0001-0003-0001;0021-0001-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0001-0003-0002;0021-0001-0003;d;Dysponent;Wojewodowie;85;;0
+0021-0001-0004;0021-0001;c;Podzadanie 21.1.4;Ochrona roślin;;;0
+0021-0001-0004-0001;0021-0001-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0001-0004-0002;0021-0001-0004;d;Dysponent;Wojewodowie;85;;0
+0021-0001-0005;0021-0001;c;Podzadanie 21.1.5;Nadzór nad uprawą roślin genetycznie zmodyfikowanych, strefami wolnymi od GMO oraz kontrolą zamierzonego uwolnienia organizmów genetycznie zmodyfikowanych;;;0
+0021-0001-0005-0001;0021-0001-0005;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0001-0006;0021-0001;c;Podzadanie 21.1.6;Program wieloletni ``Ochrona roślin uprawnych z uwzględnieniem bezpieczeństwa żywności oraz ograniczenia strat w plonach i zagrożeń dla zdrowia ludzi, zwierząt domowych i środowiska``;;;0
+0021-0001-0006-0001;0021-0001-0006;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0001-0007;0021-0001;c;Podzadanie 21.1.7;Program wieloletni ``Ulepszanie Roślin Zrównoważonych AgroEkosystemów, Wysokiej Jakości Żywności i Produkcji Roślinnej na Cele Nieżywnościowe``;;;0
+0021-0001-0007-0001;0021-0001-0007;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0001-0008;0021-0001;c;Podzadanie 21.1.8;Program wieloletni ``Rozwój zrównoważonych metod produkcji ogrodniczej w celu zapewnienia wysokiej jakości biologicznej i odżywczej produktów ogrodniczych oraz zachowania bioróżnorodności środowiska i ochrony jego zasobów``;;;0
+0021-0001-0008-0001;0021-0001-0008;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0002;0021;b;Zadanie 21.2;Wspieranie rozwoju produkcji zwierzęcej i hodowli zwierząt;;;0
+0021-0002-0001;0021-0002;c;Podzadanie 21.2.1;Wspieranie postępu biologicznego w produkcji zwierzęcej;;;0
+0021-0002-0001-0001;0021-0002-0001;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0002-0002;0021-0002;c;Podzadanie 21.2.2;Wspieranie działalności kontrolnej;;;0
+0021-0002-0002-0001;0021-0002-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0002-0003;0021-0002;c;Podzadanie 21.2.3;Program wieloletni ``Biologiczne, środowiskowe i technologiczne uwarunkowania rozwoju produkcji zwierzęcej``;;;0
+0021-0002-0003-0001;0021-0002-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0003;0021;b;Zadanie 21.3;Ochrona zdrowia i dobrostanu zwierząt oraz zdrowia publicznego w zakresie weterynarii;;;0
+0021-0003-0001;0021-0003;c;Podzadanie 21.3.1;Ochrona zdrowia i dobrostanu zwierząt;;;0
+0021-0003-0001-0001;0021-0003-0001;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0003-0001-0002;0021-0003-0001;d;Dysponent;Wojewodowie;85;;0
+0021-0003-0002;0021-0003;c;Podzadanie 21.3.2;Nadzór nad zdrowotną jakością środków spożywczych pochodzenia zwierzęcego i pasz w miejscach ich pozyskiwania, wytwarzania, przetwarzania i składowania;;;0
+0021-0003-0002-0001;0021-0003-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0003-0002-0002;0021-0003-0002;d;Dysponent;Wojewodowie;85;;0
+0021-0003-0003;0021-0003;c;Podzadanie 21.3.3;Realizacja zadań laboratoriów referencyjnych i innych zadań zleconych;;;0
+0021-0003-0003-0001;0021-0003-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0003-0004;0021-0003;c;Podzadanie 21.3.4;Program wieloletni ``Ochrona zdrowia zwierząt i zdrowia publicznego``;;;0
+0021-0003-0004-0001;0021-0003-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0004;0021;b;Zadanie 21.4;Kształtowanie ustroju rolnego państwa oraz rolnictwo ekologiczne i żywność regionalna, tradycyjna i systemy jakości żywności;;;0
+0021-0004-0001;0021-0004;c;Podzadanie 21.4.1;Kształtowanie ustroju rolnego państwa;;;0
+0021-0004-0001-0001;0021-0004-0001;d;Dysponent;Wojewodowie;85;;0
+0021-0004-0002;0021-0004;c;Podzadanie 21.4.2;Rolnictwo ekologiczne;;;0
+0021-0004-0002-0001;0021-0004-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0004-0002-0002;0021-0004-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0021-0004-0003;0021-0004;c;Podzadanie 21.4.3;Żywność regionalna, tradycyjna i systemy jakości żywności;;;0
+0021-0004-0003-0001;0021-0004-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0021-0004-0003-0002;0021-0004-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;35;;0
+0021-0004-0004;0021-0004;c;Podzadanie 21.4.4;Agrochemiczna obsługa rolnictwa w Polsce;;;0
+0021-0004-0004-0001;0021-0004-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0004-0005;0021-0004;c;Podzadanie 21.4.5;Program wieloletni ``Kształtowanie środowiska rolniczego Polski oraz zrównoważony rozwój produkcji rolniczej``;;;0
+0021-0004-0005-0001;0021-0004-0005;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0004-0006;0021-0004;c;Podzadanie 21.4.6;Program wieloletni ``Ekonomiczne i społeczne uwarunkowania rozwoju gospodarki żywnościowej po wstąpieniu Polski do Unii Europejskiej``;;;0
+0021-0004-0006-0001;0021-0004-0006;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0005;0021;b;Zadanie 21.5;Wspieranie infrastruktury wsi;;;0
+0021-0005-0001;0021-0005;c;Podzadanie 21.5.1;Nadzór nad wykorzystaniem środków z budżetu przez jst w zakresie usuwania skutków klęsk żywiołowych;;;0
+0021-0005-0001-0001;0021-0005-0001;d;Dysponent;Wojewodowie;85;;0
+0021-0005-0002;0021-0005;c;Podzadanie 21.5.2;Prace geodezyjno-urządzeniowe na potrzeby rolnictwa, w tym scalanie i wymiana gruntów oraz zagospodarowanie poscaleniowe;;;0
+0021-0005-0002-0001;0021-0005-0002;d;Dysponent;Wojewodowie;85;;0
+0021-0006;0021;b;Zadanie 21.6;Wspieranie rybactwa śródlądowego i rybołówstwa morskiego;;;356502
+0021-0006-0001;0021-0006;c;Podzadanie 21.6.1;Wspieranie rybactwa śródlądowego;;;0
+0021-0006-0001-0001;0021-0006-0001;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;62;;0
+0021-0006-0001-0002;0021-0006-0001;d;Dysponent;Wojewodowie;85;;0
+0021-0006-0002;0021-0006;c;Podzadanie 21.6.2;Wspieranie rybołówstwa morskiego;;;0
+0021-0006-0002-0001;0021-0006-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;62;;0
+0021-0006-0003;0021-0006;c;Podzadanie 21.6.3;PO Zrównoważony rozwój sektora rybołówstwa i nadbrzeżnych obszarów rybackich 2007-2013;;;356502
+0021-0006-0003-0001;0021-0006-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;62;;356502
+0021-0006-0003-0002;0021-0006-0003;d;Dysponent;Wojewodowie;85;;0
+0021-0006-0004;0021-0006;c;Podzadanie 21.6.4;Program wieloletni ``Wieloletni Program Zbierania Danych Rybackich 2007-2013``;;;0
+0021-0006-0004-0001;0021-0006-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;62;;0
+0021-0007;0021;b;Zadanie 21.7;Realizacja Wspólnej Polityki Rolnej oraz pomocy krajowej;;;18583060
+0021-0007-0001;0021-0007;c;Podzadanie 21.7.1;Doradztwo rolnicze;;;0
+0021-0007-0001-0001;0021-0007-0001;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0021-0007-0001-0002;0021-0007-0001;d;Dysponent;Wojewodowie;85;;0
+0021-0007-0002;0021-0007;c;Podzadanie 21.7.2;Pomoc krajowa;;;0
+0021-0007-0002-0001;0021-0007-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0007-0002-0002;0021-0007-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0021-0007-0002-0003;0021-0007-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;35;;0
+0021-0007-0002-0004;0021-0007-0002;d;Dysponent;Wojewodowie;85;;0
+0021-0007-0003;0021-0007;c;Podzadanie 21.7.3;WPR finansowane z EFRG;;;580648
+0021-0007-0003-0001;0021-0007-0003;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;580648
+0021-0007-0004;0021-0007;c;Podzadanie 21.7.4;Wspieranie realizacji WPR Unii Europejskiej;;;550000
+0021-0007-0004-0001;0021-0007-0004;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;35;;550000
+0021-0007-0005;0021-0007;c;Podzadanie 21.7.5;Program Rozwoju Obszarów Wiejskich 2007-2013;;;10804275
+0021-0007-0005-0001;0021-0007-0005;d;Dysponent;Ministerstwo Finansów;19;;0
+0021-0007-0005-0002;0021-0007-0005;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;10481630
+0021-0007-0005-0003;0021-0007-0005;d;Dysponent;Wojewodowie;85;;322645
+0021-0007-0008;0021-0007;c;Podzadanie 21.7.8;Realizacja płatności bezpośrednich;;;6648137
+0021-0007-0008-0001;0021-0007-0008;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;6648137
+0021-0007-0009;0021-0007;c;Podzadanie 21.7.9;Zbieranie i wykorzystywanie danych rachunkowych z gospodarstw rolnych na potrzeby FADN (Farm Accountancy Data Network);;;0
+0021-0007-0009-0001;0021-0007-0009;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0021-0008;0021;b;Zadanie 21.8;Informatyzacja działalności i budowa społeczeństwa informacyjnego;;;0
+0021-0008-0001;0021-0008;c;Podzadanie 21.8.1;Utrzymanie systemów informatycznych;;;0
+0021-0008-0001-0001;0021-0008-0001;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0021-0008-0002;0021-0008;c;Podzadanie 21.8.2;Budowa i wdrożenie rozwiązań informatycznych;;;0
+0021-0008-0002-0001;0021-0008-0002;d;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0022;;a;FUNKCJA 22;PLANOWANIE STRATEGICZNE ORAZ OBSŁUGA ADMINISTRACYJNA I TECHNICZNA;;;21031
+0022-0001;0022;b;Zadanie 22.1;Koordynacja merytoryczna działalności, planowania strategicznego i operacyjnego;;;45
+0022-0001-0001;0022-0001;c;Dysponent;Kancelaria Senatu;03;;0
+0022-0001-0002;0022-0001;c;Dysponent;Krajowa Rada Radiofonii i Telewizji;09;;0
+0022-0001-0003;0022-0001;c;Dysponent;Krajowe Biuro Wyborcze;11;;0
+0022-0001-0004;0022-0001;c;Dysponent;Państwowa Inspekcja Pracy;12;;0
+0022-0001-0005;0022-0001;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;17;;0
+0022-0001-0006;0022-0001;c;Dysponent;Ministerstwo Infrastruktury;18;;0
+0022-0001-0007;0022-0001;c;Dysponent;Ministerstwo Finansów;19;;0
+0022-0001-0008;0022-0001;c;Dysponent;Ministerstwo Gospodarki;20;;0
+0022-0001-0009;0022-0001;c;Dysponent;Ministerstwo Infrastruktury;21;;0
+0022-0001-0010;0022-0001;c;Dysponent;Ministerstwo Środowiska;22;;0
+0022-0001-0011;0022-0001;c;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0022-0001-0012;0022-0001;c;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0022-0001-0013;0022-0001;c;Dysponent;Ministerstwo Infrastruktury;26;;0
+0022-0001-0014;0022-0001;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;0
+0022-0001-0015;0022-0001;c;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;45
+0022-0001-0016;0022-0001;c;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0022-0001-0017;0022-0001;c;Dysponent;Ministerstwo Edukacji Narodowej;30;;0
+0022-0001-0018;0022-0001;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0022-0001-0019;0022-0001;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0022-0001-0020;0022-0001;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0022-0001-0021;0022-0001;c;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0022-0001-0022;0022-0001;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;35;;0
+0022-0001-0023;0022-0001;c;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0022-0001-0024;0022-0001;c;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0022-0001-0025;0022-0001;c;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0022-0001-0026;0022-0001;c;Dysponent;Ministerstwo Infrastruktury;39;;0
+0022-0001-0027;0022-0001;c;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0022-0001-0028;0022-0001;c;Dysponent;Ministerstwo Środowiska;41;;0
+0022-0001-0029;0022-0001;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0022-0001-0030;0022-0001;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;43;;0
+0022-0001-0031;0022-0001;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0022-0001-0032;0022-0001;c;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0022-0001-0033;0022-0001;c;Dysponent;Ministerstwo Zdrowia;46;;0
+0022-0001-0034;0022-0001;c;Dysponent;Urząd Zamówień Publicznych;49;;0
+0022-0001-0035;0022-0001;c;Dysponent;Urząd Regulacji Energetyki;50;;0
+0022-0001-0036;0022-0001;c;Dysponent;Urząd Ochrony Konkurencji i Konsumentów;53;;0
+0022-0001-0037;0022-0001;c;Dysponent;Wyższy Urząd Górniczy;60;;0
+0022-0001-0038;0022-0001;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;62;;0
+0022-0001-0039;0022-0001;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0022-0001-0040;0022-0001;c;Dysponent;Polski Komitet Normalizacyjny;65;;0
+0022-0001-0041;0022-0001;c;Dysponent;Państwowa Agencja Atomistyki;68;;0
+0022-0001-0042;0022-0001;c;Dysponent;Urząd Komunikacji Elektronicznej;76;;0
+0022-0001-0043;0022-0001;c;Dysponent;Wojewodowie;85;;0
+0022-0002;0022;b;Zadanie 22.2;Obsługa administracyjna;;;20347
+0022-0002-0001;0022-0002;c;Dysponent;Kancelaria Senatu;03;;0
+0022-0002-0002;0022-0002;c;Dysponent;Krajowa Rada Radiofonii i Telewizji;09;;0
+0022-0002-0003;0022-0002;c;Dysponent;Krajowe Biuro Wyborcze;11;;0
+0022-0002-0004;0022-0002;c;Dysponent;Państwowa Inspekcja Pracy;12;;0
+0022-0002-0005;0022-0002;c;Dysponent;Kancelaria Prezesa Rady Ministrów;16;;0
+0022-0002-0006;0022-0002;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;17;;0
+0022-0002-0007;0022-0002;c;Dysponent;Ministerstwo Infrastruktury;18;;0
+0022-0002-0008;0022-0002;c;Dysponent;Ministerstwo Finansów;19;;0
+0022-0002-0009;0022-0002;c;Dysponent;Ministerstwo Gospodarki;20;;0
+0022-0002-0010;0022-0002;c;Dysponent;Ministerstwo Infrastruktury;21;;0
+0022-0002-0011;0022-0002;c;Dysponent;Ministerstwo Środowiska;22;;0
+0022-0002-0012;0022-0002;c;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0022-0002-0013;0022-0002;c;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0022-0002-0014;0022-0002;c;Dysponent;Ministerstwo Infrastruktury;26;;0
+0022-0002-0015;0022-0002;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;0
+0022-0002-0016;0022-0002;c;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;1654
+0022-0002-0017;0022-0002;c;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0022-0002-0018;0022-0002;c;Dysponent;Ministerstwo Edukacji Narodowej;30;;0
+0022-0002-0019;0022-0002;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0022-0002-0020;0022-0002;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0022-0002-0021;0022-0002;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0022-0002-0022;0022-0002;c;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0022-0002-0023;0022-0002;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;35;;0
+0022-0002-0024;0022-0002;c;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0022-0002-0025;0022-0002;c;Dysponent;Ministerstwo Sprawiedliwości;37;;17583
+0022-0002-0026;0022-0002;c;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;1110
+0022-0002-0027;0022-0002;c;Dysponent;Ministerstwo Infrastruktury;39;;0
+0022-0002-0028;0022-0002;c;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0022-0002-0029;0022-0002;c;Dysponent;Ministerstwo Środowiska;41;;0
+0022-0002-0030;0022-0002;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0022-0002-0031;0022-0002;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;43;;0
+0022-0002-0032;0022-0002;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0022-0002-0033;0022-0002;c;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0022-0002-0034;0022-0002;c;Dysponent;Ministerstwo Zdrowia;46;;0
+0022-0002-0035;0022-0002;c;Dysponent;Urząd Zamówień Publicznych;49;;0
+0022-0002-0036;0022-0002;c;Dysponent;Urząd Regulacji Energetyki;50;;0
+0022-0002-0037;0022-0002;c;Dysponent;Urząd Ochrony Konkurencji i Konsumentów;53;;0
+0022-0002-0038;0022-0002;c;Dysponent;Wyższy Urząd Górniczy;60;;0
+0022-0002-0039;0022-0002;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;62;;0
+0022-0002-0040;0022-0002;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0022-0002-0041;0022-0002;c;Dysponent;Polski Komitet Normalizacyjny;65;;0
+0022-0002-0042;0022-0002;c;Dysponent;Państwowa Agencja Atomistyki;68;;0
+0022-0002-0043;0022-0002;c;Dysponent;Urząd Transportu Kolejowego;71;;0
+0022-0002-0044;0022-0002;c;Dysponent;Kasa Rolniczego Ubezpieczenia Społecznego;72;;0
+0022-0002-0045;0022-0002;c;Dysponent;Urząd Komunikacji Elektronicznej;76;;0
+0022-0002-0046;0022-0002;c;Dysponent;Wojewodowie;85;;0
+0022-0003;0022;b;Zadanie 22.3;Obsługa techniczna;;;639
+0022-0003-0001;0022-0003;c;Dysponent;Kancelaria Sejmu;02;;0
+0022-0003-0002;0022-0003;c;Dysponent;Kancelaria Senatu;03;;0
+0022-0003-0003;0022-0003;c;Dysponent;Krajowa Rada Radiofonii i Telewizji;09;;0
+0022-0003-0004;0022-0003;c;Dysponent;Krajowe Biuro Wyborcze;11;;0
+0022-0003-0005;0022-0003;c;Dysponent;Państwowa Inspekcja Pracy;12;;0
+0022-0003-0006;0022-0003;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;17;;0
+0022-0003-0007;0022-0003;c;Dysponent;Ministerstwo Infrastruktury;18;;0
+0022-0003-0008;0022-0003;c;Dysponent;Ministerstwo Finansów;19;;0
+0022-0003-0009;0022-0003;c;Dysponent;Ministerstwo Gospodarki;20;;0
+0022-0003-0010;0022-0003;c;Dysponent;Ministerstwo Infrastruktury;21;;0
+0022-0003-0011;0022-0003;c;Dysponent;Ministerstwo Środowiska;22;;0
+0022-0003-0012;0022-0003;c;Dysponent;Ministerstwo Kultury i Dziedzictwa Narodowego;24;;0
+0022-0003-0013;0022-0003;c;Dysponent;Ministerstwo Sportu i Turystyki;25;;0
+0022-0003-0014;0022-0003;c;Dysponent;Ministerstwo Infrastruktury;26;;0
+0022-0003-0015;0022-0003;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;27;;0
+0022-0003-0016;0022-0003;c;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;28;;639
+0022-0003-0017;0022-0003;c;Dysponent;Ministerstwo Obrony Narodowej;29;;0
+0022-0003-0018;0022-0003;c;Dysponent;Ministerstwo Edukacji Narodowej;30;;0
+0022-0003-0019;0022-0003;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;31;;0
+0022-0003-0020;0022-0003;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;32;;0
+0022-0003-0021;0022-0003;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;33;;0
+0022-0003-0022;0022-0003;c;Dysponent;Ministerstwo Rozwoju Regionalnego;34;;0
+0022-0003-0023;0022-0003;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;35;;0
+0022-0003-0024;0022-0003;c;Dysponent;Ministerstwo Skarbu Państwa;36;;0
+0022-0003-0025;0022-0003;c;Dysponent;Ministerstwo Sprawiedliwości;37;;0
+0022-0003-0026;0022-0003;c;Dysponent;Ministerstwo Nauki i Szkolnictwa Wyższego;38;;0
+0022-0003-0027;0022-0003;c;Dysponent;Ministerstwo Infrastruktury;39;;0
+0022-0003-0028;0022-0003;c;Dysponent;Ministerstwo Sportu i Turystyki;40;;0
+0022-0003-0029;0022-0003;c;Dysponent;Ministerstwo Środowiska;41;;0
+0022-0003-0030;0022-0003;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;42;;0
+0022-0003-0031;0022-0003;c;Dysponent;Ministerstwo Spraw Wewnętrznych i Administracji;43;;0
+0022-0003-0032;0022-0003;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;44;;0
+0022-0003-0033;0022-0003;c;Dysponent;Ministerstwo Spraw Zagranicznych;45;;0
+0022-0003-0034;0022-0003;c;Dysponent;Ministerstwo Zdrowia;46;;0
+0022-0003-0035;0022-0003;c;Dysponent;Urząd Zamówień Publicznych;49;;0
+0022-0003-0036;0022-0003;c;Dysponent;Urząd Ochrony Konkurencji i Konsumentów;53;;0
+0022-0003-0037;0022-0003;c;Dysponent;Wyższy Urząd Górniczy;60;;0
+0022-0003-0038;0022-0003;c;Dysponent;Ministerstwo Rolnictwa i Rozwoju Wsi;62;;0
+0022-0003-0039;0022-0003;c;Dysponent;Ministerstwo Pracy i Polityki Społecznej;63;;0
+0022-0003-0040;0022-0003;c;Dysponent;Polski Komitet Normalizacyjny;65;;0
+0022-0003-0041;0022-0003;c;Dysponent;Państwowa Agencja Atomistyki;68;;0
+0022-0003-0042;0022-0003;c;Dysponent;Urząd Transportu Kolejowego;71;;0
+0022-0003-0043;0022-0003;c;Dysponent;Wojewodowie;85;;0
+9999;;a;Total;Ogółem;;;84004046
