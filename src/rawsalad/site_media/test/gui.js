@@ -63,7 +63,14 @@ var _gui = (function () {
                 $(this).addClass('active');
 
                 $('.app-container:visible').hide();
-                $('#app-' + action).show();
+                if( action === 'table' ) {
+                    $('#app-' + action).show();
+                    _gui.refresh_gui();
+                }
+                else {
+                    update_share_tab();
+                    $('#app-share').show();
+                }
             });
 
         $('#app-tb-tl-clear-button')
@@ -194,11 +201,11 @@ var _gui = (function () {
 
         $('#pl-sr-button')
             .click( function () {
-                _db.search( $('#pl-sr-query').val(), ['0-0-2011', '0-1-2011', '0-1-2012', 
-                                                      '0-2-2011', '0-2-2012', '1-0-2011', 
-                                                      '1-1-2011', '1-1-2012', '1-2-2011', 
-                                                      '1-2-2012', '2-1-2011', '2-2-2011', 
-                                                      '2-3-2011', '2-4-2011', '3-0-2011', 
+                _db.search( $('#pl-sr-query').val(), ['0-0-2011', '0-1-2011', '0-1-2012',
+                                                      '0-2-2011', '0-2-2012', '1-0-2011',
+                                                      '1-1-2011', '1-1-2012', '1-2-2011',
+                                                      '1-2-2012', '2-1-2011', '2-2-2011',
+                                                      '2-3-2011', '2-4-2011', '3-0-2011',
                                                       '3-1-2011' ], false );
             });
 
@@ -625,4 +632,55 @@ var _gui = (function () {
             .show();
     };
 
+    function update_share_tab() {
+        var html = [];
+
+        $('#app-sh-table').find('input:checked').removeAttr('checked');
+
+        html.push( '<tbody>' );
+        $('.sheet').each( function ( i, sheet ) {
+            var id = $(this).attr('id').split('-');
+            var group = id[1];
+            var sheet = id[2];
+            var name = $(this).attr('title');
+
+            html.push( '<tr>' );
+            // add (un)select all buttons
+            if( i === 0 ) {
+                html.push( '<td class="app-sh-select-buttons" ' );
+                html.push( 'rowspan="', $('.sheet').length, '">' );
+                html.push( '<div id="app-sh-select" class="grey button">');
+                html.push( 'Zaznacz wszystkie</div>' );
+                html.push( '<br class="clear"/>' );
+                html.push( '<div id="app-sh-unselect" class="grey button"> ');
+                html.push( 'Odznacz wszystkie</div>' );
+                html.push( '</td>' );
+            }
+            html.push( '<td class="check">' );
+            html.push( '<input type="checkbox" ');
+            html.push( 'value="', ( group + '-' + sheet ));
+            html.push( '" /></td>' );
+            html.push( '<td>', name, '</td>' );
+            html.push( '</tr>' );
+        });
+        html.push( '</tbody>' );
+
+        $('#app-sh-table')
+            .empty()
+            .append( $( html.join('') ));
+
+        $('#app-sh-select').click( function () {
+            // select all checkboxes
+            $('#app-sh-table')
+                .find(':checkbox')
+                .attr( 'checked', 'true' );
+        });
+
+        $('#app-sh-unselect').click( function () {
+            // unselect all checkboxes
+            $('#app-sh-table')
+                .find(':checkbox')
+                .removeAttr( 'checked' );
+        });
+    }
 })();
