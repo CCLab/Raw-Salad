@@ -240,7 +240,7 @@ def feedback_email( request ):
                 from_email,
                 ['ktrzewiczek@centrumcyfrowe.pl'] )
 
-    return HttpResponse()
+    return HttpResponse( 'Email sent' )
 
 
 @csrf_exempt
