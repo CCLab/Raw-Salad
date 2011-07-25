@@ -349,6 +349,18 @@ var _table = (function () {
         });
     }
 
+    
+    function set_invisable_subtree( id ) {
+    $('tr.'+id).each( function () {
+                    var node = $(this);
+             if ( node.attr( 'data-open' ) === 'true' ) {
+                 set_invisable_subtree( node.attr('id') );
+             }
+             _store.set_visible( id, false );
+        });      
+    }
+
+
     function open_close_subtree( node, root ) {
         var a_root = root || a_parent( node );
         var a_root_id = a_root.attr('id');
@@ -391,6 +403,7 @@ var _table = (function () {
             // the node is closed
             else {
                 // hide subtree
+                set_invisable_subtree( id );
                 _utils.with_subtree( id, $.fn.hide );
 
                 // mark subtree as closed
