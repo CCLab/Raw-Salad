@@ -224,8 +224,6 @@ var _gui = (function () {
                 .removeAttr( 'checked' );
         });
 
-        $('#pl-sr-full').hide();
-        $('#pl-sr-results').hide();
 
         $('#pl-sr-button')
             .click( function () {

@@ -43,12 +43,20 @@ var _db = (function () {
             dataType: 'json',
             success: function ( received_data ) {
                 var html = [];
-                html.push( '<table><tbody>' );
+                html.push( '<table>' );
+                html.push( '<thead>' );
+                html.push( '<tr>' );
+                html.push( '<th>Zaznacz</th>' );
+                html.push( '<th>Ilość trafień</th>' );
+                html.push( '<th>Miejsce trafienia</th>' );
+                html.push( '</tr>' );
+                html.push( '</thead>' );
+                html.push( '<tbody>' );
                 received_data['strict']['result'].forEach( function ( collection ) {
                     html.push( '<tr>' );
                     html.push( '<td><input type="checkbox"></td>' );
+                    html.push( '<td class="right">', collection['data'].length, '</td>' );
                     html.push( '<td style="font-weight: bold;">', collection['perspective'], '</td>' );
-                    html.push( '<td>Ilość trafień: ', collection['data'].length, '</td>' );
                     html.push( '</tr>' );
 //                    html.push( '<h3>', collection['perspective'], '</h3>' );
 //                    collection['data'].forEach( function ( result ) {
@@ -65,6 +73,7 @@ var _db = (function () {
                     .append( $( html.join('') ))
                     .slideDown( 200 );
 
+                $('#pl-sr-show').show();
             //    _tools.show_search_results( tmp_data );
             }
         });

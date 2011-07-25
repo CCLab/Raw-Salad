@@ -196,6 +196,9 @@ var _table = (function () {
             html.push( column['type'] );
             html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
             html.push( data[column['key']] );
+            if( data['info'] !== null ) {
+                html.push( '<img src="/site_media/img/info_small.png" />' );
+            }
             html.push( '</td>' );
         });
 
@@ -349,13 +352,13 @@ var _table = (function () {
         });
     }
 
-    
+
     function set_invisible_subtree( id ) {
         $('tr.'+id).each( function () {
             var node = $(this);
             set_invisible_subtree( node.attr('id') );
            _store.set_visible( id, false );
-        });      
+        });
     }
 
 
