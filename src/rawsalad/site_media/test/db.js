@@ -46,9 +46,10 @@ var _db = (function () {
                 html.push( '<table><tbody>' );
                 received_data['strict']['result'].forEach( function ( collection ) {
                     html.push( '<tr>' );
-                    html.push( '<input type="checkbox">' );
+                    html.push( '<td><input type="checkbox"></td>' );
                     html.push( '<td style="font-weight: bold;">', collection['perspective'], '</td>' );
                     html.push( '<td>Ilość trafień: ', collection['data'].length, '</td>' );
+                    html.push( '</tr>' );
 //                    html.push( '<h3>', collection['perspective'], '</h3>' );
 //                    collection['data'].forEach( function ( result ) {
 //                        html.push( '<p style="margin-left: 10px;">', result['text'], '</p>' );
