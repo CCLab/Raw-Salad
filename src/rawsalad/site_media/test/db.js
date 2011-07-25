@@ -43,17 +43,24 @@ var _db = (function () {
             dataType: 'json',
             success: function ( received_data ) {
                 var html = [];
+                html.push( '<table><tbody>' );
                 received_data['strict']['result'].forEach( function ( collection ) {
-                    html.push( '<h3>', collection['perspective'], '</h3>' );
-                    collection['data'].forEach( function ( result ) {
-                        html.push( '<p style="margin-left: 10px;">', result['text'], '</p>' );
-                    });
+                    html.push( '<tr>' );
+                    html.push( '<input type="checkbox">' );
+                    html.push( '<td style="font-weight: bold;">', collection['perspective'], '</td>' );
+                    html.push( '<td>Ilość trafień: ', collection['data'].length, '</td>' );
+//                    html.push( '<h3>', collection['perspective'], '</h3>' );
+//                    collection['data'].forEach( function ( result ) {
+//                        html.push( '<p style="margin-left: 10px;">', result['text'], '</p>' );
+//                    });
                 });
+                html.push( '</tbody></table>' );
 
                 $('#pl-sr-full')
                     .slideUp( 200 );
 
                 $('#pl-sr-results')
+                    .empty()
                     .append( $( html.join('') ))
                     .slideDown( 200 );
 
