@@ -199,11 +199,11 @@ var _gui = (function () {
         $('#pl-sr-more')
             .click( function () {
                 if( $('#pl-sr-full').is(':visible') ) {
-                    $('#pl-sr-full').hide();
+                    $('#pl-sr-full').slideUp( 200 );
                     $(this).html( 'Pokaż zaawansowane' );
                 }
                 else {
-                    $('#pl-sr-full').show();
+                    $('#pl-sr-full').slideDown( 200 );
                     $(this).html( 'Zamknij zaawansowane' );
                 }
             });
