@@ -350,10 +350,10 @@ var _table = (function () {
     }
 
     
-    function set_invisable_subtree( id ) {
+    function set_invisible_subtree( id ) {
         $('tr.'+id).each( function () {
             var node = $(this);
-            set_invisable_subtree( node.attr('id') );
+            set_invisible_subtree( node.attr('id') );
            _store.set_visible( id, false );
         });      
     }

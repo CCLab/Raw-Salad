@@ -339,7 +339,7 @@ var _table = (function () {
 
 
     function show_selected_subtree( id ) {
-     $('tr.'+id).each( function () {
+        $('tr.'+id).each( function () {
                     var node = $(this);
              if ( node.attr( 'data-open' ) === 'true' ) {
                  show_selected_subtree( node.attr('id') );
@@ -351,12 +351,10 @@ var _table = (function () {
 
     
     function set_invisable_subtree( id ) {
-    $('tr.'+id).each( function () {
-                    var node = $(this);
-             if ( node.attr( 'data-open' ) === 'true' ) {
-                 set_invisable_subtree( node.attr('id') );
-             }
-             _store.set_visible( id, false );
+        $('tr.'+id).each( function () {
+            var node = $(this);
+            set_invisable_subtree( node.attr('id') );
+           _store.set_visible( id, false );
         });      
     }
 
