@@ -209,7 +209,7 @@ var _gui = (function () {
                                                       '3-1-2011' ], false );
             });
 
-        $('#pl-sc-form')
+        $('#pl-sr-form')
             .submit( function () {
                 $('#pl-sr-button').trigger( $.Event( 'click' ) );
                 return false;
@@ -489,7 +489,14 @@ var _gui = (function () {
             html.push( '<input type="checkbox" ');
             html.push( 'value="', ( group + '-' + sheet ));
             html.push( '" /></td>' );
-            html.push( '<td>', name, '</td>' );
+            html.push( '<td ' );
+            if( sheet === 0 ) {
+                html.push( 'style="font-weight: bold"' );
+            }
+            else {
+                html.push( 'style="padding-left: 10px;"' );
+            }
+            html.push( '>', name, '</td>' );
             html.push( '</tr>' );
         });
         html.push( '</tbody>' );
@@ -649,10 +656,10 @@ var _gui = (function () {
             if( i === 0 ) {
                 html.push( '<td class="app-sh-select-buttons" ' );
                 html.push( 'rowspan="', $('.sheet').length, '">' );
-                html.push( '<div id="app-sh-select" class="grey button">');
+                html.push( '<div id="app-sh-select" class="rounded grey button">');
                 html.push( 'Zaznacz wszystkie</div>' );
                 html.push( '<br class="clear"/>' );
-                html.push( '<div id="app-sh-unselect" class="grey button"> ');
+                html.push( '<div id="app-sh-unselect" class="rounded grey button"> ');
                 html.push( 'Odznacz wszystkie</div>' );
                 html.push( '</td>' );
             }
@@ -660,7 +667,14 @@ var _gui = (function () {
             html.push( '<input type="checkbox" ');
             html.push( 'value="', ( group + '-' + sheet ));
             html.push( '" /></td>' );
-            html.push( '<td>', name, '</td>' );
+            html.push( '<td ' );
+            if( sheet === 0 ) {
+                html.push( 'style="font-weight: bold"' );
+            }
+            else {
+                html.push( 'style="padding-left: 10px;"' );
+            }
+            html.push( '>', name, '</td>' );
             html.push( '</tr>' );
         });
         html.push( '</tbody>' );

@@ -40,6 +40,15 @@
     color: #d8d8d8;
 }
 
+.rounded {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
 /*  T O G G L E   B U T T O N */
 .pushed {
     color: #fff;
