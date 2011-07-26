@@ -588,9 +588,9 @@ var _tools = (function () {
             .click( function () {
                 var active_sheet_name = _store.active_sheet_name();
                 $( '#app-tb-tl-title' ).hide();
-                $( '#app-tb-tl-rename-input').value( active_sheet_name );
+                $( '#app-tb-tl-rename-input').val( active_sheet_name );
                 $('#app-tb-tl-rename-form').show();
-                  
+                $('#app-tb-tl-rename-button').hide();  
             });
     }
 
