@@ -586,10 +586,11 @@ var _tools = (function () {
     function prepare_rename_sheet_interface() {
         $('#app-tb-tl-rename-button')
             .click( function () {
+                var active_sheet_name = _store.active_sheet_name();
                 $( '#app-tb-tl-title' ).hide();
-                $( '#app-tb-tl-rename-input').value( _store.active_sheet_name() );
+                $( '#app-tb-tl-rename-input').val( active_sheet_name );
                 $('#app-tb-tl-rename-form').show();
-                  
+                $('#app-tb-tl-rename-button').hide();  
             });
     }
 
