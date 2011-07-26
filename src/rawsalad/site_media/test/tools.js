@@ -498,7 +498,7 @@ var _tools = (function () {
                     // show the form
                     columns_form.slideDown( 200 );
 
-                    $('html')
+                    $('#app-tb-tl-columns-button')
                         .click( function () {
                             $(this).trigger( $.Event( 'click' ));
                         });
