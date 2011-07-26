@@ -45,6 +45,7 @@ var _db = (function () {
                 var html = [];
                 var row;
                 var idefs = [];
+                var tbody = $('#pl-sr-results').find('tbody');
 
                 received_data['strict']['result'].forEach( function ( collection ) {
                     html.push( '<tr>' );
@@ -66,15 +67,14 @@ var _db = (function () {
                             idef: idefs
                         });
                     });
+
+                    tbody.append( row );
                 });
 
                 $('#pl-sr-full')
                     .slideUp( 200 );
 
                 $('#pl-sr-results')
-                    .find('tbody')
-                    .empty()
-                    .append( $( html.join('') ))
                     .slideDown( 200 );
 
                 $('#pl-sr-show').show();
