@@ -400,6 +400,7 @@ var _table = (function () {
                 if( $('.'+id).length !== 0 ) {
                    // _utils.with_subtree( id, $.fn.show );
                    show_selected_subtree( id );
+                   _gui.make_zebra();
                 }
                 // if children not loaded yet
                 else {
