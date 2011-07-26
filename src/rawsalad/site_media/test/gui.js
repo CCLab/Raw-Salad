@@ -289,7 +289,7 @@ var _gui = (function () {
     that.init_app = function ( collection_name ) {
 
         if( arguments.length !== 0 ){
-            _store.set_active_sheet_name( collection_name );
+            _store.active_sheet_name( collection_name );
         }
         that.refresh_gui();
 
