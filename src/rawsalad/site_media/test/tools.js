@@ -504,14 +504,11 @@ var _tools = (function () {
                                 .trigger( $.Event( 'click' ));
                         });
 
-                    event.stopPropagation();
                 }
                 else {
                     $('html')
                         .unbind( 'click' );
                 }
-
-
 
             });
 
@@ -532,6 +529,9 @@ var _tools = (function () {
             });
 
         $('#app-tb-tl-columns-form')
+            .click( function ( event ) {
+                event.stopPropagation();
+            })
             .submit( function () {
                 new_active_columns = [];
                 checkboxes = $('input[name=app-tb-tl-columns]:checked');
