@@ -12,6 +12,7 @@ from django.core import serializers
 import xml.etree.cElementTree as ET
 
 from ConfigParser import ConfigParser
+import re
 
 import rsdbapi as rsdb
 
@@ -223,7 +224,7 @@ def parse_conditions(pth):
     test_count= (pth.count('[') + pth.count(']') == 2)
 
     if test_presence and test_order and test_count:
-        path_elm_list= pth[pth.index('[')+1:-1].split('+AND+')
+        path_elm_list= pth[pth.index('[')+1 : pth.index(']')].split('+AND+')
         if len(path_elm_list) > 0:
             for elm in path_elm_list:
                 scope_list= elm.split('+TO+')
@@ -240,7 +241,7 @@ def parse_conditions(pth):
                     if len(tmplst_from) != len(tmplst_to): # ERROR!
                         return { "error": '31' } # 'to' and 'from' are from different levels
                     
-                    if len(tmplst_from) > 1: # check one, but do for both, as it's alredy checked if they are on the same level
+                    if len(tmplst_from) > 1: # check one, but do for both (we know alredy that they are on the same level)
                         try:
                             last_num_from= int(tmplst_from[-1])
                             last_num_to= int(tmplst_to[-1])
@@ -266,15 +267,38 @@ def parse_conditions(pth):
                         else:
                             idef_list.append(str(last_num_curr))
                         last_num_curr += 1
-                        
 
                 elif len(scope_list) > 2: # ERROR!
                     return { "error": '33' } # incorrectly defined scope!
 
-        return { "idef": { "$in": idef_list } }
+        if '/branch' in pth: # query based on regexp (brothers and parents of given idefs + all level 'a')
+            lookup, i= "", 0
+            for idef in idef_list:
+                i += 1
+                lookup_idef= build_idef_regexp( idef )
 
-    elif (not test_presence) and (not test_order) and (not test_count):
-        return path2query(pth) # well, then it means we're dealing with single idef
+                lookup += "(%s)|" % lookup_idef
+                if i == len(idef_list):
+                    lookup= lookup[:-1] # cutting the last symbol | in case it's the end of list
+
+            if len(idef_list) == 1: # single idef
+                lookup= lookup[1:-1] # cutting ( and )
+
+            qry_fin= re.compile(lookup, re.IGNORECASE)
+
+        else: # plain list of elements
+            qry_fin= { "$in": idef_list }
+
+        return { "idef": qry_fin }    
+
+    elif (not test_presence) and (not test_order) and (not test_count): # dealing with single idef
+        if '/branch' in pth: # query based on regexp (brothers and parents of given idef + all level 'a')
+            idef= pth[0:pth.index('/branch')]
+            lookup= build_idef_regexp( path2query( idef )['idef'] )
+            qry_fin= { 'idef' : re.compile(lookup, re.IGNORECASE) }
+        else:
+            qry_fin= path2query(pth)
+        return qry_fin
 
     else: # ERROR
         return { "error": '34' } # otherwise it's a syntax error
@@ -285,6 +309,24 @@ def get_count(query, collection, db=None):
 
     return db[collection].find(query).count()
 
+def build_idef_regexp( curr_idef ):
+    """ build regexp quering collection """
+    level_num= curr_idef.count('-')
+    if level_num > 0: # deeper than 'a'
+        idef_srch= curr_idef.rsplit('-', 1)[0]
+        lookup_idef= "^%s\-\d+$" % idef_srch
+        curr_idef= idef_srch
+        level= 1
+        while level < level_num:
+            idef_srch= curr_idef.rsplit('-', 1)[0]
+            lookup_idef += "|^%s\-\d+$" % idef_srch
+            curr_idef= idef_srch
+            level += 1
+        lookup_idef += "|^([A-Z]|\d)+$"
+    else: # just query the highest level
+        lookup_idef= "^([A-Z]|\d)+$"
+
+    return lookup_idef
 
 def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=None):
     if db is None:
@@ -307,6 +349,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
         data= coll.get_data(db, dataset_idef, view_idef, issue)
         httpresp_dict= coll.response
+
         if httpresp_dict['httpresp'] == 200:
             result['data']= data
             result['count']= coll.count
@@ -362,7 +405,7 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
     result= {
         'dataset_id': int(dataset_idef),
         'view_id': int(view_idef),
-        'issue': issue,
+        'issue': issue
         }
 
     httpresp_dict= {}
