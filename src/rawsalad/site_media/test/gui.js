@@ -230,7 +230,7 @@ var _gui = (function () {
                 if(  $('#pl-sr-query').val() === '' ) {
                     return;
                 }
-                var boxes = $('pl-sr-table').find('input:checkbox:checked');
+                var boxes = $('#pl-sr-table').find('input:checkbox:checked');
                 var collections;
 
                 if( boxes.length === 0 ) {
