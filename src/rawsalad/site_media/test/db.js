@@ -46,17 +46,15 @@ var _db = (function () {
                 html.push( '<table>' );
                 html.push( '<thead>' );
                 html.push( '<tr>' );
-                html.push( '<th>Zaznacz</th>' );
-                html.push( '<th>Ilość trafień</th>' );
-                html.push( '<th>Miejsce trafienia</th>' );
+                html.push( '<th style="font-weight: normal; color: #c1c1c1;">ilość wystąpień</th>' );
+                html.push( '<th style="font-weight: normal; color: #c1c1c1;">kolekcja</th>' );
                 html.push( '</tr>' );
                 html.push( '</thead>' );
                 html.push( '<tbody>' );
                 received_data['strict']['result'].forEach( function ( collection ) {
                     html.push( '<tr>' );
-                    html.push( '<td><input type="checkbox"></td>' );
-                    html.push( '<td class="right">', collection['data'].length, '</td>' );
-                    html.push( '<td style="font-weight: bold;">', collection['perspective'], '</td>' );
+                    html.push( '<td class="right" style="width: 75px; vertical-align: top; padding: 5px; border-right: 1px solid #c1c1c1;">', collection['data'].length, '</td>' );
+                    html.push( '<td style="font-weight: bold; padding: 5px; vertical-align: top;">', collection['perspective'], '</td>' );
                     html.push( '</tr>' );
 //                    html.push( '<h3>', collection['perspective'], '</h3>' );
 //                    collection['data'].forEach( function ( result ) {
