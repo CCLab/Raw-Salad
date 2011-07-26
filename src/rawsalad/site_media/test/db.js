@@ -43,30 +43,36 @@ var _db = (function () {
             dataType: 'json',
             success: function ( received_data ) {
                 var html = [];
-                html.push( '<table>' );
-                 html.push( '<thead>' );
-                 html.push( '<tr style="padding-bottom: 15px">' );
-                 html.push( '<th style="font-weight: normal; color: #8b8b8b;">ilość wystąpień</th>' );
-                 html.push( '<th style="text-align: left; padding-left: 15px; font-weight: normal; color: #8b8b8b;">kolekcja</th>' );
-                 html.push( '</tr>' );
-                 html.push( '</thead>' );
-                 html.push( '<tbody>' );
-                 received_data['strict']['result'].forEach( function ( collection ) {
-                     html.push( '<tr>' );
-                     html.push( '<td class="right" style="width: 50px; vertical-align: top; padding-right: 15px; border-right: 1px solid #c1c1c1; text-align: right">', collection['data'].    length, '</td>' );
-                     html.push( '<td style="font-weight: bold; padding-left: 15px; vertical-align: top;"><div style="float: left;">', collection['perspective'], '</div>' );
-                     html.push( '<div style="padding: 0px 5px; color: #fff; margin-left: 10px; background-color: #c1c1c1; float: left;">&gt;</div></td>' );
-                     html.push( '</tr>' );
+                var row;
+                var idefs = [];
+
+                received_data['strict']['result'].forEach( function ( collection ) {
+                    html.push( '<tr>' );
+                    html.push( '<td class="right" style="width: 50px; vertical-align: top; padding-right: 15px; border-right: 1px solid #c1c1c1; text-align: right">', collection['data'].    length, '</td>' );
+                    html.push( '<td style="font-weight: bold; padding-left: 15px; vertical-align: top;"><div style="float: left;">', collection['perspective'], '</div>' );
+                    html.push( '<div style="padding: 0px 5px; color: #fff; margin-left: 10px; background-color: #c1c1c1; float: left;">&gt;</div></td>' );
+                    html.push( '</tr>' );
+
+                    row = $( html.join('') );
+                    collection['data'].forEach( function ( result ) {
+                        idefs.push( result['idef'] );
+                    });
+
+                    row.click( function () {
+                        that.add_search_data({
+                            dataset: collection['dataset'],
+                            view: collection['view'],
+                            issue: collection['issue'],
+                            idef: idefs
+                        });
+                    });
                 });
-                html.push( '</tbody></table>' );
-
-
-
 
                 $('#pl-sr-full')
                     .slideUp( 200 );
 
                 $('#pl-sr-results')
+                    .find('tbody')
                     .empty()
                     .append( $( html.join('') ))
                     .slideDown( 200 );
