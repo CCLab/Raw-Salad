@@ -498,9 +498,10 @@ var _tools = (function () {
                     // show the form
                     columns_form.slideDown( 200 );
 
-                    $('#app-tb-tl-columns-button')
+                    $('html')
                         .click( function () {
-                            $(this).trigger( $.Event( 'click' ));
+                            $('#app-tb-tl-columns-button')
+                                .trigger( $.Event( 'click' ));
                         });
 
                     event.stopPropagation();
