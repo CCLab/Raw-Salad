@@ -596,7 +596,7 @@ var _tools = (function () {
         $('#app-tb-tl-rename-form').show();
         $('#app-tb-tl-rename-button').click( function () {
             $('#app-tb-tl-rename-form').submit( function() {
-               set_new_sheet_name(); 
+//               set_new_sheet_name(); 
             } );
         });  
      }
