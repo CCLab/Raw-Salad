@@ -44,24 +44,24 @@ var _db = (function () {
             success: function ( received_data ) {
                 var html = [];
                 html.push( '<table>' );
-                html.push( '<thead>' );
-                html.push( '<tr>' );
-                html.push( '<th style="font-weight: normal; color: #c1c1c1;">ilość wystąpień</th>' );
-                html.push( '<th style="font-weight: normal; color: #c1c1c1;">kolekcja</th>' );
-                html.push( '</tr>' );
-                html.push( '</thead>' );
-                html.push( '<tbody>' );
-                received_data['strict']['result'].forEach( function ( collection ) {
-                    html.push( '<tr>' );
-                    html.push( '<td class="right" style="width: 75px; vertical-align: top; padding: 5px; border-right: 1px solid #c1c1c1;">', collection['data'].length, '</td>' );
-                    html.push( '<td style="font-weight: bold; padding: 5px; vertical-align: top;">', collection['perspective'], '</td>' );
-                    html.push( '</tr>' );
-//                    html.push( '<h3>', collection['perspective'], '</h3>' );
-//                    collection['data'].forEach( function ( result ) {
-//                        html.push( '<p style="margin-left: 10px;">', result['text'], '</p>' );
-//                    });
+                 html.push( '<thead>' );
+                 html.push( '<tr style="padding-bottom: 15px">' );
+                 html.push( '<th style="font-weight: normal; color: #8b8b8b;">ilość wystąpień</th>' );
+                 html.push( '<th style="text-align: left; padding-left: 15px; font-weight: normal; color: #8b8b8b;">kolekcja</th>' );
+                 html.push( '</tr>' );
+                 html.push( '</thead>' );
+                 html.push( '<tbody>' );
+                 received_data['strict']['result'].forEach( function ( collection ) {
+                     html.push( '<tr>' );
+                     html.push( '<td class="right" style="width: 50px; vertical-align: top; padding-right: 15px; border-right: 1px solid #c1c1c1; text-align: right">', collection['data'].    length, '</td>' );
+                     html.push( '<td style="font-weight: bold; padding-left: 15px; vertical-align: top;"><div style="float: left;">', collection['perspective'], '</div>' );
+                     html.push( '<div style="padding: 0px 5px; color: #fff; margin-left: 10px; background-color: #c1c1c1; float: left;">&gt;</div></td>' );
+                     html.push( '</tr>' );
                 });
                 html.push( '</tbody></table>' );
+
+
+
 
                 $('#pl-sr-full')
                     .slideUp( 200 );
