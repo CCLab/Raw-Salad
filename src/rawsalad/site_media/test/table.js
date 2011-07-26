@@ -348,21 +348,31 @@ var _table = (function () {
 
 
     function show_selected_subtree( id ) {
-        $('tr.'+id).each( function () {
-                    var node = $(this);
-             if ( node.attr( 'data-open' ) === 'true' ) {
-                 show_selected_subtree( node.attr('id') );
-             }
-             _store.set_visible( id, true );
-             node.show();
+        var list = $('tr.'+id);
+        list.each( function () {
+            var node = $(this);
+            var new_id = node.attr('id');
+            var data_open = node.attr( 'data-open' );
+            if ( data_open === 'true' ) {
+                show_selected_subtree( new_id );
+            }
+            node.show();
+           _store.set_visible( new_id, true );
         });
+        _store.set_visible( id, true );
     }
 
 
     function set_invisible_subtree( id ) {
-        $('tr.'+id).each( function () {
+        var list = $('tr.'+id);
+        list.each( function () {
             var node = $(this);
-            set_invisible_subtree( node.attr('id') );
+            var new_id = node.attr('id');
+            var data_open = node.attr( 'data-open' );
+            if ( data_open === 'true' ) {
+                set_invisible_subtree( new_id );
+            }
+            _store.set_visible( new_id, false );
         });
         _store.set_visible( id, false );
     }
@@ -381,6 +391,10 @@ var _table = (function () {
             // if the node is closed
             if( node.attr( 'data-open' ) === 'false' ) {
 
+                // mark subtree as open
+                _store.set_open( id, true );
+                node.attr( 'data-open', 'true' );
+
                 // if children are hidden
                 var test = $('.'+id);
                 if( $('.'+id).length !== 0 ) {
@@ -398,9 +412,6 @@ var _table = (function () {
                     _store.set_selected( previously_selected_id, false );
                 }
 
-                // mark subtree as open
-                _store.set_open( id, true );
-                node.attr( 'data-open', 'true' );
 
                 // clear selected attributes and set selection to clicked tree
                 _store.set_selected( a_root_id, true );

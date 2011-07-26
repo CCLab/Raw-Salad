@@ -224,7 +224,7 @@ var _table = (function () {
                 }
             );
 
-        if( !is_visible ){
+        if( !is_visible && data['level'] !== 'a' ){
             row.hide();
         }
 
