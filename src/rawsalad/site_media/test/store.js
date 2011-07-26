@@ -179,6 +179,21 @@ var _store = (function () {
     };
 
 
+    that.set_visible = function ( id, state ) {
+        var node, rows = that.active_rows();
+        var i, len = rows.length;
+        for ( i = 0; i < len; i += 1 ) {
+            node = rows[i];
+            if ( node['data']['idef'] === id ) {
+                node['state']['visible'] = state;
+                return;
+            }
+
+        }
+
+    };
+
+
     that.active_sheet_index = function ( new_active_sheet_num ) {
         if( arguments.length === 0 ) {
             return that.active_group()['active_sheet_number'];
@@ -245,7 +260,7 @@ var _store = (function () {
             .map( function ( row ) {
                 return {
                     data: row,
-                    state: { open: false, selected: false }
+                    state: { open: false, selected: false, visible: true }
                 };
             })
             .forEach( function ( e ) {
@@ -285,14 +300,14 @@ var _store = (function () {
     that.get_sheet = function ( group, sheet ) {
         return groups[group]['sheets'][sheet];
     };
-    
+
     that.remove_active_group = function() {
         if (groups.length === 1){
             return false;
-        } 
-        groups.splice ( that.active_group_index(), 1 );  
+        }
+        groups.splice ( that.active_group_index(), 1 );
         if (that.active_group_index() !== 0){
-            active_group_number = that.active_group_index()-1;   
+            active_group_number = that.active_group_index()-1;
         }
         return true;
     }
@@ -302,31 +317,34 @@ var _store = (function () {
         var active_group_sheets = active_grp['sheets'];
         var active_sheet_num = that.active_sheet_index();
         if (groups.length === 1 && active_group_sheets.length === 1 ){
-            return false; 
+            return false;
         }
-        active_group_sheets.splice(active_sheet_num, 1 );    
+        active_group_sheets.splice(active_sheet_num, 1 );
         if (active_group_sheets.length === 0 ){
             that.remove_active_group();
         }else if (active_sheet_num !== 0 ) {
-                active_grp['active_sheet_number'] = active_sheet_num - 1  ;                  
-            }            
+                active_grp['active_sheet_number'] = active_sheet_num - 1  ;
+            }
         return true;
     };
-    
-    that.set_active_sheet_name = function (sheet_name) {
+
+    that.active_sheet_name = function (sheet_name) {
+        if( arguments.length === 0 ) {
+            return that.active_sheet()['name'];
+        }
         that.active_sheet()['name'] = sheet_name;
     };
 
     that.reset_sheet = function () {
         var active_sheet = that.active_sheet();
-        var basic_rows = that.active_group()['basic_rows'].slice();
+        var basic_rows = $.extend( true, [], that.active_group()['basic_rows'] );
         var total = active_sheet['rows']['total'];
 
         active_sheet['rows'] = basic_rows;
         active_sheet['rows']['total'] = total;
     };
 
-    that.next_sheet_name = function () {    
+    that.next_sheet_name = function () {
         var next_num=1;
         var sheet_name;
         that.active_group()['sheets'].forEach( function (sheet, sheet_num){
@@ -335,11 +353,11 @@ var _store = (function () {
                 if ( sheet_name[1] >= next_num ){
                     next_num = sheet_name[1];
                     next_num++;
-                   }; 
+                   };
             }
         });
 
-        return 'Arkusz ' + next_num; 
+        return 'Arkusz ' + next_num;
     };
 
 // P R I V A T E   I N T E R F A C E
@@ -379,7 +397,11 @@ var _store = (function () {
         var rows = data['rows'].map( function ( row ) {
                                     return {
                                         data: row,
-                                        state: { open: false, selected: false }
+                                        state: {
+                                            open: false,
+                                            selected: false,
+                                            visible: true
+                                        }
                                     };
                                 });
 
@@ -397,7 +419,6 @@ var _store = (function () {
             'rows': rows,
             'name': data['name'],
             'filtered': false
-//          'pending_nodes': []
         };
     }
 

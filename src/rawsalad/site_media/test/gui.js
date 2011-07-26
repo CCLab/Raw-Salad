@@ -63,7 +63,14 @@ var _gui = (function () {
                 $(this).addClass('active');
 
                 $('.app-container:visible').hide();
-                $('#app-' + action).show();
+                if( action === 'table' ) {
+                    $('#app-' + action).show();
+                    _gui.refresh_gui();
+                }
+                else {
+                    update_share_tab();
+                    $('#app-share').show();
+                }
             });
 
         $('#app-tb-tl-clear-button')
@@ -158,7 +165,122 @@ var _gui = (function () {
                 });
 
                 _download.selected( ids );
-                hide_top_panels();
+
+                // close download panel
+                if( $('#application').is(':visible') ) {
+                    hide_top_panels();
+                }
+                else {
+                    $('#tm-choose').trigger( $.Event( 'click' ) );
+                }
+            });
+
+        $('#pl-fb-button')
+            .click( function () {
+                $.ajax({
+                    url:'feedback/',
+                    type: 'POST',
+                    data: {
+                        email: $('#pl-fb-email').val(),
+                        message: $('#pl-fb-message').val()
+                    },
+                    success: function () {
+                        // close feedback panel
+                        if( $('#application').is(':visible') ) {
+                            hide_top_panels();
+                        }
+                        else {
+                            $('#tm-choose').trigger( $.Event( 'click' ) );
+                        }
+                    }
+                });
+            });
+
+        $('#pl-sr-more')
+            .click( function () {
+                if( $('#pl-sr-full').is(':visible') ) {
+                    $('#pl-sr-full').slideUp( 200 );
+                    $(this).html( 'Pokaż zaawansowane' );
+                }
+                else {
+                    $('#pl-sr-unselect').trigger( $.Event( 'click' ));
+                    $('#pl-sr-full').slideDown( 200 );
+                    $(this).html( 'Zamknij zaawansowane' );
+                }
+            });
+
+
+        $('#pl-sr-select').click( function () {
+            // select all checkboxes
+            $('#pl-sr-table')
+                .find(':checkbox')
+                .attr( 'checked', 'true' );
+        });
+
+        $('#pl-sr-unselect').click( function () {
+            // unselect all checkboxes
+            $('#pl-sr-table')
+                .find(':checkbox')
+                .removeAttr( 'checked' );
+        });
+
+
+        $('#pl-sr-button')
+            .click( function () {
+                if(  $('#pl-sr-query').val() === '' ) {
+                    return;
+                }
+                var boxes = $('#pl-sr-table').find('input:checkbox:checked');
+                var collections;
+
+                if( boxes.length === 0 ) {
+                    collections = ['0-0-2011', '0-1-2011', '0-1-2012', '0-2-2011',
+                                   '0-2-2012', '1-0-2011', '1-1-2011', '1-1-2012',
+                                   '1-2-2011', '1-2-2012', '2-1-2011', '2-2-2011',
+                                   '2-3-2011', '2-4-2011', '3-0-2011', '3-1-2011' ];
+                }
+                else {
+                    collections = [];
+                    boxes.each( function () {
+                        collections.push( $(this).val() );
+                        $(this).removeAttr( 'checked' );
+                    });
+                }
+
+                _db.search( $('#pl-sr-query').val(), collections, false );
+            });
+
+        $('#pl-sr-form')
+            .submit( function () {
+                $('#pl-sr-button').trigger( $.Event( 'click' ) );
+                return false;
+            });
+
+
+        $('#app-sh-submit')
+            .click( function () {
+                var boxes = $('#app-sh-table').find('input:checkbox:checked');
+
+                if( boxes.length === 0 ) {
+                    return;
+                }
+
+                $('#app-sh-permalink')
+                    .slideDown( 100 )
+                    .find('input')
+                    .val( 'http://otwartedane.pl/123457' )
+                    .focus();
+
+                $(this).hide();
+            });
+
+        $('#app-sh-permalink')
+            .find('input')
+            .focus( function () {
+                $(this).select();
+            })
+            .click( function () {
+                $(this).select();
             });
 
         init_choose_panel();
@@ -169,7 +291,7 @@ var _gui = (function () {
     that.init_app = function ( collection_name ) {
 
         if( arguments.length !== 0 ){
-            _store.set_active_sheet_name( collection_name );
+            _store.active_sheet_name( collection_name );
         }
         that.refresh_gui();
 
@@ -382,7 +504,7 @@ var _gui = (function () {
 
     function hide_top_panels() {
         // deactivate menu positions
-        $('#top-menu')
+        $('#top')
             .find('.active')
             .removeClass('active');
 
@@ -424,11 +546,17 @@ var _gui = (function () {
             if( i === 0 ) {
                 html.push( '<td class="pl-dl-select-buttons" ' );
                 html.push( 'rowspan="', $('.sheet').length, '">' );
-                html.push( '<div id="pl-dl-sh-select" class="grey button">');
-                html.push( 'Zaznacz wszystkie</div>' );
-                html.push( '<br class="clear"/>' );
-                html.push( '<div id="pl-dl-sh-unselect" class="grey button"> ');
-                html.push( 'Odznacz wszystkie</div>' );
+
+                if( $('.sheet').length > 3 ) {
+                    html.push( '<div id="pl-dl-sh-select" class="grey button">');
+                    html.push( 'Zaznacz wszystkie</div>' );
+                    html.push( '<br class="clear"/>' );
+                    html.push( '<div id="pl-dl-sh-unselect" class="grey button"> ');
+                    html.push( 'Odznacz wszystkie</div>' );
+                }
+                else {
+                    html.push( '<div style="width: 107px"></div>' );
+                }
                 html.push( '</td>' );
             }
             html.push( '<td class="check">' );
@@ -578,4 +706,63 @@ var _gui = (function () {
             .show();
     };
 
+    function update_share_tab() {
+        var html = [];
+
+        $('#app-sh-table').find('input:checked').removeAttr('checked');
+        $('#app-sh-submit').show();
+        $('#app-sh-permalink').hide();
+
+        html.push( '<tbody>' );
+        $('.sheet').each( function ( i, sheet ) {
+            var id = $(this).attr('id').split('-');
+            var group = id[1];
+            var sheet = id[2];
+            var name = $(this).attr('title');
+
+            html.push( '<tr>' );
+            // add (un)select all buttons
+            if( i === 0 ) {
+                html.push( '<td class="pl-sh-select-buttons" ' );
+                html.push( 'rowspan="', $('.sheet').length, '">' );
+
+                if( $('.sheet').length > 3 ) {
+                    html.push( '<div id="app-sh-select" class="rounded grey button right">');
+                    html.push( 'Zaznacz wszystkie</div>' );
+                    html.push( '<br class="clear"/>' );
+                    html.push( '<div id="app-sh-unselect" class="rounded grey button right"> ');
+                    html.push( 'Odznacz wszystkie</div>' );
+                }
+                else {
+                    html.push( '<div style="width: 107px"></div>' );
+                }
+                html.push( '</td>' );
+            }
+            html.push( '<td class="check">' );
+            html.push( '<input type="checkbox" ');
+            html.push( 'value="', ( group + '-' + sheet ));
+            html.push( '" /></td>' );
+            html.push( '<td>', name, '</td>' );
+            html.push( '</tr>' );
+        });
+        html.push( '</tbody>' );
+
+        $('#app-sh-table')
+            .empty()
+            .append( $( html.join('') ));
+
+        $('#app-sh-select').click( function () {
+            // select all checkboxes
+            $('#app-sh-table')
+                .find(':checkbox')
+                .attr( 'checked', 'true' );
+        });
+
+        $('#app-sh-unselect').click( function () {
+            // unselect all checkboxes
+            $('#app-sh-table')
+                .find(':checkbox')
+                .removeAttr( 'checked' );
+        });
+    }
 })();

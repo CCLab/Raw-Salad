@@ -158,9 +158,9 @@ var _table = (function () {
 
         for( ; i >= 0; i -= 1 ) {
             parent = $( '#' + data[i]['data']['parent'] );
-            if( parent.attr( 'data-open' ) === 'false' ) {
-                continue;
-            }
+//            if( parent.attr( 'data-open' ) === 'false' ) {
+//                continue;
+//            }
             parent.after( generate_row({
                 node: data[i],
                 schema: schema
@@ -177,6 +177,7 @@ var _table = (function () {
         var schema = args['schema'];
         var is_open = node['state']['open'];
         var is_selected = node['state']['selected'];
+        var is_visible = node['state']['visible'];
         var html = [];
         var row;
 
@@ -196,6 +197,9 @@ var _table = (function () {
             html.push( column['type'] );
             html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
             html.push( data[column['key']] );
+            if( !!data['info'] && column['key'] === 'type' ) {
+                html.push( '<img src="/site_media/img/info_small.png" border="0" style="margin-left: 5px;"/>' );
+            }
             html.push( '</td>' );
         });
 
@@ -204,14 +208,26 @@ var _table = (function () {
         // create & arm row
         row = $( html.join('') );
         row.click( function ( event ) {
-            // update css classes connected with node selection
-            apply_selection( $(this).attr('id') );
+                // update css classes connected with node selection
+                apply_selection( $(this).attr('id') );
 
-            // open/close a subtree if it's a-level or already selected/open
-            open_close_subtree( $(this), a_parent( $(this) ) );
+                // open/close a subtree if it's a-level or already selected/open
+                open_close_subtree( $(this), a_parent( $(this) ) );
 
-//            _gui.make_zebra();
-        });
+            })
+            .hover(
+                function () {
+                    row.find('.click').css('color', '#11a8f7' );
+                },
+                function () {
+                    raw.find('.click').css('color', '#1a7aad' );
+                }
+            );
+
+        if( !is_visible && data['level'] !== 'a' ){
+            row.hide();
+        }
+
 
         return row;
     }
@@ -332,14 +348,35 @@ var _table = (function () {
 
 
     function show_selected_subtree( id ) {
-     $('tr.'+id).each( function () {
-                    var node = $(this);
-             if ( node.attr( 'data-open' ) === 'true' ) {
-                 show_selected_subtree( node.attr('id') );
-             }
-             node.show();
+        var list = $('tr.'+id);
+        list.each( function () {
+            var node = $(this);
+            var new_id = node.attr('id');
+            var data_open = node.attr( 'data-open' );
+            if ( data_open === 'true' ) {
+                show_selected_subtree( new_id );
+            }
+            node.show();
+           _store.set_visible( new_id, true );
         });
+        _store.set_visible( id, true );
     }
+
+
+    function set_invisible_subtree( id ) {
+        var list = $('tr.'+id);
+        list.each( function () {
+            var node = $(this);
+            var new_id = node.attr('id');
+            var data_open = node.attr( 'data-open' );
+            if ( data_open === 'true' ) {
+                set_invisible_subtree( new_id );
+            }
+            _store.set_visible( new_id, false );
+        });
+        _store.set_visible( id, false );
+    }
+
 
     function open_close_subtree( node, root ) {
         var a_root = root || a_parent( node );
@@ -354,11 +391,16 @@ var _table = (function () {
             // if the node is closed
             if( node.attr( 'data-open' ) === 'false' ) {
 
+                // mark subtree as open
+                _store.set_open( id, true );
+                node.attr( 'data-open', 'true' );
+
                 // if children are hidden
                 var test = $('.'+id);
                 if( $('.'+id).length !== 0 ) {
                    // _utils.with_subtree( id, $.fn.show );
                    show_selected_subtree( id );
+                   _gui.make_zebra();
                 }
                 // if children not loaded yet
                 else {
@@ -371,9 +413,6 @@ var _table = (function () {
                     _store.set_selected( previously_selected_id, false );
                 }
 
-                // mark subtree as open
-                _store.set_open( id, true );
-                node.attr( 'data-open', 'true' );
 
                 // clear selected attributes and set selection to clicked tree
                 _store.set_selected( a_root_id, true );
@@ -383,6 +422,7 @@ var _table = (function () {
             // the node is closed
             else {
                 // hide subtree
+                set_invisible_subtree( id );
                 _utils.with_subtree( id, $.fn.hide );
 
                 // mark subtree as closed

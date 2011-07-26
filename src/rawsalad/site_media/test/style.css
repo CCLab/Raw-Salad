@@ -44,8 +44,19 @@ input {
 }
 
 textarea {
+  width: 150px;
+  height: 200px;
+
+  background-color: #fff;
+
   font-family: Arial,sans-serif;
   font-size: 12px;
+  border: 1px solid #4cbceb;
+
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 
@@ -276,6 +287,23 @@ textarea {
     padding-left: 150px;
   }
 
+  #pl-sr-more {
+    margin: 0px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #e1e1e1;
+    color: #1ea3e8;
+    border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    -o-border-radius: 0px 0px 5px 5px;
+  }
+
+  #pl-sr-more:hover {
+    background-color: #1ea3e8;
+    color: #fff;
+  }
+
 /*  A P P L I C A T I O N  */
 #application {
   overflow: visible;
@@ -434,6 +462,7 @@ textarea {
 
   .input-text {
     min-width: 100px;
+    height: 18px;
     background-color: #fff;
 
     border: 1px solid #4cbceb;
@@ -557,3 +586,17 @@ textarea {
          background-color: #fff;
          border: 1px solid #a3a3a3;
        }
+
+
+
+  #app-sh-permalink {
+    margin: 0px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #e1e1e1;
+    color: #1ea3e8;
+    border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    -o-border-radius: 0px 0px 5px 5px;
+  }

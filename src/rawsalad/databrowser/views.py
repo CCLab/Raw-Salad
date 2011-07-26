@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import Context, loader
 from django.utils import simplejson as json
+from django.core.mail import send_mail
 
 import rsdbapi as rsdb
 import csv, codecs, cStringIO
@@ -230,19 +231,38 @@ def redirect( request ):
     return HttpResponseRedirect('/app')
 
 @csrf_exempt
+def feedback_email( request ):
+    from_email = request.POST.get( 'email', 'NO EMAIL PROVIDED' )
+    message = request.POST.get( 'message', 'MESSAGE LEFT EMPTY' )
+
+    send_mail( 'Raw Salad Feedback',
+                message,
+                from_email,
+                ['ktrzewiczek@centrumcyfrowe.pl'] )
+
+    return HttpResponse( 'Email sent' )
+
+
+@csrf_exempt
 def download_data( request ):
     response = HttpResponse()
     files = request.POST.get( 'csv_string' ).split( '--file--' )[:-1]
 
     # send one sheet as CSV and collection of sheets as ZIP
     if len( files ) == 1:
-        data = files[0].split( '|' )[:-1]
+        f = files[0]
         response['Content-Type'] = 'text/csv'
         response['Content-Disposition'] = 'attachment; filename=data.csv'
 
-        writer = UnicodeWriter( response )
-        for row in data:
-            writer.writerow( row.split(';') )
+        if '.csv' in f:
+            response.write( open( 'site_media/csv/' + f ).read() )
+        else:
+            data = f.split( '|' )[:-1]
+
+            writer = UnicodeWriter( response )
+            for row in data:
+                writer.writerow( row.split(';') )
+
     else:
         in_memory = StringIO()
         zip = ZipFile( in_memory, 'a' )
