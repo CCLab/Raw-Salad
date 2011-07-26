@@ -328,7 +328,10 @@ var _store = (function () {
         return true;
     };
 
-    that.set_active_sheet_name = function (sheet_name) {
+    that.active_sheet_name = function (sheet_name) {
+        if( arguments.length === 0 ) {
+            return that.active_sheet()['name'];
+        }
         that.active_sheet()['name'] = sheet_name;
     };
 
