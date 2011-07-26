@@ -592,7 +592,8 @@ var _tools = (function () {
                     alert("Set new sheet name");        
                 }
                 $('#app-tb-tl-rename-form').hide();
-                $('#app-tb-tl-title').show();         
+                $('#app-tb-tl-title').show();
+                return false;         
             });
 
         $('#app-tb-tl-rename-button')
