@@ -243,8 +243,10 @@ var _gui = (function () {
                     collections = [];
                     boxes.each( function () {
                         collections.push( $(this).val() );
+                        $(this).removeAttr( 'checked' );
                     });
                 }
+
                 _db.search( $('#pl-sr-query').val(), collections, false );
             });
 
