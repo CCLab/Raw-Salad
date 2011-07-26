@@ -479,7 +479,7 @@ var _tools = (function () {
         var checkboxes_list;
 
         $('#app-tb-tl-columns-button')
-            .click( function () {
+            .click( function ( event ) {
                 var columns_form = $('#app-tb-tl-columns-form');
 
                 $('#app-tb-tools')
@@ -510,6 +510,7 @@ var _tools = (function () {
                         .unbind( 'click' );
                 }
 
+                event.stopPropagation();
             });
 
 
