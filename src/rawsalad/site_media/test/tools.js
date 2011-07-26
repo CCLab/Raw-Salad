@@ -44,6 +44,7 @@ var _tools = (function () {
         prepare_filtering_interface();
         prepare_snapshot_interface();
         prepare_search_interface();
+        prepare_rename_sheet_interface();
     };
 
     that.show_search_results = function( results ) {
@@ -579,6 +580,13 @@ var _tools = (function () {
                 }
 
                 return false;
+            });
+    }
+
+    function prepare_rename_sheet_interface() {
+        $('#app-tb-tl-rename-button')
+            .click( function () {
+                $('#app-tb-tl-rename-form').show();  
             });
     }
 
