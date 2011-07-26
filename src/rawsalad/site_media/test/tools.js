@@ -269,7 +269,7 @@ var _tools = (function () {
                 if( form.is(':hidden' )) {
                     form.find('tbody').empty();
                     add_sort_key();
-                    
+
                     if( others.length === 0 ) {
                         form.slideDown( 200 );
                     }
@@ -371,7 +371,7 @@ var _tools = (function () {
                 if( form.is(':hidden' )) {
                     form.find('tbody').empty();
                     add_filter_key();
-                    
+
                     if( others.length === 0 ) {
                         form.slideDown( 200 );
                     }
@@ -497,7 +497,21 @@ var _tools = (function () {
                     update_columns_form();
                     // show the form
                     columns_form.slideDown( 200 );
+
+                    $('html')
+                        .click( function () {
+                            $(this).trigger( $.Event( 'click' ));
+                        });
+
+                    event.stopPropagation();
                 }
+                else {
+                    $('html')
+                        .unbind( 'click' );
+                }
+
+
+
             });
 
 

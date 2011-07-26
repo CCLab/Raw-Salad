@@ -46,6 +46,8 @@ input {
 textarea {
   font-family: Arial,sans-serif;
   font-size: 12px;
+  width: 150px;
+  height: 200px;
 }
 
 
