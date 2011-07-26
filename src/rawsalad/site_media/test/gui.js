@@ -245,6 +245,33 @@ var _gui = (function () {
                 return false;
             });
 
+
+        $('#app-sh-submit')
+            .click( function () {
+                var boxes = $('#app-sh-table').find('input:checkbox:checked');
+
+                if( boxes.length === 0 ) {
+                    return;
+                }
+
+                $('#app-sh-permalink')
+                    .slideDown( 100 )
+                    .find('input')
+                    .val( 'http://otwartedane.pl/123457' )
+                    .focus();
+
+                $(this).hide();
+            });
+
+        $('#app-sh-permalink')
+            .find('input')
+            .focus( function () {
+                $(this).select();
+            })
+            .click( function () {
+                $(this).select();
+            });
+
         init_choose_panel();
     };
 
@@ -508,11 +535,17 @@ var _gui = (function () {
             if( i === 0 ) {
                 html.push( '<td class="pl-dl-select-buttons" ' );
                 html.push( 'rowspan="', $('.sheet').length, '">' );
-                html.push( '<div id="pl-dl-sh-select" class="grey button">');
-                html.push( 'Zaznacz wszystkie</div>' );
-                html.push( '<br class="clear"/>' );
-                html.push( '<div id="pl-dl-sh-unselect" class="grey button"> ');
-                html.push( 'Odznacz wszystkie</div>' );
+                
+                if( $('.sheet').length > 3 ) {
+                    html.push( '<div id="pl-dl-sh-select" class="grey button">');
+                    html.push( 'Zaznacz wszystkie</div>' );
+                    html.push( '<br class="clear"/>' );
+                    html.push( '<div id="pl-dl-sh-unselect" class="grey button"> ');
+                    html.push( 'Odznacz wszystkie</div>' );
+                }
+                else {
+                    html.push( '<div style="width: 107px"></div>' );
+                }
                 html.push( '</td>' );
             }
             html.push( '<td class="check">' );
@@ -666,6 +699,8 @@ var _gui = (function () {
         var html = [];
 
         $('#app-sh-table').find('input:checked').removeAttr('checked');
+        $('#app-sh-submit').show();
+        $('#app-sh-permalink').hide();
 
         html.push( '<tbody>' );
         $('.sheet').each( function ( i, sheet ) {
@@ -677,13 +712,19 @@ var _gui = (function () {
             html.push( '<tr>' );
             // add (un)select all buttons
             if( i === 0 ) {
-                html.push( '<td class="app-sh-select-buttons" ' );
+                html.push( '<td class="pl-sh-select-buttons" ' );
                 html.push( 'rowspan="', $('.sheet').length, '">' );
-                html.push( '<div id="app-sh-select" class="rounded grey button">');
-                html.push( 'Zaznacz wszystkie</div>' );
-                html.push( '<br class="clear"/>' );
-                html.push( '<div id="app-sh-unselect" class="rounded grey button"> ');
-                html.push( 'Odznacz wszystkie</div>' );
+                
+                if( $('.sheet').length > 3 ) {
+                    html.push( '<div id="app-sh-select" class="rounded grey button right">');
+                    html.push( 'Zaznacz wszystkie</div>' );
+                    html.push( '<br class="clear"/>' );
+                    html.push( '<div id="app-sh-unselect" class="rounded grey button right"> ');
+                    html.push( 'Odznacz wszystkie</div>' );
+                }
+                else {
+                    html.push( '<div style="width: 107px"></div>' );
+                }
                 html.push( '</td>' );
             }
             html.push( '<td class="check">' );

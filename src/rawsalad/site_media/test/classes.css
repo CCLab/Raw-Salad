@@ -42,8 +42,8 @@
 
 .rounded {
   padding: 5px;
-  margin: 5px;
-  margin-bottom: 0px;
+  margin: 0px 5px;
+  margin-bottom: 5px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;

@@ -451,6 +451,7 @@ textarea {
 
   .input-text {
     min-width: 100px;
+    height: 18px;
     background-color: #fff;
 
     border: 1px solid #4cbceb;
@@ -574,3 +575,17 @@ textarea {
          background-color: #fff;
          border: 1px solid #a3a3a3;
        }
+
+
+
+  #app-sh-permalink {
+    margin: 0px;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #e1e1e1;
+    color: #1ea3e8;
+    border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    -o-border-radius: 0px 0px 5px 5px;
+  }

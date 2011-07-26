@@ -12,6 +12,7 @@
     $('#pl-close-bar').hide();
     $('#application').hide();
     $('#app-share').hide();
+    $('#app-sh-permalink').hide();
     $('#app-tb-tl-srft-forms').find('form').hide();
     $('#app-tb-tl-columns-form').hide();
 })();
