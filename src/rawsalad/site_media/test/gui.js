@@ -230,13 +230,22 @@ var _gui = (function () {
                 if(  $('#pl-sr-query').val() === '' ) {
                     return;
                 }
+                var boxes = $('pl-sr-table').find('input:checkbox:checked');
+                var collections;
 
-                _db.search( $('#pl-sr-query').val(), ['0-0-2011', '0-1-2011', '0-1-2012',
-                                                      '0-2-2011', '0-2-2012', '1-0-2011',
-                                                      '1-1-2011', '1-1-2012', '1-2-2011',
-                                                      '1-2-2012', '2-1-2011', '2-2-2011',
-                                                      '2-3-2011', '2-4-2011', '3-0-2011',
-                                                      '3-1-2011' ], false );
+                if( boxes.length === 0 ) {
+                    collections = ['0-0-2011', '0-1-2011', '0-1-2012', '0-2-2011',
+                                   '0-2-2012', '1-0-2011', '1-1-2011', '1-1-2012',
+                                   '1-2-2011', '1-2-2012', '2-1-2011', '2-2-2011',
+                                   '2-3-2011', '2-4-2011', '3-0-2011', '3-1-2011' ];
+                }
+                else {
+                    collections = [];
+                    boxes.each( function () {
+                        collections.push( $(this).val() );
+                    });
+                }
+                _db.search( $('#pl-sr-query').val(), collections, false );
             });
 
         $('#pl-sr-form')
@@ -535,7 +544,7 @@ var _gui = (function () {
             if( i === 0 ) {
                 html.push( '<td class="pl-dl-select-buttons" ' );
                 html.push( 'rowspan="', $('.sheet').length, '">' );
-                
+
                 if( $('.sheet').length > 3 ) {
                     html.push( '<div id="pl-dl-sh-select" class="grey button">');
                     html.push( 'Zaznacz wszystkie</div>' );
@@ -714,7 +723,7 @@ var _gui = (function () {
             if( i === 0 ) {
                 html.push( '<td class="pl-sh-select-buttons" ' );
                 html.push( 'rowspan="', $('.sheet').length, '">' );
-                
+
                 if( $('.sheet').length > 3 ) {
                     html.push( '<div id="app-sh-select" class="rounded grey button right">');
                     html.push( 'Zaznacz wszystkie</div>' );
