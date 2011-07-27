@@ -101,7 +101,7 @@ var _db = (function () {
                 };
 
                 // TODO: shouldnt value returned by group_exists be changed?
-                if ( _store.group_exists(col_id) ) {
+                if ( !_store.group_exists(col_id) ) {
                     _sheet.create_searched_sheet( col_id, received_data );
                 }
                 else {
