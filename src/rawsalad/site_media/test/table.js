@@ -37,7 +37,6 @@ var _table = (function () {
     };
 
     that.init_table = function () {
-        _utils.create_preloader('Wczytujê tabelê');
         if ( !_store.active_filtered() ) {
             create_thead();
             create_tbody();
@@ -64,8 +63,6 @@ var _table = (function () {
 //                '-webkit-border-radius': '5px'
 //            });
         }
-
-        _utils.clean_preloader();
     };
 
     that.add_node = function ( parent_id ) {

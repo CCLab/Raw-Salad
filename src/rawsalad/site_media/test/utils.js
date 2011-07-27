@@ -90,16 +90,24 @@ var _utils = (function () {
     };
 
     that.create_preloader = function( text ) {
-        var html = [];
         var preloader;
+        var html = [];
+        var x = screen.width / 2 - 200;
+
         html.push('<div id="preloader">');
         html.push( text );
         html.push('</div>');
+
         preloader = $( html.join('') );
-        $('#app-table > .panel-main').after( preloader );
+        preloader.css({
+            'top': '10px',
+            'left': x
+        });
+
+        $('body').append( preloader );
     };
 
-    that.clean_preloader = function() {
+    that.clear_preloader = function() {
         $('#preloader').remove();
     };
 

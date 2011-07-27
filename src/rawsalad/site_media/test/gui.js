@@ -250,6 +250,7 @@ var _gui = (function () {
                 $('#pl-sr-results')
                     .slideUp( 200 );
 
+                _util.create_preloader( 'Szukam' );
                 _db.search( $('#pl-sr-query').val(), collections, false );
             });
 

@@ -639,4 +639,21 @@ textarea {
   background-color: #c1c1c1; 
 }
 
+#preloader {
+  position: fixed;
 
+  width: 400px;
+  height: 200px;
+
+  padding: 15px;
+
+  color: #5b5b5b;
+  background-color: #fff;
+  
+  border: 3px solid #5b5b5b;
+
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+}

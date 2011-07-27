@@ -74,6 +74,8 @@ var _db = (function () {
                     tbody.append( row );
                 });
 
+                _utils.clear_preloader();
+
                 $('#pl-sr-full')
                     .slideUp( 200 );
 
@@ -102,7 +104,7 @@ var _db = (function () {
                 // TODO: shouldnt value returned by group_exists be changed?
                 if ( !_store.group_exists(col_id) ) {
                     _sheet.create_searched_sheet( col_id, received_data, sheets_left );
-                } 
+                }
                 else {
                     _sheet.add_searched_group( col_id, received_data, sheets_left );
                 }
