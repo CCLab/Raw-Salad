@@ -181,19 +181,86 @@ def search_data( request ):
         "search_time_total": "%0.6f" % tlap,
         'records_found_total': total_rec
         } )
-    for k, v in result.iteritems():
-        print "'%s' : '%s'" % (k, v)
 
     return HttpResponse( json.dumps( result ))
+
+def string2list( in_str ):
+    """ converts comma separated string to the list """
+    out_list= []
+    try:
+        for elm in in_str.split(','):
+            if '[' in elm:
+                elm= elm.replace('[', '')
+            if ']' in elm:
+                elm= elm.replace(']', '')
+            out_list.append( elm.strip().encode('utf-8') )
+    except:
+        pass
+
+    return out_list
+
+def build_idef_regexp( curr_idef ):
+    """ build regexp quering collection """
+    level_num= curr_idef.count('-')
+    if level_num > 0: # deeper than 'a'
+        idef_srch= curr_idef.rsplit('-', 1)[0]
+        lookup_idef= "^%s\-\d+$" % idef_srch
+        curr_idef= idef_srch
+        level= 1
+        while level < level_num:
+            idef_srch= curr_idef.rsplit('-', 1)[0]
+            lookup_idef += "|^%s\-\d+$" % idef_srch
+            curr_idef= idef_srch
+            level += 1
+        lookup_idef += "|^([A-Z]|\d)+$"
+    else: # just query the highest level
+        lookup_idef= "^([A-Z]|\d)+$"
+
+    return lookup_idef
+
+def build_query( idef_list ):
+    lookup, i= "", 0
+    for idef in idef_list:
+        i += 1
+        lookup_idef= build_idef_regexp( idef )
+
+        lookup += "(%s)|" % lookup_idef
+        if i == len(idef_list):
+            lookup= lookup[:-1] # cutting the last symbol | in case it's the end of list
+
+    if len(idef_list) == 1: # single idef
+        lookup= lookup[1:-1] # cutting ( and )
+
+    return { 'idef': re.compile(lookup, re.IGNORECASE) }
+
 
 # get initial_data + subtrees to searched nodes
 def get_searched_data( request ):
     response_dict = {
-        'dataset': request.GET.get( 'dataset', -1 ),
-        'view': request.GET.get( 'view', -1 ),
-        'issue': request.GET.get( 'issue', -1 )
+        'dataset': int( request.GET.get( 'dataset', -1 ) ),
+        'view': int( request.GET.get( 'view', -1 ) ),
+        'issue': request.GET.get( 'issue', '' ).encode('utf-8'),
+        'idef': string2list( request.GET.get( 'idef', '' ) ),
+        'regexp': True
     }
-    return HttpResponse( json.dumps(response_dict) )
+
+    find_query= build_query( response_dict['idef'] )
+
+    db= rsdb.DBconnect("mongodb").dbconnect
+    coll= rsdb.Collection(query= find_query)
+
+    return_data = {}
+    return_data['rows']= coll.get_data(
+        db, response_dict['dataset'], response_dict['view'], response_dict['issue']
+        )
+    return_data['perspective']= coll.metadata_complete
+
+    if 'query' in return_data['perspective']: # not json serializable
+        del return_data['perspective']['query']
+    
+    print return_data
+
+    return HttpResponse( json.dumps(return_data) )
 
 
 # list of possible ajax calls
