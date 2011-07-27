@@ -598,16 +598,20 @@ var _tools = (function () {
             });
 
         $('#app-tb-tl-rename-button')
-            .click( function () {
-                var active_sheet_name = _store.active_sheet_name();
-                $('#app-tb-tl-title').hide();
-                $('#app-tb-tl-rename-input').val( active_sheet_name );
-                $('#app-tb-tl-rename-form').show();
-                $('#app-tb-tl-rename-button').click( function () {
-                    $('#app-tb-tl-rename-form').submit();
-                } );
-            });
+            .click( rename_button_click );
     }
+
+
+    function rename_button_click() {
+        var active_sheet_name = _store.active_sheet_name();
+        $('#app-tb-tl-title').hide();
+        $('#app-tb-tl-rename-input').val( active_sheet_name );
+        $('#app-tb-tl-rename-form').show();
+        $('#app-tb-tl-rename-button').click( function () {
+            $('#app-tb-tl-rename-form').submit();
+            $('#app-tb-tl-rename-button').click( rename_button_click );
+        } );
+     }
 
     function set_new_sheet_name() {
     
@@ -758,8 +762,3 @@ var _tools = (function () {
     }
 
 }) ();
-
-
-
-
-
