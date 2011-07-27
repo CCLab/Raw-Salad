@@ -69,7 +69,7 @@ var _db = (function () {
                                 dataset: collection['dataset'],
                                 view: collection['view'],
                                 issue: collection['issue'],
-                                idef: idefs
+                                idef: idefs.toString()
                             });
                         })
                         .find( '.pl-sr-results-name' )
