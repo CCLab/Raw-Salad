@@ -100,8 +100,6 @@ var _db = (function () {
                     'issue': received_data['issue']
                 };
 
-                console.log( received_data );
-
                 // TODO: shouldnt value returned by group_exists be changed?
                 if ( !_store.group_exists(col_id) ) {
                     _sheet.create_searched_sheet( col_id, received_data );
