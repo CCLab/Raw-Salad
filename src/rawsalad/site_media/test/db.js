@@ -47,29 +47,49 @@ var _db = (function () {
 
                 received_data['strict']['result'].forEach( function ( collection ) {
                     var html = [];
-                    var row;
+                    var single_row;
                     var idefs = [];
 
-                    html.push( '<tr>' );
+                    html.push( '<tr style="background-color: #e3e3e3">' );
                     html.push( '<td class="pl-sr-results-number right">', collection['data'].length, '</td>' );
-                    html.push( '<td class="pl-sr-results-name"><div class="left">', collection['perspective'], '</div>' );
+                    html.push( '<td class="pl-sr-results-name">' );
+                    html.push( '<div class="pl-sr-results-name-text left">', collection['perspective'], '</div>' );
                     html.push( '<div class="pl-sr-results-button left">&gt;</div>' );
                     html.push( '</td>' );
                     html.push( '</tr>' );
 
-                    row = $( html.join('') );
+                    single_row = $( html.join('') );
                     collection['data'].forEach( function ( result ) {
                         idefs.push( result['idef'] );
                     });
 
-                    row.click( function () {
-                        that.add_search_data({
-                            dataset: collection['dataset'],
-                            view: collection['view'],
-                            issue: collection['issue'],
-                            idef: idefs
-                        });
-                    });
+                    single_row
+                        .click( function () {
+                            that.add_search_data({
+                                dataset: collection['dataset'],
+                                view: collection['view'],
+                                issue: collection['issue'],
+                                idef: idefs
+                            });
+                        })
+                        .hover(
+                            function () {
+                                $(this)
+                                    .find( '.pl-sr-results-name-text' )
+                                    .css( 'color', '#1ea3e8' )
+                                    .end()
+                                    .find( '.pl-sr-results-button' )
+                                    .css( 'background-color', '#1ea3e8' );
+                            },
+                            function () {
+                                $(this)
+                                    .find( '.pl-sr-results-name-text' )
+                                    .css( 'color', '#000' )
+                                    .end()
+                                    .find( '.pl-sr-results-button' )
+                                    .css( 'background-color', '#c1c1c1' );
+                            }
+                        );
 
                     tbody.append( row );
                 });
