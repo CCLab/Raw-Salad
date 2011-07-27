@@ -366,7 +366,7 @@ var _store = (function () {
                 })
                 .pop();
 
-        return node['info'];
+        return node['data']['info'];
     };
 
 
