@@ -585,8 +585,8 @@ var _tools = (function () {
     }
 
     function prepare_rename_sheet_interface() {
-        $('#app-tb-tl-rename-form')
-            .submit( submit_new_sheet_name );
+//        $('#app-tb-tl-rename-form')
+//            .submit( submit_new_sheet_name );
         $('#app-tb-tl-rename-button')
             .click( rename_button_click );
     }
