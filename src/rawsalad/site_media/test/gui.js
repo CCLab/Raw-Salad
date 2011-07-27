@@ -312,6 +312,7 @@ var _gui = (function () {
         var active_sheet = _store.active_sheet_index();
 
         $('#app-tb-sheets').empty();
+        $('#app-tb-tl-old-title').empty();
         groups.forEach( function ( group, group_num ){
             group['sheets'].forEach( function ( sheet, sheet_num ) {
                 var sheet_name = sheet['name'];
