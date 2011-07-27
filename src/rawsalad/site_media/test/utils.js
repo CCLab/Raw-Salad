@@ -105,9 +105,11 @@ var _utils = (function () {
         });
 
         $('body').append( preloader );
+        $('#wrapper').css( 'opacity': '0.3' );
     };
 
     that.clear_preloader = function() {
+        $('#wrapper').css( 'opacity': '1' );
         $('#preloader').remove();
     };
 
