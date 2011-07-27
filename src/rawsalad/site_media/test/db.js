@@ -72,24 +72,26 @@ var _db = (function () {
                                 idef: idefs
                             });
                         })
-                        .hover(
-                            function () {
-                                $(this)
-                                    .find( '.pl-sr-results-name-text' )
-                                    .css( 'color', '#1ea3e8' )
-                                    .end()
-                                    .find( '.pl-sr-results-button' )
-                                    .css( 'background-color', '#1ea3e8' );
-                            },
-                            function () {
-                                $(this)
-                                    .find( '.pl-sr-results-name-text' )
-                                    .css( 'color', '#000' )
-                                    .end()
-                                    .find( '.pl-sr-results-button' )
-                                    .css( 'background-color', '#c1c1c1' );
-                            }
-                        );
+                        .find( '.pl-sr-results-name' )
+                            .hover(
+                                function () {
+                                    $(this)
+                                        .css( 'cursor', 'pointer' )
+                                        .find( '.pl-sr-results-name-text' )
+                                        .css( 'color', '#1ea3e8' )
+                                        .end()
+                                        .find( '.pl-sr-results-button' )
+                                        .css( 'background-color', '#1ea3e8' );
+                                },
+                                function () {
+                                    $(this)
+                                        .find( '.pl-sr-results-name-text' )
+                                        .css( 'color', '#000' )
+                                        .end()
+                                        .find( '.pl-sr-results-button' )
+                                        .css( 'background-color', '#c1c1c1' );
+                                }
+                            );
 
                     tbody.append( single_row );
                 });
