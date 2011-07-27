@@ -93,6 +93,7 @@ var _db = (function () {
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
+                var received_data = {"rows": [{"wspolfin_eu": 0, "leaf": false, "name": "KANCELARIA PREZYDENTA RP", "parent": null, "level": "a", "numer": 1, "idef": "01", "swiad_fiz": 953, "wyd_majatk": 6850, "v_total": 171524, "czesc": "1", "wyd_jednostek": 121721, "dot_sub": 42000, "pozycja": 1, "type": "Cz\u0119\u015b\u0107 1", "sw_eu": 0, "wyd_dlug": 0}, {"wspolfin_eu": 0, "leaf": false, "name": "KANCELARIA SEJMU", "parent": null, "level": "a", "numer": 2, "idef": "02", "swiad_fiz": 80741, "wyd_majatk": 21276, "v_total": 430780, "czesc": "2", "wyd_jednostek": 328763, "dot_sub": 0, "pozycja": 1, "type": "Cz\u0119\u015b\u0107 2", "sw_eu": 0, "wyd_dlug": 0}, {"wspolfin_eu": 0, "leaf": false, "name": "Urz\u0119dy naczelnych organ\u00f3w w\u0142adzy pa\u0144stwowej, kontroli i ochrony prawa oraz s\u0105downictwa", "parent": "01", "level": "b", "numer": 751, "idef": "01-751", "swiad_fiz": 953, "wyd_majatk": 6850, "v_total": 129524, "czesc": "1", "wyd_jednostek": 121721, "dot_sub": 0, "pozycja": 2, "type": "Dzia\u0142 751", "sw_eu": 0, "wyd_dlug": 0}, {"wspolfin_eu": 0, "leaf": false, "name": "Kultura i ochrona dziedzictwa narodowego", "parent": "01", "level": "b", "numer": 921, "idef": "01-921", "swiad_fiz": 0, "wyd_majatk": 0, "v_total": 42000, "czesc": "1", "wyd_jednostek": 0, "dot_sub": 42000, "pozycja": 7, "type": "Dzia\u0142 921", "sw_eu": 0, "wyd_dlug": 0}], "perspective": {"sort": {"1": {"level": 1}, "0": {"idef": 1}}, "name": "budzet_ksiegowy_2011", "idef": 0, "dataset": 0, "explorable": "type", "perspective": "Bud\u017cet ksi\u0119gowy 2011", "aux": {"leaf": 1, "parent": 1, "level": 1}, "query": {"level": "a"}, "ns": "dd_budg2011_tr", "issue": "2011", "columns": [{"type": "string", "key": "idef", "label": "ID"}, {"type": "string", "processable": true, "key": "numer", "label": "Numer"}, {"type": "number", "processable": true, "key": "czesc", "label": "Cz\u0119\u015b\u0107"}, {"type": "string", "label": "Typ", "processable": true, "key": "type", "basic": true}, {"type": "string", "label": "Tre\u015b\u0107", "processable": true, "key": "name", "basic": true}, {"type": "string", "processable": true, "key": "pozycja", "label": "Pozycja"}, {"label": "Dotacje i subwencje", "processable": true, "key": "dot_sub", "basic": false, "checkable": true, "type": "number"}, {"label": "\u015awiadczenia na rzecz os\u00f3b fizycznych", "processable": true, "key": "swiad_fiz", "basic": false, "checkable": true, "type": "number"}, {"label": "Wydatki bie\u017c\u0105ce jednostek bud\u017cetowych", "processable": true, "key": "wyd_jednostek", "basic": false, "checkable": true, "type": "number"}, {"label": "Wydatki maj\u0105tkowe", "processable": true, "key": "wyd_majatk", "basic": false, "checkable": true, "type": "number"}, {"label": "Wydatki na obs\u0142ug\u0119 d\u0142ugu Skarbu Pa\u0144stwa", "processable": true, "key": "wyd_dlug", "basic": false, "checkable": true, "type": "number"}, {"label": "\u015arodki w\u0142asne Unii Europejskiej", "processable": true, "key": "sw_eu", "basic": false, "checkable": true, "type": "number"}, {"label": "Wsp\u00f3\u0142finansowanie projekt\u00f3w z udzia\u0142em \u015brodk\u00f3w Unii Europejskiej", "processable": true, "key": "wspolfin_eu", "basic": false, "checkable": true, "type": "number"}, {"label": "OG\u00d3\u0141EM", "processable": true, "key": "v_total", "basic": true, "checkable": true, "type": "number"}]}};
                 var col_id = {
                     'dataset': received_data['dataset'],
                     'perspective': received_data['view'],
@@ -100,16 +101,15 @@ var _db = (function () {
                 };
 
                 console.log( received_data );
-/*
+
                 // TODO: shouldnt value returned by group_exists be changed?
                 if ( !_store.group_exists(col_id) ) {
-                    _sheet.create_searched_sheet( col_id, received_data, sheets_left );
+                    _sheet.create_searched_sheet( col_id, received_data );
                 }
                 else {
-                    _sheet.add_searched_group( col_id, received_data, sheets_left );
+                    _sheet.add_searched_group( col_id, received_data );
                 }
                 _gui.show_table_tab();
-*/
             }
         }); // $.ajax
     };
