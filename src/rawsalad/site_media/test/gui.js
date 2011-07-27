@@ -313,6 +313,10 @@ var _gui = (function () {
 
         $('#app-tb-sheets').empty();
         $('#app-tb-tl-old-title').empty();
+
+        $('#app-tb-tl-rename-form').hide();                
+        $('#app-tb-tl-title').show();                              
+
         groups.forEach( function ( group, group_num ){
             group['sheets'].forEach( function ( sheet, sheet_num ) {
                 var sheet_name = sheet['name'];
