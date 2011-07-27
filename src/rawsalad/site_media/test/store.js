@@ -104,6 +104,7 @@ var _store = (function () {
         var active_grp = that.active_group();
 
         // store original version of collection
+        active_grp['name'] = data['name'];
         active_grp['basic_rows'] = sheet( data, true );
         // add data to mutable list of sheets
         active_grp['sheets'].push( sheet( data ) );
@@ -436,7 +437,7 @@ var _store = (function () {
     // list of all sheets of the same dataset/perspective/issue
     function group( data ) {
         return {
-            'name': data['name'],
+            'name': null,
             'dataset': data['dataset'],
             'perspective': data['perspective'],
             'issue': data['issue'],
