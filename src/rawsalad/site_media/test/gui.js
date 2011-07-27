@@ -338,8 +338,7 @@ var _gui = (function () {
                     });
 
                 if( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
-                    
-                
+                    var group_name = _store.active_group_name();                  
                     close_sheet = $( '<div class="close-sheet-button button" >x</div>' );
                     if( !( groups.length === 1 && group['sheets'].length === 1 ) ) {
                         new_snap
@@ -350,9 +349,14 @@ var _gui = (function () {
                                         })
                             )
                     }
-                    new_snap.addClass('active');
-                    
+                    new_snap.addClass('active');                    
                     $('#app-tb-tl-title').html( sheet_name );
+                    if ( group_name !== sheet_name ){
+                        $('#app-tb-tl-old-title')
+                            .html( '('+ group_name + ')' )
+                            .show();                        
+                    }
+                   
                 }
                 $('#app-tb-sheets').append( new_snap );
             })
