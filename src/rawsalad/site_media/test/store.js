@@ -253,6 +253,9 @@ var _store = (function () {
         active_group_number = value;
     };
 
+    that.active_group_name = function () {
+        return that.active_group()['name'];
+    };
 
     that.add_data = function ( new_data ) {
         var rows = that.active_rows();
@@ -333,9 +336,9 @@ var _store = (function () {
         if( arguments.length === 0 ) {
             return that.active_sheet()['name'];
         }
-        that.active_sheet()['name'] = sheet_name;
+        that.active_sheet()['name'] = sheet_name; 
     };
-
+    
     that.reset_sheet = function () {
         var active_sheet = that.active_sheet();
         var basic_rows = $.extend( true, [], that.active_group()['basic_rows'] );

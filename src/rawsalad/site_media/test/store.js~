@@ -104,6 +104,7 @@ var _store = (function () {
         var active_grp = that.active_group();
 
         // store original version of collection
+        active_grp['name'] = data['name'];
         active_grp['basic_rows'] = sheet( data, true );
         // add data to mutable list of sheets
         active_grp['sheets'].push( sheet( data ) );
@@ -252,6 +253,9 @@ var _store = (function () {
         active_group_number = value;
     };
 
+    that.active_group_name = function () {
+        return that.active_group()['name'];
+    };
 
     that.add_data = function ( new_data ) {
         var rows = that.active_rows();
@@ -332,9 +336,9 @@ var _store = (function () {
         if( arguments.length === 0 ) {
             return that.active_sheet()['name'];
         }
-        that.active_sheet()['name'] = sheet_name;
+        that.active_sheet()['name'] = sheet_name; 
     };
-
+    
     that.reset_sheet = function () {
         var active_sheet = that.active_sheet();
         var basic_rows = $.extend( true, [], that.active_group()['basic_rows'] );
@@ -436,6 +440,7 @@ var _store = (function () {
     // list of all sheets of the same dataset/perspective/issue
     function group( data ) {
         return {
+            'name': null,
             'dataset': data['dataset'],
             'perspective': data['perspective'],
             'issue': data['issue'],
