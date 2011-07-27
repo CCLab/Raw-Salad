@@ -109,7 +109,7 @@ var _utils = (function () {
     };
 
     that.clear_preloader = function() {
-        $('#wrapper').css( 'opacity': '1' );
+        $('#wrapper').css( 'opacity', '1' );
         $('#preloader').remove();
     };
 
