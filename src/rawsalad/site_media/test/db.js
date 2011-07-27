@@ -91,7 +91,7 @@ var _db = (function () {
                             }
                         );
 
-                    tbody.append( row );
+                    tbody.append( single_row );
                 });
 
                 _utils.clear_preloader();
