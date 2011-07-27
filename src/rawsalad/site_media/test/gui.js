@@ -311,13 +311,11 @@ var _gui = (function () {
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
 
-        // 1  clear gui,
         $('#app-tb-sheets').empty();
-
-        // 2  new gui
         groups.forEach( function ( group, group_num ){
             group['sheets'].forEach( function ( sheet, sheet_num ) {
                 var sheet_name = sheet['name'];
+                
                 var html = [];
                 var new_sheet;
 
@@ -340,6 +338,8 @@ var _gui = (function () {
                     });
 
                 if( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
+                    var basic_name = 
+                
                     close_sheet = $( '<div class="close-sheet-button button" >x</div>' );
                     if( !( groups.length === 1 && group['sheets'].length === 1 ) ) {
                         new_snap
@@ -351,21 +351,13 @@ var _gui = (function () {
                             )
                     }
                     new_snap.addClass('active');
+                    
                     $('#app-tb-tl-title').html( sheet_name );
                 }
                 $('#app-tb-sheets').append( new_snap );
             })
         });
 
-        // TODO - finish this
-        // 3 clear and get new tabs from _store
-        //if( $('.snapshot').length == 10 ) {
-        //    $('#save-snapshot' ).hide();
-        //}
-
-        // close all unnecessary tools
-        //that.clear_app();
-        // show some data finally
         _table.clean_table();
         _table.init_table();
     };

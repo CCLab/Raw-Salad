@@ -436,6 +436,7 @@ var _store = (function () {
     // list of all sheets of the same dataset/perspective/issue
     function group( data ) {
         return {
+            'name': data['name'],
             'dataset': data['dataset'],
             'perspective': data['perspective'],
             'issue': data['issue'],
