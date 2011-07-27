@@ -360,6 +360,16 @@ var _store = (function () {
         return 'Arkusz ' + next_num;
     };
 
+    that.get_info = function ( id ) {
+        var node = that.active_rows().filter( function ( e ) {
+                return e['idef'] === id;
+                })
+                .pop();
+
+        return node['info'];
+    };
+
+
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
     var meta_data = [];

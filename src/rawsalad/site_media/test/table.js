@@ -198,7 +198,8 @@ var _table = (function () {
             html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
             html.push( data[column['key']] );
             if( !!data['info'] && column['key'] === 'type' ) {
-                html.push( '<img src="/site_media/img/info_small.png" border="0" style="margin-left: 5px;"/>' );
+                html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
+                html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
             }
             html.push( '</td>' );
         });
@@ -217,12 +218,18 @@ var _table = (function () {
             })
             .hover(
                 function () {
-                    row.find('.click').css('color', '#11a8f7' );
+                    $(this).find('.click').css('color', '#1a7aad' );
                 },
                 function () {
-                    raw.find('.click').css('color', '#1a7aad' );
+                    $(this).find('.click').css('color', '#11a8f7' );
                 }
             );
+
+        row.find('img')
+           .click( function ( event ) {
+                console.log( _store.get_info( $(this).attr('data-id') ).toString() );
+               event.stopPropagation();
+           });
 
         if( !is_visible && data['level'] !== 'a' ){
             row.hide();
