@@ -585,39 +585,32 @@ var _tools = (function () {
     }
 
     function prepare_rename_sheet_interface() {
-//        $('#app-tb-tl-rename-form')
-//            .submit( submit_new_sheet_name );
-        $('#app-tb-tl-rename-button')
-            .click( rename_button_click );
-    }
+        $('#app-tb-tl-rename-form').submit( function(){
+            var old_sheet_name = _store.active_sheet_name();
+            var new_sheet_name = $('#app-tb-tl-rename-input').val();
 
-    function rename_button_click() {
-        var active_sheet_name = _store.active_sheet_name();
-        $('#app-tb-tl-title').hide();
-        $('#app-tb-tl-rename-input').val( active_sheet_name );
-        $('#app-tb-tl-rename-form').show();
+            if ( old_sheet_name !== new_sheet_name ){
+                 alert("Set new sheet name"); 
+                 _store.active_sheet_name( new_sheet_name );             
+                 _gui.refresh_gui();       
+            }
+            return false;              
+        } );
+        
         $('#app-tb-tl-rename-button')
-            .trigger($.Event('click'))
-            .click( function () {
-                $('#app-tb-tl-rename-form').submit( submit_new_sheet_name );            
-//              $('#app-tb-tl-rename-button').click( rename_button_click );
-        });
-     }
+            .click( function(){
+                var active_sheet_name = _store.active_sheet_name();
 
-    function submit_new_sheet_name() {
-        var old_sheet_name = _store.active_sheet_name();
-        var new_sheet_name = $('#app-tb-tl-rename-input').val();
-        if ( old_sheet_name !== new_sheet_name ){
-             alert("Set new sheet name"); 
-             _store.active_sheet_name( new_sheet_name );             
-             _gui.refresh_gui();       
-        }
-        $('#app-tb-tl-rename-button')
-            .trigger($.Event('click'))
-            .click( rename_button_click );
-        $('#app-tb-tl-rename-form').hide();                
-        $('#app-tb-tl-title').show();              
-        return false;         
+                if ( $('#app-tb-tl-rename-input').is(":visible")){
+                    $('#app-tb-tl-rename-form').submit();
+                    $('#app-tb-tl-rename-form').hide();                
+                    $('#app-tb-tl-title').show();                              
+                }else{
+                    $('#app-tb-tl-title').hide();
+                    $('#app-tb-tl-rename-input').val( active_sheet_name );
+                    $('#app-tb-tl-rename-form').show();  
+                }        
+            });
     }
 
     function create_filter_result( filtered_list ) {
