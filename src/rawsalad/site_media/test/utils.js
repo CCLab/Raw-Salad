@@ -92,7 +92,7 @@ var _utils = (function () {
     that.create_preloader = function( text ) {
         var preloader;
         var html = [];
-        var x = $(window).width / 2 - 200;
+        var x = $(window).width() / 2 - 200;
 
         html.push('<div id="preloader">');
         html.push( text );
