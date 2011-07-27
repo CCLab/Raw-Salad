@@ -105,7 +105,7 @@ var _utils = (function () {
         });
 
         $('body').append( preloader );
-        $('#wrapper').css( 'opacity': '0.3' );
+        $('#wrapper').css( 'opacity', '0.3' );
     };
 
     that.clear_preloader = function() {
