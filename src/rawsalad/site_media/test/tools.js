@@ -548,6 +548,7 @@ var _tools = (function () {
                 _table.clean_table();
                 _table.init_table();
                 $(this).hide();
+                $('html').unbind( 'click' );
 
                 // to prevent form's action!!
                 return false;

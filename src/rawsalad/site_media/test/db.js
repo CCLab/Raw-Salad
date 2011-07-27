@@ -42,16 +42,19 @@ var _db = (function () {
             data: data,
             dataType: 'json',
             success: function ( received_data ) {
-                var html = [];
-                var row;
-                var idefs = [];
                 var tbody = $('#pl-sr-results').find('tbody');
+                tbody.empty();
 
                 received_data['strict']['result'].forEach( function ( collection ) {
+                    var html = [];
+                    var row;
+                    var idefs = [];
+
                     html.push( '<tr>' );
-                    html.push( '<td class="right" style="width: 50px; vertical-align: top; padding-right: 15px; border-right: 1px solid #c1c1c1; text-align: right">', collection['data'].    length, '</td>' );
-                    html.push( '<td style="font-weight: bold; padding-left: 15px; vertical-align: top;"><div style="float: left;">', collection['perspective'], '</div>' );
-                    html.push( '<div style="padding: 0px 5px; color: #fff; margin-left: 10px; background-color: #c1c1c1; float: left;">&gt;</div></td>' );
+                    html.push( '<td class="pl-sr-results-number right">', collection['data'].length, '</td>' );
+                    html.push( '<td class="pl-sr-results-name"><div class="left">', collection['perspective'], '</div>' );
+                    html.push( '<div class="pl-sr-results-button left">&gt;</div>' );
+                    html.push( '</td>' );
                     html.push( '</tr>' );
 
                     row = $( html.join('') );
@@ -78,53 +81,35 @@ var _db = (function () {
                     .slideDown( 200 );
 
                 $('#pl-sr-show').show();
-            //    _tools.show_search_results( tmp_data );
             }
         });
     };
 
     that.add_search_data = function ( search_list ) {
-        var sheets_left = search_list.length;
+        $.ajax({
+            url: 'get_searched/',
+            data: search_list,
+            dataType: 'json',
+            success: function ( received_data ) {
+                var col_id = {
+                    'dataset': received_data['dataset'],
+                    'perspective': received_data['view'],
+                    'issue': received_data['issue']
+                };
 
-        search_list.forEach( function ( e ) {
-            var data;
-            data = {
-                dataset: e['dataset'],
-                view: e['view'],
-                issue: e['issue'],
-                data: e['data'].map( function ( elem ) {
-                          return elem['idef'];
-                      })
-            };
-
-            $.ajax({
-                url: 'get_searched/',
-                data: data,
-                dataType: 'json',
-                success: function ( received_data ) {
-                    var col_id = {
-                        'dataset': received_data['dataset'],
-                        'perspective': received_data['view'],
-                        'issue': received_data['issue']
-                    };
-
-                    console.log( received_data );
+                console.log( received_data );
 /*
-                    sheets_left -= 1;
-                    // if it is the last sheet to create, show table
-                    if ( sheets_left === 0 ) {
-                        _gui.show_table_tab();
-                    }
-
-                    // TODO: shouldnt value returned by group_exists be changed?
-                    if ( !_store.group_exists(col_id) ) {
-                        _sheet.create_searched_sheet( col_id, received_data, sheets_left );
-                    } else {
-                        _sheet.add_searched_group( col_id, received_data, sheets_left );
-                    } */
+                // TODO: shouldnt value returned by group_exists be changed?
+                if ( !_store.group_exists(col_id) ) {
+                    _sheet.create_searched_sheet( col_id, received_data, sheets_left );
+                } 
+                else {
+                    _sheet.add_searched_group( col_id, received_data, sheets_left );
                 }
-            }); // $.ajax
-        }); // forEach
+                _gui.show_table_tab();
+*/
+            }
+        }); // $.ajax
     };
 
     // gets the top-level from db

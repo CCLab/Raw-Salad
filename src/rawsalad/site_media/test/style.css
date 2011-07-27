@@ -44,8 +44,10 @@ input {
 }
 
 textarea {
-  width: 150px;
+  width: 250px;
   height: 200px;
+
+  margin-top: 5px;
 
   background-color: #fff;
 
@@ -251,11 +253,25 @@ textarea {
   }
 
   #pl-fb-email {
-    color: #1b1b1b;
+    width: 250px;
   }
 
-  #pl-fb-email.info {
-    color: #aaa;
+  #app-tb-tl-rename-button {
+    margin-left: 5px;
+    padding: 2px 4px;
+
+    color: #4abff7;
+    background-color: #fff;
+
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+  }
+
+  #app-tb-tl-rename-button:hover {
+    color: #fff;
+    background-color: #4abff7;
   }
 
   #pl-close-bar {
@@ -600,3 +616,27 @@ textarea {
     -webkit-border-radius: 0px 0px 5px 5px;
     -o-border-radius: 0px 0px 5px 5px;
   }
+
+.
+.pl-sr-results-number {
+  width: 50px; 
+  vertical-align: top; 
+  padding-right: 15px; 
+  border-right: 1px solid #c1c1c1; 
+  text-align: right;
+}
+
+.pl-sr-results-name {
+  font-weight: bold; 
+  padding-left: 15px; 
+  vertical-align: top;
+}
+
+.pl-sr-results-button {
+  padding: 0px 5px; 
+  color: #fff; 
+  margin-left: 10px; 
+  background-color: #c1c1c1; 
+}
+
+
