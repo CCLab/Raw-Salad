@@ -338,7 +338,7 @@ var _gui = (function () {
                     });
 
                 if( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
-                    var basic_name = 
+                    
                 
                     close_sheet = $( '<div class="close-sheet-button button" >x</div>' );
                     if( !( groups.length === 1 && group['sheets'].length === 1 ) ) {
