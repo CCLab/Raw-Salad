@@ -636,7 +636,13 @@ textarea {
   padding: 0px 5px; 
   color: #fff; 
   margin-left: 10px; 
+  
   background-color: #c1c1c1; 
+
+  border-radius: 3px;    
+  -moz-border-radius: 3px;    
+  -webkit-border-radius: 3px;    
+  -o-border-radius: 3px;    
 }
 
 #preloader {
