@@ -590,10 +590,13 @@ var _tools = (function () {
                 var old_sheet_name = _store.active_sheet_name();
                 var new_sheet_name = $('#app-tb-tl-rename-input').val();
                 if ( old_sheet_name !== new_sheet_name ){
-                    alert("Set new sheet name");        
+                    alert("Set new sheet name"); 
+                    _store.active_sheet_name( new_sheet_name );
+                    _gui.refresh_gui();       
+                }else{
+                    $('#app-tb-tl-rename-form').hide();
+                    $('#app-tb-tl-title').show();
                 }
-                $('#app-tb-tl-rename-form').hide();
-                $('#app-tb-tl-title').show();
                 return false;         
             });
 
