@@ -380,7 +380,7 @@ var _store = (function () {
             num += group['sheets'].length;
         }
         return num;
-    }
+    };
 
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
