@@ -606,11 +606,11 @@ var _tools = (function () {
                     $('#app-tb-tl-rename-form').submit();
                 }else{
                     $('#app-tb-tl-title').hide();
-                    $('#app-tb-tl-rename-input').val( active_sheet_name );
-                    $('#app-tb-tl-rename-form')
+                    $('#app-tb-tl-rename-input')
+                        .val( active_sheet_name )
                         .focus()
-                        .select()
-                        .show();  
+                        .select();
+                    $('#app-tb-tl-rename-form').show();  
                 }        
             });
     }
