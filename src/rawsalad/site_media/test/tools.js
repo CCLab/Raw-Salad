@@ -593,10 +593,10 @@ var _tools = (function () {
 //                 alert("Set new sheet name"); 
                  _store.active_sheet_name( new_sheet_name );             
                  _gui.refresh_gui();       
-                 $('#app-tb-tl-rename-form').hide();                
-                 $('#app-tb-tl-title').show();                              
-
             }
+            $('#app-tb-tl-rename-form').hide();                
+            $('#app-tb-tl-title').show();                              
+            
             return false;              
         } );
         
