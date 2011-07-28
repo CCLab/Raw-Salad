@@ -336,9 +336,9 @@ var _store = (function () {
         if( arguments.length === 0 ) {
             return that.active_sheet()['name'];
         }
-        that.active_sheet()['name'] = sheet_name; 
+        that.active_sheet()['name'] = sheet_name;
     };
-    
+
     that.reset_sheet = function () {
         var active_sheet = that.active_sheet();
         var basic_rows = $.extend( true, [], that.active_group()['basic_rows'] );
@@ -372,7 +372,7 @@ var _store = (function () {
 
         return node['data']['info'];
     };
-    
+
     that.get_all_sheets_num = function () {
         var groups = that.get_all_groups();
         var num = 0;
@@ -450,7 +450,7 @@ var _store = (function () {
         return {
             'name': null,
             'dataset': data['dataset'],
-            'perspective': data['perspective'],
+            'perspective': data['view'],
             'issue': data['issue'],
             'columns': data['columns'],
             'active_sheet_number': 0,
