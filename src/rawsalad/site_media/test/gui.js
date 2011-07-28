@@ -539,9 +539,10 @@ var _gui = (function () {
     
     function get_name_max_length() {
         var sheets_num = _store.get_all_sheets_num();
-        var cut = [20, 20, 20, 15, 15, // 1-5
-                   12, 12, 9, 9, 6, // 6-10
-                   6, 6, 4, 4, 4 // 11-15 
+        var cut = [20, 20, 20, 20, 15, // 1-5
+                   15, 15, 12, 12, 12, // 6-10
+                   9, 9, 9, 6, 6,      // 11-15 
+                   6, 4, 4, 4, 4      // 16-20
                   ]; 
         if ( sheets_num  > cut.length ){
             return 3;
