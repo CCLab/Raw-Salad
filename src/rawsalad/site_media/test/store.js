@@ -390,7 +390,7 @@ var _store = (function () {
 
         for( i = 0; i < groups.length; i += 1 ) {
             if( data['dataset'] === groups[i]['dataset'] &&
-                data['perspective'] === groups[i]['perspective'] &&
+                data['view'] === groups[i]['perspective'] &&
                 data['issue'] === groups[i]['issue'] ) {
 
                 return i;

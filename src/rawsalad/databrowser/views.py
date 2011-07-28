@@ -237,10 +237,10 @@ def build_query( idef_list ):
 # get initial_data + subtrees to searched nodes
 def get_searched_data( request ):
     response_dict = {
-        'dataset': int( request.GET.get( 'dataset', -1 ) ),
-        'view': int( request.GET.get( 'view', -1 ) ),
-        'issue': request.GET.get( 'issue', '' ).encode('utf-8'),
-        'idef': string2list( request.GET.get( 'idef', '' ) ),
+        'dataset': int( request.POST.get( 'dataset', -1 ) ),
+        'view': int( request.POST.get( 'view', -1 ) ),
+        'issue': request.POST.get( 'issue', '' ).encode('utf-8'),
+        'idef': string2list( request.POST.get( 'idef', '' ) ),
         'regexp': True
     }
 
@@ -258,7 +258,7 @@ def get_searched_data( request ):
     if 'query' in return_data['perspective']: # not json serializable
         del return_data['perspective']['query']
     
-    print return_data
+    #print return_data
 
     return HttpResponse( json.dumps(return_data) )
 

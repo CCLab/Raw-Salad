@@ -59,7 +59,7 @@ var _sheet = (function () {
         // create group
         _store.create_group({
            "dataset": col_id.dataset,
-           "perspective": col_id.perspective,
+           "perspective": col_id.view,
            "issue": col_id.issue,
            "columns": data.perspective.columns
         });
@@ -77,7 +77,7 @@ var _sheet = (function () {
         _gui.init_app( basic_data['name'] );
     };
 
-    that.create_searched_sheet = function ( col_id, data, sheets_left ) {
+    that.create_searched_sheet = function ( col_id, data ) {
         var new_sheet;
         var additional_rows;
 
@@ -96,11 +96,15 @@ var _sheet = (function () {
             'rows': data['rows'].map( function ( row ) {
                         return {
                             data: row,
-                            state: { open: false, selected: false }
+                            state: { open: false, selected: false, visible: true }
                         };
                     }),
             'filtered': false,
         };
+
+        if( new_sheet['rows'][ new_sheet['rows'].length - 1 ]['data']['idef'].indexOf( '9999' ) !== -1 ) {
+            new_sheet['rows']['total'] = new_sheet['rows'].pop();
+        }
 
         // change subtrees nodes' parents' state to open
         if ( !!additional_rows ) {
@@ -108,12 +112,7 @@ var _sheet = (function () {
         }
 
         // create new sheet containing search data
-        // and if it is the last sheet to create, show table
-        if ( sheets_left === 0 ) {
-            that.create_new_sheet( new_sheet, "Arkusz" );
-        } else {
-            that.create_new_sheet( new_sheet, "Arkusz", true );
-        }
+        that.create_new_sheet( new_sheet, "Arkusz" );
 
     };
 

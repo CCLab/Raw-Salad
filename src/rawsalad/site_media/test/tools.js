@@ -80,7 +80,7 @@ var _tools = (function () {
         // open nodes to show downloaded subtrees
         basic_rows.forEach( function ( store_row ) {
             id = store_row['data']['idef'];
-            if ( !!nodes_to_open[ id ] ) {
+            if ( nodes_to_open[ id ] ) {
                 store_row['state']['open'] = true;
             }
         });

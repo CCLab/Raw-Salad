@@ -69,7 +69,8 @@ var _db = (function () {
                                 dataset: collection['dataset'],
                                 view: collection['view'],
                                 issue: collection['issue'],
-                                idef: idefs.toString()
+                                idef: idefs.toString(),
+                                query: query
                             });
                         })
                         .find( '.pl-sr-results-name' )
@@ -115,9 +116,10 @@ var _db = (function () {
             view: search_list['view'],
             issue: search_list['issue'],
         };
-
+        _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
             url: 'get_searched/',
+            type: 'POST',
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
@@ -128,7 +130,13 @@ var _db = (function () {
                 else {
                     _sheet.add_searched_group( col_id, received_data );
                 }
+                _utils.clear_preloader();
                 _gui.show_table_tab();
+                $('td').each( function () {
+                    if( $(this).html().toLowerCase().indexOf( search_list['query'].toLowerCase() ) !== -1 ) {
+                        $(this).parent().css( 'background-color', '#F3E58A' );
+                    }
+                });
             }
         }); // $.ajax
     };
@@ -158,7 +166,7 @@ var _db = (function () {
                 // create group
                 _store.create_group({
                    "dataset": col_id.dataset,
-                   "perspective": col_id.perspective,
+                   "view": col_id.perspective,
                    "issue": col_id.issue,
                    "columns": received_data.perspective.columns,
                 });

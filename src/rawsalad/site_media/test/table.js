@@ -232,7 +232,6 @@ var _table = (function () {
             row.hide();
         }
 
-
         return row;
     }
 
