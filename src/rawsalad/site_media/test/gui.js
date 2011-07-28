@@ -311,7 +311,7 @@ var _gui = (function () {
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
         
-//        var max_length = get_name_max_length();
+        var max_length = get_name_max_length();
         
 
         $('#app-tb-sheets').empty();
@@ -336,8 +336,8 @@ var _gui = (function () {
                                                         
 
 
-                           sheet_name.length > 20 ?
-                           sheet_name.slice( 0, 17 ) + '...' :
+                           sheet_name.length > max_length ?
+                           sheet_name.slice( 0, max_length - 3 ) + '...' :
                            sheet_name );
 
 
@@ -546,7 +546,7 @@ var _gui = (function () {
                    ];
         // >25 
         if (sheet_num -1  > cut.length ){
-            return 5;
+            return 3;
         }
         return cut[ sheet_num-1 ];
     }
