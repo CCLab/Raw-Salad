@@ -310,6 +310,9 @@ var _gui = (function () {
         var close_sheet;
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
+        
+        var max_length = get_max_name_length();
+        
 
         $('#app-tb-sheets').empty();
         $('#app-tb-tl-old-title').empty();
@@ -329,9 +332,16 @@ var _gui = (function () {
                 html.push( 'id="snap-' + group_num + '-' + sheet_num + '" ' );
                 html.push( 'class="sheet tab button" ' );
                 html.push( 'title="', sheet_name, '">' );
-                html.push( sheet_name.length > 20 ?
+                html.push( //get_short_name( sheet_name ));
+                                                        
+
+
+                           sheet_name.length > 20 ?
                            sheet_name.slice( 0, 17 ) + '...' :
                            sheet_name );
+
+
+
                 html.push( '</li>' );
 
                 new_snap = $( html.join('') );
@@ -525,6 +535,19 @@ var _gui = (function () {
         $('#pl-close-bar')
             .hide();
     }
+    
+    
+    function get_max_name_length() {
+        var sheets_num = _store.get_all_sheets_num();
+        var cut = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20 // 1-10
+                   17, 17, 17, 17, 17, // 11-15 
+                   13, 13, 13, 13, 13, // 16-20
+                   9, 9, 9, 9, 9, // 21-25
+                   5, 5, 5, 5, 5  // 26-30
+                   ];
+        
+    }
+    
 
     // update download panel with currently open sheets
     function update_download_panel() {

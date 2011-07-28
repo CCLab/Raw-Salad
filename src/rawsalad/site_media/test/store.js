@@ -372,7 +372,15 @@ var _store = (function () {
 
         return node['data']['info'];
     };
-
+    
+    that.get_all_sheets_num = function () {
+        var groups = that.get_all_groups();
+        var num = 0;
+        groups.forEach( function ( group ){
+            num += group['sheets'].length;
+        }
+        return num;
+    }
 
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their perspectives
