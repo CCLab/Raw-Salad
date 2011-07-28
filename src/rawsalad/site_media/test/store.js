@@ -450,7 +450,7 @@ var _store = (function () {
         return {
             'name': null,
             'dataset': data['dataset'],
-            'perspective': data['view'],
+            'perspective': data['view'] || data['perspective'],
             'issue': data['issue'],
             'columns': data['columns'],
             'active_sheet_number': 0,
