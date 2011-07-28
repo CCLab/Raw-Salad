@@ -579,7 +579,6 @@ var _tools = (function () {
                     strict = $('#strict-match').is(':checked');
                     _db.search( query, scope, strict );
                 }
-
                 return false;
             });
     }
@@ -590,12 +589,11 @@ var _tools = (function () {
             var new_sheet_name = $('#app-tb-tl-rename-input').val();
 
             if ( old_sheet_name !== new_sheet_name ){
-//                 alert("Set new sheet name"); 
                  _store.active_sheet_name( new_sheet_name );             
                  _gui.refresh_gui();       
             }
             $('#app-tb-tl-rename-form').hide();                
-            $('#app-tb-tl-title').show();                              
+            $('#app-tb-tl-title').show();  
             
             return false;              
         } );
@@ -609,7 +607,10 @@ var _tools = (function () {
                 }else{
                     $('#app-tb-tl-title').hide();
                     $('#app-tb-tl-rename-input').val( active_sheet_name );
-                    $('#app-tb-tl-rename-form').show();  
+                    $('#app-tb-tl-rename-form')
+                        .focus()
+                        .select()
+                        .show();  
                 }        
             });
     }
