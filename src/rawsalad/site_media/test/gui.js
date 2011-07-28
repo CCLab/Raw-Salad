@@ -332,7 +332,7 @@ var _gui = (function () {
                 html.push( 'id="snap-' + group_num + '-' + sheet_num + '" ' );
                 html.push( 'class="sheet tab button" ' );
                 html.push( 'title="', sheet_name, '">' );
-                html.push( //get_short_name( sheet_name ));
+                html.push( //get_name_max_length();
                                                         
 
 
@@ -537,15 +537,18 @@ var _gui = (function () {
     }
     
     
-    function get_max_name_length() {
+    function get_name_max_length() {
         var sheets_num = _store.get_all_sheets_num();
-        var cut = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20 // 1-10
+        var cut = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, // 1-10
                    17, 17, 17, 17, 17, // 11-15 
                    13, 13, 13, 13, 13, // 16-20
                    9, 9, 9, 9, 9, // 21-25
-                   5, 5, 5, 5, 5  // 26-30
                    ];
-        
+        // >25 
+        if (sheet_num -1  > cut.length ){
+            return 5;
+        }
+        return cut[ sheet_num-1 ];
     }
     
 
