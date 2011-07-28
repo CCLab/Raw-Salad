@@ -311,7 +311,7 @@ var _gui = (function () {
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
         
-        var max_length = get_max_name_length();
+//        var max_length = get_name_max_length();
         
 
         $('#app-tb-sheets').empty();
