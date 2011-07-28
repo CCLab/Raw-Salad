@@ -540,11 +540,10 @@ var _gui = (function () {
     function get_name_max_length() {
         var sheets_num = _store.get_all_sheets_num();
         var cut = [20, 20, 20, 20, 20, // 1-5
-                   20, 17, 17, 17, 17, // 6-10
-                   15, 15, 15, 12, 12, // 11-15 
-                   12, 12, 9, 9, 9,     // 16-20
-                   6,6                 // 21-25
-                   ];
+                   20, 15, 15, 15, 15, // 6-10
+                   15, 12, 12, 12, 12, // 11-15 
+                   6, 6, 6, 4, 4,     // 16-20
+                  ];
         // >length 
         if ( sheets_num  > cut.length ){
             return 3;
