@@ -231,7 +231,7 @@ def build_query( idef_list ):
     if len(idef_list) == 1: # single idef
         lookup= lookup[1:-1] # cutting ( and )
 
-    return { 'idef': re.compile(lookup, re.IGNORECASE) }
+    return lookup
 
 
 # get initial_data + subtrees to searched nodes
@@ -245,9 +245,10 @@ def get_searched_data( request ):
     }
 
     find_query= build_query( response_dict['idef'] )
+    # regexpquery= re.compile(find_query, re.IGNORECASE)
 
     db= rsdb.DBconnect("mongodb").dbconnect
-    coll= rsdb.Collection(query= find_query)
+    coll= rsdb.Collection(query= { 'idef': { '$regex': find_query} })
 
     return_data = {}
     return_data['rows']= coll.get_data(
@@ -256,9 +257,12 @@ def get_searched_data( request ):
     return_data['perspective']= coll.metadata_complete
 
     if 'query' in return_data['perspective']: # not json serializable
+        try:
+            sr= json.dumps( return_data['perspective']['query'] )
+        except: # not json serializable!
+            if 'idef' in return_data['perspective']['query']:
+                return_data['perspective']['query']['idef']= find_query # re-write it with plain regexp
         del return_data['perspective']['query']
-    
-    #print return_data
 
     return HttpResponse( json.dumps(return_data) )
 
