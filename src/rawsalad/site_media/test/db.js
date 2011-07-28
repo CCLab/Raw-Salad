@@ -114,6 +114,7 @@ var _db = (function () {
         var col_id = {
             dataset: search_list['dataset'],
             view: search_list['view'],
+            perspective: search_list['view'],
             issue: search_list['issue'],
         };
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
