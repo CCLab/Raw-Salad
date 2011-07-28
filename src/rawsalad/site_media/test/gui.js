@@ -545,10 +545,10 @@ var _gui = (function () {
                    9, 9, 9, 9, 9, // 21-25
                    ];
         // >25 
-        if (sheet_num -1  > cut.length ){
+        if (sheets_num -1  > cut.length ){
             return 3;
         }
-        return cut[ sheet_num-1 ];
+        return cut[ sheets_num-1 ];
     }
     
 
