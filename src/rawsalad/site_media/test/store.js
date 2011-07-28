@@ -378,7 +378,7 @@ var _store = (function () {
         var num = 0;
         groups.forEach( function ( group ){
             num += group['sheets'].length;
-        }
+        });
         return num;
     };
 
