@@ -541,8 +541,9 @@ var _gui = (function () {
         var sheets_num = _store.get_all_sheets_num();
         var cut = [20, 20, 20, 20, 15, // 1-5
                    15, 15, 12, 12, 12, // 6-10
-                   9, 9, 9, 6, 6,      // 11-15 
-                   6, 4, 4, 4, 4      // 16-20
+                   9, 9, 6, 6, 6,      // 11-15 
+                   6, 4, 4, 4, 4,      // 16-20
+                   4, 4                // 21-22
                   ]; 
         if ( sheets_num  > cut.length ){
             return 3;
