@@ -100,7 +100,7 @@ var _utils = (function () {
 
         preloader = $( html.join('') );
         preloader.css({
-            'top': '10px',
+            'top': '-1px',
             'left': x
         });
 

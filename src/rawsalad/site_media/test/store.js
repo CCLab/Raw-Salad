@@ -45,15 +45,15 @@ var _store = (function () {
     };
 
 
-    // get metadata about perspectives available in a cerain dataset
-    that.meta_perspectives = function ( dataset_id ) {
+    // get metadata about views available in a cerain dataset (name perspectives comes from db!)
+    that.meta_views = function ( dataset_id ) {
         return meta_data[ dataset_id ]['perspectives'];
     };
 
 
     // check if group exists
-    that.group_exists = function (data) {
-        if( find_group( data ) !== -1) {
+    that.group_exists = function ( data ) {
+        if( find_group( data ) === -1) {
             return false;
         }
         return true;
@@ -90,8 +90,8 @@ var _store = (function () {
     };
 
 
-    that.perspective = function () {
-        return that.active_group()['perspective'];
+    that.view = function () {
+        return that.active_group()['view'];
     };
 
 
@@ -383,7 +383,7 @@ var _store = (function () {
     };
 
 // P R I V A T E   I N T E R F A C E
-    // data about available datasets and their perspectives
+    // data about available datasets and their views
     var meta_data = [];
 
     // a store for a sheets tab in the GUI
@@ -445,13 +445,13 @@ var _store = (function () {
     }
 
 
-    // list of all sheets of the same dataset/perspective/issue
+    // list of all sheets of the same dataset/view/issue
     function group( data ) {
         return {
             'name': null,
-            'dataset': data['dataset'],
-            'perspective': data['view'] || data['perspective'],
-            'issue': data['issue'],
+            'dataset': data['dataset'].toString(),
+            'view': ( data['view'] || data['perspective'] ).toString(),
+            'issue': data['issue'].toString(),
             'columns': data['columns'],
             'active_sheet_number': 0,
             'sheets': [],

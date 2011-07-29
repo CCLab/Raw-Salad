@@ -654,16 +654,24 @@ textarea {
   padding: 20px;
 
   color: #5b5b5b;
-  background-color: #fff;
+  background-color: #fffffa;
 
   text-align: center;
   font-weight: bold;
   font-size: 14px;
   
-  border: 3px solid #5b5b5b;
+  border-left: 3px solid #5b5b5b;
+  border-right: 3px solid #5b5b5b;
+  border-bottom: 3px solid #5b5b5b;
 
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
+  border-radius: 0px 0px 5px 5px;
+  -moz-border-radius: 0px 0px 5px 5px;
+  -webkit-border-radius: 0px 0px 5px 5px;
+  -o-border-radius: 0px 0px 5px 5px;
+}
+
+#app-tb-tl-old-title {
+  margin-top: 2px;
+  margin-left: 5px;
+  color: #8b8b8b;
 }

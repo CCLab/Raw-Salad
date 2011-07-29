@@ -291,7 +291,7 @@ var _gui = (function () {
     };
 
 
-    // used once when some perspective is chosen for the very first time
+    // used once when some view is chosen for the very first time
     that.init_app = function ( collection_name ) {
 
         if( arguments.length !== 0 ){
@@ -667,7 +667,7 @@ var _gui = (function () {
 
     function create_views_panel( dataset_id ) {
         var html = [];
-        var views = _store.meta_perspectives( dataset_id );
+        var views = _store.meta_views( dataset_id );
         var len = views.length;
         var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
         var panel = $('#pl-choose');
@@ -710,12 +710,12 @@ var _gui = (function () {
                 var button = $(this);
                 var col_id = {
                     dataset: button.attr( 'data-set-id' ),
-                    perspective: button.attr( 'data-view-id' ),
+                    view: button.attr( 'data-view-id' ),
                     issue: button.attr( 'data-issue' )
                 };
 
-                // if new group is created, get data and show table
-                if( _store.group_exists( col_id ) ) {
+                // if no such group yet - go to db and create one
+                if( !_store.group_exists( col_id ) ) {
                     // get top-level data from db
                     _db.get_init_data( col_id );
                 }
