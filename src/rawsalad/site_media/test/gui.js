@@ -511,8 +511,8 @@ var _gui = (function () {
                 .append(app_cover);
 
             $('#app-cover')
-                .height( $('#application').height() )
-                .width( $('application').width());                
+                .height( $('#application').height() );
+                .width( $('#application').width() );                
 
             // show close panels bar
             $('#pl-close-bar')

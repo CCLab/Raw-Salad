@@ -337,7 +337,7 @@ textarea {
     background-color: #8b8b8b; /* same as bodyu bgcolor */
   }
   
-  #app-cover {
+  #app-cover div {
     position: absolute;
   }
 
