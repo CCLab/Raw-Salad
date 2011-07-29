@@ -248,9 +248,9 @@ var _store = (function () {
     that.active_group = function ( value ) {
         if( arguments.length === 0 ) {
             return groups[ active_group_number ];
+        }else if ( typeof value === 'number' ){
+            active_group_number = value;
         }
-
-        active_group_number = value;
     };
 
     that.active_group_name = function () {
