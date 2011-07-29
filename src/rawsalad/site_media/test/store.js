@@ -258,9 +258,11 @@ var _store = (function () {
             typeof value.view === 'string' ){
 
                 num = find_group( value );
-                num === -1 ? 
-                return -1 :
-                active_group_number = num;                 
+                if ( num === -1 ) {
+                return -1 
+                }else{
+                    active_group_number = num;                 
+                }
         }
     };
 
