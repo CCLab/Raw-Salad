@@ -327,6 +327,7 @@ textarea {
   margin: 0px auto;
   margin-top: 10px;
   padding-bottom: 5px;
+  position: relative;
 
   background-color: #fff;
 }
@@ -334,6 +335,10 @@ textarea {
   #application > header {
     overflow: auto;
     background-color: #8b8b8b; /* same as bodyu bgcolor */
+  }
+  
+  #app_cover {
+    position: absolute;
   }
 
   #app-tabs {
