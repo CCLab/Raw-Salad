@@ -748,7 +748,7 @@ var _gui = (function () {
                 else {
                     // go back to application with focus on requested sheet
 //                    _store.active_group(_store.find_group( col_id ));
-                    _store.hide_top_panels();
+                    hide_top_panels();
 //                    that.refresh_gui();
                 }
             });
