@@ -322,12 +322,12 @@ var _gui = (function () {
 
         var max_length = get_name_max_length();
 
-
+        _tools.clean_tools_table();
         $('#app-tb-sheets').empty();
         $('#app-tb-tl-old-title').empty();
-
         $('#app-tb-tl-rename-form').hide();
         $('#app-tb-tl-title').show();
+        
 
         groups.forEach( function ( group, group_num ){
             group['sheets'].forEach( function ( sheet, sheet_num ) {
