@@ -339,6 +339,7 @@ textarea {
   
   #app-cover {
     position: absolute;
+    top: 0px;
   }
 
   #app-tabs {
