@@ -510,6 +510,8 @@ var _gui = (function () {
             $('#application')
                 .append(app_cover);
 
+            $('#app-cover').height( $('#application').height() );                
+
             // show close panels bar
             $('#pl-close-bar')
                 .show();
