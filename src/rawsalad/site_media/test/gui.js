@@ -497,6 +497,8 @@ var _gui = (function () {
     }
 
     function show_top_panel( panel ) {
+        var app_cover = $( '<div id="app-cover" > </div>' );
+        
         // show panel
         panel.slideDown( 400 );
 
@@ -504,6 +506,9 @@ var _gui = (function () {
             // dim the application
             $('#application')
                 .animate({ opacity: 0.25 }, 300 );
+            
+            $('#application')
+                .append(app_cover);
 
             // show close panels bar
             $('#pl-close-bar')
@@ -517,6 +522,10 @@ var _gui = (function () {
         panel.slideUp( 400 );
 
         // undim the application
+        
+        $('app-cover')
+            .remove();
+        
         $('#application')
             .animate({ opacity: 1 }, 300 );
 
@@ -537,6 +546,10 @@ var _gui = (function () {
             .slideUp( 400 );
 
         // undim the application
+
+        $('app-cover')
+            .remove();
+
         $('#application')
             .animate({ opacity: 1 }, 300 );
 
