@@ -89,6 +89,18 @@ var _utils = (function () {
         return value === '0' ? '0' : result.reverse().join(' ') + " 000";
     };
 
+    that.uniq = function ( array, sort_it ) {
+        var result = [];
+
+        array.forEach( function ( e ) {
+            if( result.indexOf( e ) === -1 ) {
+                y.push( e )
+            }
+        });
+
+        return sort_it ? result.sort() : result;
+    };
+
     that.create_preloader = function( text ) {
         var preloader;
         var html = [];

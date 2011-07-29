@@ -265,18 +265,34 @@ var _gui = (function () {
             .click( function () {
                 var boxes = $('#app-sh-table').find('input:checkbox:checked');
                 var vals = $.map( boxes, function ( e ) { return $(e).val() } );
+                var selected = {};
+                var group;
+                var groups = $.extend( true, [], _store.get_all_groups() );
+                var new_groups = [];
+
+                vals.forEach( function ( e ) {
+                    var group = e.split('-')[0];
+                    var sheet = e.split('-')[1];
+
+                    try {
+                        selected[ group ].push( sheet );
+                    }
+                    catch ( err ) {
+                        selected[ group ] = [ sheet ];
+                    }
+                });
+
+                for( group in selected ) {
+                    if( selected.hasOwnProperty( group ) {
+
+                    }
+                }
+
                 var groups = $.extend( true, [], _store.get_all_groups() );
 
                 if( boxes.length === 0 ) {
                     return;
                 }
-
-                vals.forEach( function ( val ) {
-                    var group_id = val.split('-')[0];
-                    var sheet_id = val.split('-')[1];
-
-                });
-
 
                 $('#app-sh-permalink')
                     .slideDown( 100 )
