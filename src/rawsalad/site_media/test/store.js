@@ -246,10 +246,21 @@ var _store = (function () {
 
     // active group getter / setter
     that.active_group = function ( value ) {
+        var num;
         if( arguments.length === 0 ) {
             return groups[ active_group_number ];
+  
         }else if ( typeof value === 'number' ){
             active_group_number = value;
+
+        }else if ( typeof value === 'object' &&
+            typeof value.dataset === 'string' && 
+            typeof value.view === 'string' ){
+
+                num = find_group( value );
+                num === -1 ? 
+                return -1 :
+                active_group_number = num;                 
         }
     };
 
