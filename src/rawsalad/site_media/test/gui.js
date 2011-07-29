@@ -523,7 +523,7 @@ var _gui = (function () {
 
         // undim the application
         
-        $('app-cover')
+        $('#app-cover')
             .remove();
         
         $('#application')
@@ -547,7 +547,7 @@ var _gui = (function () {
 
         // undim the application
 
-        $('app-cover')
+        $('#app-cover')
             .remove();
 
         $('#application')
