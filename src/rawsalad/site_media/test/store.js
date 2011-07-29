@@ -251,6 +251,7 @@ var _store = (function () {
             return groups[ active_group_number ];
   
         }else if ( typeof value === 'number' ){
+        
             active_group_number = value;
 
         }else if ( typeof value === 'object' &&

@@ -68,6 +68,13 @@ var _tools = (function () {
                 _db.add_search_data( search_list );
             });
     };
+    
+    that.clean_tools_table = function () {
+        var open_tool = $('#app-tb-tools').find('form:visible');
+        if( open_tool.length !== 0 ) {
+                 open_tool.slideUp( 200 );
+        }  
+    };
 
     that.open_subtrees = function( basic_rows, subtree_rows ) {
         var nodes_to_open = {};
