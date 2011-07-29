@@ -29,6 +29,9 @@ var _db = (function () {
 //  P U B L I C   I N T E R F A C E
     var that = {};
 
+    that.save_permalink = function ( sheets ) {
+        console.log( sheets );
+    };
 
     that.search = function ( query, scope, strict ) {
         var data = {

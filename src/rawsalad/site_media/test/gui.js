@@ -264,10 +264,19 @@ var _gui = (function () {
         $('#app-sh-submit')
             .click( function () {
                 var boxes = $('#app-sh-table').find('input:checkbox:checked');
+                var vals = $.map( boxes, function ( e ) { return $(e).val() } );
+                var groups = $.extend( true, [], _store.get_all_groups() );
 
                 if( boxes.length === 0 ) {
                     return;
                 }
+
+                vals.forEach( function ( val ) {
+                    var group_id = val.split('-')[0];
+                    var sheet_id = val.split('-')[1];
+
+                });
+
 
                 $('#app-sh-permalink')
                     .slideDown( 100 )
@@ -310,20 +319,20 @@ var _gui = (function () {
         var close_sheet;
         var active_group = _store.active_group_index();
         var active_sheet = _store.active_sheet_index();
-        
+
         var max_length = get_name_max_length();
-        
+
 
         $('#app-tb-sheets').empty();
         $('#app-tb-tl-old-title').empty();
 
-        $('#app-tb-tl-rename-form').hide();                
-        $('#app-tb-tl-title').show();                              
+        $('#app-tb-tl-rename-form').hide();
+        $('#app-tb-tl-title').show();
 
         groups.forEach( function ( group, group_num ){
             group['sheets'].forEach( function ( sheet, sheet_num ) {
                 var sheet_name = sheet['name'];
-                
+
                 var html = [];
                 var new_sheet;
 
@@ -333,7 +342,7 @@ var _gui = (function () {
                 html.push( 'class="sheet tab button" ' );
                 html.push( 'title="', sheet_name, '">' );
                 html.push( //get_name_max_length();
-                                                        
+
 
 
                            sheet_name.length > max_length ?
@@ -353,7 +362,7 @@ var _gui = (function () {
                     });
 
                 if( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
-                    var group_name = _store.active_group_name();                  
+                    var group_name = _store.active_group_name();
                     close_sheet = $( '<div class="close-sheet-button button" >x</div>' );
                     if( !( groups.length === 1 && group['sheets'].length === 1 ) ) {
                         new_snap
@@ -364,14 +373,14 @@ var _gui = (function () {
                                         })
                             )
                     }
-                    new_snap.addClass('active');                    
+                    new_snap.addClass('active');
                     $('#app-tb-tl-title').html( sheet_name );
                     if ( group_name !== sheet_name ){
                         $('#app-tb-tl-old-title')
                             .html( '('+ group_name + ')' )
-                            .show();                        
+                            .show();
                     }
-                   
+
                 }
                 $('#app-tb-sheets').append( new_snap );
             })
@@ -535,22 +544,22 @@ var _gui = (function () {
         $('#pl-close-bar')
             .hide();
     }
-    
-    
+
+
     function get_name_max_length() {
         var sheets_num = _store.get_all_sheets_num();
         var cut = [20, 20, 20, 20, 15, // 1-5
                    15, 15, 12, 12, 12, // 6-10
-                   9, 9, 6, 6, 6,      // 11-15 
+                   9, 9, 6, 6, 6,      // 11-15
                    6, 4, 4, 4, 4,      // 16-20
                    4, 4                // 21-22
-                  ]; 
+                  ];
         if ( sheets_num  > cut.length ){
             return 3;
         }
         return cut[ sheets_num-1 ];
     }
-    
+
 
     // update download panel with currently open sheets
     function update_download_panel() {
