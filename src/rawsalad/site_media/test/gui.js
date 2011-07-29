@@ -314,7 +314,18 @@ var _gui = (function () {
     };
 
 
-    that.refresh_gui = function () {
+    that.refresh_gui = function() {
+
+        var open_tool = $('#app-tb-tools').find('form:visible');
+        if( open_tool.length !== 0 ) {
+                 open_tool.slideUp( 200, that.refresh_gui_action );
+        }else{
+        that.refresh_gui_action();
+        }  
+    };
+
+
+    that.refresh_gui_action = function () {
         var groups = _store.get_all_groups();
         var close_sheet;
         var active_group = _store.active_group_index();
@@ -322,7 +333,6 @@ var _gui = (function () {
 
         var max_length = get_name_max_length();
 
-        _tools.clean_tools_table();
         $('#app-tb-sheets').empty();
         $('#app-tb-tl-old-title').empty();
         $('#app-tb-tl-rename-form').hide();
