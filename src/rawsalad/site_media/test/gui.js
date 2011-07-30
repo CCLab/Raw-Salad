@@ -353,7 +353,18 @@ var _gui = (function () {
     };
 
 
-    that.refresh_gui = function () {
+    that.refresh_gui = function() {
+
+        var open_tool = $('#app-tb-tools').find('form:visible');
+        if( open_tool.length !== 0 ) {
+                 open_tool.slideUp( 200, that.refresh_gui_action );
+        }else{
+        that.refresh_gui_action();
+        }  
+    };
+
+
+    that.refresh_gui_action = function () {
         var groups = _store.get_all_groups();
         var close_sheet;
         var active_group = _store.active_group_index();
@@ -361,12 +372,11 @@ var _gui = (function () {
 
         var max_length = get_name_max_length();
 
-
         $('#app-tb-sheets').empty();
         $('#app-tb-tl-old-title').empty();
-
         $('#app-tb-tl-rename-form').hide();
         $('#app-tb-tl-title').show();
+        
 
         groups.forEach( function ( group, group_num ){
             group['sheets'].forEach( function ( sheet, sheet_num ) {
@@ -799,7 +809,9 @@ var _gui = (function () {
                 }
                 else {
                     // go back to application with focus on requested sheet
+                    _store.active_group( col_id );
                     hide_top_panels();
+                    that.refresh_gui();
                 }
             });
 
