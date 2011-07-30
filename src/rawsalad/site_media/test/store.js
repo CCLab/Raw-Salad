@@ -382,6 +382,12 @@ var _store = (function () {
         return num;
     };
 
+    that.restore_state = function ( state ) {
+        groups = state;
+        active_group_number = 0;
+        that.active_sheet_index( 0 );
+    };
+
 // P R I V A T E   I N T E R F A C E
     // data about available datasets and their views
     var meta_data = [];

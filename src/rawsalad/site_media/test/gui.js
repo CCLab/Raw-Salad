@@ -29,7 +29,7 @@ var _gui = (function () {
 // P U B L I C   I N T E R F A C E
     var that = {};
 
-    that.init_gui = function () {
+    that.init_gui = function ( hide_panel ) {
 
         // arm top menu
         $('#top')
@@ -270,36 +270,41 @@ var _gui = (function () {
                 var groups = $.extend( true, [], _store.get_all_groups() );
                 var new_groups = [];
 
-                vals.forEach( function ( e ) {
-                    var group = e.split('-')[0];
-                    var sheet = e.split('-')[1];
-
-                    try {
-                        selected[ group ].push( sheet );
-                    }
-                    catch ( err ) {
-                        selected[ group ] = [ sheet ];
-                    }
-                });
-
-                for( group in selected ) {
-                    if( selected.hasOwnProperty( group ) {
-
-                    }
-                }
-
-                var groups = $.extend( true, [], _store.get_all_groups() );
-
+                // if nothing selected
                 if( boxes.length === 0 ) {
                     return;
                 }
 
-                $('#app-sh-permalink')
-                    .slideDown( 100 )
-                    .find('input')
-                    .val( 'http://otwartedane.pl/123457' )
-                    .focus();
+                // groups sheet's indexes e.g.: { '0': [ '1', '3' ], '2': [ '0', '1' ] }
+                // these are indexes in groups array in store, not idefs in db!!
+                // TODO: this can cause the problem that groups will come in different order!!
+                vals.forEach( function ( e ) {
+                    var group_index = e.split('-')[0];
+                    var sheet_index = e.split('-')[1];
 
+                    try {
+                        selected[ group_index ].push( sheet_index );
+                    }
+                    catch ( err ) {
+                        selected[ group_index ] = [ sheet_index ];
+                    }
+                });
+
+                // for each group filter only those selected by the user
+                for( group in selected ) {
+                    if( selected.hasOwnProperty( group ) {
+                        var current_sheets = groups[ group ]['sheets'];
+
+                        current_sheets = current_sheets.filter( function ( e, i ) {
+                            return selected[group].indexOf( i ) !== -1;
+                        });
+                    }
+                }
+
+                // save selected groups/sheets to mongo
+                _db.save_permalink( groups );
+
+                // hide button
                 $(this).hide();
             });
 
@@ -312,9 +317,27 @@ var _gui = (function () {
                 $(this).select();
             });
 
-        init_choose_panel();
+        init_choose_panel( hide_panel );
     };
 
+
+    that.restore_session = function ( idef ) {
+        _utils.create_preloader( 'Wczytuję dane - to może chwilę potrwać' );
+
+        $.ajax({
+            url: 'restore_state/',
+            data: { idef: idef },
+            dataType: 'json',
+            success: function ( received_data ) {
+                _store.restore_state( received_data );
+
+                // show the application
+                $('#pl-cover').remove();
+                that.init_app();
+                _utils.clear_preloader();
+            }
+        });
+    });
 
     // used once when some view is chosen for the very first time
     that.init_app = function ( collection_name ) {
@@ -514,7 +537,7 @@ var _gui = (function () {
 
     function show_top_panel( panel ) {
         var app_cover = $( '<div id="app-cover" > </div>' );
-        
+
         // show panel
         panel.slideDown( 400 );
 
@@ -522,13 +545,13 @@ var _gui = (function () {
             // dim the application
             $('#application')
                 .animate({ opacity: 0.25 }, 300 );
-            
+
             $('#application')
                 .append(app_cover);
 
             $('#app-cover')
                 .height( $('#application').height() )
-                .width( $('#application').width() );                
+                .width( $('#application').width() );
 
             // show close panels bar
             $('#pl-close-bar')
@@ -542,10 +565,9 @@ var _gui = (function () {
         panel.slideUp( 400 );
 
         // undim the application
-        
         $('#app-cover')
             .remove();
-        
+
         $('#application')
             .animate({ opacity: 1 }, 300 );
 
@@ -566,7 +588,6 @@ var _gui = (function () {
             .slideUp( 400 );
 
         // undim the application
-
         $('#app-cover')
             .remove();
 
@@ -666,7 +687,7 @@ var _gui = (function () {
     }
 
 
-    function init_choose_panel() {
+    function init_choose_panel( hide_panel ) {
         var html = [];
         var datasets = _store.meta_datasets();
         var len = datasets.length;
@@ -704,6 +725,21 @@ var _gui = (function () {
                 $('#pl-ch-datasets')
                     .hide();
             });
+
+        if( hide_panel ) {
+            $('#pl-choose')
+                .append( $('<div id="pl-cover"></div>') );
+
+            $('#pl-cover')
+                .css({
+                    'position': 'absolute',
+                    'top': '0px',
+                    'width': $('#pl-choose').width(),
+                    'height': $('#pl-choose').height(),
+                    'background-color': '#000',
+                    'opacity': '0.4'
+                });
+        }
     };
 
 

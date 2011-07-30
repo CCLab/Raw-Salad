@@ -29,8 +29,26 @@ var _db = (function () {
 //  P U B L I C   I N T E R F A C E
     var that = {};
 
-    that.save_permalink = function ( sheets ) {
-        console.log( sheets );
+    that.save_permalink = function ( groups ) {
+        // inform user it can take a while!!
+        _utils.create_preloader( 'Zapisujemy arkusze w bazie danych<br />może to chwilę potrwać' );
+
+        $.ajax({
+            url: 'store_state/',
+            type: 'POST',
+            data: {
+                state: JSON.stringify( groups )
+            },
+            success: function ( received_data ) {
+              $('#app-sh-permalink')
+                .slideDown( 100 )
+                .find('input')
+                .val( 'http://otwartedane.pl/id/'+received_data['id'] )
+                .focus()
+
+                _utils.clear_preloader();
+            }
+        });
     };
 
     that.search = function ( query, scope, strict ) {

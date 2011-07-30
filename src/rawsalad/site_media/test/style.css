@@ -193,6 +193,10 @@ textarea {
     margin-left: -5px;
   }
 
+  #pl-choose {
+    position: relative;
+  }
+
   .pl-ch-back {
     width: 120px;
   }

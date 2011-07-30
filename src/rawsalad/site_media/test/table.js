@@ -100,7 +100,12 @@ var _table = (function () {
             schema.forEach( function ( column ) {
                 html.push( '<td class="', column['key'], ' ' );
                 html.push( column['type'], '">' );
-                html.push( total['data'][ column['key'] ] );
+                if( column['type'] === 'number' ) {
+                    html.push( _utils.money( total['data'][ column['key'] ] ));
+                }
+                else {
+                    html.push( total['data'][ column['key'] ] );
+                }
                 html.push( '</td>' );
             });
 

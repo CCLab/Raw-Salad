@@ -266,6 +266,32 @@ def get_searched_data( request ):
 
     return HttpResponse( json.dumps(return_data) )
 
+# store front-end state as a permalink in mongo
+def store_state( request ):
+    data = request.POST.get( 'state', '' )
+    #
+    # store in mongo, create uniq idef and send it back to front-end
+    #
+
+    return HttpResponse( '1000' ) #replace '1000' with uniq idef
+
+# init application prepared to handle restore data
+def init_restore( request, idef ):
+    template = loader.get_template( "restore.html" )
+    context = Context({
+        'meta': get_ms_nav(),
+        'idef': idef
+    })
+    return HttpResponse( template.render( context ))
+
+
+#restore front-end state from mongo
+def restore_state( request ):
+    idef = request.GET.get( 'idef', '-1' )
+    data = 'get_me_from_mongo_my_name_is_' + idef
+
+    return HttpResponse( data )
+
 
 # list of possible ajax calls
 func_dict = {
