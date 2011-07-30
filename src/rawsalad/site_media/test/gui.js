@@ -337,7 +337,7 @@ var _gui = (function () {
                 _utils.clear_preloader();
             }
         });
-    });
+    };
 
     // used once when some view is chosen for the very first time
     that.init_app = function ( collection_name ) {
