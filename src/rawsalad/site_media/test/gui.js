@@ -292,7 +292,7 @@ var _gui = (function () {
 
                 // for each group filter only those selected by the user
                 for( group in selected ) {
-                    if( selected.hasOwnProperty( group ) {
+                    if( selected.hasOwnProperty( group ) ) {
                         var current_sheets = groups[ group ]['sheets'];
 
                         current_sheets = current_sheets.filter( function ( e, i ) {
@@ -360,7 +360,7 @@ var _gui = (function () {
                  open_tool.slideUp( 200, that.refresh_gui_action );
         }else{
         that.refresh_gui_action();
-        }  
+        }
     };
 
 
@@ -376,7 +376,7 @@ var _gui = (function () {
         $('#app-tb-tl-old-title').empty();
         $('#app-tb-tl-rename-form').hide();
         $('#app-tb-tl-title').show();
-        
+
 
         groups.forEach( function ( group, group_num ){
             group['sheets'].forEach( function ( sheet, sheet_num ) {
