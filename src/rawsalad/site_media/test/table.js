@@ -55,8 +55,6 @@ var _table = (function () {
             create_filtered_tbody();
             $('#app-tb-tl-columns-button').hide();
             $('#app-tb-tl-clear-button').hide();
-            $('#app-tb-tl-filter-button').hide();
-            $('#app-tb-tl-sort-button').hide();
 //            $('#app-tb-tl-sort-button').css({
 //                'border-radius': '5px',
 //                '-moz-border-radius': '5px',
