@@ -316,7 +316,7 @@ var _table = (function () {
     }
     
     function generate_info_panel_text( info ) {
-        return '<div>info panel</div>';
+        return '<div class="info">info panel</div>';
     }
 
     function find_parent( id ) {

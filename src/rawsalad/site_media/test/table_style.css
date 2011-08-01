@@ -59,6 +59,11 @@
   text-align: right;
 }
 
+.info {
+  color: black;
+  z-index: 1;
+}
+
 
 .a > .type {
   width: 138px;
