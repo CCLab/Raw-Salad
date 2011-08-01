@@ -1,0 +1,130 @@
+body {
+  margin: 0px;
+  padding: 0px;
+
+  background-color: #8b8b8b;
+  font-family: Arial,sans-serif;
+  font-size: 11px;
+
+  cursor: default;
+}
+
+#wrapper {
+  width: 960px;
+  margin: 0px auto;
+  padding: 0px;
+}
+
+/* PANEL */
+  .panel {
+    overflow: hidden;
+    margin-top: 10px;  
+    background-color: #fff;
+    
+    
+    
+    
+    width: 960px;    
+  }
+
+  .panel > header {
+    overflow: auto;
+    clear: both;
+    border-bottom: 2px solid #3b3b3b;
+  }
+
+  .panel > header > * {
+    float: left;
+  }
+
+  .panel-title {
+    margin: 0px 5px;
+    margin-top: 5px;
+    padding: 5px;
+
+    color: #fff;
+    background-color: #3b3b3b;
+
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -o-border-radius: 5px 5px 0px 0px;
+  }
+
+ .panel-main {
+    overflow: hidden;
+    margin: 5px;
+    padding: 5px;
+
+    float: left;
+    background-color: #e3e3e3;
+    
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+
+
+
+
+     width: 940px;
+  }
+  
+    #pl-choose {
+    position: relative;    
+    
+    
+    
+
+  }
+
+  .pl-ch-back {
+    width: 120px;
+
+  }
+    .panel .button {
+    float: right;
+
+    padding: 5px;
+
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+  }
+  
+  
+  
+  
+  
+  
+  #pl-ch-area {
+    overflow: visible;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 2000px;
+  }
+
+  
+  
+  
+  
+  #pl-ch-views {
+    height: 160px;
+  }
+  
+  #pl-ch-datasets {
+    height: 260px;
+  }
+  
+  
+  .blue {
+    color: white;
+    background-color: #4ABFF7;
+  }
+  .right {
+    float: right;
+  }
+  
+
