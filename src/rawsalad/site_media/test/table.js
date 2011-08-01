@@ -312,11 +312,11 @@ var _table = (function () {
         html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
         html.push( generate_info_panel_text( data['info'] ) );
         html.push( '</a>' );
-        return html;
+        return html.join('');
     }
     
     function generate_info_panel_text( info ) {
-        return '<div>zawartoœæ panelu info</div>';
+        return '<div>info panel</div>';
     }
 
     function find_parent( id ) {
