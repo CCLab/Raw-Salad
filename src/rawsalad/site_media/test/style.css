@@ -20,6 +20,26 @@ a:hover {
   text-decoration: underline;
 }
 
+a.hoverable {
+	position: relative;
+	cursor: pointer;
+}
+
+a.hoverable div {
+	position: absolute;
+	display: none;
+	top: 10px;
+	left: 5px;
+	margin: 0px;
+	padding: 10px;
+	background-color: white;
+	border: 1px solid black;
+}
+
+a.hoverable:hover div {
+	display: block;
+}
+
 ul {
   float: left;
   padding: 0px;

@@ -198,8 +198,9 @@ var _table = (function () {
             html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
             html.push( column['type'] === 'number' ? _utils.money( data[column['key']] ) : data[column['key']] );
             if( !!data['info'] && column['key'] === 'type' ) {
-                html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
-                html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
+                //html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
+                //html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
+                html.push( generate_info_panel(data) );
             }
             html.push( '</td>' );
         });
@@ -303,6 +304,19 @@ var _table = (function () {
         html.push( '</tr>' );
 
         return $( html.join('') );
+    }
+    
+    function generate_info_panel( data ) {
+        var html = [ '<a class="hoverable">' ];
+        html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
+        html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
+        html.push( generate_info_panel_text( data['info'] ) );
+        html.push( '</a>' );
+        return html;
+    }
+    
+    function generate_info_panel_text( info ) {
+        return '<div>zawartoœæ panelu info</div>';
     }
 
     function find_parent( id ) {
