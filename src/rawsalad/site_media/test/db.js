@@ -31,7 +31,7 @@ var _db = (function () {
 
     that.save_permalink = function ( groups ) {
         // inform user it can take a while!!
-        _utils.create_preloader( 'Zapisujemy arkusze w bazie danych<br />może to chwilę potrwać' );
+        _utils.create_preloader( 'Zapisuję arkusze w bazie danych<br />może to chwilę potrwać' );
 
         $.ajax({
             url: 'store_state/',
