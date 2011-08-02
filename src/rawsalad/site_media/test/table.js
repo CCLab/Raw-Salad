@@ -328,13 +328,13 @@ var _table = (function () {
                 // e['type'] === 'Miernik'
                 for ( attr in measure_values ) {
                     if ( measure_values.hasOwnProperty(attr) ) {
-                        html.push( ', ', attr, ': ', measure_values[attr] );
+                        html.push( measure_values[attr], ': ', e[ measure_values[attr] ] );
                     }
                 }
                 html.push('</div>');
                 
                 for ( attr in visible_attrs[attr] ) {
-                    if ( visible_attrs.hasOwnProperty(attr) ) {
+                    if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] ) {
                         html.push( '<div>', attr, ': ', e[attr], '</div>' );
                     }
                 }
@@ -351,7 +351,7 @@ var _table = (function () {
             html.push( '<div>', e['elem_type'], ': ', e['elem_name'], '</div>');
             if ( e['elem_type'] === 'Miernik' ) {
                 for ( attr in visible_attrs[attr] ) {
-                    if ( visible_attrs.hasOwnProperty(attr) ) {
+                    if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] ) {
                         html.push( '<div>', attr, ': ', e[attr], '</div>' );
                     }
                 }
@@ -365,7 +365,7 @@ var _table = (function () {
         var attr;
         html.push( '<div>', 'Cel: ', info[0]['name'], '</div>');
         for ( attr in visible_attrs ) {
-            if ( visible_attrs.hasOwnProperty(attr) ) {
+            if ( visible_attrs.hasOwnProperty(attr) && !!info[0][attr] ) {
                 html.push( '<div>', attr, ': ', info[0][attr], '</div>' );
             }
         }
