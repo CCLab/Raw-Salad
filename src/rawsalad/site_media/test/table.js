@@ -322,7 +322,7 @@ var _table = (function () {
         info.forEach( function ( e ) {
             html.push( '<div>', e['elem_type'], ': ', e['elem_name'], '</div>' );
             if ( e['elem_type'] === 'Miernik' ) {
-                for ( attr in visible_attrs[attr] ) {
+                for ( attr in visible_attrs ) {
                     if ( visible_attrs.hasOwnProperty(attr) ) {
                         html.push( '<div>', visible_attrs[attr] );
                         html.push( ': ', e[attr], '</div>' );
@@ -340,7 +340,7 @@ var _table = (function () {
         info.forEach( function ( e ) {
             html.push( '<div>', e['type'], ': ', e['name'], '</div>');
             if ( e['type'] === 'Miernik' ) {
-                for ( attr in visible_attrs[attr] ) {
+                for ( attr in visible_attrs ) {
                     if ( visible_attrs.hasOwnProperty(attr) ) {
                         html.push( '<div>', visible_attrs[attr] );
                         html.push( ': ', e[attr], '</div>' );
@@ -396,7 +396,8 @@ var _table = (function () {
             _store.active_columns().forEach( function ( col ) {
                 if ( /val_(\d+)/.test(col['key']) ) {
                     year = /val_(\d+)/.exec( col['key'] )[1];
-                    visible_attrs[ col['key'] ] = 'miernik_wartosc_' + year;
+                    visible_attrs[ 'miernik_wartosc_' + year ] = 
+                        'Miernik wartosc ' + year + 'r.';
                 }
             });
         }
