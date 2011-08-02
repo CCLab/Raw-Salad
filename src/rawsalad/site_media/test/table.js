@@ -335,7 +335,8 @@ var _table = (function () {
                 
                 for ( attr in visible_attrs[attr] ) {
                     if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] ) {
-                        html.push( '<div>', attr, ': ', e[attr], '</div>' );
+                        html.push( '<div>', visible_attrs[attr] );
+                        html.push( ': ', e[attr], '</div>' );
                     }
                 }
             }
@@ -351,9 +352,9 @@ var _table = (function () {
             html.push( '<div>', e['type'], ': ', e['name'], '</div>');
             if ( e['type'] === 'Miernik' ) {
                 for ( attr in visible_attrs[attr] ) {
-                    if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] &&
-                         attr !== 'type' && attr !== 'name' ) {
-                            html.push( '<div>', attr, ': ', e[attr], '</div>' );
+                    if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] ) {
+                        html.push( '<div>', visible_attrs[attr] );
+                        html.push( ': ', e[attr], '</div>' );
                     }
                 }
             }
@@ -364,10 +365,12 @@ var _table = (function () {
     function generate_text_for_nfz( info, visible_attrs ) {
         var html = [];
         var attr;
-        html.push( '<div>', info[0]['type'], ': ', info[0]['name'], '</div>');
+        html.push( '<div>', 'Cel: ', info[0]['name'], '</div>');
         for ( attr in visible_attrs ) {
-            if ( visible_attrs.hasOwnProperty(attr) && !!info[0][attr] ) {
-                html.push( '<div>', attr, ': ', info[0][attr], '</div>' );
+            if ( visible_attrs.hasOwnProperty(attr) && !!info[0][attr] &&
+                 attr !== 'type' && attr !== 'name' ) {
+                    html.push( '<div>', visible_attrs[attr] );
+                    html.push( ': ', info[0][attr], '</div>' );
             }
         }
         return html.join('');
@@ -384,7 +387,7 @@ var _table = (function () {
         var text_generator = functions_map[_store.dataset()];
         var visible_attrs = {};
         _store.active_columns().forEach( function( col ) {
-            visible_attrs[ col['key'] ] = true;
+            visible_attrs[ col['key'] ] = col['label'];
         });
         if ( _store.dataset() === '0' ) {
             measure_values = {
