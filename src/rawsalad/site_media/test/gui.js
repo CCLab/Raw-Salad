@@ -96,9 +96,6 @@ var _gui = (function () {
             )
             .click( function () {
                 var panel = $('#pl-choose');
-                var datasets_height; 
-                var views_height;
-
 
                 panel
                     .find('.panel-title')
@@ -111,13 +108,8 @@ var _gui = (function () {
                     .find('ul')
                     .remove();
 
-
-                datasets_height = $("#pl-ch-datasets").height(); 
-                views_height = $("#pl-ch-views").height();
+                
     
-                if ( views_height > datasets_height ){
-                    $("#pl-ch-views").height( datasets_height );
-                }                    
             });
 
         _tools.prepare_tools();
@@ -721,6 +713,7 @@ var _gui = (function () {
         var datasets = _store.meta_datasets();
         var len = datasets.length;
         var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
+        var datasets_height; 
 
         html.push( '<ul class="left">' );
         datasets.forEach( function ( set, i ) {
@@ -748,6 +741,7 @@ var _gui = (function () {
             .find( '.button' )
             .click( function () {
                 var dataset_id = $(this).attr( 'data-set-id' );
+                datasets_height = $("#pl-ch-datasets").height();
 
                 create_views_panel( dataset_id );
                 move_to_views_panel();
@@ -789,6 +783,7 @@ var _gui = (function () {
         var len = views.length;
         var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
         var panel = $('#pl-choose');
+        var views_height;
 
         html.push( '<ul class="left">' );
         views.forEach( function ( view, i ) {
@@ -854,6 +849,8 @@ var _gui = (function () {
         // show back icon
         $('.pl-ch-back > img')
             .show();
+           
+        views_height =$("#pl-ch-views").height();    
     };
 
     function update_share_tab() {
