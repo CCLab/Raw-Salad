@@ -104,11 +104,7 @@ var _gui = (function () {
                     .find('.panel-desc')
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
 
-                $('#pl-ch-views')
-                    .find('ul')
-                    .remove();
-
-                
+                move_to_datasets_panel();                                
     
             });
 
@@ -764,7 +760,8 @@ var _gui = (function () {
         }
     };
     
-    function move_to_views_panel(){  
+    
+    function move_to_views_panel() {  
         var datasets_height = $("#pl-ch-datasets").height(); 
         var views_height = $("#pl-ch-views").height();
         $("#pl-ch-area").animate( {"left": "-=960px"}, 800, function(){       
@@ -776,6 +773,24 @@ var _gui = (function () {
                        .animate ( {"height": ""+ views_height +"px"}, 200 );
             }      
         });                         
+    };
+    
+    
+    function move_to_datasets_panel() {
+        var views_height = $("#pl-ch-views").height();
+        var views_height = $("#pl-ch-views").height();
+        $("#pl-ch-area").animate( {"left": "+=960px"}, 800, function(){
+            if ( datasets_height > views_height ){
+                $("#pl-ch-datasets")
+                    .animate ( {"height": "" + datasets_height + "px"}, 200 );            
+            }else if ( views_height > datasets_height ){
+                $("#pl-ch-views")
+                    .animate ( {"height": "" + datasets_height + "px"}, 200 );
+            }
+            $('#pl-ch-views')
+                .find('ul')
+                .remove();       
+        });
     };
 
 
