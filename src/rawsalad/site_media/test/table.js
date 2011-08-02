@@ -320,12 +320,12 @@ var _table = (function () {
         var html = [];
         
         info.forEach( function ( e ) {
-            html.push( '<div>', e['type'], ': ', e['name'] );
-            if ( e['type'] === 'Cel' ) {
+            html.push( '<div>', e['elem_type'], ': ', e['elem_name'] );
+            if ( e['elem_type'] === 'Cel' ) {
                 html.push( '</div>' );
             }
             else {
-                // e['type'] === 'Miernik'
+                // e['elem_type'] === 'Miernik'
                 for ( attr in measure_values ) {
                     if ( measure_values.hasOwnProperty(attr) ) {
                         html.push( measure_values[attr], ': ', e[ measure_values[attr] ] );
@@ -348,11 +348,12 @@ var _table = (function () {
         var html = [];
         
         info.forEach( function ( e ) {
-            html.push( '<div>', e['elem_type'], ': ', e['elem_name'], '</div>');
-            if ( e['elem_type'] === 'Miernik' ) {
+            html.push( '<div>', e['type'], ': ', e['name'], '</div>');
+            if ( e['type'] === 'Miernik' ) {
                 for ( attr in visible_attrs[attr] ) {
-                    if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] ) {
-                        html.push( '<div>', attr, ': ', e[attr], '</div>' );
+                    if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] &&
+                         attr !== 'type' && attr !== 'name' ) {
+                            html.push( '<div>', attr, ': ', e[attr], '</div>' );
                     }
                 }
             }
@@ -363,7 +364,7 @@ var _table = (function () {
     function generate_text_for_nfz( info, visible_attrs ) {
         var html = [];
         var attr;
-        html.push( '<div>', 'Cel: ', info[0]['name'], '</div>');
+        html.push( '<div>', info[0]['type'], ': ', info[0]['name'], '</div>');
         for ( attr in visible_attrs ) {
             if ( visible_attrs.hasOwnProperty(attr) && !!info[0][attr] ) {
                 html.push( '<div>', attr, ': ', info[0][attr], '</div>' );
