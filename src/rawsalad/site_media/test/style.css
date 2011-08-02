@@ -197,10 +197,9 @@ textarea {
 
   .panel-main {
     overflow: hidden;
-    width: 940px;
+    clear: both;
     margin: 5px;
     padding: 5px;
-    float: left;
 
     background-color: #e3e3e3;
     
@@ -216,14 +215,6 @@ textarea {
 
   #pl-choose {
     position: relative;
-  }
-
-  #pl-ch-area {
-    overflow: visible;
-    position: relative;
-    left: 0px;
-    top: 0px;
-    width: 2000px;
   }
 
   .pl-ch-back {
