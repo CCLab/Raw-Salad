@@ -388,7 +388,7 @@ var _table = (function () {
         if ( dataset === '0' ) {
             visible_attrs = {
                 'wartosc_bazowa': 'Wartosc bazowa',
-                'wartosc_rok_obecny': 'Wartosc rok obecny'
+                'wartosc_rok_obec': 'Wartosc rok obecny'
             };
         }
         else if ( dataset === '2' ) {
