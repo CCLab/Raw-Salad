@@ -318,7 +318,7 @@ var _table = (function () {
     function generate_info_panel_text( info ) {
         var ignored_attrs = { 'elem_level': true, 'idef': true, 'idef_sort': true, 'leaf': true,
                               'level': true, 'parent': true, 'parent_sort': true, 'type': true };
-        var html = [ '<div>' ];
+        var html = [ '<div class="info">' ];
         info.forEach( function(info_obj) {
             for ( attr in info_obj ) {
                 if ( info_obj.hasOwnProperty(attr) && !(attr in ignored_attrs) ) {
