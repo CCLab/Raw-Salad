@@ -201,6 +201,7 @@ textarea {
     width: 940px;
     margin: 5px;
     padding: 5px;
+    float: left;
 
     background-color: #e3e3e3;
     
