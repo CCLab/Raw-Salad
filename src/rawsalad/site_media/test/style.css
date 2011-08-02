@@ -217,6 +217,14 @@ textarea {
     position: relative;
   }
 
+  #pl-ch-area {
+    overflow: visible;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 2000px;
+  }
+
   .pl-ch-back {
     width: 120px;
   }
