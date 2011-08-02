@@ -96,6 +96,9 @@ var _gui = (function () {
             )
             .click( function () {
                 var panel = $('#pl-choose');
+                var datasets_height; 
+                var views_height;
+
 
                 panel
                     .find('.panel-title')
@@ -105,12 +108,16 @@ var _gui = (function () {
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
 
                 $('#pl-ch-views')
-                    .hide()
                     .find('ul')
                     .remove();
 
-                $('#pl-ch-datasets')
-                    .show();
+
+                datasets_height = $("#pl-ch-datasets").height(); 
+                views_height = $("#pl-ch-views").height();
+    
+                if ( views_height > datasets_height ){
+                    $("#pl-ch-views").height( datasets_height );
+                }                    
             });
 
         _tools.prepare_tools();
@@ -743,9 +750,8 @@ var _gui = (function () {
                 var dataset_id = $(this).attr( 'data-set-id' );
 
                 create_views_panel( dataset_id );
+                move_to_views_panel();
 
-                $('#pl-ch-datasets')
-                    .hide();
             });
 
         if( hide_panel ) {
@@ -762,6 +768,18 @@ var _gui = (function () {
                     'opacity': '0.4'
                 });
         }
+    };
+    
+    function move_to_views_panel(){  
+        $("#pl-ch-area").animate( {"left": "-=960px"}, 800, function(){       
+            if ( datasets_height > views_height ){                    
+                   $("#pl-ch-datasets")
+                       .animate ( {"height": "" + views_height + "px"}, 200 );                   
+            }else if ( views_height > datasets_height ){
+                   $("#pl-ch-views")
+                       .animate ( {"height": ""+ views_height +"px"}, 200 );
+            }      
+        });                         
     };
 
 
@@ -804,7 +822,6 @@ var _gui = (function () {
 
         $('#pl-ch-views')
             .append( $( html.join('') ))
-            .show()
             .find( '.button' )
             .click( function () {
                 var button = $(this);

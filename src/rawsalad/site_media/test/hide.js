@@ -1,6 +1,6 @@
 (function () {
     // hide what's not needed now
-    $('#pl-ch-views').hide();
+//    $('#pl-ch-views').hide();
     $('#pl-search').hide();
     $('#pl-sr-full').hide();
     $('#pl-sr-results').hide();
