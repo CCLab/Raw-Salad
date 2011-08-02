@@ -383,7 +383,7 @@ var _table = (function () {
         var text_generator = functions_map[_store.dataset()];
         var visible_attrs = {};
         _store.active_columns().forEach( function( col ) {
-            visible_attrs[ col ][ 'key' ] = true;
+            visible_attrs[ col['key'] ] = true;
         });
         if ( _store.dataset() === '0' ) {
             measure_values = {
