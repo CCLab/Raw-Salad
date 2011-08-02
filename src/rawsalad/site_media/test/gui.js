@@ -765,6 +765,7 @@ var _gui = (function () {
     };
     
     function move_to_views_panel(){  
+        var datasets_height = $("#pl-ch-datasets").height(); 
         $("#pl-ch-area").animate( {"left": "-=960px"}, 800, function(){       
             if ( datasets_height > views_height ){                    
                    $("#pl-ch-datasets")
