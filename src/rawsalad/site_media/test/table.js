@@ -411,7 +411,7 @@ var _table = (function () {
                 });
         }
         
-        return visible_attr;
+        return visible_attrs;
     }
 
     function find_parent( id ) {
