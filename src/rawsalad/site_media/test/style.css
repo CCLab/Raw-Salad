@@ -198,6 +198,7 @@ textarea {
   .panel-main {
     overflow: hidden;
     clear: both;
+    width: 940px;
     margin: 5px;
     padding: 5px;
 
