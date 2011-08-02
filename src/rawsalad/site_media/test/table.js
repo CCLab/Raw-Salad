@@ -316,7 +316,18 @@ var _table = (function () {
     }
     
     function generate_info_panel_text( info ) {
-        return '<div class="info">info panel</div>';
+        var ignored_attrs = { 'elem_level': true, 'idef': true, 'idef_sort': true, 'leaf': true,
+                              'level': true, 'parent': true, 'parent_sort': true, 'type': true };
+        var html = [ '<div>' ];
+        info.forEach( function(info_obj) {
+            for ( attr in info_obj ) {
+                if ( info_obj.hasOwnProperty(attr) && !(attr in ignored_attrs) ) {
+                    html.push( attr, ': ', info_obj[attr], '<br>' );
+                }
+            }
+        });
+        html.push( '</div>' );
+        return html.join('');
     }
 
     function find_parent( id ) {
