@@ -315,17 +315,85 @@ var _table = (function () {
         return html.join('');
     }
     
-    function generate_info_panel_text( info ) {
-        var ignored_attrs = { 'elem_level': true, 'idef': true, 'idef_sort': true, 'leaf': true,
-                              'level': true, 'parent': true, 'parent_sort': true, 'type': true };
-        var html = [ '<div class="info">' ];
-        info.forEach( function(info_obj) {
-            for ( attr in info_obj ) {
-                if ( info_obj.hasOwnProperty(attr) && !(attr in ignored_attrs) ) {
-                    html.push( attr, ': ', info_obj[attr], '<br>' );
+    function generate_text_for_budzet( info, visible_attrs, measure_values ) {
+        var attr;
+        var html = [];
+        
+        info.forEach( function ( e ) {
+            html.push( '<div>', e['type'], ': ', e['name'] );
+            if ( e['type'] === 'Cel' ) {
+                html.push( '</div>' );
+            }
+            else {
+                // e['type'] === 'Miernik'
+                for ( attr in measure_values ) {
+                    if ( measure_values.hasOwnProperty(attr) ) {
+                        html.push( ', ', attr, ': ', measure_values[attr] );
+                    }
+                }
+                html.push('</div>');
+                
+                for ( attr in visible_attrs[attr] ) {
+                    if ( visible_attrs.hasOwnProperty(attr) ) {
+                        html.push( '<div>', attr, ': ', e[attr], '</div>' );
+                    }
                 }
             }
         });
+        return html.join('');
+    }
+    
+    function generate_text_for_fundusze_zad( info, visible_attrs ) {
+        var attr;
+        var html = [];
+        
+        info.forEach( function ( e ) {
+            html.push( '<div>', e['elem_type'], ': ', e['elem_name'], '</div>');
+            if ( e['elem_type'] === 'Miernik' ) {
+                for ( attr in visible_attrs[attr] ) {
+                    if ( visible_attrs.hasOwnProperty(attr) ) {
+                        html.push( '<div>', attr, ': ', e[attr], '</div>' );
+                    }
+                }
+            }
+        });
+        return html.join('');
+    }
+    
+    function generate_text_for_nfz( info, visible_attrs ) {
+        var html = [];
+        var attr;
+        html.push( '<div>', 'Cel: ', info[0]['name'], '</div>');
+        for ( attr in visible_attrs ) {
+            if ( visible_attrs.hasOwnProperty(attr) ) {
+                html.push( '<div>', attr, ': ', info[0][attr], '</div>' );
+            }
+        }
+        return html.join('');
+    }
+    
+    function generate_info_panel_text( info ) {
+        var html = [ '<div class="info">' ];
+        var measure_values = {};
+        var functions_map = {
+            '0': generate_text_for_budzet,
+            '2': generate_text_for_fundusze_zad,
+            '3': generate_text_for_nfz
+        };
+        var text_generator = functions_map[_store.dataset()];
+        var visible_attrs = {};
+        _store.active_columns().forEach( function( col ) {
+            visible_attrs[ col ] = true;
+        });
+        if ( _store.dataset() === '0' ) {
+            measure_values = {
+                'wartosc_bazowa': 'Wartosc bazowa',
+                'wartosc_rok_obecny': 'Wartosc rok obecny'
+            };
+        }
+        
+        html.push( text_generator( info, visible_attrs, measure_values ) );
+
         html.push( '</div>' );
         return html.join('');
     }
