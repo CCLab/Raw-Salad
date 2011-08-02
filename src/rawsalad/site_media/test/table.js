@@ -315,26 +315,15 @@ var _table = (function () {
         return html.join('');
     }
     
-    function generate_text_for_budzet( info, visible_attrs, measure_values ) {
+    function generate_text_for_budzet( info, visible_attrs ) {
         var attr;
         var html = [];
         
         info.forEach( function ( e ) {
-            html.push( '<div>', e['elem_type'], ': ', e['elem_name'] );
-            if ( e['elem_type'] === 'Cel' ) {
-                html.push( '</div>' );
-            }
-            else {
-                // e['elem_type'] === 'Miernik'
-                for ( attr in measure_values ) {
-                    if ( measure_values.hasOwnProperty(attr) ) {
-                        html.push( measure_values[attr], ': ', e[ measure_values[attr] ] );
-                    }
-                }
-                html.push('</div>');
-                
+            html.push( '<div>', e['elem_type'], ': ', e['elem_name'], '</div>' );
+            if ( e['elem_type'] === 'Miernik' ) {
                 for ( attr in visible_attrs[attr] ) {
-                    if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] ) {
+                    if ( visible_attrs.hasOwnProperty(attr) ) {
                         html.push( '<div>', visible_attrs[attr] );
                         html.push( ': ', e[attr], '</div>' );
                     }
@@ -352,7 +341,7 @@ var _table = (function () {
             html.push( '<div>', e['type'], ': ', e['name'], '</div>');
             if ( e['type'] === 'Miernik' ) {
                 for ( attr in visible_attrs[attr] ) {
-                    if ( visible_attrs.hasOwnProperty(attr) && !!e[attr] ) {
+                    if ( visible_attrs.hasOwnProperty(attr) ) {
                         html.push( '<div>', visible_attrs[attr] );
                         html.push( ': ', e[attr], '</div>' );
                     }
@@ -367,8 +356,7 @@ var _table = (function () {
         var attr;
         html.push( '<div>', 'Cel: ', info[0]['name'], '</div>');
         for ( attr in visible_attrs ) {
-            if ( visible_attrs.hasOwnProperty(attr) && !!info[0][attr] &&
-                 attr !== 'type' && attr !== 'name' ) {
+            if ( visible_attrs.hasOwnProperty(attr) ) {
                     html.push( '<div>', visible_attrs[attr] );
                     html.push( ': ', info[0][attr], '</div>' );
             }
@@ -378,28 +366,52 @@ var _table = (function () {
     
     function generate_info_panel_text( info ) {
         var html = [ '<div class="info">' ];
-        var measure_values = {};
         var functions_map = {
             '0': generate_text_for_budzet,
             '2': generate_text_for_fundusze_zad,
             '3': generate_text_for_nfz
         };
-        var text_generator = functions_map[_store.dataset()];
+        var text_generator = functions_map[ _store.dataset() ];
+        var visible_attrs = prepare_visible_attributes();
+        
+        html.push( text_generator( info, visible_attrs ) );
+
+        html.push( '</div>' );
+        return html.join('');
+    }
+    
+    function prepare_visible_attributes() {
         var visible_attrs = {};
-        _store.active_columns().forEach( function( col ) {
-            visible_attrs[ col['key'] ] = col['label'];
-        });
-        if ( _store.dataset() === '0' ) {
-            measure_values = {
+        var dataset = _store.dataset();
+        var year;
+        
+        if ( dataset === '0' ) {
+            visible_attrs = {
                 'wartosc_bazowa': 'Wartosc bazowa',
                 'wartosc_rok_obecny': 'Wartosc rok obecny'
             };
         }
+        else if ( dataset === '2' ) {
+            visible_attrs[ 'miernik_wartosc_bazowa' ] = 'Wartosc bazowa';
+            _store.active_columns().forEach( function ( col ) {
+                if ( /val_(\d+)/.test(col['key']) ) {
+                    year = /val_(\d+)/.exec( col['key'] )[1];
+                    visible_attrs[ col['key'] ] = 'miernik_wartosc_' + year;
+                }
+            });
+        }
+        else if ( dataset === '3' ) {
+            _store.active_columns().filter ( function ( col ) {
+                    return col['key'] !== 'type';
+                })                
+                .forEach( function( col ) {
+                    if ( col['key'] !== 'type' && col['key'] !== 'name' ) {
+                        visible_attrs[ col['key'] ] = col['label'];
+                    }
+                });
+        }
         
-        html.push( text_generator( info, visible_attrs, measure_values ) );
-
-        html.push( '</div>' );
-        return html.join('');
+        return visible_attr;
     }
 
     function find_parent( id ) {
