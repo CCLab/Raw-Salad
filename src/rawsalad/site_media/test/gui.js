@@ -32,7 +32,7 @@ var _gui = (function () {
     that.init_gui = function ( hide_panel ) {
 
         window.onbeforeunload = _utils.beforeunload;
-
+        var datasets_height;
         // arm top menu
         $('#top')
             .find('li')
@@ -95,9 +95,11 @@ var _gui = (function () {
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
                 
                 $("#pl-ch-area").animate( {"left": "+=960px"}, 800, function(){                    
+        
                     $('#pl-ch-views')
                         .find('ul')
-                        .remove();
+                        .remove()
+                        .removeAttr('height');
                         
                     $("#pl-ch-datasets")
                         .animate ( {"height": "" + datasets_height + "px"}, 200 );            
@@ -323,6 +325,9 @@ var _gui = (function () {
             });
 
         init_choose_panel( hide_panel );
+
+        datasets_height = $("#pl-ch-datasets").height();
+
     };
 
 
