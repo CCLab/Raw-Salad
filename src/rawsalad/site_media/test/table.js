@@ -43,26 +43,26 @@ var _table = (function () {
             _gui.make_zebra();
             $('#app-tb-tl-columns-button').show();
             $('#app-tb-tl-clear-button').show();
-            $('#app-tb-tl-filter-button').show();
-            $('#app-tb-tl-sort-button').show();
-            $('#app-tb-tl-sort-button').css({
-                'border-radius': '5px 0px 0px 5px',
-                '-moz-border-radius': '5px 0px 0px 5px',
-                '-webkit-border-radius': '5px 0px 0px 5px',
-                '-o-border-radius': '5px 0px 0px 5px'
-            });
+            //$('#app-tb-tl-filter-button').show();
+            //$('#app-tb-tl-sort-button').show();
+            //$('#app-tb-tl-sort-button').css({
+            //    'border-radius': '5px 0px 0px 5px',
+            //    '-moz-border-radius': '5px 0px 0px 5px',
+            //    '-webkit-border-radius': '5px 0px 0px 5px',
+            //    '-o-border-radius': '5px 0px 0px 5px'
+            //});
         } else {
             create_filtered_thead();
             create_filtered_tbody( _store.active_sorted() );
             $('#app-tb-tl-columns-button').hide();
             $('#app-tb-tl-clear-button').hide();
             //$('#app-tb-tl-filter-button').hide();
-            $('#app-tb-tl-sort-button').css({
-                'border-radius': '5px',
-                '-moz-border-radius': '5px',
-                '-webkit-border-radius': '5px',
-                '-o-border-radius': '5px'
-            });
+            //$('#app-tb-tl-sort-button').css({
+            //    'border-radius': '5px',
+            //    '-moz-border-radius': '5px',
+            //    '-webkit-border-radius': '5px',
+            //    '-o-border-radius': '5px'
+            //});
         }
     };
 
