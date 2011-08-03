@@ -200,8 +200,7 @@ textarea {
     margin: 5px;
     padding: 5px;
     clear: both;
-    width: 940px;
-    float: left;
+    
 
     background-color: #e3e3e3;
     
@@ -217,10 +216,14 @@ textarea {
   
     #pl-ch-views {
     clear: none;
+    width: 940px;
+    float: left;
   }
   
   #pl-ch-datasets {
     clear: none;
+    width: 940px;
+    float: left;
   }
 
   #pl-choose {
