@@ -94,13 +94,19 @@ var _gui = (function () {
                     .find('.panel-desc')
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
 
-                $('#pl-ch-views')
-                    .hide()
-                    .find('ul')
-                    .remove();
-
-                $('#pl-ch-datasets')
-                    .show();
+                $("#pl-ch-area").animate( {"left": "+=960px"}, 800, function(){
+                    var datasets_height = $("#pl-ch-datasets").height(); 
+ 
+                    $('#pl-ch-views')
+                        .find('ul')
+                        .remove();
+  
+                    $("#pl-ch-datasets").animate ( {"height": "" + datasets_height + "px"}, 200 );            
+                    
+        
+ 
+                    }            
+                });
             });
 
         _tools.prepare_tools();
@@ -736,6 +742,7 @@ var _gui = (function () {
                 var dataset_id = $(this).attr( 'data-set-id' );
 
                 create_views_panel( dataset_id );
+
 
                 $('#pl-ch-datasets')
                     .hide();
