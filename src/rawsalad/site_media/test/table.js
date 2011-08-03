@@ -53,10 +53,10 @@ var _table = (function () {
             });
         } else {
             create_filtered_thead();
-            create_filtered_tbody();
+            create_filtered_tbody( _store.active_sorted() );
             $('#app-tb-tl-columns-button').hide();
             $('#app-tb-tl-clear-button').hide();
-            $('#app-tb-tl-filter-button').hide();
+            //$('#app-tb-tl-filter-button').hide();
             $('#app-tb-tl-sort-button').css({
                 'border-radius': '5px',
                 '-moz-border-radius': '5px',
@@ -257,30 +257,38 @@ var _table = (function () {
         $('#app-tb-filteredtable > thead').append( html.join('') );
     }
 
-    function create_filtered_tbody() {
+    function create_filtered_tbody( is_sorted ) {
         var schema = _store.active_columns();
         // deep copy is made to ensure that _store is not changed by sort
         var rows_copy = [];
+        var sort_fun;
+        
+        // sort function for filtered & not sorted table
+        var standard_sort = function ( a, b ) {
+             if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
+                 return -1;
+             } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
+                 return 1;
+             } else {
+                 return 0;
+             }
+        };
+        // sort function for filterd & sorted table(rows are now sorted)
+        var fake_sort = function ( a, b ) {
+            return -1;
+        };
+        sort_fun = is_sorted ? fake_sort : standard_sort;
+        
         $.extend( true, rows_copy, _store.active_rows() );
 
-        rows_copy.sort( function ( a, b ) {
-                     var return_value;
-                     if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
-                         return_value = -1;
-                     } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
-                         return_value = 1;
-                     } else {
-                         return_value = 0;
-                     }
-                return return_value;
-            })
-            .forEach( function ( row ) {
-                var new_node = generate_filtered_row({
-                                    node: row,
-                                    schema: schema
-                                });
-                $('#app-tb-filteredtable > tbody').append( new_node );
-            });
+        rows_copy.sort( sort_fun )
+                 .forEach( function ( row ) {
+                     var new_node = generate_filtered_row({
+                                         node: row,
+                                         schema: schema
+                                     });
+                     $('#app-tb-filteredtable > tbody').append( new_node );
+                 });
     }
 
     function generate_filtered_row( args ) {

@@ -31,11 +31,9 @@ var _tools = (function () {
 
     // TODO refactor this !!!!
     that.sort = function ( data, sett ) {
-        var id = "idef";
-        // TODO what is it for?!
-        var new_table_data_object = {};
-        _algorithms.prepare_sorting_setting( sett, id );
+        _algorithms.prepare_sorting_setting( sett, 'idef' );
         _algorithms.sort( data, sett );
+        _store.set_sorted( true );
     };
 
     that.prepare_tools = function () {
@@ -464,6 +462,9 @@ var _tools = (function () {
                 $.extend( true, new_sheet, _store.active_sheet() );
                 new_sheet['rows'] = create_filter_result( filtered_rows );
                 new_sheet['filtered'] = true;
+                // if new sheet is created from sheet that hasn't been filtered yet,
+                // it will be treated as not sorted
+                new_sheet['sorted'] = _store.active_sorted() && _store.active_filtered();
 
                 _sheet.create_new_sheet( new_sheet, "Arkusz", true );
 

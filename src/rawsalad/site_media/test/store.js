@@ -231,7 +231,15 @@ var _store = (function () {
     that.active_filtered = function () {
         return that.active_sheet()['filtered'];
     };
-
+    
+    that.active_sorted = function () {
+        return that.active_sheet()['sorted'];
+    };
+    
+    that.set_sorted = function ( is_sorted ) {
+        that.active_sheet()['sorted'] = is_sorted;
+    }
+    
 
     // active sheet getter / setter
     that.active_sheet = function ( value ) {
@@ -460,7 +468,8 @@ var _store = (function () {
             'columns': cols,
             'rows': rows,
             'name': data['name'],
-            'filtered': false
+            'filtered': false,
+            'sorted': false
         };
     }
 
