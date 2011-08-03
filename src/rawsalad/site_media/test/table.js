@@ -260,29 +260,22 @@ var _table = (function () {
     function create_filtered_tbody( is_sorted ) {
         var schema = _store.active_columns();
         // deep copy is made to ensure that _store is not changed by sort
-        var rows_copy = [];
-        var sort_fun;
-        
-        // sort function for filtered & not sorted table
-        var standard_sort = function ( a, b ) {
-             if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
-                 return -1;
-             } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
-                 return 1;
-             } else {
-                 return 0;
-             }
-        };
-        // sort function for filterd & sorted table(rows are now sorted)
-        var fake_sort = function ( a, b ) {
-            return -1;
-        };
-        sort_fun = is_sorted ? fake_sort : standard_sort;
-        
+        var rows_copy = [];        
         $.extend( true, rows_copy, _store.active_rows() );
+        
+        if ( !is_sorted ) {
+            rows_copy.sort( sort_fun( function ( a, b ) {
+                if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
+                    return -1;
+                } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }) );
+        }
 
-        rows_copy.sort( sort_fun )
-                 .forEach( function ( row ) {
+        rows_copy.forEach( function ( row ) {
                      var new_node = generate_filtered_row({
                                          node: row,
                                          schema: schema
