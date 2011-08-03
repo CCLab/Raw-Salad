@@ -196,10 +196,11 @@ textarea {
   }
 
   .panel-main {
-    overflow: hidden;
-    clear: both;
+    overflow: hidden;   
     margin: 5px;
     padding: 5px;
+    width: 940px;
+    float: left;
 
     background-color: #e3e3e3;
     
@@ -224,6 +225,13 @@ textarea {
   .pl-ch-more {
     margin: 0px;
     padding: 5px;
+  }
+
+  #pl-ch-area {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 2000px;
   }
 
   #pl-choose li {
