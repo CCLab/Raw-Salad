@@ -264,7 +264,7 @@ var _table = (function () {
         $.extend( true, rows_copy, _store.active_rows() );
         
         if ( !is_sorted ) {
-            rows_copy.sort( sort_fun( function ( a, b ) {
+            rows_copy.sort( function ( a, b ) {
                 if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
                     return -1;
                 } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
@@ -272,9 +272,8 @@ var _table = (function () {
                 } else {
                     return 0;
                 }
-            }) );
+            });
         }
-
         rows_copy.forEach( function ( row ) {
                      var new_node = generate_filtered_row({
                                          node: row,
