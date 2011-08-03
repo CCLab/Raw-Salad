@@ -31,17 +31,7 @@ var _gui = (function () {
 
     that.init_gui = function ( hide_panel ) {
 
-        window.onbeforeunload = function ( e ) {
-            e = e || window.event;
-
-            // For IE and Firefox prior to version 4
-            if (e) {
-                e.returnValue = 'Any string';
-            }
-
-            // For Safari
-            return 'Any string';
-        };
+        window.onbeforeunload = _utils.beforeunload;
 
         // arm top menu
         $('#top')
@@ -176,6 +166,8 @@ var _gui = (function () {
                 else {
                     $('#tm-choose').trigger( $.Event( 'click' ) );
                 }
+                // arm backbutton and others again - timeout for letting download work
+                setTimeout( function () { window.onbeforeunload = _utils.beforeunload; }, 1000 );
             });
 
         $('#pl-feedback')
