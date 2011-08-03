@@ -45,21 +45,24 @@ var _table = (function () {
             $('#app-tb-tl-clear-button').show();
             $('#app-tb-tl-filter-button').show();
             $('#app-tb-tl-sort-button').show();
-//            $('#app-tb-tl-sort-button').css({
-//                'border-radius': '5px 0px 0px 5px',
-//                '-moz-border-radius': '5px 0px 0px 5px',
-//                '-webkit-border-radius': '5px 0px 0px 5px'
-//            });
+            $('#app-tb-tl-sort-button').css({
+                'border-radius': '5px 0px 0px 5px',
+                '-moz-border-radius': '5px 0px 0px 5px',
+                '-webkit-border-radius': '5px 0px 0px 5px',
+                '-o-border-radius': '5px 0px 0px 5px'
+            });
         } else {
             create_filtered_thead();
             create_filtered_tbody();
             $('#app-tb-tl-columns-button').hide();
             $('#app-tb-tl-clear-button').hide();
-//            $('#app-tb-tl-sort-button').css({
-//                'border-radius': '5px',
-//                '-moz-border-radius': '5px',
-//                '-webkit-border-radius': '5px'
-//            });
+            $('#app-tb-tl-filter-button').hide();
+            $('#app-tb-tl-sort-button').css({
+                'border-radius': '5px',
+                '-moz-border-radius': '5px',
+                '-webkit-border-radius': '5px',
+                '-o-border-radius': '5px'
+            });
         }
     };
 
@@ -315,19 +318,104 @@ var _table = (function () {
         return html.join('');
     }
     
-    function generate_info_panel_text( info ) {
-        var ignored_attrs = { 'elem_level': true, 'idef': true, 'idef_sort': true, 'leaf': true,
-                              'level': true, 'parent': true, 'parent_sort': true, 'type': true };
-        var html = [ '<div class="info">' ];
-        info.forEach( function(info_obj) {
-            for ( attr in info_obj ) {
-                if ( info_obj.hasOwnProperty(attr) && !(attr in ignored_attrs) ) {
-                    html.push( attr, ': ', info_obj[attr], '<br>' );
+    function generate_text_for_budzet( info, visible_attrs ) {
+        var attr;
+        var html = [];
+        
+        info.forEach( function ( e ) {
+            html.push( '<div>', e['elem_type'], ': ', e['elem_name'], '</div>' );
+            if ( e['elem_type'] === 'Miernik' ) {
+                for ( attr in visible_attrs ) {
+                    if ( visible_attrs.hasOwnProperty(attr) ) {
+                        html.push( '<div>', visible_attrs[attr] );
+                        html.push( ': ', e[attr], '</div>' );
+                    }
                 }
             }
         });
+        return html.join('');
+    }
+    
+    function generate_text_for_fundusze_zad( info, visible_attrs ) {
+        var attr;
+        var html = [];
+        
+        info.forEach( function ( e ) {
+            html.push( '<div>', e['type'], ': ', e['name'], '</div>');
+            if ( e['type'] === 'Miernik' ) {
+                for ( attr in visible_attrs ) {
+                    if ( visible_attrs.hasOwnProperty(attr) ) {
+                        html.push( '<div>', visible_attrs[attr] );
+                        html.push( ': ', e[attr], '</div>' );
+                    }
+                }
+            }
+        });
+        return html.join('');
+    }
+    
+    function generate_text_for_nfz( info, visible_attrs ) {
+        var html = [];
+        var attr;
+        html.push( '<div>', 'Cel: ', info[0]['name'], '</div>');
+        for ( attr in visible_attrs ) {
+            if ( visible_attrs.hasOwnProperty(attr) ) {
+                    html.push( '<div>', visible_attrs[attr] );
+                    html.push( ': ', info[0][attr], '</div>' );
+            }
+        }
+        return html.join('');
+    }
+    
+    function generate_info_panel_text( info ) {
+        var html = [ '<div class="info">' ];
+        var functions_map = {
+            '0': generate_text_for_budzet,
+            '2': generate_text_for_fundusze_zad,
+            '3': generate_text_for_nfz
+        };
+        var text_generator = functions_map[ _store.dataset() ];
+        var visible_attrs = prepare_visible_attributes();
+        
+        html.push( text_generator( info, visible_attrs ) );
+
         html.push( '</div>' );
         return html.join('');
+    }
+    
+    function prepare_visible_attributes() {
+        var visible_attrs = {};
+        var dataset = _store.dataset();
+        var year;
+        
+        if ( dataset === '0' ) {
+            visible_attrs = {
+                'wartosc_bazowa': 'Wartosc bazowa',
+                'wartosc_rok_obec': 'Wartosc rok obecny'
+            };
+        }
+        else if ( dataset === '2' ) {
+            visible_attrs[ 'miernik_wartosc_bazowa' ] = 'Wartosc bazowa';
+            _store.active_columns().forEach( function ( col ) {
+                if ( /val_(\d+)/.test(col['key']) ) {
+                    year = /val_(\d+)/.exec( col['key'] )[1];
+                    visible_attrs[ 'miernik_wartosc_' + year ] = 
+                        'Miernik wartosc ' + year + 'r.';
+                }
+            });
+        }
+        else if ( dataset === '3' ) {
+            _store.active_columns().filter ( function ( col ) {
+                    return col['key'] !== 'type';
+                })                
+                .forEach( function( col ) {
+                    if ( col['key'] !== 'type' && col['key'] !== 'name' ) {
+                        visible_attrs[ col['key'] ] = col['label'];
+                    }
+                });
+        }
+        
+        return visible_attrs;
     }
 
     function find_parent( id ) {

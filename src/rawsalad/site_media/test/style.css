@@ -25,7 +25,7 @@ a.hoverable {
 	cursor: pointer;
 }
 
-a.hoverable div {
+a.hoverable div.info {
 	position: absolute;
 	display: none;
 	top: 10px;

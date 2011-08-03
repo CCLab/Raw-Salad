@@ -64,6 +64,8 @@ var _download = (function () {
             });
         }
 
+        window.onbeforeunload = null;
+
         // send it to server for further processing!!
         $('#pl-dl-hidden-form')
             .find('input')

@@ -139,6 +139,18 @@ var _utils = (function () {
         return parent_id;
     }
 
+    that.beforeunload = function ( e ) {
+        e = e || window.event;
+
+        // For IE and Firefox prior to version 4
+        if (e) {
+            e.returnValue = 'Opuszczenie strony spowoduje utratę danych';
+        }
+
+        // For Safari
+        return 'Opuszczenie strony spowoduje utratę danych';
+    };
+
     return that;
 
 })();
