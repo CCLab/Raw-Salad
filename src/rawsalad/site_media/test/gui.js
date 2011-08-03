@@ -442,8 +442,6 @@ var _gui = (function () {
 
         _table.clean_table();
         _table.init_table();
-
-        $('#app-tbs-table').trigger( $.Event( 'click' ) );
     };
 
 
