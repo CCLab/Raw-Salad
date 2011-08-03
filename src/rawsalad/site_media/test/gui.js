@@ -737,7 +737,7 @@ var _gui = (function () {
         });
         html.push( '</ul>' );
         
-        datasets_height = $("#pl-ch-datasets").height();
+
 
         $('#pl-ch-datasets')
             .append( $( html.join('') ))
@@ -773,6 +773,7 @@ var _gui = (function () {
                     'opacity': '0.4'
                 });
         }
+    datasets_height = $("#pl-ch-datasets").height();
     };
 
 
