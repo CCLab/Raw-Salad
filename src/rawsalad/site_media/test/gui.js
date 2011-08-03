@@ -100,12 +100,8 @@ var _gui = (function () {
                     $('#pl-ch-views')
                         .find('ul')
                         .remove();
-  
-                    $("#pl-ch-datasets").animate ( {"height": "" + datasets_height + "px"}, 200 );            
-                    
-        
- 
-                    }            
+                    $("#pl-ch-datasets")
+                        .animate ( {"height": "" + datasets_height + "px"}, 200 );            
                 });
             });
 
@@ -743,9 +739,17 @@ var _gui = (function () {
 
                 create_views_panel( dataset_id );
 
-
-                $('#pl-ch-datasets')
-                    .hide();
+                $("#pl-ch-area").animate( {"left": "-=960px"}, 800, function(){      
+                    
+                    var datasets_height = $("#pl-ch-datasets").height(); 
+                    var views_height =$("#pl-ch-views").height();
+                            
+                    if ( datasets_height > views_height ){  
+                        $("#pl-ch-datasets").animate ( {"height": "" + views_height + "px"}, 200 );                   
+                    }else if ( views_height > datasets_height ){            
+                        $("#pl-ch-views").animate ( {"height": ""+ views_height +"px"}, 200 );
+                    }     
+                });
             });
 
         if( hide_panel ) {
