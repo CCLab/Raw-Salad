@@ -58,7 +58,7 @@ var _gui = (function () {
                 $('.app-container:visible').hide();
                 if( action === 'table' ) {
                     $('#app-' + action).show();
-                    _gui.refresh_gui();
+                    that.refresh_gui();
                 }
                 else {
                     update_share_tab();
@@ -358,12 +358,13 @@ var _gui = (function () {
 
 
     that.refresh_gui = function() {
-
         var open_tool = $('#app-tb-tools').find('form:visible');
+
         if( open_tool.length !== 0 ) {
-                 open_tool.slideUp( 200, that.refresh_gui_action );
-        }else{
-        that.refresh_gui_action();
+             open_tool.slideUp( 200, that.refresh_gui_action );
+        }
+        else {
+            that.refresh_gui_action();
         }
     };
 
@@ -441,6 +442,8 @@ var _gui = (function () {
 
         _table.clean_table();
         _table.init_table();
+
+        $('#app-tbs-table').trigger( $.Event( 'click' ) );
     };
 
 
@@ -817,6 +820,13 @@ var _gui = (function () {
                     hide_top_panels();
                     that.refresh_gui();
                 }
+
+                // show table tab in application
+                $('#app-tbs-table').addClass('active');
+                $('#app-tbs-share').removeClass('active');
+
+                $('#app-share').hide();
+                $('#app-table').show();
             });
 
         panel
