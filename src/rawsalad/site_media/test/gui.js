@@ -93,13 +93,12 @@ var _gui = (function () {
                 panel
                     .find('.panel-desc')
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
-
-                $("#pl-ch-area").animate( {"left": "+=960px"}, 800, function(){
-                    var datasets_height = $("#pl-ch-datasets").height(); 
- 
+                
+                $("#pl-ch-area").animate( {"left": "+=960px"}, 800, function(){                    
                     $('#pl-ch-views')
                         .find('ul')
                         .remove();
+                        
                     $("#pl-ch-datasets")
                         .animate ( {"height": "" + datasets_height + "px"}, 200 );            
                 });
@@ -708,7 +707,9 @@ var _gui = (function () {
         var html = [];
         var datasets = _store.meta_datasets();
         var len = datasets.length;
-        var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
+        var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 ); 
+        var datasets_height;
+
 
         html.push( '<ul class="left">' );
         datasets.forEach( function ( set, i ) {
@@ -730,6 +731,8 @@ var _gui = (function () {
             }
         });
         html.push( '</ul>' );
+        
+        datasets_height = $("#pl-ch-datasets").height();
 
         $('#pl-ch-datasets')
             .append( $( html.join('') ))
@@ -741,7 +744,6 @@ var _gui = (function () {
 
                 $("#pl-ch-area").animate( {"left": "-=960px"}, 800, function(){      
                     
-                    var datasets_height = $("#pl-ch-datasets").height(); 
                     var views_height =$("#pl-ch-views").height();
                             
                     if ( datasets_height > views_height ){  
