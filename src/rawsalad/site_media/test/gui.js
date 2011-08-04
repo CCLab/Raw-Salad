@@ -342,6 +342,8 @@ var _gui = (function () {
                                 var level;
                                 var hashed_nodes;
                                 var nodes_to_download = [];
+                                
+                                // object containing ids of nodes to download
                                 var id_obj = {};
                                 var id;
                                     
@@ -359,13 +361,14 @@ var _gui = (function () {
                                             hashed_nodes[level].forEach( function ( e ) {
                                                 // add open not leaves that has 
                                                 // parent that should be downloaded
-                                                if ( !e['data']['leaf'] && e['state']['open'] &&
-                                                     !!id_obj[ e['data']['parent'] ] ) {
+                                                if ( e['state']['open'] ) {
                                                     // 1 means that node should be downloaded
                                                     id_obj[ e['data']['idef'] ] = 1;
-                                                    // 2 means that node shouldn't be downloaded, but has
-                                                    // at least 1 descendant that should be downloaded
-                                                    id_obj[ e['data']['parent'] ] = 2;
+                                                    // if node has parent, that parent
+                                                    // shouldn't be downloaded, 2 means this
+                                                    if ( !!e['data']['parent'] ) {
+                                                        id_obj[ e['data']['parent'] ] = 2;
+                                                    }
                                                 }
                                             });
                                         }

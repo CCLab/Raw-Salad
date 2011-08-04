@@ -430,7 +430,8 @@ var _store = (function () {
                 'data': e,
                 'state': {
                     'open': !!open_nodes[ e['idef'] ],
-                    'selected': false
+                    'selected': false,
+                    'visible': true
                 }
             };
         });
