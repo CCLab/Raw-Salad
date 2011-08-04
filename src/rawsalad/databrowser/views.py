@@ -274,7 +274,7 @@ def store_state( request ):
     # store in mongo, create uniq idef and send it back to front-end
     #
 
-    return HttpResponse( '1000' ) #replace '1000' with uniq idef
+    return HttpResponse( {'id': '1000'} ) #replace '1000' with uniq idef
 
 # init application prepared to handle restore data
 def init_restore( request, idef ):
