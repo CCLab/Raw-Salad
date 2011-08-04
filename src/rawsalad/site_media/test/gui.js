@@ -35,6 +35,12 @@ var _gui = (function () {
         window.onbeforeunload = _utils.beforeunload;
 
         $('#most-top')
+            .find('table')
+            .css({
+                'margin-left': (( $(window).width() - 960 ) / 2 ) + 'px'
+            });
+
+        $('#mt-toggle')
             .click( function () {
                 if( $('#app-wrapper').is(':visible') ) {
                     $('#app-wrapper').hide();
@@ -47,37 +53,24 @@ var _gui = (function () {
                     $('#mt-toggle').attr( 'src', '/site_media/img/aplikacjaOn_normal.png' );
                 }
             })
-            .find('table')
-            .css({
-                'margin-left': (( $(window).width() - 960 ) / 2 ) + 'px'
-            });
-
-        $('#mt-od-logo').hover(
-            function () {
-                $(this).attr( 'src', '/site_media/img/logo_rollover.png' );
-            },
-            function () {
-                $(this).attr( 'src', '/site_media/img/logo_normal.png' );
-            }
-        );
-
-        $('#mt-toggle').hover(
-            function () {
-                if( $('#app-wrapper').is(':visible') ) {
-                    $(this).attr( 'src', '/site_media/img/aplikacjaOn_rollover.png' );
+            .hover(
+                function () {
+                    if( $('#app-wrapper').is(':visible') ) {
+                        $(this).attr( 'src', '/site_media/img/aplikacjaOn_rollover.png' );
+                    }
+                    else {
+                        $(this).attr( 'src', '/site_media/img/portalOn_rollover.png' );
+                    }
+                    $(this).css( 'cursor': 'pointer' );
+                },
+                function () {
+                    if( $('#app-wrapper').is(':visible') ) {
+                        $(this).attr( 'src', '/site_media/img/aplikacjaOn_normal.png' );
+                    }
+                    else {
+                        $(this).attr( 'src', '/site_media/img/portalOn_normal.png' );
+                    }
                 }
-                else {
-                    $(this).attr( 'src', '/site_media/img/portalOn_rollover.png' );
-                }
-            },
-            function () {
-                if( $('#app-wrapper').is(':visible') ) {
-                    $(this).attr( 'src', '/site_media/img/aplikacjaOn_normal.png' );
-                }
-                else {
-                    $(this).attr( 'src', '/site_media/img/portalOn_normal.png' );
-                }
-            }
         );
 
         // arm top menu
