@@ -39,43 +39,43 @@ var _gui = (function () {
                 if( $('#app-wrapper').is(':visible') ) {
                     $('#app-wrapper').hide();
                     $('#main-wrapper').show();
-                    $('#mt-toggle').attr( 'src', '/site_media/test/img/portalOn_normal.png' );
+                    $('#mt-toggle').attr( 'src', '/site_media/img/portalOn_normal.png' );
                 }
                 else {
                     $('#app-wrapper').show();
                     $('#main-wrapper').hide();
-                    $('#mt-toggle').attr( 'src', '/site_media/test/img/aplikacjaOn_normal.png' );
+                    $('#mt-toggle').attr( 'src', '/site_media/img/aplikacjaOn_normal.png' );
                 }
             })
-            .find('p')
+            .find('table')
             .css({
                 'margin-left': (( $(window).width() - 960 ) / 2 ) + 'px'
             });
 
         $('#mt-od-logo').hover(
             function () {
-                $(this).attr( 'src', '/site_media/test/img/logo_rollover.png' );
+                $(this).attr( 'src', '/site_media/img/logo_rollover.png' );
             },
             function () {
-                $(this).attr( 'src', '/site_media/test/img/logo_normal.png' );
+                $(this).attr( 'src', '/site_media/img/logo_normal.png' );
             }
         );
 
         $('#mt-toggle').hover(
             function () {
                 if( $('#app-wrapper').is(':visible') ) {
-                    $(this).attr( 'src', '/site_media/test/img/aplikacjaOn_rollover.png' );
+                    $(this).attr( 'src', '/site_media/img/aplikacjaOn_rollover.png' );
                 }
                 else {
-                    $(this).attr( 'src', '/site_media/test/img/portalOn_rollover.png' );
+                    $(this).attr( 'src', '/site_media/img/portalOn_rollover.png' );
                 }
             },
             function () {
                 if( $('#app-wrapper').is(':visible') ) {
-                    $(this).attr( 'src', '/site_media/test/img/aplikacjaOn_normal.png' );
+                    $(this).attr( 'src', '/site_media/img/aplikacjaOn_normal.png' );
                 }
                 else {
-                    $(this).attr( 'src', '/site_media/test/img/portalOn_normal.png' );
+                    $(this).attr( 'src', '/site_media/img/portalOn_normal.png' );
                 }
             }
         );
@@ -342,7 +342,7 @@ var _gui = (function () {
                 vals.forEach( function ( e ) {
                     var group_index = e.split('-')[0];
                     var sheet_index = e.split('-')[1];
-                    
+
                     if ( !!selected[group_index] ) {
                         selected[ group_index ].push( sheet_index );
                     }
@@ -360,7 +360,7 @@ var _gui = (function () {
                             'issue': groups[group]['issue'],
                             'sheets': []
                         };
-                        
+
                         var current_sheets = groups[ group ]['sheets'];
 
                         current_sheets = current_sheets.filter( function ( e, i ) {
@@ -371,11 +371,11 @@ var _gui = (function () {
                                 var level;
                                 var hashed_nodes;
                                 var nodes_to_download = [];
-                                
+
                                 // object containing ids of nodes to download
                                 var id_obj = {};
                                 var id;
-                                    
+
                                 // if it's filtered sheet, all ids are needed
                                 if ( e['filtered'] ) {
                                     needed_ids = e['rows'].map( function ( row ) {
@@ -388,7 +388,7 @@ var _gui = (function () {
                                     for ( level in hashed_nodes ) {
                                         if ( hashed_nodes.hasOwnProperty(level) ) {
                                             hashed_nodes[level].forEach( function ( e ) {
-                                                // add open not leaves that has 
+                                                // add open not leaves that has
                                                 // parent that should be downloaded
                                                 if ( e['state']['open'] &&
                                                      (!e['data']['parent'] || !!id_obj[ e['data']['parent'] ]) ) {
@@ -403,14 +403,14 @@ var _gui = (function () {
                                             });
                                         }
                                     }
-                                    
+
                                     for ( id in id_obj ) {
                                         if ( id_obj.hasOwnProperty(id) && id_obj[id] === 1 ) {
                                             needed_ids.push( id );
                                         }
                                     }
                                 }
-                                
+
                                 return {
                                     'columns': e['columns'],
                                     'rows': needed_ids,
@@ -419,7 +419,7 @@ var _gui = (function () {
                                     'sorted': e['sorted']
                                 };
                             });
-                        
+
                         group_to_send['sheets'] = current_sheets;
                         data_to_send.push( group_to_send );
                     }
