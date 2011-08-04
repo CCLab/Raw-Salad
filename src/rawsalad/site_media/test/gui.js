@@ -39,10 +39,12 @@ var _gui = (function () {
                 if( $('#app-wrapper').is(':visible') ) {
                     $('#app-wrapper').hide();
                     $('#main-wrapper').show();
+                    $('#mt-toggle').attr( 'src', '/site_media/test/img/portalOn_normal.png' );
                 }
                 else {
                     $('#app-wrapper').show();
                     $('#main-wrapper').hide();
+                    $('#mt-toggle').attr( 'src', '/site_media/test/img/aplikacjaOn_normal.png' );
                 }
             })
             .find('p')
@@ -50,6 +52,33 @@ var _gui = (function () {
                 'margin-left': (( $(window).width() - 960 ) / 2 ) + 'px'
             });
 
+        $('#mt-od-logo').hover(
+            function () {
+                $(this).attr( 'src', '/site_media/test/img/logo_rollover.png' );
+            },
+            function () {
+                $(this).attr( 'src', '/site_media/test/img/logo_normal.png' );
+            }
+        );
+
+        $('#mt-toggle').hover(
+            function () {
+                if( $('#app-wrapper').is(':visible') ) {
+                    $(this).attr( 'src', '/site_media/test/img/aplikacjaOn_rollover.png' );
+                }
+                else {
+                    $(this).attr( 'src', '/site_media/test/img/portalOn_rollover.png' );
+                }
+            },
+            function () {
+                if( $('#app-wrapper').is(':visible') ) {
+                    $(this).attr( 'src', '/site_media/test/img/aplikacjaOn_normal.png' );
+                }
+                else {
+                    $(this).attr( 'src', '/site_media/test/img/portalOn_normal.png' );
+                }
+            }
+        );
 
         // arm top menu
         $('#top')

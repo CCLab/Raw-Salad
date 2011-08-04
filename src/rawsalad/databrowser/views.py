@@ -268,7 +268,7 @@ def get_searched_data( request ):
 
 # store front-end state as a permalink in mongo
 def store_state( request ):
-    data = request.POST.get( 'state', '' )
+    data = request.GET.get( 'state', '' )
     #
     # store in mongo, create uniq idef and send it back to front-end
     #

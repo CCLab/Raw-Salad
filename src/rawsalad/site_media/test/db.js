@@ -35,7 +35,7 @@ var _db = (function () {
 
         $.ajax({
             url: 'store_state/',
-            type: 'POST',
+            type: 'GET',
             data: {
                 state: JSON.stringify( groups )
             },

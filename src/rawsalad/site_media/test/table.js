@@ -96,7 +96,7 @@ var _table = (function () {
 
         // create total row
         if( !!total ) {
-            html.push( '<tr style="background-color: #3b3b3b">' );
+            html.push( '<tr style="background-color: #8b8b8b">' );
 
             schema.forEach( function ( column ) {
                 html.push( '<td class="', column['key'], ' ' );
@@ -262,9 +262,9 @@ var _table = (function () {
     function create_filtered_tbody( is_sorted ) {
         var schema = _store.active_columns();
         // deep copy is made to ensure that _store is not changed by sort
-        var rows_copy = [];        
+        var rows_copy = [];
         $.extend( true, rows_copy, _store.active_rows() );
-        
+
         if ( !is_sorted ) {
             rows_copy.sort( function ( a, b ) {
                 if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
@@ -310,7 +310,7 @@ var _table = (function () {
 
         return $( html.join('') );
     }
-    
+
     function generate_info_panel( data ) {
         var html = [ '<div class="app-tb-info-button">' ];
         html.push( '<img src="/site_media/img/info_small.png" border="0" ' );
@@ -319,11 +319,11 @@ var _table = (function () {
         html.push( generate_info_panel_text( data['info'] ) );
         return html.join('');
     }
-    
+
     function generate_text_for_budzet( info, visible_attrs ) {
         var attr;
         var html = [];
-        
+
         info.forEach( function ( e ) {
             html.push( '<div>', e['elem_type'], ': ', e['elem_name'], '</div>' );
             if ( e['elem_type'] === 'Miernik' ) {
@@ -337,11 +337,11 @@ var _table = (function () {
         });
         return html.join('');
     }
-    
+
     function generate_text_for_fundusze_zad( info, visible_attrs ) {
         var attr;
         var html = [];
-        
+
         info.forEach( function ( e ) {
             html.push( '<div>', e['type'], ': ', e['name'], '</div>');
             if ( e['type'] === 'Miernik' ) {
@@ -355,7 +355,7 @@ var _table = (function () {
         });
         return html.join('');
     }
-    
+
     function generate_text_for_nfz( info, visible_attrs ) {
         var html = [];
         var attr;
@@ -368,7 +368,7 @@ var _table = (function () {
         }
         return html.join('');
     }
-    
+
     function generate_info_panel_text( info ) {
         var html = [ '<div class="app-tb-info">' ];
         var functions_map = {
@@ -378,18 +378,18 @@ var _table = (function () {
         };
         var text_generator = functions_map[ _store.dataset() ];
         var visible_attrs = prepare_visible_attributes();
-        
+
         html.push( text_generator( info, visible_attrs ) );
 
         html.push( '</div>' );
         return html.join('');
     }
-    
+
     function prepare_visible_attributes() {
         var visible_attrs = {};
         var dataset = _store.dataset();
         var year;
-        
+
         if ( dataset === '0' ) {
             visible_attrs = {
                 'wartosc_bazowa': 'Wartosc bazowa',
@@ -401,7 +401,7 @@ var _table = (function () {
             _store.active_columns().forEach( function ( col ) {
                 if ( /val_(\d+)/.test(col['key']) ) {
                     year = /val_(\d+)/.exec( col['key'] )[1];
-                    visible_attrs[ 'miernik_wartosc_' + year ] = 
+                    visible_attrs[ 'miernik_wartosc_' + year ] =
                         'Miernik wartosc ' + year + 'r.';
                 }
             });
@@ -409,14 +409,14 @@ var _table = (function () {
         else if ( dataset === '3' ) {
             _store.active_columns().filter ( function ( col ) {
                     return col['key'] !== 'type';
-                })                
+                })
                 .forEach( function( col ) {
                     if ( col['key'] !== 'type' && col['key'] !== 'name' ) {
                         visible_attrs[ col['key'] ] = col['label'];
                     }
                 });
         }
-        
+
         return visible_attrs;
     }
 
