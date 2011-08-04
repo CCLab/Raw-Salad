@@ -61,7 +61,7 @@ var _gui = (function () {
                     else {
                         $(this).attr( 'src', '/site_media/img/portalOn_rollover.png' );
                     }
-                    $(this).css( 'cursor': 'pointer' );
+                    $(this).css( 'cursor', 'pointer' );
                 },
                 function () {
                     if( $('#app-wrapper').is(':visible') ) {
