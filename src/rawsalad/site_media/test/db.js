@@ -39,6 +39,7 @@ var _db = (function () {
             data: {
                 state: JSON.stringify( groups )
             },
+            dataType: 'json',
             success: function ( received_data ) {
               $('#app-sh-permalink')
                 .slideDown( 100 )
