@@ -267,6 +267,7 @@ def get_searched_data( request ):
     return HttpResponse( json.dumps(return_data) )
 
 # store front-end state as a permalink in mongo
+@csrf_exempt
 def store_state( request ):
     data = request.POST.get( 'state', '' )
     #
