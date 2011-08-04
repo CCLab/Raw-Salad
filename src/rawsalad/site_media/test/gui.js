@@ -313,11 +313,11 @@ var _gui = (function () {
                 vals.forEach( function ( e ) {
                     var group_index = e.split('-')[0];
                     var sheet_index = e.split('-')[1];
-
-                    try {
+                    
+                    if ( !!selected[group_index] ) {
                         selected[ group_index ].push( sheet_index );
                     }
-                    catch ( err ) {
+                    else {
                         selected[ group_index ] = [ sheet_index ];
                     }
                 });
@@ -335,7 +335,7 @@ var _gui = (function () {
                         var current_sheets = groups[ group ]['sheets'];
 
                         current_sheets = current_sheets.filter( function ( e, i ) {
-                                return selected[group].indexOf( i ) !== -1;
+                                return selected[group].indexOf( i + '' ) !== -1;
                             })
                             .map( function ( e ) {
                                 var needed_ids = [];
