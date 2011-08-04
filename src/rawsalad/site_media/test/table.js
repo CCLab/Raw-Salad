@@ -321,7 +321,7 @@ var _table = (function () {
     
     function generate_info_panel_content( info ) {
         var html = [];
-        var parent_id = info['parent'];
+        var parent_id = info['0']['parent'];
         var info_button = $( '#' + parent_id ).find('.app-tb-info-button');
 
         html.push( generate_info_panel_text( info ) );
