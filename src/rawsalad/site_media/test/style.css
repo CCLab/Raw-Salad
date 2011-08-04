@@ -25,17 +25,6 @@ a.hoverable {
 	cursor: pointer;
 }
 
-a.hoverable div.info {
-	position: absolute;
-	display: none;
-	top: 10px;
-	left: 5px;
-	margin: 0px;
-	padding: 10px;
-	background-color: white;
-	border: 1px solid black;
-}
-
 a.hoverable:hover div {
 	display: block;
 }
@@ -598,6 +587,21 @@ textarea {
     -webkit-border-radius: 5px;
     -o-border-radius: 5px;
   }
+
+.app-tb-info-button {
+  display: inline;
+}
+
+.app-tb-info{
+	position: absolute;
+	display: none;
+	top: 10px;
+	left: 5px;
+	margin: 0px;
+	padding: 10px;
+	background-color: white;
+	border: 1px solid black;
+}
 
 .close-sheet-button {
   float: right;

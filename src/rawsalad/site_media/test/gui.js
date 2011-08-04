@@ -94,15 +94,12 @@ var _gui = (function () {
                     .find('.panel-desc')
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
                 
-                $("#pl-ch-area").animate( {"left": "+=960px"}, 800, function(){                    
-        
+                    $("#pl-ch-datasets")
+                        .animate ( {"height": "" + datasets_height + "px"}, 500 );            
+                $("#pl-ch-area").animate( {"left": "+=960px"}, 500, function(){                    
                     $('#pl-ch-views')
                         .find('ul')
-                        .remove()
-                        .removeAttr('height');
-                        
-                    $("#pl-ch-datasets")
-                        .animate ( {"height": "" + datasets_height + "px"}, 200 );            
+                        .remove();
                 });
             });
 
@@ -744,19 +741,17 @@ var _gui = (function () {
             .find( '.button' )
             .click( function () {
                 var dataset_id = $(this).attr( 'data-set-id' );
+                var views_height =$("#pl-ch-views").height();
 
                 create_views_panel( dataset_id );
 
-                $("#pl-ch-area").animate( {"left": "-=960px"}, 800, function(){      
-                    
-                    var views_height =$("#pl-ch-views").height();
-                            
-                    if ( datasets_height > views_height ){  
-                        $("#pl-ch-datasets").animate ( {"height": "" + views_height + "px"}, 200 );                   
-                    }else if ( views_height > datasets_height ){            
-                        $("#pl-ch-views").animate ( {"height": ""+ views_height +"px"}, 200 );
-                    }     
-                });
+                if ( datasets_height > views_height ){  
+                    $("#pl-ch-datasets").animate ( {"height": "" + views_height + "px"}, 500 );                   
+                }else if ( views_height > datasets_height ){            
+                     $("#pl-ch-views").animate ( {"height": ""+ views_height +"px"}, 500 );
+                }     
+
+                $("#pl-ch-area").animate( {"left": "-=960px"}, 500);
             });
 
         if( hide_panel ) {
