@@ -25,17 +25,6 @@ a.hoverable {
 	cursor: pointer;
 }
 
-a.hoverable div.info {
-	position: absolute;
-	display: none;
-	top: 10px;
-	left: 5px;
-	margin: 0px;
-	padding: 10px;
-	background-color: white;
-	border: 1px solid black;
-}
-
 a.hoverable:hover div {
 	display: block;
 }
@@ -81,6 +70,17 @@ textarea {
   -o-border-radius: 5px;
 }
 
+
+#most-top {
+  background-color: #3b3b3b;
+}
+
+#most-top > p {
+  padding: 5px 0px;
+  margin: 0px;
+  font-size: 12px;
+  color: #2d84dd;
+}
 
 #wrapper {
   width: 960px;
@@ -599,6 +599,20 @@ textarea {
     -o-border-radius: 5px;
   }
 
+.app-tb-info-button {
+  display: inline;
+}
+
+.app-tb-info{
+	position: absolute;
+	top: 10px;
+	left: 5px;
+	margin: 0px;
+	padding: 10px;
+	background-color: white;
+	border: 1px solid black;
+}
+
 .close-sheet-button {
   float: right;
   margin: -2px -2px;
@@ -667,7 +681,7 @@ textarea {
     -o-border-radius: 0px 0px 5px 5px;
   }
 
-.
+
 .pl-sr-results-number {
   width: 50px; 
   vertical-align: top; 

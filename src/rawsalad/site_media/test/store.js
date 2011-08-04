@@ -388,7 +388,7 @@ var _store = (function () {
 
     that.get_info = function ( id ) {
         var node = that.active_rows().filter( function ( e ) {
-                return e['idef'] === id;
+                return e['data']['idef'] === id;
                 })
                 .pop();
 

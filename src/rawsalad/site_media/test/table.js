@@ -203,7 +203,7 @@ var _table = (function () {
             if( !!data['info'] && column['key'] === 'type' ) {
                 //html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
                 //html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
-                html.push( generate_info_panel(data) );
+                html.push( generate_info_panel_button( data ) );
             }
             html.push( '</td>' );
         });
@@ -231,8 +231,9 @@ var _table = (function () {
 
         row.find('img')
            .click( function ( event ) {
-                console.log( _store.get_info( $(this).attr('data-id') ).toString() );
-               event.stopPropagation();
+           //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
+                event.stopPropagation();
+                generate_info_panel_content( _store.get_info( $(this).attr('data-id') ));                
            });
 
         if( !is_visible && data['level'] !== 'a' ){
@@ -309,13 +310,22 @@ var _table = (function () {
         return $( html.join('') );
     }
     
-    function generate_info_panel( data ) {
-        var html = [ '<a class="hoverable">' ];
-        html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
+    function generate_info_panel_button( data ) {
+        var html = [ '<div class="app-tb-info-button">' ];
+        html.push( '<img src="/site_media/img/info_small.png" border="0" ' );
         html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
-        html.push( generate_info_panel_text( data['info'] ) );
-        html.push( '</a>' );
+        html.push( '</div>' );
+//        html.push( generate_info_panel_text( data['info'] ) );
         return html.join('');
+    }
+    
+    function generate_info_panel_content( info ) {
+        var html = [];
+        var parent_id = info['0']['parent'];
+        var info_button = $( '#' + parent_id ).find('.app-tb-info-button');
+
+        html.push( generate_info_panel_text( info ) );
+        info_button.append( html.join('') );
     }
     
     function generate_text_for_budzet( info, visible_attrs ) {
@@ -368,7 +378,7 @@ var _table = (function () {
     }
     
     function generate_info_panel_text( info ) {
-        var html = [ '<div class="info">' ];
+        var html = [ '<div class="app-tb-info">' ];
         var functions_map = {
             '0': generate_text_for_budzet,
             '2': generate_text_for_fundusze_zad,
