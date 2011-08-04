@@ -240,7 +240,7 @@ def get_searched_data( request ):
         'dataset': int( request.GET.get( 'dataset', -1 ) ),
         'view': int( request.GET.get( 'view', -1 ) ),
         'issue': request.GET.get( 'issue', '' ).encode('utf-8'),
-        'idef': string2list( request.POST.get( 'idef', '' ) ),
+        'idef': string2list( request.GET.get( 'idef', '' ) ),
         'regexp': True
     }
 
