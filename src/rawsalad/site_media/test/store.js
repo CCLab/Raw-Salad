@@ -406,11 +406,37 @@ var _store = (function () {
 
     that.restore_state = function ( state ) {
         groups = state;
+        groups.forEach( function( group ) {
+            group['sheets'].forEach( function ( sheet ) {
+                sheet['rows'] = add_state( sheet['rows'] );
+            });
+        });
         active_group_number = 0;
         that.active_sheet_index( 0 );
     };
 
 // P R I V A T E   I N T E R F A C E
+
+    function add_state( rows ) {
+        var open_nodes = {};
+        rows.forEach( function ( e ) {
+            if ( !!e['parent'] ) {
+                open_nodes[ e['parent'] ] = true;
+            }
+        });
+        
+        return rows.map( function ( e ) {            
+            return {
+                'data': e,
+                'state': {
+                    'open': !!open_nodes[ e['idef'] ],
+                    'selected': false,
+                    'visible': true
+                }
+            };
+        });
+    }
+    
     // data about available datasets and their views
     var meta_data = [];
 

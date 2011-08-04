@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns( 'databrowser.views',
-    (r'^store_state/$', 'store_state' ),
     (r'^(?P<idef>)[-1-9]+/$', 'init_restore' ),
+    (r'^app/store_state/$', 'store_state' ),
     (r'^restore_state/$', 'restore_state' ),
     (r'^prepare_data/$', 'prepare_data' ),
     (r'^download/$', 'download_data' ),

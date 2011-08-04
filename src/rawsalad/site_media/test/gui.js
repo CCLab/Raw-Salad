@@ -329,6 +329,7 @@ var _gui = (function () {
                 var group;
                 var groups = $.extend( true, [], _store.get_all_groups() );
                 var new_groups = [];
+                var data_to_send = [];
 
                 // if nothing selected
                 if( boxes.length === 0 ) {
@@ -341,11 +342,11 @@ var _gui = (function () {
                 vals.forEach( function ( e ) {
                     var group_index = e.split('-')[0];
                     var sheet_index = e.split('-')[1];
-
-                    try {
+                    
+                    if ( !!selected[group_index] ) {
                         selected[ group_index ].push( sheet_index );
                     }
-                    catch ( err ) {
+                    else {
                         selected[ group_index ] = [ sheet_index ];
                     }
                 });
@@ -353,16 +354,79 @@ var _gui = (function () {
                 // for each group filter only those selected by the user
                 for( group in selected ) {
                     if( selected.hasOwnProperty( group ) ) {
+                        var group_to_send = {
+                            'dataset': groups[group]['dataset'],
+                            'view': groups[group]['view'],
+                            'issue': groups[group]['issue'],
+                            'sheets': []
+                        };
+                        
                         var current_sheets = groups[ group ]['sheets'];
 
                         current_sheets = current_sheets.filter( function ( e, i ) {
-                            return selected[group].indexOf( i ) !== -1;
-                        });
+                                return selected[group].indexOf( i + '' ) !== -1;
+                            })
+                            .map( function ( e ) {
+                                var needed_ids = [];
+                                var level;
+                                var hashed_nodes;
+                                var nodes_to_download = [];
+                                
+                                // object containing ids of nodes to download
+                                var id_obj = {};
+                                var id;
+                                    
+                                // if it's filtered sheet, all ids are needed
+                                if ( e['filtered'] ) {
+                                    needed_ids = e['rows'].map( function ( row ) {
+                                        return row['data']['idef'];
+                                    });
+                                }
+                                else {
+                                    hashed_nodes = _utils.hash_list( e['rows'] );
+                                    // mark nodes that need to be downloaded
+                                    for ( level in hashed_nodes ) {
+                                        if ( hashed_nodes.hasOwnProperty(level) ) {
+                                            hashed_nodes[level].forEach( function ( e ) {
+                                                // add open not leaves that has 
+                                                // parent that should be downloaded
+                                                if ( e['state']['open'] &&
+                                                     (!e['data']['parent'] || !!id_obj[ e['data']['parent'] ]) ) {
+                                                    // 1 means that node should be downloaded
+                                                    id_obj[ e['data']['idef'] ] = 1;
+                                                    // if node has parent, that parent
+                                                    // shouldn't be downloaded, 2 means this
+                                                    if ( !!e['data']['parent'] ) {
+                                                        id_obj[ e['data']['parent'] ] = 2;
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                    
+                                    for ( id in id_obj ) {
+                                        if ( id_obj.hasOwnProperty(id) && id_obj[id] === 1 ) {
+                                            needed_ids.push( id );
+                                        }
+                                    }
+                                }
+                                
+                                return {
+                                    'columns': e['columns'],
+                                    'rows': needed_ids,
+                                    'name': e['name'],
+                                    'filtered': e['filtered'],
+                                    'sorted': e['sorted']
+                                };
+                            });
+                        
+                        group_to_send['sheets'] = current_sheets;
+                        data_to_send.push( group_to_send );
                     }
                 }
 
                 // save selected groups/sheets to mongo
-                _db.save_permalink( groups );
+                _db.save_permalink( data_to_send );
 
                 // hide button
                 $(this).hide();
