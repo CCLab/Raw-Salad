@@ -231,8 +231,10 @@ var _table = (function () {
 
         row.find('img')
            .click( function ( event ) {
-                console.log( _store.get_info( $(this).attr('data-id') ).toString() );
-               event.stopPropagation();
+           //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
+                event.stopPropagation();
+                var line = row.find( '.app-tb-info' );
+                line.show();
            });
 
         if( !is_visible && data['level'] !== 'a' ){
@@ -310,11 +312,11 @@ var _table = (function () {
     }
     
     function generate_info_panel( data ) {
-        var html = [ '<a class="hoverable">' ];
-        html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
+        var html = [ '<div class="app-tb-info-button">' ];
+        html.push( '<img src="/site_media/img/info_small.png" border="0" ' );
         html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
+        html.push( '</div>' );
         html.push( generate_info_panel_text( data['info'] ) );
-        html.push( '</a>' );
         return html.join('');
     }
     
@@ -368,7 +370,7 @@ var _table = (function () {
     }
     
     function generate_info_panel_text( info ) {
-        var html = [ '<div class="info">' ];
+        var html = [ '<div class="app-tb-info">' ];
         var functions_map = {
             '0': generate_text_for_budzet,
             '2': generate_text_for_fundusze_zad,

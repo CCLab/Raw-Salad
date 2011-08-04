@@ -25,17 +25,6 @@ a.hoverable {
 	cursor: pointer;
 }
 
-a.hoverable div.info {
-	position: absolute;
-	display: none;
-	top: 10px;
-	left: 5px;
-	margin: 0px;
-	padding: 10px;
-	background-color: white;
-	border: 1px solid black;
-}
-
 a.hoverable:hover div {
 	display: block;
 }
@@ -609,6 +598,21 @@ textarea {
     -o-border-radius: 5px;
   }
 
+.app-tb-info-button {
+  display: inline;
+}
+
+.app-tb-info{
+	position: absolute;
+	display: none;
+	top: 10px;
+	left: 5px;
+	margin: 0px;
+	padding: 10px;
+	background-color: white;
+	border: 1px solid black;
+}
+
 .close-sheet-button {
   float: right;
   margin: -2px -2px;
@@ -677,7 +681,7 @@ textarea {
     -o-border-radius: 0px 0px 5px 5px;
   }
 
-.
+
 .pl-sr-results-number {
   width: 50px; 
   vertical-align: top; 
