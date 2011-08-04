@@ -44,7 +44,7 @@ var _db = (function () {
               $('#app-sh-permalink')
                 .slideDown( 100 )
                 .find('input')
-                .val( 'http://otwartedane.pl/id/'+received_data['id'] )
+                .val( 'http://otwartedane.pl/'+received_data['id'] )
                 .focus()
 
                 _utils.clear_preloader();
@@ -142,7 +142,6 @@ var _db = (function () {
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
             url: 'get_searched/',
-            type: 'POST',
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
