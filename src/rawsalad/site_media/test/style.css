@@ -82,6 +82,16 @@ textarea {
 }
 
 
+#most-top {
+  height: 20px;
+  background-color: #3b3b3b;
+}
+
+#most-top > p {
+  font-size: 12px;
+  color: #0000ff;
+}
+
 #wrapper {
   width: 960px;
   margin: 0px auto;

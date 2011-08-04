@@ -30,9 +30,27 @@ var _gui = (function () {
     var that = {};
 
     that.init_gui = function ( hide_panel ) {
+        var datasets_height;
 
         window.onbeforeunload = _utils.beforeunload;
-        var datasets_height;
+
+        $('#most-top')
+            .click( function () {
+                if( $('#app-wrapper').is(':visible') ) {
+                    $('#app-wrapper').hide();
+                    $('#main-wrapper').show();
+                }
+                else {
+                    $('#app-wrapper').show();
+                    $('#main-wrapper').hide();
+                }
+            })
+            .find('p')
+            .css({
+                'margin-left': (( $(window).width() - 960 ) / 2 ) + 'px'
+            });
+
+
         // arm top menu
         $('#top')
             .find('li')
@@ -93,16 +111,16 @@ var _gui = (function () {
                 panel
                     .find('.panel-desc')
                     .html('Wybierz jedną z dostępnych kolekcji danych.');
-                
-                $("#pl-ch-area").animate( {"left": "+=960px"}, 800, function(){                    
-        
+
+                $("#pl-ch-area").animate( {"left": "+=960px"}, 800, function(){
+
                     $('#pl-ch-views')
                         .find('ul')
                         .remove()
                         .removeAttr('height');
-                        
+
                     $("#pl-ch-datasets")
-                        .animate ( {"height": "" + datasets_height + "px"}, 200 );            
+                        .animate ( {"height": "" + datasets_height + "px"}, 200 );
                 });
             });
 
@@ -712,7 +730,7 @@ var _gui = (function () {
         var html = [];
         var datasets = _store.meta_datasets();
         var len = datasets.length;
-        var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 ); 
+        var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
         var datasets_height;
 
 
@@ -736,7 +754,7 @@ var _gui = (function () {
             }
         });
         html.push( '</ul>' );
-        
+
 
 
         $('#pl-ch-datasets')
@@ -747,15 +765,15 @@ var _gui = (function () {
 
                 create_views_panel( dataset_id );
 
-                $("#pl-ch-area").animate( {"left": "-=960px"}, 800, function(){      
-                    
+                $("#pl-ch-area").animate( {"left": "-=960px"}, 800, function(){
+
                     var views_height =$("#pl-ch-views").height();
-                            
-                    if ( datasets_height > views_height ){  
-                        $("#pl-ch-datasets").animate ( {"height": "" + views_height + "px"}, 200 );                   
-                    }else if ( views_height > datasets_height ){            
+
+                    if ( datasets_height > views_height ){
+                        $("#pl-ch-datasets").animate ( {"height": "" + views_height + "px"}, 200 );
+                    }else if ( views_height > datasets_height ){
                         $("#pl-ch-views").animate ( {"height": ""+ views_height +"px"}, 200 );
-                    }     
+                    }
                 });
             });
 
