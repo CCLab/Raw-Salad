@@ -361,7 +361,8 @@ var _gui = (function () {
                                             hashed_nodes[level].forEach( function ( e ) {
                                                 // add open not leaves that has 
                                                 // parent that should be downloaded
-                                                if ( e['state']['open'] ) {
+                                                if ( e['state']['open'] &&
+                                                     (!e['data']['parent'] || !!id_obj[ e['data']['parent'] ]) ) {
                                                     // 1 means that node should be downloaded
                                                     id_obj[ e['data']['idef'] ] = 1;
                                                     // if node has parent, that parent
