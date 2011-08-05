@@ -42,16 +42,20 @@
 
 .main-tab {
   font-size: 14px;
-  padding: 25px 15px;
+  padding: 15px 15px;
   color: #6a6a6a;
+}
+
+.main-tab:hover {
+  color: #438db3;
 }
 
 .main-tab.active {
   background-color: #e8e8e8;
 }
 
-.main-tab:hover {
-  color: #3a3a3a;
+.main-tab.active:hover {
+  background-color: #e8e8e8 !important;
 }
 
 .rounded {
