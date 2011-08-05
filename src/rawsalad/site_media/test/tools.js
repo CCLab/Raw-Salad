@@ -73,19 +73,19 @@ var _tools = (function () {
         var full_type;
         var breadcrumb_list = [];
 
-        while ( !!tmp_id ) {
+        node = _store.get_node_from_active_sheet( tmp_id ); 
+        
+        while ( !!node ) {
             
-            full_type = node.children('.type').html();
+            breadcrumb_list.push( tmp_id );
 
-            tmp_id = _utils.get_parent_id( tmp_id );          
-            breadcrumb_list.push( full_type );
+            tmp_id = node['data']['parent'];          
+
+            node = _store.get_node_from_active_sheet( tmp_id );
+
         }
         breadcrumb_list = breadcrumb_list.reverse();
-
-
-
-
-        return breadcrumb_list.join(' > ');
+        return breadcrumb_list.join( ' > ' );
     };
 
     that.open_subtrees = function( basic_rows, subtree_rows ) {

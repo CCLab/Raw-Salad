@@ -223,7 +223,7 @@ var _store = (function () {
     };
     
 
-    that.get_row_from_active = function ( id ) {
+    that.get_node_from_active_sheet = function ( id ) {
         var rows = that.active_rows();
         var node;
         var i;
