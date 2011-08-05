@@ -343,9 +343,10 @@ var _table = (function () {
         };
         var text_generator = functions_map[ _store.dataset() ];
         var visible_attrs = prepare_visible_attributes();
-
+        
+        html.push( '<table>' );
         html.push( text_generator( info, visible_attrs ) );
-
+        html.push( '</table>' );
 
         return html.join('');
     }
@@ -389,13 +390,22 @@ var _table = (function () {
     function generate_text_for_nfz( info, visible_attrs ) {
         var html = [];
         var attr;
-        html.push( '<div>', 'Cel: ', info[0]['name'], '</div>');
+        
+        html.push( '<thead> <tr> ' );
+        html.push( '<th>', 'Cel: ', '</th> <th>', info[0]['name'], '</th>' );
+        html.push( '</tr> </thead>' );
+        
+        html.push( '<tbody>' );
+        
         for ( attr in visible_attrs ) {
             if ( visible_attrs.hasOwnProperty(attr) ) {
-                    html.push( '<div>', visible_attrs[attr] );
-                    html.push( ': ', info[0][attr], '</div>' );
+                    html.push( '<tr><td>', visible_attrs[attr], ':' );
+                    html.push ( '</td></tr><tr><td>' );
+                    html.push( info[0][attr], '</td></tr>' );
             }
         }
+        
+        html.push( '</tbody>' );
         return html.join('');
     }
 
