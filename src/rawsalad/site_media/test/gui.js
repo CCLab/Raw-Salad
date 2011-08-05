@@ -45,12 +45,12 @@ var _gui = (function () {
                 if( $('#app-wrapper').is(':visible') ) {
                     $('#app-wrapper').hide();
                     $('#main-wrapper').show();
-                    $('#mt-toggle').attr( 'src', '/site_media/img/portalOn_normal.png' );
+                    $('#mt-toggle').attr( 'src', '/site_media/img/toggle_PortalGlow_01.png' );
                 }
                 else {
                     $('#app-wrapper').show();
                     $('#main-wrapper').hide();
-                    $('#mt-toggle').attr( 'src', '/site_media/img/aplikacjaOn_normal.png' );
+                    $('#mt-toggle').attr( 'src', '/site_media/img/toggle_AplikacjaGlow_01.png' );
                 }
             })
             .hover(
@@ -65,10 +65,10 @@ var _gui = (function () {
                 },
                 function () {
                     if( $('#app-wrapper').is(':visible') ) {
-                        $(this).attr( 'src', '/site_media/img/aplikacjaOn_normal.png' );
+                        $(this).attr( 'src', '/site_media/img/toggle_AplikacjaGlow_01.png' );
                     }
                     else {
-                        $(this).attr( 'src', '/site_media/img/portalOn_normal.png' );
+                        $(this).attr( 'src', '/site_media/img/toggle_PortalGlow_01.png' );
                     }
                 }
         );

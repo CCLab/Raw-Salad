@@ -65,6 +65,7 @@ var _db = (function () {
             dataType: 'json',
             success: function ( received_data ) {
                 var html = [];
+                var thead = $('#pl-sr-results').find('thead');
                 var tbody = $('#pl-sr-results').find('tbody');
                 tbody.empty();
 
@@ -74,6 +75,7 @@ var _db = (function () {
                     html.push( '</tr>' );
 
                     tbody.append( $( html.join( '' ) ) );
+                    thead.hide();
                 }
                 else {
                     received_data['strict']['result'].forEach( function ( collection ) {
@@ -135,6 +137,7 @@ var _db = (function () {
 
                         tbody.append( single_row );
                     });
+                    thead.show();
                 }
                 _utils.clear_preloader();
 
