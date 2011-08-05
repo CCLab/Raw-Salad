@@ -80,7 +80,7 @@ var _download = (function () {
 //  P R I V A T E   I N T E R F A C E
 
     function add_filtered( sheet ) {
-        var result = '';
+        var result = [];
         var rows_copy = [];
         $.extend( true, rows_copy, sheet['rows'] );
         
