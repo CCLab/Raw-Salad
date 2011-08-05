@@ -240,7 +240,7 @@ var _table = (function () {
                 
            });
 
-        if( !is_visible && data['level'] !== 'a' ){
+        if ( !is_visible ) {
             row.hide();
         }
 
@@ -555,7 +555,6 @@ var _table = (function () {
             }
             _store.set_visible( new_id, false );
         });
-        _store.set_visible( id, false );
     }
 
 
