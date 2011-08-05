@@ -95,10 +95,10 @@ var _download = (function () {
             });
         }
         rows_copy.forEach( function ( e ) {
-            result = add_child( e['data'], sheet['columns'], result );
+            result.push( add_row(e['data'], sheet['columns']) );
         });
 
-        return result;
+        return result.join('');
     }
 
 
