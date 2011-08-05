@@ -68,7 +68,7 @@ var _db = (function () {
                 var tbody = $('#pl-sr-results').find('tbody');
                 tbody.empty();
 
-                if( received_data['strict']['result']['data'].length === 0 ) {
+                if( received_data['records_found_total'] === 0 ) {
                     html.push( '<tr style="background-color: #e3e3e3">' );
                     html.push( '<td>Niestety wyszukiwane hasło nie znajduje się wśród zebranych tutaj danych</td>' );
                     html.push( '</tr>' );
