@@ -675,6 +675,10 @@ textarea {
   }
 
 
+.pl-sr-results > table {
+  border-collapse: collapse;
+}
+
 .pl-sr-results-number {
   width: 50px; 
   vertical-align: top; 
