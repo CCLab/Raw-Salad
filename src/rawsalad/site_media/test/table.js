@@ -354,18 +354,32 @@ var _table = (function () {
     function generate_text_for_budzet( info, visible_attrs ) {
         var attr;
         var html = [];
+        var cont = null;
+
+        html.push( '<thead> <tr> ' );
 
         info.forEach( function ( e ) {
-            html.push( '<div>', e['elem_type'], ': ', e['elem_name'], '</div>' );
+            html.push( '<tr><th>', e['elem_type'], ':');
+            html.push('</th><th>', e['elem_name'], '</th></tr>' );
             if ( e['elem_type'] === 'Miernik' ) {
-                for ( attr in visible_attrs ) {
-                    if ( visible_attrs.hasOwnProperty(attr) ) {
-                        html.push( '<div>', visible_attrs[attr] );
-                        html.push( ': ', e[attr], '</div>' );
-                    }
-                }
+                cont = e;
             }
         });
+        html.push( '</thead>' );
+         
+        if ( cont !== null ){
+            html.push( '<tbody>' );
+        
+            for ( attr in visible_attrs ) {
+                if ( visible_attrs.hasOwnProperty(attr) ) {
+                    html.push( '<tr><td>', visible_attrs[attr],':' );
+                    html.push( '</td><td>', cont[attr], '</td></tr>' );
+                }
+            }
+            html.push('</tbody>');
+        }
+            
+        
         return html.join('');
     }
 
@@ -384,21 +398,22 @@ var _table = (function () {
                 cont = e;
             }    
 
-         });
+        });
          
-         html.push( '</thead>' );
+        html.push( '</thead>' );
          
-         if ( cont !== null ){
-             html.push( '<tbody><tr>' );
-             for ( attr in visible_attrs ) {
-                 if ( visible_attrs.hasOwnProperty(attr) ) {
-                     html.push( '<td>', visible_attrs[attr], ':' );
-                     html.push( '</td><td> ', cont[attr], '</td></tr>' );
-                 }
-             }
-             html.push('</tbody>');    
-         }                    
-         return html.join('');
+        if ( cont !== null ){
+            html.push( '<tbody>' );
+            for ( attr in visible_attrs ) {
+                if ( visible_attrs.hasOwnProperty(attr) ) {
+                    html.push( '<tr><td>', visible_attrs[attr], ':' );
+                    html.push( '</td><td>', cont[attr], '</td></tr>' );
+                }
+            }
+            html.push('</tbody>');    
+        }
+                             
+        return html.join('');
     }
 
     function generate_text_for_nfz( info, visible_attrs ) {
