@@ -675,7 +675,7 @@ textarea {
   }
 
 
-.pl-sr-results > table {
+#pl-sr-results > table {
   border-collapse: collapse;
 }
 
