@@ -46,11 +46,13 @@ var _gui = (function () {
                     $('#app-wrapper').hide();
                     $('#main-wrapper').show();
                     $('#mt-toggle').attr( 'src', '/site_media/img/toggle_PortalGlow_01.png' );
+                    $('body').css( 'background-color', '#8b8b8b' );
                 }
                 else {
                     $('#app-wrapper').show();
                     $('#main-wrapper').hide();
                     $('#mt-toggle').attr( 'src', '/site_media/img/toggle_AplikacjaGlow_01.png' );
+                    $('body').css( 'background-color', '#fff' );
                 }
             })
             .hover(
