@@ -202,22 +202,40 @@ var _store = (function () {
         that.active_group()['active_sheet_number'] = new_active_sheet_num;
     };
 
+
     that.active_group_index = function () {
         return active_group_number;
     };
+
 
     that.next_sheet_number = function () {
         return that.active_group()['sheets'].length;
     };
 
+
     that.max_group_number = function () {
         return groups.length;
     };
 
+
     that.active_rows = function () {
         return that.active_sheet()['rows'];
     };
+    
 
+    that.get_row_from_active = function ( id ) {
+        var rows = that.active_rows();
+        var node;
+        var i;
+        
+        for ( i=0; i < rows.length ; i += 1 ) {
+            node = rows[i];
+            if ( node['data']['idef'] === id ){
+                return node;
+            }
+        }
+        return null;  
+    };
 
 //    that.active_pending_nodes = function () {
 //        return that.active_sheet()['pending_nodes'];

@@ -74,7 +74,7 @@ var _tools = (function () {
         var breadcrumb_list = [];
 
         while ( !!tmp_id ) {
-            node = $('#'+ tmp_id);
+            
             full_type = node.children('.type').html();
 
             tmp_id = _utils.get_parent_id( tmp_id );          
@@ -83,26 +83,7 @@ var _tools = (function () {
         breadcrumb_list = breadcrumb_list.reverse();
 
 
-//            breadcrumb_list.forEach( function ( el, i ) {
-//                breadcrumb.push( el['type'] + ' ' );
-//                if ( i < breadcrumb_list.length - 1 ) {
-//                    if ( el['name'].length > 35 ) {
-//                        el['name'] = el['name']
-//                                               .slice(0, 32)
-//                                               .concat('...');
-//                    }
-//                } else {
-//                    if ( el['name'].length > 45 ) {
-//                        el['name'] = el['name']
-//                                               .slice(0, 42)
-//                                               .concat('...');
-//                    }
-//                }
-//                breadcrumb.push( el['name'] );
-//                if ( i < breadcrumb_list.length - 1 ) {
-//                    breadcrumb.push(' > ');
-//                }
-//            });
+
 
         return breadcrumb_list.join(' > ');
     };
