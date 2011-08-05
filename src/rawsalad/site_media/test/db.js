@@ -89,8 +89,8 @@ var _db = (function () {
                         html.push( '<td class="pl-sr-results-number right">', collection['data'].length, '</td>' );
                         html.push( '<td class="pl-sr-results-name">' );
                         html.push( '<div class="pl-sr-results-name-text left">', collection['perspective'], '</div>' );
-                        html.push( '<div class="pl-sr-results-button left">&gt;</div>' );
                         if( results_length > results_limit ) {
+                            html.push( '<div class="pl-sr-results-button left">&gt;</div>' );
                             html.push( '<div style="font-weight: bold; margin-top:5px; clear: both; color: #7345c6">' );
                             html.push( 'Zbyt wiele wyników - nie sposób ich wyświetlić</div>' );
                         }
@@ -143,6 +143,9 @@ var _db = (function () {
 
                 $('#pl-sr-full')
                     .slideUp( 200 );
+
+                $('#pl-sr-more')
+                    .html('Pokaż zaawansowane');
 
                 $('#pl-sr-results')
                     .slideDown( 200 )
