@@ -204,22 +204,27 @@ def build_idef_regexp( curr_idef ):
     level_num= curr_idef.count('-')
     if level_num > 0: # deeper than 'a'
         idef_srch= curr_idef.rsplit('-', 1)[0]
-        lookup_idef= "^%s\-\d+$" % idef_srch
+        lookup_idef= r"^%s\-([A-Z]|\d)+$" % idef_srch
         curr_idef= idef_srch
         level= 1
         while level < level_num:
             idef_srch= curr_idef.rsplit('-', 1)[0]
-            lookup_idef += "|^%s\-\d+$" % idef_srch
+            lookup_idef += r"|^%s\-([A-Z]|\d)+$" % idef_srch
             curr_idef= idef_srch
             level += 1
-        lookup_idef += "|^([A-Z]|\d)+$"
-    else: # just query the highest level
-        lookup_idef= "^([A-Z]|\d)+$"
+        lookup_idef += r"|^([A-Z]|\d)+$"
+    else: # simply query the highest level
+        lookup_idef= r"^([A-Z]|\d)+$"
 
     return lookup_idef
 
 def build_query( idef_list ):
     lookup, i= "", 0
+
+    result_limit= 275 # WARNING! Limiting number of idefs here with a constant
+    if len(idef_list) > result_limit:
+        idef_list= idef_list[:result_limit]
+
     for idef in idef_list:
         i += 1
         lookup_idef= build_idef_regexp( idef )
@@ -227,9 +232,6 @@ def build_query( idef_list ):
         lookup += "(%s)|" % lookup_idef
         if i == len(idef_list):
             lookup= lookup[:-1] # cutting the last symbol | in case it's the end of list
-
-    if len(idef_list) == 1: # single idef
-        lookup= lookup[1:-1] # cutting ( and )
 
     return lookup
 
@@ -245,7 +247,6 @@ def get_searched_data( request ):
     }
 
     find_query= build_query( response_dict['idef'] )
-    # regexpquery= re.compile(find_query, re.IGNORECASE)
 
     db= rsdb.DBconnect("mongodb").dbconnect
     coll= rsdb.Collection(query= { 'idef': { '$regex': find_query} })
@@ -255,14 +256,6 @@ def get_searched_data( request ):
         db, response_dict['dataset'], response_dict['view'], response_dict['issue']
         )
     return_data['perspective']= coll.metadata_complete
-
-    if 'query' in return_data['perspective']: # not json serializable
-        try:
-            sr= json.dumps( return_data['perspective']['query'] )
-        except: # not json serializable!
-            if 'idef' in return_data['perspective']['query']:
-                return_data['perspective']['query']['idef']= find_query # re-write it with plain regexp
-        del return_data['perspective']['query']
 
     return HttpResponse( json.dumps(return_data) )
 

@@ -71,12 +71,18 @@ var _db = (function () {
                     var html = [];
                     var single_row;
                     var idefs = [];
+                    var results_length = collection['data'].length;
+                    var results_limit = 250;
 
                     html.push( '<tr style="background-color: #e3e3e3">' );
                     html.push( '<td class="pl-sr-results-number right">', collection['data'].length, '</td>' );
                     html.push( '<td class="pl-sr-results-name">' );
                     html.push( '<div class="pl-sr-results-name-text left">', collection['perspective'], '</div>' );
                     html.push( '<div class="pl-sr-results-button left">&gt;</div>' );
+                    if( results_length > results_limit ) {
+                        html.push( '<div style="font-weight: bold; margin-top:5px; clear: both; color: #7345c6">' );
+                        html.push( 'Zbyt wiele wyników - nie sposób ich wyświetlić</div>' );
+                    }
                     html.push( '</td>' );
                     html.push( '</tr>' );
 
@@ -85,39 +91,50 @@ var _db = (function () {
                         idefs.push( result['idef'] );
                     });
 
-                    single_row
-                        .click( function () {
-                            that.add_search_data({
-                                dataset: collection['dataset'].toString(),
-                                view: collection['view'].toString(),
-                                issue: collection['issue'].toString(),
-                                idef: idefs.toString(),
-                                query: query
-                            });
-                        })
-                        .find( '.pl-sr-results-name' )
-                            .hover(
-                                function () {
-                                    $(this)
-                                        .css( 'cursor', 'pointer' )
-                                        .find( '.pl-sr-results-name-text' )
-                                        .css( 'color', '#1ea3e8' )
-                                        .end()
-                                        .find( '.pl-sr-results-button' )
-                                        .css( 'background-color', '#1ea3e8' );
-                                },
-                                function () {
-                                    $(this)
-                                        .find( '.pl-sr-results-name-text' )
-                                        .css( 'color', '#000' )
-                                        .end()
-                                        .find( '.pl-sr-results-button' )
-                                        .css( 'background-color', '#c1c1c1' );
-                                }
-                            );
+                    if( results_length < results_limit ) {
+                        single_row
+                            .click( function () {
+                                that.add_search_data({
+                                    dataset: collection['dataset'].toString(),
+                                    view: collection['view'].toString(),
+                                    issue: collection['issue'].toString(),
+                                    idef: idefs.toString(),
+                                    query: query
+                                });
+                            })
+                            .find( '.pl-sr-results-name' )
+                                .hover(
+                                    function () {
+                                        $(this)
+                                            .css( 'cursor', 'pointer' )
+                                            .find( '.pl-sr-results-name-text' )
+                                            .css( 'color', '#1ea3e8' )
+                                            .end()
+                                            .find( '.pl-sr-results-button' )
+                                            .css( 'background-color', '#1ea3e8' );
+                                    },
+                                    function () {
+                                        $(this)
+                                            .find( '.pl-sr-results-name-text' )
+                                            .css( 'color', '#000' )
+                                            .end()
+                                            .find( '.pl-sr-results-button' )
+                                            .css( 'background-color', '#c1c1c1' );
+                                    }
+                                );
+                    }
 
                     tbody.append( single_row );
                 });
+                $('#pl-sr-results')
+                    .find('tr')
+                    .each( function () {
+                        var h = $(this).find('.pl-sr-results-name').height();
+
+                        $(this)
+                            .find('.pl-sr-results-number')
+                            .height( h );
+                    });
 
                 _utils.clear_preloader();
 
