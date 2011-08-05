@@ -326,7 +326,7 @@ var _table = (function () {
 
         html.push( '<div class="app-tb-info-close" > x <div> ' );
         html.push( '<div class="app-tb-info-header">');
-        html.push( _tools.create_breadcrum( parent_id, true ) );
+        html.push( _tools.create_breadcrumb( parent_id, true ) );
         html.push( '</div>' );
         html.push( generate_info_panel_text( info ) );
         html.push( '</div>' );
