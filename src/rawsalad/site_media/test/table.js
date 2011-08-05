@@ -234,6 +234,10 @@ var _table = (function () {
            //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
                 event.stopPropagation();
                 generate_info_panel_content( _store.get_info( $(this).attr('data-id') ));
+                $('#app-tb-in-close').click( function() {
+                    $('#app-tb-info').remove();
+                })
+                
            });
 
         if( !is_visible && data['level'] !== 'a' ){
@@ -320,11 +324,11 @@ var _table = (function () {
 
 
     function generate_info_panel_content( info ) {
-        var html = [ '<div class="app-tb-info">' ];
+        var html = [ '<div id="app-tb-info">' ];
         var parent_id = info['0']['parent'];
         var info_button = $( '#' + parent_id ).find( '.app-tb-in-button' );
 
-        html.push( '<div class="app-tb-in-close" > x <div> ' );
+        html.push( '<div id="app-tb-in-close" > x </div> ' );
         html.push( '<div class="app-tb-in-header">' );
         html.push( _tools.create_info_breadcrumb( parent_id ) );
         html.push( '</div>' );
