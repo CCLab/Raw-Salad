@@ -70,19 +70,18 @@ var _tools = (function () {
     that.create_info_breadcrumb = function( id ) {
         var tmp_id = id;
         var node;
-        var full_type;
+        var type;
         var breadcrumb_list = [];
 
         node = _store.get_node_from_active_sheet( tmp_id ); 
         
         while ( !!node ) {
-            
-            breadcrumb_list.push( tmp_id );
-
+            type = node['data']['type'];
             tmp_id = node['data']['parent'];          
 
-            node = _store.get_node_from_active_sheet( tmp_id );
+            breadcrumb_list.push( type );
 
+            node = _store.get_node_from_active_sheet( tmp_id );
         }
         breadcrumb_list = breadcrumb_list.reverse();
         return breadcrumb_list.join( ' > ' );

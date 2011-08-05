@@ -372,19 +372,33 @@ var _table = (function () {
     function generate_text_for_fundusze_zad( info, visible_attrs ) {
         var attr;
         var html = [];
-
+        var cont = null;
+        
+        html.push( '<thead> <tr> ' );
+        
         info.forEach( function ( e ) {
-            html.push( '<div>', e['type'], ': ', e['name'], '</div>');
+            html.push( '<tr><th>', e['type'], ':' );
+            html.push( '</th><th>', e['name'], '</th></tr>');
+
             if ( e['type'] === 'Miernik' ) {
-                for ( attr in visible_attrs ) {
-                    if ( visible_attrs.hasOwnProperty(attr) ) {
-                        html.push( '<div>', visible_attrs[attr] );
-                        html.push( ': ', e[attr], '</div>' );
-                    }
-                }
-            }
-        });
-        return html.join('');
+                cont = e;
+            }    
+
+         });
+         
+         html.push( '</thead>' );
+         
+         if ( cont !== null ){
+             html.push( '<tbody><tr>' );
+             for ( attr in visible_attrs ) {
+                 if ( visible_attrs.hasOwnProperty(attr) ) {
+                     html.push( '<td>', visible_attrs[attr], ':' );
+                     html.push( '</td><td> ', cont[attr], '</td></tr>' );
+                 }
+             }
+             html.push('</tbody>');    
+         }                    
+         return html.join('');
     }
 
     function generate_text_for_nfz( info, visible_attrs ) {
@@ -400,7 +414,7 @@ var _table = (function () {
         for ( attr in visible_attrs ) {
             if ( visible_attrs.hasOwnProperty(attr) ) {
                     html.push( '<tr><td>', visible_attrs[attr], ':' );
-                    html.push ( '</td></tr><tr><td>' );
+                    html.push ( '</td><td>' );
                     html.push( info[0][attr], '</td></tr>' );
             }
         }
