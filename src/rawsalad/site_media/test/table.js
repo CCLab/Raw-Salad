@@ -335,7 +335,7 @@ var _table = (function () {
     }
 
     function generate_info_panel_text( info ) {
-        var html = 
+        var html = [];
         var functions_map = {
             '0': generate_text_for_budzet,
             '2': generate_text_for_fundusze_zad,
