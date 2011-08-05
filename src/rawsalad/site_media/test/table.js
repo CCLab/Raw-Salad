@@ -325,8 +325,11 @@ var _table = (function () {
         var info_button = $( '#' + parent_id ).find( '.app-tb-in-button' );
 
         html.push( '<div class="app-tb-in-close" > x <div> ' );
-        html.push( '<div class="app-tb-in-header">');
+        html.push( '<div class="app-tb-in-header">' );
         html.push( _tools.create_info_breadcrumb( parent_id ) );
+        html.push( '</div>' );
+        html.push( '<div class="app-tb-in-title">' );
+        html.push( $('#'+ parent_id).next().text() );
         html.push( '</div>' );
         html.push( generate_info_panel_text( info ) );
         html.push( '</div>' );
