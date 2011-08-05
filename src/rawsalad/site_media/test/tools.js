@@ -67,7 +67,67 @@ var _tools = (function () {
             });
     };
     
+    that.create_breadcrumb = function( id, is_info ) {
+        var tmp_id = id;
+        var node;
+        var type;
+        var full_type;
+        var name;
+        var breadcrumb = [];
+        var breadcrumb_list = [];
 
+        tmp_id = _utils.get_parent_id( id );
+
+        while ( !!tmp_id ) {
+            node = $('#'+ tmp_id);
+            full_type = node.children('.type').html();
+            type = get_type_representation( full_type );
+            name = node.children('.name').html();
+
+            tmp_id = _utils.get_parent_id( tmp_id );
+
+            if ( !! is_info ) {
+                breadcrumb_list.push( full_type );
+            }
+            else{
+                breadcrumb_list.push({
+                    type: type,
+                    name: name
+                });
+            }
+        }
+
+        breadcrumb_list = breadcrumb_list.reverse();
+
+        if( !! is_info ) {
+        
+        }
+        else{
+
+            breadcrumb_list.forEach( function ( el, i ) {
+                breadcrumb.push( el['type'] + ' ' );
+                if ( i < breadcrumb_list.length - 1 ) {
+                    if ( el['name'].length > 35 ) {
+                        el['name'] = el['name']
+                                               .slice(0, 32)
+                                               .concat('...');
+                    }
+                } else {
+                    if ( el['name'].length > 45 ) {
+                        el['name'] = el['name']
+                                               .slice(0, 42)
+                                               .concat('...');
+                    }
+                }
+                breadcrumb.push( el['name'] );
+                if ( i < breadcrumb_list.length - 1 ) {
+                    breadcrumb.push(' > ');
+                }
+            });
+        }
+
+        return breadcrumb.join('');
+    };
 
     that.open_subtrees = function( basic_rows, subtree_rows ) {
         var nodes_to_open = {};
@@ -625,7 +685,7 @@ var _tools = (function () {
                              })
                              .map( function (e) {
                                  var id = e['data']['idef'];
-                                 e['breadcrumb'] = create_breadcrumb( id );
+                                 e['breadcrumb'] = that.create_breadcrumb( id );
                                  return e;
                              });
     }
@@ -641,56 +701,6 @@ var _tools = (function () {
         }
 
         return visual_data_object;
-    }
-
-    function create_breadcrumb( id ) {
-        var tmp_id = id;
-        var node;
-        var type;
-        var full_type;
-        var name;
-        var breadcrumb = [];
-        var breadcrumb_list = [];
-
-        tmp_id = _utils.get_parent_id( id );
-
-        while ( !!tmp_id ) {
-            node = $('#'+ tmp_id);
-            full_type = node.children('.type').html();
-            type = get_type_representation( full_type );
-            name = node.children('.name').html();
-
-            tmp_id = _utils.get_parent_id( tmp_id );
-            breadcrumb_list.push({
-                type: type,
-                name: name
-            });
-        }
-
-        breadcrumb_list = breadcrumb_list.reverse();
-
-        breadcrumb_list.forEach( function ( el, i ) {
-            breadcrumb.push( el['type'] + ' ' );
-            if ( i < breadcrumb_list.length - 1 ) {
-                if ( el['name'].length > 35 ) {
-                    el['name'] = el['name']
-                                           .slice(0, 32)
-                                           .concat('...');
-                }
-            } else {
-                if ( el['name'].length > 45 ) {
-                    el['name'] = el['name']
-                                           .slice(0, 42)
-                                           .concat('...');
-                }
-            }
-            breadcrumb.push( el['name'] );
-            if ( i < breadcrumb_list.length - 1 ) {
-                breadcrumb.push(' > ');
-            }
-        });
-
-        return breadcrumb.join('');
     }
 
     function get_type_representation( full_type ) {

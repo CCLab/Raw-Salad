@@ -315,18 +315,39 @@ var _table = (function () {
         html.push( '<img src="/site_media/img/info_small.png" border="0" ' );
         html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
         html.push( '</div>' );
-//        html.push( generate_info_panel_text( data['info'] ) );
         return html.join('');
     }
 
 
     function generate_info_panel_content( info ) {
-        var html = [];
+        var html = [ '<div class="app-tb-info">' ];
         var parent_id = info['0']['parent'];
-        var info_button = $( '#' + parent_id ).find('.app-tb-info-button');
+        var info_button = $( '#' + parent_id ).find( '.app-tb-info-button' );
 
+        html.push( '<div class="app-tb-info-close" > x <div> ' );
+        html.push( '<div class="app-tb-info-header">');
+        html.push( _tools.create_breadcrum( parent_id, true ) );
+        html.push( '</div>' );
         html.push( generate_info_panel_text( info ) );
+        html.push( '</div>' );
+
         info_button.append( html.join('') );
+    }
+
+    function generate_info_panel_text( info ) {
+        var html = 
+        var functions_map = {
+            '0': generate_text_for_budzet,
+            '2': generate_text_for_fundusze_zad,
+            '3': generate_text_for_nfz
+        };
+        var text_generator = functions_map[ _store.dataset() ];
+        var visible_attrs = prepare_visible_attributes();
+
+        html.push( text_generator( info, visible_attrs ) );
+
+
+        return html.join('');
     }
 
     function generate_text_for_budzet( info, visible_attrs ) {
@@ -375,22 +396,6 @@ var _table = (function () {
                     html.push( ': ', info[0][attr], '</div>' );
             }
         }
-        return html.join('');
-    }
-
-    function generate_info_panel_text( info ) {
-        var html = [ '<div class="app-tb-info">' ];
-        var functions_map = {
-            '0': generate_text_for_budzet,
-            '2': generate_text_for_fundusze_zad,
-            '3': generate_text_for_nfz
-        };
-        var text_generator = functions_map[ _store.dataset() ];
-        var visible_attrs = prepare_visible_attributes();
-
-        html.push( text_generator( info, visible_attrs ) );
-
-        html.push( '</div>' );
         return html.join('');
     }
 
