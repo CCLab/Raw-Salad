@@ -81,35 +81,21 @@ var _download = (function () {
 
     function add_filtered( sheet ) {
         var result = '';
-        var hashed = _utils.hash_list( sheet['rows'] );
-        var sorted_keys = (function () {
-            var key;
-            var result = [];
-
-            for( key in hashed ) {
-                result.push( key );
-            }
-
-            return result.sort();
-        })();
-        var top_level = sorted_keys.shift();
-
-        // top level first
-        hashed[ top_level ].sort( function ( a, b ) {
-                               return a['data']['idef'] > b['data']['idef'];
-                           })
-                           .forEach( function ( e ) {
-                               result += add_row( e['data'], sheet['columns'] );
-                           });
-
-        // children levels
-        sorted_keys.forEach( function ( level ) {
-            hashed[ level ].sort( function( a, b ) {
-                                return a['data']['idef'] < b['data']['idef'];
-                           })
-                           .forEach( function ( e ) {
-                                result = add_child( e['data'], sheet['columns'], result );
-                           });
+        var rows_copy = [];
+        $.extend( true, rows_copy, sheet['rows'] );
+        
+        if ( !sheet['sorted'] ) {
+            rows_copy.sort( function (a, b) {
+                if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
+                    return -1;
+                }
+                else {
+                    return a['data']['idef_sort'] > b['data']['idef_sort'];
+                };
+            });
+        }
+        rows_copy.forEach( function ( e ) {
+            result = add_child( e['data'], sheet['columns'], result );
         });
 
         return result;
