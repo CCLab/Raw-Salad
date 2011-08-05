@@ -236,6 +236,15 @@ var _store = (function () {
         }
         return null;  
     };
+    
+    that.get_node_name = function ( id ) {
+        var node = that.get_node_from_active_sheet( id );
+        var name = node['data']['name'];
+        if (typeof name === 'string'){
+            return name;
+        }
+        return null;
+    };
 
 //    that.active_pending_nodes = function () {
 //        return that.active_sheet()['pending_nodes'];

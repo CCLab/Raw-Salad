@@ -329,7 +329,7 @@ var _table = (function () {
         html.push( _tools.create_info_breadcrumb( parent_id ) );
         html.push( '</div>' );
         html.push( '<div class="app-tb-in-title">' );
-        html.push( $('#'+ parent_id).next().text() );
+        html.push( _store.get_node_name(parent_id) );
         html.push( '</div>' );
         html.push( generate_info_panel_text( info ) );
         html.push( '</div>' );
