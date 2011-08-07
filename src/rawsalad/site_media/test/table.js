@@ -230,13 +230,16 @@ var _table = (function () {
             );
 
         row.find('img')
-           .click( function ( event ) {
+           .click( function () {
            //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
-                event.stopPropagation();
                 generate_info_panel_content( _store.get_info( $(this).attr('data-id') ));
+                $('#app-tb-info')
+                    .click( function ( event ){
+                        event.stopPropagation();
+                    });                
                 $('#app-tb-in-close').click( function() {
                     $('#app-tb-info').remove();
-                })
+                });
                 
            });
 
