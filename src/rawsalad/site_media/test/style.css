@@ -592,10 +592,6 @@ textarea {
     -o-border-radius: 5px;
   }
 
-.app-tb-in-button {
-  display: inline;
-}
-
 #app-tb-info{
 	position: absolute;
 	top: 10px;
@@ -604,6 +600,14 @@ textarea {
 	padding: 10px;
 	background-color: white;
 	border: 1px solid black;
+}
+
+.app-tb-in-button {
+    display: inline;
+}
+
+#app-tb-in-close{
+    float: right;
 }
 
 .close-sheet-button {
