@@ -234,8 +234,8 @@ var _table = (function () {
            //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
                 generate_info_panel_content( _store.get_info( $(this).attr('data-id') ));
                 $('#app-tb-info')
-                    .click( function ( info_event ){
-                        info_event.stopPropagation();                        
+                    .click( function ( event ){
+                        event.stopPropagation();                        
                     });                
                 $('#app-tb-in-close').click( function() {
                     $('#app-tb-info').remove();
