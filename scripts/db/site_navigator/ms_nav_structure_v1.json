@@ -30,28 +30,28 @@
       },
     {
         "idef": 1,
-        "name": "Środki europejskie",
-        "description": "Udział środków europejskich w budżecie centralnym Polski",
+        "name": "Budżet Środków Europejskich",
+        "description": "Środki europejskie przeznaczone na realizację programów współfinansowanych przez Unię Europejską",
         "long_description": null,
         "perspectives": [
             { 
                 "idef": 0,
                 "name": "Budżet środków europejskich w układzie tradycyjnym",
-                "description": "Dane dotyczące środków europejskich na szczeblu centralnym",
+                "description": "Wydatki środków europejskich zorganizowane w sposób odpowiadający tradycyjnego układowi budżetu państwa",
                 "long_description": null,
                 "issues": [ "2011" ]
                 },             
             { 
                 "idef": 1,
                 "name": "Budżet środków europejskich w układzie zadaniowym",
-                "description": "Dane dotyczące środków europejskich na szczeblu centralnym",
+                "description": "Wydatki środków europejskich wpisane w strukturę budżetu zadaniowego",
                 "long_description": null,
                 "issues": [ "2011", "2012" ]
                 },
             {
                 "idef": 2,
                 "name": "Budżet środków europejskich w układzie instytucionalnym",
-                "description": "Dane dotyczące środków europejskich na szczeblu centralnym",
+                "description": "Wydatki środków europejskich z perspektywy ich dysponentów. Struktura kolekcji zaczerpnięta jest z budżetu zadaniowego",
                 "long_description": null,
                 "issues": [ "2011", "2012" ]
                 }
@@ -73,7 +73,7 @@
             {
                 "idef": 1,
                 "name": "Fundusze celowe w układzie tradycyjnym",
-                "description": "Odpowiadające klasycznemu układowi budżetu państwa",
+                "description": "Odpowiadające tradycyjnemu układowi budżetu państwa",
                 "long_description": null,
                 "issues": [ "2011" ]
                 },
@@ -111,22 +111,6 @@
                 "idef": 1,
                 "name": "Dane ośrodków regionalnych",
                 "description": "Dane budżetowe ośrodków regionalnych NFZ",
-                "long_description": null,
-                "issues": [ "2011" ]
-                }
-            ]
-   
-        },
-    {
-        "idef": 4,
-        "name": "Krajowy Fundusz Drogowy",
-        "description": "Dane finansowe Krajowego Funduszu Drogowego",
-        "long_description": null,
-        "perspectives": [
-            {
-                "idef": 0,
-                "name": "Dane zagregowane",
-                "description": "Ogólne dane o wydatkach KFD",
                 "long_description": null,
                 "issues": [ "2011" ]
                 }
