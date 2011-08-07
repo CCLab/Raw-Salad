@@ -637,7 +637,7 @@ textarea {
     color: #000000;
 }
 
-#app-tb-in-table > thead> tr > td {
+#app-tb-in-table > thead> tr > th {
     padding: 10px;
 }
 
