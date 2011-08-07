@@ -627,6 +627,19 @@ textarea {
     display: inline;
 }
 
+#app-tb-in-table > thead {
+    display: inline;
+    
+}
+
+#app-tb-in-table > tr {
+    border: 0px;  
+}
+
+#app-tb-in-table > td {
+    padding: 10px;
+}
+
 .close-sheet-button {
   float: right;
   margin: -2px -2px;
