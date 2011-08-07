@@ -628,15 +628,16 @@ textarea {
 }
 
 #app-tb-in-table > thead {
-    display: inline;
+
     
 }
 
-#app-tb-in-table > tr {
-    border: 0px;  
+#app-tb-in-table > thead > tr {
+    background-color: inherit;
+    color: #000000;
 }
 
-#app-tb-in-table > td {
+#app-tb-in-table > thead> tr > td {
     padding: 10px;
 }
 
