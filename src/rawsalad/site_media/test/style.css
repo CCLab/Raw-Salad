@@ -623,6 +623,10 @@ textarea {
     background-color: #8B8B8B;
 }
 
+#app-tb-in-table {
+    display: inline;
+}
+
 .close-sheet-button {
   float: right;
   margin: -2px -2px;

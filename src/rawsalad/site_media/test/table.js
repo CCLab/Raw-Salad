@@ -360,7 +360,7 @@ var _table = (function () {
         var text_generator = functions_map[ _store.dataset() ];
         var visible_attrs = prepare_visible_attributes();
         
-        html.push( '<table>' );
+        html.push( '<table id="app-tb-in-table" >' );
         html.push( text_generator( info, visible_attrs ) );
         html.push( '</table>' );
 
