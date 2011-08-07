@@ -105,6 +105,14 @@ var _utils = (function () {
         var preloader;
         var html = [];
         var x = $(window).width() / 2 - 200;
+        var app_cover = $( '<div id="app-cover" > </div>' );
+        $('#application')
+            .append(app_cover);
+        $('#app-cover')
+             .height( $('#application').height() )
+             .width( $('#application').width() );
+
+
 
         html.push('<div id="preloader">');
         html.push( text );
@@ -121,6 +129,7 @@ var _utils = (function () {
     };
 
     that.clear_preloader = function() {
+        $('#app-cover').remove();
         $('#wrapper').css( 'opacity', '1' );
         $('#preloader').remove();
     };
