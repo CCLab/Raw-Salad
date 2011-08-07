@@ -599,7 +599,8 @@ textarea {
 	margin: 0px;
 	padding: 10px;
 	background-color: #E3E3E3;
-	border: 1px solid black;
+	border: 2px solid #000000;
+    border-radius: 5px;
 }
 
 .app-tb-in-button {
