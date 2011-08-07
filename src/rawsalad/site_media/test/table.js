@@ -235,12 +235,18 @@ var _table = (function () {
                 generate_info_panel_content( _store.get_info( $(this).attr('data-id') ));
                 $('#app-tb-info')
                     .click( function ( event ){
-                        event.stopPropagation();
+                        
                     });                
                 $('#app-tb-in-close').click( function() {
                     $('#app-tb-info').remove();
+                    $('html').unbind( 'click' );
                 });
-                
+                $('html')
+                    .click( function () {
+                        $('#app-tb-in-close')
+                            .trigger( $.Event( 'click' ));
+                });
+                event.stopPropagation();
            });
 
         if ( !is_visible ) {
