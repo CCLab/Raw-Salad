@@ -604,6 +604,7 @@ textarea {
 
 .app-tb-in-button {
     display: inline;
+    position: relative;
 }
 
 #app-tb-in-close {
