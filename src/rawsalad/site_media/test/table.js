@@ -232,7 +232,7 @@ var _table = (function () {
         row.find('img')
            .click( function ( event ) {
            //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
-                var info_panel_close_button = $('#app-tb-in-close');
+                var info_panel_close_button = $('#app-tb-in-con-close');
                 if ( info_panel_close_button.length === 1 ){
                    info_panel_close_button.trigger( $.Event( 'click' ));
                 }
@@ -242,13 +242,13 @@ var _table = (function () {
                     .click( function ( event ){
                         event.stopPropagation();                        
                     });                
-                $('#app-tb-in-close').click( function() {
+                $('#app-tb-in-con-close').click( function() {
                     $('#app-tb-info').remove();
                     $('html').unbind( 'click' );
                 });
                 $('html')
                     .click( function () {
-                        $('#app-tb-in-close')
+                        $('#app-tb-in-con-close')
                             .trigger( $.Event( 'click' ));
                 });
                 }
@@ -330,7 +330,7 @@ var _table = (function () {
     }
 
     function generate_info_panel_button( data ) {
-        var html = [ '<div class="app-tb-in-button">' ];
+        var html = [ '<div class="app-tb-info-button">' ];
         html.push( '<img src="/site_media/img/info_small.png" border="0" ' );
         html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
         html.push( '</div>' );
@@ -341,9 +341,11 @@ var _table = (function () {
     function generate_info_panel_content( info ) {
         var html = [ '<div id="app-tb-info">' ];
         var parent_id = info['0']['parent'];
-        var info_button = $( '#' + parent_id ).find( '.app-tb-in-button' );
+        var info_button = $( '#' + parent_id ).find( '.app-tb-info-button' );
 
-        html.push( '<div id="app-tb-in-close" > x </div> ' );
+        html.push( '<div id="app-tb-in-table">' );
+        html.push( '<div id="app-tb-in-content">' );
+        html.push( '<div id="app-tb-in-con-close" > x </div> ' );
         html.push( '<div class="app-tb-in-header">' );
         html.push( _tools.create_info_breadcrumb( parent_id ) );
         html.push( '</div>' );
@@ -351,6 +353,8 @@ var _table = (function () {
         html.push( _store.get_node_name(parent_id) );
         html.push( '</div>' );
         html.push( generate_info_panel_text( info ) );
+        html.push( '</div>' );
+        html.push( '</div>' );
         html.push( '</div>' );
 
         info_button.parent().append( html.join('') );
@@ -366,7 +370,7 @@ var _table = (function () {
         var text_generator = functions_map[ _store.dataset() ];
         var visible_attrs = prepare_visible_attributes();
         
-        html.push( '<table id="app-tb-in-table" >' );
+        html.push( '<table id="app-tb-in-con-table" >' );
         html.push( text_generator( info, visible_attrs ) );
         html.push( '</table>' );
 

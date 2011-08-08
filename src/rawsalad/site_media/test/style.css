@@ -594,21 +594,35 @@ textarea {
 
 #app-tb-info {
 	position: absolute;
-	top: 10px;
+  text-align: center;
+  z-index: 1;
+  left: 0px;
+  width: 100%;
+}
+
+#app-tb-in-table{
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}  
+
+#app-tb-in-content {
+  top: 10px;
 	left: 5px;
 	margin: 0px;
 	padding: 10px;
 	background-color: #E3E3E3;
 	border: 2px solid #000000;
-    border-radius: 5px;
+  border-radius: 5px;
+  text-align: left;
 }
 
-.app-tb-in-button {
+.app-tb-info-button {
     display: inline;
     position: relative;
 }
 
-#app-tb-in-close {
+#app-tb-in-con-close {
     float: right;
     color: #8B8B8B;
     background-color: white;
@@ -618,26 +632,26 @@ textarea {
     border-radius: 7px;
 }
 
-#app-tb-in-close:hover {
+#app-tb-in-con-close:hover {
     color: white;
     background-color: #8B8B8B;
 }
 
-#app-tb-in-table {
+#app-tb-in-con-table {
     display: inline;
 }
 
-#app-tb-in-table > thead {
+#app-tb-in-con-table > thead {
 
     
 }
 
-#app-tb-in-table > thead > tr {
+#app-tb-in-con-table > thead > tr {
     background-color: inherit;
     color: #000000;
 }
 
-#app-tb-in-table > thead> tr > th {
+#app-tb-in-con-table > thead> tr > th {
     padding: 10px;
 }
 
