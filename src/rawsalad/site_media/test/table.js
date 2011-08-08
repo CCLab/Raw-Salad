@@ -347,7 +347,7 @@ var _table = (function () {
         html.push( generate_info_panel_text( info ) );
         html.push( '</div>' );
 
-        info_button.append( html.join('') );
+        info_button.parent().append( html.join('') );
     }
 
     function generate_info_panel_text( info ) {
