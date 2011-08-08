@@ -385,7 +385,7 @@ var _table = (function () {
         html.push( '<thead> <tr> ' );
 
         info.forEach( function ( e ) {
-            html.push( '<tr><th>', e['elem_type'], ':');
+            html.push( '<tr><th class="app-tb-in-con-type" >', e['elem_type'], ':');
             html.push('</th><th>', e['elem_name'], '</th></tr>' );
             if ( e['elem_type'] === 'Miernik' ) {
                 cont = e;

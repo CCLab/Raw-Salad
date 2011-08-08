@@ -129,3 +129,7 @@
   #app-tb-in-con-table > thead> tr > th {
     font-weight: normal;
   }
+  
+  .app-tb-in-con-type{
+    text-align: left;
+  }
