@@ -639,23 +639,6 @@ textarea {
     background-color: #8B8B8B;
   }
 
-  #app-tb-in-con-table {
-    display: inline;
-  }
-
-  #app-tb-in-con-table > thead {
-    font-weight: normal;
-  }
-
-  #app-tb-in-con-table > thead > tr {
-    background-color: inherit;
-    color: #000000;
-  }
-
-  #app-tb-in-con-table > thead> tr > th {
-    font-weight: normal;
-  }
-
 .close-sheet-button {
   float: right;
   margin: -2px -2px;

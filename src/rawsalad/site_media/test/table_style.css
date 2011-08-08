@@ -112,3 +112,20 @@
   width: 120px;
   text-align: right;
 }
+
+  #app-tb-in-con-table {
+    display: inline;
+  }
+
+  #app-tb-in-con-table > thead {
+    font-weight: normal;
+  }
+
+  #app-tb-in-con-table > thead > tr {
+    background-color: inherit;
+    color: #000000;
+  }
+
+  #app-tb-in-con-table > thead> tr > th {
+    font-weight: normal;
+  }
