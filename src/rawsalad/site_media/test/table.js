@@ -232,6 +232,11 @@ var _table = (function () {
         row.find('img')
            .click( function ( event ) {
            //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
+                var info_panel_close_button = $('#app-tb-in-close');
+                if ( info_panel_close_button.length === 1 ){
+                   info_panel_close_button.trigger( $.Event( 'click' ));
+                }
+                else{                    
                 generate_info_panel_content( _store.get_info( $(this).attr('data-id') ));
                 $('#app-tb-info')
                     .click( function ( event ){
@@ -246,6 +251,7 @@ var _table = (function () {
                         $('#app-tb-in-close')
                             .trigger( $.Event( 'click' ));
                 });
+                }
                 event.stopPropagation();
            });
 
