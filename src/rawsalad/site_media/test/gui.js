@@ -447,7 +447,7 @@ var _gui = (function () {
         _utils.create_preloader( 'Wczytuję dane - to może chwilę potrwać' );
 
         $.ajax({
-            url: 'restore_state/',
+            url: '/restore_state/',
             data: { idef: idef },
             dataType: 'json',
             success: function ( received_data ) {
