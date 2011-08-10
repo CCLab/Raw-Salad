@@ -113,23 +113,45 @@
   text-align: right;
 }
 
-  #app-tb-in-con-table {
-    display: inline;
+  #app-tb-in-con-table1 {
+      border-top: 1px solid #8B8B8B;
+      border-bottom: 1px solid #8B8B8B;
+      display: table;
+      margin-top: 5px;
+      width: 680px;
   }
 
-  #app-tb-in-con-table > thead {
-    font-weight: normal;
-  }
-
-  #app-tb-in-con-table > thead > tr {
-    background-color: inherit;
-    color: #000000;
-  }
-
-  #app-tb-in-con-table > thead> tr > th {
-    font-weight: normal;
+  #app-tb-in-content > table > tbody > tr:hover {
+  background-color: #E3E3E3;
   }
   
-  .app-tb-in-con-type{
+  #app-tb-in-content td {
+    padding: 0px;
+    padding-right: 25px;
+  }
+
+  #app-tb-in-content td+td {
+    border-left: none;
+    padding: 0px;
+  }
+
+  .app-tb-in-con-type {
+    width: 150px;
     text-align: right;
   }
+
+  .app-tb-in-con-name{
+    padding: 5px;
+    width: 510px;
+  } 
+
+  td.app-tb-in-con-attr{
+    width: 150px;
+    text-align: right;
+  } 
+
+  td.app-tb-in-con-num{
+    padding: 5px;
+    text-align: right;
+  } 
+
