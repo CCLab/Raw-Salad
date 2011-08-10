@@ -489,7 +489,7 @@
   <script src="/site_media/test/download.js"></script>
   <script type="text/javascript" language="javascript" charset="utf-8">
   // <![CDATA[
-      _store.meta_data( {{ meta['meta_data']|safe }} );       
+      _store.meta_data( {{ meta.meta_data|safe }} );       
       _gui.init_gui( true ); 
       _gui.restore_session( {{ idef }} );
   // ]]>
