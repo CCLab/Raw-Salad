@@ -232,7 +232,7 @@ var _table = (function () {
         row.find('img')
            .click( function ( event ) {
            //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
-                var info_panel_close_button = $('#app-tb-in-con-close');
+                var info_panel_close_button = $('#app-tb-in-con-button-x');
                 if ( info_panel_close_button.length === 1 ){
                    info_panel_close_button.trigger( $.Event( 'click' ));
                 }
@@ -242,13 +242,13 @@ var _table = (function () {
                     .click( function ( event ){
                         event.stopPropagation();                        
                     });                
-                $('#app-tb-in-con-close').click( function() {
+                $('#app-tb-in-con-button-x').click( function() {
                     $('#app-tb-info').remove();
                     $('html').unbind( 'click' );
                 });
                 $('html')
                     .click( function () {
-                        $('#app-tb-in-con-close')
+                        $('#app-tb-in-con-button-x')
                             .trigger( $.Event( 'click' ));
                 });
                 }
@@ -345,7 +345,7 @@ var _table = (function () {
 
 //        html.push( '<div id="app-tb-in-table">' );
         html.push( '<div id="app-tb-in-content">' );
-        html.push( '<div id="app-tb-in-con-close" > x </div> ' );
+        html.push( '<div id="app-tb-in-con-button-x" > x </div> ' );
         html.push( '<div id="app-tb-in-header">' );
         html.push( _tools.create_info_breadcrumb( parent_id ) );
         html.push( '</div>' );
