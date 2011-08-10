@@ -232,7 +232,7 @@ var _table = (function () {
         row.find('img')
            .click( function ( event ) {
            //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
-                var info_panel_close_button = $('#app-tb-in-con-close');
+                var info_panel_close_button = $('#app-tb-in-con-button-x');
                 if ( info_panel_close_button.length === 1 ){
                    info_panel_close_button.trigger( $.Event( 'click' ));
                 }
@@ -242,13 +242,13 @@ var _table = (function () {
                     .click( function ( event ){
                         event.stopPropagation();                        
                     });                
-                $('#app-tb-in-con-close').click( function() {
+                $('#app-tb-in-con-button-x').click( function() {
                     $('#app-tb-info').remove();
                     $('html').unbind( 'click' );
                 });
                 $('html')
                     .click( function () {
-                        $('#app-tb-in-con-close')
+                        $('#app-tb-in-con-button-x')
                             .trigger( $.Event( 'click' ));
                 });
                 }
@@ -343,19 +343,19 @@ var _table = (function () {
         var parent_id = info['0']['parent'];
         var info_button = $( '#' + parent_id ).find( '.app-tb-info-button' );
 
-        html.push( '<div id="app-tb-in-table">' );
+//        html.push( '<div id="app-tb-in-table">' );
         html.push( '<div id="app-tb-in-content">' );
-        html.push( '<div id="app-tb-in-con-close" > x </div> ' );
-        html.push( '<div class="app-tb-in-header">' );
+        html.push( '<div id="app-tb-in-con-button-x" > x </div> ' );
+        html.push( '<div id="app-tb-in-header">' );
         html.push( _tools.create_info_breadcrumb( parent_id ) );
         html.push( '</div>' );
-        html.push( '<div class="app-tb-in-title">' );
+        html.push( '<div id="app-tb-in-title">' );
         html.push( _store.get_node_name(parent_id) );
         html.push( '</div>' );
         html.push( generate_info_panel_text( info ) );
         html.push( '</div>' );
         html.push( '</div>' );
-        html.push( '</div>' );
+//        html.push( '</div>' );
 
         info_button.parent().append( html.join('') );
     }
@@ -370,7 +370,6 @@ var _table = (function () {
         var text_generator = functions_map[ _store.dataset() ];
         var visible_attrs = prepare_visible_attributes();
         
-        html.push( '<table id="app-tb-in-con-table" >' );
         html.push( text_generator( info, visible_attrs ) );
         html.push( '</table>' );
 
@@ -382,29 +381,31 @@ var _table = (function () {
         var html = [];
         var cont = null;
 
-        html.push( '<thead> <tr> ' );
-
+        html.push( '<table id="app-tb-in-con-table1" >' );
+        html.push( '<tbody>' );
         info.forEach( function ( e ) {
-            html.push( '<tr><th class="app-tb-in-con-type" >', e['elem_type'], ':');
-            html.push('</th><th>', e['elem_name'], '</th></tr>' );
+            html.push( '<tr><td class="app-tb-in-con-type" >', e['elem_type'], ':');
+            html.push('</td><td class="app-tb-in-con-name" >', e['elem_name'], '</td></tr>' );
             if ( e['elem_type'] === 'Miernik' ) {
                 cont = e;
             }
         });
-        html.push( '</thead>' );
+        html.push( '</tbody>' );
+        html.push( '</table>' );
          
+        html.push( '<table id="app-tb-in-con-table2" >' );
+        html.push( '<tbody>' );
         if ( cont !== null ){
-            html.push( '<tbody>' );
         
             for ( attr in visible_attrs ) {
                 if ( visible_attrs.hasOwnProperty(attr) ) {
-                    html.push( '<tr><td>', visible_attrs[attr],':' );
-                    html.push( '</td><td>', cont[attr], '</td></tr>' );
+                    html.push( '<tr><td class="app-tb-in-con-attr" >', visible_attrs[attr],':' );
+                    html.push( '</td><td class="app-tb-in-con-num" >', cont[attr], '</td></tr>' );
                 }
             }
-            html.push('</tbody>');
         }
-            
+        html.push('</tbody>');
+        html.push( '</table>' );
         
         return html.join('');
     }
@@ -414,31 +415,32 @@ var _table = (function () {
         var html = [];
         var cont = null;
         
-        html.push( '<thead> <tr> ' );
-        
+        html.push( '<table id="app-tb-in-con-table1" >' );
+        html.push( '<tbody>' );
         info.forEach( function ( e ) {
-            html.push( '<tr><th>', e['type'], ':' );
-            html.push( '</th><th>', e['name'], '</th></tr>');
+            html.push( '<tr><td class="app-tb-in-con-type" >', e['type'], ':' );
+            html.push( '</td><td class="app-tb-in-con-name" >', e['name'], '</td></tr>');
 
             if ( e['type'] === 'Miernik' ) {
                 cont = e;
             }    
 
         });
+        html.push( '</tbody>' );
+        html.push( '</table>' );
          
-        html.push( '</thead>' );
-         
+        html.push( '<table id="app-tb-in-con-table2" >' );
+        html.push( '<tbody>' );
         if ( cont !== null ){
-            html.push( '<tbody>' );
             for ( attr in visible_attrs ) {
                 if ( visible_attrs.hasOwnProperty(attr) ) {
-                    html.push( '<tr><td>', visible_attrs[attr], ':' );
-                    html.push( '</td><td>', cont[attr], '</td></tr>' );
+                    html.push( '<tr><td class="app-tb-in-con-attr" >', visible_attrs[attr], ':' );
+                    html.push( '</td><td class="app-tb-in-con-num" >', cont[attr], '</td></tr>' );
                 }
             }
-            html.push('</tbody>');    
         }
-                             
+        html.push('</tbody>');    
+        html.push( '</table>' );
         return html.join('');
     }
 
@@ -446,21 +448,27 @@ var _table = (function () {
         var html = [];
         var attr;
         
-        html.push( '<thead> <tr> ' );
-        html.push( '<th>', 'Cel: ', '</th> <th>', info[0]['name'], '</th>' );
-        html.push( '</tr> </thead>' );
-        
+        html.push( '<table id="app-tb-in-con-table1" >' );
         html.push( '<tbody>' );
+        html.push( '<tr><td class="app-tb-in-con-type" >', 'Cel: ');
+        html.push('</td> <td class="app-tb-in-con-name" >', info[0]['name'], '</td>' );
+        html.push( '</tr>' );
         
+        html.push( '</tbody>' );
+        html.push( '</table>' );
+
+        html.push( '<table id="app-tb-in-con-table2" >' );
+        html.push( '<tbody>' );
         for ( attr in visible_attrs ) {
             if ( visible_attrs.hasOwnProperty(attr) ) {
-                    html.push( '<tr><td>', visible_attrs[attr], ':' );
-                    html.push ( '</td><td>' );
+                    html.push( '<tr><td class="app-tb-in-con-attr" >', visible_attrs[attr], ':' );
+                    html.push ( '</td><td class="app-tb-in-con-num">' );
                     html.push( info[0][attr], '</td></tr>' );
             }
         }
         
         html.push( '</tbody>' );
+        html.push( '</table>' );
         return html.join('');
     }
 
