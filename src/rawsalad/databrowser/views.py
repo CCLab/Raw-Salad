@@ -262,12 +262,13 @@ def get_searched_data( request ):
 # store front-end state as a permalink in mongo
 @csrf_exempt
 def store_state( request ):
-    data = request.GET.get( 'state', '' )
-    #
-    # store in mongo, create uniq idef and send it back to front-end
-    #
+    data= request.POST.get( 'state', '' )
 
-    return HttpResponse( json.dumps({'id': '1000'}) ) #replace '1000' with uniq idef
+    db= rsdb.DBconnect("mongodb").dbconnect
+    state= rsdb.State()
+    curr_state_id= state.save_state(data, db)
+
+    return HttpResponse( json.dumps({'id': curr_state_id}) )
 
 # init application prepared to handle restore data
 def init_restore( request, idef ):
