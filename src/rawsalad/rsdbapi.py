@@ -11,7 +11,7 @@ import pymongo
 meta_src= "md_budg_scheme"
 state_counter= "md_sta_cnt"
 nav_schema= "ms_nav"
-conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/rawsdata.conf"
+conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/rawsdata.conf"
 
 class Response:
     """
@@ -499,10 +499,6 @@ class State:
         
     def __del__(self):
         pass
-
-    def set_idef(self, state_id):
-        if state_id is not None:
-            self.state_id= state_id
 
     def get_state(self, state_id, datasrc):
         """ extracts user view (string) from the db """
