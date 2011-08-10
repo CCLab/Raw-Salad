@@ -93,7 +93,7 @@ class DBconnect:
         self.dbconnect= dbase
 
     def __del__(self):
-        self.connect.disconnect()
+        pass
 
     def fill_connection(self, db_type):
         cfg= ConfigParser({ 'basedir': conf_filename })
