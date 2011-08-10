@@ -84,8 +84,8 @@ class DBconnect:
     def __init__(self, db_type):
         if db_type == 'mongodb':
             self.fill_connection(db_type)
-            connect= pymongo.Connection(self.host, self.port)
-            dbase= connect[self.database]
+            self.connect= pymongo.Connection(self.host, self.port)
+            dbase= self.connect[self.database]
             dbase.authenticate(self.username, self.password)
         elif db_type == 'postgresql':
             dbase= None # not yet realized
@@ -93,7 +93,7 @@ class DBconnect:
         self.dbconnect= dbase
 
     def __del__(self):
-        pass
+        self.connect.disconnect()
 
     def fill_connection(self, db_type):
         cfg= ConfigParser({ 'basedir': conf_filename })
@@ -518,9 +518,9 @@ class State:
                 self.response= Response().get_response(42) # wrong state id
 
         if success:
-            state_dict= datasrc[state_coll_name].find_one() # state is a single object
+            state_dict= datasrc[state_coll_name].find_one() # state is always a single object
             if len(state_dict) > 0:
-                data= state_dict['data']
+                data= state_dict['content']
             else:
                 self.response= Response().get_response(40) # no state data
 
@@ -533,7 +533,7 @@ class State:
         returns xxxx (id for permalink)
         """
         state_id= 0 # generate state id
-        state_id_dict= datasrc[state_counter].find_one( {"curr_state_id": True } )
+        state_id_dict= datasrc[state_counter].find_one( {'curr_state_id': True } )
         if state_id_dict is None: # not yet created
             state_id, state_id_inc= 0, 1
             state_id_dict= {
@@ -543,17 +543,17 @@ class State:
                 }
 
         if state_object is not None: # save object to the db
-            state_id= int(state_id_dict["curr_id"]) + state_id_dict["increment"]
+            state_id= int(state_id_dict['curr_id']) + state_id_dict['increment']
             state_collection_name= "_".join(["sd", "%07d" % state_id]) # sd - state data
             success= True
             try:
-                datasrc[state_collection_name].insert({ "data": state_object })
+                datasrc[state_collection_name].insert({ 'content': state_object })
             except Exception as e:
                 print e
                 success= False
 
             if success: # incrementing state counter & saving it into the db
-                state_id_dict["curr_id"]= state_id
+                state_id_dict['curr_id']= state_id
                 datasrc[state_counter].save(state_id_dict)
             else:
                 self.response= Response().get_response(41) # can't insert into the db
