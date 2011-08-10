@@ -9,10 +9,11 @@ from ConfigParser import ConfigParser
 import pymongo
 
 meta_src= "md_budg_scheme"
+state_counter= "md_sta_cnt"
 nav_schema= "ms_nav"
 conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/media/rawsdata.conf"
 
-class Response(object):
+class Response:
     """
     response object
     returns dict with http response and description
@@ -55,6 +56,18 @@ class Response(object):
             '35': {
                 'httpresp': 400,
                 'descr': 'ERROR: Format not specified!'
+                },
+            '40': {
+                'httpresp': 404,
+                'descr': 'ERROR: No state data!'
+                },
+            '41': {
+                'httpresp': 500,
+                'descr': 'ERROR: Cannot insert state data into the db!'
+                },
+            '42': {
+                'httpresp': 400,
+                'descr': 'ERROR: Wrong state id!'
                 }
             }
 
@@ -67,7 +80,7 @@ class Response(object):
         self.descr= self.response_dict[str(code)]['descr']
         return self.response_dict[str(code)]
 
-class DBconnect(object):
+class DBconnect:
     def __init__(self, db_type):
         if db_type == 'mongodb':
             self.fill_connection(db_type)
@@ -103,7 +116,8 @@ class DBconnect(object):
             self.username= 'readonly'
             self.password= ''
 
-class Navtree(object): # Navigator tree
+class Navtree:
+    """ Navigator tree """
     def __init__(self, **parms):
         """
         **parms are:
@@ -116,7 +130,6 @@ class Navtree(object): # Navigator tree
 
     def __del__(self):
         pass
-
 
     def get_nav_full(self, datasrc):
         out= []
@@ -209,8 +222,12 @@ class Navtree(object): # Navigator tree
 
         return count
 
-class Collection(object):
-
+class Collection:
+    """
+    extraction of the imformation from the db
+    params: dataset, view, issue
+    additional params: query, user defined list of fields
+    """
     def __init__(self, **parms):
         """
         **parms are URL params:
@@ -470,3 +487,81 @@ class Collection(object):
             self.warning= "There is no such column as '%s' in meta-data!" % warning_list[0]
         elif len(warning_list) > 1:
             self.warning= "There are no such columns as ['%s'] in meta-data!" % "', '".join(warning_list)
+
+
+class State:
+    """
+    the class saves to and restores from mongo
+    the current state of open datasheets
+    """
+    def __init__(self):
+        self.response= Response().get_response(0) # CollectionState class is optimistic
+        
+    def __del__(self):
+        pass
+
+    def set_idef(self, state_id):
+        if state_id is not None:
+            self.state_id= state_id
+
+    def get_state(self, state_id, datasrc):
+        """ extracts user view (string) from the db """
+        data= ''
+        success= True
+
+        if state_id == 0 or state_id is None:
+            self.response= Response().get_response(42) # no data
+            success= False
+
+        if success:
+            state_coll_name= ''
+            try:
+                state_coll_name=  "_".join(["sd", "%07d" % state_id])
+            except:
+                success= False
+                self.response= Response().get_response(42) # wrong state id
+
+        if success:
+            state_dict= datasrc[state_coll_name].find_one() # state is a single object
+            if len(state_dict) > 0:
+                data= state_dict['data']
+            else:
+                self.response= Response().get_response(40) # no state data
+
+        return data
+
+    def save_state(self, state_object, datasrc):
+        """
+        saves state compiled by a user
+        into the db collection sd_0000xxxx
+        returns xxxx (id for permalink)
+        """
+        state_id= 0 # generate state id
+        state_id_dict= datasrc[state_counter].find_one( {"curr_state_id": True } )
+        if state_id_dict is None: # not yet created
+            state_id, state_id_inc= 0, 1
+            state_id_dict= {
+                "curr_state_id":True,
+                "curr_id": state_id,
+                "increment": state_id_inc
+                }
+
+        if state_object is not None: # save object to the db
+            state_id= int(state_id_dict["curr_id"]) + state_id_dict["increment"]
+            state_collection_name= "_".join(["sd", "%07d" % state_id]) # sd - state data
+            success= True
+            try:
+                datasrc[state_collection_name].insert({ "data": state_object })
+            except Exception as e:
+                print e
+                success= False
+
+            if success: # incrementing state counter & saving it into the db
+                state_id_dict["curr_id"]= state_id
+                datasrc[state_counter].save(state_id_dict)
+            else:
+                self.response= Response().get_response(41) # can't insert into the db
+        else:
+            self.response= Response().get_response(40) # bad request - data is empty
+
+        return state_id
