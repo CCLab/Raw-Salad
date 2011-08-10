@@ -262,11 +262,31 @@ def get_searched_data( request ):
 # store front-end state as a permalink in mongo
 @csrf_exempt
 def store_state( request ):
-    data= request.POST.get( 'state', '' )
+    data= request.GET.get( 'state', '' ) # data is a unicode string
+    data= data.replace('true', 'True').replace('false', 'False').encode('utf-8')
 
-    db= rsdb.DBconnect("mongodb").dbconnect
-    state= rsdb.State()
-    curr_state_id= state.save_state(data, db)
+    success= True
+
+    data_list= []
+    try:
+        data_list= eval(data)
+    except Exception, e:
+        print e
+        success= False
+
+    if success:
+        try: # checking if it is json serializable
+            json.dumps(data_list)
+        except Exception, e:
+            print e
+            success= False
+
+    if success:
+        db= rsdb.DBconnect("mongodb").dbconnect
+        state= rsdb.State()
+        curr_state_id= state.save_state(data_list, db)
+    else:
+        curr_state_id= None
 
     return HttpResponse( json.dumps({'id': curr_state_id}) )
 
@@ -277,15 +297,47 @@ def init_restore( request, idef ):
         'meta': get_ms_nav(),
         'idef': idef
     })
+    
     return HttpResponse( template.render( context ))
-
 
 #restore front-end state from mongo
 def restore_state( request ):
     idef = request.GET.get( 'idef', '-1' )
-    data = 'get_me_from_mongo_my_name_is_' + idef
 
-    return HttpResponse( data )
+    data= []
+    if idef != -1:
+        db= rsdb.DBconnect("mongodb").dbconnect
+        state= rsdb.State()
+
+        try:
+            data= state.get_state(int(idef), db)
+        except Exception, e:
+            print e
+
+        # now substitute list of open idefs with actual data:
+        # level 'a' + open branches
+        if len(data) > 0:
+            coll= rsdb.Collection()
+            for elt in data:
+                ds_id= int(elt['dataset'])
+                vw_id= int(elt['view'])
+                iss= str(elt['issue'])
+
+                for elt_item in elt['sheets']:
+                    find_query= build_query( elt_item['rows'] )
+
+                    coll.set_query( { 'idef': { '$regex': find_query} } )
+
+                    curr_data = []
+                    try:
+                        curr_data= coll.get_data(db, ds_id, vw_id, iss)
+                    except:
+                        pass
+
+                    if len(curr_data) is not None:
+                        elt_item['rows']= curr_data
+
+    return HttpResponse( json.dumps(data) )
 
 
 # list of possible ajax calls
