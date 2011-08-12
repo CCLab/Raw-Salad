@@ -225,13 +225,16 @@ def build_query( idef_list ):
     if len(idef_list) > result_limit:
         idef_list= idef_list[:result_limit]
 
-    for idef in idef_list:
-        i += 1
-        lookup_idef= build_idef_regexp( idef )
+    if len(idef_list) > 0:
+        for idef in idef_list:
+            i += 1
+            lookup_idef= build_idef_regexp( idef )
 
-        lookup += "(%s)|" % lookup_idef
-        if i == len(idef_list):
-            lookup= lookup[:-1] # cutting the last symbol | in case it's the end of list
+            lookup += r"(%s)|" % lookup_idef
+            if i == len(idef_list):
+                lookup= lookup[:-1] # cutting the last symbol | in case it's the end of list
+    else: # in cases there're no 'open' nodes in the view
+        lookup= build_idef_regexp( '0' ) # this returns regexp for getting level 'a' only
 
     return lookup
 
@@ -309,14 +312,14 @@ def restore_state( request ):
         db= rsdb.DBconnect("mongodb").dbconnect
         state= rsdb.State()
 
-        try:
-            data= state.get_state(int(idef), db)
-        except Exception, e:
-            print e
+        data= state.get_state(int(idef), db)
+        print state.response
 
-        # now substitute list of open idefs with actual data:
-        # level 'a' + open branches
-        if len(data) > 0:
+        if state.response['httpresp'] != 200: # ERROR!
+            data= state.response # {'descr': <str - error description>, 'httpresp': <int - http status>}
+        else: # everything is OK
+            # now substitute list of open idefs with actual data:
+            # level 'a' + open branches
             coll= rsdb.Collection()
             for elt in data:
                 ds_id= int(elt['dataset'])
@@ -324,7 +327,13 @@ def restore_state( request ):
                 iss= str(elt['issue'])
 
                 for elt_item in elt['sheets']:
-                    find_query= build_query( elt_item['rows'] )
+                    open_elements= []
+                    for curr_idef in elt_item['rows']:
+                        # artificially moving focus to one level deeper,
+                        # as build_query looks for brothers, not for parents
+                        open_elements.append("-".join([curr_idef, '1']))
+                        
+                    find_query= build_query( open_elements )
 
                     coll.set_query( { 'idef': { '$regex': find_query} } )
 
