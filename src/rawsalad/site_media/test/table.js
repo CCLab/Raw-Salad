@@ -243,8 +243,10 @@ var _table = (function () {
                         event.stopPropagation();                        
                     });                
                 $('#app-tb-in-con-button-x').click( function() {
-                    $('#app-tb-info').remove();
-                    $('html').unbind( 'click' );
+                    $('#app-tb-info').slideUp( 800, function () {
+                    	$('#app-tb-info').remove();
+                    	$('html').unbind( 'click' );
+            	    });
                 });
                 $('html')
                     .click( function () {
