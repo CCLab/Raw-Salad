@@ -438,7 +438,7 @@ var _store = (function () {
             group['sheets'].forEach( function ( sheet ) {
                 var rows = sheet['rows'];
                 rows = add_state( rows );
-                if( rows[ rows.length - 1 ]['idef'].indexOf( '9999' ) !== -1 ) {
+                if( rows[ rows.length - 1 ]['data']['idef'].indexOf( '9999' ) !== -1 ) {
                     rows['total'] = rows.pop();
                 }
             });
