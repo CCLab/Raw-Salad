@@ -435,11 +435,11 @@ var _store = (function () {
         groups = state;
         groups.forEach( function( group ) {
             var group_name;
-            
             group['sheets'].forEach( function ( sheet ) {
-                sheet['rows'] = add_state( sheet['rows'] );
-                if( sheet['rows'][ sheet['rows'].length - 1 ]['idef'].indexOf( '9999' ) !== -1 ) {
-                    sheet['rows']['total'] = sheet['rows'].pop();
+                var rows = sheet['rows'];
+                rows = add_state( rows );
+                if( rows[ rows.length - 1 ]['idef'].indexOf( '9999' ) !== -1 ) {
+                    rows['total'] = rows.pop();
                 }
             });
             group['name'] = group['sheets'][0]['name'];
