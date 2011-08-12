@@ -59,7 +59,7 @@ class Response:
                 },
             '40': {
                 'httpresp': 404,
-                'descr': 'ERROR: No state data!'
+                'descr': 'ERROR: No data for specified state id!'
                 },
             '41': {
                 'httpresp': 500,
@@ -519,7 +519,7 @@ class State:
 
         if success:
             state_dict= datasrc[state_coll_name].find_one() # state is always a single object
-            if len(state_dict) > 0:
+            if state_dict is not None:
                 data= state_dict['content']
             else:
                 self.response= Response().get_response(40) # no state data
