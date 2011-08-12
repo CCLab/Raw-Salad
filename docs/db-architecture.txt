@@ -3,10 +3,41 @@ There are 2 storages used for different purposes:
 
     1. PostgreSQL - used as a main storage for table-like raw data;
     2. mongoDB - used as a storage of:
-        - site navigator - the scheme of the web-site navigation
-        - meta-data of the main raw data storage
-        - snapshots
-        - raw data, semi-structured (future use)
+        - raw data
+        - meta-data for the main raw data storage
+        - snapshots (user defined views)
+        - site navigation structure
+
+DATA STORAGE - CONNECTION CONFIGURATION
+There is a common .conf file with the configuration of connection to
+both MongoDB and PostgreSQL. In the file there are all the details of
+the connection for db drivers
+
+File structure (this is a working configuration for read-only access
+to both databases deployed at cecyf.megivps.pl):
+
+[mongodb]
+host: localhost
+port: 27017
+database: rawsdoc00
+username: admin
+password: <admin password>
+
+[postgresql]
+host: localhost
+port: 5432
+database: rawstbl00
+username: pg_5009u
+password: useruser
+
+WARNING!
+It is nesessary to use admin password in the case of mongodb! When a
+user stores app state (permalink), a new collection in mongo is being
+created. To make it possible the app logs on to mongo with a profile
+of a user with the rights to write into the db (in rawsdoc00 it is
+'admin'). Thus the .conf file should be put into the place unavailable
+to reach from any insecure client!
+
 
 POSTGRESQL
 The basic setup of the server:
@@ -49,7 +80,7 @@ codes should be stored in a special collection in the database of mongoDB
 
 MONGODB - GENERAL SETUP
 The basic setup:
-    server: mongoDB version 1.6.5 64bit
+    server: mongoDB version 1.8.1 64bit
     database name: rawsdoc00
         where "raws" is a project name ("Raw Salad")
               "doc" refers to db type (document oriented)
@@ -57,6 +88,7 @@ The basic setup:
     port: 28017
     additional software:
         Python interface: pymongo 1.9
+
 
 MONGODB - COLLECTIONS NAMESPACES
 All the data in mongoDB are stored in a single database, but separate
@@ -73,16 +105,20 @@ Naming collections:
 - <KK> (2 symbols) describes the kind of a collection: 'dd' (data),
 'dr' (reference), 'md' (meta-data),  'ms' (meta-site), 'zz'
 (collections for auxilar purposes)
-- <TTTT> (4 symbols) indicates to what data-set a collection
-belong (examples: 'budg' - 'budget', 'poll' - local polls, etc.). A
-special data-set 'aaaa' is for references that can be used in different
-data-sets
+- <TTTT> (4 symbols) indicates to what group of data a collection
+belongs (examples: 'budg' - 'budget', 'poll' - local polls,
+etc.). This part can be skipped in the names of references that can be
+used in several data groups
 - <YYYY> (4 symbols) - year (if it makes sense for a collection, if
-not - 'XXXX')
+not - this part is absent)
 - <descr> - description
 
 In the names of the meta-data collections ('md') the year is absent:
 <KK>_<TTTT>_<descr>
+
+User-defined collections (snapshots) are named by their unique id:
+<KK>_<XXXXXXX>, where <KK> is 'sd' (state data) and <XXXXXXX> is a
+unique id (integer with leading zeroes)
 
 In the names of the collections connected to site structure ('ms') the
 year and and the code of the data-set are absent:
@@ -95,146 +131,153 @@ dd_budg2011_go - goal oriented budget 2011
 dd_budg2011_tr - traditional budget 2011
 dd_budg2012_fc - budget 'Funduszy celowe' 2011
 dd_poll2010_kandydaci_rady - local polls 2010: Kandydaci Rady
-dr_aaaaXXXX_teryt - territory code TERYT
+dr_teryt - territory code TERYT
 md_budg_scheme
 md_poll_scheme
 ms_nav - site navigation
+sd_0000128 - snapshot # 128
 
 
 
 MONGODB - NAVIGATOR
 This provides web framework with the objects with information about the scheme
-of hi level navigation of the web-site, such as:
-    1st step - selection of the data set (collection): 
-        "Budżet centralny"
-        "Wybory lokalne"
-    2nd step - selection of the perspective (view):
-        "Budżet centralny":
-            "Budżet zadaniowy"
-            "Budżet instytucjonalny"
-            "Budżet księgowy"
-        "Wybory lokalne": 
-            "Wybory wójtów, burmistrzów i prezydentów miast"
-            "Sejmiki wojewódzkie"
-            
-The structure is represented by the collection m_site_nav (navigator) 
-with the items arranged as follows:
+of hi level navigation of the web-site in the form of a tree
+[datasets: [their perspectives: [ issues of the perspectives ] ] ]:
+
 [
     {
-    "pos": /position of the appearance 1, 2, ..., n/,
-    "func": /"collection" on the highest level/,
-    "name": /name as it appears on the web-page/,
-    "url": /relative URL as described in the paragraph "URLs"/,
+        "idef": 0,
+        "name": ..., 
+        "description": ...,
+        "perspective": [
+            {
+                "idef": 0, 
+                "description": ..., 
+                "name": ...,
+                "issue": [
+                    "string1",
+                    "string2"
+                    ]
+                },
+            {
+                ...
+                }
+            ],
+        },
+    {
+        ...
+        }
+    ]
+    
+Optional key for each level, except "issue" - "long_description"
+Each element on the levels of dataset and perspective is identified by
+idef (int). Issues are identified by str, and are represented by a
+simple list of strings with no further info.
 
-    "descr": /description as it appears on the web-page/,
 
-    "long_descr": /html code of the long description as it 
-                  appears on the web-page/,
-    "view": [ /array of views inside the collection/
+MONGODB - METADATA
+There is one collection used a storage of meta-data for all the models
+in the db. There should be as many docs as there are models are
+specified in the Navigator
+
+The metadata for all perspectives (views) are stored in the collection
+md_budg_scheme as a list of documents (dicts), each specifying
+particular perspective.
+
+The meta-data structure of a perspective:
+
+{
+    "name": <str>, # codename of the collection (appears as a key
+                            #  'request' in db API) 
+    "perspective": <str>, # the descr of the collection (appears as a
+                                      # collection description in a app tree view
+    "ns": <str>, # collection name in mongodb
+    "dataset": <int>, # dataset id
+    "idef": <int>, # perspective (view) id
+    "issue": <str>, # issue id
+    "explorable": <str>, # field name, which is used as a link to open
+                                    # the branch in the tree view of the app
+    "max_level": <str>, # deepest level in the collection
+    "columns": [ # list of all the columns, that can be shown to the
+                        # user in the app tree view.
+                        # the data from one collection can be used for
+                        # several views, so it's nesessary to specify
+                        # here ONLY those fields that appear in the
+                        # view, described by a particular meta-data
+                        # see (1)
         {
-        "pos": /position of the appearance 1, 2, ..., n/,
-        "func": /"collection" on the highest level/,
-        "name": /name as it appears on the web-page/,
-        "url": /relative URL as described in the paragraph "URLs"/,
-        "descr": /description as it appears on the web-page/,
-        "long_descr": /html code of the long description as 
-                      it appears on the web-page/
-        }, 
-        { ... }
-        ]
-    },
-    { 
-    ... 
+            "key": <str>, # key name as it's represented in the db
+            "label": <str>, # label for the interface
+            "type": <str>, # type ("string" or "number")
+            "processable": <bool>, # can the field be filtered, sorted, etc.
+    	    "checkable": <bool>, # only for field type "number" -
+                                               # indicates if the field can be
+                                               # checked or not (deprecated?)
+	    "basic": <bool>, # true - field shown by default on the
+                                       # opening of the app tree view
+
+            },
+        {
+		...
+            },
+        ...
+        ], # end of columns
+    "aux": { # additional fields that are never shown in the app, but
+                # should be extracted for technical purposes.
+		# those fields never appear in the tree view of the
+		# app, but CAN appear in any view (data or tree) of
+		# the db API, if specified in the list of parameter ?fields=[...]
+		# the examples of the fields given below
+        "leaf": 1, # 1 means "appear"
+        "parent": 1,
+        "idef": 1,
+        "info": 1
+        },
+    "query": { # query for extracting the data from the collection.
+   	       	   # should be proper mongodb query - otherwise the
+   	       	   # app returns no data!
+    	       	   # empty dict means "extract all"
+    	       	   # see (1)
+        "node": { "$in" : [ null, 1 ] },
+        "val": { "$and": { "$gt": 15000, "$lt": 25000 } },
+	...
+        },
+    "sort": { # the dict describes how the data is sorted
+    	         # the keys ("0", "1", ..., "n") are the order of
+    	         # sorted columns;
+    	         # values are dicts: {"fieldname": <int> # sort order }:
+        "0": {"idef_sort": 1},
+        "1": {"parent_sort": 1},
+        "2": {"level": 1},
+	...
+	"n": {"fieldname": <int> } # sort order
+	     		   	     	        # 1 - ascending, 0 - descending
+        }
     }
-]
 
-MONGODB - SCHEMES OF THE MAIN RAW DATA STORAGE
-There should be as many of collections with meta-data as many models
-there's is in the project (in Raw-Salad it is 2).
-Meta-data should include information not only about the structure of the storage
-(such as column names, types, whether a column can be aggregated or not, etc.),
-but also the nature of the data ("table" - for SQL tables, and "document" - for
-non-SQL collections of documents).
-Every such scheme should map the column names of the table in the PostgreSQL
-database to a letter taken from the URL (a to x) as described in the document
-URL-structure, which would pass from client to the server sufficient information
-about the tables/collections and their columns/keys to extract.
+(1)There can be more than 1 view based on the data from the same
+collection, but separated using specific columns and/or query
 
-The form of the mapping is as follows:
-[
-    { // collection (table) lp_okregi 
-    "col_code": "g" //how collection appears in the URL 
-    "col_name": "lp_okregi",
-    "col_local_name": "okręgi",
-    "col_descr": "Electoral district",
-    "col_descr_full": "Okręgi wyborczy",
+Metadata Update
 
-    "col_keys": {
+When it is nesessary to update metadata, it is recommeded to use the script:
+/scripts/db/universal/json2mongo.py
 
-       "a": {  //how key (column) appears in the URL
-             "key_name": "teryt",
-             "key_type": "string",
-             "key_aggr": False,
-             "key_label": "Kod terytorialny",
+type
+$ json2mongo.py -h
+for help
 
-       },
-        "xxxx": { ... },
+example of use:
+python json2mongo.py -f path/to/rawsdata.conf -r '{"dataset":0,"idef":1,"issue":"2012"}' -c md_budg_scheme
 
-       "e": {
-             "key_name": "liczba_komitetow",
-             "key_type": "int",
-             "key_aggr": True,
-             "key_label": "Liczba komitetów"
-
-       },
-        { ... }
-    },
-
-    { // collection (table) lp_kandydaci_urzad
-    "col_code": "h" //how collection appears in the URL 
-    "col_name": "lp_kandydaci_urzad",
-    "col_local_name": "kandydaci_urząd",
-    "col_descr": "local governmental polls, Poland 2010",
-    "col_descr_full": "...",
-
-   "col_keys": {
-
-       "a": {
-             "key_name": "gmina",
-             "key_type": "string",
-             "key_aggr": False,
-             "key_label": "Gmina",
-
-       },
-
-       "b": {
-             "key_name": "szczebel",
-             "key_type": "string",
-             "key_aggr": False,
-             "key_label": "Szczebel",
-
-       },
-        "xxxx": { ... },
-
-       "t": {
-             "key_name": "l_glosow",
-             "key_type": "int",
-             "key_aggr": True,
-             "key_label": "Liczba głosów"
-
-       },
-
-       "u": {
-             "key_name": "proc_glosow",
-             "key_type": "float",
-             "key_aggr": True,
-             "key_label": "% głosów"
-
-       }
-    },
-
-    {
-    ... 
-    },
-]
+NOTES:
+1. use single quotes for query
+2. remember about the types: "dataset:<int>,"idef":<int>,"issue":<str>
+3. if option -c is used (delete existing before insert), then the
+query specifies the record which should be deleted. Written wrong, but
+syntactically correct (in terms of  mongodb) will result in
+duplicating the record - the old one will be left in the metadata
+collection, while the new one is inserted! In this case the former
+record will be used for extraction and describing the data.
+Following an example given above should always work clean!
 
