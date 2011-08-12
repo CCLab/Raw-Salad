@@ -439,7 +439,7 @@ var _store = (function () {
                 var rows = sheet['rows'];
                 rows = add_state( rows );
                 if( rows[ rows.length - 1 ]['data']['idef'].indexOf( '9999' ) !== -1 ) {
-                    rows['total'] = rows.pop();
+                    sheet['rows']['total'] = rows.pop();
                 }
             });
             group['name'] = group['sheets'][0]['name'];
