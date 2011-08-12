@@ -243,7 +243,7 @@ var _table = (function () {
                         event.stopPropagation();                        
                     });                
                 $('#app-tb-in-con-button-x').click( function() {
-                    $('#app-tb-info').slideUp( 800, function () {
+                    $('#app-tb-in-content').slideUp( 200, function () {
                     	$('#app-tb-info').remove();
                     	$('html').unbind( 'click' ); 
             	    });
@@ -345,7 +345,6 @@ var _table = (function () {
         var parent_id = info['0']['parent'];
         var info_button = $( '#' + parent_id ).find( '.app-tb-info-button' );
 
-//        html.push( '<div id="app-tb-in-table">' );
         html.push( '<div id="app-tb-in-content">' );
         html.push( '<div id="app-tb-in-con-button-x" > x </div> ' );
         html.push( '<div id="app-tb-in-header">' );
@@ -357,9 +356,10 @@ var _table = (function () {
         html.push( generate_info_panel_text( info ) );
         html.push( '</div>' );
         html.push( '</div>' );
-//        html.push( '</div>' );
 
         info_button.parent().append( html.join('') );
+        $('#app-tb-in-content').slideDown( 200 ); 
+
     }
 
     function generate_info_panel_text( info ) {
