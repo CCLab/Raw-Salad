@@ -54,6 +54,39 @@ def fill_rbt(budg_data):
         if row_doc['idef'] == '999999':
             row_doc['type']= 'Total' # specific type
 
+    # fill 'info' key
+    print "...trying to move defined elements to the info key of their parents: %s" % info_idefs
+    if len(info_idefs) == 0:
+        print "...no elements for info key"
+    else:
+        for info_idef in info_idefs:
+            parent_idef= info_idef.rsplit("-",1)[0]
+            index_parent, index_info= -1, -1
+            i= 0
+            print "...looking for idefs: info %s; parent %s" % (info_idef, parent_idef)
+            for curr_doc in out:
+                curr_idef= curr_doc["idef"]
+
+                if curr_idef == parent_idef:
+                    index_parent= i
+                    parent_dict= curr_doc
+                if curr_idef == info_idef:
+                    index_info= i
+                    info_dict= curr_doc
+                if index_parent > 0 and index_info > 0: # ok, we've got them both
+                    break
+                i += 1
+
+            if index_parent < 0 and index_info < 0:
+                print "ERROR: can't move elements to the info key - impossible to find them and/or their parents!"
+            else:
+                if parent_dict["info"] is None:
+                    parent_dict["info"]= []
+                print "...setting up info key for element %s" % parent_dict["idef"]
+                del info_dict["info"]
+                parent_dict["info"].append(info_dict)
+                del out[index_info]
+
     # filling out 'leaf'
     budg_list= out[:]
     for bd in out:
@@ -108,6 +141,7 @@ def csv_parse(csv_read, schema):
                         dict_row[new_key] = field # no, it is a string
                 #additional fields
                 dict_row['leaf']= True
+                dict_row['info']= None
 
                 i += 1
 
@@ -207,10 +241,12 @@ if __name__ == "__main__":
         except Exception as e:
             print 'Unable to authenticate to the database:\n %s\n' % e
             exit()
+        
+        info_idefs= ["15-753", "15-755", "15-801", "15-753-12", "15-755-02", "15-755-95", "15-801-44"]
+        obj_rep= fill_rbt(obj_parsed) # processing and inserting the data
 
         print '-- inserting data into '+ dbname +'.'+ dbname
         mongo_connect.start_request()
-        obj_rep= fill_rbt(obj_parsed) # processing and inserting the data
         print "-- %d records inserted" % db_insert(obj_rep, work_db, collectname, clean_db)
 
         mongo_connect.end_request()
