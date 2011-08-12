@@ -122,7 +122,8 @@
     }
   ],
   "aux": {
-      "leaf": 1
+      "leaf": 1,
+      "info": 1
   },
   "query": {},
   "sort": {
