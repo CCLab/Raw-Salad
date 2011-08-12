@@ -245,7 +245,7 @@ var _table = (function () {
                 $('#app-tb-in-con-button-x').click( function() {
                     $('#app-tb-info').slideUp( 800, function () {
                     	$('#app-tb-info').remove();
-                    	$('html').unbind( 'click' );
+                    	$('html').unbind( 'click' ); 
             	    });
                 });
                 $('html')
