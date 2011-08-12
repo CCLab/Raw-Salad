@@ -452,6 +452,10 @@ var _store = (function () {
             }
         });
         
+        if( rows[ rows.length - 1 ]['data']['idef'].indexOf( '9999' ) !== -1 ) {
+            rows['total'] = rows.pop();
+        }
+        
         return rows.map( function ( e ) {            
             return {
                 'data': e,
