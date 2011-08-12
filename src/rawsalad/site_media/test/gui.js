@@ -451,11 +451,18 @@ var _gui = (function () {
             data: { idef: idef },
             dataType: 'json',
             success: function ( received_data ) {
+                var active_group;
+                var active_sheet;
+                var active_name;
+                
                 _store.restore_state( received_data );
+                active_group = _store.active_group_index();
+                active_sheet = _store.active_sheet_index();
+                active_sheet_name = received_data[active_group]['sheets'][active_sheet]['name'];
 
                 // show the application
                 $('#pl-cover').remove();
-                that.init_app();
+                that.init_app( active_sheet_name );
                 _utils.clear_preloader();
             }
         });
