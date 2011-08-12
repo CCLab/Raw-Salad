@@ -434,9 +434,15 @@ var _store = (function () {
     that.restore_state = function ( state ) {
         groups = state;
         groups.forEach( function( group ) {
+            var group_name;
+            
             group['sheets'].forEach( function ( sheet ) {
                 sheet['rows'] = add_state( sheet['rows'] );
+                if( sheet['rows'][ sheet['rows'].length - 1 ]['idef'].indexOf( '9999' ) !== -1 ) {
+                    sheet['rows']['total'] = sheet['rows'].pop();
+                }
             });
+            group['name'] = group['sheets'][0]['name'];
         });
         active_group_number = 0;
         that.active_sheet_index( 0 );
@@ -451,10 +457,6 @@ var _store = (function () {
                 open_nodes[ e['parent'] ] = true;
             }
         });
-        
-        if( rows[ rows.length - 1 ]['idef'].indexOf( '9999' ) !== -1 ) {
-            rows['total'] = rows.pop();
-        }
         
         return rows.map( function ( e ) {            
             return {
