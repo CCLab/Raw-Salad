@@ -434,12 +434,10 @@ var _store = (function () {
     that.restore_state = function ( state ) {
         groups = state;
         groups.forEach( function( group ) {
-            var group_name;
             group['sheets'].forEach( function ( sheet ) {
-                var rows = sheet['rows'];
-                rows = add_state( rows );
-                if( rows[ rows.length - 1 ]['data']['idef'].indexOf( '9999' ) !== -1 ) {
-                    sheet['rows']['total'] = rows.pop();
+                sheet['rows'] = add_state( sheet['rows'] );
+                if( sheet['rows'][ sheet['rows'].length - 1 ]['data']['idef'].indexOf( '9999' ) !== -1 ) {
+                    sheet['rows']['total'] = sheet['rows'].pop();
                 }
             });
             group['name'] = group['sheets'][0]['name'];
