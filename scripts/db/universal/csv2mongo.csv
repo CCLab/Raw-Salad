@@ -1,0 +1,156 @@
+"type";"numer";"parent";"idef";"czesc";"level";"tresc";"pozycja";"total"
+"Część 1";1;;"01";"1";"a";"KANCELARIA PREZYDENTA RP";1;171524
+"Dział 751";751;"01";"01-751";"1";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;129524
+"Rozdział 75101";75101;"01-751";"01-751-01";"1";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;102181
+"Rozdział 75103";75103;"01-751";"01-751-03";"1";"c";"Biuro Bezpieczeństwa  Narodowego";4;14800
+"Rozdział 75106";75106;"01-751";"01-751-06";"1";"c";"Odznaczenia państwowe";5;10153
+"Rozdział 75195";75195;"01-751";"01-751-95";"1";"c";"Pozostała działalność";6;2390
+"Dział 921";921;"01";"01-921";"1";"b";"Kultura i ochrona dziedzictwa narodowego";7;42000
+"Rozdział 92123";92123;"01-921";"01-921-23";"1";"c";"Narodowy Fundusz Rewaloryzacji Zabytków Krakowa";8;42000
+"Część 2";2;;"02";"2";"a";"KANCELARIA SEJMU";1;430780
+"Dział 751";751;"02";"02-751";"2";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;430780
+"Rozdział 75101";75101;"02-751";"02-751-01";"2";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;430780
+"Część 3";3;;"03";"3";"a";"KANCELARIA SENATU";1;176212
+"Dział 751";751;"03";"03-751";"3";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;176212
+"Rozdział 75101";75101;"03-751";"03-751-01";"3";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;101212
+"Rozdział 75195";75195;"03-751";"03-751-95";"3";"c";"Pozostała działalność (Opieka nad Polonią i Polakami za granicą)";4;75000
+"Część 4";4;;"04";"4";"a";"SĄD NAJWYŻSZY";1;88161
+"Dział 751";751;"04";"04-751";"4";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;68885
+"Rozdział 75102";75102;"04-751";"04-751-02";"4";"c";"Naczelne organy sądownictwa";3;68885
+"Dział 753";753;"04";"04-753";"4";"b";"Obowiązkowe ubezpieczenia społeczne";4;19276
+"Rozdział 75312";75312;"04-753";"04-753-12";"4";"c";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";5;19276
+"Część 5";5;;"05";"5";"a";"NACZELNY SĄD ADMINISTRACYJNY";1;373452
+"Dział 751";751;"05";"05-751";"5";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;352769
+"Rozdział 75102";75102;"05-751";"05-751-02";"5";"c";"Naczelne organy sądownictwa";3;352769
+"Dział 753";753;"05";"05-753";"5";"b";"Obowiązkowe ubezpieczenia społeczne";4;20683
+"Rozdział 75312";75312;"05-753";"05-753-12";"5";"c";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";5;20683
+"Część 6";6;;"06";"6";"a";"TRYBUNAŁ KONSTYTUCYJNY";1;26840
+"Dział 751";751;"06";"06-751";"6";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;22138
+"Rozdział 75102";75102;"06-751";"06-751-02";"6";"c";"Naczelne organy sądownictwa";3;22138
+"Dział 753";753;"06";"06-753";"6";"b";"Obowiązkowe ubezpieczenia społeczne";4;4702
+"Rozdział 75312";75312;"06-753";"06-753-12";"6";"c";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";5;4702
+"Część 7";7;;"07";"7";"a";"NAJWYŻSZA IZBA KONTROLI";1;257802
+"Dział 751";751;"07";"07-751";"7";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;257802
+"Rozdział 75101";75101;"07-751";"07-751-01";"7";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;257802
+"Część 8";8;;"08";"8";"a";"RZECZNIK PRAW OBYWATELSKICH";1;35424
+"Dział 751";751;"08";"08-751";"8";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;35424
+"Rozdział 75101";75101;"08-751";"08-751-01";"8";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;35424
+"Część 9";9;;"09";"9";"a";"KRAJOWA RADA RADIOFONII I TELEWIZJI";1;17890
+"Dział 751";751;"09";"09-751";"9";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;17890
+"Rozdział 75101";75101;"09-751";"09-751-01";"9";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;17890
+"Część 10";10;;"10";"10";"a";"GENERALNY INSPEKTOR OCHRONY DANYCH OSOBOWYCH";1;14700
+"Dział 751";751;"10";"10-751";"10";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;14700
+"Rozdział 75101";75101;"10-751";"10-751-01";"10";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;14700
+"Część 11";11;;"11";"11";"a";"KRAJOWE BIURO WYBORCZE";1;45832
+"Dział 751";751;"11";"11-751";"11";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;45832
+"Rozdział 75101";75101;"11-751";"11-751-01";"11";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;45832
+"Część 12";12;;"12";"12";"a";"PAŃSTWOWA INSPEKCJA PRACY";1;274479
+"Dział 751";751;"12";"12-751";"12";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;274479
+"Rozdział 75101";75101;"12-751";"12-751-01";"12";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;270939
+"Rozdział 75195";75195;"12-751";"12-751-95";"12";"c";"Pozostała działalność";4;3540
+"Część 13";13;;"13";"13";"a";"INSTYTUT PAMIĘCI NARODOWEJ – KOMISJA ŚCIGANIA ZBRODNI PRZECIWKO NARODOWI POLSKIEMU";1;223263
+"Dział 751";751;"13";"13-751";"13";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;221168
+"Rozdział 75101";75101;"13-751";"13-751-01";"13";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;98983
+"Rozdział 75112";75112;"13-751";"13-751-12";"13";"c";"Jednostki podległe Instytutowi Pamięci Narodowej – Komisji Ścigania Zbrodni przeciwko Narodowi Polskiemu";4;122185
+"Dział 753";753;"13";"13-753";"13";"b";"Obowiązkowe ubezpieczenia społeczne";5;2095
+"Rozdział 75302";75302;"13-753";"13-753-02";"13";"c";"Uposażenia prokuratorów w stanie spoczynku oraz uposażenia rodzinne";6;2095
+"Część 14";14;;"14";"14";"a";"RZECZNIK PRAW DZIECKA";1;8540
+"Dział 751";751;"14";"14-751";"14";"b";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa oraz sądownictwa";2;8540
+"Rozdział 75101";75101;"14-751";"14-751-01";"14";"c";"Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa";3;8540
+"Część 15";15;;"15";"15";"a";"SĄDY POWSZECHNE";1;5929826
+"Dział 753";753;"15";"15-753";"15";"b";"Obowiązkowe ubezpieczenia społeczne";2;189977
+"Część 15/01";"15/01";"15";"15-01";"15/01";"b";"Ministerstwo Sprawiedliwości";1;193116
+"Dział 753";753;"15-01";"15-01-753";"15/01";"c";"Obowiązkowe ubezpieczenia społeczne";2;6922
+"Rozdział 75312";75312;"15-01-753";"15-01-753-12";"15/01";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;6922
+"Dział 755";755;"15-01";"15-01-755";"15/01";"c";"Wymiar sprawiedliwości";4;183796
+"Rozdział 75502";75502;"15-01-755";"15-01-755-02";"15/01";"d";"Jednostki sądownictwa powszechnego";5;183796
+"Dział 801";801;"15-01";"15-01-801";"15/01";"c";"Oświata i wychowanie";6;2398
+"Rozdział 80144";80144;"15-01-801";"15-01-801-44";"15/01";"d";"Inne formy kształcenia osobno niewymienione";7;2398
+"Część 15/02";"15/02";"15";"15-02";"15/02";"b";"Sąd Apelacyjny w Warszawie";1;627874
+"Dział 753";753;"15-02";"15-02-753";"15/02";"c";"Obowiązkowe ubezpieczenia społeczne";2;20691
+"Rozdział 75312";75312;"15-02-753";"15-02-753-12";"15/02";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;20691
+"Dział 755";755;"15-02";"15-02-755";"15/02";"c";"Wymiar sprawiedliwości";4;604412
+"Rozdział 75502";75502;"15-02-755";"15-02-755-02";"15/02";"d";"Jednostki sądownictwa powszechnego";5;596271
+"Rozdział 75595";75595;"15-02-755";"15-02-755-95";"15/02";"d";"Pozostała działalność";6;8141
+"Dział 801";801;"15-02";"15-02-801";"15/02";"c";"Oświata i wychowanie";7;2771
+"Rozdział 80144";80144;"15-02-801";"15-02-801-44";"15/02";"d";"Inne formy kształcenia osobno niewymienione";8;2771
+"Część 15/03";"15/03";"15";"15-03";"15/03";"b";"Sąd Apelacyjny w Katowicach";1;683152
+"Dział 753";753;"15-03";"15-03-753";"15/03";"c";"Obowiązkowe ubezpieczenia społeczne";2;19655
+"Rozdział 75312";75312;"15-03-753";"15-03-753-12";"15/03";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;19655
+"Dział 755";755;"15-03";"15-03-755";"15/03";"c";"Wymiar sprawiedliwości";4;658370
+"Rozdział 75502";75502;"15-03-755";"15-03-755-02";"15/03";"d";"Jednostki sądownictwa powszechnego";5;652063
+"Rozdział 75595";75595;"15-03-755";"15-03-755-95";"15/03";"d";"Pozostała działalność";6;6307
+"Dział 801";801;"15-03";"15-03-801";"15/03";"c";"Oświata i wychowanie";7;5127
+"Rozdział 80144";80144;"15-03-801";"15-03-801-44";"15/03";"d";"Inne formy kształcenia osobno niewymienione";8;5127
+"Część 15/04";"15/04";"15";"15-04";"15/04";"b";"Sąd Apelacyjny w Gdańsku";1;708561
+"Dział 753";753;"15-04";"15-04-753";"15/04";"c";"Obowiązkowe ubezpieczenia społeczne";2;22743
+"Rozdział 75312";75312;"15-04-753";"15-04-753-12";"15/04";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;22743
+"Dział 755";755;"15-04";"15-04-755";"15/04";"c";"Wymiar sprawiedliwości";4;680386
+"Rozdział 75502";75502;"15-04-755";"15-04-755-02";"15/04";"d";"Jednostki sądownictwa powszechnego";5;668840
+"Rozdział 75595";75595;"15-04-755";"15-04-755-95";"15/04";"d";"Pozostała działalność";6;11546
+"Dział 801";801;"15-04";"15-04-801";"15/04";"c";"Oświata i wychowanie";7;5432
+"Rozdział 80144";80144;"15-04-801";"15-04-801-44";"15/04";"d";"Inne formy kształcenia osobno niewymienione";8;5432
+"Część 15/05";"15/05";"15";"15-05";"15/05";"b";"Sąd Apelacyjny w Poznaniu";1;508592
+"Dział 753";753;"15-05";"15-05-753";"15/05";"c";"Obowiązkowe ubezpieczenia społeczne";2;16742
+"Rozdział 75312";75312;"15-05-753";"15-05-753-12";"15/05";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;16742
+"Dział 755";755;"15-05";"15-05-755";"15/05";"c";"Wymiar sprawiedliwości";4;487465
+"Rozdział 75502";75502;"15-05-755";"15-05-755-02";"15/05";"d";"Jednostki sądownictwa powszechnego";5;479537
+"Rozdział 75595";75595;"15-05-755";"15-05-755-95";"15/05";"d";"Pozostała działalność";6;7928
+"Dział 801";801;"15-05";"15-05-801";"15/05";"c";"Oświata i wychowanie";7;4385
+"Rozdział 80144";80144;"15-05-801";"15-05-801-44";"15/05";"d";"Inne formy kształcenia osobno niewymienione";8;4385
+"Część 15/06";"15/06";"15";"15-06";"15/06";"b";"Sąd Apelacyjny w Krakowie";1;610610
+"Dział 753";753;"15-06";"15-06-753";"15/06";"c";"Obowiązkowe ubezpieczenia społeczne";2;18776
+"Rozdział 75312";75312;"15-06-753";"15-06-753-12";"15/06";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;18776
+"Dział 755";755;"15-06";"15-06-755";"15/06";"c";"Wymiar sprawiedliwości";4;587946
+"Rozdział 75502";75502;"15-06-755";"15-06-755-02";"15/06";"d";"Jednostki sądownictwa powszechnego";5;582479
+"Rozdział 75595";75595;"15-06-755";"15-06-755-95";"15/06";"d";"Pozostała działalność";6;5467
+"Dział 801";801;"15-06";"15-06-801";"15/06";"c";"Oświata i wychowanie";7;3888
+"Rozdział 80144";80144;"15-06-801";"15-06-801-44";"15/06";"d";"Inne formy kształcenia osobno niewymienione";8;3888
+"Część 15/07";"15/07";"15";"15-07";"15/07";"b";"Sąd Apelacyjny we Wrocławiu";1;612966
+"Dział 753";753;"15-07";"15-07-753";"15/07";"c";"Obowiązkowe ubezpieczenia społeczne";2;21115
+"Rozdział 75312";75312;"15-07-753";"15-07-753-12";"15/07";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;21115
+"Dział 755";755;"15-07";"15-07-755";"15/07";"c";"Wymiar sprawiedliwości";4;586887
+"Rozdział 75502";75502;"15-07-755";"15-07-755-02";"15/07";"d";"Jednostki sądownictwa powszechnego";5;579287
+"Rozdział 75595";75595;"15-07-755";"15-07-755-95";"15/07";"d";"Pozostała działalność";6;7600
+"Dział 801";801;"15-07";"15-07-801";"15/07";"c";"Oświata i wychowanie";7;4964
+"Rozdział 80144";80144;"15-07-801";"15-07-801-44";"15/07";"d";"Inne formy kształcenia osobno niewymienione";8;4964
+"Część 15/08";"15/08";"15";"15-08";"15/08";"b";"Sąd Apelacyjny w Łodzi";1;541916
+"Dział 753";753;"15-08";"15-08-753";"15/08";"c";"Obowiązkowe ubezpieczenia społeczne";2;17859
+"Rozdział 75312";75312;"15-08-753";"15-08-753-12";"15/08";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;17859
+"Dział 755";755;"15-08";"15-08-755";"15/08";"c";"Wymiar sprawiedliwości";4;519347
+"Rozdział 75502";75502;"15-08-755";"15-08-755-02";"15/08";"d";"Jednostki sądownictwa powszechnego";5;513750
+"Rozdział 75595";75595;"15-08-755";"15-08-755-95";"15/08";"d";"Pozostała działalność";6;5597
+"Dział 801";801;"15-08";"15-08-801";"15/08";"c";"Oświata i wychowanie";7;4710
+"Rozdział 80144";80144;"15-08-801";"15-08-801-44";"15/08";"d";"Inne formy kształcenia osobno niewymienione";8;4710
+"Część 15/09";"15/09";"15";"15-09";"15/09";"b";"Sąd Apelacyjny w Rzeszowie";1;255064
+"Dział 753";753;"15-09";"15-09-753";"15/09";"c";"Obowiązkowe ubezpieczenia społeczne";2;8209
+"Rozdział 75312";75312;"15-09-753";"15-09-753-12";"15/09";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;8209
+"Dział 755";755;"15-09";"15-09-755";"15/09";"c";"Wymiar sprawiedliwości";4;244723
+"Rozdział 75502";75502;"15-09-755";"15-09-755-02";"15/09";"d";"Jednostki sądownictwa powszechnego";5;242929
+"Rozdział 75595";75595;"15-09-755";"15-09-755-95";"15/09";"d";"Pozostała działalność";6;1794
+"Dział 801";801;"15-09";"15-09-801";"15/09";"c";"Oświata i wychowanie";7;2132
+"Rozdział 80144";80144;"15-09-801";"15-09-801-44";"15/09";"d";"Inne formy kształcenia osobno niewymienione";8;2132
+"Część 15/10";"15/10";"15";"15-10";"15/10";"b";"Sąd Apelacyjny w Białymstoku";1;360533
+"Dział 753";753;"15-10";"15-10-753";"15/10";"c";"Obowiązkowe ubezpieczenia społeczne";2;10884
+"Rozdział 75312";75312;"15-10-753";"15-10-753-12";"15/10";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;10884
+"Dział 755";755;"15-10";"15-10-755";"15/10";"c";"Wymiar sprawiedliwości";4;346322
+"Rozdział 75502";75502;"15-10-755";"15-10-755-02";"15/10";"d";"Jednostki sądownictwa powszechnego";5;342156
+"Rozdział 75595";75595;"15-10-755";"15-10-755-95";"15/10";"d";"Pozostała działalność";6;4166
+"Dział 801";801;"15-10";"15-10-801";"15/10";"c";"Oświata i wychowanie";7;3327
+"Rozdział 80144";80144;"15-10-801";"15-10-801-44";"15/10";"d";"Inne formy kształcenia osobno niewymienione";8;3327
+"Część 15/11";"15/11";"15";"15-11";"15/11";"b";"Sąd Apelacyjny w Lublinie";1;478018
+"Dział 753";753;"15-11";"15-11-753";"15/11";"c";"Obowiązkowe ubezpieczenia społeczne";2;14337
+"Rozdział 75312";75312;"15-11-753";"15-11-753-12";"15/11";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;14337
+"Dział 755";755;"15-11";"15-11-755";"15/11";"c";"Wymiar sprawiedliwości";4;460056
+"Rozdział 75502";75502;"15-11-755";"15-11-755-02";"15/11";"d";"Jednostki sądownictwa powszechnego";5;456582
+"Rozdział 75595";75595;"15-11-755";"15-11-755-95";"15/11";"d";"Pozostała działalność";6;3474
+"Dział 801";801;"15-11";"15-11-801";"15/11";"c";"Oświata i wychowanie";7;3625
+"Rozdział 80144";80144;"15-11-801";"15-11-801-44";"15/11";"d";"Inne formy kształcenia osobno niewymienione";8;3625
+"Część 15/12";"15/12";"15";"15-12";"15/12";"b";"Sąd Apelacyjny w Szczecinie";1;349424
+"Dział 753";753;"15-12";"15-12-753";"15/12";"c";"Obowiązkowe ubezpieczenia społeczne";2;12044
+"Rozdział 75312";75312;"15-12-753";"15-12-753-12";"15/12";"d";"Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne";3;12044
+"Dział 755";755;"15-12";"15-12-755";"15/12";"c";"Wymiar sprawiedliwości";4;334996
+"Rozdział 75502";75502;"15-12-755";"15-12-755-02";"15/12";"d";"Jednostki sądownictwa powszechnego";5;330748
+"Rozdział 75595";75595;"15-12-755";"15-12-755-95";"15/12";"d";"Pozostała działalność";6;4248
+"Dział 801";801;"15-12";"15-12-801";"15/12";"c";"Oświata i wychowanie";7;2384
+"Rozdział 80144";80144;"15-12-801";"15-12-801-44";"15/12";"d";"Inne formy kształcenia osobno niewymienione";8;2384
