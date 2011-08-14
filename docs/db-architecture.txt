@@ -521,4 +521,19 @@ WARNING! Some documents are being moved by the script to 'info' key
 of their parents, their idefs are specified explicitly in the script
 as a list info_idef_list
 
+MONGODB - DATA - INDEXES
+All the data collections in MongoDB have indexes built on their
+crucial fields for accelerating data extraction, searching and
+sorting. Every collection's indexes are built based on its metadata,
+where it is enough information of how data can be extracted.
 
+To ensure that all the collections have proper indexes there's a
+script /scripts/db/universal/collindex.py
+The scrips ENSURES if there are indexes, not CREATES them, so, it is
+safe to launch it any time. It works for all collections that are
+listed in the metadata collection in the db, so, it is highly
+recommended to launch it every time a new data collection appears in
+the db.
+
+Launch the script:
+$ python collindex.py -f path/to/conf/rawsdata.conf -l md_budg_scheme
