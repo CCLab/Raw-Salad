@@ -452,7 +452,7 @@ var _table = (function () {
         
         html.push( '<table id="app-tb-in-con-table1" >' );
         html.push( '<tbody>' );
-        html.push( '<tr><td class="app-tb-in-con-type" >', 'Cel: ');
+        html.push( '<tr><td class="app-tb-in-con-type" >');
         html.push('</td> <td class="app-tb-in-con-name" >', info[0]['name'], '</td>' );
         html.push( '</tr>' );
         
