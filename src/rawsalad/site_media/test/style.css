@@ -622,9 +622,9 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     display: none;
-    -moz-box-shadow: 10px 10px 5px #888;
-    -webkit-box-shadow: 10px 10px 5px #888;
-    box-shadow: 10px 10px 5px #888;
+    -moz-box-shadow: 0px 0px 100px #5B5B5B;
+    -webkit-box-shadow: 0px 0px 100px #5B5B5B;
+    box-shadow: 0px 0px 100px #5B5B5B;
   }
 
   .app-tb-info-button {
