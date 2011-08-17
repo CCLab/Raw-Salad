@@ -248,6 +248,7 @@ var _db = (function () {
         };
 
         $.ajax({
+            url: '/',
             data: download_data,
             dataType: 'json',
             success: function( received_data ) {
