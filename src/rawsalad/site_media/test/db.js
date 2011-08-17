@@ -248,7 +248,7 @@ var _db = (function () {
         };
 
         $.ajax({
-            url: '/',
+            url: '/app/',
             data: download_data,
             dataType: 'json',
             success: function( received_data ) {
