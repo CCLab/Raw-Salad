@@ -193,14 +193,14 @@ def get_issues_meta(request, serializer, dataset_idef, view_idef, db=None):
     out, mime_tp, http_response = format_result(result, serializer, nav.response['httpresp'])
     return HttpResponse( out, mimetype=mime_tp, status=http_response )
 
-def get_userdef_fields(rq):
+def get_userdef_fields(rq, parm):
     """
     user defined list of fields
     format can be (with or without space):
       ?fields=[fieldX, fieldY]
       ?fields=fieldX, fieldY
     """
-    clm_str= rq.GET.get('fields', '[]')
+    clm_str= rq.GET.get(parm, '[]')
     out_tmp, out_list= [], []
     if clm_str != '[]':
         clm_str= clm_str.replace(' ', '')
@@ -344,7 +344,7 @@ def get_data(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         httpresp_dict= rsdb.Response().get_response(userdef_query['error'])
         result['response']= httpresp_dict['descr']
     else:
-        userdef_fields= get_userdef_fields(request)
+        userdef_fields= get_userdef_fields(request, 'fields')
 
         coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
         data= coll.get_data(db, dataset_idef, view_idef, issue)
@@ -377,7 +377,7 @@ def get_metadata(request, serializer, dataset_idef, view_idef, issue, path='', d
         'issue': issue,
         }
 
-    userdef_fields= get_userdef_fields(request)
+    userdef_fields= get_userdef_fields(request, 'fields')
     userdef_query= {}
     if len(path) != 0:
         userdef_query.update(path2query(path))
@@ -414,7 +414,7 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         httpresp_dict= rsdb.Response().get_response(userdef_query['error'])
         result['response']= httpresp_dict['descr']
     else:
-        userdef_fields= get_userdef_fields(request)
+        userdef_fields= get_userdef_fields(request, 'fields')
 
         coll= rsdb.Collection(fields= userdef_fields, query= userdef_query)
         tree= coll.get_tree(db, dataset_idef, view_idef, issue)
@@ -430,4 +430,73 @@ def get_tree(request, serializer, dataset_idef, view_idef, issue, path='', db=No
         result['request']= coll.request
 
     out, mime_tp, http_response = format_result(result, serializer, httpresp_dict['httpresp'])
+    return HttpResponse( out, mimetype=mime_tp, status=http_response )
+
+def build_scope(dbase, dataset, view, issue):
+    out, lst= [], []
+    fieldict= { '_id':0, 'dataset': 1, 'idef': 1, 'issue': 1 }
+    sortlist= [ ('dataset', 1), ('idef', 1), ('issue', 1) ]
+    if dataset:
+        if view:
+            if issue: # dataset-view-issue
+                specdict= { 'dataset': int(dataset), 'idef': int(view), 'issue': issue }
+            else: # dataset-view-  all issues
+                specdict= { 'dataset': int(dataset), 'idef': int(view) }
+        else: # dataset-  all views and issues
+            specdict ={ 'dataset': int(dataset) }
+    else: # all datasets, views and issues
+        specdict= None
+
+    lst= dbase[rsdb.meta_src].find( spec= specdict, fields= fieldict, sort= sortlist )
+
+    if lst.count() > 0: # gather elements into the list
+        for elt in lst:
+            out.append( '-'.join([ str(elt['dataset']), str(elt['idef']), elt['issue'] ]) )
+
+    return out
+
+def search_data(request, serializer, path='', db=None, **kwargs):
+    result= { 'request': 'search for data' }
+
+    query_str= request.GET.get('query', None) # THE search string
+    lookup_fields= get_userdef_fields(request, 'lookup') # what fields to include to search
+
+    strict= request.GET.get('strict', False) # strict?
+    if str(strict).upper() in ['TRUE', 'T', 'YES', 'Y', 'TAK', '1']:
+        strict= True
+    else:
+        strict= False
+
+    if query_str is None:
+        result['response']= rsdb.Response().get_response(36)["descr"]
+    else:
+        if db is None:
+            db= rsdb.DBconnect("mongodb").dbconnect
+
+        # cleaning user query
+        query_str= query_str.strip()
+        query_str= re.sub('\s+', ' ', query_str) # cleaning multiple spaces
+
+        # optional args specifying what collections to search in
+        dataset= kwargs.get('dataset_idef', None)
+        view= kwargs.get('view_idef', None)
+        issue= kwargs.get('issue', None)        
+        scope_list= build_scope(db, dataset, view, issue)
+        if len(scope_list) == 0: # ERROR! wrong conditions for search
+            result['response']= rsdb.Response().get_response(37)["descr"]
+        else:
+            result.update( {
+                'query': query_str,
+                'scope': scope_list,
+                'uri': request.build_absolute_uri()
+                } )
+
+            if query_str is None:
+                result['response']= rsdb.Response().get_response(36)["descr"]
+            else:
+                res= rsdb.Search()
+                result.update( res.search_data(db, qrystr= query_str, scope= scope_list, strict= strict, lookup= lookup_fields) )
+                result['response']= rsdb.Response().get_response(0)["descr"]
+
+    out, mime_tp, http_response = format_result(result, serializer, 200)
     return HttpResponse( out, mimetype=mime_tp, status=http_response )
