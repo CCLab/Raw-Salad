@@ -5,8 +5,10 @@ function: classes representing the API to data and meta-data
 requirements: mongod, conf file (see conf_filename)
 """
 
+from time import time
 from ConfigParser import ConfigParser
 import pymongo
+import re
 
 meta_src= "md_budg_scheme"
 state_counter= "md_sta_cnt"
@@ -56,6 +58,14 @@ class Response:
             '35': {
                 'httpresp': 400,
                 'descr': 'ERROR: Format not specified!'
+                },
+            '36': {
+                'httpresp': 400,
+                'descr': 'ERROR: Search string not specified!'
+                },
+            '37': {
+                'httpresp': 404,
+                'descr': 'ERROR: No such collection(s)!'
                 },
             '40': {
                 'httpresp': 404,
@@ -448,13 +458,15 @@ class Collection:
             field_names_complete= [] # reverse check
             for fl in meta_data['columns']:
                 field_names_complete.append(fl['key'])
-            self.fill_warning(field_names_complete) # fill self.warning
+
+            aux_fields= [k for k,v in meta_data['aux'].iteritems()]
+            self.fill_warning( field_names_complete + aux_fields ) # fill self.warning
 
         else:
             md_fields= meta_data['columns'] # list of main columns to be returned
             for fld in md_fields:
                 fields_dict[fld['key']]= 1
-                
+
         return fields_dict
 
     def get_sort_list(self, meta_data):
@@ -561,3 +573,149 @@ class State:
             self.response= Response().get_response(40) # bad request - data is empty
 
         return state_id
+
+
+class Search:
+    """
+    the class searches through data in mongo
+    """
+    def __init__(self):
+        self.set_query( None )
+        self.set_scope( None )
+        self.strict= False
+        self.response= Response().get_response(0) # Search class is optimistic
+
+    def __del__(self):
+        pass
+
+    def set_query(self, query):
+        self.qrystr= query
+
+    def set_scope(self, scope):
+        self.scope= scope
+
+    def set_lookup(self, lookup):
+        self.lookup= lookup
+
+    def switch_strict(self, strict):
+        if strict:
+            self.strict= True
+
+    def do_search(self, regx, dbconn, collect):
+        """
+        TO-DO:
+        - search with automatic substitution of specific polish letters
+          (lowercase & uppercase): user can enter 'lodz', but the search
+          should find 'Łódż' as well
+        - search with flexible processing of prefixes and suffixes
+          (see str.endswith and startswith)
+        - search in 'info' keys (???)
+        """
+        ns_list= [] # list of results
+        stat_dict= { "errors": [] }
+        found_num= 0 # number of records found
+        exclude_fields= ['idef', 'idef_sort', 'parent', 'parent_sort', 'level'] # not all fields are searchable!
+
+        for sc in self.scope: # fill the list of collections
+            sc_list= sc.split('-')
+            dataset, idef, issue= int(sc_list[0]), int(sc_list[1]), str(sc_list[2])
+            collect.set_fields( ["perspective", "ns", "columns"] )
+            metadata= collect.get_complete_metadata(dataset, idef, issue, dbconn)
+            if metadata is None:
+                stat_dict['errors'].append('collection not found %s' % sc)
+            else:
+                curr_coll_dict= {
+                    'perspective': metadata['perspective'],
+                    'dataset': dataset,
+                    'view': idef,
+                    'issue': issue,
+                    'data': []
+                    }
+
+                collect.set_fields(None) # for search we need all fields, except for exclude_fields
+                for fld in metadata['columns']:
+                    if 'processable' in fld:
+                        check_str= fld['type'] == 'string'
+                        if len(self.lookup) > 0:
+                            check_valid= fld['key'] in self.lookup
+                        else:
+                            check_valid= fld['key'] not in exclude_fields
+                        if fld['processable'] and check_str and check_valid:
+                            search_query= { fld['key']: regx }
+                            collect.set_query(search_query)
+                            found= collect.get_data(dbconn, dataset, idef, issue)
+                            if len(found) > 0:
+                                for found_elt in found:
+                                    curr_coll_dict['data'].append({
+                                        'key': fld['key'],
+                                        'text': found_elt[str(fld['key'])],
+                                        'idef': found_elt['idef'],
+                                        'parent': found_elt['parent']
+                                        })
+                                    found_num += 1
+                if len(curr_coll_dict['data']) > 0:
+                    ns_list.append(curr_coll_dict)
+
+        stat_dict.update( { 'records_found': found_num } )
+
+        return { 'stat': stat_dict, 'result': ns_list }
+
+    def build_regexp(self, searchline, strict):
+        """ construct regexp for search """
+        if strict:
+            searchline= "^%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s$" % { "lookupstr": searchline }
+        return searchline
+
+    def search_data(self, datasrc, qrystr, scope, strict, lookup= None):
+        self.set_query(qrystr)
+        self.set_scope(scope)
+        self.switch_strict(strict)
+        self.set_lookup(lookup)
+        
+        regxsearch= self.build_regexp( self.qrystr, self.strict )
+        regx= re.compile(regxsearch, re.IGNORECASE)
+
+        out= { }
+        total_rec= 0
+
+        coll= Collection(fields= lookup)
+
+        # 1st PASS
+        tl1= time() # starting to search
+        result_1= self.do_search(regx, datasrc, coll)
+        total_rec += result_1['stat']['records_found']
+        tlap1= time()-tl1 # 1st pass finished
+        result_1['stat'].update( { "search_time": "%0.6f" % tlap1 } )
+        out['strict']= result_1
+
+        # 2nd PASS
+        second_pass_list= []
+        if not self.strict: # second pass makes sense
+            second_pass_list= self.qrystr.split(' ')
+
+            result_2= { 'stat': { 'records_found': 0 }, 'result': [] } # blank dict for 2nd pass
+            if len(second_pass_list) > 0:
+                tl2= time() # starting to search
+
+                for wrd in second_pass_list:
+                    lookup= self.build_regexp(wrd, True) # we look for separate words using strict
+                    regx= re.compile(lookup, re.IGNORECASE)
+                    result_2_curr= self.do_search(regx, datasrc, coll)
+
+                    if result_2_curr['stat']['records_found'] > 0:
+                        result_2['result'].append( result_2_curr['result'] )
+                        result_2['stat']['records_found'] += result_2_curr['stat']['records_found']
+
+                    total_rec += result_2_curr['stat']['records_found']
+                    tlap2= time()-tl2 # 2nd pass finished
+                    result_2['stat'].update( { "search_time": "%0.6f" % tlap2 } )
+
+                out['loose']= result_2
+
+        tlap= time()-tl1
+        out.update( {
+            "search_time_total": "%0.6f" % tlap,
+            'records_found_total': total_rec
+            } )
+
+        return out
