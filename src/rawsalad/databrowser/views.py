@@ -132,55 +132,13 @@ def search_data( request ):
         strict= False
     else:
         strict= True
-    # cleaning user query
-    usrqry= usrqry.strip()
-    usrqry= re.sub('\s+', ' ', usrqry) # cleaning multiple spaces
-
-    lookup= build_regexp(usrqry, strict)
-    regx= re.compile(lookup, re.IGNORECASE)
-
-    result= { }
-    total_rec= 0
+    
+    usrqry= usrqry.strip() # cleaning user query
+    query_str= re.sub('\s+', ' ', usrqry) # cleaning multiple spaces
 
     db= rsdb.DBconnect('mongodb').dbconnect
-
-    # 1st PASS
-    tl1= time() # starting to search
-    result_1= do_search(scope_list, regx, db)
-    total_rec += result_1['stat']['records_found']
-    tlap1= time()-tl1 # 1st pass finished
-    result_1['stat'].update( { "search_time": "%0.6f" % tlap1 } )
-    result['strict']= result_1
-
-    # 2nd PASS
-    second_pass_list= []
-    if not strict: # second pass makes sense
-        second_pass_list= usrqry.split(' ')
-
-        result_2= { 'stat': { 'records_found': 0 }, 'result': [] } # blank dict for 2nd pass
-        if len(second_pass_list) > 0:
-            tl2= time() # starting to search
-
-            for wrd in second_pass_list:
-                lookup= build_regexp(wrd, True) # we look for separate words using strict
-                regx= re.compile(lookup, re.IGNORECASE)
-                result_2_curr= do_search(scope_list, regx, db)
-
-                if result_2_curr['stat']['records_found'] > 0:
-                    result_2['result'].append( result_2_curr['result'] )
-                    result_2['stat']['records_found'] += result_2_curr['stat']['records_found']
-
-                total_rec += result_2_curr['stat']['records_found']
-                tlap2= time()-tl2 # 2nd pass finished
-                result_2['stat'].update( { "search_time": "%0.6f" % tlap2 } )
-
-            result['loose']= result_2
-
-    tlap= time()-tl1
-    result.update( {
-        "search_time_total": "%0.6f" % tlap,
-        'records_found_total': total_rec
-        } )
+    res= rsdb.Search()
+    result= res.search_data( db, qrystr= query_str, scope= scope_list, strict= strict )
 
     return HttpResponse( json.dumps( result ))
 
