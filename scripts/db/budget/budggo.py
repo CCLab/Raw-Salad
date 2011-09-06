@@ -148,6 +148,9 @@ def build_obj(curr_year, nosql_db, nosql_coll, sql_conn, sql_table, translate, r
         for row_child in rows_children:
             for k in info_useless_keys: #first delete useless keys
                 if k in row_child: del row_child[k]
+            row_child['type']= row_child.pop('elem_type')
+            row_child['name']= row_child.pop('elem_name')
+            row_child['level']= row_child.pop('elem_level')
             curr_dict['info'].append(row_child) # and then append the result to 'info' key of Dysponent
 
         # filling 'czescz_name' key with data extracted from traditional budget
