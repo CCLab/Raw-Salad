@@ -61,7 +61,7 @@ class Response:
                 },
             '36': {
                 'httpresp': 400,
-                'descr': 'ERROR: Search string not specified!'
+                'descr': 'ERROR: Search string not given!'
                 },
             '37': {
                 'httpresp': 404,
@@ -583,10 +583,11 @@ class Search:
         self.set_query( None )
         self.set_scope( None )
         self.strict= False
+        self.found= {} # results in short form
         self.response= Response().get_response(0) # Search class is optimistic
 
     def __del__(self):
-        pass
+        self.found= None
 
     def set_query(self, query):
         self.qrystr= query
@@ -596,6 +597,8 @@ class Search:
 
     def set_lookup(self, lookup):
         self.lookup= lookup
+        if lookup is None:
+            self.lookup= []
 
     def switch_strict(self, strict):
         if strict:
@@ -611,8 +614,9 @@ class Search:
           (see str.endswith and startswith)
         - search in 'info' keys (???)
         """
+        
         ns_list= [] # list of results
-        stat_dict= { "errors": [] }
+        error_list= []
         found_num= 0 # number of records found
         exclude_fields= ['idef', 'idef_sort', 'parent', 'parent_sort', 'level'] # not all fields are searchable!
 
@@ -622,7 +626,7 @@ class Search:
             collect.set_fields( ["perspective", "ns", "columns"] )
             metadata= collect.get_complete_metadata(dataset, idef, issue, dbconn)
             if metadata is None:
-                stat_dict['errors'].append('collection not found %s' % sc)
+                error_list.append('collection not found %s' % sc)
             else:
                 curr_coll_dict= {
                     'perspective': metadata['perspective'],
@@ -632,20 +636,30 @@ class Search:
                     'data': []
                     }
 
-                collect.set_fields(None) # for search we need all fields, except for exclude_fields
+                collect.set_fields(None) # presumed to search through all fields
                 for fld in metadata['columns']:
                     if 'processable' in fld:
+
                         check_str= fld['type'] == 'string'
                         if len(self.lookup) > 0:
                             check_valid= fld['key'] in self.lookup
                         else:
                             check_valid= fld['key'] not in exclude_fields
+
                         if fld['processable'] and check_str and check_valid:
                             search_query= { fld['key']: regx }
                             collect.set_query(search_query)
+
+                            # actual query to the db
                             found= collect.get_data(dbconn, dataset, idef, issue)
-                            if len(found) > 0:
-                                for found_elt in found:
+
+                            for found_elt in found:
+                                # control of what is already found
+                                if sc not in self.found:
+                                    self.found[sc]= []
+                                if found_elt['idef'] not in self.found[sc]:
+                                    self.found[sc].append(found_elt['idef'])
+                                
                                     curr_coll_dict['data'].append({
                                         'key': fld['key'],
                                         'text': found_elt[str(fld['key'])],
@@ -653,17 +667,24 @@ class Search:
                                         'parent': found_elt['parent']
                                         })
                                     found_num += 1
+
                 if len(curr_coll_dict['data']) > 0:
                     ns_list.append(curr_coll_dict)
 
-        stat_dict.update( { 'records_found': found_num } )
+        out_dict= { 'records_found': found_num, 'result': ns_list }
+        if len(error_list) > 0:
+            out_dict['errors']= error_list
+        
+        return out_dict
 
-        return { 'stat': stat_dict, 'result': ns_list }
 
     def build_regexp(self, searchline, strict):
         """ construct regexp for search """
         if strict:
-            searchline= "^%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s$" % { "lookupstr": searchline }
+            # version 1 - have problems
+            # searchline= "^%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s$" % { "lookupstr": searchline }
+            # version 2
+            searchline= "^%(lookupstr)s(\s)+|^%(lookupstr)s$|\s+%(lookupstr)s\s+|\s+%(lookupstr)s$" % { "lookupstr": searchline }
         return searchline
 
     def search_data(self, datasrc, qrystr, scope, strict, lookup= None):
@@ -671,50 +692,53 @@ class Search:
         self.set_scope(scope)
         self.switch_strict(strict)
         self.set_lookup(lookup)
-        
+
         regxsearch= self.build_regexp( self.qrystr, self.strict )
+        print regxsearch
         regx= re.compile(regxsearch, re.IGNORECASE)
 
+        coll= Collection()
         out= { }
         total_rec= 0
 
-        coll= Collection(fields= lookup)
+        self.found= {}
 
-        # 1st PASS
+        # 1st pass
         tl1= time() # starting to search
         result_1= self.do_search(regx, datasrc, coll)
-        total_rec += result_1['stat']['records_found']
+        total_rec += result_1['records_found']
         tlap1= time()-tl1 # 1st pass finished
-        result_1['stat'].update( { "search_time": "%0.6f" % tlap1 } )
+        result_1.update( { "search_time": "%0.6f" % tlap1 } )
         out['strict']= result_1
 
-        # 2nd PASS
+        # 2nd pass
         second_pass_list= []
         if not self.strict: # second pass makes sense
-            second_pass_list= self.qrystr.split(' ')
+            result_2= { 'records_found': 0 } # blank dict for 2nd pass
+            tl2= time() # starting to search
 
-            result_2= { 'stat': { 'records_found': 0 }, 'result': [] } # blank dict for 2nd pass
-            if len(second_pass_list) > 0:
-                tl2= time() # starting to search
+            second_pass_list= self.qrystr.split(' ')
+            if len(second_pass_list) > 1: # 2nd pass makes sense only if search str consists of >1 words
 
                 for wrd in second_pass_list:
                     lookup= self.build_regexp(wrd, True) # we look for separate words using strict
                     regx= re.compile(lookup, re.IGNORECASE)
                     result_2_curr= self.do_search(regx, datasrc, coll)
 
-                    if result_2_curr['stat']['records_found'] > 0:
-                        result_2['result'].append( result_2_curr['result'] )
-                        result_2['stat']['records_found'] += result_2_curr['stat']['records_found']
+                    if result_2_curr['records_found'] > 0:
+                        result_2['result']= result_2_curr['result']
+                        result_2['records_found'] += result_2_curr['records_found']
 
-                    total_rec += result_2_curr['stat']['records_found']
-                    tlap2= time()-tl2 # 2nd pass finished
-                    result_2['stat'].update( { "search_time": "%0.6f" % tlap2 } )
+                    total_rec += result_2_curr['records_found']
 
-                out['loose']= result_2
+            tlap2= time()-tl2 # 2nd pass finished
+            result_2.update( { "search_time": "%0.6f" % tlap2 } )
+
+            out['loose']= result_2
 
         tlap= time()-tl1
         out.update( {
-            "search_time_total": "%0.6f" % tlap,
+            'search_time_total': "%0.6f" % tlap,
             'records_found_total': total_rec
             } )
 
