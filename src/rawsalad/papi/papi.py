@@ -467,7 +467,7 @@ def search_data(request, serializer, path='', db=None, **kwargs):
     else:
         strict= False
 
-    if query_str is None:
+    if (query_str is None) or (query_str.strip() == ''):
         result['response']= rsdb.Response().get_response(36)["descr"]
     else:
         if db is None:
@@ -487,7 +487,6 @@ def search_data(request, serializer, path='', db=None, **kwargs):
         else:
             result.update( {
                 'query': query_str,
-                'scope': scope_list,
                 'uri': request.build_absolute_uri()
                 } )
 
@@ -495,7 +494,11 @@ def search_data(request, serializer, path='', db=None, **kwargs):
                 result['response']= rsdb.Response().get_response(36)["descr"]
             else:
                 res= rsdb.Search()
-                result.update( res.search_data(db, qrystr= query_str, scope= scope_list, strict= strict, lookup= lookup_fields) )
+                result.update(
+                    res.search_data(
+                        db, qrystr= query_str, scope= scope_list, strict= strict, lookup= lookup_fields
+                        )
+                    )
                 result['response']= rsdb.Response().get_response(0)["descr"]
 
     out, mime_tp, http_response = format_result(result, serializer, 200)
