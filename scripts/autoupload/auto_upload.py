@@ -343,7 +343,7 @@ def modify_schemas(json_schema, json_hierarchy, params_dict):
     new_schema_file_path = os.path.join('data', new_schema_file_name)
     coll_descr_file_path = os.path.join('data', coll_descr_file_name)
     try:
-        modifier.save(new_schema_file_name, coll_descr_file_name)
+        modifier.save(new_schema_file_path, coll_descr_file_path)
     except IOError:
         print 'Can not create one of files: %s, %s.' % (new_schema_file_path, coll_descr_file_path)
         return None
