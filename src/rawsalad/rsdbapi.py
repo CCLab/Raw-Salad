@@ -684,7 +684,7 @@ class Search:
             # version 1 - have problems
             # searchline= "^%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s([^a-z][^A-Z][^0-9]|\s)|([^a-z][^A-Z][^0-9]|\s)%(lookupstr)s$" % { "lookupstr": searchline }
             # version 2
-            searchline= "^%(lookupstr)s(\s)+|^%(lookupstr)s$|\s+%(lookupstr)s\s+|\s+%(lookupstr)s$" % { "lookupstr": searchline }
+            searchline= r"^%(lookupstr)s(\s)+|^%(lookupstr)s$|\s+%(lookupstr)s\s+|\s+%(lookupstr)s$" % { "lookupstr": searchline }
         return searchline
 
     def search_data(self, datasrc, qrystr, scope, strict, lookup= None):
@@ -694,7 +694,6 @@ class Search:
         self.set_lookup(lookup)
 
         regxsearch= self.build_regexp( self.qrystr, self.strict )
-        print regxsearch
         regx= re.compile(regxsearch, re.IGNORECASE)
 
         coll= Collection()
