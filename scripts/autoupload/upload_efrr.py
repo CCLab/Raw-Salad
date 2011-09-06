@@ -5,6 +5,7 @@ Created on 05-09-2011
 '''
 
 import os
+import optparse
 from functools import cmp_to_key
 
 from auto_upload import upload
@@ -12,7 +13,7 @@ from auto_upload import upload
 
     
 def filter_csv_files(name):
-    return '.csv' == name[-4:]
+    return '.csv' == name[-4:] and 'upload' not in name
 
 
 def get_persp_type(name):
@@ -39,20 +40,29 @@ def compare_names(name1, name2):
     
 
 if __name__ == '__main__':
-    files_dir = os.path.join('data', os.getcwd())
+    cmdparser = optparse.OptionParser(usage="usage: python %prog [Options] source_file.csv source_schema.json") 
+    cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
+    opts, args = cmdparser.parse_args()
+    
+    files_dir = os.path.join(os.getcwd(), 'data')
     all_files = os.listdir(files_dir)
     csv_files = filter(filter_csv_files, all_files)
-
+    
     # sort files so that they are processed in the following order:
     # krajowe -> wojewodzkie > powiatowe > gminne
     csv_files = sorted(csv_files, key=cmp_to_key(compare_names))
+    db = None
     
     for file in csv_files:
+        full_path = os.path.join(files_dir, file)
         schema_descr = file.rstrip('.csv') + '-schema_descr.json'
+        schema_path = os.path.join(files_dir, schema_descr)
+        hierarchy_path = os.path.join(files_dir, 'hierarchy.json')
         year = file.rstrip('.csv')[-4:]
         persp_type = get_persp_type(file)
         coll = 'dd_effr' + year + '_' + persp_type 
-        args = [file, schema_descr, 'hierarchy.json']
-        upload(args, coll_name=coll)
+        args = [full_path, schema_path, hierarchy_path]
+        print 'Processing file %s' % file
+        db = upload(args, conf_filename=opts.conf_filename, coll_name=coll, db=db)
 
     

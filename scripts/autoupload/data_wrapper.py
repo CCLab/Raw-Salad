@@ -59,6 +59,10 @@ class CsvFile:
         """Moves to the begining of the file and creates another reader."""
         self.file.seek(0)
         self.create_reader()
+    
+    def close(self):
+        """Closes csv file."""
+        self.file.close()
 
 
 class CsvData:
@@ -185,5 +189,13 @@ class Data:
         writer = csv.writer(open(self.name, 'wb'), delimiter=delim, 
                             quotechar=quote, quoting=csv.QUOTE_NONNUMERIC)
         for row in self.rows:
-            writer.writerow(row)
+            uni_row = []
+            for field in row:
+                try:
+                    val = field.encode('utf-8')
+                    uni_row.append(val)
+                except:
+                    uni_row.append(field)
+            writer.writerow(uni_row)
+            #writer.writerow(row)
         file.close()

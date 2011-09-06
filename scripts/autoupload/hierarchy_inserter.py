@@ -12,29 +12,29 @@ class HierarchyInserter:
                       hierarchy columns,
         "type_column" number of column which value represents name of data row
                       and will be moved to new field(its name is field_name)
+        "summable": [list of columns that should be summed after creating hierarchy]
     }
     Data passed to HierarchyInserter should be correct, otherwise created
     data will contain bugs.
     """
     
-    def __init__(self, csv_data, hierarchy_def, add_id=False):
+    def __init__(self, csv_data, hierarchy_def, schema_descr, add_id=False):
         """Initiates object.
         
         Arguments:
         csv_data -- data that needs hierarchy inserting
         hierarchy_def -- object representing hierarchy in data
+        schema_descr -- objecy describing schema of data
         add_id -- if new column with id should be prepended for each row
         """
         self.csv_data = csv_data
         self.hierarchy_fields = hierarchy_def['columns']
         self.hierarchy_field_label = hierarchy_def['field_name']
         self.modified_rows = []
-        self.delete_order = sorted(self.hierarchy_fields, reverse=True)
-        type_column_nr = hierarchy_def['type_column']
-        for col_nr in self.delete_order:
-            if col_nr < type_column_nr:
-                type_column_nr -= 1
-        self.type_column_nr = type_column_nr
+        self.type_column_nr = hierarchy_def['type_column']
+        self.summable = hierarchy_def['summable']
+        self.fields = schema_descr['fields']
+        self.delete_order = sorted(self.hierarchy_fields + [self.type_column_nr], reverse=True)
         self.hierarchy_obj = HierarchyNode(0)
         self.add_id = add_id
         self.bad_hierarchy_log = []
@@ -49,13 +49,14 @@ class HierarchyInserter:
         in header).
         Firstly, changes header, then for each row gets its hierarchy, if
         it is new hierarchy, adds new rows representing this hierarchy,
-        in the end clears hierarchy from the row. 
+        in the end clears hierarchy from the row.
+        After that, if id were generated, fills summable columns
+        in added hierarchy rows.
         """
         self.bad_hierarchy_log = []
         header = self.csv_data.get_header()
         for nr in self.delete_order:
             del header[nr]
-        del header[self.type_column_nr]
         header.insert(0, self.hierarchy_field_label)
         if self.add_id:
             header.insert(0, 'id')
@@ -87,6 +88,9 @@ class HierarchyInserter:
             
             old_hierarchy = new_hierarchy
             row = self.csv_data.get_next_row(row_type='list')
+            
+        if self.add_id:
+            self.fill_summable_values()
                 
     def all_rows_correct(self):
         """Returns True if no errors were found, otherwise False."""
@@ -126,7 +130,6 @@ class HierarchyInserter:
          
         for nr in self.delete_order:
             del cleaned_row[nr]
-        del cleaned_row[self.type_column_nr]
         
         cleaned_row.insert(0, hierarchy_field_name)
         if self.add_id:
@@ -213,6 +216,63 @@ class HierarchyInserter:
         
         return '-'.join(id_list)
     
+    def fill_summable_values(self):
+        """Fills summable columns in added hierarchy rows."""
+        summable_cols = self.summable[:]
+        for i in range(len(summable_cols)):
+            for col_nr in self.delete_order:
+                if col_nr < summable_cols[i]:
+                    summable_cols[i] -= 1
+            summable_cols[i] += 2
+        summable_cols_types = [self.fields[i]['type'] for i in self.summable]
+        
+        rows_dict = {}
+        i = -1
+        for row in self.modified_rows:
+            i += 1
+            # omitting header
+            if i == 0:
+                continue
+            id = row[0]
+            rows_dict[id] = row
+            parent_id = self.get_parent_id(id)
+            while parent_id:
+                parent_row = rows_dict[parent_id]
+                j = 0
+                for col_nr in summable_cols:
+                    value = row[col_nr]
+                    type = summable_cols_types[j]
+                    if parent_row[col_nr] == '':
+                        parent_row[col_nr] = 0
+                    if value == '':
+                        continue
+                    if type == 'int':
+                        parent_row[col_nr] += int(value)
+                    elif type == 'float' and value != '':
+                        commas_in_field = value.count(',')
+                        dots_in_field = value.count('.')
+                        if commas_in_field > 0:
+                            if dots_in_field > 0:
+                                parent_row[col_nr] += float( value.replace(',', '', commas_in_field) )
+                        else:
+                            value = value.replace(',', '', commas_in_field - 1)
+                            parent_row[col_nr] += float( value.replace(',', '.') )
+
+                    j += 1
+                parent_id = self.get_parent_id(parent_id)
+                
+    
+    def get_parent_id(self, id):
+        """Returns id of parent of row with given id. If this row has
+        no parent, None is returned.
+        
+        Parameters:
+        id -- id of child
+        """
+        if id.count('-') == 0:
+            return None
+        return id.rsplit('-', 1)[0]
+            
 
 class HierarchyNode:
     

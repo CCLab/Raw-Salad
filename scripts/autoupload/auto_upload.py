@@ -5,15 +5,16 @@ Created on 31-08-2011
 '''
 
 import os
+import getpass
 import optparse
 import csv
 import pymongo
 import simplejson as json
 from ConfigParser import ConfigParser
-from universal.data_validator import DataValidator
-from universal.data_wrapper import CsvFile, CsvData, Data
-from universal.hierarchy_inserter import HierarchyInserter
-from universal.schema_modifier import SchemaModifier
+from data_validator import DataValidator
+from data_wrapper import CsvFile, CsvData, Data
+from hierarchy_inserter import HierarchyInserter
+from schema_modifier import SchemaModifier
 
 
 
@@ -142,7 +143,6 @@ def fill_docs(data):
     return data
 
 
-
 def csv_parse(csv_read, schema):
     """Parses csv file and returns data as list of dicts using schema.
     For each field, tries to cast it on the type that is described
@@ -234,7 +234,7 @@ def open_files(csv_name, schema_descr_name, hierarchy_name):
         json_hierarchy = json.load(hierarchy_file, encoding='utf-8')
         hierarchy_file.close()
     except IOError:
-        exit('Error: during processing hierarchy file.' % hierarchy_name)
+        exit('Error: during processing hierarchy file: %s.' % hierarchy_name)
     print 'Successfully opened file with hierarchy'
 
     return (csv_file, schema_descr, json_hierarchy)
@@ -268,22 +268,23 @@ def validate_data(csv_file, schema_descr):
         except IOError:
             print 'Can not open file %s, no info will be saved.' % errors_file_name
         else:
-            errors_file.write(validator.get_errors_log())
+            errors_file.write(validator.get_errors_log().encode('utf-8'))
         
     return correct
 
 
-def insert_hierarchy(csv_file, json_hierarchy):
+def insert_hierarchy(csv_file, json_hierarchy, schema_descr):
     """Inserts hierarchy into csv_file using hierarchy schema.
     
     Arguments:
     csv_file -- CsvFile object representing data
     json_hierarchy -- hierarchy schema
+    schema_descr -- schema describing fields in collection
     """
     print 'Trying to clean hierarchy in data'
     csv_file.reset()
     csv_data = CsvData(csv_file)
-    hierarchy_cleaner = HierarchyInserter(csv_data, json_hierarchy, add_id=True)
+    hierarchy_cleaner = HierarchyInserter(csv_data, json_hierarchy, schema_descr, add_id=True)
     hierarchy_cleaner.insert_hierarchy()
     if hierarchy_cleaner.all_rows_correct():
         print 'All rows have correct hierarchy'
@@ -339,13 +340,15 @@ def modify_schemas(json_schema, json_hierarchy, params_dict):
     modifier.modify_coll_descr(params_dict, add_id=True)
     coll_descr_file_name = 'budg' + str(params_dict['dataset']) + str(params_dict['perspective']) +\
                            '_' + json_schema['issue'] + '.json'
+    new_schema_file_path = os.path.join('data', new_schema_file_name)
+    coll_descr_file_path = os.path.join('data', coll_descr_file_name)
     try:
         modifier.save(new_schema_file_name, coll_descr_file_name)
     except IOError:
-        print 'Can not create one of files: %s, %s.' % (new_schema_file_name, coll_descr_file_name)
+        print 'Can not create one of files: %s, %s.' % (new_schema_file_path, coll_descr_file_path)
         return None
     else:
-        print 'New schema files successfully created and saved in: %s, %s' % (new_schema_file_name, coll_descr_file_name)
+        print 'New schema files successfully created and saved in: %s, %s' % (new_schema_file_path, coll_descr_file_path)
     
     return (modifier.get_new_schema(), modifier.get_coll_descr())
 
@@ -499,20 +502,53 @@ def get_collection_values(schema_descr):
         'dataset': dataset_nr,
         'perspective': persp_nr
     }
+    
+    
+def get_summable_fields(new_schema_descr, hierarchy):
+    """Returns columns that should be summable
+    
+    Arguments:
+    new_schema_descr -- schema describing fields
+    hierarchy -- hierarchy in collection
+    """
+    summable_cols = hierarchy['summable'][:]
+    delete_order = sorted(hierarchy['columns'] + [hierarchy['type_column']], reverse=True)
+    for i in range(len(summable_cols)):
+        for col_nr in delete_order:
+            if col_nr < summable_cols[i]:
+                summable_cols[i] -= 1
+    
+    cols = []
+    names = new_schema_descr['alias']
+    for i in summable_cols:
+        cols.append(names[str(i)])
+    return summable_cols
+
+nav_path = os.path.join('data', 'ms_nav_structure_v')
 
 consts = {
-    'conf_filename': '$HOME\projects\rawsalad\src\rawsalad\site_media\rawsdata.conf',
+    'conf_filename': '$HOME/projects/rawsalad/src/rawsalad/site_media/rawsdata.conf',
     'coll_name': 'dd_test_2011',
     'scheme_coll_name': 'md_budg_scheme',
     'validator_errors_name': 'validator_errors.log',
     'hierarchy_errors_name': 'hierarchy_errors.log',
     'coll_descr_name': 'coll_descr.json',
-    'navigator_name_prefix': 'ms_nav_structure_v',
+    'navigator_name_prefix': nav_path,
     'navigator_coll_name': 'ms_nav'
 }
 
 
-def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None):
+def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None, db=None):
+    """Main function responsible for uploading data.
+    
+    Arguments:
+    args -- list containing name of csv file, schema description file and
+            hierarchy file
+    conf_filename -- name of configuration file
+    coll_name -- name of collection that data should be inserted in
+    scheme_coll_name -- name of collection with data describing collections
+    db -- authenticated connection to database
+    """
     if len(args) != 3:
         print 'Wrong number of arguments. Should be exactly 3(data, schema, hierarchy).'
         exit()
@@ -545,8 +581,8 @@ def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None):
     validated = validate_data(csv_file, schema_descr)
     if validated or ignore:
         print 'Data was validated.'
-        new_data_file_name = insert_hierarchy(csv_file, json_hierarchy)
-        
+        new_data_file_name = insert_hierarchy(csv_file, json_hierarchy, schema_descr)
+        csv_file.close()
         params_dict = get_collection_values(schema_descr)
         params_dict['ns'] = coll_name
         result = modify_schemas(schema_descr, json_hierarchy, params_dict)
@@ -560,19 +596,28 @@ def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None):
         exit()
         
     
-    conn = get_db_connect(conf_filename, 'mongodb')
-    conn_host = conn['host']
-    conn_port = conn['port']
-    conn_db = conn['database']
-    
-    # connect to db
-    try:
-        connection = pymongo.Connection(conn_host, conn_port)
-        db = connection[conn_db]
-        print '...connected to the database', db
-    except Exception as e:
-        print 'Unable to connect to the mongodb database:\n %s\n' % e
-        exit()
+    if db is None:
+        conn = get_db_connect(conf_filename, 'mongodb')
+        conn_host = conn['host']
+        conn_port = conn['port']
+        conn_db = conn['database']
+        
+        # connect to db
+        try:
+            connection = pymongo.Connection(conn_host, conn_port)
+            db = connection[conn_db]
+            print '...connected to the database', db
+        except Exception as e:
+            print 'Unable to connect to the mongodb database:\n %s\n' % e
+            exit()
+        
+        conn_username = conn['username']
+        conn_password = conn['password']
+        if conn_password is None:
+            conn_password = getpass.getpass()
+        if db.authenticate(conn_username, conn_password) != 1:
+            print 'Cannot authenticate to db, exiting now'
+            exit()
 
     try:
         data_file = open(new_data_file_name, 'rb')
@@ -615,6 +660,8 @@ def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None):
     # insert updated site navigator object
     db_insert_metadata(nav_obj, db, nav_coll_name, {})
     print 'Done.'
+    
+    return db
 
 
 if __name__ == "__main__":
