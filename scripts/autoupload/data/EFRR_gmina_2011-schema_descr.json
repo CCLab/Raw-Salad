@@ -11,8 +11,7 @@
         {
             "label": "Numer umowy/decyzji",
             "type": "string",
-            "obligatory": true,
-            "basic": true
+            "obligatory": true
             },
         {
             "label": "Tytuł projektu",
@@ -29,20 +28,17 @@
         {
             "label": "Oś priorytetowa <Kod>",
             "type": "string",
-            "obligatory": true,
-            "basic": true
+            "obligatory": true
             },
         {
             "label": "Działanie <Kod>",
             "type": "string",
-            "obligatory": true,
-            "basic": true
+            "obligatory": true
             },
         {
             "label": "Poddziałanie <Kod>",
             "type": "string",
-            "obligatory": true,
-            "basic": true
+            "obligatory": true
             },
         {
             "label": "Cały kraj/ Województwo",
@@ -62,7 +58,8 @@
         {
             "label": "Wartość ogółem",
             "type": "float",
-            "obligatory": true
+            "obligatory": true,
+            "basic": true
             },
         {
             "label": "Wydatki kwalifikowalne",
@@ -72,7 +69,8 @@
         {
             "label": "Dofinansowanie",
             "type": "float",
-            "obligatory": true
+            "obligatory": true,
+            "basic": true
             },
         {
             "label": "Dofinansowanie UE",
@@ -82,7 +80,8 @@
         {
             "label": "Nazwa beneficjenta",
             "type": "string",
-            "obligatory": true
+            "obligatory": true,
+            "basic": true
             },
         {
             "label": "NIP beneficjenta",

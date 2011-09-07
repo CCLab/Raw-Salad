@@ -1,3 +1,5 @@
+﻿# -*- coding: utf-8 -*-
+
 '''
 Created on 30-08-2011
 '''
@@ -6,6 +8,20 @@ import simplejson as json
 from django.template.defaultfilters import slugify
 from string import ascii_lowercase
 
+
+def remove_diacritics(name):
+    """Returns name without diacritics and inserted latin letters.
+    
+    Arguments:
+    name -- word to have diacritics removed
+    """
+    return name.replace(u'ą', 'a').replace(u'ć', 'c').replace(u'ę', 'e').replace(u'ł', 'l')\
+               .replace(u'ń', 'n').replace(u'ó', 'o').replace(u'ś', 's').replace(u'ź', 'z')\
+               .replace(u'ż', 'z').replace(u'Ą', 'A').replace(u'Ć', 'C').replace(u'Ę', 'E')\
+               .replace(u'Ł', 'L').replace(u'Ń', 'N').replace(u'Ó', 'O').replace(u'Ś', 'S')\
+               .replace(u'Ź', 'Z').replace(u'Ż', 'Z')
+
+    
 """
 Description of input and output schemas used by SchemaModifier
 is in the end of this file.
@@ -55,8 +71,10 @@ class SchemaModifier:
         field_nr += 1
         
         for field in fields:
-            name = slugify(field["label"])
-            base = slugify(field["label"])
+            #name = slugify(field["label"])
+            name = slugify(remove_diacritics(field["label"]))
+            #base = slugify(field["label"])
+            base = slugify(remove_diacritics(field["label"]))
             i = 1
             while name in type:
                 i += 1
@@ -81,10 +99,9 @@ class SchemaModifier:
             explorable = self.out_schema['alias']['0']
         perspective = self.schema['dataset_name'] + ' ' + self.schema['perspective_name'] +\
                       ' ' + self.schema['issue']
-        
         max_level = len(self.hierarchy['columns'])
         self.out_coll = {
-            "name": slugify(perspective),
+            "name": slugify(remove_diacritics(perspective)),
             "perspective": perspective,
             "ns": params_dict['ns'],
             "dataset": params_dict['dataset'],
@@ -161,8 +178,8 @@ class SchemaModifier:
         
         previous_names = []
         for field in fields:
-            key = slugify(field["label"])
-            key_base = slugify(field["label"])
+            key = slugify(remove_diacritics(field["label"]))
+            key_base = slugify(remove_diacritics(field["label"]))
             i = 1
             while key in previous_names:
                 i += 1

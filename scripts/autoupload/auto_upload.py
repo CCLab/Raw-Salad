@@ -101,6 +101,22 @@ def db_insert_metadata(data_bulk, db, collname, query=None):
         collect.insert(data_bulk, check_keys=False)
 
 
+def db_save_navigator(nav_obj, db, collname):
+    """Updates navigator object in database.
+    
+    Arguments:
+    nav_obj -- updated version of navigator object
+    db -- object representing database
+    collname -- name of collection in database where navigator will be inserted
+    """
+    collect = db[collname]
+    idef = nav_obj['idef']
+    prev_obj = collect.find_one({'idef': idef})
+    if prev_obj:
+        nav_obj['_id'] = prev_obj['_id']
+    collect.save(nav_obj)
+    
+
 def fill_docs(data):
     """Fills information for each row in data: idef_sort, leaf,
     parent, parent_sort.
@@ -353,22 +369,28 @@ def modify_schemas(json_schema, json_hierarchy, params_dict):
     return (modifier.get_new_schema(), modifier.get_coll_descr())
 
 
-def update_site_navigator(coll_descr, schema_descr):
+def update_site_navigator(coll_descr, schema_descr, new_nav=True):
     """Uses collection description and schema descr to create updated
-    version of navigator. Returns this object.
+    version of navigator. Returns description of dataset that was
+    updated/added.
     
     Arguments:
     coll_descr -- schema describing collection
     schema_descr -- initial schema description
+    new_nav -- True if navigator should be saved in new file, False if file
+               containing navigator object should be updated
     """
     
-    nav_obj, file_name = open_last_nav_object()
+    nav_obj, file_name = get_last_nav_object()
     
-    update_navigator_object(nav_obj, coll_descr, schema_descr)
+    updated_obj = update_navigator_object(nav_obj, coll_descr, schema_descr)
     
     prefix = consts['navigator_name_prefix']
     last_ok = int( file_name.lstrip(prefix).rstrip('.json') )
-    new_nav_file_name = prefix + str(last_ok + 1) +'.json'
+    if new_nav:
+        new_nav_file_name = prefix + str(last_ok + 1) +'.json'
+    else:
+        new_nav_file_name = file_name
     print 'Trying to save new navigator schema file.'
     try:
         new_nav_file = open(new_nav_file_name, 'wb')
@@ -378,10 +400,10 @@ def update_site_navigator(coll_descr, schema_descr):
         exit()
     
     print 'Successfully saved navigator schema file.'
-    return nav_obj
+    return updated_obj
 
 
-def open_last_nav_object():
+def get_last_nav_object():
     """Opens last file containing navigator object and returns it
     as object"""
     
@@ -420,7 +442,7 @@ def open_last_nav_object():
 def update_navigator_object(nav_obj, coll_descr, schema_descr):
     """Updates navigator object. Inserts new dataset, new perspective
     or new issue, it depends on what collections are in navigator object
-    already.
+    already. Returns dataset description that was added/updated.
     
     nav_obj -- previous navigator object
     coll_descr -- schema describing collection
@@ -433,6 +455,8 @@ def update_navigator_object(nav_obj, coll_descr, schema_descr):
             dataset_found = True
             break
         i += 1
+    
+    updated_obj = None
 
     if dataset_found:
         j = 0
@@ -458,6 +482,7 @@ def update_navigator_object(nav_obj, coll_descr, schema_descr):
                 "issues": [ coll_descr['issue'] ]
             }
             nav_obj[i]['perspectives'].append(perspective_descr)
+        updated_obj = nav_obj[i]
     else:
         dataset_descr = {
                 "idef": coll_descr['dataset'],
@@ -474,7 +499,10 @@ def update_navigator_object(nav_obj, coll_descr, schema_descr):
                     }
                 ]
             }
+        updated_obj = dataset_descr
         nav_obj.append(dataset_descr)
+    
+    return updated_obj
 
 
 def get_collection_values(schema_descr):
@@ -487,7 +515,7 @@ def get_collection_values(schema_descr):
     collection -- collection with meta data
     """
     
-    nav_obj = open_last_nav_object()[0]
+    nav_obj = get_last_nav_object()[0]
     dataset_nr = 0
     persp_nr = 0
     for dataset in nav_obj:
@@ -538,7 +566,8 @@ consts = {
 }
 
 
-def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None, db=None):
+def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None,
+           db=None, new_nav=True):
     """Main function responsible for uploading data.
     
     Arguments:
@@ -548,6 +577,8 @@ def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None, db=N
     coll_name -- name of collection that data should be inserted in
     scheme_coll_name -- name of collection with data describing collections
     db -- authenticated connection to database
+    new_nav -- True if navigator should be saved in new file, False if file
+               containing navigator object should be updated
     """
     if len(args) != 3:
         print 'Wrong number of arguments. Should be exactly 3(data, schema, hierarchy).'
@@ -640,7 +671,7 @@ def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None, db=N
     obj_rep = fill_docs(obj_parsed) # processing and inserting the data
     
     # prepare updated version of site navigator collection
-    nav_obj = update_site_navigator(coll_descr, schema_descr)
+    updated_nav_obj = update_site_navigator(coll_descr, schema_descr, new_nav)
 
     print 'Trying to insert data into the db'
     print db_insert_data(obj_rep, db, coll_name), 'records inserted'
@@ -658,7 +689,8 @@ def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None, db=N
     print db_insert_metadata(coll_descr, db, scheme_coll_name, query), 'collection description records inserted'
     
     # insert updated site navigator object
-    db_insert_metadata(nav_obj, db, nav_coll_name, {})
+    if updated_nav_obj:
+        db_save_navigator(updated_nav_obj, db, nav_coll_name)
     print 'Done.'
     
     return db

@@ -52,6 +52,7 @@ if __name__ == '__main__':
     # krajowe -> wojewodzkie > powiatowe > gminne
     csv_files = sorted(csv_files, key=cmp_to_key(compare_names))
     db = None
+    create_new_nav = True
     
     for file in csv_files:
         full_path = os.path.join(files_dir, file)
@@ -63,6 +64,8 @@ if __name__ == '__main__':
         coll = 'dd_effr' + year + '_' + persp_type 
         args = [full_path, schema_path, hierarchy_path]
         print 'Processing file %s' % file
-        db = upload(args, conf_filename=opts.conf_filename, coll_name=coll, db=db)
+        db = upload(args, conf_filename=opts.conf_filename, coll_name=coll,
+                    db=db, new_nav=create_new_nav)
+        create_new_nav = False
 
     
