@@ -386,9 +386,9 @@ var _table = (function () {
         html.push( '<table id="app-tb-in-con-table1" >' );
         html.push( '<tbody>' );
         info.forEach( function ( e ) {
-            html.push( '<tr><td class="app-tb-in-con-type" >', e['elem_type'], ':');
-            html.push('</td><td class="app-tb-in-con-name" >', e['elem_name'], '</td></tr>' );
-            if ( e['elem_type'] === 'Miernik' ) {
+            html.push( '<tr><td class="app-tb-in-con-type" >', e['type'], ':');
+            html.push('</td><td class="app-tb-in-con-name" >', e['name'], '</td></tr>' );
+            if ( e['type'] === 'Miernik' ) {
                 cont = e;
             }
         });

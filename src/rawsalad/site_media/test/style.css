@@ -79,6 +79,7 @@ textarea {
   width: 960px;
   margin: 0px auto;
   padding: 0px;
+  position: relative;
 }
 
 /*  T O P   M E N U  */
@@ -374,7 +375,7 @@ textarea {
     background-color: #8b8b8b; /* same as bodyu bgcolor */
   }
   
-  #app-cover {
+  .cover {
     position: absolute;
     top: 0px;
   }
@@ -610,11 +611,13 @@ textarea {
   #app-tb-in-content {
     top: 10px;
     left: 5px;
-	margin: 0px;
+	  margin: 0px;
   	padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
     background-color: #E3E3E3;
+    color: black;
+    font-weight: normal;
   	border: 2px solid #000000;
     border-radius: 5px;
     text-align: left;

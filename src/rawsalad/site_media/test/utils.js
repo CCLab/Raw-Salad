@@ -105,12 +105,12 @@ var _utils = (function () {
         var preloader;
         var html = [];
         var x = $(window).width() / 2 - 200;
-        var app_cover = $( '<div id="app-cover" > </div>' );
-        $('#application')
-            .append(app_cover);
-        $('#app-cover')
-             .height( $('#application').height() )
-             .width( $('#application').width() );
+        var main_cover = $( '<div class="cover" id="main-cover" > </div>' );
+        $('#wrapper')
+            .append(main_cover);
+        $('#main-cover')
+             .height( $('#wrapper').height() )
+             .width( $('#wrapper').width() );
 
 
 
@@ -129,7 +129,7 @@ var _utils = (function () {
     };
 
     that.clear_preloader = function() {
-        $('#app-cover').remove();
+        $('#main-cover').remove();
         $('#wrapper').css( 'opacity', '1' );
         $('#preloader').remove();
     };

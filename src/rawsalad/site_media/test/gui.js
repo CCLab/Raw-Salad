@@ -676,7 +676,7 @@ var _gui = (function () {
     }
 
     function show_top_panel( panel ) {
-        var app_cover = $( '<div id="app-cover" > </div>' );
+        var app_cover = $( '<div class="cover" id="app-cover" > </div>' );
 
         // show panel
         panel.slideDown( 400 );
