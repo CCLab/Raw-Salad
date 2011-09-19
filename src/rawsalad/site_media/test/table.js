@@ -378,7 +378,41 @@ var _table = (function () {
         return html.join('');
     }
 
+  
     function generate_text_for_budzet( info, visible_attrs ) {
+        var html;
+        var budzet_function_map = {
+            '0': generate_text_for_budzet_ksiegowy,
+            '1': generate_text_for_budzet_zadaniowy
+        }
+        var text_generator = budzet_function_map[ _store.view() ];
+        html = text_generator( info, visible_attrs );
+        return html;
+    }
+
+    function generate_text_for_budzet_ksiegowy( info, visible_attrs ) {
+        var html = [];
+        var list = info.slice();
+        // sort list by 'dzial' value 
+        list.sort( function( a, b ) { 
+                var a_idef_list = a['idef'].split( '-' );
+                var b_idef_list = b['idef'].split( '-' );
+                return a_idef_list[1] - b_idef_list[1];
+            });
+
+        html.push( '<table id="app-tb-in-con-table1" >' );
+        html.push( '<tbody>' );
+        list.forEach( function ( e ) {
+            html.push( '<tr><td class="app-tb-in-con-type" >', e['type'], ':');
+            html.push('</td><td class="app-tb-in-con-name" >', e['name'], '</td></tr>' );
+        });
+        html.push( '</tbody>' );
+        html.push( '</table>' );
+        return html.join('');
+    }
+
+
+    function generate_text_for_budzet_zadaniowy( info, visible_attrs ) {
         var attr;
         var html = [];
         var cont = null;
