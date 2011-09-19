@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 '''
 Created on 25-08-2011
 '''
@@ -18,7 +20,8 @@ class HierarchyInserter:
     data will contain bugs.
     """
     
-    def __init__(self, csv_data, hierarchy_def, schema_descr, add_id=False):
+    def __init__(self, csv_data, hierarchy_def, schema_descr,
+                 add_id=False, teryt_data=None):
         """Initiates object.
         
         Arguments:
@@ -26,6 +29,7 @@ class HierarchyInserter:
         hierarchy_def -- object representing hierarchy in data
         schema_descr -- objecy describing schema of data
         add_id -- if new column with id should be prepended for each row
+        teryt_data -- data from file with TERYT codes, can be used to generate id
         """
         self.csv_data = csv_data
         self.hierarchy_fields = hierarchy_def['columns']
@@ -37,6 +41,11 @@ class HierarchyInserter:
         self.delete_order = sorted(self.hierarchy_fields + [self.type_column_nr], reverse=True)
         self.hierarchy_obj = HierarchyNode(0)
         self.add_id = add_id
+        self.use_teryt = False
+        if self.add_id:
+            if teryt_data:
+                self.use_teryt = True
+                self.teryt_id_generator = TerytIdGenerator(teryt_data)
         self.bad_hierarchy_log = []
         
     def insert_hierarchy(self):
@@ -170,7 +179,13 @@ class HierarchyInserter:
             child = act_hierarchy_obj.get_child(field)
             # if this row represents new hierarchy
             if child is None:
-                new_id = act_hierarchy_obj.get_new_child_id()
+                if self.use_teryt:
+                    new_id = self.teryt_id_generator.get_teryt_id(partial_hierarchy)
+                    if new_id is None:
+                        self.teryt_id_generator.add_teryt_unit(partial_hierarchy)
+                        new_id = self.teryt_id_generator.get_teryt_id(partial_hierarchy)
+                else:
+                    new_id = act_hierarchy_obj.get_new_child_id()
                 child = HierarchyNode(new_id)
                 act_hierarchy_obj.add_child(child, field)
                 new_row = ['' for _ in range(row_len)]
@@ -282,7 +297,7 @@ class HierarchyNode:
         """Initiates object.
         
         Arguments:
-        id -- id of this node
+        id -- id of this node(integer)
         """
         self.id = id
         self.children = {}
@@ -345,3 +360,285 @@ class HierarchyError(Exception):
     def __str__(self):
         """Returns string representation of error."""
         return repr(self.log)
+    
+
+class TerytIdGenerator:
+    
+    """Class creating TERYT codes."""
+    
+    def __init__(self, data):
+        """Initiates this object using data from file with TERYT codes.
+        
+        Arguments:
+        data -- csv data of file with TERYT codes
+        """
+        self.codes = {}
+        self.errors = []
+        row = data.get_next_row()
+        while row:
+            type = row['Nazwa typu jednostki']
+            name = unicode(row['Nazwa']).lower()
+            full_code = row['TERYT']
+            woj_code = full_code[:2]
+            pow_code = full_code[2:4]
+            gm_code = full_code[4:6]
+            
+            if self.is_type_ignored(type):
+                row = data.get_next_row()
+                continue
+            
+            if self.is_wojewodztwo(type):
+                self.codes[name] = {'id': woj_code, 'name': name, 'powiats': {}}
+                last_woj = self.codes[name]
+                last_woj_code = woj_code
+            elif self.is_powiat(type):
+                new_pow_dict = {'id': pow_code, 'name': name, 'gminas': {}}
+                if woj_code == last_woj_code:
+                    last_woj['powiats'][name] = new_pow_dict
+                else:
+                    woj = self.get_teryt_object(woj_code)
+                    if woj is None:
+                        self.errors.append('Error: unknown województwo, code=%s' % woj_code)
+                        print 'Error: unknown województwo, code=', woj_code
+                        row = data.get_next_row()
+                        continue
+                    woj['powiats'][name] = new_pow_dict
+                last_pow = new_pow_dict
+                last_pow_code = pow_code
+            elif self.is_gmina(type):
+                new_gm_dict = {'id': gm_code, 'name': name}
+                if woj_code == last_woj_code and pow_code == last_pow_code:
+                    last_pow['gminas'][name] = new_gm_dict
+                else:
+                    pow = self.get_teryt_object(woj_code, pow_code)
+                    if pow is None:
+                        self.errors.append('Error: unknown powiat, code=%s' % pow_code)
+                        print 'Error: unknown powiat, code=', pow_code
+                        row = data.get_next_row()
+                        continue
+                    pow['gminas'][name] = new_gm_dict
+            else:
+                self.errors.append('Error: unknown unit type: %s' % type)
+                print 'Error: unknown unit type:', type
+        
+            row = data.get_next_row()
+    
+    def is_wojewodztwo(self, type):
+        return type == 'województwo'.decode('utf-8')
+    
+    def is_powiat(self, type):
+        return type in ['powiat'.decode('utf-8'), 'miasto na prawach powiatu'.decode('utf-8'),
+                        'miasto stołeczne, na prawach powiatu'.decode('utf-8')]
+    
+    def is_gmina(self, type):
+        return type in ['gmina miejska'.decode('utf-8'), 'gmina wiejska'.decode('utf-8'),
+                        'gmina miejsko-wiejska'.decode('utf-8'), 'dzielnica'.decode('utf-8'),
+                        'delegatura'.decode('utf-8'), 'gmina miejska, miasto stołeczne'.decode('utf-8')]
+    
+    def is_type_ignored(self, type):
+        return type in ['miasto', 'obszar wiejski']
+        
+    def get_teryt_object(self, woj_code, pow_code=None, gm_code=None):
+        """Returns dict representing teritorial unit which code is
+        woj_code[ + pow_code[ + gm_code]]. If such a unit cannot be found,
+        None is returned.
+        
+        Arguments:
+        woj_code -- code of unit's wojewodztwo
+        pow_code -- code of unit's powiat
+        gm_code -- code of unit's gmina
+        """
+        woj_dict = None
+        for woj in self.codes:
+            if woj['id'] == woj_code:
+                woj_dict = woj
+                last_dict = woj_dict
+                break
+        
+        if woj_dict is None:
+            return None
+        
+        if pow_code:
+            pow_dict = None
+            for pow in woj_dict['powiats']:
+                if pow['id'] == pow_code:
+                    pow_dict = pow
+                    last_dict = pow_dict
+                    break
+                
+            if pow_dict is None:
+                return None
+        
+        if gm_code:
+            for gm in pow_dict:
+                if gm['id'] == gm_code:
+                    gm_dict = gm
+                    last_dict = gm_dict
+                    break
+            if gm_dict is None:
+                return None
+        
+        return last_dict
+    
+    def get_teryt_name(self, code):
+        """Returns name of teritorial unit which code is
+        woj_code[ + pow_code[ + gm_code]]. If such a unit cannot be found,
+        None is returned.
+        
+        Arguments:
+        code -- unit's TERYT code
+        """
+        woj_code = code[:2]
+        if len(code) > 3:
+            pow_code = code[2:4]
+            if len(code) > 5:
+                gm_code = code[4:6]
+        teryt_object_dict = self.get_teryt_object(woj_code, pow_code, gm_code)
+        try:
+            return teryt_object_dict['name']
+        except TypeError:
+            return None
+    
+    def get_teryt_id(self, hierarchy):
+        """Returns teryt id of teritorial unit represented by hierarchy.
+        Letters in hierarchy strings are lowercased and changed so that
+        they could be in the same form as they are expected.
+        If such a unit can not be found, returns None.
+        
+        Arguments:
+        hierarchy -- list containing name of unit's wojewodztwo,
+                     powiat(optionally) and gmina(optionally)
+        """
+        modified_hierarchy = [unicode(name).lower() for name in hierarchy]
+        woj_name = modified_hierarchy[0].split(' ')[-1] # get only wojewodztwo's name
+        pow_name, gm_name = None, None
+        if len(modified_hierarchy) > 1:
+            pow_name = self.correct_powiat_name(modified_hierarchy[1])
+        if len(modified_hierarchy) > 2:
+            gm_name = self.correct_gmina_name(modified_hierarchy[2])
+            
+        tmp_obj = self.codes
+        try:
+            tmp_obj = tmp_obj[woj_name]
+        except KeyError:
+            return None
+        
+        if pow_name:
+            try:
+                tmp_obj = tmp_obj['powiats'][pow_name]
+            except KeyError:
+                return None
+        
+        if gm_name:
+            try:
+                tmp_obj = tmp_obj['gminas'][gm_name]
+            except KeyError:
+                return None
+        
+        return tmp_obj['id']
+    
+    def add_teryt_unit(self, hierarchy):
+        """ Add new teritorial unit. If it exists in actual hierarchy,
+        nothing will happen. Otherwise, this unit will be placed in hierarchy.
+        
+        Arguments:
+        hierarchy -- hierarchy of new teritorial unit
+        """
+        modified_hierarchy = [unicode(name).lower() for name in hierarchy]
+        if self.get_teryt_id(modified_hierarchy):
+            return
+        
+        tmp_obj = self.codes
+        i = 0
+        for field in modified_hierarchy:
+            if field in tmp_obj:
+                if i == 0:
+                    tmp_obj = tmp_obj[field]['powiats']
+                else:
+                    tmp_obj = tmp_obj[field]['gminas']
+            else:
+                if i == 0:
+                    id = self.find_highest_id(tmp_obj) + 1
+                    tmp_obj[field] = {'id': str(id), 'name': field, 'powiats': {}}
+                elif i == 1:
+                    id = self.find_highest_id(tmp_obj['powiats']) + 1
+                    tmp_obj[field] = {'id': str(id), 'name': field, 'gminas': {}}
+                elif i == 2:
+                    id = self.find_highest_id(tmp_obj['gminas']) + 1
+                    tmp_obj[field] = {'id': str(id), 'name': field}
+            i += 1
+    
+    def find_highest_id(self, objects):
+        """Returns highest id of objects in list.
+        
+        Argument:
+        objects -- list of objects that have id value
+        """
+        highest_id = 0
+        for obj in objects:
+            id = int(objects[obj]['id'])
+            if id > highest_id:
+                highest_id = id
+        
+        return highest_id
+    
+    def correct_powiat_name(self, full_name):
+        """Returns only powiat's name, without 'powiat' part, 'm. st.'
+        
+        Arguments:
+        full_name -- full name of powiat
+        """
+        
+        short_name = full_name
+        if 'powiat' in short_name:
+            short_name = short_name.lstrip('powiat')
+            if short_name[0] == ' ':
+                short_name = short_name[1:]
+        
+        if short_name.startswith('m.'):
+            short_name = short_name.lstrip('m.')
+            if short_name[0] == ' ':
+                short_name = short_name[1:]
+        
+        if short_name.startswith('st.'):
+            short_name = short_name.lstrip('st.')
+            if short_name[0] == ' ':
+                short_name = short_name[1:]
+        
+        return short_name
+    
+    def correct_gmina_name(self, full_name):
+        """Returns only gmina's name, without 'm.' part.
+        
+        Arguments:
+        full_name -- full name of gmina
+        """
+        
+        short_name = full_name
+        if 'gmina' in short_name:
+            short_name = short_name.lstrip('gmina')
+            if short_name[0] == ' ':
+                short_name = short_name[1:]
+                
+        if short_name.startswith('m.'):
+            short_name = short_name.lstrip('m.')
+            if short_name[0] == ' ':
+                short_name = short_name[1:]
+        
+        if short_name.startswith('st.'):
+            short_name = short_name.lstrip('st.')
+            if short_name[0] == ' ':
+                short_name = short_name[1:]
+        
+        if short_name.endswith(' - miasto'):
+            short_name = short_name.replace(' - miasto' , '')
+            
+        if short_name == 'święta katarzyna'.decode('utf-8'):
+            print 'Zamiana'
+            short_name = 'siechnice'
+        
+        if short_name == 'rejowec':
+            print 'Zamiana'
+            short_name = 'rejowiec'
+        
+        return short_name

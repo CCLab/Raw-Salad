@@ -13,7 +13,7 @@ from auto_upload import upload
 
     
 def filter_csv_files(name):
-    return '.csv' == name[-4:] and 'upload' not in name
+    return '.csv' == name[-4:] and 'upload' not in name and 'TERYT' not in name
 
 
 def get_persp_type(name):
@@ -59,13 +59,14 @@ if __name__ == '__main__':
         schema_descr = file.rstrip('.csv') + '-schema_descr.json'
         schema_path = os.path.join(files_dir, schema_descr)
         hierarchy_path = os.path.join(files_dir, 'hierarchy.json')
+        teryt_path = os.path.join(files_dir, 'TERYT.csv')
         year = file.rstrip('.csv')[-4:]
         persp_type = get_persp_type(file)
         coll = 'dd_effr' + year + '_' + persp_type 
         args = [full_path, schema_path, hierarchy_path]
         print 'Processing file %s' % file
         db = upload(args, conf_filename=opts.conf_filename, coll_name=coll,
-                    db=db, new_nav=create_new_nav)
+                    teryt_filename=teryt_path, db=db, new_nav=create_new_nav)
         create_new_nav = False
 
     

@@ -289,18 +289,36 @@ def validate_data(csv_file, schema_descr):
     return correct
 
 
-def insert_hierarchy(csv_file, json_hierarchy, schema_descr):
+def get_teryt_data(teryt_filename):
+    """Opens file with TERYT codes and returns data from it.
+    
+    Arguments:
+    teryt_filename -- name of file with TERYT codes
+    """
+    
+    try:
+        csv_file = CsvFile(teryt_filename, quote='"', delim=';')
+    except IOError:
+        exit('Error: can\'t open teryt file %s. Exiting now.' % teryt_filename)
+        
+    return CsvData(csv_file)
+    
+
+def insert_hierarchy(csv_file, json_hierarchy, schema_descr, teryt_data=None):
     """Inserts hierarchy into csv_file using hierarchy schema.
     
     Arguments:
     csv_file -- CsvFile object representing data
     json_hierarchy -- hierarchy schema
     schema_descr -- schema describing fields in collection
+    teryt_data -- data with TERYT codes, if None, then rows' id will be not
+                  connected with TERYT codes
     """
     print 'Trying to clean hierarchy in data'
     csv_file.reset()
     csv_data = CsvData(csv_file)
-    hierarchy_cleaner = HierarchyInserter(csv_data, json_hierarchy, schema_descr, add_id=True)
+    hierarchy_cleaner = HierarchyInserter(csv_data, json_hierarchy, schema_descr,
+                                          add_id=True, teryt_data=teryt_data)
     hierarchy_cleaner.insert_hierarchy()
     if hierarchy_cleaner.all_rows_correct():
         print 'All rows have correct hierarchy'
@@ -567,7 +585,7 @@ consts = {
 
 
 def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None,
-           db=None, new_nav=True):
+           teryt_filename=None, db=None, new_nav=True):
     """Main function responsible for uploading data.
     
     Arguments:
@@ -576,6 +594,8 @@ def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None,
     conf_filename -- name of configuration file
     coll_name -- name of collection that data should be inserted in
     scheme_coll_name -- name of collection with data describing collections
+    teryt_filename -- name of file with TERYT codes, if not specified, then
+                      TERYT codes won't be used
     db -- authenticated connection to database
     new_nav -- True if navigator should be saved in new file, False if file
                containing navigator object should be updated
@@ -612,7 +632,13 @@ def upload(args, conf_filename=None, coll_name=None, scheme_coll_name=None,
     validated = validate_data(csv_file, schema_descr)
     if validated or ignore:
         print 'Data was validated.'
-        new_data_file_name = insert_hierarchy(csv_file, json_hierarchy, schema_descr)
+        if teryt_filename:
+            teryt_data = get_teryt_data(teryt_filename)
+            new_data_file_name = insert_hierarchy(csv_file, json_hierarchy,
+                                                  schema_descr, teryt_data)
+        else:
+            new_data_file_name = insert_hierarchy(csv_file, json_hierarchy,
+                                                  schema_descr)
         csv_file.close()
         params_dict = get_collection_values(schema_descr)
         params_dict['ns'] = coll_name
