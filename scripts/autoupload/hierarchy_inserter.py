@@ -10,10 +10,14 @@ class HierarchyInserter:
     object of the following form:
     {
         "columns": [list of columns creating hierarchy],
-        "field_name": name of column that will be inserted to substitute
-                      hierarchy columns,
-        "type_column" number of column which value represents name of data row
-                      and will be moved to new field(its name is field_name)
+        "field_type_label": name of column(that will be inserted), representing
+                            type of row(position in hierarchy),
+        "field_name_label": name of column(that will be inserted), representing
+                            name of row,
+        "name_column": number of column which value represents name of data row
+                       and will be moved to new field(its name is field_name_label),
+        "lowest_type": name that will be inserted to the type column in rows
+                       that are in the lowest position in hierarchy
         "summable": [list of columns that should be summed after creating hierarchy]
     }
     Data passed to HierarchyInserter should be correct, otherwise created
@@ -33,12 +37,15 @@ class HierarchyInserter:
         """
         self.csv_data = csv_data
         self.hierarchy_fields = hierarchy_def['columns']
-        self.hierarchy_field_label = hierarchy_def['field_name']
+        self.hierarchy_field_label = hierarchy_def['field_name_label']
+        self.hierarchy_columns_labels = [self.csv_data.get_header()[i] for i in self.hierarchy_fields]
+        self.type_label = hierarchy_def['field_type_label']
+        self.lowest_type = hierarchy_def['lowest_type']
         self.modified_rows = []
-        self.type_column_nr = hierarchy_def['type_column']
+        self.name_column_nr = hierarchy_def['name_column']
         self.summable = hierarchy_def['summable']
         self.fields = schema_descr['fields']
-        self.delete_order = sorted(self.hierarchy_fields + [self.type_column_nr], reverse=True)
+        self.delete_order = sorted(self.hierarchy_fields + [self.name_column_nr], reverse=True)
         self.hierarchy_obj = HierarchyNode(0)
         self.add_id = add_id
         self.use_teryt = False
@@ -50,10 +57,11 @@ class HierarchyInserter:
         
     def insert_hierarchy(self):
         """Process of inserting hierarchy is as follows:
-        - for header: remove hierarchy fields and type column, prepend field_name
+        - for header: remove hierarchy fields and type column,
+                      prepend field_type_label, field_name_label
         - for row: create rows representing hierarchy(if not created yet) and
-                   remove hierarchy fields and type column, prepend value of type
-                   column
+                   remove hierarchy fields and type column, prepend type of row
+                   (lowest_type) and value of name column
         Additionally id of rows can be inserted(and then id field is inserted
         in header).
         Firstly, changes header, then for each row gets its hierarchy, if
@@ -66,7 +74,8 @@ class HierarchyInserter:
         header = self.csv_data.get_header()
         for nr in self.delete_order:
             del header[nr]
-        header.insert(0, self.hierarchy_field_label)
+        header.insert(0, self.type_label)
+        header.insert(1, self.hierarchy_field_label)
         if self.add_id:
             header.insert(0, 'id')
         self.modified_rows = [header]
@@ -120,8 +129,8 @@ class HierarchyInserter:
     
     def clean_row(self, row, hierarchy):
         """Adds id of this row to hierarchy object.
-        Removes hierarchy fields from the row, moves name representing row
-        (field described by type column in schema) to the beginning of the row.
+        Removes hierarchy fields from the row, moves its type and name(fields
+        described by name and type column in schema) to the beginning of it.
         Adds rows's id if add_id parameter was set to True on constructing
         this object.
         
@@ -135,12 +144,13 @@ class HierarchyInserter:
         row_node = HierarchyNode(next_id)
         node.add_child(row_node, next_id)
          
-        hierarchy_field_name = cleaned_row[self.type_column_nr]
+        hierarchy_field_name = cleaned_row[self.name_column_nr]
          
         for nr in self.delete_order:
             del cleaned_row[nr]
         
-        cleaned_row.insert(0, hierarchy_field_name)
+        cleaned_row.insert(0, self.lowest_type)
+        cleaned_row.insert(1, hierarchy_field_name)
         if self.add_id:
             row_hierarchy = hierarchy + [next_id]
             full_id = self.get_full_id(row_hierarchy)
@@ -165,7 +175,7 @@ class HierarchyInserter:
         """Returns rows list of hierarchy rows that should be put inside
         data to show new_hierarchy. If hierarchy rows have been added for
         new_hierarchy already, empty list will be returned. Hierarchy rows
-        will be have only one field not empty: name(plus id if created).
+        will be have not empty: id(if created), type, name and summable fields.
         
         Arguments:
         new_hierarchy -- list representing hierarchy in row in data 
@@ -174,6 +184,7 @@ class HierarchyInserter:
         hierarchy_rows = []
         partial_hierarchy = []
         act_hierarchy_obj = self.hierarchy_obj
+        i = 0
         for field in new_hierarchy:
             partial_hierarchy.append(field)
             child = act_hierarchy_obj.get_child(field)
@@ -191,13 +202,16 @@ class HierarchyInserter:
                 new_row = ['' for _ in range(row_len)]
                 if self.add_id:
                     new_row[0] = self.get_full_id(partial_hierarchy)
-                    new_row[1] = field
+                    new_row[1] = self.hierarchy_columns_labels[i]
+                    new_row[2] = field
                 else:
-                    new_row[0] = field
+                    new_row[0] = self.hierarchy_columns_labels[i]
+                    new_row[1] = field
                     
                 hierarchy_rows.append(new_row)
             
             act_hierarchy_obj = child
+            i += 1
         return hierarchy_rows
     
     def get_hierarchy_node(self, hierarchy):
@@ -238,7 +252,11 @@ class HierarchyInserter:
             for col_nr in self.delete_order:
                 if col_nr < summable_cols[i]:
                     summable_cols[i] -= 1
-            summable_cols[i] += 2
+            
+            if self.add_id:
+                summable_cols[i] += 3
+            else:
+                summable_cols[i] += 2                
         summable_cols_types = [self.fields[i]['type'] for i in self.summable]
         
         rows_dict = {}
@@ -510,7 +528,7 @@ class TerytIdGenerator:
                      powiat(optionally) and gmina(optionally)
         """
         modified_hierarchy = [unicode(name).lower() for name in hierarchy]
-        woj_name = modified_hierarchy[0].split(' ')[-1] # get only wojewodztwo's name
+        woj_name = modified_hierarchy[0]
         pow_name, gm_name = None, None
         if len(modified_hierarchy) > 1:
             pow_name = self.correct_powiat_name(modified_hierarchy[1])
@@ -545,6 +563,11 @@ class TerytIdGenerator:
         hierarchy -- hierarchy of new teritorial unit
         """
         modified_hierarchy = [unicode(name).lower() for name in hierarchy]
+        if len(modified_hierarchy) > 1:
+            modified_hierarchy[1] = self.correct_powiat_name(modified_hierarchy[1])
+        if len(modified_hierarchy) > 2:
+            modified_hierarchy[2] = self.correct_gmina_name(modified_hierarchy[2])
+            
         if self.get_teryt_id(modified_hierarchy):
             return
         

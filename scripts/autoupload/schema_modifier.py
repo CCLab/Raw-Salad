@@ -69,6 +69,9 @@ class SchemaModifier:
         alias[str(field_nr)] = "type"
         type["type"] = "string"
         field_nr += 1
+        alias[str(field_nr)] = "name"
+        type["type"] = "string"
+        field_nr += 1
         
         for field in fields:
             #name = slugify(field["label"])
@@ -93,7 +96,7 @@ class SchemaModifier:
                   be described
         """
         explorable = ''
-        if self.out_schema['alias']['0'] == 'idef':
+        if add_id:
             explorable = self.out_schema['alias']['1']
         else:
             explorable = self.out_schema['alias']['0']
@@ -153,7 +156,7 @@ class SchemaModifier:
         Arguments:
         fields -- list of fields before inserting hierarchy
         """
-        to_remove = sorted(self.hierarchy['columns'] + [self.hierarchy['type_column']], reverse=True)
+        to_remove = sorted(self.hierarchy['columns'] + [self.hierarchy['name_column']], reverse=True)
         for nr in to_remove:
             del fields[nr]
     
@@ -173,8 +176,8 @@ class SchemaModifier:
         
         fields = self.schema["fields"][:]
         self.remove_hierarchy_fields(fields)
-        hierarchy_label = self.hierarchy['field_name']
-        columns.append(self.create_column("type", hierarchy_label, "string", basic=True))
+        columns.append(self.create_column("type", self.hierarchy['field_type_label'], "string", basic=True))
+        columns.append(self.create_column("name", self.hierarchy['field_name_label'], "string", basic=True))
         
         previous_names = []
         for field in fields:
@@ -230,10 +233,12 @@ Expected form of schema describing data fields:
     Expected form of hierarchy:
     {
         "rows": [list of hierarchy columns]
-        "type_column": number of column which value represents name of data row
-                       and will be moved to new field(its name is field_name)
-        "field_name": name of column that will be inserted to substitute
-                      hierarchy columns
+        "name_column": number of column which value represents name of data row
+                       and will be moved to new field(its name is field_name_label)
+        "field_type_label": name of column(will be inserted) that represents
+                            type of row
+        "field_name_label": name of column(will be inserted) that represents
+                            name of row
     }
     
     SchemaModifier creates modified schema and collection description.
