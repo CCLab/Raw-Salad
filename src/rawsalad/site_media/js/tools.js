@@ -596,7 +596,7 @@ var _tools = (function () {
 
         breadcrumb_list.forEach( function ( el, i ) {
             breadcrumb.push( el['type'] + ' ' );
-            if (!!el['name'] && ) {
+            if (!!el['name']) {
                 if ( i < breadcrumb_list.length - 1 ) {
                     if ( el['name'].length > 35 ) {
                         el['name'] = el['name']
