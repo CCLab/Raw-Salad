@@ -120,8 +120,8 @@ class DBconnect:
             else:
                 self.password= '' # must be instance of basestring
         except: # it's unavailable, filling defaults then
-            self.host= 'localhost'
-            self.port= 27017
+            self.host= 'cecyf.megivps.pl'
+            self.port= 8000
             self.database= 'rawsdoc00'
             self.username= 'readonly'
             self.password= ''
