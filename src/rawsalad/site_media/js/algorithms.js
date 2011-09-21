@@ -70,6 +70,7 @@ var _algorithms = (function () {
                 passed_filter_object = {};
             }
         }
+        
         return result;
     };
 
