@@ -31,6 +31,14 @@ class Response:
                 'httpresp': 200,
                 'descr': 'OK'
                 },
+            '1': {
+                'httpresp': 200,
+                'descr': 'OK: Data successfully updated'
+                },
+            '2': {
+                'httpresp': 200,
+                'descr': 'OK: Data successfully inserted'
+                },
             '10': {
                 'httpresp': 404,
                 'descr': 'ERROR: No such data!'
@@ -77,11 +85,15 @@ class Response:
                 },
             '41': {
                 'httpresp': 500,
-                'descr': 'ERROR: Cannot insert state data into the db!'
+                'descr': 'ERROR: Cannot insert data into the db!'
                 },
             '42': {
                 'httpresp': 400,
                 'descr': 'ERROR: Wrong state id!'
+                },
+            '43': {
+                'httpresp': 404,
+                'descr': 'ERROR: No data specified!'
                 }
             }
 
@@ -330,6 +342,39 @@ class Collection:
             )
         return self.metadata_complete
 
+    def save_complete_metadata(self, new_object, dbase):
+        """
+        saves metadata defined by a user
+        into the db collection for metadata
+        """
+        ds_id, ps_id, iss= new_object['dataset'], new_object['idef'], new_object['issue']
+        update_status= True # true - update, false - insert
+        if new_object is not None:
+            current_object= dbase[meta_src].find_one({ 'dataset': ds_id, 'idef': ps_id, 'issue': iss })
+            if current_object is None: # is dataset-view-issue already in the db?
+                current_object= {}
+                update_status= False # insert instead of update
+            else:
+                current_object= { '_id': current_object['_id'] } # only _id is required for save()
+
+            current_object.update(new_object)
+
+            try:
+                dbase[meta_src].save(current_object)
+                if update_status:
+                    self.response= Response().get_response(1) # OK, updated
+                else:
+                    self.response= Response().get_response(2) # OK, inserted
+            except Exception as e:
+                self.response= Response().get_response(41) # ERROR, can't insert into the db
+                self.response['descr']= ' '.join([ self.response['descr'], str(e) ])
+
+        else:
+            self.response= Response().get_response(43) # ERROR, bad request - data is empty
+
+        return ds_id, ps_id, iss, update_status
+
+
     def get_data(self, datasrc, dataset_id, view_id, issue):
         data= []
         elm_count= 0
@@ -565,7 +610,6 @@ class State:
             try:
                 datasrc[state_collection_name].insert({ 'content': state_object })
             except Exception as e:
-                print e
                 success= False
 
             if success: # incrementing state counter & saving it into the db
