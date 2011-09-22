@@ -124,27 +124,18 @@ class DBconnect:
             cfg= ConfigParser({ 'basedir': conf_filename })
             cfg.read(conf_filename)
 
-            try: # to read from conf file first
-                self.host= cfg.get(db_type,'host')
-                self.port= cfg.getint(db_type,'port')
-                self.database= cfg.get(db_type,'database')
-                self.username= cfg.get(db_type,'username')            
-                try:
-                    pssw= cfg.get(db_type,'password')
-                except:
-                    pssw = None
-                if pssw is not None:
-                    self.password= pssw
-                else:
-                    self.password= '' # must be instance of basestring
-            except: # it's unavailable, filling defaults then
-                print dir_path
-                print conf_filename
-                self.host= 'cecyf.megivps.pl'
-                self.port= 8000
-                self.database= 'rawsdoc00'
-                self.username= 'readonly'
-                self.password= ''
+            self.host= cfg.get(db_type,'host')
+            self.port= cfg.getint(db_type,'port')
+            self.database= cfg.get(db_type,'database')
+            self.username= cfg.get(db_type,'username')            
+            try:
+                pssw= cfg.get(db_type,'password')
+            except:
+                pssw = None
+            if pssw is not None:
+                self.password= pssw
+            else:
+                self.password= '' # must be instance of basestring
 
 class Navtree:
     """ Navigator tree """
