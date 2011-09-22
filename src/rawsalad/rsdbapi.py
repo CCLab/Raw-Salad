@@ -9,11 +9,15 @@ from time import time
 from ConfigParser import ConfigParser
 import pymongo
 import re
+import os
+this_file_path = os.path.dirname( __file__ )
+dir_path = os.path.split(this_file_path)[0]
 
 meta_src= "md_budg_scheme"
 state_counter= "md_sta_cnt"
 nav_schema= "ms_nav"
-conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/rawsdata.conf"
+#conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/rawsdata.conf"
+conf_filename = os.path.join(dir_path, 'site_media', 'rawsdata.conf')
 
 class Response:
     """

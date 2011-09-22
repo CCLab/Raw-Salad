@@ -24,9 +24,8 @@
 // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 // OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// master version
-
 var _algorithms = (function () {
+
     var that = {};
 
 //  P U B L I C   I N T E R F A C E
