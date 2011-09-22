@@ -10,13 +10,12 @@ from ConfigParser import ConfigParser
 import pymongo
 import re
 import os
-this_file_path = os.path.dirname( __file__ )
-dir_path = os.path.split(this_file_path)[0]
 
 meta_src= "md_budg_scheme"
 state_counter= "md_sta_cnt"
 nav_schema= "ms_nav"
-#conf_filename= "/home/cecyf/www/projects/rawsalad/src/rawsalad/site_media/rawsdata.conf"
+
+dir_path = os.path.dirname( __file__ )
 conf_filename = os.path.join(dir_path, 'site_media', 'rawsdata.conf')
 
 class Response:
@@ -122,25 +121,30 @@ class DBconnect:
         pass
 
     def fill_connection(self, db_type):
-        cfg= ConfigParser({ 'basedir': conf_filename })
-        cfg.read(conf_filename)
+            cfg= ConfigParser({ 'basedir': conf_filename })
+            cfg.read(conf_filename)
 
-        try: # to read from conf file first
-            self.host= cfg.get(db_type,'host')
-            self.port= cfg.getint(db_type,'port')
-            self.database= cfg.get(db_type,'database')
-            self.username= cfg.get(db_type,'username')            
-            pssw= cfg.get(db_type,'password')
-            if pssw is not None:
-                self.password= pssw
-            else:
-                self.password= '' # must be instance of basestring
-        except: # it's unavailable, filling defaults then
-            self.host= 'cecyf.megivps.pl'
-            self.port= 8000
-            self.database= 'rawsdoc00'
-            self.username= 'readonly'
-            self.password= ''
+            try: # to read from conf file first
+                self.host= cfg.get(db_type,'host')
+                self.port= cfg.getint(db_type,'port')
+                self.database= cfg.get(db_type,'database')
+                self.username= cfg.get(db_type,'username')            
+                try:
+                    pssw= cfg.get(db_type,'password')
+                except:
+                    pssw = None
+                if pssw is not None:
+                    self.password= pssw
+                else:
+                    self.password= '' # must be instance of basestring
+            except: # it's unavailable, filling defaults then
+                print dir_path
+                print conf_filename
+                self.host= 'cecyf.megivps.pl'
+                self.port= 8000
+                self.database= 'rawsdoc00'
+                self.username= 'readonly'
+                self.password= ''
 
 class Navtree:
     """ Navigator tree """
