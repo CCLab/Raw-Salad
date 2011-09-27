@@ -23,17 +23,15 @@ step 2: action
 [log out]
 
 
-step 3.0: define metadata - general description
+step 3.0: define metadata - general description and upload data
 ------------------
-*dataset ___ int        *view idef ___ int        *issue ___________ string 20
-*ns ____________ string 20
-*name  _________________________ string 100
-*description _________________________ string 100
-deepest level __ string 1
-batch size ___ int 100..4096
+*dataset ___ int        *view idef ___ int        *issue ___________ (label/descr)
+*description _________________________ text
 
-[next step] -> step 3.1
-
+file ______ [choose] string
+[upload] -> step 3.1
+/Django stores a user's data into temporary storage, parses it, and
+suggests some definitions that appear at the next step 3.1/
 
 step 3.1: define fields
 ------------------
@@ -47,9 +45,12 @@ step 3.1: define fields
 [add field] (3)
 [save fields] -> step 3.2
 
-
 step 3.2: advanced
 ------------------
+name  _______________ <hidden> ~100 slag from dataset, view idef, issue
+*ns ____________ (created automatically according to DB arch)
+batch size ___ int 100..4096
+
 *explorable ______ list (4)
 
 sorting: (5)
@@ -61,8 +62,6 @@ query: (6)
 [save metadata] -> ?  [save and upload] -> step 4  [cancel] -> ?
 
 
-step 4: upload data
-------------------
 *metadata ______ list (10)
 
 hierarchy:
@@ -71,14 +70,12 @@ hierarchy:
     *'hierarchy fields: ______ string 100 (7)
     [add field]
     *'move to field _______ list (4, 8)
+/to be moved to the leve of fields: checkbox - a part of 'hierarchy'
+and list with number - level of it/
 
 identification:
     *idef autofill ______ true/false (9)
     *'idef column ______ string 100
-
-file ______ [choose] string
-
-[upload] -> step 5
 
 
 step 5: upload status and results
