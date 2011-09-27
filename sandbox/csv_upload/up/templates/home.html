@@ -1,0 +1,15 @@
+<html>
+	<head>
+		<title>Upload new collection</title>
+    <link rel="stylesheet" href="/static/style.css" />
+	</head>
+	<body>
+		<h1>Upload new data collection</h1>
+			<form action="/upload/" method="post" enctype="multipart/form-data">
+				<table>
+        {{ form.as_table }}
+        </table>
+				<input type="submit" value="Upload data" />
+			</form>
+	</body>
+</html>

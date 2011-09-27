@@ -1,0 +1,12 @@
+body {
+  width: 960px;
+  margin: 10px auto;
+  font-family: sans-serif;
+  font-size: 11px;
+  color: #5b5b5b;
+}
+
+th {
+  font-size: 11px;
+  text-align: right;
+}
