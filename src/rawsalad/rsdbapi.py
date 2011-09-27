@@ -93,7 +93,11 @@ class Response:
             '43': {
                 'httpresp': 404,
                 'descr': 'ERROR: No data specified!'
-                }
+                },
+            '44': {
+                'httpresp': 500,
+                'descr': 'ERROR: Cannot update document!'
+                },
             }
 
     def __del__(self):
@@ -369,6 +373,28 @@ class Collection:
 
         return ds_id, ps_id, iss, update_status
 
+
+    def save_doc(self, new_doc, dataset_id, view_id, issue, idef, dbase):
+        """
+        saves new_dict (a dictionary) into specified doc in the db
+        """
+        qry= { 'idef': idef }
+        self.set_query(qry)
+        orig_doc= self.get_data(dbase, dataset_id, view_id, issue)
+        coll_name= self.metadata_complete['ns'] # get_data calls for complete metadata
+
+        if self.response['httpresp'] == 200: # record found
+            orig_doc= orig_doc[0] # expecting only one element
+            orig_doc.update(new_doc)
+
+            try:
+                dbase[coll_name].update(qry, orig_doc) # update doc by its idef
+            except Exception as e:
+                self.response= Response().get_response(44) # ERROR, can't insert into the db
+                self.response['descr']= ' '.join([ self.response['descr'], str(e) ])
+
+        return self.response
+        
 
     def get_data(self, datasrc, dataset_id, view_id, issue):
         data= []
