@@ -25,4 +25,8 @@ def upload( req ):
         tmp_file.write( chunk );
     tmp_file.close()
 
+    upl_file.seek( 0 )
+    # do the csv processing as upl_file inherits from a File class
+    # and though you can treat it as a normal CSV file
+
     return render_to_response( 'wait.html', { 'file_name': upl_file.name } )
