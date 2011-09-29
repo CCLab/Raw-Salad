@@ -16,3 +16,17 @@ th {
 label {
   margin-right: 5px;
 }
+
+#submit {
+  width: 120px; 
+  background-color: #3b3b3b; 
+  text-align: center; 
+  color: #eee; 
+  border-radius: 5px; 
+  padding: 3px; 
+}
+
+#submit:hover {
+  background-color: #8b8b8b;
+  cursor: pointer;
+}
