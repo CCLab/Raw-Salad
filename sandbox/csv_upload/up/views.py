@@ -31,10 +31,8 @@ def upload( req ):
     tmp_file.close()
 
     upl_file.seek( 0 )
-    
-    # do the csv processing as upl_file inherits from a File class
-    # and though you can treat it as a normal CSV file
 
+    # actual csv processing goes here
     meta_data_draft= {
         'dataset': 99, # to obtain from db or to increment
         'idef': 99, # to obtain from db or to increment in scope of dataset
@@ -45,22 +43,23 @@ def upload( req ):
         'explorable': '',
         'max_level': ''
         }
+    delim = str( req.POST.get( 'delim', ';' ) )
 
-    columns= process_csv(upl_file)
+    columns= process_csv( upl_file, delim )
     meta_data_draft.update( { 'columns': columns } )
 
-    return render_to_response( 'wait.html', { 'file_name': upl_file.name } )
+    return render_to_response( 'wait.html', { 'file_name': upl_file.name, 'data': meta_data_draft } )
 
-def process_csv(src_file):
+
+def process_csv( src_file, delim ):
     """
     process user uploaded CSV file
-    and create a proposed meta-data dict    
+    and create a proposed meta-data dict
     """
 
-    # NB: now it's just a guess, but actually should be entered by user
-    csv_delim= ';'
+    csv_delim= delim
     csv_quote= '"'
-    
+
     csv_dict= DictReader(src_file, skipinitialspace= True, delimiter= csv_delim, quotechar= csv_quote)
 
     columns_list= fill_column_names( csv_dict.fieldnames )
@@ -174,7 +173,7 @@ def fill_column_names(field_names):
             if kw in key:
                 basic= True
                 break
-        
+
         out.append({
             'label': label,
             'key': key,

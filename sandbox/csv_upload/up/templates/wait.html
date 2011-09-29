@@ -6,5 +6,92 @@
 	<body>
 		<h1>File {{ file_name }} uploaded successfully</h1>
 		<a href="/">&lt;&lt; Back to upload form</a>
+    <br /><br />
+    {% for d in data.columns %}
+    <table>
+    <tr>
+      <td>
+        <label for="_label">Label</label>
+      </td>
+      <td>
+        <input id="_label" type="text" value="{{ d.label }}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="_key">Key</label>
+      </td>
+      <td>
+        <input id="_key" type="text" value="{{ d.key }}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="_type">Type</label>
+      </td>
+      <td>
+        <input id="_type" type="text" value="{{ d.type }}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="_format">Format</label>
+      </td>
+      <td>
+        <input id="_format" type="text" value="{{ d.format }}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="_basic">Basic</label>
+      </td>
+      <td>
+        <select id="_basic" name="_basic">
+          {% if d.basic %}
+          <option selected>True</option>
+          <option>False</option>
+          {% else %}
+          <option>True</option>
+          <option selected>False</option>
+          {% endif %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="_processable">Processable</label>
+      </td>
+      <td>
+        <select id="_processable" name="_processable">
+          {% if d.processable %}
+          <option selected>True</option>
+          <option>False</option>
+          {% else %}
+          <option>True</option>
+          <option selected>False</option>
+          {% endif %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="_checkable">Checkable</label>
+      </td>
+      <td>
+        <select id="_checkable" name="_checkable">
+          {% if d.checkable %}
+          <option selected>True</option>
+          <option>False</option>
+          {% else %}
+          <option>True</option>
+          <option selected>False</option>
+          {% endif %}
+        </select>
+      </td>
+    </tr>
+   </table> 
+   </table> 
+   <br /><br />
+    {% endfor %}
 	</body>
 </html>

@@ -7,6 +7,12 @@ body {
 }
 
 th {
+  padding-top: 5px;
   font-size: 11px;
   text-align: right;
+  vertical-align: top;
+}
+
+label {
+  margin-right: 5px;
 }
