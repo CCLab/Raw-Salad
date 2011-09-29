@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     url(r'^$', home ),
     url(r'^upload/$', upload ),
     url(r'^save_metadata/$', save_metadata ),
+    url(r'^save_advanced/$', save_advanced ),
 )
 
 urlpatterns += staticfiles_urlpatterns()

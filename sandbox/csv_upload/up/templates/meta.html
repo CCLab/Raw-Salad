@@ -8,44 +8,44 @@
 		<h1>File {{ file_name }} uploaded successfully</h1>
 		<a href="/">&lt;&lt; Back to upload form</a>
     <br /><br />
-    {% for d in data.columns %}
+    {% for d in data %}
     <table>
     <tr>
-      <td>
+      <th>
         <label for="_label{{ forloop.counter0 }}">Label</label>
-      </td>
+      </th>
       <td>
         <input class="metadata" id="_label{{ forloop.counter0 }}" type="text" value="{{ d.label }}"/>
       </td>
     </tr>
     <tr>
-      <td>
+      <th>
         <label for="_key{{ forloop.counter0 }}">Key</label>
-      </td>
+      </th>
       <td>
         <input class="metadata" id="_key{{ forloop.counter0 }}" type="text" value="{{ d.key }}"/>
       </td>
     </tr>
     <tr>
-      <td>
+      <th>
         <label for="_type{{ forloop.counter0 }}">Type</label>
-      </td>
+      </th>
       <td>
         <input class="metadata" id="_type{{ forloop.counter0 }}" type="text" value="{{ d.type }}"/>
       </td>
     </tr>
     <tr>
-      <td>
+      <th>
         <label for="_format{{ forloop.counter0 }}">Format</label>
-      </td>
+      </th>
       <td>
         <input class="metadata" id="_format{{ forloop.counter0 }}" type="text" value="{{ d.format }}"/>
       </td>
     </tr>
     <tr>
-      <td>
+      <th>
         <label for="_basic{{ forloop.counter0 }}">Basic</label>
-      </td>
+      </th>
       <td>
         <select class="metadata" id="_basic{{ forloop.counter0 }}" name="_basic{{ forloop.counter0 }}">
           {% if d.basic %}
@@ -59,9 +59,9 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <th>
         <label for="_processable{{ forloop.counter0 }}">Processable</label>
-      </td>
+      </th>
       <td>
         <select class="metadata" id="_processable{{ forloop.counter0 }}" name="_processable{{ forloop.counter0 }}">
           {% if d.processable %}
@@ -75,9 +75,9 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <th>
         <label for="_checkable{{ forloop.counter0 }}">Checkable</label>
-      </td>
+      </th>
       <td>
         <select class="metadata" id="_checkable{{ forloop.counter0 }}" name="_checkable{{ forloop.counter0 }}">
           {% if d.checkable %}

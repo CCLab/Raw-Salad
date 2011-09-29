@@ -8,8 +8,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': '',
+        'ENGINE': 'sqlite3',
+        'NAME': 'data.db',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',

@@ -47,14 +47,29 @@ def upload( req ):
     delim = str( req.POST.get( 'delim', ';' ) )
 
     columns= process_csv( upl_file, delim )
-    meta_data_draft.update( { 'columns': columns } )
+    meta_data_draft.update({ 'columns': columns })
+    req.session['meta_data_draft'] = meta_data_draft
 
-    return render_to_response( 'wait.html', { 'file_name': upl_file.name, 'data': meta_data_draft } )
+    return render_to_response( 'meta.html', { 'file_name': upl_file.name, 'data': columns } )
 
 
 @csrf_exempt
 def save_metadata( req ):
-    print json.loads( req.POST.get( 'metadata', [] ) )
+    columns_update = json.loads( req.POST.get( 'metadata', [] ) )
+    req.session['meta_data_draft']['columns'] = columns_update
+    req.session.modified = True
+
+    return render_to_response( 'advanced.html', { 'data': req.session['meta_data_draft']['columns'] })
+
+
+@csrf_exempt
+def save_advanced( req ):
+    advanced = json.loads( req.POST.get( 'advanced', {} ) )
+    print 10 * '-', 'SESSION DATA', 10 * '-'
+    print req.session['meta_data_draft']
+
+    print 10 * '-', 'ADVANCED DATA', 10 * '-'
+    print advanced
 
     return HttpResponseRedirect( '/' )
 
