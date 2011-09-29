@@ -1,0 +1,178 @@
+<html>
+	<head>
+		<title>File uploaded</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/jquery.js"></script>
+	</head>
+	<body>
+		<h1>File {{ file_name }} uploaded successfully</h1>
+		<a href="/">&lt;&lt; Back to upload form</a>
+    <br /><br />
+    
+    <h2>Sorting:</h2>
+    <table class="sorting">
+    <tr>
+      <th>
+        <label>Key</label>
+      </th>
+      <td>
+        <select class="key">
+          <option value="null">Choose key</option>
+        {% for d in data %}
+          <option value="{{ d.key }}">{{ d.label }}</option>
+        {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label>Order</label>
+      </th>
+      <td>
+        <select class="order">
+          <option>Ascending</option>
+          <option>Descending</option>
+        </select>
+      </td>
+    </tr>
+   </table> 
+   <br /><br />
+    <table class="sorting">
+    <tr>
+      <th>
+        <label>Key</label>
+      </th>
+      <td>
+        <select class="key" />
+          <option value="null">Choose key</option>
+        {% for d in data %}
+          <option value="{{ d.key }}">{{ d.label }}</option>
+        {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label>Order</label>
+      </th>
+      <td>
+        <select class="order">
+          <option>Ascending</option>
+          <option>Descending</option>
+        </select>
+      </td>
+    </tr>
+   </table> 
+   <br /><br />
+    <table class="sorting">
+    <tr>
+      <th>
+        <label>Key</label>
+      </th>
+      <td>
+        <select class="key" />
+          <option value="null">Choose key</option>
+        {% for d in data %}
+          <option value="{{ d.key }}">{{ d.label }}</option>
+        {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label>Order</label>
+      </th>
+      <td>
+        <select class="order">
+          <option>Ascending</option>
+          <option>Descending</option>
+        </select>
+      </td>
+    </tr>
+   </table> 
+   <br /><br />
+    
+   <h2>Hierarchy</h2>
+   <table class="hierarchy">
+   {% for d in data %}
+    <tr>
+      <th>
+        <label>{{ d.label }}</label>
+      </th>
+      <td>
+        <select id="{{ d.key }}" class="metadata" />
+          <option value="null">no hierarchy</option>
+        {% for d in data %}
+          <option value="{{ forloop.counter0 }}">{{ forloop.counter0 }}</option>
+        {% endfor %}
+        </select>
+      </td>
+    </tr>
+   {% endfor %}
+   </table> 
+   <br /><br />
+    
+    <h2>Advanced stuff</h2>
+    <table>
+    <tr>
+      <th>
+        <label>Batch size (in kb):</label>
+      </th>
+      <td>
+        <input id="batch_size" class="metadata" type="text" value="100" />
+      </td>
+    </tr>
+   </table> 
+   <br /><br />
+    
+    <div id="submit" >Save changes</div>
+   <br /><br />
+
+
+    <form action="/save_advanced/" method="post" id="hid_form">
+      <input name="advanced" type="text" />
+    </form>
+
+
+    <script type="text/javascript">
+        $('#hid_form').hide();
+        $('#submit').click( function () {
+            var result = {};
+            var order = [];
+            $('.sorting').each( function () {
+                var k = $(this).find('.key').val();
+                var v = $(this).find('.order').val();
+                var tmp = {};
+                if( k !== 'null' ) {
+                  tmp[k] = v;
+                  order.push( tmp );
+                }
+            });
+            result['order'] = order;
+
+            var tmp = [];
+            $('.hierarchy').find('.metadata').each( function() {
+                var v = $(this).attr('id').replace('_', '').replace(/[0-9]/g, '');
+                var k = $(this).val();
+
+                if( k === 'null' ) {
+                  return;
+                }
+
+                tmp[k] = v;
+            });
+            
+            result['hierarchy'] = tmp.filter( function (e) { return !!e } );
+            result['batch_size'] = $('#batch_size').val();
+
+            //console.log( '\n\n\n\n' + JSON.stringify( result ));
+            
+            $('#hid_form')
+                .find('input')
+                .val( JSON.stringify( result ) )
+                .end()
+                .submit();
+        });
+    </script>
+	</body>
+</html>
