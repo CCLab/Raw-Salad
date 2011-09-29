@@ -2,6 +2,7 @@
 	<head>
 		<title>File uploaded</title>
     <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/jquery.js"></script>
 	</head>
 	<body>
 		<h1>File {{ file_name }} uploaded successfully</h1>
@@ -11,42 +12,42 @@
     <table>
     <tr>
       <td>
-        <label for="_label">Label</label>
+        <label for="_label{{ forloop.counter0 }}">Label</label>
       </td>
       <td>
-        <input id="_label" type="text" value="{{ d.label }}"/>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="_key">Key</label>
-      </td>
-      <td>
-        <input id="_key" type="text" value="{{ d.key }}"/>
+        <input class="metadata" id="_label{{ forloop.counter0 }}" type="text" value="{{ d.label }}"/>
       </td>
     </tr>
     <tr>
       <td>
-        <label for="_type">Type</label>
+        <label for="_key{{ forloop.counter0 }}">Key</label>
       </td>
       <td>
-        <input id="_type" type="text" value="{{ d.type }}"/>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="_format">Format</label>
-      </td>
-      <td>
-        <input id="_format" type="text" value="{{ d.format }}"/>
+        <input class="metadata" id="_key{{ forloop.counter0 }}" type="text" value="{{ d.key }}"/>
       </td>
     </tr>
     <tr>
       <td>
-        <label for="_basic">Basic</label>
+        <label for="_type{{ forloop.counter0 }}">Type</label>
       </td>
       <td>
-        <select id="_basic" name="_basic">
+        <input class="metadata" id="_type{{ forloop.counter0 }}" type="text" value="{{ d.type }}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="_format{{ forloop.counter0 }}">Format</label>
+      </td>
+      <td>
+        <input class="metadata" id="_format{{ forloop.counter0 }}" type="text" value="{{ d.format }}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="_basic{{ forloop.counter0 }}">Basic</label>
+      </td>
+      <td>
+        <select class="metadata" id="_basic{{ forloop.counter0 }}" name="_basic{{ forloop.counter0 }}">
           {% if d.basic %}
           <option selected>True</option>
           <option>False</option>
@@ -59,10 +60,10 @@
     </tr>
     <tr>
       <td>
-        <label for="_processable">Processable</label>
+        <label for="_processable{{ forloop.counter0 }}">Processable</label>
       </td>
       <td>
-        <select id="_processable" name="_processable">
+        <select class="metadata" id="_processable{{ forloop.counter0 }}" name="_processable{{ forloop.counter0 }}">
           {% if d.processable %}
           <option selected>True</option>
           <option>False</option>
@@ -75,10 +76,10 @@
     </tr>
     <tr>
       <td>
-        <label for="_checkable">Checkable</label>
+        <label for="_checkable{{ forloop.counter0 }}">Checkable</label>
       </td>
       <td>
-        <select id="_checkable" name="_checkable">
+        <select class="metadata" id="_checkable{{ forloop.counter0 }}" name="_checkable{{ forloop.counter0 }}">
           {% if d.checkable %}
           <option selected>True</option>
           <option>False</option>
@@ -90,8 +91,43 @@
       </td>
     </tr>
    </table> 
-   </table> 
    <br /><br />
     {% endfor %}
+    <div id="submit" >Save changes</div>
+
+    <form action="/save_metadata/" method="post" id="hid_form">
+      <input name="metadata" type="text" />
+    </form>
+
+    <script type="text/javascript">
+        $('#hid_form').hide();
+        $('#submit').click( function () {
+            var result = [];
+                       
+            $('table').each( function () {
+                var tmp = {};
+
+                $(this).find('.metadata').each( function() {
+                    var k = $(this).attr('id').replace('_', '').replace(/[0-9]/g, '');
+                    var v = $(this).val();
+                    if( v === 'True' ) {
+                      v = true;
+                    }
+                    if( v === 'False' ) {
+                      v = false;
+                    }
+
+                    tmp[k] = v;
+                });
+                result.push( tmp );
+            });
+            
+            $('#hid_form')
+                .find('input')
+                .val( JSON.stringify( result ) )
+                .end()
+                .submit();
+        });
+    </script>
 	</body>
 </html>

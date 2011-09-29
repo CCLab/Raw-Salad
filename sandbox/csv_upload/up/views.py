@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from csv_upload.up.forms import *
 
 from csv import DictReader
 import re
+import simplejson as json
 
 def home( req ):
     f = FirstStepForm()
@@ -49,6 +50,13 @@ def upload( req ):
     meta_data_draft.update( { 'columns': columns } )
 
     return render_to_response( 'wait.html', { 'file_name': upl_file.name, 'data': meta_data_draft } )
+
+
+@csrf_exempt
+def save_metadata( req ):
+    print json.loads( req.POST.get( 'metadata', [] ) )
+
+    return HttpResponseRedirect( '/' )
 
 
 def process_csv( src_file, delim ):
