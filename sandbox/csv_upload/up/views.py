@@ -72,7 +72,6 @@ def fill_column_types(columns, csvdict):
 
     for row in csvdict.reader: # checking rows to guess types
         i= 0 # field index   # !!! WARNING !!! don't miss restval param of DictReader! (number of values if bigger than in the header)
-        # tmp_list= []
         for clm in csvdict.fieldnames:
             if len(str(row[i])) > 0: # not enough for analysis
                 currval= replace_locale_symbols( row[i].strip() )
