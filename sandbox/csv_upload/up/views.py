@@ -8,6 +8,7 @@ from csv_upload.up.forms import *
 from csv import DictReader
 import re
 import simplejson as json
+import rsdbapi as rsdb
 
 def home( req ):
     f = FirstStepForm()
@@ -33,16 +34,30 @@ def upload( req ):
 
     upl_file.seek( 0 )
 
+    # update nav tree
+    nav_dict= define_nav_id({
+        'dataset': req.POST.get( 'dataset_id', None ),
+        'view': req.POST.get( 'view_id', None ),
+        'issue': req.POST.get( 'issue', None ),
+        'dataset_name': req.POST.get( 'dataset', '' ),
+        'dataset_descr': req.POST.get( 'ds_desc', '' ),
+        'view_name': req.POST.get( 'view', '' ),
+        'view_descr': req.POST.get( 'vw_desc', '' )
+        } )
+
     # actual csv processing goes here
+    ns_name= req.POST.get( 'abbr', 'xxxxxx' )
+    ns_name= re.sub(r'[\W\s]+', '_', ns_name.lower(), re.U)
+    ns_name= 'du_' + ns_name[:6] + nav_dict['issue']
     meta_data_draft= {
-        'dataset': 99, # to obtain from db or to increment
-        'idef': 99, # to obtain from db or to increment in scope of dataset
-        'issue': req.POST.get( 'issue', 'issX' ),
-        'name': req.POST.get( 'abbr', 'xxxx' ),
-        'perspective': req.POST.get( 'desc', '' ),
-        'ns': None,
-        'explorable': '',
-        'max_level': ''
+        'dataset': nav_dict['dataset'],
+        'idef': nav_dict['view'],
+        'issue': nav_dict['issue'],
+        'name': req.POST.get( 'abbr', 'xxxxxx' ),
+        'perspective': req.POST.get( 'view', '' ),
+        'ns': ns_name,
+        'explorable': None, # to define upon data upload
+        'max_level': None # to define upon data upload
         }
     delim = str( req.POST.get( 'delim', ';' ) )
 
@@ -65,11 +80,16 @@ def save_metadata( req ):
 @csrf_exempt
 def save_advanced( req ):
     advanced = json.loads( req.POST.get( 'advanced', {} ) )
-    print 10 * '-', 'SESSION DATA', 10 * '-'
-    print req.session['meta_data_draft']
+    meta_data= req.session['meta_data_draft']
 
-    print 10 * '-', 'ADVANCED DATA', 10 * '-'
-    print advanced
+    meta_data['sort']= convert_sort(advanced['order'])
+    meta_data['batch_size']= advanced['batch_size']
+
+    db= rsdb.DBconnect("mongodb").dbconnect
+
+    coll= rsdb.Collection()
+    ds_id, ps_id, iss, update_status= coll.save_complete_metadata(meta_data, db)
+    print ds_id, ps_id, iss, update_status
 
     return HttpResponseRedirect( '/' )
 
@@ -79,7 +99,6 @@ def process_csv( src_file, delim ):
     process user uploaded CSV file
     and create a proposed meta-data dict
     """
-
     csv_delim= delim
     csv_quote= '"'
 
@@ -127,6 +146,7 @@ def fill_column_types(columns, csvdict):
                     out[i]['type_precision']= max( new_prec, cur_prec )
             i += 1
 
+    # filling formats
     for out_doc in out:
         if out_doc['type_tmp'] in ['int', 'float']:
 
@@ -190,7 +210,6 @@ def fill_column_names(field_names):
         key= re.sub(r'_$', '', key)
 
         basic, processable= False, True
-        # WARNING! should actually be sthn like: if ['id', 'idef', 'typ', 'type', 'name', 'nazwa', 'total', 'ogolem'] in key:
         for kw in basic_keywords:
             if kw in key:
                 basic= True
@@ -208,6 +227,52 @@ def fill_column_names(field_names):
 
     return out
 
+def convert_sort(sort_list):
+    out= {}
+    if len(sort_list) > 0:
+        cnt= 0
+        for elm in sort_list:
+            kv= [(k,v) for k,v in elm.iteritems()][0]
+            if kv[1] == 'Ascending':
+                dr= 1
+            else:
+                dr= -1
+            out[str(cnt)]= { kv[0]: dr }
+            cnt += 1
+
+    return out
+
+def define_nav_id(navig_dict):
+    """
+    check if there are such dataset and view in the navigation tree,
+    if there are none, code them and save to the tree
+    """
+    db= rsdb.DBconnect("mongodb").dbconnect
+    navtree= rsdb.Navtree()
+
+    need_insert= False
+    if navig_dict['dataset'] is None: # no such dataset in the db
+        dataset= navtree.get_max_dataset(db)
+        navig_dict['dataset']= dataset+1
+        navig_dict['view']= 0 # the new dataset, so, the view is 0
+        need_insert= True
+        # new_dict= {} # define new element in navtree
+    else:
+        if navig_dict['view'] is None: # no such view of the dataset
+            view= navtree.get_max_view(db, int(navig_dict['dataset'])) # check if there's such view
+            navig_dict['view']= view+1
+            need_insert= True
+            # new_dict= {} # define new element in navtree -> dataset
+        else: # there's already such dataset and view - check if given issue is unique
+            if navig_dict['issue'] in navtree.get_issue( db, navig_dict['dataset'], navig_dict['view'] ):
+                pass # error should be generated - issue already exist!
+
+    if need_insert:
+        # update navtree, insert new element
+        pass
+
+
+    return navig_dict
 
 def replace_locale_symbols(src): # find smarter way to do it!
     return src.replace(r'ą', 'a').replace(r'ć', 'c').replace(r'ę', 'e').replace(r'ł', 'l')\
