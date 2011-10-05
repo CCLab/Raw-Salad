@@ -49,13 +49,6 @@
             "processable": true
             },
         {
-            "key": "info",
-            "label": "W tym",
-            "basic": false,
-            "type": "string",
-            "processable": false
-            },
-        {
             "key": "frst_popr",
             "label": "Przewidywane wykonanie w 2010",
             "type": "number",
@@ -75,7 +68,8 @@
     "aux": {
         "leaf": 1,
         "parent": 1,
-        "idef": 1
+        "idef": 1,
+	"info": 1
         },
     "query": {},
     "sort": {

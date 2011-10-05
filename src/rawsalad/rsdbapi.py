@@ -247,6 +247,36 @@ class Navtree:
 
         return count
 
+    def get_max_dataset(self, datasrc):
+        """
+        the max dataset id in the nav tree
+        """
+        dsmax_dict= datasrc[nav_schema].find(
+            fields= { '_id': 0, 'idef':1 },
+            sort= [('idef', -1)],
+            limit= 1
+            )
+        for ii in dsmax_dict:
+            result= int(ii['idef']) # it is anyway only one record
+
+        return result
+
+    def get_max_view(self, datasrc, dataset):
+        """
+        the max view number of the given dataset in the nav tree
+        """
+        vwmax_dict= datasrc[nav_schema].find_one(
+            spec_or_id= { 'idef': int(dataset) },
+            fields= { '_id':0, 'perspectives.idef':1}
+            )
+
+        vwid_list= []
+        for vw in vwmax_dict['perspectives']:
+            vwid_list.append( int(vw['idef']) )
+
+        return max(vwid_list)
+
+
 class Collection:
     """
     extraction of the imformation from the db
@@ -421,7 +451,9 @@ class Collection:
             except:
                 cursor_batchsize= 'default'
 
-            cursor_query= metadata_complete['query'] # initial query
+            cursor_query= {}
+            if 'query' in metadata_complete:
+                cursor_query.update( metadata_complete['query'] ) # initial query
             if len(self.raw_query) != 0:
                 cursor_query.update(self.raw_query) # additional query build on the path argument
 
@@ -520,7 +552,8 @@ class Collection:
 
     def get_fields(self, meta_data):
         fields_dict= {'_id':0} # _id is never returned
-        fields_dict.update(meta_data['aux']) # list of fields to be returned in any case
+        if 'aux' in meta_data:
+            fields_dict.update(meta_data['aux']) # fields to be returned in any case
 
         if len(self.request_fields) > 0:
             fields_dict.update(self.request_fields)
@@ -529,7 +562,9 @@ class Collection:
             for fl in meta_data['columns']:
                 field_names_complete.append(fl['key'])
 
-            aux_fields= [k for k,v in meta_data['aux'].iteritems()]
+            aux_fields= []
+            if 'aux' in meta_data:
+                aux_fields= [k for k,v in meta_data['aux'].iteritems()]
             self.fill_warning( field_names_complete + aux_fields ) # fill self.warning
 
         else:
@@ -642,7 +677,6 @@ class State:
             self.response= Response().get_response(40) # bad request - data is empty
 
         return state_id
-
 
 class Search:
     """
@@ -808,6 +842,78 @@ class Search:
         out.update( {
             'search_time_total': "%0.6f" % tlap,
             'records_found_total': total_rec
+            } )
+
+        return out
+
+    def search_text(self, datasrc, qrystr, scope, strict, display= None):
+        self.set_query(qrystr)
+        self.set_scope(scope)
+        self.switch_strict(strict)
+
+        out= { 'result': [] }
+        self.found= {}
+
+        collect= Collection()
+
+        query_regx= ''
+        qry_dict= { }
+        words_list= qrystr.strip().lower().split(' ')
+        if len(words_list) > 1: # multiple words
+            kwds_list= []
+            for word in words_list:
+                query_regx= r'^%s' % word
+                if strict:
+                    query_regx += '$'
+                kwds_list.append({ '_keywords': re.compile(query_regx) })
+            qry_dict.update({ '$and': kwds_list })
+        elif len(words_list) == 1: # one word
+            query_regx= r'^%s' % qrystr
+            if strict:
+                query_regx += '$'
+            qry_dict.update( { '_keywords': re.compile(query_regx) } )
+
+        collect.set_query(qry_dict)
+
+        tl1= time() # starting to search
+        found_total= 0
+
+        # iterating through collections
+        error_list= []
+        for sc in self.scope: # fill the list of collections
+            found_num= 0
+            sc_list= sc.split('-')
+            dataset, idef, issue= int(sc_list[0]), int(sc_list[1]), str(sc_list[2])
+            collect.set_fields( ["perspective", "ns"] ) # WARNING! eventually we can add "columns" here for indication where the result is found
+            metadata= collect.get_complete_metadata(dataset, idef, issue, datasrc)
+
+            if metadata is None:
+                error_list.append('collection not found %s' % sc)
+            else:
+                curr_coll_dict= {
+                    'perspective': metadata.get('perspective', ''),
+                    'dataset': dataset,
+                    'view': idef,
+                    'issue': issue,
+                    'data': []
+                    }
+
+                collect.set_fields(display)
+
+                # actual query to the db
+                found= collect.get_data(datasrc, dataset, idef, issue)
+                for rec in found:
+                    curr_coll_dict['data'].append(rec)
+                    found_num += 1
+
+            if found_num > 0:
+                found_total += found_num
+                out['result'].append(curr_coll_dict)
+
+        tlap= time()-tl1
+        out.update( {
+            'search_time_total': "%0.6f" % tlap,
+            'records_found_total': found_total
             } )
 
         return out

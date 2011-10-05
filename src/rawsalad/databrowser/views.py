@@ -138,7 +138,8 @@ def search_data( request ):
 
     db= rsdb.DBconnect('mongodb').dbconnect
     res= rsdb.Search()
-    result= res.search_data( db, qrystr= query_str, scope= scope_list, strict= strict )
+    # result= res.search_data( db, qrystr= query_str, scope= scope_list, strict= strict )
+    result= res.search_text( db, qrystr= query_str, scope= scope_list, strict= strict )
 
     return HttpResponse( json.dumps( result ))
 

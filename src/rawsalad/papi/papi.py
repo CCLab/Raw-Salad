@@ -494,12 +494,22 @@ def search_data(request, serializer, path='', db=None, **kwargs):
                 result['response']= rsdb.Response().get_response(36)["descr"]
             else:
                 res= rsdb.Search()
+                # # old search
+                # result.update(
+                #     res.search_data(
+                #         db, qrystr= query_str, scope= scope_list, strict= strict, lookup= lookup_fields
+                #         )
+                #     )
+                # result['response']= rsdb.Response().get_response(0)["descr"]
+
+                # new search
+                display_fields= get_userdef_fields(request, 'fields') # fields to display
                 result.update(
-                    res.search_data(
-                        db, qrystr= query_str, scope= scope_list, strict= strict, lookup= lookup_fields
+                    res.search_text(
+                        db, qrystr= query_str, scope= scope_list, strict= strict, display= display_fields
                         )
                     )
-                result['response']= rsdb.Response().get_response(0)["descr"]
+                result['response']= rsdb.Response().get_response(0)["descr"]                
 
     out, mime_tp, http_response = format_result(result, serializer, 200)
     return HttpResponse( out, mimetype=mime_tp, status=http_response )

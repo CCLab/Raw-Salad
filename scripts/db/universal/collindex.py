@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 """
 indexing collections in mongodb
@@ -13,7 +14,18 @@ import simplejson as json
 from ConfigParser import ConfigParser
 
 import pymongo
-from pymongo import ASCENDING, DESCENDING
+import re
+
+# fields to exclude from full-text search
+# WARNING! that should somehow be indicated in the metadata!!!
+exclude_fields= [
+    'idef', 'idef_sort',
+    'parent', 'parent_sort',
+    'level', 'type',
+    'numer', 'czesc', 'paragrafy', 'pozycja',
+    'numer-umowydecyzji', 'os-priorytetowa-kod', 'dziaanie-kod', 'poddziaanie-kod', 'nip-beneficjenta', 'kod-pocztowy', 'ostatni-wniosek-o-patnosc-dla-najbardziej-aktualnej-umowyaneksu','projekt-zakonczony-wniosek-o-patnosc-koncowa','data-podpisania-umowyaneksu', 'data-utworzenia-w-ksi-simik-07-13-umowyaneksu'
+    ]
+exclude_words= ['i', 'a', 'lub', 'w', 'o', 'z', 'za', 'u', 'do', 'nad', 'na', 'dla', 'bez', 'przy', 'do', 'ku', 'mimo', 'śród', 'przez', 'po', 'pod', 'przez', 'między']
 
 #-----------------------------
 def get_db_connect(fullpath, dbtype):
@@ -36,17 +48,63 @@ def get_db_connect(fullpath, dbtype):
 
     return connect_dict
 
+def build_keyword_list(collection, fields):
+
+    kwd_key= '_keywords'
+
+    coll_data= db[collection].find() # all data!
+
+    for doc in coll_data:
+        kwd_list= []
+        for field in fields:
+
+            # conditions under which we create list of keywords
+            is_proc= 'processable' in field
+            is_string= field['type'] == 'string'
+            is_not_excl= field['key'] not in exclude_fields
+
+            if is_string and is_proc and is_not_excl:
+                if doc[field['key']] is not None:
+
+                    curr_kwd_list= doc[field['key']].split(' ')
+                    for curr_kwd in curr_kwd_list:
+                        curr_kwd= curr_kwd.strip().lower()
+
+                        if len(curr_kwd) == 0:
+                            continue
+
+                        curr_kwd= re.sub(r'^[\W[^ąćęłńóśźż]\!\?\_]+|[\W[^ąćęłńóśźż]\!\?\_]+$', '', curr_kwd, re.L)
+                        new_kwd= replace_locale_symbols( curr_kwd )
+
+                        if curr_kwd not in exclude_words:
+                            kwd_list.append(curr_kwd) # append clean word
+                            if new_kwd != curr_kwd:
+                                kwd_list.append(new_kwd) # append word without local symbols
+
+        doc[kwd_key]= kwd_list # always overwrite?
+        db[collection].save(doc)
+
+    return kwd_key
+
+
+def replace_locale_symbols(src): # find smarter way to do it!
+    return src.replace(u'ą', 'a').replace(u'ć', 'c').replace(u'ę', 'e').replace(u'ł', 'l')\
+           .replace(u'ń', 'n').replace(u'ó', 'o').replace(u'ś', 's').replace(u'ź', 'z')\
+           .replace(u'ż', 'z').replace(u'Ą', 'A').replace(u'Ć', 'C').replace(u'Ę', 'E')\
+           .replace(u'Ł', 'L').replace(u'Ń', 'N').replace(u'Ó', 'O').replace(u'Ś', 'S')\
+           .replace(u'Ź', 'Z').replace(u'Ż', 'Z')
+
 #-----------------------------
-def ensure_indexes(db, md_coll):
-    ns_items= db[md_coll].find({}, {'_id':0, 'ns':1, 'query':1, 'sort':1})
+def ensure_indexes():
+    ns_items= db[coll_metadata].find({}, {'_id':0, 'ns':1, 'query':1, 'sort':1, 'columns':1, 'name':1})
     for ns in ns_items:
         curr_ns= ns['ns']
-        print "collection %s: \n...ensure indexes for \"idef\" and \"parent\"" % curr_ns
+        print "collection %s (%s): \n...ensuring indexes for \"idef\" and \"parent\"" % (curr_ns, ns['name'])
         db[curr_ns].ensure_index("idef")
         db[curr_ns].ensure_index("parent")
-        print "...trying to ensure indexes for \"level\""
+        print "...ensuring indexes for \"level\""
         try:
-            print "...ensure indexes for \"level\""
+            print "...ensuring indexes for \"level\""
             db[curr_ns].ensure_index("level")
         except:
             print "...no luck with \"level\" - no such key"
@@ -57,7 +115,7 @@ def ensure_indexes(db, md_coll):
         except:
             cond_sort= None
 
-        print "...trying to ensure indexes for sort keys"
+        print "...ensuring indexes for sort keys"
         if cond_sort is not None:
             list_sort= [int(k) for k, v in cond_sort.iteritems()]
             list_sort.sort()
@@ -65,10 +123,10 @@ def ensure_indexes(db, md_coll):
                 sort_list_index.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
 
             sort_index_name= "_".join([curr_ns,"sort_default"])
-            print "...ensure index %s for sort keys %s" % (sort_index_name, sort_list_index)
+            print "...ensuring index %s for sort keys %s" % (sort_index_name, sort_list_index)
             db[curr_ns].ensure_index(sort_list_index, name=sort_index_name)
 
-        print "...trying to ensure indexes for query keys"
+        print "...ensuring indexes for query keys"
         query_list_index= [] # query
         try:
             cond_query= ns['query']
@@ -77,10 +135,20 @@ def ensure_indexes(db, md_coll):
 
         if cond_query is not None:
             for nn in cond_query.items():
-                print "...ensure index for query key %s" % nn[0]
+                print "...ensuring index for query key %s" % nn[0]
                 db[curr_ns].ensure_index(nn[0])
         else:
             print "...no luck with query - no keys"
+
+        print "...creating lists of keywords for full-text search %s" % curr_ns
+        kwd= build_keyword_list(curr_ns, ns['columns'])
+        print "...ensuring index for keyword keys"
+        try:
+            db[curr_ns].ensure_index(kwd)
+        except Exception as e:
+            print e
+
+        print '-' * 50
 
 
 #-----------------------------
@@ -133,6 +201,6 @@ if __name__ == "__main__":
         print 'ERROR: No collection for metadata specified! Exiting now...'
         exit()
     
-    ensure_indexes(db, coll_metadata)
+    ensure_indexes()
 
     print "Done"
