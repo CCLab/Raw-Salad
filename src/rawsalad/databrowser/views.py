@@ -254,7 +254,7 @@ def store_state( request ):
 
 # init application prepared to handle restore data
 def init_restore( request, idef ):
-    template = loader.get_template( "restore.html" )
+    template = loader.get_template( "app.html" )
     context = Context({
         'meta': get_ms_nav(),
         'idef': idef
