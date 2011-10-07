@@ -95,68 +95,97 @@ def replace_locale_symbols(src): # find smarter way to do it!
            .replace(u'Ź', 'Z').replace(u'Ż', 'Z')
 
 #-----------------------------
-def ensure_indexes():
-    ns_items= db[coll_metadata].find({}, {'_id':0, 'ns':1, 'query':1, 'sort':1, 'columns':1, 'name':1})
-    for ns in ns_items:
-        curr_ns= ns['ns']
-        print "collection %s (%s): \n...ensuring indexes for \"idef\" and \"parent\"" % (curr_ns, ns['name'])
-        db[curr_ns].ensure_index("idef")
-        db[curr_ns].ensure_index("parent")
+def ensure_indexes(ns):
+    curr_ns= ns['ns']
+    print "collection %s (%s): \n...ensuring indexes for \"idef\" and \"parent\"" % (curr_ns, ns['name'])
+    db[curr_ns].ensure_index("idef")
+    db[curr_ns].ensure_index("parent")
+    print "...ensuring indexes for \"level\""
+    try:
         print "...ensuring indexes for \"level\""
-        try:
-            print "...ensuring indexes for \"level\""
-            db[curr_ns].ensure_index("level")
-        except:
-            print "...no luck with \"level\" - no such key"
+        db[curr_ns].ensure_index("level")
+    except:
+        print "...no luck with \"level\" - no such key"
 
-        sort_list_index= [] # sort
-        try:
-            cond_sort= ns['sort']
-        except:
-            cond_sort= None
+    sort_list_index= [] # sort
+    try:
+        cond_sort= ns['sort']
+    except:
+        cond_sort= None
 
-        print "...ensuring indexes for sort keys"
-        if cond_sort is not None:
-            list_sort= [int(k) for k, v in cond_sort.iteritems()]
-            list_sort.sort()
-            for sort_key in list_sort:
-                sort_list_index.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
+    print "...ensuring indexes for sort keys"
+    if cond_sort is not None:
+        list_sort= [int(k) for k, v in cond_sort.iteritems()]
+        list_sort.sort()
+        for sort_key in list_sort:
+            sort_list_index.append((cond_sort[str(sort_key)].keys()[0], cond_sort[str(sort_key)].values()[0]))
 
-            sort_index_name= "_".join([curr_ns,"sort_default"])
-            print "...ensuring index %s for sort keys %s" % (sort_index_name, sort_list_index)
-            db[curr_ns].ensure_index(sort_list_index, name=sort_index_name)
+        sort_index_name= "_".join([curr_ns,"sort_default"])
+        print "...ensuring index %s for sort keys %s" % (sort_index_name, sort_list_index)
+        db[curr_ns].ensure_index(sort_list_index, name=sort_index_name)
 
-        print "...ensuring indexes for query keys"
-        query_list_index= [] # query
-        try:
-            cond_query= ns['query']
-        except:
-            cond_query= None
+    print "...ensuring indexes for query keys"
+    query_list_index= [] # query
+    try:
+        cond_query= ns['query']
+    except:
+        cond_query= None
 
-        if cond_query is not None:
-            for nn in cond_query.items():
-                print "...ensuring index for query key %s" % nn[0]
-                db[curr_ns].ensure_index(nn[0])
+    if cond_query is not None:
+        for nn in cond_query.items():
+            print "...ensuring index for query key %s" % nn[0]
+            db[curr_ns].ensure_index(nn[0])
+    else:
+        print "...no luck with query - no keys"
+
+    print "...creating lists of keywords for full-text search %s" % curr_ns
+    kwd= build_keyword_list(curr_ns, ns['columns'])
+    print "...ensuring index for keyword keys"
+    try:
+        db[curr_ns].ensure_index(kwd)
+    except Exception as e:
+        print e
+
+    print '-' * 50
+
+#-----------------------------
+def ensure_indexes_meta(coll_metadata, coll_data= None):
+    err= ''
+    if coll_data is not None:
+        ns_item= db[coll_metadata].find_one(
+            { 'ns': coll_data.strip() },
+            { '_id':0, 'ns':1, 'query':1, 'sort':1, 'columns':1, 'name':1 }
+            )
+        if len(ns_item) == 0:
+            err= "ERROR! No records found with specified collection name!"
         else:
-            print "...no luck with query - no keys"
+            ensure_indexes( ns_item )
+    else:
+        ns_items= db[coll_metadata].find(
+            {},
+            {'_id':0, 'ns':1, 'query':1, 'sort':1, 'columns':1, 'name':1}
+            )
+        if ns_items is None:
+            err= "ERROR! No records found in the specified metadata collection!"
+        else:
+            if ns_items.count() == 0:
+                err= "ERROR! No records found in the specified metadata collection!"
+            else:
+                for curr_doc in ns_items:
+                    ensure_indexes( curr_doc )
 
-        print "...creating lists of keywords for full-text search %s" % curr_ns
-        kwd= build_keyword_list(curr_ns, ns['columns'])
-        print "...ensuring index for keyword keys"
-        try:
-            db[curr_ns].ensure_index(kwd)
-        except Exception as e:
-            print e
-
-        print '-' * 50
-
+    if len(err) != 0:
+        return err
+    else:
+        return 'OK'
 
 #-----------------------------
 if __name__ == "__main__":
     # process command line options
     cmdparser = optparse.OptionParser(usage="usage: python %prog [Options]") 
     cmdparser.add_option("-f", "--conf", action="store", dest="conf_filename", help="configuration file")
-    cmdparser.add_option("-l", "--collect", action="store",dest='collection_name',help="collection name where metadata is stored")
+    cmdparser.add_option("-m", "--meta", action="store", dest='coll_metadata',help="metadata collection name")
+    cmdparser.add_option("-l", "--collect", action="store", dest='collection_name',help="data collection name (all collections if not given)")
 
     opts, args = cmdparser.parse_args()
 
@@ -194,13 +223,13 @@ if __name__ == "__main__":
         print 'Cannot authenticate to db, exiting now'
         exit()
 
-    # data & meta-data collections
-    if opts.collection_name is not None:
-        coll_metadata= opts.collection_name
+    if opts.coll_metadata is not None:
+        coll_meta= opts.coll_metadata
     else:
-        print 'ERROR: No collection for metadata specified! Exiting now...'
+        print 'ERROR: No metadata collection specified! Exiting now...'
         exit()
-    
-    ensure_indexes()
+
+    result= ensure_indexes_meta(coll_meta, opts.collection_name)
+    print result
 
     print "Done"
