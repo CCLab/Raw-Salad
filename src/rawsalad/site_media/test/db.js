@@ -34,7 +34,7 @@ var _db = (function () {
         _utils.create_preloader( 'Zapisuję arkusze w bazie danych.<br />To może chwilę potrwać...' );
 
         $.ajax({
-            url: 'store_state/',
+            url: _basic_url + 'store_state/',
             type: 'GET',
             data: {
                 state: JSON.stringify( groups )
@@ -60,7 +60,7 @@ var _db = (function () {
         };
 
         $.ajax({
-            url: 'search/',
+            url: _basic_url + 'search/',
             data: data,
             dataType: 'json',
             success: function ( received_data ) {
@@ -78,7 +78,7 @@ var _db = (function () {
                     thead.hide();
                 }
                 else {
-                    received_data['strict']['result'].forEach( function ( collection ) {
+                    received_data['result'].forEach( function ( collection ) {
                         var html = [];
                         var single_row;
                         var idefs = [];
@@ -172,7 +172,7 @@ var _db = (function () {
         };
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
-            url: 'get_searched/',
+            url: _basic_url + 'get_searched/',
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
@@ -206,6 +206,7 @@ var _db = (function () {
 
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
+            url: _basic_url,
             data: init_data_info,
             dataType: "json",
             success: function( received_data ) {
