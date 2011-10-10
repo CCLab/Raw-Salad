@@ -291,6 +291,7 @@ def restore_state( request ):
                 vw_id= int(elt['view'])
                 iss= str(elt['issue'])
                 md_complete= coll.get_complete_metadata( ds_id, vw_id, iss, db )
+
                 elt['columns']= md_complete['columns']
 
                 for elt_item in elt['sheets']:
@@ -312,8 +313,6 @@ def restore_state( request ):
 
                     if len(curr_data) is not None:
                         elt_item['rows']= curr_data
-
-                print elt
 
     return HttpResponse( json.dumps(data) )
 
