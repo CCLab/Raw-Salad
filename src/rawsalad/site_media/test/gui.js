@@ -140,13 +140,14 @@ var _gui = (function () {
                         {
                             "height": datasets_height + "px"
                         },
-                        500 );
+                        500,
+                        'swing' );
 
                 $("#pl-ch-area").animate(
                         {
                             "left": "+=960px"
                         },
-                        500,
+                        500, 'swing',
                         function() {
                             $('#pl-ch-views')
                                 .find('ul')
@@ -874,10 +875,10 @@ var _gui = (function () {
                 create_views_panel( dataset_id );
 
                 if( datasets_height > views_height ) {
-                    $("#pl-ch-datasets").animate({ "height": views_height + "px" }, 500 );
+                    $("#pl-ch-datasets").animate({ "height": views_height + "px" }, 500, 'swing' );
                 }
                 else if( views_height > datasets_height ) {
-                    $("#pl-ch-views").animate({ "height": views_height + "px" }, 500 );
+                    $("#pl-ch-views").animate({ "height": views_height + "px" }, 500, 'swing' );
                 }
 
                 $("#pl-ch-area").animate( {"left": "-=960px"}, 500);
