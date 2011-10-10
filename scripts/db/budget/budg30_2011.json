@@ -13,33 +13,38 @@
             "key": "idef_sort",
             "label": "ID",
             "type": "string",
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "parent_sort",
             "label": "Rodzic",
             "type": "string",
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "level",
             "label": "Poziom",
             "type": "string",
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "type",
             "label": "Numer",
             "type": "string",
             "basic": true,
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "name",
             "label": "Koszty",
             "type": "string",
             "basic": true,
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "centrala",
@@ -47,7 +52,8 @@
             "processable": true,
             "basic": true,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "dolnoslaskie",
@@ -55,7 +61,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "kujawskopomorskie",
@@ -63,7 +70,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "lubelski",
@@ -71,7 +79,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "lubuski",
@@ -79,7 +88,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "lodzki",
@@ -87,7 +97,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "malopolski",
@@ -95,7 +106,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "mazowiecki",
@@ -103,7 +115,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "opolski",
@@ -111,7 +124,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "podkarpacki",
@@ -119,7 +133,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "podlaski",
@@ -127,7 +142,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "pomorski",
@@ -135,7 +151,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "slaski",
@@ -143,7 +160,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "swietokrzyski",
@@ -151,7 +169,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "warminskomazurski",
@@ -159,7 +178,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "wielkopolski",
@@ -167,7 +187,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "zachodniopomorski",
@@ -175,7 +196,8 @@
             "processable": true,
             "basic": false,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "osrodki_wojewodzkie",
@@ -183,7 +205,8 @@
             "processable": true,
             "basic": true,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "ogolem",
@@ -191,7 +214,8 @@
             "processable": true,
             "basic": true,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             }
         ],
     "aux": {

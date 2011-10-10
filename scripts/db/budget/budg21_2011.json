@@ -13,40 +13,46 @@
             "key": "idef_sort",
             "label": "ID",
             "type": "string",
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "parent_sort",
             "label": "Rodzic",
             "type": "string",
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "level",
             "label": "Poziom",
             "type": "string",
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "type",
             "label": "Numer",
             "basic": true,
             "type": "string",
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "name",
             "label": "Treść",
             "type": "string",
             "basic": true,
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "paragrafy",
             "label": "Paragrafy",
             "basic": true,
             "type": "string",
-            "processable": true
+            "processable": true,
+	    "format": "@"
             },
         {
             "key": "frst_popr",
@@ -54,7 +60,8 @@
             "type": "number",
             "basic": true,
             "processable": true,
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             },
         {
             "key": "plan_nast",
@@ -62,7 +69,8 @@
             "processable": true,
             "basic": true,
             "type": "number",
-            "checkable": true
+            "checkable": true,
+	    "format": "# ##0"
             }
         ],
     "aux": {

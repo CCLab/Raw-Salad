@@ -10,51 +10,59 @@
     {
       "key": "idef",
       "label": "ID",
-      "type": "string"
+      "type": "string",
+      "format": "@"
     },
     {
       "key": "parent",
       "label": "Rodzic",
       "type": "string",
-      "processable": true
+      "processable": true,
+      "format": "@"
     },
     {
       "key": "level",
       "label": "Poziom",
       "type": "string",
-      "processable": true
+      "processable": true,
+      "format": "@"
     },
     {
       "key": "numer",
       "label": "Numer",
       "type": "string",
-      "processable": true
+      "processable": true,
+      "format": "@"
     },
     {
       "key": "czesc",
       "label": "Część",
       "type": "number",
-      "processable": true
+      "processable": true,
+      "format": "###"
     },
     {
       "key": "type",
       "label": "Typ",
       "basic": true,
       "type": "string",
-      "processable": true
+      "processable": true,
+      "format": "@"
     },
     {
       "key": "name",
       "label": "Treść",
       "type": "string",
       "basic": true,
-      "processable": true
+      "processable": true,
+      "format": "@"
     },
     {
       "key": "pozycja",
       "label": "Pozycja",
       "type": "string",
-      "processable": true
+      "processable": true,
+      "format": "@"
     },
     {
       "key": "dot_sub",
@@ -62,7 +70,8 @@
       "type": "number",
       "basic": false,
       "processable": true,
-      "checkable": true
+      "checkable": true,
+      "format": "# ##0"
     },
     {
       "key": "swiad_fiz",
@@ -70,7 +79,8 @@
       "type": "number",
       "basic": false,
       "processable": true,
-      "checkable": true
+      "checkable": true,
+      "format": "# ##0"
     },
     {
       "key": "wyd_jednostek",
@@ -78,7 +88,8 @@
       "type": "number",
       "basic": false,
       "processable": true,
-      "checkable": true
+      "checkable": true,
+      "format": "# ##0"
     },
     {
       "key": "wyd_majatk",
@@ -86,7 +97,8 @@
       "type": "number",
       "basic": false,
       "processable": true,
-      "checkable": true
+      "checkable": true,
+      "format": "# ##0"
     },
     {
       "key": "wyd_dlug",
@@ -94,7 +106,8 @@
       "type": "number",
       "basic": false,
       "processable": true,
-      "checkable": true
+      "checkable": true,
+      "format": "# ##0"
     },
     {
       "key": "sw_eu",
@@ -102,7 +115,8 @@
       "type": "number",
       "basic": false,
       "processable": true,
-      "checkable": true
+      "checkable": true,
+      "format": "# ##0"
     },
     {
       "key": "wspolfin_eu",
@@ -110,7 +124,8 @@
       "type": "number",
       "basic": false,
       "processable": true,
-      "checkable": true
+      "checkable": true,
+      "format": "# ##0"
     },
     {
       "key": "v_total",
@@ -118,13 +133,13 @@
       "type": "number",
       "basic": true,
       "processable": true,
-      "checkable": true
+      "checkable": true,
+      "format": "# ##0"
     }
   ],
   "aux": {
       "leaf": 1,
-      "info": 1,
-      "_keywords": 1
+      "info": 1
   },
   "query": {},
   "sort": {
