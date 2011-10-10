@@ -138,8 +138,14 @@ def search_data( request ):
 
     db= rsdb.DBconnect('mongodb').dbconnect
     res= rsdb.Search()
+
+    # WARNING!
+    # rsdb.Search().search_data(...) - old way of search (through text keys)
+    # rsdb.Search().search_text(...) - new way of search (through _keywords)
+
     # result= res.search_data( db, qrystr= query_str, scope= scope_list, strict= strict )
-    result= res.search_text( db, qrystr= query_str, scope= scope_list, strict= strict )
+    fld_list= ['idef'] # on the first stage return only idefs
+    result= res.search_text( db, qrystr= query_str, scope= scope_list, display= fld_list, strict= strict )
 
     return HttpResponse( json.dumps( result ))
 
@@ -284,6 +290,8 @@ def restore_state( request ):
                 ds_id= int(elt['dataset'])
                 vw_id= int(elt['view'])
                 iss= str(elt['issue'])
+                md_complete= coll.get_complete_metadata( ds_id, vw_id, iss, db )
+                elt['columns']= md_complete['columns']
 
                 for elt_item in elt['sheets']:
                     open_elements= []
@@ -304,6 +312,8 @@ def restore_state( request ):
 
                     if len(curr_data) is not None:
                         elt_item['rows']= curr_data
+
+                print elt
 
     return HttpResponse( json.dumps(data) )
 
