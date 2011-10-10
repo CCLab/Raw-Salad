@@ -101,7 +101,7 @@ var _table = (function () {
             schema.forEach( function ( column ) {
                 html.push( '<td class="', column['key'], ' ' );
                 html.push( column['type'], '">' );
-                if( column['type'] === 'number' || column['type'] === 'float' || column['type'] === 'int' ) {
+                if( column['type'] === 'number' ) {
                     html.push( _utils.money( total['data'][ column['key'] ] ));
                 }
                 else {
@@ -199,7 +199,7 @@ var _table = (function () {
             html.push( '<td class="', column['key'], ' ' );
             html.push( column['type'] );
             html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
-            if( column['type'] === 'number' || column['type'] === 'float' || column['type'] === 'int' ) {
+            if( column['type'] === 'number' ) {
                 html.push( _utils.money( data[column['key']] ) );
             }
             else {
