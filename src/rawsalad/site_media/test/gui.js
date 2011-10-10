@@ -32,7 +32,7 @@ var _gui = (function () {
     that.init_gui = function ( hide_panel ) {
         var datasets_height;
 
-        window.onbeforeunload = _utils.beforeunload;
+//        window.onbeforeunload = _utils.beforeunload;
 
         $('#most-top')
             .find('table')
@@ -140,13 +140,14 @@ var _gui = (function () {
                         {
                             "height": datasets_height + "px"
                         },
-                        500 );
+                        500,
+                        'swing' );
 
                 $("#pl-ch-area").animate(
                         {
                             "left": "+=960px"
                         },
-                        500,
+                        500, 'swing',
                         function() {
                             $('#pl-ch-views')
                                 .find('ul')
@@ -218,7 +219,7 @@ var _gui = (function () {
                     $('#tm-choose').trigger( $.Event( 'click' ) );
                 }
                 // arm backbutton and others again - timeout for letting download work
-                setTimeout( function () { window.onbeforeunload = _utils.beforeunload; }, 1000 );
+//                setTimeout( function () { window.onbeforeunload = _utils.beforeunload; }, 1000 );
             });
 
         $('#pl-feedback')
@@ -874,10 +875,10 @@ var _gui = (function () {
                 create_views_panel( dataset_id );
 
                 if( datasets_height > views_height ) {
-                    $("#pl-ch-datasets").animate({ "height": views_height + "px" }, 500 );
+                    $("#pl-ch-datasets").animate({ "height": views_height + "px" }, 500, 'swing' );
                 }
                 else if( views_height > datasets_height ) {
-                    $("#pl-ch-views").animate({ "height": views_height + "px" }, 500 );
+                    $("#pl-ch-views").animate({ "height": views_height + "px" }, 500, 'swing' );
                 }
 
                 $("#pl-ch-area").animate( {"left": "-=960px"}, 500);

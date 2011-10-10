@@ -132,7 +132,7 @@ def search_data( request ):
         strict= False
     else:
         strict= True
-    
+
     usrqry= usrqry.strip() # cleaning user query
     query_str= re.sub('\s+', ' ', usrqry) # cleaning multiple spaces
 
@@ -260,12 +260,12 @@ def store_state( request ):
 
 # init application prepared to handle restore data
 def init_restore( request, idef ):
-    template = loader.get_template( "restore.html" )
+    template = loader.get_template( "app.html" )
     context = Context({
         'meta': get_ms_nav(),
         'idef': idef
     })
-    
+
     return HttpResponse( template.render( context ))
 
 #restore front-end state from mongo
@@ -300,7 +300,7 @@ def restore_state( request ):
                         # artificially moving focus to one level deeper,
                         # as build_query looks for brothers, not for parents
                         open_elements.append("-".join([curr_idef, '1']))
-                        
+
                     find_query= build_query( open_elements )
 
                     coll.set_query( { 'idef': { '$regex': find_query} } )
@@ -334,9 +334,10 @@ func_dict = {
 
 
 def get_page( data ):
-    template = loader.get_template( "test.html" )
-#     context = Context( tmp_solution_for_metadata() )
-    context = Context( get_ms_nav() )
+    template = loader.get_template( "app.html" )
+    context = Context({
+        'meta': get_ms_nav()
+    })
     return HttpResponse( template.render( context ))
 
 

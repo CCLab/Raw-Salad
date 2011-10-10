@@ -199,7 +199,12 @@ var _table = (function () {
             html.push( '<td class="', column['key'], ' ' );
             html.push( column['type'] );
             html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
-            html.push( column['type'] === 'number' ? _utils.money( data[column['key']] ) : data[column['key']] );
+            if( column['type'] === 'number' ) {
+                html.push( _utils.money( data[column['key']] ) );
+            }
+            else {
+                html.push( data[column['key']] );
+            }
             if( !!data['info'] && column['key'] === 'type' ) {
                 //html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
                 //html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
@@ -236,16 +241,16 @@ var _table = (function () {
                 if ( info_panel_close_button.length === 1 ){
                    info_panel_close_button.trigger( $.Event( 'click' ));
                 }
-                else{                    
+                else{
                 generate_info_panel_content( _store.get_info( $(this).attr('data-id') ));
                 $('#app-tb-info')
                     .click( function ( event ){
-                        event.stopPropagation();                        
-                    });                
+                        event.stopPropagation();
+                    });
                 $('#app-tb-in-con-button-x').click( function() {
                     $('#app-tb-in-content').slideUp( 200, function () {
                     	$('#app-tb-info').remove();
-                    	$('html').unbind( 'click' ); 
+                    	$('html').unbind( 'click' );
             	    });
                 });
                 $('html')
@@ -358,7 +363,7 @@ var _table = (function () {
         html.push( '</div>' );
 
         info_button.parent().append( html.join('') );
-        $('#app-tb-in-content').slideDown( 200 ); 
+        $('#app-tb-in-content').slideDown( 200 );
 
     }
 
@@ -371,14 +376,14 @@ var _table = (function () {
         };
         var text_generator = functions_map[ _store.dataset() ];
         var visible_attrs = prepare_visible_attributes();
-        
+
         html.push( text_generator( info, visible_attrs ) );
         html.push( '</table>' );
 
         return html.join('');
     }
 
-  
+
     function generate_text_for_budzet( info, visible_attrs ) {
         var html;
         var budzet_function_map = {
@@ -393,8 +398,8 @@ var _table = (function () {
     function generate_text_for_budzet_ksiegowy( info, visible_attrs ) {
         var html = [];
         var list = info.slice();
-        // sort list by 'dzial' value 
-        list.sort( function( a, b ) { 
+        // sort list by 'dzial' value
+        list.sort( function( a, b ) {
                 var a_idef_list = a['idef'].split( '-' );
                 var b_idef_list = b['idef'].split( '-' );
                 return a_idef_list[1] - b_idef_list[1];
@@ -428,11 +433,11 @@ var _table = (function () {
         });
         html.push( '</tbody>' );
         html.push( '</table>' );
-         
+
         html.push( '<table id="app-tb-in-con-table2" >' );
         html.push( '<tbody>' );
         if ( cont !== null ){
-        
+
             for ( attr in visible_attrs ) {
                 if ( visible_attrs.hasOwnProperty(attr) ) {
                     html.push( '<tr><td class="app-tb-in-con-attr" >', visible_attrs[attr],':' );
@@ -442,7 +447,7 @@ var _table = (function () {
         }
         html.push('</tbody>');
         html.push( '</table>' );
-        
+
         return html.join('');
     }
 
@@ -450,7 +455,7 @@ var _table = (function () {
         var attr;
         var html = [];
         var cont = null;
-        
+
         html.push( '<table id="app-tb-in-con-table1" >' );
         html.push( '<tbody>' );
         info.forEach( function ( e ) {
@@ -459,12 +464,12 @@ var _table = (function () {
 
             if ( e['type'] === 'Miernik' ) {
                 cont = e;
-            }    
+            }
 
         });
         html.push( '</tbody>' );
         html.push( '</table>' );
-         
+
         html.push( '<table id="app-tb-in-con-table2" >' );
         html.push( '<tbody>' );
         if ( cont !== null ){
@@ -475,7 +480,7 @@ var _table = (function () {
                 }
             }
         }
-        html.push('</tbody>');    
+        html.push('</tbody>');
         html.push( '</table>' );
         return html.join('');
     }
@@ -483,13 +488,13 @@ var _table = (function () {
     function generate_text_for_nfz( info, visible_attrs ) {
         var html = [];
         var attr;
-        
+
         html.push( '<table id="app-tb-in-con-table1" >' );
         html.push( '<tbody>' );
         html.push( '<tr><td class="app-tb-in-con-type" >');
         html.push('</td> <td class="app-tb-in-con-name" >', info[0]['name'], '</td>' );
         html.push( '</tr>' );
-        
+
         html.push( '</tbody>' );
         html.push( '</table>' );
 
@@ -502,7 +507,7 @@ var _table = (function () {
                     html.push( info[0][attr], '</td></tr>' );
             }
         }
-        
+
         html.push( '</tbody>' );
         html.push( '</table>' );
         return html.join('');
