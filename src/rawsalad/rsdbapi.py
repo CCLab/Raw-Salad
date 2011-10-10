@@ -552,8 +552,11 @@ class Collection:
 
     def get_fields(self, meta_data):
         fields_dict= {'_id':0} # _id is never returned
-        if 'aux' in meta_data:
-            fields_dict.update(meta_data['aux']) # fields to be returned in any case
+
+        # WARNING! not necessary anymore!
+        # # fields to be returned in any case
+        # if 'aux' in meta_data:
+        #     fields_dict.update(meta_data['aux'])
 
         if len(self.request_fields) > 0:
             fields_dict.update(self.request_fields)
@@ -863,14 +866,18 @@ class Search:
             kwds_list= []
             for word in words_list:
                 query_regx= r'^%s' % word
+                # query_regx= r'%s' % word # WARNING! it works, but extremely slow!
                 if strict:
                     query_regx += '$'
+                    # query_regx = '^' + query_regx + '$'
                 kwds_list.append({ '_keywords': re.compile(query_regx) })
             qry_dict.update({ '$and': kwds_list })
         elif len(words_list) == 1: # one word
-            query_regx= r'^%s' % qrystr
+            # query_regx= r'^%s' % qrystr # WARNING! it works, but extremely slow!
+            query_regx= r'%s' % qrystr
             if strict:
                 query_regx += '$'
+                # query_regx = '^' + query_regx + '$'
             qry_dict.update( { '_keywords': re.compile(query_regx) } )
 
         collect.set_query(qry_dict)
