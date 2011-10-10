@@ -221,22 +221,22 @@ var _store = (function () {
     that.active_rows = function () {
         return that.active_sheet()['rows'];
     };
-    
+
 
     that.get_node_from_active_sheet = function ( id ) {
         var rows = that.active_rows();
         var node;
         var i;
-        
+
         for ( i=0; i < rows.length ; i += 1 ) {
             node = rows[i];
             if ( node['data']['idef'] === id ){
                 return node;
             }
         }
-        return null;  
+        return null;
     };
-    
+
     that.get_node_name = function ( id ) {
         var node = that.get_node_from_active_sheet( id );
         var name = node['data']['name'];
@@ -258,15 +258,15 @@ var _store = (function () {
     that.active_filtered = function () {
         return that.active_sheet()['filtered'];
     };
-    
+
     that.active_sorted = function () {
         return that.active_sheet()['sorted'];
     };
-    
+
     that.set_sorted = function ( is_sorted ) {
         that.active_sheet()['sorted'] = is_sorted;
     }
-    
+
 
     // active sheet getter / setter
     that.active_sheet = function ( value ) {
@@ -284,20 +284,20 @@ var _store = (function () {
         var num;
         if( arguments.length === 0 ) {
             return groups[ active_group_number ];
-  
+
         }else if ( typeof value === 'number' ){
-        
+
             active_group_number = value;
 
         }else if ( typeof value === 'object' &&
-            typeof value.dataset === 'string' && 
+            typeof value.dataset === 'string' &&
             typeof value.view === 'string' ){
 
                 num = find_group( value );
                 if ( num === -1 ) {
-                return -1 
+                return -1
                 }else{
-                    active_group_number = num;                 
+                    active_group_number = num;
                 }
         }
     };
@@ -432,16 +432,47 @@ var _store = (function () {
     };
 
     that.restore_state = function ( state ) {
-        groups = state;
-        groups.forEach( function( group ) {
+        // traverse the state list and prepare data to proper format
+        state.forEach( function( group ) {
             group['sheets'].forEach( function ( sheet ) {
+                // assign a proper node state
                 sheet['rows'] = add_state( sheet['rows'] );
+                // if 'Total' available, move it to separate field
                 if( sheet['rows'][ sheet['rows'].length - 1 ]['data']['idef'].indexOf( '9999' ) !== -1 ) {
                     sheet['rows']['total'] = sheet['rows'].pop();
                 }
             });
+
+            // create a basic_rows on the basis of the first row in the group
+            group['basic_rows'] = [];
+            $.extend( true,
+                      group['basic_rows'],
+                      group['sheets'][0]['rows'].filter( function ( e ) {
+                                                    return e['data']['level'] === 'a';
+                                                })
+                                                .map( function ( e ) {
+                                                    return {
+                                                            'data': e['data'],
+                                                            'state': {
+                                                                'open': false,
+                                                                'selected': false,
+                                                                'visible': true
+                                                            }
+                                                    }
+                                                })
+                      );
+
+            // TODO: this is a bug - the full columns list should come from db
+            group['columns'] = [];
+            $.extend( true, group['columns'], group['sheets'][0]['columns'] );
+
+            // create easy-to-access name field in the group
             group['name'] = group['sheets'][0]['name'];
+            // reset active sheet
+            group['active_sheet_number'] = 0;
         });
+        // assign state to groups obejct
+        groups = state;
         active_group_number = 0;
         that.active_sheet_index( 0 );
     };
@@ -455,8 +486,8 @@ var _store = (function () {
                 open_nodes[ e['parent'] ] = true;
             }
         });
-        
-        return rows.map( function ( e ) {            
+
+        return rows.map( function ( e ) {
             return {
                 'data': e,
                 'state': {
@@ -467,7 +498,7 @@ var _store = (function () {
             };
         });
     }
-    
+
     // data about available datasets and their views
     var meta_data = [];
 
