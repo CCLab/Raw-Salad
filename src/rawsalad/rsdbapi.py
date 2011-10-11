@@ -553,11 +553,6 @@ class Collection:
     def get_fields(self, meta_data):
         fields_dict= {'_id':0} # _id is never returned
 
-        # WARNING! not necessary anymore!
-        # # fields to be returned in any case
-        # if 'aux' in meta_data:
-        #     fields_dict.update(meta_data['aux'])
-
         if len(self.request_fields) > 0:
             fields_dict.update(self.request_fields)
 
@@ -571,6 +566,9 @@ class Collection:
             self.fill_warning( field_names_complete + aux_fields ) # fill self.warning
 
         else:
+            if 'aux' in meta_data:
+                fields_dict.update(meta_data['aux'])
+
             md_fields= meta_data['columns'] # list of main columns to be returned
             for fld in md_fields:
                 fields_dict[fld['key']]= 1
@@ -856,11 +854,10 @@ class Search:
 
         out= { 'result': [] }
         self.found= {}
+        qry_dict= { }
 
         collect= Collection()
 
-        query_regx= ''
-        qry_dict= { }
         words_list= qrystr.strip().lower().split(' ')
         if len(words_list) > 1: # multiple words
             kwds_list= []
@@ -873,8 +870,8 @@ class Search:
                 kwds_list.append({ '_keywords': re.compile(query_regx) })
             qry_dict.update({ '$and': kwds_list })
         elif len(words_list) == 1: # one word
-            # query_regx= r'^%s' % qrystr # WARNING! it works, but extremely slow!
-            query_regx= r'%s' % qrystr
+            query_regx= r'^%s' % qrystr
+            # query_regx= r'%s' % qrystr # WARNING! it works, but extremely slow!
             if strict:
                 query_regx += '$'
                 # query_regx = '^' + query_regx + '$'
