@@ -1,0 +1,221 @@
+{
+    "aux": {
+        "idef": 1,
+        "leaf": 1,
+        "parent": 1
+    },
+    "batchsize": null,
+    "columns": [
+        {
+            "format": "@",
+            "key": "idef_sort",
+            "label": "ID",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "parent_sort",
+            "label": "Rodzic",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "level",
+            "label": "Poziom",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "basic": true,
+            "format": "@",
+            "key": "type",
+            "label": "Nazwa",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "numer-umowydecyzji",
+            "label": "Numer umowy/decyzji",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "basic": true,
+            "format": "@",
+            "key": "program-operacyjny-nazwa",
+            "label": "Program Operacyjny <Nazwa>",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "os-priorytetowa-kod",
+            "label": "O\u015b priorytetowa <Kod>",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "dzialanie-kod",
+            "label": "Dzia\u0142anie <Kod>",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "poddzialanie-kod",
+            "label": "Poddzia\u0142anie <Kod>",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "basic": true,
+            "checkable": true,
+            "format": "# ##0.00",
+            "key": "wartosc-ogolem",
+            "label": "Warto\u015b\u0107 og\u00f3\u0142em",
+            "processable": true,
+            "type": "float"
+        },
+        {
+            "checkable": true,
+            "format": "# ##0.00",
+            "key": "wydatki-kwalifikowalne",
+            "label": "Wydatki kwalifikowalne",
+            "processable": true,
+            "type": "float"
+        },
+        {
+            "basic": true,
+            "checkable": true,
+            "format": "# ##0.00",
+            "key": "dofinansowanie",
+            "label": "Dofinansowanie",
+            "processable": true,
+            "type": "float"
+        },
+        {
+            "checkable": true,
+            "format": "# ##0.00",
+            "key": "dofinansowanie-ue",
+            "label": "Dofinansowanie UE",
+            "processable": true,
+            "type": "float"
+        },
+        {
+            "basic": true,
+            "format": "@",
+            "key": "nazwa-beneficjenta",
+            "label": "Nazwa beneficjenta",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "nip-beneficjenta",
+            "label": "NIP beneficjenta",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "kod-pocztowy",
+            "label": "Kod pocztowy",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "miejscowosc",
+            "label": "Miejscowo\u015b\u0107",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "wojewodztwo",
+            "label": "Wojew\u00f3dztwo",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "powiat",
+            "label": "Powiat",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "temat-priorytetu",
+            "label": "Temat priorytetu",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "forma-prawna",
+            "label": "Forma prawna",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "obszar-realizacji",
+            "label": "Obszar realizacji",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "ostatni-wniosek-o-platnosc-dla-najbardziej-aktualnej-umowyaneksu",
+            "label": "Ostatni Wniosek o p\u0142atno\u015b\u0107 dla najbardziej aktualnej Umowy/Aneksu",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "projekt-zakonczony-wniosek-o-platnosc-koncowa",
+            "label": "Projekt zako\u0144czony (Wniosek o p\u0142atno\u015b\u0107 ko\u0144cow\u0105)",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "data-podpisania-umowyaneksu",
+            "label": "Data podpisania Umowy/Aneksu",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "format": "@",
+            "key": "data-utworzenia-w-ksi-simik-07-13-umowyaneksu",
+            "label": "Data utworzenia w KSI SIMIK 07-13 Umowy/Aneksu",
+            "processable": true,
+            "type": "string"
+        }
+    ],
+    "dataset": 5,
+    "explorable": "type",
+    "idef": 1,
+    "issue": "2011",
+    "max_level": "d",
+    "name": "europejski-fundusz-rozwoju-regionalnego-szczebel-wojewodzki-2011",
+    "ns": "dd_effr2011_wo",
+    "perspective": "Europejski Fundusz Rozwoju Regionalnego Szczebel wojew\u00f3dzki 2011",
+    "query": {},
+    "sort": {
+        "0": {
+            "idef_sort": 1
+        },
+        "1": {
+            "parent_sort": 1
+        },
+        "2": {
+            "level": 1
+        }
+    }
+}
