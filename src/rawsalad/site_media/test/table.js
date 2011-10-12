@@ -332,7 +332,7 @@ var _table = (function () {
             html.push( '<td class="', column['key'], ' ' );
             if( column['format'] !== '@' ) {
                 html.push( 'number">' );
-                html.push( node['data'][ column['key'] ] );
+                html.push( _utils.money( node['data'][ column['key']], column['format'] ));
             }
             else {
                 html.push( 'string">' );
