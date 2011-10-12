@@ -167,37 +167,42 @@ def string2list( in_str ):
 def build_idef_regexp( curr_idef ):
     """ build regexp quering collection """
     level_num= curr_idef.count('-')
+
+    # build regexp for the given idef plus it's context (siblings and full parental branch)
     if level_num > 0: # deeper than 'a'
         idef_srch= curr_idef.rsplit('-', 1)[0]
-        lookup_idef= r"^%s\-([A-Z]|\d)+$" % idef_srch
+        lookup_idef= r'^%s\-([A-Z]|\d)+$' % idef_srch
         curr_idef= idef_srch
         level= 1
         while level < level_num:
             idef_srch= curr_idef.rsplit('-', 1)[0]
-            lookup_idef += r"|^%s\-([A-Z]|\d)+$" % idef_srch
+            lookup_idef += r'|^%s\-([A-Z]|\d)+$' % idef_srch
             curr_idef= idef_srch
             level += 1
-        lookup_idef += r"|^([A-Z]|\d)+$"
+        lookup_idef += r'|^([A-Z]|\d)+$'
+
     else: # simply query the highest level
-        lookup_idef= r"^([A-Z]|\d)+$"
+        lookup_idef= r'^([A-Z]|\d)+$'
 
     return lookup_idef
 
-def build_query( idef_list ):
-    lookup, i= "", 0
+def build_query( idef_list):
+    lookup, i= '', 0
 
     result_limit= 275 # WARNING! Limiting number of idefs here with a constant
     if len(idef_list) > result_limit:
         idef_list= idef_list[:result_limit]
-
+    
     if len(idef_list) > 0:
         for idef in idef_list:
             i += 1
+
             lookup_idef= build_idef_regexp( idef )
 
-            lookup += r"(%s)|" % lookup_idef
+            lookup += r'(%s)|' % lookup_idef
             if i == len(idef_list):
                 lookup= lookup[:-1] # cutting the last symbol | in case it's the end of list
+
     else: # in cases there're no 'open' nodes in the view
         lookup= build_idef_regexp( '0' ) # this returns regexp for getting level 'a' only
 
@@ -278,7 +283,6 @@ def restore_state( request ):
         state= rsdb.State()
 
         data= state.get_state(int(idef), db)
-        print state.response
 
         if state.response['httpresp'] != 200: # ERROR!
             data= state.response # {'descr': <str - error description>, 'httpresp': <int - http status>}
@@ -298,18 +302,31 @@ def restore_state( request ):
                     open_elements= []
                     for curr_idef in elt_item['rows']:
                         # artificially moving focus to one level deeper,
-                        # as build_query looks for brothers, not for parents
+                        # as build_query looks for siblings, not parents
                         open_elements.append("-".join([curr_idef, '1']))
 
-                    find_query= build_query( open_elements )
+                    if elt_item['filtered']:
+                        find_query= { '$in': elt_item['rows'] }
+                    else:
+                        find_query= { '$regex': build_query( open_elements ) }
 
-                    coll.set_query( { 'idef': { '$regex': find_query} } )
+                    coll.set_query({ 'idef': find_query })
 
                     curr_data = []
                     try:
                         curr_data= coll.get_data(db, ds_id, vw_id, iss)
                     except:
                         pass
+
+                    if elt_item['filtered']:
+                        for curr_doc in curr_data:
+                            j= 0
+                            for rw in elt_item['rows']:
+                                if curr_doc['idef'] == rw:
+                                    curr_doc.update({ 'breadcrumb': elt_item['breadcrumbs'][j] })
+                                    print curr_doc, '\n'
+                                    break
+                                j+=1
 
                     if len(curr_data) is not None:
                         elt_item['rows']= curr_data

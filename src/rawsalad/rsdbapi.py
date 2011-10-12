@@ -624,7 +624,7 @@ class State:
         success= True
 
         if state_id == 0 or state_id is None:
-            self.response= Response().get_response(42) # no data
+            self.response= Response().get_response(42) # state id not specified
             success= False
 
         if success:
