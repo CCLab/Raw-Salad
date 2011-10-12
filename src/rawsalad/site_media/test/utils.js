@@ -72,9 +72,25 @@ var _utils = (function () {
     };
 
 
-    that.money = function ( value ) {
+    that.money = function ( data, format ) {
         var result = [];
-        var value = "" + value;
+        var data = data + '';
+        var value = '';
+        var sufix = '.';
+        if( format.indexOf('.') !== -1 ) {
+             value = data.split('.')[0];
+             sufix += data.split('.')[1] || '00';
+             // just one digit provided
+             if( sufix.length === 2 ) {
+                 sufix += '0';
+             }
+             else if( sufix.length > 3 ) {
+                 sufix = sufix.substr(0,3);
+             }
+        }
+        else {
+            value = data;
+        }
 
         var cut = function ( value ) {
             if( value.length <= 3 ) {
@@ -86,7 +102,7 @@ var _utils = (function () {
             }
         }
         cut( value );
-        return value === '0' ? '0' : result.reverse().join(' ') + " 000";
+        return value === '0' ? '0' : result.reverse().join(' ') + sufix;
     };
 
     that.uniq = function ( array, sort_it ) {

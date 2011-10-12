@@ -100,11 +100,12 @@ var _table = (function () {
 
             schema.forEach( function ( column ) {
                 html.push( '<td class="', column['key'], ' ' );
-                html.push( column['type'], '">' );
-                if( column['type'] === 'number' ) {
-                    html.push( _utils.money( total['data'][ column['key'] ] ));
+                if( column['format'] !== '@' ) {
+                    html.push( 'number">' );
+                    html.push( _utils.money( total['data'][ column['key'] ], column['format'] ));
                 }
                 else {
+                    html.push( 'string">' );
                     html.push( total['data'][ column['key'] ] );
                 }
                 html.push( '</td>' );
@@ -197,12 +198,13 @@ var _table = (function () {
         // TODO >> it can be sligthly slower than for loop - test it
         schema.forEach( function ( column ) {
             html.push( '<td class="', column['key'], ' ' );
-            html.push( column['type'] );
-            html.push( !data['leaf'] && column['key'] === 'type' ? ' click">' : '">' );
-            if( column['type'] === 'number' ) {
-                html.push( _utils.money( data[column['key']] ) );
+            html.push( !data['leaf'] && column['key'] === 'type' ? ' click ' : '' );
+            if( column['format'] !== '@' ) {
+                html.push( 'number">' );
+                html.push( _utils.money( data[column['key']], column['format'] ) );
             }
             else {
+                html.push( 'string">' );
                 html.push( data[column['key']] );
             }
             if( !!data['info'] && column['key'] === 'type' ) {
@@ -327,8 +329,15 @@ var _table = (function () {
         html.push( '<tr id="', node['data']['idef'], '" ' );
         html.push( 'class="filtered-data">' );
         args['schema'].forEach( function ( column ) {
-            html.push( '<td class="', column['key'], ' ', column['type'], '">' );
-            html.push( node['data'][ column['key'] ] );
+            html.push( '<td class="', column['key'], ' ' );
+            if( column['format'] !== '@' ) {
+                html.push( 'number">' );
+                html.push( node['data'][ column['key'] ] );
+            }
+            else {
+                html.push( 'string">' );
+                html.push( node['data'][ column['key'] ] );
+            }
             html.push('</td>');
         });
         html.push( '</tr>' );
