@@ -231,6 +231,8 @@ var _gui = (function () {
 
         $('#pl-fb-button')
             .click( function () {
+                _utils.create_preloader( "Email został wysłany!" );
+                setTimeout( _utils.clear_preloader, 2000 );
                 $.ajax({
                     url:'feedback/',
                     type: 'POST',
