@@ -90,6 +90,7 @@ var _utils = (function () {
         }
         else {
             value = data;
+            sufix = '';
         }
 
         var cut = function ( value ) {
