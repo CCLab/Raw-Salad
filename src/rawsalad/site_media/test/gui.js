@@ -419,6 +419,9 @@ var _gui = (function () {
                                     'columns': e['columns'],
                                     'rows': needed_ids,
                                     'name': e['name'],
+                                    'breadcrumbs': e['filtered'] ? needed_ids.map( function ( e ) {
+                                                                        return 'BREADCRUMB for ' + e;
+                                                                   }) : [],
                                     'filtered': e['filtered'],
                                     'sorted': e['sorted']
                                 };

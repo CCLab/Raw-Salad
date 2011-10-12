@@ -66,18 +66,18 @@ var _tools = (function () {
                 _db.add_search_data( search_list );
             });
     };
-    
+
     that.create_info_breadcrumb = function( id ) {
         var tmp_id = id;
         var node;
         var type;
         var breadcrumb_list = [];
 
-        node = _store.get_node_from_active_sheet( tmp_id ); 
-        
+        node = _store.get_node_from_active_sheet( tmp_id );
+
         while ( !!node ) {
             type = node['data']['type'];
-            tmp_id = node['data']['parent'];          
+            tmp_id = node['data']['parent'];
 
             breadcrumb_list.push( type );
 
@@ -102,6 +102,56 @@ var _tools = (function () {
                 store_row['state']['open'] = true;
             }
         });
+    }
+
+    that.create_breadcrumb = function ( id ) {
+        var tmp_id = id;
+        var node;
+        var type;
+        var full_type;
+        var name;
+        var breadcrumb = [];
+        var breadcrumb_list = [];
+
+        tmp_id = _utils.get_parent_id( id );
+
+        while ( !!tmp_id ) {
+            node = $('#'+ tmp_id);
+            full_type = node.children('.type').html();
+            type = full_type;//get_type_representation( full_type );
+            name = node.children('.name').html();
+
+            tmp_id = _utils.get_parent_id( tmp_id );
+            breadcrumb_list.push({
+                type: type,
+                name: name
+            });
+        }
+
+        breadcrumb_list = breadcrumb_list.reverse();
+
+        breadcrumb_list.forEach( function ( el, i ) {
+            breadcrumb.push( el['type'] + ' ' );
+            if ( i < breadcrumb_list.length - 1 ) {
+                if ( el['name'].length > 35 ) {
+                    el['name'] = el['name']
+                                           .slice(0, 32)
+                                           .concat('...');
+                }
+            } else {
+                if ( el['name'].length > 45 ) {
+                    el['name'] = el['name']
+                                           .slice(0, 42)
+                                           .concat('...');
+                }
+            }
+            breadcrumb.push( el['name'] );
+            if ( i < breadcrumb_list.length - 1 ) {
+                breadcrumb.push(' > ');
+            }
+        });
+
+        return breadcrumb.join('');
     }
 
     return that;
@@ -610,15 +660,15 @@ var _tools = (function () {
             var new_sheet_name = $('#app-tb-tl-rename-input').val();
 
             if ( old_sheet_name !== new_sheet_name ){
-                 _store.active_sheet_name( new_sheet_name );             
-                 _gui.refresh_gui();       
+                 _store.active_sheet_name( new_sheet_name );
+                 _gui.refresh_gui();
             }
-            $('#app-tb-tl-rename-form').hide();                
-            $('#app-tb-tl-title').show();  
-            
-            return false;              
+            $('#app-tb-tl-rename-form').hide();
+            $('#app-tb-tl-title').show();
+
+            return false;
         } );
-        
+
         $('#app-tb-tl-rename-button')
             .click( function(){
                 var active_sheet_name = _store.active_sheet_name();
@@ -627,12 +677,12 @@ var _tools = (function () {
                     $('#app-tb-tl-rename-form').submit();
                 }else{
                     $('#app-tb-tl-title').hide();
-                    $('#app-tb-tl-rename-form').show();  
+                    $('#app-tb-tl-rename-form').show();
                     $('#app-tb-tl-rename-input')
                         .val( active_sheet_name )
                         .select()
                         .focus();
-                }        
+                }
             });
     }
 
@@ -643,7 +693,7 @@ var _tools = (function () {
                              })
                              .map( function (e) {
                                  var id = e['data']['idef'];
-                                 e['breadcrumb'] = create_breadcrumb( id );
+                                 e['breadcrumb'] = that.create_breadcrumb( id );
                                  return e;
                              });
     }
@@ -665,56 +715,6 @@ var _tools = (function () {
         var type_list;
         type_list = full_type.split(' ');
         return type_list.pop();
-    }
-    
-    function create_breadcrumb( id ) {
-        var tmp_id = id;
-        var node;
-        var type;
-        var full_type;
-        var name;
-        var breadcrumb = [];
-        var breadcrumb_list = [];
-
-        tmp_id = _utils.get_parent_id( id );
-
-        while ( !!tmp_id ) {
-            node = $('#'+ tmp_id);
-            full_type = node.children('.type').html();
-            type = full_type;//get_type_representation( full_type );
-            name = node.children('.name').html();
-
-            tmp_id = _utils.get_parent_id( tmp_id );
-            breadcrumb_list.push({
-                type: type,
-                name: name
-            });
-        }
-
-        breadcrumb_list = breadcrumb_list.reverse();
-
-        breadcrumb_list.forEach( function ( el, i ) {
-            breadcrumb.push( el['type'] + ' ' );
-            if ( i < breadcrumb_list.length - 1 ) {
-                if ( el['name'].length > 35 ) {
-                    el['name'] = el['name']
-                                           .slice(0, 32)
-                                           .concat('...');
-                }
-            } else {
-                if ( el['name'].length > 45 ) {
-                    el['name'] = el['name']
-                                           .slice(0, 42)
-                                           .concat('...');
-                }
-            }
-            breadcrumb.push( el['name'] );
-            if ( i < breadcrumb_list.length - 1 ) {
-                breadcrumb.push(' > ');
-            }
-        });
-
-        return breadcrumb.join('');
     }
 
     function construct_scope() {
