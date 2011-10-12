@@ -31,6 +31,14 @@
             "basic": true,
             "format": "@",
             "key": "type",
+            "label": "Typ",
+            "processable": true,
+            "type": "string"
+        },
+        {
+            "basic": true,
+            "format": "@",
+            "key": "name",
             "label": "Nazwa",
             "processable": true,
             "type": "string"
