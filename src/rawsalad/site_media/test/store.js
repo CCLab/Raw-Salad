@@ -462,10 +462,6 @@ var _store = (function () {
                                                 })
                       );
 
-            // TODO: this is a bug - the full columns list should come from db
-            group['columns'] = [];
-            $.extend( true, group['columns'], group['sheets'][0]['columns'] );
-
             // create easy-to-access name field in the group
             group['name'] = group['sheets'][0]['name'];
             // reset active sheet
