@@ -314,7 +314,7 @@ var _table = (function () {
 
     function generate_filtered_row( args ) {
         var node = args['node'];
-        var breadcrumb = node['breadcrumb'] || '';
+        var breadcrumb = node['breadcrumb'] || node['data']['breadcrumb'] || '';
         var html = [];
 
         // breadcrumb
