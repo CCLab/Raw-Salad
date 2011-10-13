@@ -415,12 +415,17 @@ var _gui = (function () {
                                     }
                                 }
 
+                                var test = e['filtered'] ? needed_ids.map( function ( id ) {
+                                                                        //return 'BREADCRUMB for ' + id;
+                                                                        return _tools.create_breadcrumb(id, false);
+                                                                   }) : [];
                                 return {
                                     'columns': e['columns'],
                                     'rows': needed_ids,
                                     'name': e['name'],
-                                    'breadcrumbs': e['filtered'] ? needed_ids.map( function ( e ) {
-                                                                        return 'BREADCRUMB for ' + e;
+                                    'breadcrumbs': e['filtered'] ? needed_ids.map( function ( id ) {
+                                                                        //return 'BREADCRUMB for ' + id;
+                                                                        return _tools.create_breadcrumb(id, false);
                                                                    }) : [],
                                     'filtered': e['filtered'],
                                     'sorted': e['sorted']

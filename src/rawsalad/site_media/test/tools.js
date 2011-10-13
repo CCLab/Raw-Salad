@@ -104,7 +104,7 @@ var _tools = (function () {
         });
     }
 
-    that.create_breadcrumb = function ( id ) {
+    that.create_breadcrumb = function ( id, no_html ) {
         var tmp_id = id;
         var node;
         var type;
@@ -113,18 +113,44 @@ var _tools = (function () {
         var breadcrumb = [];
         var breadcrumb_list = [];
 
+        var parents_list = [];
+        var i;
+        var no_html = no_html || false;
+        
         tmp_id = _utils.get_parent_id( id );
+        
+        if ( no_html ) {
+        
+            while ( !!tmp_id ) {
+                node = $('#'+ tmp_id);
+                full_type = node.children('.type').html();
+                type = full_type;//get_type_representation( full_type );
+                name = node.children('.name').html();
 
-        while ( !!tmp_id ) {
-            node = $('#'+ tmp_id);
-            full_type = node.children('.type').html();
-            type = full_type;//get_type_representation( full_type );
-            name = node.children('.name').html();
-
-            tmp_id = _utils.get_parent_id( tmp_id );
-            breadcrumb_list.push({
-                type: type,
-                name: name
+                tmp_id = _utils.get_parent_id( tmp_id );
+                breadcrumb_list.push({
+                    type: type,
+                    name: name
+                });
+            }
+            
+        } else {
+        
+            while ( !!tmp_id ) {
+                parents_list.push( tmp_id );
+                tmp_id = _utils.get_parent_id( tmp_id );
+            }
+            
+            _store.active_rows().forEach( function ( row ) {
+                for (i = 0; i < parents_list.length; ++i) {
+                    if ( parents_list[i] === row['data']['idef'] ) {
+                        breadcrumb_list[i] = {
+                        //parents_list[i] = {
+                            type: row['data']['type'],
+                            name: row['data']['name']
+                        };
+                    }
+                }
             });
         }
 
