@@ -81,7 +81,6 @@ var _db = (function () {
                     received_data['result'].forEach( function ( collection ) {
                         var html = [];
                         var single_row;
-                        var idefs = [];
                         var results_length = collection['data'].length;
                         var results_limit = 250;
 
@@ -98,9 +97,6 @@ var _db = (function () {
                         html.push( '</tr>' );
 
                         single_row = $( html.join('') );
-                        collection['data'].forEach( function ( result ) {
-                            idefs.push( result['idef'] );
-                        });
 
                         if( results_length < results_limit ) {
                             single_row
@@ -109,7 +105,7 @@ var _db = (function () {
                                         dataset: collection['dataset'].toString(),
                                         view: collection['view'].toString(),
                                         issue: collection['issue'].toString(),
-                                        idef: idefs.toString(),
+                                        idef: collection['data'].toString(),
                                         query: query
                                     });
                                 })
