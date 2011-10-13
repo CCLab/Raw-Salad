@@ -201,7 +201,7 @@ def build_query( idef_list):
     result_limit= 275 # WARNING! Limiting number of idefs here with a constant
     if len(idef_list) > result_limit:
         idef_list= idef_list[:result_limit]
-    
+
     if len(idef_list) > 0:
         for idef in idef_list:
             i += 1
@@ -241,6 +241,14 @@ def get_searched_data( request ):
     return_data['perspective']= coll.metadata_complete
 
     return HttpResponse( json.dumps(return_data) )
+
+
+def get_context( request ):
+    idef = request.GET.get( 'idef', None )
+
+    # magic here
+
+    return HttpResponse( json.dumps( [{}, {}, {}] ))
 
 # store front-end state as a permalink in mongo
 @csrf_exempt

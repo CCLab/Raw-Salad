@@ -29,6 +29,23 @@ var _db = (function () {
 //  P U B L I C   I N T E R F A C E
     var that = {};
 
+    that.get_context = function ( idef ) {
+        console.log( '>>>> idef: ' + idef );
+        $.ajax({
+            url: 'get_context/',
+            data: { idef: idef },
+            type: 'GET',
+            success: function ( res ) {
+                console.log( '>>>> results:' );
+                console.log( res )
+            },
+            error: function ( err ) {
+                console.log( '>>>> ERROR:\n' + err )
+            }
+        });
+    };
+
+
     that.save_permalink = function ( groups ) {
         // inform user it can take a while!!
         _utils.create_preloader( 'Zapisuję arkusze w bazie danych.<br />To może chwilę potrwać...' );
