@@ -60,6 +60,28 @@ var _store = (function () {
     };
 
 
+    that.non_filtered_exists = function ( data ) {
+        var i;
+        var sheets;
+        var grp_number = find_group( data );
+
+        // no such group exists yet
+        if( grp_number === -1 ) {
+            return false;
+        }
+
+        sheets = that.get_group( grp_number )['sheets'];
+        for( i = 0; i < sheets.length; ++i ) {
+            if( sheets[i]['filtered'] === false ) {
+                // the group exists and there is a non-filtered sheet present
+                return true;
+            }
+        }
+
+        // though group exists, there are only filtered sheets
+        return false;
+    };
+
     // creates a new group and sets an activ group index
     that.create_group = function (data) {
         // create a group for new data collection
@@ -295,8 +317,9 @@ var _store = (function () {
 
                 num = find_group( value );
                 if ( num === -1 ) {
-                return -1
-                }else{
+                    return -1
+                }
+                else {
                     active_group_number = num;
                 }
         }

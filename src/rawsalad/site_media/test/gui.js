@@ -415,16 +415,11 @@ var _gui = (function () {
                                     }
                                 }
 
-                                var test = e['filtered'] ? needed_ids.map( function ( id ) {
-                                                                        //return 'BREADCRUMB for ' + id;
-                                                                        return _tools.create_breadcrumb(id, false);
-                                                                   }) : [];
                                 return {
                                     'columns': e['columns'],
                                     'rows': needed_ids,
                                     'name': e['name'],
                                     'breadcrumbs': e['filtered'] ? needed_ids.map( function ( id ) {
-                                                                        //return 'BREADCRUMB for ' + id;
                                                                         return _tools.create_breadcrumb(id, false);
                                                                    }) : [],
                                     'filtered': e['filtered'],
@@ -962,7 +957,7 @@ var _gui = (function () {
                 };
 
                 // if no such group yet - go to db and create one
-                if( !_store.group_exists( col_id ) ) {
+                if( !_store.non_filtered_exists( col_id ) ) {
                     // get top-level data from db
                     _db.get_init_data( col_id );
                 }
