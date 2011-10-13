@@ -189,9 +189,6 @@ var _db = (function () {
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
-                console.log( '>>>> received object' );
-                console.log( received_data );
-
                 if ( _store.group_exists( col_id ) ) {
                     _sheet.create_searched_sheet( col_id, received_data );
                 }
