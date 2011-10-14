@@ -116,7 +116,6 @@ var _db = (function () {
                         single_row = $( html.join('') );
 
                         if( results_length < results_limit ) {
-                            console.log( collection );
                             single_row
                                 .click( function () {
                                     that.add_search_data({
@@ -190,9 +189,8 @@ var _db = (function () {
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
-                var rd = JSON.parse( received_data );
                 console.log( '>>>> received object' );
-                console.log( rd );
+                console.log( received_data );
 
                 if ( _store.group_exists( col_id ) ) {
                     _sheet.create_searched_sheet( col_id, received_data );
