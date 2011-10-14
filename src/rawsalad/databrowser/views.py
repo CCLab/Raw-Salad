@@ -146,6 +146,15 @@ def search_data( request ):
     # result= res.search_data( db, qrystr= query_str, scope= scope_list, strict= strict )
     fld_list= ['idef'] # on the first stage return only idefs
     result= res.search_text( db, qrystr= query_str, scope= scope_list, display= fld_list, strict= strict )
+    if len(result['result']) > 0:
+
+        # rebuild { data: [ { idef: idef1 }, ..., { idef: idefN } ] }
+        # into { data: [ idef1, ..., idefN ] }
+        for res_persp in result['result']:
+            new_data= []
+            for doc in res_persp['data']:
+                new_data.append(doc['idef'])
+            res_persp['data']= new_data
 
     return HttpResponse( json.dumps( result ))
 
@@ -228,6 +237,7 @@ def get_searched_data( request ):
     return_data['rows']= coll.get_data(
         db, response_dict['dataset'], response_dict['view'], response_dict['issue']
         )
+
     return_data['perspective']= coll.metadata_complete
 
     return HttpResponse( json.dumps(return_data) )
@@ -332,7 +342,6 @@ def restore_state( request ):
                             for rw in elt_item['rows']:
                                 if curr_doc['idef'] == rw:
                                     curr_doc.update({ 'breadcrumb': elt_item['breadcrumbs'][j] })
-                                    print curr_doc, '\n'
                                     break
                                 j+=1
 
