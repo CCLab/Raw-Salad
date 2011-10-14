@@ -201,7 +201,7 @@ def build_query( idef_list):
     result_limit= 275 # WARNING! Limiting number of idefs here with a constant
     if len(idef_list) > result_limit:
         idef_list= idef_list[:result_limit]
-    
+
     if len(idef_list) > 0:
         for idef in idef_list:
             i += 1
@@ -359,8 +359,12 @@ func_dict = {
 
 
 
-def get_page( data ):
-    template = loader.get_template( "app.html" )
+def get_page( request ):
+    if request.GET.get( 'lang', None ) == 'en':
+        template = loader.get_template( "app_en.html" )
+    else:
+        template = loader.get_template( "app.html" )
+
     context = Context({
         'meta': get_ms_nav()
     })
@@ -369,7 +373,7 @@ def get_page( data ):
 
 def app_page( request ):
     data = request.GET
-    if data == {}:
+    if data == {} or data['lang'] == 'en':
         return get_page( request )
     else:
         function_id = data['action']
@@ -377,6 +381,9 @@ def app_page( request ):
 
 def redirect( request ):
     return HttpResponseRedirect('/app')
+
+def redirect_en( request ):
+    return HttpResponseRedirect('/app?lang=en')
 
 @csrf_exempt
 def feedback_email( request ):
