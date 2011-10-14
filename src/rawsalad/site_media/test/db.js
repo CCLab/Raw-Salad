@@ -116,6 +116,7 @@ var _db = (function () {
                         single_row = $( html.join('') );
 
                         if( results_length < results_limit ) {
+                            console.log( collection );
                             single_row
                                 .click( function () {
                                     that.add_search_data({
