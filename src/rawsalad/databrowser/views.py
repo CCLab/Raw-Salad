@@ -373,7 +373,7 @@ def get_page( request ):
 
 def app_page( request ):
     data = request.GET
-    if data == {} or data['lang'] == 'en':
+    if data == {} or data.get('lang','') == 'en':
         return get_page( request )
     else:
         function_id = data['action']
