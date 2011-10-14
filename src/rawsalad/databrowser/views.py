@@ -215,7 +215,7 @@ def regexp_parents( curr_idef, rg_list ):
 
     if lookup_idef not in rg_list:
         rg_list.append(lookup_idef)
-    
+
     curr_idef= idef_srch
     level= 0
     while level < level_num:
@@ -245,7 +245,7 @@ def build_query( idef_list, parents= True, siblings= True, fullroot= True ):
 
     if len(idef_list) > 0:
 
-        lookup_list= [] # lookup_list is 
+        lookup_list= [] # lookup_list is
 
         for idef in idef_list:
             i += 1
@@ -260,7 +260,7 @@ def build_query( idef_list, parents= True, siblings= True, fullroot= True ):
         lookup_list= regexp_fullroot( lookup_list ) # return level 'a' only
 
     lookup= '|'.join( lookup_list ) # turning it into a regexp string
-    
+
     return lookup
 
 
@@ -282,7 +282,7 @@ def get_searched_data( request ):
     return_data['rows']= coll.get_data(
         db, response_dict['dataset'], response_dict['view'], response_dict['issue']
         )
-    
+
     return_data['perspective']= coll.metadata_complete
 
     return HttpResponse( json.dumps(return_data) )
@@ -310,13 +310,6 @@ def get_context( request ):
 
     return HttpResponse( json.dumps(return_data) )
 
-
-def get_context( request ):
-    idef = request.GET.get( 'idef', None )
-
-    # magic here
-
-    return HttpResponse( json.dumps( [{}, {}, {}] ))
 
 # store front-end state as a permalink in mongo
 @csrf_exempt
@@ -450,10 +443,10 @@ def get_page( request ):
 def app_page( request ):
     old_browser_marks = ['MSIE 7', 'MSIE 6', 'Firefox/3']
     browser = request.META.get('HTTP_USER_AGENT', '')
-    
+
     if len([x for x in old_browser_marks if x in browser]) > 0:
         return HttpResponseRedirect('/old_browser')
-        
+
     data = request.GET
     if data == {} or data.get('lang','') == 'en':
         return get_page( request )
