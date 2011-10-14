@@ -7,7 +7,6 @@ Technology used
 ---------------
 
 - MongoDB <http://mongodb.org/>
-- PostgreSQL <http://www.postgresql.org/>
 - Django Web Framework <http://djangoproject.com>
 - jQuery <http://jquery.com>
 
