@@ -283,6 +283,11 @@ def get_searched_data( request ):
         db, response_dict['dataset'], response_dict['view'], response_dict['issue']
         )
 
+    try:
+        ttt= get_context( request )
+    except Exception as e:
+       print e
+
     return_data['perspective']= coll.metadata_complete
 
     return HttpResponse( json.dumps(return_data) )
