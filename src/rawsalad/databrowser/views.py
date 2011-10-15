@@ -173,29 +173,53 @@ def string2list( in_str ):
 
     return out_list
 
-def build_idef_regexp( curr_idef ):
-    """ build regexp quering collection """
+def regexp_fullroot():
+    """
+    regexp for level 'a' only
+    """
+    return r'(^([A-Z]|\d)+$)'
+
+def regexp_siblings( curr_idef ):
+    """
+    regexp for full list of sublings
+    including the element itself
+    """
     level_num= curr_idef.count('-')
 
-    # build regexp for the given idef plus it's context (siblings and full parental branch)
     if level_num > 0: # deeper than 'a'
         idef_srch= curr_idef.rsplit('-', 1)[0]
-        lookup_idef= r'^%s\-([A-Z]|\d)+$' % idef_srch
-        curr_idef= idef_srch
-        level= 1
-        while level < level_num:
-            idef_srch= curr_idef.rsplit('-', 1)[0]
-            lookup_idef += r'|^%s\-([A-Z]|\d)+$' % idef_srch
-            curr_idef= idef_srch
-            level += 1
-        lookup_idef += r'|^([A-Z]|\d)+$'
-
+        lookup_idef= r'(^%s\-([A-Z]|\d)+$)' % idef_srch
     else: # simply query the highest level
-        lookup_idef= r'^([A-Z]|\d)+$'
+        lookup_idef= r'(^([A-Z]|\d)+$)'
 
     return lookup_idef
 
-def build_query( idef_list):
+def regexp_parents( curr_idef ):
+    """
+    regexp for full list of parents up to the level 'a'
+    including the element itself
+    """
+    level_num= curr_idef.count('-')
+
+    idef_srch= curr_idef
+    lookup_idef= r'(^%s$)' % idef_srch
+    curr_idef= idef_srch
+    level= 0
+    while level < level_num:
+        idef_srch= curr_idef.rsplit('-', 1)[0]
+        lookup_idef += r'|(^%s$)' % idef_srch
+        curr_idef= idef_srch
+        level += 1
+
+    return lookup_idef
+
+
+def build_query( idef_list, parents= True, siblings= True, fullroot= True ):
+    """
+    query for building a branch
+    parents - full list of siblings, parents up to the level 'a', and full level 'a'
+    bloom is False - the element itself and all its parents up to the level 'a'
+    """
     lookup, i= '', 0
 
     result_limit= 275 # WARNING! Limiting number of idefs here with a constant
@@ -206,14 +230,23 @@ def build_query( idef_list):
         for idef in idef_list:
             i += 1
 
-            lookup_idef= build_idef_regexp( idef )
+            lookup_parents, lookup_siblings, lookup_fullroot= '', '', ''
 
-            lookup += r'(%s)|' % lookup_idef
-            if i == len(idef_list):
-                lookup= lookup[:-1] # cutting the last symbol | in case it's the end of list
+            if parents:
+                lookup += ''.join( [ '|', regexp_parents( idef ) ] )
+            if siblings:
+                lookup += ''.join( [ '|', regexp_siblings( idef ) ] )
+            if fullroot:
+                lookup += ''.join( [ '|', regexp_fullroot( ) ] )
+
+            if i < len(idef_list):
+                lookup += '|'
+
+        # cutting first | symbol, and "smoothing the angles" in-btwn idefs
+        lookup= lookup[1:].replace('||', '|')
 
     else: # in cases there're no 'open' nodes in the view
-        lookup= build_idef_regexp( '0' ) # this returns regexp for getting level 'a' only
+        lookup= regexp_fullroot( ) # return level 'a' only
 
     return lookup
 
@@ -224,11 +257,39 @@ def get_searched_data( request ):
         'dataset': int( request.GET.get( 'dataset', -1 ) ),
         'view': int( request.GET.get( 'view', -1 ) ),
         'issue': request.GET.get( 'issue', '' ).encode('utf-8'),
-        'idef': string2list( request.GET.get( 'idef', '' ) ),
-        'regexp': True
+        'idef': string2list( request.GET.get( 'idef', '' ) )
     }
 
-    find_query= build_query( response_dict['idef'] )
+    find_query= build_query( response_dict['idef'], parents= True, siblings= False, fullroot= False )
+
+    db= rsdb.DBconnect("mongodb").dbconnect
+    coll= rsdb.Collection(query= { 'idef': { '$regex': find_query} })
+
+    return_data = {}
+    return_data['rows']= coll.get_data(
+        db, response_dict['dataset'], response_dict['view'], response_dict['issue']
+        )
+
+    try:
+        ttt= get_context( request )
+    except Exception as e:
+       print e
+    
+    return_data['perspective']= coll.metadata_complete
+
+    return HttpResponse( json.dumps(return_data) )
+
+
+def get_context( request ):
+    response_dict = {
+        'dataset': int( request.GET.get( 'dataset', -1 ) ),
+        'view': int( request.GET.get( 'view', -1 ) ),
+        'issue': request.GET.get( 'issue', '' ).encode('utf-8'),
+        'idef': [ request.GET.get( 'idef', None ) ] # should be list for build_query
+    }
+
+    find_query= build_query( response_dict['idef'], parents= False, siblings= True, fullroot= False )
+    print find_query
 
     db= rsdb.DBconnect("mongodb").dbconnect
     coll= rsdb.Collection(query= { 'idef': { '$regex': find_query} })
@@ -241,14 +302,6 @@ def get_searched_data( request ):
     return_data['perspective']= coll.metadata_complete
 
     return HttpResponse( json.dumps(return_data) )
-
-
-def get_context( request ):
-    idef = request.GET.get( 'idef', None )
-
-    # magic here
-
-    return HttpResponse( json.dumps( [{}, {}, {}] ))
 
 # store front-end state as a permalink in mongo
 @csrf_exempt
