@@ -10,7 +10,6 @@ from django.core.mail import send_mail
 import rsdbapi as rsdb
 import csv, codecs, cStringIO
 import re
-from time import time
 
 from StringIO import StringIO
 from zipfile import ZipFile
@@ -173,13 +172,17 @@ def string2list( in_str ):
 
     return out_list
 
-def regexp_fullroot():
+def regexp_fullroot( rg_list ):
     """
     regexp for level 'a' only
     """
-    return r'(^([A-Z]|\d)+$)'
+    lvroot= r'(^([A-Z]|\d)+$)'
+    if lvroot not in rg_list:
+        rg_list.append(lvroot)
 
-def regexp_siblings( curr_idef ):
+    return rg_list
+
+def regexp_siblings( curr_idef, rg_list ):
     """
     regexp for full list of sublings
     including the element itself
@@ -192,9 +195,12 @@ def regexp_siblings( curr_idef ):
     else: # simply query the highest level
         lookup_idef= r'(^([A-Z]|\d)+$)'
 
-    return lookup_idef
+    if lookup_idef not in rg_list:
+        rg_list.append( lookup_idef )
 
-def regexp_parents( curr_idef ):
+    return rg_list
+
+def regexp_parents( curr_idef, rg_list ):
     """
     regexp for full list of parents up to the level 'a'
     including the element itself
@@ -203,15 +209,23 @@ def regexp_parents( curr_idef ):
 
     idef_srch= curr_idef
     lookup_idef= r'(^%s$)' % idef_srch
+
+    if lookup_idef not in rg_list:
+        rg_list.append(lookup_idef)
+    
     curr_idef= idef_srch
     level= 0
     while level < level_num:
         idef_srch= curr_idef.rsplit('-', 1)[0]
-        lookup_idef += r'|(^%s$)' % idef_srch
+        lookup_idef = r'(^%s$)' % idef_srch
+
+        if lookup_idef not in rg_list:
+            rg_list.append(lookup_idef)
+
         curr_idef= idef_srch
         level += 1
 
-    return lookup_idef
+    return rg_list
 
 
 def build_query( idef_list, parents= True, siblings= True, fullroot= True ):
@@ -227,27 +241,23 @@ def build_query( idef_list, parents= True, siblings= True, fullroot= True ):
         idef_list= idef_list[:result_limit]
 
     if len(idef_list) > 0:
+
+        lookup_list= [] # lookup_list is 
+
         for idef in idef_list:
             i += 1
-
-            lookup_parents, lookup_siblings, lookup_fullroot= '', '', ''
-
             if parents:
-                lookup += ''.join( [ '|', regexp_parents( idef ) ] )
+                lookup_list= regexp_parents( idef, lookup_list )
             if siblings:
-                lookup += ''.join( [ '|', regexp_siblings( idef ) ] )
+                lookup_list= regexp_siblings( idef, lookup_list )
             if fullroot:
-                lookup += ''.join( [ '|', regexp_fullroot( ) ] )
-
-            if i < len(idef_list):
-                lookup += '|'
-
-        # cutting first | symbol, and "smoothing the angles" in-btwn idefs
-        lookup= lookup[1:].replace('||', '|')
+                lookup_list= regexp_fullroot( lookup_list )
 
     else: # in cases there're no 'open' nodes in the view
-        lookup= regexp_fullroot( ) # return level 'a' only
+        lookup_list= regexp_fullroot( lookup_list ) # return level 'a' only
 
+    lookup= '|'.join( lookup_list ) # turning it into a regexp string
+    
     return lookup
 
 
@@ -269,11 +279,6 @@ def get_searched_data( request ):
     return_data['rows']= coll.get_data(
         db, response_dict['dataset'], response_dict['view'], response_dict['issue']
         )
-
-    try:
-        ttt= get_context( request )
-    except Exception as e:
-       print e
     
     return_data['perspective']= coll.metadata_complete
 
@@ -289,7 +294,6 @@ def get_context( request ):
     }
 
     find_query= build_query( response_dict['idef'], parents= False, siblings= True, fullroot= False )
-    print find_query
 
     db= rsdb.DBconnect("mongodb").dbconnect
     coll= rsdb.Collection(query= { 'idef': { '$regex': find_query} })
