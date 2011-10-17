@@ -451,7 +451,7 @@ var _gui = (function () {
         init_choose_panel( hide_panel );
 
         datasets_height = $("#pl-ch-datasets").height();
-
+        $('#mt-toggle').trigger( $.Event( 'click' ));
     };
 
 
