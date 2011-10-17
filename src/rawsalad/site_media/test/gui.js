@@ -47,6 +47,19 @@ var _gui = (function () {
                     $('#main-wrapper').show();
                     $('#mt-toggle').attr( 'src', '/site_media/img/toggle_PortalGlow_01.png' );
                     $('body').css( 'background-color', '#fff' );
+                    $('#ms-main').show();
+
+                    $('.main-tab').removeClass('active').click( function () {
+                      var tab = $(this).attr('id').split('-').pop();
+                      $('.main-tab').removeClass('active');
+                      $(this).addClass('active');
+
+                      $('.main-site').hide();
+                      $('#ms-'+tab).show();
+                    });
+
+                    $('#mt-menu-main').addClass('active');
+                    $('.main-site').not('#ms-main').hide();
                 }
                 else {
                     $('#app-wrapper').show();
@@ -451,7 +464,6 @@ var _gui = (function () {
         init_choose_panel( hide_panel );
 
         datasets_height = $("#pl-ch-datasets").height();
-        $('#mt-toggle').trigger( $.Event( 'click' ));
     };
 
 

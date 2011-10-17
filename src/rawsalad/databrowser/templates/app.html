@@ -13,9 +13,9 @@
   <table>
   	<tbody>
   		<tr>
-  			<td style="width: 320px;"><img id="mt-od-logo" src="/site_media/img/logo_rollover.png" /></td>
+  			<td style="width: 320px;"><a href="http://otwartedane.pl" target="_top"><img id="mt-od-logo" src="/site_media/img/logo_rollover.png" /></a></td>
   			<td style="width: 320px; text-align: center"><img id="mt-toggle" src="/site_media/img/toggle_AplikacjaGlow_01.png" /></td>
-  			<td style="width: 320px;"><img id="mt-cc-logo" src="/site_media/img/logo_CC-PP.png" class="right" style="margin-right: 30px" /></td>
+  			<td style="width: 320px;"><a href="http://centrumcyfrowe.pl" target="_blank"><img id="mt-cc-logo" src="/site_media/img/logo_CC-PP.png" class="right" style="margin-right: 30px" /></a></td>
   		</tr>
   	</tbody>
   </table>
@@ -26,7 +26,7 @@
    <!--  H E A D E R  -->
     <header id="main-top" style="padding-top: 15px;">
       <nav id="main-top-menu">
-        <div id="mt-menu-main" class="main-tab button left active">Dostępność danych</div>
+        <div id="mt-menu-main" class="main-tab button left active">Strona główna</div>
         <div id="mt-menu-help" class="main-tab button left">Pomoc</div>
         <div id="mt-menu-rights" class="main-tab button left">Własność intelektualna</div>
         <div id="mt-menu-rawsalad" class="main-tab button left">Raw Salad</div>
@@ -122,17 +122,21 @@ The United States popularized salads in the late 19th century and other regions 
      <!-- R A W   S A L A D  -->
     <article id="ms-rawsalad" class="main-site clear" style="padding-bottom: 10px; overflow: auto;">
       <section style="padding: 20px; width: 45%;" class="left">
-
-      Dostęp do danych publicznych w Polsce jest coraz lepszy, jednak wciąż brakuje standardów ich prezentacji. Potrzebie szybkiego, efektywnego i ustandaryzowanego dostępu do danych publicznych wychodzi naprzeciw Raw Salad (Surówka), projekt Centrum Cyfrowego. Raw Salad to sieciowa przeglądarka danych, pozwalająca na łatwy dostęp do danych publicznych. Głównym przedmiotem wysiłków twórców Raw Salad jest stworzenie efektywnego i przejrzystego systemu poruszania się w gąszczu danych. Dzięki zastosowaniu nowoczesnych technologii informatycznych użytkownicy Raw Salad dostaną do ręki narzędzie pozwalające łatwo dobrać dane potrzebne im do pracy i dostosować sposób prezentacji danych do ich potrzeb.
-     <br />
-     <br />
+     <h2>Oprogramowanie</h2>
       Raw  Salad oferuje ujednolicony tok pracy z danymi. Bez względu na strukturę danych i ich treść przeglądanie danych w Raw Salad wygląda tak samo. W przyszłości pozwoli to stworzyć jednolity system nawigacji w obrębie całości danych publicznych.
      </section>
      <section style="padding: 20px; width: 45%;" class="right">
-      Ważnym elementem Raw Salad jest funkcjonalność Rich Download, pozwalająca na każdym etapie pracy z danymi ściągnąć interesujące użytkownika dane w formie umożliwiającej ich dalszą obróbkę w dowolnym środowisku oraz umieszczenie ich w arkuszu kalkulacyjnym, emailu, blogu etc.
+     <h2>Do pobrania</h2>
+     Kod źródłowy Raw Salad opublikowany jest na otwartej licencji BSD, 
+     co w praktyce oznacza, że każdy podmiot zainteresowany 
+     wykorzystaniem Raw Salad do własnych celów, może to zrobić 
+     bez dodatkowej zgody autorów oprogramowania. 
      <br />
      <br />
-      Z punktu widzenia programistów najważniejszym elementem Raw Salad jest tzw. publiczny interfejs programistyczny (ang: API, Application Programming Interface) bazy danych zasilającej Raw Salad. Poprzez API Raw Salad dowolny programista tworząc stronę internetową, wizualizację czy aplikację na telefon komórkowy, może wykorzystać zebrane przez nas dane (np. budżet środków europejskich). Będzie mógł pobierać je bezpośrednio z miejsca, gdzie są przechowywane – w bazie otwartych danych.
+     <ul>
+       <li>Wersja stabilna - <a href="https://github.com/CCLab/Raw-Salad/zipball/master">.zip / 22.4 MB</a></li>
+       <li>Pełny kod źródłowy - <a href="https://github.com/CCLab/Raw-Salad/">GitHub</a></li>
+     </ul>
      </section>
     </article>
 
@@ -771,7 +775,6 @@ From the perspective of software developers the most important element is the Ra
         {% else %}
         _gui.init_gui(); 
         _basic_url = '';
-        {% endif %}
 
         $('.main-site').not('#ms-main').hide();
         $('.main-tab').click( function () {
@@ -782,7 +785,8 @@ From the perspective of software developers the most important element is the Ra
           $('.main-site').hide();
           $('#ms-'+tab).show();
         });
-
+        $('#mt-toggle').trigger( $.Event( 'click' ));
+        {% endif %}
       })();
   // ]]>
   </script> 
