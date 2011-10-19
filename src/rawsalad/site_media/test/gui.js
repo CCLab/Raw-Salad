@@ -48,7 +48,7 @@ var _gui = (function () {
                     $('#mt-toggle').attr( 'src', '/site_media/img/toggle_PortalGlow_01.png' );
                     $('body').css( 'background-color', '#fff' );
                     $('#ms-main').show();
-
+                    $('#beta-version').show();
                     $('.main-tab').removeClass('active').click( function () {
                       var tab = $(this).attr('id').split('-').pop();
                       $('.main-tab').removeClass('active');
@@ -64,6 +64,7 @@ var _gui = (function () {
                 else {
                     $('#app-wrapper').show();
                     $('#main-wrapper').hide();
+                    $('#beta-version').hide();
                     $('#mt-toggle').attr( 'src', '/site_media/img/toggle_AplikacjaGlow_01.png' );
                     $('body').css( 'background-color', '#8b8b8b' );
                 }
