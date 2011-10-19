@@ -60,7 +60,7 @@ var _db = (function () {
         };
 
         $.ajax({
-            url: 'search/',
+            url: '/search/',
             data: data,
             dataType: 'json',
             success: function ( received_data ) {
@@ -168,7 +168,7 @@ var _db = (function () {
         };
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
-            url: 'get_searched/',
+            url: '/get_searched/',
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
