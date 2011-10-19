@@ -355,12 +355,16 @@ var _table = (function () {
 
 
     function generate_info_panel_content( info ) {
-        var html = [ '<div id="app-tb-info">' ];
+        var html = [];
         var parent_id = info['0']['parent'];
         var info_button = $( '#' + parent_id ).find( '.app-tb-info-button' );
 
+        html.push( '<div id="app-tb-info">' );
         html.push( '<div id="app-tb-in-content">' );
-        html.push( '<div id="app-tb-in-con-button-x" > x </div> ' );
+        html.push( '<h3 style="float: left;">Ten panel zawiera informacje dodatkowe nie mieszczące się w podstawowej strukturze danych.</h3>' );
+        html.push( '<div id="app-tb-in-con-button-x"  style="margin-top: 3px; float: right;"> x </div> ' );
+        html.push( '<br style="clear: both;" />' );
+        html.push( '<br style="clear: both;" />' );
         html.push( '<div id="app-tb-in-header">' );
         html.push( _tools.create_info_breadcrumb( parent_id ) );
         html.push( '</div>' );

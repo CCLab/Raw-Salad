@@ -155,3 +155,6 @@
     text-align: right;
   } 
 
+.app-tb-info-button {
+  cursor: pointer;
+}

@@ -15,6 +15,8 @@ from time import time
 from StringIO import StringIO
 from zipfile import ZipFile
 
+from operator import attrgetter
+
 
 # to be removed soon
 def choose_collection( data ):
@@ -28,6 +30,7 @@ def get_init_data( data ):
     db= rsdb.DBconnect("mongodb").dbconnect
     coll= rsdb.Collection(query= { 'level': 'a' })
 
+    print data
     return_data = {}
     return_data['rows']= coll.get_data(
         db, data['dataset'], data['perspective'], data['issue']
@@ -201,7 +204,7 @@ def build_query( idef_list):
     result_limit= 275 # WARNING! Limiting number of idefs here with a constant
     if len(idef_list) > result_limit:
         idef_list= idef_list[:result_limit]
-    
+
     if len(idef_list) > 0:
         for idef in idef_list:
             i += 1
@@ -359,8 +362,12 @@ func_dict = {
 
 
 
-def get_page( data ):
-    template = loader.get_template( "app.html" )
+def get_page( request ):
+    if request.GET.get( 'lang', None ) == 'en':
+        template = loader.get_template( "app_en.html" )
+    else:
+        template = loader.get_template( "app.html" )
+
     context = Context({
         'meta': get_ms_nav()
     })
@@ -369,7 +376,7 @@ def get_page( data ):
 
 def app_page( request ):
     data = request.GET
-    if data == {}:
+    if data == {} or data.get('lang','') == 'en':
         return get_page( request )
     else:
         function_id = data['action']
@@ -377,6 +384,9 @@ def app_page( request ):
 
 def redirect( request ):
     return HttpResponseRedirect('/app')
+
+def redirect_en( request ):
+    return HttpResponseRedirect('/app?lang=en')
 
 @csrf_exempt
 def feedback_email( request ):
@@ -437,9 +447,18 @@ def download_data( request ):
 
     return response
 
+def dataset_compare(d1, d2):
+    return d1['idef'] - d2['idef']
+
 def get_ms_nav():
     db= rsdb.DBconnect("mongodb").dbconnect
     nav_full= rsdb.Navtree().get_nav_full(db)
+    print nav_full
+    
+    print nav_full[0]
+    
+    nav_full = sorted(nav_full, cmp=dataset_compare)
+    print nav_full
     out= { 'meta_data': json.dumps( nav_full ) }
     return out
 
