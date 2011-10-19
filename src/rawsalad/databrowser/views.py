@@ -237,8 +237,8 @@ def build_query( idef_list, parents= True, siblings= True, fullroot= True ):
     lookup, i= '', 0
 
     result_limit= 275 # WARNING! Limiting number of idefs here with a constant
-    if len(idef_list) > result_limit:
-        idef_list= idef_list[:result_limit]
+    if len(idef_list) > result_limit: # WARNING!
+        idef_list= idef_list[:result_limit] # WARNING!
 
     if len(idef_list) > 0:
 
