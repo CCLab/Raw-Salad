@@ -123,3 +123,6 @@
   float: right;
 }
 
+.click:hover {
+  cursor: pointer !important;
+}

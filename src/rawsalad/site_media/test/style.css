@@ -819,4 +819,6 @@ footer a:hover {
   cursor: pointer;
 }
 
-
+#ms-help img {
+  border: 3px solid #8b8b8b;
+}
