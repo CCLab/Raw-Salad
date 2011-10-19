@@ -43,6 +43,11 @@ td {
   padding: 5px 0px;
 }
 
+h2 {
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+
 h3 {
   margin: 0px;
 }
