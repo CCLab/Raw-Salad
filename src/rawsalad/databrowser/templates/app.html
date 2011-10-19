@@ -936,10 +936,8 @@ From the perspective of software developers the most important element is the Ra
         {% if idef %}
         _gui.init_gui( true ); 
         _gui.restore_session( {{ idef }} );
-        _basic_url = '/app/';
         {% else %}
         _gui.init_gui(); 
-        _basic_url = '';
 
         $('.main-site').not('#ms-main').hide();
         $('.main-tab').click( function () {
