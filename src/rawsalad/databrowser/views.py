@@ -15,6 +15,8 @@ from time import time
 from StringIO import StringIO
 from zipfile import ZipFile
 
+from operator import attrgetter
+
 
 # to be removed soon
 def choose_collection( data ):
@@ -28,6 +30,7 @@ def get_init_data( data ):
     db= rsdb.DBconnect("mongodb").dbconnect
     coll= rsdb.Collection(query= { 'level': 'a' })
 
+    print data
     return_data = {}
     return_data['rows']= coll.get_data(
         db, data['dataset'], data['perspective'], data['issue']
@@ -444,9 +447,18 @@ def download_data( request ):
 
     return response
 
+def dataset_compare(d1, d2):
+    return d1['idef'] - d2['idef']
+
 def get_ms_nav():
     db= rsdb.DBconnect("mongodb").dbconnect
     nav_full= rsdb.Navtree().get_nav_full(db)
+    print nav_full
+    
+    print nav_full[0]
+    
+    nav_full = sorted(nav_full, cmp=dataset_compare)
+    print nav_full
     out= { 'meta_data': json.dumps( nav_full ) }
     return out
 
