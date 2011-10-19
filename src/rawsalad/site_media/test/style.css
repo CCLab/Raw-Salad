@@ -794,7 +794,7 @@ textarea {
 }
 
 footer {
-  margin-top: 30px;
+  margin-top: 150px;
   padding: 0px 15px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -815,4 +815,10 @@ footer a:hover {
   margin-right: 0%;
 }
 
+#goto-app:hover {
+  cursor: pointer;
+}
 
+#ms-help img {
+  border: 3px solid #8b8b8b;
+}
