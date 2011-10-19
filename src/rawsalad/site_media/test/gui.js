@@ -40,6 +40,19 @@ var _gui = (function () {
                 'margin-left': (( $(window).width() - 960 ) / 2 ) + 'px'
             });
 
+        $('#goto-app')
+            .hover(
+                function () {
+                    $('#goto-app').attr('src', '/site_media/img/goto_app_over.png');
+                },
+                function () {
+                    $('#goto-app').attr('src', '/site_media/img/goto_app.png');
+                }
+            )
+            .click( function () {
+                $('#mt-toggle').trigger( $.Event('click') );
+            });
+
         $('#mt-toggle')
             .click( function () {
                 if( $('#app-wrapper').is(':visible') ) {
