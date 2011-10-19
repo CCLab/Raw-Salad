@@ -475,6 +475,9 @@ var _gui = (function () {
                 $(this).select();
             });
 
+        if( hide_panel ) {
+            $('#beta-version').hide();
+        }
         init_choose_panel( hide_panel );
 
         datasets_height = $("#pl-ch-datasets").height();
