@@ -15,9 +15,8 @@
       <tr id="beta-version">
         <td colspan="3">
           <div style="padding: 5px; background: #fff; border-radius: 5px; font-size: 1.1em; text-align: center; color: #000;">
-            Portal <b>Otwarte dane</b> dostępny jest w wersji beta, co oznacza, 
-            że jego autorzy pracują nad nowymi funkcjami oraz chętnie 
-            poprawiają ewentualne błędy.
+           Portal <b>otwartedane.pl</b> jest dostępny w wersji beta. Nadal 
+           pracujemy nad dodatkowymi elementami i poprawiamy pojawiające się błędy.
           </div>
         </td>
       </tr>
@@ -31,13 +30,14 @@
 
  </header>
  <div id="wrapper">
-   <div id="main-wrapper">
+   <div id="main-wrapper" style="font-size: 1.2em;">
    <!--  H E A D E R  -->
     <header id="main-top" style="padding-top: 15px;">
       <nav id="main-top-menu">
         <div id="mt-menu-main" class="main-tab button left active">Strona główna</div>
         <div id="mt-menu-help" class="main-tab button left">Pomoc</div>
         <div id="mt-menu-rights" class="main-tab button left">Własność intelektualna</div>
+        <div id="mt-menu-api" class="main-tab button left">API</div>
         <div id="mt-menu-rawsalad" class="main-tab button left">Raw Salad</div>
         <div id="mt-menu-english" class="main-tab button right">English summary</div>
       </nav>
@@ -45,35 +45,48 @@
      
      <!--  M A I N  -->
     <article id="ms-main" class="main-site clear" style="padding-bottom: 10px; overflow: auto;">
-      <section style="padding: 20px; width: 45%;" class="left"> 
-      <h2>Otwarte dane</h2>
-      <p>
-      lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna 
-      aliqua. ut enim ad minim veniam, quis nostrud exercitation 
-      ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-      duis aute irure dolor in reprehenderit in voluptate velit 
-      esse cillum dolore eu fugiat nulla pariatur. excepteur 
-      sint occaecat cupidatat non proident, sunt in culpa qui 
-      officia deserunt mollit anim id est laborum.
+      <section style="padding: 20px; width: 50%;" class="left"> 
+      <p style="font-size: 1.2em;">
+        Otwarte dane to serwis udostępniający dane publiczne w sposób
+        przejrzysty, przydatny i zgodny ze standardami. Naszym celem jest
+        zwiększyć dostępność danych publicznych oraz skalę ich wykorzystania.
+        Chcemy też demonstrować, jak publikować zasoby zgodnie ze standardami
+        otwartych danych.
       </p>
 
-      <h2>Po co taka strona</h2>
       <p>
-      lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna 
-      aliqua. ut enim ad minim veniam, quis nostrud exercitation 
-      ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-      duis aute irure dolor in reprehenderit in voluptate velit 
-      esse cillum dolore eu fugiat nulla pariatur. excepteur 
-      sint occaecat cupidatat non proident, sunt in culpa qui 
-      officia deserunt mollit anim id est laborum.
+        Dane posiadane przez instytucje publiczne, mimo że stanowią często
+        informację publiczną, to nie są publicznie dostępne. Instytucje te nie
+        publikują danych w internecie - lub robią to w sposób utrudniający ich
+        wykorzystanie.
+
+        Wierzymy, że publikacja danych w sposób otwarty przynosi zysk społeczny
+        poprzez zwiększenie ich przydatności, efektywności i innowacyjności
+        działań opartych na wykorzystaniu tych danych, oraz przejrzystości
+        działań administracji państwowej.
+
+        Celem naszego serwisu jest więc zarówno otwieranie danych publicznych -
+        jak i demonstrowanie, jak tego dokonać. Tworząc serwis kierowaliśmy się
+        standardami otwartych danych (takich jak amerykańskie 
+        <a href="https://public.resource.org/8_principles.html" target="_blank">
+        8 Principles of Open Government Data</a>). W szczególności dołożyliśmy starań, by
+        udostępniane przez nas dane publiczne były dostępne w surowej postaci,
+        dostępne poprzez API, oraz dostępne do ściągnięcia w całości.
+
+        Mamy nadzieję, że prezentowany przez nas model publikacji otwartych
+        danych będzie z czasem stosowany przez inne organizacje pracujące z
+        danymi publicznymi oraz instytucje publiczne.
+
+        Pragniemy też, był zasoby serwisu stały się platformą, z której
+        korzystają inne serwisy. Sami wykorzystujemy otwartedane.pl do
+        prezentacji danych budzetowych na stronie 
+        <a href="http://otwartybudzet.pl" target="_blank">otwartybudzet.pl</a>
       </p>
      </section>
      <section style="padding: 20px; width: 35%;" class="right">
        <img id="goto-app" src="/site_media/img/goto_app.png" alt="Przejdź do aplikacji" />
-       <div style="padding-left: 5px;">
-         <h2>Oto kolekcje, które udostępniamy</h2>
+       <div style="padding-top: 10px; padding-left: 5px;">
+         <h3>Oto kolekcje, które udostępniamy</h3>
          <ul style="margin-left: 5px;">
           <li>Budżet Rzeczpospolitej Polskiej wraz ze sprawozdaniami</li>
           <li>Środki europejskie</li>
@@ -246,46 +259,87 @@
      odpowiedzialności za jakość, w tym dokładność i aktualność danych.
      </section>
     </article>
+
+     <!--  A P I  -->
+    <article id="ms-api" class="main-site clear" style="padding-bottom: 10px; overflow: auto;">
+      <section style="padding: 20px; width: 45%;" class="left">
+      <p>
+      Serwis otwartedane.pl udostępnia wszystkie zebrane w nim dane poprzez 
+      publiczny interfejs programistyczny. 
+      </p>
+      <p>
+      Pełna dokumentacja API jest dostępna 
+      <a href="https://github.com/CCLab/Raw-Salad/blob/master/docs/api_spec.txt"
+         target="_blank">tutaj</a>.
+      </p>
+     </section>
+    </article>
      
      
      <!-- R A W   S A L A D  -->
     <article id="ms-rawsalad" class="main-site clear" style="padding-bottom: 10px; overflow: auto;">
       <section style="padding: 20px; width: 45%;" class="left">
      <h2>Oprogramowanie</h2>
-      Raw  Salad oferuje ujednolicony tok pracy z danymi. Bez względu na strukturę danych i ich treść przeglądanie danych w Raw Salad wygląda tak samo. W przyszłości pozwoli to stworzyć jednolity system nawigacji w obrębie całości danych publicznych.
+       Strona <b>otwartedane.pl</b> działa w oparciu o Raw Salad, sieciową
+       przeglądarkę danych stworzoną w Centrum Cyfrowym.
+       
+       Raw Salad to narzędzie, które pozwala użytkownikom łatwo wyszukiwać i
+       przeglądać dane, dobierać dane potrzebne im do pracy, dostosować sposób
+       prezentacji danych do swoich potrzeb oraz wykorzystywać je we własnych
+       projektach.
+       
+       Raw Salad oferuje ujednolicony tok pracy z danymi. Bez względu na
+       strukturę danych i ich treść przeglądanie danych w Raw Salad wygląda tak
+       samo.
      </section>
      <section style="padding: 20px; width: 45%;" class="right">
+     
      <h2>Do pobrania</h2>
-     Kod źródłowy Raw Salad opublikowany jest na otwartej licencji BSD, 
-     co w praktyce oznacza, że każdy podmiot zainteresowany 
-     wykorzystaniem Raw Salad do własnych celów, może to zrobić 
-     bez dodatkowej zgody autorów oprogramowania. 
-     <br />
-     <br />
-     <ul>
-       <li>Wersja stabilna - <a href="https://github.com/CCLab/Raw-Salad/zipball/master">.zip / 22.4 MB</a></li>
-       <li>Pełny kod źródłowy - <a href="https://github.com/CCLab/Raw-Salad/">GitHub</a></li>
-     </ul>
-     <br />
-     <br />
-     <br />
-     Więcej informacji: <a href="http://rawsalad.centrumcyfrowe.pl" target="_blank">http://rawsalad.centrumcyfrowe.pl</a>
+     <p>
+     Kod źródłowy systemu Raw Salad jest przez nas udostępniany na otwartej
+     licencji BSD. Licencja ta pozwala na jego swobodne wykorzystywanie, do
+     dowolnych celów, bez dodatkowej naszej zgody.
+     </p>
+     <p>
+     Więcej informacji o Raw Salad można znaleźć na 
+     <a href="http://rawsalad.centrumcyfrowe.pl/" target="_blank">stronie projektu</a>.
+     </p>
+     <p>
+     Kod źródłowy Raw Salad udostępniamy na portalu 
+     <a href="http://github.com/cclab/raw-salad" target="_blank">GitHub</a>.
+     </p>
      </section>
     </article>
 
-     <!-- R A W   S A L A D  -->
+     <!-- E N G L I S H  -->
     <article id="ms-english" class="main-site clear" style="padding-bottom: 10px; overflow: auto;">
-      <section style="padding: 20px; width: 45%;" class="left">
-Access to public data in Poland is getting better, but still lacks the standards of their presentation. Raw Salad answers the need for a fast, efficient and standardized access to public data. Salad Raw Data Viewer is a browser, allowing easy access to public data. The main subject of the efforts of developers Raw Salad is to create an efficient and transparent system of movement in the thicket of data. By using modern information technology users get the tool to easily choose the data they need and adjust output to meet their needs.
+      <section style="padding: 20px; width: 50%;" class="left"> 
+      <p style="font-size: 1.2em;">
+         Otwartedane.pl is a Polish service that makes public data available in a
+         way that's transparent, useful and standardized. Our goal is to increase
+         the opennes: availability and re-use of public data. We also want to
+         demonstrate how to publish data in accordance to open data standards.
+      </p>
+      <p>
+      We believe that publication of public data in an open manner brings
+     social value by increasing their usefulness, effectiveness and
+     innovation of uses, and transparency of public administration. Our goal
+     is both to make specific data available in an open way, and to
+     demonstrate how the open data model works.
      <br />
+     
+     Currently we are publishing several collections of data on Polish public
+     finances, which we consider one of the key datasets that need to be made
+     available.
      <br />
-Raw Salad offers a unified workflow. Regardless of the data structure and the contents viewing data in the Raw Salad looks the same. In the future, this will create a unified navigation system within the whole public data.
+     
+     Otwartedane.pl is a service built with 
+     <a href="http://rawsalad.centrumcyfrowe.pl" target="_blank">Raw Salad</a>,
+     a data publishing and viewing platform developed by 
+     <a href="http://centrumcyfrowe.pl" target="_blank">Centrum Cyfrowe</a>.
+     <p>
      </section>
-     <section style="padding: 20px; width: 45%;" class="right">
-An important element is the functionality of Raw Salad Rich download, allowing each stage to work with data download interesting user data in a form which facilitates their further processing in any environment and placing them in a spreadsheet, email, blog, etc.
-     <br />
-     <br />
-From the perspective of software developers the most important element is the Raw Salad’s public application programming interface (Eng: API Application Programming Interface). With API any developer creating a web page, or visualization application for mobile phone, can use data collected by us (eg EU budget funds). She/he will be able to download them directly from the place where they are stored – in the open data base.
+     <section style="padding: 20px; width: 35%;" class="right">
      </section>
     </article>
 
