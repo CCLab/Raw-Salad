@@ -34,7 +34,7 @@ var _db = (function () {
         _utils.create_preloader( 'Zapisuję arkusze w bazie danych.<br />To może chwilę potrwać...' );
 
         $.ajax({
-            url: _basic_url + 'store_state/',
+            url: 'store_state/',
             type: 'GET',
             data: {
                 state: JSON.stringify( groups )
@@ -60,7 +60,7 @@ var _db = (function () {
         };
 
         $.ajax({
-            url: _basic_url + 'search/',
+            url: '/search/',
             data: data,
             dataType: 'json',
             success: function ( received_data ) {
@@ -168,7 +168,7 @@ var _db = (function () {
         };
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
-            url: _basic_url + 'get_searched/',
+            url: '/get_searched/',
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
@@ -202,7 +202,7 @@ var _db = (function () {
 
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
-            url: _basic_url,
+            url: '/',
             data: init_data_info,
             dataType: "json",
             success: function( received_data ) {
@@ -245,7 +245,7 @@ var _db = (function () {
         };
 
         $.ajax({
-            url: '/app/',
+            url: '/',
             data: download_data,
             dataType: 'json',
             success: function( received_data ) {
