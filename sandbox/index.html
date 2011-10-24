@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title> RawSalad search </title>
+      <link rel = "stylesheet" href = "style.css" />
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
+      </script> 
+      <script src = "script.js" ></script>
+    </head >
+  <body> 
+
+    <div id = "wrapper" > 
+        <div id = "app-wrapper" > 
+            <section id ="panels" > 
+                <section class = "panel" id = "pl-search" >
+                    <section id = "pl-sr-form-panel" > 
+                        <section class = "panel-main" > 
+                            <form id ="pl-sr-form" action = "get" >
+                                <input type = "text" class = "input-text" placeholder = "Szukana fraza" id = "pl-sr-query" name = "pl-sr-query" >
+                            </form >
+                        </section >
+                    </section >
+                <section id ="pl-sr-full" class = "panel-main" > 
+                    <p> Wybierz kolekcje danych </p> 
+                    <hr> 
+                    <table id = "pl-sr-table" > 
+                        <tbody> 
+                            <tr> 
+                                <td class = "pl-sr-select-buttons" rowspan = "35" >
+                                    <div id = "pl-sr-select" class = "rounded grey button" > Zaznacz wszystkie </div >
+                                    <br class ="clear" > 
+                                    <div id = "pl-sr-unselect" class = "rounded grey button" > Odznacz wszystkie </div >
+                                </td>
+                            </tr >
+                        </tbody>
+                     </table>
+                </section>
+            </section> 
+          </div>
+      </div>
+   </body>
+</html >
