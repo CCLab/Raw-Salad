@@ -5,6 +5,10 @@ body {
     background-color: #8B8B8B;
 }
 
+h3 {
+    margin: 0;
+}
+
 #wrapper {
     width: 960px;
     margin: 0 auto;
@@ -20,6 +24,39 @@ body {
     overflow: hidden;
     margin-top: 10px;
     background-color: white;
+}
+
+.panel > header {
+    overflow: auto;
+    clear: both;
+    border-bottom: 2px solid #3B3B3B;
+}
+
+.panel-title {
+    margin: 0 5px;
+    margin-top: 5px;
+    padding: 5px;
+    color: white;
+    background-color: #3B3B3B;
+    border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -o-border-radius: 5px 5px 0 0;
+}
+
+.panel > header > * {
+    float: left;
+}
+
+.panel-icon {
+    margin-top: 5px;
+}
+
+.panel-desc {
+    margin: 0 5px;
+    margin-top: 5px;
+    padding: 5px;
+    font-weight: bold;
 }
 
 .panel-main {
@@ -42,7 +79,7 @@ form {
 }
 
 .input-text {
-    min-width: 100px;
+    min-width: 200px;
     height: 18px;
     background-color: white;
     border: 1px solid #4CBCEB;
@@ -61,3 +98,75 @@ input {
 #pl-sr-results > table {
     border-collapse: collapse;
 }
+
+.pl-bt-container {
+    overflow: auto;
+    width: 225px;
+    padding-bottom: 5px;
+}
+
+#pl-sr-more {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #E1E1E1;
+    color: #1EA3E8;
+    border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    -o-border-radius: 0 0 5px 5px;
+}
+
+  #pl-sr-more:hover {
+    background-color: #1ea3e8;
+    color: #fff;
+  }
+
+
+.panel .button {
+    float: right;
+    padding: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.blue {
+    color: white;
+    background-color: #4ABFF7;
+}
+
+ul {
+    float: left;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: block;
+}
+
+#pl-sr-full li {
+    width: 350px;
+    margin: 15px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+#pl-sr-full header {
+border-bottom: 1px solid #919191;
+}
+
+
+

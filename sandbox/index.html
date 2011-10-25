@@ -1,18 +1,24 @@
 <!DOCTYPE html>
   <html>
     <head>
+      <meta charset="UTF-8">
       <title> RawSalad search </title>
       <link rel = "stylesheet" href = "style.css" />
       <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
       </script> 
-      <script src = "script.js" ></script>
     </head >
   <body> 
 
     <div id = "wrapper" > 
         <div id = "app-wrapper" > 
             <section id ="panels" > 
+
                 <section class = "panel" id = "pl-search" >
+                    <header>
+                        <p class="panel-title">Wyszukaj</p>
+                        <img src="img/info.png" alt="Ikona informacji" class="panel-icon">
+                        <p class="panel-desc">Wyszukaj konkretne informacje w naszej bazie danych.</p>
+                    </header>
                     <section id = "pl-sr-form-panel" > 
                         <section class = "panel-main" > 
                             <form id ="pl-sr-form" action = "get" >
@@ -20,23 +26,84 @@
                             </form >
                         </section >
                     </section >
-                <section id ="pl-sr-full" class = "panel-main" > 
-                    <p> Wybierz kolekcje danych </p> 
-                    <hr> 
-                    <table id = "pl-sr-table" > 
-                        <tbody> 
-                            <tr> 
-                                <td class = "pl-sr-select-buttons" rowspan = "35" >
-                                    <div id = "pl-sr-select" class = "rounded grey button" > Zaznacz wszystkie </div >
-                                    <br class ="clear" > 
-                                    <div id = "pl-sr-unselect" class = "rounded grey button" > Odznacz wszystkie </div >
-                                </td>
-                            </tr >
-                        </tbody>
-                     </table>
-                </section>
+                    <section id ="pl-sr-full" class = "panel-main" style="display: none;" > 
+
+                    <!-- ADVANCE SEARCH -->
+
+
+                        <ul class="left">
+                            <li>
+                                <input value="0-0-2011" type="checkbox">
+                                <header>
+                                    <h3>Budżet centralny</h3>
+                                </header>
+                                <section>
+                                    <p>
+                                    Budżet centralny Rzeczpospolitej Polskiej,
+                                    czyli komplet finansów centralnych planowanych w ustawie budżetowej.
+                                    Poza planami finansowymi kolekcja zawiera sprawozdania finansowe - stronę dochodów i wydatków.
+                                    </p>
+                                    <div class="blue button right" data-set-id="0">
+                                        Zobacz dane
+                                    </div>
+                                </section>
+                            </li>
+                            <li>
+                                <input value="0-0-2011" type="checkbox">
+                                <header>
+                                    <h3>Budżet Środków Europejskich</h3>
+                                </header>
+                                <section>
+                                    <p>
+                                    Środki europejskie przeznaczone na realizację programów
+                                    współfinansowanych przez Unię Europejską
+                                    </p>
+                                    <div class="blue button right" data-set-id="1">
+                                        Zobacz dane
+                                    </div>
+                                </section>
+                            </li>
+                            <li>
+                                <input value="0-0-2011" type="checkbox">                            
+                                <header>
+                                    <h3>Fundusze celowe i agencje narodowe</h3>
+                                </header>
+                                <section>
+                                    <p>
+                                    Części kosztowe budżetów wszystkich funduszy celowych i
+                                    agencji narodowych
+                                    </p>
+                                    <div class="blue button right" data-set-id="2">
+                                    Zobacz dane
+                                    </div>
+                                </section>
+                            </li>
+                        </ul>
+
+                    <!-- END ADVANCE SEARCH -->
+
+
+
+                    </section>
+                    <div class="pl-bt-container" style="margin-top: -5px">
+                        <div id="pl-sr-more" class="button left">Zaawansowane</div>
+                    </div>
             </section> 
           </div>
       </div>
+      <script>
+             $('#pl-sr-more')
+            .click( function () {
+                if( $('#pl-sr-full').is(':visible') ) {
+                    $('#pl-sr-full').slideUp( 200 );
+                    $(this).html( 'Pokaż zaawansowane' );
+                }
+                else {
+                    $('#pl-sr-unselect').trigger( $.Event( 'click' ));
+                    $('#pl-sr-full').slideDown( 200 );
+                    $(this).html( 'Zamknij zaawansowane' );
+                }
+            });
+      </script>
    </body>
 </html >
