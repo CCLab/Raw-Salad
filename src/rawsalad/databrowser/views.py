@@ -375,13 +375,11 @@ def get_page( request ):
 
 
 def app_page( request ):
-    bad_browser_marks = ['MSIE 7', 'MSIE 6', 'Firefox/3']
+    old_browser_marks = ['MSIE 7', 'MSIE 6', 'Firefox/3']
     browser = request.META.get('HTTP_USER_AGENT', '')
     
-    if len([x for x in bad_browser_marks if x in browser]) > 0:
-        template = loader.get_template( "old_browser.html" )
-        context = Context({})
-        return HttpResponse( template.render( context ))
+    if len([x for x in old_browser_marks if x in browser]) > 0:
+        return HttpResponseRedirect('/old_browser')
         
     data = request.GET
     if data == {} or data.get('lang','') == 'en':
@@ -389,6 +387,11 @@ def app_page( request ):
     else:
         function_id = data['action']
         return func_dict[function_id]( data )
+
+def old_browser_page( request ):
+    template = loader.get_template( "old_browser.html" )
+    context = Context({})
+    return HttpResponse( template.render( context ))
 
 def redirect( request ):
     return HttpResponseRedirect('/')

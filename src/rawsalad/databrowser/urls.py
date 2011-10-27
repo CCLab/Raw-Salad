@@ -11,4 +11,5 @@ urlpatterns = patterns( 'databrowser.views',
     (r'^get_searched/$', 'get_searched_data' ),
     (r'^$', 'app_page' ),
     (r'^en/$', 'redirect_en' ),
+    (r'^old_browser/$', 'old_browser_page' )
 )
