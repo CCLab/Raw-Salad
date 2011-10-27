@@ -375,6 +375,14 @@ def get_page( request ):
 
 
 def app_page( request ):
+    bad_browser_marks = ['MSIE 7', 'MSIE 6', 'Firefox/3']
+    browser = request.META.get('HTTP_USER_AGENT', '')
+    
+    if len([x for x in bad_browser_marks if x in browser]) > 0:
+        template = loader.get_template( "old_browser.html" )
+        context = Context({})
+        return HttpResponse( template.render( context ))
+        
     data = request.GET
     if data == {} or data.get('lang','') == 'en':
         return get_page( request )

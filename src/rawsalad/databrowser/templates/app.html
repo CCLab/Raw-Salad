@@ -1052,26 +1052,6 @@
  </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script src="/site_media/test/utils.js"></script>
-  <script type="text/javascript" language="javascript">
-  // <![CDATA[
-      (function () {
-        var create_old_version_paneltext = function() {
-            var info = [ 'Twoja przeglądarka nie potrafi pokazywać treści zgodnych z najnowszymi standardami. '];
-            info.push( 'Zaktualizuj dswoją przeglądarkę, żeby zobaczyć stronę. Dowiedz się więcej.' );
-            info.push( '<a href="http://centrumcyfrowe.pl/about/dlaczego-uzywamy-otwartych-standardow-sieciowych/"' );
-            info.push( 'target="_blank" id="warning-more-info"> Dowiedz się więcej</a>.' );
-            return info.join('');
-        };
-        var version = $.browser['version'];        
-        if ( (!!$.browser['mozilla'] && parseFloat(version) < 6.0) ||
-             (!!$.browser['msie'] && parseFloat(version) < 8.0) ) {
-            _utils.create_preloader( create_old_version_paneltext() );
-        }
-      })();
-  // ]]>
-  </script>
-  
   <!-- minification area: /site_media/test/ -->
   <script src="/site_media/test/hide.js"></script>
   <script src="/site_media/test/assert.js"></script>
@@ -1080,7 +1060,7 @@
   <script src="/site_media/test/gui.js"></script>
   <script src="/site_media/test/table.js"></script>
   <script src="/site_media/test/sheet.js"></script>
-  <!--<script src="/site_media/test/utils.js"></script>-->
+  <script src="/site_media/test/utils.js"></script>
   <script src="/site_media/test/tools.js"></script>
   <script src="/site_media/test/algorithms.js"></script>
   <script src="/site_media/test/download.js"></script>

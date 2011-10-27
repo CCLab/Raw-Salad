@@ -1,0 +1,46 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/site_media/test/min.css">
+    
+    <title>Raw Salad: surowe dane w różnych smakach</title>
+  </head>
+  <body style="background-color: rgb(255, 255, 255); " >
+  <header id="most-top">  
+    <table> 
+      <tbody> 
+  	    <tr> 
+  	      <td style="width: 320px;"><a href="http://otwartedane.pl" target="_top"><img id="mt-od-logo" src="/site_media/img/logo_rollover.png" /></a></td> 
+  		  <td style="width: 320px; text-align: center"><a href="http://otwartedane.pl" > <img id="mt-toggle" src="/site_media/img/toggle_AplikacjaGlow_01.png" /> </a> </td> 
+  		  <td style="width: 320px;"><a href="http://centrumcyfrowe.pl" target="_blank"><img id="mt-cc-logo" src="/site_media/img/logo_CC-PP.png" class="right" style="margin-right: 30px" /></a></td> 
+  	    </tr> 
+  	  </tbody> 
+    </table> 
+  </header> 
+  <div id="wrapper"> 
+   <div id="preloader">
+     Twoja przeglądarka nie potrafi pokazywać treści zgodnych z najnowszymi standardami.
+     Zaktualizuj swoją przeglądarkę, żeby zobaczyć stronę.
+     <a href="http://centrumcyfrowe.pl/about/dlaczego-uzywamy-otwartych-standardow-sieciowych/" target="_blank" id="warning-more-info">
+         Dowiedz się więcej
+     </a>
+     .
+   </div>
+  </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script>
+  (function () {
+    var x = ($(window).width() - $('#preloader').width()) / 2;
+    $('#preloader').css({ 'left': x });
+  })();
+  </script>
+</html>
+    
+
+
+
+
