@@ -763,8 +763,8 @@ textarea {
 #preloader {
   position: fixed;
 
-  width: 300px;
-  height: 20px;
+  min-width: 300px;
+  min-height: 20px;
 
   padding: 20px;
 
@@ -784,6 +784,11 @@ textarea {
   -webkit-border-radius: 0px 0px 5px 5px;
   -o-border-radius: 0px 0px 5px 5px;
 }
+
+#preloader a:hover {
+    color: #8b8b8b;
+}
+
 
 #app-tb-tl-old-title {
   margin-top: 2px;

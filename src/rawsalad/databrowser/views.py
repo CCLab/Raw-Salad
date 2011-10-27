@@ -453,12 +453,9 @@ def dataset_compare(d1, d2):
 def get_ms_nav():
     db= rsdb.DBconnect("mongodb").dbconnect
     nav_full= rsdb.Navtree().get_nav_full(db)
-    print nav_full
-
-    print nav_full[0]
 
     nav_full = sorted(nav_full, cmp=dataset_compare)
-    print nav_full
+
     out= { 'meta_data': json.dumps( nav_full ) }
     return out
 
