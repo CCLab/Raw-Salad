@@ -14,6 +14,8 @@ import re
 from StringIO import StringIO
 from zipfile import ZipFile
 
+from operator import attrgetter
+
 
 # to be removed soon
 def choose_collection( data ):
@@ -27,6 +29,7 @@ def get_init_data( data ):
     db= rsdb.DBconnect("mongodb").dbconnect
     coll= rsdb.Collection(query= { 'level': 'a' })
 
+    print data
     return_data = {}
     return_data['rows']= coll.get_data(
         db, data['dataset'], data['perspective'], data['issue']
@@ -424,8 +427,12 @@ func_dict = {
 
 
 
-def get_page( data ):
-    template = loader.get_template( "app.html" )
+def get_page( request ):
+    if request.GET.get( 'lang', None ) == 'en':
+        template = loader.get_template( "app_en.html" )
+    else:
+        template = loader.get_template( "app.html" )
+
     context = Context({
         'meta': get_ms_nav()
     })
@@ -433,15 +440,29 @@ def get_page( data ):
 
 
 def app_page( request ):
+    old_browser_marks = ['MSIE 7', 'MSIE 6', 'Firefox/3']
+    browser = request.META.get('HTTP_USER_AGENT', '')
+    
+    if len([x for x in old_browser_marks if x in browser]) > 0:
+        return HttpResponseRedirect('/old_browser')
+        
     data = request.GET
-    if data == {}:
+    if data == {} or data.get('lang','') == 'en':
         return get_page( request )
     else:
         function_id = data['action']
         return func_dict[function_id]( data )
 
+def old_browser_page( request ):
+    template = loader.get_template( "old_browser.html" )
+    context = Context({})
+    return HttpResponse( template.render( context ))
+
 def redirect( request ):
-    return HttpResponseRedirect('/app')
+    return HttpResponseRedirect('/')
+
+def redirect_en( request ):
+    return HttpResponseRedirect('/?lang=en')
 
 @csrf_exempt
 def feedback_email( request ):
@@ -502,9 +523,15 @@ def download_data( request ):
 
     return response
 
+def dataset_compare(d1, d2):
+    return d1['idef'] - d2['idef']
+
 def get_ms_nav():
     db= rsdb.DBconnect("mongodb").dbconnect
     nav_full= rsdb.Navtree().get_nav_full(db)
+
+    nav_full = sorted(nav_full, cmp=dataset_compare)
+
     out= { 'meta_data': json.dumps( nav_full ) }
     return out
 

@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/site_media/test/min.css">
+    
+    <title>Raw Salad: surowe dane w różnych smakach</title>
+  </head>
+  <body style="background-color: rgb(255, 255, 255); " >
+  <header id="most-top">  
+    <table> 
+      <tbody> 
+  	    <tr> 
+  	      <td style="width: 320px;"><a href="http://otwartedane.pl" target="_top"><img id="mt-od-logo" src="/site_media/img/logo_rollover.png" /></a></td> 
+  		  <td style="width: 320px; text-align: center"><a href="http://otwartedane.pl" > <img id="mt-toggle" src="/site_media/img/toggle_AplikacjaGlow_01.png" /> </a> </td> 
+  		  <td style="width: 320px;"><a href="http://centrumcyfrowe.pl" target="_blank"><img id="mt-cc-logo" src="/site_media/img/logo_CC-PP.png" class="right" style="margin-right: 30px" /></a></td> 
+  	    </tr> 
+  	  </tbody> 
+    </table> 
+  </header> 
+  <div id="wrapper"> 
+   <div id="main-wrapper"> 
+   <!--  H E A D E R  --> 
+    <header id="main-top" style="padding-top: 15px;"> 
+    </header>
+     <!--  M A I N  --> 
+    <article id="ms-main" class="main-site clear" style="padding-bottom: 10px; overflow: auto; height: 300px; "> 
+      <h2 style="padding: 120px; text-align: center; " >
+        Ups... nastąpił błąd. <a href="http://otwartedane.pl" >Wróć do strony głównej</a> 
+      </h2>
+    </article> 
+    </div>  
+  </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script>
+  (function () {
+    var x = $(window).width() / 2 - $('table').width() / 2;
+    $('table').css({ 'padding': '0px 5px', 'margin-left': x });
+  })();
+  </script>
+</html>
+    
+
+
+
+

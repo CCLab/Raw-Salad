@@ -43,6 +43,11 @@ td {
   padding: 5px 0px;
 }
 
+h2 {
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+
 h3 {
   margin: 0px;
 }
@@ -758,8 +763,8 @@ textarea {
 #preloader {
   position: fixed;
 
-  width: 300px;
-  height: 20px;
+  min-width: 300px;
+  min-height: 20px;
 
   padding: 20px;
 
@@ -780,6 +785,11 @@ textarea {
   -o-border-radius: 0px 0px 5px 5px;
 }
 
+#preloader a:hover {
+    color: #8b8b8b;
+}
+
+
 #app-tb-tl-old-title {
   margin-top: 2px;
   margin-left: 5px;
@@ -788,6 +798,37 @@ textarea {
 
 
 .main-site {
+  line-height: 1.8em;
   margin: 0px;
   background-color: #e8e8e8;
+}
+
+footer {
+  margin-top: 150px;
+  padding: 0px 15px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+footer > section {
+  padding: 10px 0px;
+  line-height: 1.7em;
+  float: left;
+  margin-right: 1%;
+}
+
+footer a:hover {
+  color: #8b8b8b;
+}
+
+.last {
+  margin-right: 0%;
+}
+
+#goto-app:hover {
+  cursor: pointer;
+}
+
+#ms-help img {
+  border: 3px solid #8b8b8b;
 }

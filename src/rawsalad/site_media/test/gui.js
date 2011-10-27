@@ -32,12 +32,25 @@ var _gui = (function () {
     that.init_gui = function ( hide_panel ) {
         var datasets_height;
 
-//        window.onbeforeunload = _utils.beforeunload;
+        window.onbeforeunload = _utils.beforeunload;
 
         $('#most-top')
             .find('table')
             .css({
                 'margin-left': (( $(window).width() - 960 ) / 2 ) + 'px'
+            });
+
+        $('#goto-app')
+            .hover(
+                function () {
+                    $('#goto-app').attr('src', '/site_media/img/goto_app_over.png');
+                },
+                function () {
+                    $('#goto-app').attr('src', '/site_media/img/goto_app.png');
+                }
+            )
+            .click( function () {
+                $('#mt-toggle').trigger( $.Event('click') );
             });
 
         $('#mt-toggle')
@@ -47,10 +60,24 @@ var _gui = (function () {
                     $('#main-wrapper').show();
                     $('#mt-toggle').attr( 'src', '/site_media/img/toggle_PortalGlow_01.png' );
                     $('body').css( 'background-color', '#fff' );
+                    $('#ms-main').show();
+                    $('#beta-version').show();
+                    $('.main-tab').removeClass('active').click( function () {
+                      var tab = $(this).attr('id').split('-').pop();
+                      $('.main-tab').removeClass('active');
+                      $(this).addClass('active');
+
+                      $('.main-site').hide();
+                      $('#ms-'+tab).show();
+                    });
+
+                    $('#mt-menu-main').addClass('active');
+                    $('.main-site').not('#ms-main').hide();
                 }
                 else {
                     $('#app-wrapper').show();
                     $('#main-wrapper').hide();
+                    $('#beta-version').hide();
                     $('#mt-toggle').attr( 'src', '/site_media/img/toggle_AplikacjaGlow_01.png' );
                     $('body').css( 'background-color', '#8b8b8b' );
                 }
@@ -219,7 +246,7 @@ var _gui = (function () {
                     $('#tm-choose').trigger( $.Event( 'click' ) );
                 }
                 // arm backbutton and others again - timeout for letting download work
-//                setTimeout( function () { window.onbeforeunload = _utils.beforeunload; }, 1000 );
+                setTimeout( function () { window.onbeforeunload = _utils.beforeunload; }, 1000 );
             });
 
         $('#pl-feedback')
@@ -293,6 +320,7 @@ var _gui = (function () {
 
                 if( boxes.length === 0 ) {
                     collections = ['0-0-2011', '0-1-2011', '0-1-2012', '0-2-2011',
+                                   '0-3-2010',
                                    '0-2-2012', '1-0-2011', '1-1-2011', '1-1-2012',
                                    '1-2-2011', '1-2-2012', '2-1-2011', '2-2-2011',
                                    '2-3-2011', '2-4-2011', '3-0-2011', '3-1-2011',
@@ -448,10 +476,12 @@ var _gui = (function () {
                 $(this).select();
             });
 
+        if( hide_panel ) {
+            $('#beta-version').hide();
+        }
         init_choose_panel( hide_panel );
 
         datasets_height = $("#pl-ch-datasets").height();
-
     };
 
 

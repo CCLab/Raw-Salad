@@ -48,6 +48,7 @@
 
 .main-tab:hover {
   color: #438db3;
+  background-color: #f4f4f4;
 }
 
 .main-tab.active {
@@ -122,3 +123,6 @@
   float: right;
 }
 
+.click:hover {
+  cursor: pointer !important;
+}

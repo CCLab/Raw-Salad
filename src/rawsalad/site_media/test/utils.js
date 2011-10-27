@@ -121,7 +121,7 @@ var _utils = (function () {
     that.create_preloader = function( text ) {
         var preloader;
         var html = [];
-        var x = $(window).width() / 2 - 200;
+        var x;
         var main_cover = $( '<div class="cover" id="main-cover" > </div>' );
         $('#wrapper')
             .append(main_cover);
@@ -136,12 +136,11 @@ var _utils = (function () {
         html.push('</div>');
 
         preloader = $( html.join('') );
-        preloader.css({
-            'top': '-1px',
-            'left': x
-        });
 
         $('body').append( preloader );
+        preloader.css({ 'top': '-1px' });
+        x = ($(window).width() - $('#preloader').width()) / 2;
+        preloader.css({ 'left': x });
         $('#wrapper').css( 'opacity', '0.3' );
     };
 
