@@ -4,7 +4,7 @@
       <meta charset="UTF-8">
       <title> RawSalad search </title>
       <link rel = "stylesheet" href = "style.css" />
-      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
+      <script src = "jquery.min.js">
       </script> 
     </head >
   <body> 
@@ -16,13 +16,13 @@
                 <section class = "panel" id = "pl-search" >
                     <header>
                         <p class="panel-title">Wyszukaj</p>
-                        <img src="img/info.png" alt="Ikona informacji" class="panel-icon">
+                        <img src="img/info.png" alt="Ikona informacji" class="panel-icon"/>
                         <p class="panel-desc">Wyszukaj konkretne informacje w naszej bazie danych.</p>
                     </header>
                     <section id = "pl-sr-form-panel" > 
                         <section class = "panel-main" > 
                             <form id ="pl-sr-form" action = "get" >
-                                <input type = "text" class = "input-text" placeholder = "Szukana fraza" id = "pl-sr-query" name = "pl-sr-query" >
+                                <input type = "text" class = "input-text" placeholder = "Szukana fraza" id = "pl-sr-query" name = "pl-sr-query" />
                             </form >
                         </section >
                     </section >
@@ -33,7 +33,8 @@
 
                         <ul class="left">
                             <li>
-                                <input value="0-0-2011" type="checkbox">
+                                <input value="0" type="checkbox"/>
+                                <img src="img/triangle.png" alt="triangle" data-set-id="0" />
                                 <div class="pl-sr-collection" >
                                     <header>
                                         <h3>Budżet centralny</h3>
@@ -44,14 +45,12 @@
                                         czyli komplet finansów centralnych planowanych w ustawie budżetowej.
                                         Poza planami finansowymi kolekcja zawiera sprawozdania finansowe - stronę dochodów i wydatków.
                                         </p>
-                                        <div class="blue button right" data-set-id="0">
-                                            Zobacz dane
-                                        </div>
                                     </section>
                                 </div>
                             </li>
                             <li>
-                                <input value="0-0-2011" type="checkbox">
+                                <input value="1" type="checkbox"/>
+                                <img src="img/triangle.png" alt="triangle" data-set-id="1"/>
                                 <div class="pl-sr-collection" >
                                     <header>
                                         <h3>Budżet Środków Europejskich</h3>
@@ -61,14 +60,12 @@
                                         Środki europejskie przeznaczone na realizację programów
                                         współfinansowanych przez Unię Europejską
                                         </p>
-                                        <div class="blue button right" data-set-id="1">
-                                            Zobacz dane
-                                        </div>
                                     </section>
                                 </div>
                             </li>
                             <li>
-                                <input value="0-0-2011" type="checkbox">                            
+                                <input value="2" type="checkbox" />
+                                <img src="img/triangle.png" alt="triangle" data-set-id="2" />                             
                                 <div class="pl-sr-collection" >
                                     <header>
                                         <h3>Fundusze celowe i agencje narodowe</h3>
@@ -78,9 +75,6 @@
                                         Części kosztowe budżetów wszystkich funduszy celowych i
                                         agencji narodowych
                                         </p>
-                                        <div class="blue button right" data-set-id="2">
-                                        Zobacz dane
-                                        </div>
                                     </section>
                                 </div>
                             </li>
@@ -93,6 +87,9 @@
                     </section>
                     <div class="pl-bt-container" style="margin-top: -5px">
                         <div id="pl-sr-more" class="button left">Zaawansowane</div>
+                    </div>
+                    <div class="pl-bt-container">
+                        <div id="pl-sr-button" class="blue button">Szukaj</div>
                     </div>
             </section> 
           </div>

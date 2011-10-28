@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title> RawSalad search </title>
+      <link rel = "stylesheet" href = "style.css" />
+      <script src = "jquery.min.js">
+      </script> 
+    </head >
+  <body> 
+
+    <div id = "wrapper" > 
+        <div id = "app-wrapper" > 
+            <section id ="panels" > 
+
+                <section class = "panel" id = "pl-search" >
+                    <header>
+                        <p class="panel-title">Wyszukaj</p>
+                        <img src="img/info.png" alt="Ikona informacji" class="panel-icon"/>
+                        <p class="panel-desc">Wyszukaj konkretne informacje w naszej bazie danych.</p>
+                    </header>
+                    <section id = "pl-sr-form-panel" > 
+                        <section class = "panel-main" > 
+                            <form id ="pl-sr-form" action = "get" >
+                                <input type = "text" class = "input-text" placeholder = "Szukana fraza" id = "pl-sr-query" name = "pl-sr-query" />
+                            </form >
+                        </section >
+                    </section >
+                    <section id ="pl-sr-full" class = "panel-main" style="display: none;" > 
+
+                    <!-- ADVANCE SEARCH -->
+
+
+                        <ul class="left">
+                            <li>
+                                <input value="0" type="checkbox"/>
+                                <section class="pl-sr-fl-det" >                                
+                                    <img src="img/triangle.png" alt="triangle" data-set-id="0" />
+                                    <section class="pl-sr-fl-collection" >
+                                        <header>
+                                            <h3>Budżet centralny</h3>
+                                        </header>
+                                        <section>
+                                            <p>
+                                            Budżet centralny Rzeczpospolitej Polskiej,
+                                            czyli komplet finansów centralnych planowanych w ustawie budżetowej.
+                                            Poza planami finansowymi kolekcja zawiera sprawozdania finansowe - stronę dochodów i wydatków.
+                                            </p>
+                                        </section>
+                                    </section>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td></td>
+                                                <td>2000</td>
+                                                <td>2001</td>
+                                                <td>2002</td>
+                                                <td>2003</td>
+                                                <td>2004</td>
+                                                <td>2005</td>
+                                                <td>2006</td>
+                                                <td>2007</td>
+                                                <td>2008</td>
+                                                <td>2009</td>
+                                                <td>2010</td>
+                                                <td>2011</td>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Budżet tradycyjny</td>
+                                                <td> <input value="0-1-2000" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2001" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2002" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2003" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2004" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2005" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2006" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2007" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2008" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2009" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2010" type="checkbox"/> </td>
+                                                <td> <input value="0-1-2011" type="checkbox"/> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Budżet zadaniowy</td>
+                                                <td> <input value="0-2-2000" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2001" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2002" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2003" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2004" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2005" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2006" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2007" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2008" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2009" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2010" type="checkbox"/> </td>
+                                                <td> <input value="0-2-2011" type="checkbox"/> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Budżet instytucjonalny</td>
+                                                <td> <input value="0-3-2000" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2001" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2002" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2003" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2004" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2005" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2006" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2007" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2008" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2009" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2010" type="checkbox"/> </td>
+                                                <td> <input value="0-3-2011" type="checkbox"/> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sprawozdanie z wykonania - wydatki</td>
+                                            </tr>                                          
+                                        </tbody>
+                                    </table>
+                                </section>
+                            </li>
+                            <li>
+                                <input value="1" type="checkbox"/>
+                                <img src="img/triangle.png" alt="triangle" data-set-id="1"/>
+                                <section class="pl-sr-fl-det" >                                
+                                    <section class="pl-sr-fl-collection" >
+                                        <header>
+                                            <h3>Budżet Środków Europejskich</h3>
+                                        </header>
+                                        <section>
+                                            <p>
+                                            Środki europejskie przeznaczone na realizację programów
+                                            współfinansowanych przez Unię Europejską
+                                            </p>
+                                        </section>
+                                    </section>
+                                </section>
+                            </li>
+                            <li>
+                                <input value="2" type="checkbox" />
+                                <section class="pl-sr-fl-det" >                                
+                                    <img src="img/triangle.png" alt="triangle" data-set-id="2" />                             
+                                    <section class="pl-sr-fl-collection" >
+                                        <header>
+                                            <h3>Fundusze celowe i agencje narodowe</h3>
+                                        </header>
+                                        <section>
+                                            <p>
+                                            Części kosztowe budżetów wszystkich funduszy celowych i
+                                            agencji narodowych
+                                            </p>
+                                        </section>
+                                    </section>
+                                </section>
+                            </li>
+                        </ul>
+
+                    <!-- END ADVANCE SEARCH -->
+
+
+
+                    </section>
+                    <div class="pl-bt-container" style="margin-top: -5px">
+                        <div id="pl-sr-more" class="button left">Zaawansowane</div>
+                    </div>
+                    <div class="pl-bt-container">
+                        <div id="pl-sr-button" class="blue button">Szukaj</div>
+                    </div>
+            </section> 
+          </div>
+      </div>
+      <script>
+             $('#pl-sr-more')
+            .click( function () {
+                if( $('#pl-sr-full').is(':visible') ) {
+                    $('#pl-sr-full').slideUp( 200 );
+                    $(this).html( 'Pokaż zaawansowane' );
+                }
+                else {
+                    $('#pl-sr-unselect').trigger( $.Event( 'click' ));
+                    $('#pl-sr-full').slideDown( 200 );
+                    $(this).html( 'Zamknij zaawansowane' );
+                }
+            });
+      </script>
+   </body>
+</html >
