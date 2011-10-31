@@ -9,6 +9,10 @@ h3 {
     margin: 0;
 }
 
+td {
+    padding: 5px 0;
+}
+
 #wrapper {
     width: 960px;
     margin: 0 auto;
@@ -158,21 +162,33 @@ ul {
 }
 
 #pl-sr-full li {
-    width: 350px;
     margin: 15px;
     padding: 10px;
     overflow: hidden;
 }
 
-#pl-sr-full header {
+.pl-sr-fl-collection header {
     border-bottom: 1px solid #919191;
 }
-#pl-sr-full img {
+
+.search-arrow  {
     float: left;
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 9px;
+    margin-top: 4px;
 }
+
+.search-arrow:hover  {
+    cursor: pointer;
+}
+
+.dim-pointer{
+	float: left;
+	margin-left: -14px;
+	position: absolute;
+	display: none;
+}
+
 
 #pl-sr-full input {
     float: left;
@@ -180,20 +196,115 @@ ul {
     margin-top: 7px;
 }
 
-#pl-sr-full img:hover  {
-    coursor: pointer;
-}
 
 
 .pl-sr-fl-collection {
     overflow: auto;
+    max-width: 320px;
 }
 
 .pl-sr-fl-det {
     overflow: auto;
+    padding: 5px;
+    border-width: 1px;
+    border-style: solid;
+	border-color: #E3E3E3;
 }
 
-.pl-sr-fl-det td:first-child {
-    background-color: red; 
+.col-details{
+    background-color: white;
+
+    border-color: #919191;
 }
 
+.pl-sr-fl-col-det{
+    overflow: auto;
+	display: none;
+}
+
+.pl-sr-fl-col-det table{
+    overflow: auto;
+} 
+
+
+.pl-sr-fl-col-det > table > tbody td:first-child {
+    display: block;
+    width: 100px;
+    text-align: right;
+    margin-right: 30px;
+}
+
+.pl-sr-fl-deepcolection{
+    overflow: auto;
+}
+
+.col-deepdet{
+    background-color: #E3E3E3;
+    border-color: #919191 !important;
+
+}
+
+
+.pl-sr-fl-deepdet{
+    overflow: auto;
+    padding: 5px;
+    border-width: 1px;
+    border-style: solid;        
+    border-color: white;
+
+}
+
+
+
+
+
+
+
+
+/* RESULT  */
+
+
+
+
+/* RESULT CHANGES */
+.pl-sr-results-number {
+    vertical-align: top;
+    vertical-align: top;
+    padding-left: 20px;
+    text-align: left;
+    width: 80px;
+    height: 13px;
+}
+
+.pl-sr-results-name {
+    padding-left: 15px;
+    vertical-align: top;
+}
+
+#pl-sr-results > table {
+    border-collapse: collapse;
+    margin-left: 20px;
+}
+
+/* RESULT NEW */
+
+#pl-sr-results td {
+    padding: 1px;
+}
+
+.pl-sr-results-col {
+    display: inline-block;
+    margin: 15px;
+    margin-bottom: 0px;
+}
+
+#pl-sr-results > p:first-child {
+    width: 80px;
+}
+
+.pl-sr-results-colection-name {
+    margin-left: 20px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+    font-weight: bold;
+}

@@ -34,8 +34,9 @@
                         <ul class="left">
                             <li>
                                 <input value="0" type="checkbox"/>
-                                <section class="pl-sr-fl-det" >                                
-                                    <img src="img/triangle.png" alt="triangle" data-set-id="0" />
+                                <section class="pl-sr-fl-det" >
+									<img src="img/corner.png" class="dim-pointer" >                                
+                                    <img src="img/triangle.png" alt="triangle" class="search-arrow" data-set-id="0" />
                                     <section class="pl-sr-fl-collection" >
                                         <header>
                                             <h3>Budżet centralny</h3>
@@ -48,81 +49,98 @@
                                             </p>
                                         </section>
                                     </section>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td></td>
-                                                <td>2000</td>
-                                                <td>2001</td>
-                                                <td>2002</td>
-                                                <td>2003</td>
-                                                <td>2004</td>
-                                                <td>2005</td>
-                                                <td>2006</td>
-                                                <td>2007</td>
-                                                <td>2008</td>
-                                                <td>2009</td>
-                                                <td>2010</td>
-                                                <td>2011</td>                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Budżet tradycyjny</td>
-                                                <td> <input value="0-1-2000" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2001" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2002" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2003" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2004" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2005" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2006" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2007" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2008" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2009" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2010" type="checkbox"/> </td>
-                                                <td> <input value="0-1-2011" type="checkbox"/> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Budżet zadaniowy</td>
-                                                <td> <input value="0-2-2000" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2001" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2002" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2003" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2004" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2005" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2006" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2007" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2008" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2009" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2010" type="checkbox"/> </td>
-                                                <td> <input value="0-2-2011" type="checkbox"/> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Budżet instytucjonalny</td>
-                                                <td> <input value="0-3-2000" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2001" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2002" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2003" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2004" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2005" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2006" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2007" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2008" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2009" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2010" type="checkbox"/> </td>
-                                                <td> <input value="0-3-2011" type="checkbox"/> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sprawozdanie z wykonania - wydatki</td>
-                                            </tr>                                          
-                                        </tbody>
-                                    </table>
+                                    <section class="pl-sr-fl-col-det" > 
+
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>2000</td>
+                                                    <td>2001</td>
+                                                    <td>2002</td>
+                                                    <td>2003</td>
+                                                    <td>2004</td>
+                                                    <td>2005</td>
+                                                    <td>2006</td>
+                                                    <td>2007</td>
+                                                    <td>2008</td>
+                                                    <td>2009</td>
+                                                    <td>2010</td>
+                                                    <td>2011</td>                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Budżet tradycyjny</td>
+                                                    <td> <input value="0-1-2000" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2001" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2002" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2003" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2004" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2005" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2006" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2007" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2008" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2009" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2010" type="checkbox"/> </td>
+                                                    <td> <input value="0-1-2011" type="checkbox"/> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Budżet zadaniowy</td>
+                                                    <td> <input value="0-2-2000" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2001" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2002" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2003" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2004" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2005" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2006" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2007" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2008" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2009" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2010" type="checkbox"/> </td>
+                                                    <td> <input value="0-2-2011" type="checkbox"/> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Budżet instytucjonalny</td>
+                                                    <td> <input value="0-3-2000" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2001" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2002" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2003" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2004" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2005" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2006" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2007" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2008" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2009" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2010" type="checkbox"/> </td>
+                                                    <td> <input value="0-3-2011" type="checkbox"/> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sprawozdanie z wykonania - wydatki</td>
+                                                    <td> <input value="0-4-2000" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2001" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2002" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2003" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2004" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2005" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2006" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2007" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2008" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2009" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2010" type="checkbox"/> </td>
+                                                    <td> <input value="0-4-2011" type="checkbox"/> </td>
+                                                    
+                                                </tr>                                          
+                                            </tbody>
+                                        </table>
+                                    </section>
                                 </section>
                             </li>
                             <li>
                                 <input value="1" type="checkbox"/>
-                                <img src="img/triangle.png" alt="triangle" data-set-id="1"/>
                                 <section class="pl-sr-fl-det" >                                
+									<img src="img/corner.png" class="dim-pointer" >                                
+									<img src="img/triangle.png" alt="triangle" class="search-arrow" data-set-id="1"/>
                                     <section class="pl-sr-fl-collection" >
                                         <header>
                                             <h3>Budżet Środków Europejskich</h3>
@@ -134,12 +152,49 @@
                                             </p>
                                         </section>
                                     </section>
+                                    <section class="pl-sr-fl-col-det" >                                     
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>2008</td>
+                                                    <td>2009</td>
+                                                    <td>2010</td>
+                                                    <td>2011</td>                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Układ 1</td>
+                                                    <td> <input value="1-1-2008" type="checkbox"/> </td>
+                                                    <td> <input value="1-1-2009" type="checkbox"/> </td>
+                                                    <td> <input value="1-1-2010" type="checkbox"/> </td>
+                                                    <td> <input value="1-1-2011" type="checkbox"/> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Układ 2</td>
+                                                    <td> <input value="2-2-2008" type="checkbox"/> </td>
+                                                    <td> <input value="2-2-2009" type="checkbox"/> </td>
+                                                    <td> <input value="2-2-2010" type="checkbox"/> </td>
+                                                    <td> <input value="2-2-2011" type="checkbox"/> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Układ 3</td>
+                                                    <td> <input value="3-3-2008" type="checkbox"/> </td>
+                                                    <td> <input value="3-3-2009" type="checkbox"/> </td>
+                                                    <td> <input value="3-3-2010" type="checkbox"/> </td>
+                                                    <td> <input value="3-3-2011" type="checkbox"/> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>    
                                 </section>
                             </li>
                             <li>
                                 <input value="2" type="checkbox" />
                                 <section class="pl-sr-fl-det" >                                
-                                    <img src="img/triangle.png" alt="triangle" data-set-id="2" />                             
+									<img src="img/corner.png" class="dim-pointer" >                                
+									<img src="img/triangle.png" alt="triangle" class="search-arrow" data-set-id="2" />                             
                                     <section class="pl-sr-fl-collection" >
                                         <header>
                                             <h3>Fundusze celowe i agencje narodowe</h3>
@@ -151,14 +206,230 @@
                                             </p>
                                         </section>
                                     </section>
+                                    <section class="pl-sr-fl-col-det" > 
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>2010</td>
+                                                    <td>2011</td>                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Układ 1</td>
+                                                    <td> <input value="2-1-2010" type="checkbox"/> </td>
+                                                    <td> <input value="2-1-2011" type="checkbox"/> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Układ 2</td>
+                                                    <td>  </td>
+                                                    <td> <input value="2-2-2011" type="checkbox"/> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                    
+                                    </section>    
                                 </section>
                             </li>
-                        </ul>
-
+                            <li>
+                                <input value="4" type="checkbox" />
+                                <section class="pl-sr-fl-det" >                                
+									<img src="img/corner.png" class="dim-pointer" >                                
+									<img src="img/triangle.png" alt="triangle" class="search-arrow" data-set-id="4" />                             
+                                    <section class="pl-sr-fl-collection" >
+                                        <header>
+                                            <h3>Nazwa kolekcji EFRR</h3>
+                                        </header>
+                                        <section>
+                                            <p>
+                                            Opis kolekcji EFRR
+                                            </p>
+                                        </section>
+                                    </section>
+                                    <section class="pl-sr-fl-col-det" > 
+										<ul>
+											<li>
+												<input value="4-1" type="checkbox" />
+												<section class="pl-sr-fl-deepdet" >
+     												<img src="img/corner2.png" class="dim-pointer" >
+													<img src="img/triangle.png" alt="triangle" class="search-arrow" data-set-id="4" />                             
+													<section class="pl-sr-fl-deepcolection" >
+														<header>
+															Szczebel krajowy 
+														</header>
+													</section>										
+                                                    <section class="pl-sr-fl-col-det" > 
+    													<table>
+	    													<thead>
+	    														<tr>
+	    															<td></td>
+	    															<td>2008</td>
+                                                                    <td>2009</td>
+	    															<td>2010</td>
+	    															<td>2011</td>                                                
+	    														</tr>
+	    													</thead>
+	    													<tbody>
+	    														<tr>
+	    															<td>Układ 1</td>
+	    															<td> <input value="4-1-1-2009" type="checkbox"/> </td>																
+	    															<td></td>
+	    															<td> <input value="4-1-1-2010" type="checkbox"/> </td>
+	    															<td> <input value="4-1-1-2011" type="checkbox"/> </td>
+	    														</tr>
+	    														<tr>
+	    															<td>Układ 2</td>
+	    															<td> <input value="4-1-2-2009" type="checkbox"/> </td>																
+	    															<td> <input value="4-1-2-2010" type="checkbox"/> </td>																
+	    															<td>  </td>
+	    															<td> <input value="4-1-2-2011" type="checkbox"/> </td>
+	    														</tr>
+	    													</tbody>
+	    												</table>                                    
+	    											</section>
+	    										</section>	
+											</li>
+											<li>
+												<input value="4-2" type="checkbox" />
+												<section class="pl-sr-fl-deepdet" >
+     												<img src="img/corner2.png" class="dim-pointer" >
+													<img src="img/triangle.png" alt="triangle" class="search-arrow" data-set-id="4" />                             
+													<section class="pl-sr-fl-deepcolection" >
+														<header>
+															Szczebel wojewódzki 
+														</header>
+													</section>										
+                                                    <section class="pl-sr-fl-col-det" > 
+    													<table>
+	    													<thead>
+	    														<tr>
+	    															<td></td>
+	    															<td>2006</td>
+                                                                    <td>2007</td>
+	    															<td>2008</td>
+	    															<td>2009</td>                                                
+	    														</tr>
+	    													</thead>
+	    													<tbody>
+	    														<tr>
+	    															<td>Układ 1</td>
+	    															<td> <input value="4-2-1-2006" type="checkbox"/> </td>																
+	    															<td></td>
+	    															<td> <input value="4-2-1-2008" type="checkbox"/> </td>
+	    															<td> <input value="4-2-1-2009" type="checkbox"/> </td>
+	    														</tr>
+	    														<tr>
+	    															<td>Układ 2</td>
+	    															<td> <input value="4-2-1-2006" type="checkbox"/> </td>																
+	    															<td> <input value="4-2-1-2007" type="checkbox"/> </td>																
+	    															<td> <input value="4-2-1-2008" type="checkbox"/> </td>																
+	    															<td> <input value="4-2-1-2009" type="checkbox"/> </td>																
+	    														</tr>
+	    													</tbody>
+	    												</table>                                    
+	    											</section>
+	    										</section>
+											</li>
+											<li>
+												<input value="4-3" type="checkbox" />
+												<section class="pl-sr-fl-deepdet" >
+     												<img src="img/corner2.png" class="dim-pointer" >
+													<img src="img/triangle.png" alt="triangle" class="search-arrow" data-set-id="4" />                             
+													<section class="pl-sr-fl-deepcolection" >
+														<header>
+															Szczebel powiatowy 
+														</header>
+													</section>										
+                                                    <section class="pl-sr-fl-col-det" > 
+    													<table>
+	    													<thead>
+	    														<tr>
+	    															<td></td>
+	    															<td>2006</td>
+                                                                    <td>2007</td>
+	    															<td>2008</td>
+	    															<td>2009</td>                                                
+	    															<td>2010</td>
+	    															<td>2011</td>                                                
+	    														</tr>
+	    													</thead>
+	    													<tbody>
+	    														<tr>
+	    															<td>Układ 1</td>
+	    															<td> <input value="4-3-1-2006" type="checkbox"/> </td>																
+	    															<td> <input value="4-3-1-2007" type="checkbox"/> </td>																
+	    															<td> <input value="4-3-1-2008" type="checkbox"/> </td>
+	    															<td> <input value="4-3-1-2009" type="checkbox"/> </td>
+	    															<td> <input value="4-3-1-2010" type="checkbox"/> </td>
+	    															<td> <input value="4-3-1-2011" type="checkbox"/> </td>
+	    														</tr>
+	    														<tr>
+	    															<td>Układ 2</td>
+	    															<td> <input value="4-3-2-2006" type="checkbox"/> </td>																
+	    															<td> <input value="4-3-2-2007" type="checkbox"/> </td>																
+	    															<td> <input value="4-3-2-2008" type="checkbox"/> </td>																
+	    															<td> <input value="4-3-2-2009" type="checkbox"/> </td>																
+	    															<td> <input value="4-3-2-2010" type="checkbox"/> </td>
+	    															<td> <input value="4-3-2-2011" type="checkbox"/> </td>
+	    														</tr>
+	    													</tbody>
+	    												</table>                                    
+	    											</section>
+                                                </section>
+											</li>
+											<li>
+												<input value="4-4" type="checkbox" />
+												<section class="pl-sr-fl-deepdet" >
+     												<img src="img/corner2.png" class="dim-pointer" >
+													<img src="img/triangle.png" alt="triangle" class="search-arrow" data-set-id="4" />                             
+													<section class="pl-sr-fl-deepcolection" >
+														<header>
+															Szczebel gminny 
+														</header>
+													</section>										
+                                                    <section class="pl-sr-fl-col-det" > 
+    													<table>
+	    													<thead>
+	    														<tr>
+	    															<td></td>
+	    															<td>2006</td>
+                                                                    <td>2007</td>
+	    															<td>2008</td>
+	    															<td>2009</td>                                                
+	    															<td>2010</td>
+	    															<td>2011</td>                                                
+	    														</tr>
+	    													</thead>
+	    													<tbody>
+	    														<tr>
+	    															<td>Układ 1</td>
+	    															<td> <input value="4-4-1-2006" type="checkbox"/> </td>																
+	    															<td> <input value="4-4-1-2007" type="checkbox"/> </td>																
+	    															<td> <input value="4-4-1-2008" type="checkbox"/> </td>
+	    															<td> <input value="4-4-1-2009" type="checkbox"/> </td>
+	    															<td> <input value="4-4-1-2010" type="checkbox"/> </td>
+	    															<td> <input value="4-4-1-2011" type="checkbox"/> </td>
+	    														</tr>
+	    														<tr>
+	    															<td>Układ 2</td>
+	    															<td> <input value="4-4-2-2006" type="checkbox"/> </td>																
+	    															<td> <input value="4-4-2-2007" type="checkbox"/> </td>																
+	    															<td> <input value="4-4-2-2008" type="checkbox"/> </td>																
+	    															<td> <input value="4-4-2-2009" type="checkbox"/> </td>																
+	    															<td> <input value="4-4-2-2010" type="checkbox"/> </td>
+	    															<td> <input value="4-4-2-2011" type="checkbox"/> </td>
+	    														</tr>
+	    													</tbody>
+	    												</table>                                    
+	    											</section>
+                                                </section
+											</li>
+										</ul>
+									</section>
+                                </section>
+                            </li>
+						</ul>
                     <!-- END ADVANCE SEARCH -->
-
-
-
                     </section>
                     <div class="pl-bt-container" style="margin-top: -5px">
                         <div id="pl-sr-more" class="button left">Zaawansowane</div>
@@ -169,19 +440,6 @@
             </section> 
           </div>
       </div>
-      <script>
-             $('#pl-sr-more')
-            .click( function () {
-                if( $('#pl-sr-full').is(':visible') ) {
-                    $('#pl-sr-full').slideUp( 200 );
-                    $(this).html( 'Pokaż zaawansowane' );
-                }
-                else {
-                    $('#pl-sr-unselect').trigger( $.Event( 'click' ));
-                    $('#pl-sr-full').slideDown( 200 );
-                    $(this).html( 'Zamknij zaawansowane' );
-                }
-            });
-      </script>
+      <script src="script.js" > </script>
    </body>
 </html >
