@@ -524,7 +524,7 @@ textarea {
   }
 
   .input-text {
-    min-width: 100px;
+    min-width: 200px;
     height: 18px;
     background-color: #fff;
 
