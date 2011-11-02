@@ -75,8 +75,6 @@ td {
     -o-border-radius: 5px;
 }
 
-
-
 form {
     display: block;
     margin-top: 0em;
@@ -165,6 +163,10 @@ ul {
     margin: 15px;
     padding: 10px;
     overflow: hidden;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .pl-sr-fl-collection header {
@@ -189,14 +191,11 @@ ul {
 	display: none;
 }
 
-
 #pl-sr-full input {
     float: left;
     margin-right: 10px;
     margin-top: 7px;
 }
-
-
 
 .pl-sr-fl-collection {
     overflow: auto;
@@ -226,7 +225,6 @@ ul {
     overflow: auto;
 } 
 
-
 .pl-sr-fl-col-det > table > tbody td:first-child {
     display: block;
     width: 100px;
@@ -241,9 +239,7 @@ ul {
 .col-deepdet{
     background-color: #E3E3E3;
     border-color: #919191 !important;
-
 }
-
 
 .pl-sr-fl-deepdet{
     overflow: auto;
@@ -251,22 +247,13 @@ ul {
     border-width: 1px;
     border-style: solid;        
     border-color: white;
-
 }
-
-
-
-
-
-
 
 
 /* RESULT  */
 
-
-
-
 /* RESULT CHANGES */
+
 .pl-sr-results-number {
     vertical-align: top;
     vertical-align: top;
@@ -298,7 +285,7 @@ ul {
     margin-bottom: 0px;
 }
 
-#pl-sr-results > p:first-child {
+#pl-sr-results > .pl-sr-results-col:first-child {
     width: 80px;
 }
 
@@ -307,4 +294,67 @@ ul {
     margin-bottom: 0px;
     margin-top: 20px;
     font-weight: bold;
+}
+
+
+/* RESULT 2 */
+
+/* RESULT 2 NEW */
+
+#pl-sr-results-table{
+    padding-top: 120px;
+    padding-bottom: 50px;
+}
+
+#pl-sr-results-table > .button {
+    padding: 5px;
+ }
+
+#pl-sr-results-table > .over-table {
+    margin-top: 25px;
+    border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    -webkit-border-radius: 2px 2px 0 0;
+    -o-border-radius: 2px 2px 0 0;
+    
+}
+
+#pl-sr-results-table > .under-table {
+    border-radius: 0 0 2px 2px;
+    -moz-border-radius: 0 0 2px 2px;
+    -webkit-border-radius: 0 0 2px 2px;
+    -o-border-radius: 0 0 2px 2px;
+}
+
+.result-path {
+    margin-left: 2px;
+    width: 820px;
+    text-align: left;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.result-table {
+    width: 940px;
+    border-collapse: collapse;
+}
+
+.result-table > thead {
+    background-color: #C8C8C8;
+}
+
+.result-table td {
+    padding-left: 10px;
+}
+
+.result-table tbody{
+}
+
+.result-table > tbody > tr{
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    border-spacing: 2px;
+
 }
