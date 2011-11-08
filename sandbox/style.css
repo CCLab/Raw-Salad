@@ -184,7 +184,7 @@ ul {
     cursor: pointer;
 }
 
-.claud-pointer{
+.dim-pointer{
 	float: left;
 	margin-left: -14px;
 	position: absolute;
@@ -270,13 +270,13 @@ ul {
 
 #pl-sr-results > table {
     border-collapse: collapse;
-    margin-left: 20px;
+‎
 }
 
 /* RESULT NEW */
 
 #pl-sr-results td {
-    padding: 1px;
+    ‎padding: 1px;
 }
 
 .pl-sr-results-col {

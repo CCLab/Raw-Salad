@@ -290,7 +290,7 @@ var _gui = (function () {
                 }
                 
 //                var boxes = $('#pl-sr-table').find('input:checkbox:checked');
-                var boxes = $('#pl-sr-full').find('input:checkbox:checked');
+                var boxes = $('.pl-sr-fl-col-det').find('input:checkbox:checked');
                 var collections;
 
                 if( boxes.length === 0 ) {
@@ -1047,6 +1047,18 @@ var _gui = (function () {
         html.push( '</ul>' );
         $('#pl-sr-full').append( $( html.join('') ));
         $('.search-arrow').click( show_search_collection );
+
+        $('#pl-sr-full > ul > li > input').change( function(){
+           if ( $(this).is( ':checked' ) ){
+               $(this).next().find( ':checkbox' )
+               .prop( 'checked', true );
+           }
+           else{
+               $(this).next().find( ':checkbox' )
+               .prop( 'checked', false );    
+           }
+        });
+
     };
     
     function include( arr, obj ) {

@@ -49,6 +49,10 @@ var _store = (function () {
     that.meta_views = function ( dataset_id ) {
         return meta_data[ dataset_id ]['perspectives'];
     };
+    
+    that.get_dataset_name = function ( dataset_id ) {
+        return meta_data[ dataset_id ]['name'];
+    }
 
 
     // check if group exists

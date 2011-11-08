@@ -451,20 +451,45 @@ textarea {
     border-color: white;
   }
 
-  #pl-sr-results > table {
+  #pl-sr-results-panel > table {
     border-collapse: collapse;
+    margin-left: 20px;    
+  }
+
+  #pl-sr-results-panel td {
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+
+  .pl-sr-results-col {
+    display: inline-block;
+    margin: 15px;
+    margin-bottom: 0px;
+  }
+
+  #pl-sr-results > .pl-sr-results-col:first-child {
+    width: 80px;
+  }
+
+  .pl-sr-results-colection-name {
+    margin-left: 20px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+    font-weight: bold;
   }
 
   .pl-sr-results-number {
-    width: 50px; 
-    vertical-align: top; 
-    padding-right: 15px; 
-    border-right: 1px solid #c1c1c1; 
-    text-align: right;
+    vertical-align: top;
+    vertical-align: top;
+    padding-left: 20px;
+    text-align: left;
+    width: 80px;
+    height: 13px;
   }
 
   .pl-sr-results-name {
-    font-weight: bold; 
     padding-left: 15px; 
     vertical-align: top;
   }

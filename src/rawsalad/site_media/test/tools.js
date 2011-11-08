@@ -103,6 +103,30 @@ var _tools = (function () {
             }
         });
     }
+    
+    that.display_search_result = function ( recived_data ){
+        var new_sheet = {};
+        create_filter_result( recived_data );
+        
+        new_sheet['rows'] = create_filter_result( recived_data );
+        new_sheet;
+                new_sheet['filtered'] = true;
+                // if new sheet is created from sheet that hasn't been filtered yet,
+                // it will be treated as not sorted
+//                new_sheet['sorted'] = _store.active_sorted() && _store.active_filtered();
+
+//                _sheet.create_new_sheet( new_sheet, "Arkusz", true );
+
+//                _table.clean_table();
+//                _table.init_table();
+
+//                $(this).hide();
+
+                return false;        
+        
+        
+        
+    }
 
     that.create_breadcrumb = function ( id, no_html ) {
         var tmp_id = id;
