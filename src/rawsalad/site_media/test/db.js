@@ -54,7 +54,7 @@ var _db = (function () {
 
     that.search = function ( query, scope, strict ) {
         var data = {
-            query: query,
+            query: query.toLowerCase(),
             scope: scope.toString(),
             strict: strict.toString()
         };
