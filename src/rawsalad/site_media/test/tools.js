@@ -102,31 +102,35 @@ var _tools = (function () {
                 store_row['state']['open'] = true;
             }
         });
-    }
+    };
     
-    that.display_search_result = function ( recived_data ){
-        var new_sheet = {};
-        create_filter_result( recived_data );
+    that.display_search_result = function( col_id, recived_data ) {
+        var hits = {};
+        var all_raws = {};
+        var idef;
+        var sort_idef;
+        var parent_sort_idef;
         
-        new_sheet['rows'] = create_filter_result( recived_data );
-        new_sheet;
-                new_sheet['filtered'] = true;
-                // if new sheet is created from sheet that hasn't been filtered yet,
-                // it will be treated as not sorted
-//                new_sheet['sorted'] = _store.active_sorted() && _store.active_filtered();
-
-//                _sheet.create_new_sheet( new_sheet, "Arkusz", true );
-
-//                _table.clean_table();
-//                _table.init_table();
-
-//                $(this).hide();
-
-                return false;        
+        var split_reg = /(.*)-\d+/;
+        var query = col_id['query'];
+        var columns = recived_data['perspective']['columns'];
         
-        
-        
-    }
+        recived_data;
+        col_id;
+        recived_data['rows'].forEach( function( e ){
+            idef = e['idef'];
+            all_raws[ idef ] = e;
+            if ( !! _algorithms.is_search_result( query, e, columns )  ) {
+
+                sort_idef = e['idef_sort'];
+                parent_sort = ( e['parent_sort'] === null  ) ? 'root' : e['parent_sort'];                               
+                hits[parent_sort] = hits[parent_sort] || [];
+                hits[parent_sort].push( idef );
+                console.log( '>>>> that hit object' );
+                console.log( e );           
+            }
+        });
+    };
 
     that.create_breadcrumb = function ( id, no_html ) {
         var tmp_id = id;
@@ -202,7 +206,7 @@ var _tools = (function () {
         });
 
         return breadcrumb.join('');
-    }
+    };
 
     return that;
 
@@ -527,7 +531,7 @@ var _tools = (function () {
 
                 var column, operation, query;
                 var filtered_rows;
-                var i;
+                var i;c
                 var keys_num = $('#app-tb-tl-filter-form').find('tbody > tr').length;
                 var mask = [];
                 var new_sheet;

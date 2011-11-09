@@ -71,7 +71,7 @@ var _db = (function () {
 
     that.search = function ( query, scope, strict ) {
         var data = {
-            query: query,
+            query: query.toLowerCase(),
             scope: scope.toString(),
             strict: strict.toString()
         };
@@ -208,6 +208,7 @@ var _db = (function () {
             view: search_list['view'],
             perspective: search_list['view'],
             issue: search_list['issue'],
+            query: search_list['query'],
         };
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
@@ -217,22 +218,22 @@ var _db = (function () {
             success: function ( received_data ) {
                 console.log( '>>>> received object' );
                 console.log( received_data );
-                _tools.display_search_result( received_data );
+ 
+                if ( _store.group_exists( col_id ) ) {
+                    _sheet.create_searched_sheet( col_id, received_data );
+                }
+                else {
+                   _tools.display_search_result( col_id, received_data );         // TEST             
+                //    _sheet.add_searched_group( col_id, received_data );
+                }
+                _utils.clear_preloader();
+                _gui.show_table_tab();
 
-//                if ( _store.group_exists( col_id ) ) {
-//                    _sheet.create_searched_sheet( col_id, received_data );
-//                }
-//                else {
-//                    _sheet.add_searched_group( col_id, received_data );
-//                }
-//                _utils.clear_preloader();
-//                _gui.show_table_tab();
-
-//                $('#app-tb-datatable > tbody td').each( function () {
-//                    if( $(this).html().toLowerCase().indexOf( search_list['query'].toLowerCase() ) !== -1 ) {
-//                        $(this).parent().css( 'background-color', '#F3E58A' );
-//                    }
-//                });
+                $('#app-tb-datatable > tbody td').each( function () {
+                    if( $(this).html().toLowerCase().indexOf( search_list['query'].toLowerCase() ) !== -1 ) {
+                        $(this).parent().css( 'background-color', '#F3E58A' );
+                    }
+                });
             }
         }); // $.ajax
     };
