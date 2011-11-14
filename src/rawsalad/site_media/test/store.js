@@ -29,6 +29,11 @@ var _store = (function () {
 //  P U B L I C   I N T E R F A C E
     var that = {};
 
+    that.FILTERED = 1;
+    that.NORMAL   = 0;
+    that.SEARCHED = 2;
+    
+
     // meta_data setter/getter
     that.meta_data = function ( value ) {
         // set it just once
@@ -76,7 +81,7 @@ var _store = (function () {
 
         sheets = that.get_group( grp_number )['sheets'];
         for( i = 0; i < sheets.length; ++i ) {
-            if( sheets[i]['filtered'] === false ) {
+            if( sheets[i]['type'] === that.FILTERED ) {
                 // the group exists and there is a non-filtered sheet present
                 return true;
             }
@@ -131,6 +136,7 @@ var _store = (function () {
 
         // store original version of collection
         active_grp['name'] = data['name'];
+        active_grp['initialized'] = true;
         active_grp['basic_rows'] = sheet( data, true );
         // add data to mutable list of sheets
         active_grp['sheets'].push( sheet( data ) );
@@ -282,9 +288,14 @@ var _store = (function () {
     };
 
     that.active_filtered = function () {
-        return that.active_sheet()['filtered'];
+        return that.active_sheet()['type'] === that.FILTERED;
     };
 
+    that.active_searched = function () {
+        return that.active_sheet()['type'] === that.SEARCHED;
+    };
+
+    
     that.active_sorted = function () {
         return that.active_sheet()['sorted'];
     };
@@ -579,11 +590,10 @@ var _store = (function () {
             'columns': cols,
             'rows': rows,
             'name': data['name'],
-            'filtered': false,
+            'filtered': that.NORMAL,
             'sorted': false
         };
     }
-
 
     // list of all sheets of the same dataset/view/issue
     function group( data ) {
@@ -596,7 +606,8 @@ var _store = (function () {
             'active_sheet_number': 0,
             'sheets': [],
             'basic_rows': null,
-            'basic_changed': false
+            'basic_changed': false,
+            'initialized': false,
         };
     }
 

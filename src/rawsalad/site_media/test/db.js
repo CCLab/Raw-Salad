@@ -218,14 +218,15 @@ var _db = (function () {
             success: function ( received_data ) {
                 console.log( '>>>> received object' );
                 console.log( received_data );
+
+               _sheet.display_search_result( col_id, received_data );         // TEST             
  
-                if ( _store.group_exists( col_id ) ) {
-                    _sheet.create_searched_sheet( col_id, received_data );
-                }
-                else {
-                   _tools.display_search_result( col_id, received_data );         // TEST             
-                //    _sheet.add_searched_group( col_id, received_data );
-                }
+//                if ( _store.group_exists( col_id ) ) {
+//                    _sheet.create_searched_sheet( col_id, received_data );
+//                }
+//                else {
+//                    _sheet.add_searched_group( col_id, received_data );
+//                }
                 _utils.clear_preloader();
                 _gui.show_table_tab();
 
