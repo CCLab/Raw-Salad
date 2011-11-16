@@ -82,6 +82,26 @@ var _algorithms = (function () {
 
         sorting_setting.push( hidden_attribute );
     };
+    
+    
+    that.is_search_result = function ( query, row, columns ) {
+        var string;
+        var tmp;
+        var i;
+        var column;
+        var reg_query = new RegExp( query, 'i' );
+        
+        for ( i=0; i< columns.length; i++ ) {
+            column = columns[i];
+            string = row[column['key']];
+            if ( column['type'] === 'string' && string !== null ) {
+                if ( reg_query.exec( string ) !== null ) {
+                    return true;
+                } 
+            }
+        }
+        return false;  
+    };
 
 //  P R I V A T E   I N T E R F A C E
 
@@ -109,7 +129,7 @@ var _algorithms = (function () {
     // sorts part of an array data with merge sort algorithm using setting sett
     var merge_sort = function( data, sorting_setting, start, end ) {
         var start = start || 0;
-        var end = end || data.lenght - 1;
+        var end = end || data.length - 1;
         var middle;
 
         if ( start > end - 1 ) {

@@ -71,7 +71,7 @@ var _db = (function () {
 
     that.search = function ( query, scope, strict ) {
         var data = {
-            query: query,
+            query: query.toLowerCase(),
             scope: scope.toString(),
             strict: strict.toString()
         };
@@ -82,40 +82,65 @@ var _db = (function () {
             dataType: 'json',
             success: function ( received_data ) {
                 var html = [];
-                var thead = $('#pl-sr-results').find('thead');
-                var tbody = $('#pl-sr-results').find('tbody');
-                tbody.empty();
+                var head_html = [];
+                var table;
+                var last_dataset = null;
+                var results_panel = $('#pl-sr-results-panel');
+                results_panel.empty();
+//                var thead = $('#pl-sr-results').find('thead');
+//                var tbody = $('#pl-sr-results').find('tbody');
+//                tbody.empty();
 
-                if( received_data['records_found_total'] === 0 ) {
-                    html.push( '<tr style="background-color: #e3e3e3">' );
-                    html.push( '<td>Niestety wyszukiwane hasło nie znajduje się wśród zebranych tutaj danych</td>' );
-                    html.push( '</tr>' );
-
-                    tbody.append( $( html.join( '' ) ) );
-                    thead.hide();
+                if( received_data['records_found_total'] === 0 ) { 
+                    $('.pl-sr-results-col').hide();               
+                    html.push( '<p> Niestety wyszukiwane hasło nie znajduje się wśród zebranych tutaj danych</p>' );
+                    results_panel.append( $( html.join( '' ) ) );
                 }
                 else {
+                    $('.pl-sr-results-col').show();
+                                       
                     received_data['result'].forEach( function ( collection ) {
                         var html = [];
-                        var single_row;
+                        
+                        var single_row = [];
                         var results_length = collection['data'].length;
-                        var results_limit = 250;
-
-                        html.push( '<tr style="background-color: #e3e3e3">' );
-                        html.push( '<td class="pl-sr-results-number right">', collection['data'].length, '</td>' );
-                        html.push( '<td class="pl-sr-results-name">' );
-                        html.push( '<div class="pl-sr-results-name-text left">', collection['perspective'], '</div>' );
-                        if( results_length > results_limit ) {
-                            html.push( '<div class="pl-sr-results-button left">&gt;</div>' );
-                            html.push( '<div style="font-weight: bold; margin-top:5px; clear: both; color: #7345c6">' );
-                            html.push( 'Zbyt wiele wyników - nie sposób ich wyświetlić</div>' );
+                        // TODO rebuid display
+                        
+                        if ( collection['dataset'] !== last_dataset ) {
+                            if ( last_dataset !== null ){
+                                results_panel.append( $( head_html.join('') ) );
+                                results_panel.append( table );
+                            }
+                            last_dataset =  collection['dataset'];
+                            head_html = [];
+                            head_html.push( '<p class="pl-sr-results-colection-name">', _store.get_dataset_name( last_dataset ), '</p> ' );
+                            table = $('<table><tbody></tbody></table>');
                         }
+                        html.push( '<tr>');
+                        html.push( '<td class="pl-sr-results-number">' );
+                        html.push( results_length );
+                        html.push( '</td>' );    
+                        html.push( '<td class="pl-sr-results-name">' );
+                        html.push( collection['perspective'] );
                         html.push( '</td>' );
-                        html.push( '</tr>' );
+                        
+                        
+                        
+//                            html.push( '<tr style="background-color: #e3e3e3">' );
+//                            html.push( '<td class="pl-sr-results-number right">', collection['data'].length, '</td>' );
+//                            html.push( '<td class="pl-sr-results-name">' );
+//                            html.push( '<div class="pl-sr-results-name-text left">', collection['perspective'], '</div>' );
+//                        if( results_length > results_limit ) {
+//                            html.push( '<div class="pl-sr-results-button left">&gt;</div>' );
+//                            html.push( '<div style="font-weight: bold; margin-top:5px; clear: both; color: #7345c6">' );
+//                            html.push( 'Zbyt wiele wyników - nie sposób ich wyświetlić</div>' );
+//                        }
+//                        html.push( '</td>' );
+//                        html.push( '</tr>' );
 
                         single_row = $( html.join('') );
 
-                        if( results_length < results_limit ) {
+//                        if( results_length < results_limit ) {
                             single_row
                                 .click( function () {
                                     that.add_search_data({
@@ -146,12 +171,13 @@ var _db = (function () {
                                                 .css( 'background-color', '#c1c1c1' );
                                         }
                                     );
-                        }
-
-                        tbody.append( single_row );
+//                        }
+                                table.append( single_row );
+//                        tbody.append( single_row );
                     });
-                    thead.show();
+//                    thead.show();
                 }
+                results_panel.append( $( html.join('') ));
                 _utils.clear_preloader();
 
                 $('#pl-sr-full')
@@ -182,6 +208,7 @@ var _db = (function () {
             view: search_list['view'],
             perspective: search_list['view'],
             issue: search_list['issue'],
+            query: search_list['query'],
         };
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
@@ -192,12 +219,14 @@ var _db = (function () {
                 console.log( '>>>> received object' );
                 console.log( received_data );
 
-                if ( _store.group_exists( col_id ) ) {
-                    _sheet.create_searched_sheet( col_id, received_data );
-                }
-                else {
-                    _sheet.add_searched_group( col_id, received_data );
-                }
+               _sheet.display_search_result( col_id, received_data );         // TEST             
+ 
+//                if ( _store.group_exists( col_id ) ) {
+//                    _sheet.create_searched_sheet( col_id, received_data );
+//                }
+//                else {
+//                    _sheet.add_searched_group( col_id, received_data );
+//                }
                 _utils.clear_preloader();
                 _gui.show_table_tab();
 

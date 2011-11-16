@@ -102,7 +102,7 @@ var _tools = (function () {
                 store_row['state']['open'] = true;
             }
         });
-    }
+    };    
 
     that.create_breadcrumb = function ( id, no_html ) {
         var tmp_id = id;
@@ -178,7 +178,7 @@ var _tools = (function () {
         });
 
         return breadcrumb.join('');
-    }
+    };
 
     return that;
 
