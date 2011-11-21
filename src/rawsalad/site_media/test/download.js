@@ -51,7 +51,7 @@ var _download = (function () {
                     }
                     csv_string += '|';
 
-                    if( sheet['filtered'] ) {
+                    if( sheet['type'] === _store.FILTERED ) {
                         csv_string += add_filtered( sheet );
                     }
                     else {

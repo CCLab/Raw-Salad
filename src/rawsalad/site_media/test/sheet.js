@@ -33,8 +33,7 @@ var _sheet = (function () {
         var new_sheet = {};
 
         $.extend( true, new_sheet, sheet_data );
-        new_sheet["name"] = _store.next_sheet_name();
-
+        new_sheet["name"] =  ( sheet_name === 'Arkusz' ) ? _store.next_sheet_name() : sheet_name;
         _store.add_new_sheet( new_sheet );
         _gui.refresh_gui();
     };
@@ -122,21 +121,29 @@ var _sheet = (function () {
         var hits = {};
         var all_raws = {};
         var result_raws = [];
-        
+        var group_num;
         var new_sheet;
         var idef;
         var parent_sort;
         var results;
+        var sheet_num;
         
         var query = col_id['query'];
+        var perspective = recived_data['perspective'];        
         var columns = recived_data['perspective']['columns'];
+        var new_group = {
+                'dataset': col_id['dataset'],
+                'issue': perspective['issue'],
+                'perspective': col_id['view'],
+                'issue': col_id['issue'],
+                'columns': columns
+        };
         
         // create all_raws map and hits list
         recived_data['rows'].forEach( function( e ){
             idef = e['idef'];
             all_raws[ idef ] = e;
             if ( !! _algorithms.is_search_result( query, e, columns )  ) {
-
                 parent_sort = ( e['parent_sort'] === null  ) ? '_root' : e['parent_sort'];                               
                 hits[parent_sort] = hits[parent_sort] || [];
                 hits[parent_sort].push( idef );
@@ -149,48 +156,51 @@ var _sheet = (function () {
                 result_raws.push( new_result_raw( results, hits, all_raws ) ); 
             }
         }
+
+        new_sheet = {     
+            'columns': columns.filter( function( e ) {
+                return e['basic'] === true;           
+            }),
+            'type': _store.SEARCHED,
+            'query': query,
+            'name': recived_data['perspective']['perspective'],
+            'sorted': false,
+            'rows': result_raws
+            };
+
         
-        if ( _store.group_exists( col_id ) ) {
-            that.create_searched_sheet( col_id, received_data );
+        // TODO prepare for exist group
+        group_num = _store.group_exists( col_id );
+        if ( group_num !== null ) {
+            _store.active_group( group_num );
+            sheet_num = _store.search_result_exists( query );
+            if ( sheet_num  !== null ){
+                _store.active_sheet( sheet_num );
+                _gui.refresh_gui();
+            }
+            else {
+                // add new sheet
+                add_new_result( new_sheet, "Znalezione" );
+            }
         }
         else {
             // create group
-            _store.create_group({
-                'dataset': col_id.dataset,
-                'perspective': col_id.view,
-                'issue': col_id.issue,
-                'columns': columns
-            });   
-            new_sheet = {     
-                'columns' : columns.filter( function( e ) {
-                                return e['basic'] === true;           
-                            }),
-                'type': _store.SEARCHED,
-                'name': recived_data['perspective']['perspective'],
-                'sorted': false,
-                'rows': result_raws
-            };
-            _sheet.create_new_sheet( new_sheet, "Arkusz", true );            
-            
-//                _table.clean_table();
-//                _table.init_table();
-            
-// TODO remove - just example            
-//        basic_rows = data.rows.filter( function ( e ) {
-//            return e['level'] === 'a';
-//        });
-            
-            //_sheet.add_searched_group( col_id, received_data );
+            _store.create_group( new_group ); 
+            _store.active_group_name( perspective['perspective'] );              
+            add_new_result( new_sheet, "Znalezione" );
+        }
+        _gui.show_table_tab();   
+        if( $('#application').is(':hidden') ) {                                
+            $('#application').show();
         }
         
-        
-        
-        
-        
-//        hits.sort();
     };
 
 // P R I V A T E   I N T E R F A C E
+
+    function add_new_result( sheet, name ){
+        that.create_new_sheet( sheet, name, true );                        
+    } 
 
     function new_result_raw( result, hits, all_raws ) {
         var hit_raw = {};
@@ -207,7 +217,9 @@ var _sheet = (function () {
         });                
         while ( parent_idef !== null ){          
             parent = all_raws[ parent_idef ];
-            breadcrumb.push( parent['name'] );
+            breadcrumb.push( parent['type']
+                                .concat( ': ', parent['name'] ) 
+            );
             path.push( parent );
             parent_idef = parent ['parent'];
         }

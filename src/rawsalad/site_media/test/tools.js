@@ -353,7 +353,7 @@ var _tools = (function () {
             .append( $( html.join('') ));
     }
 
-// >>
+
     function prepare_sorting_interface() {
 
         $('#app-tb-tl-sort-button')
@@ -432,8 +432,6 @@ var _tools = (function () {
                 that.sort( _store.active_rows(), settings );
 
                 _gui.refresh_gui();
-                //_table.clean_table();
-                //_table.init_table();
                 $(this).hide();
 
                 return false;
@@ -555,18 +553,13 @@ var _tools = (function () {
                 new_sheet = {};
                 $.extend( true, new_sheet, _store.active_sheet() );
                 new_sheet['rows'] = create_filter_result( filtered_rows );
-                new_sheet['filtered'] = true;
+                new_sheet['type'] = _store.FILTERED;
                 // if new sheet is created from sheet that hasn't been filtered yet,
                 // it will be treated as not sorted
                 new_sheet['sorted'] = _store.active_sorted() && _store.active_filtered();
 
                 _sheet.create_new_sheet( new_sheet, "Arkusz", true );
-
-                _table.clean_table();
-                _table.init_table();
-
                 $(this).hide();
-
                 return false;
            });
     };

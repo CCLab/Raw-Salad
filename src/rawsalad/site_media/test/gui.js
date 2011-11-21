@@ -383,7 +383,7 @@ var _gui = (function () {
                                 var id;
 
                                 // if it's filtered sheet, all ids are needed
-                                if ( e['filtered'] ) {
+                                if ( e['type'] === _store.FILTERED ) {
                                     needed_ids = e['rows'].map( function ( row ) {
                                         return row['data']['idef'];
                                     });
@@ -421,10 +421,10 @@ var _gui = (function () {
                                     'columns': e['columns'],
                                     'rows': needed_ids,
                                     'name': e['name'],
-                                    'breadcrumbs': e['filtered'] ? needed_ids.map( function ( id ) {
+                                    'breadcrumbs': ( e['type'] === _store.FILTERED ) ? needed_ids.map( function ( id ) {
                                                                         return _tools.create_breadcrumb(id, false);
                                                                    }) : [],
-                                    'filtered': e['filtered'],
+                                    'type': e['type'],
                                     'sorted': e['sorted']
                                 };
                             });
@@ -521,6 +521,8 @@ var _gui = (function () {
         $('#app-tb-tl-old-title').empty();
         $('#app-tb-tl-rename-form').hide();
         $('#app-tb-tl-title').show();
+
+
 
 
         groups.forEach( function ( group, group_num ){
@@ -639,7 +641,6 @@ var _gui = (function () {
 
     that.show_table_tab = function() {
         hide_top_panels();
-        $('#app-tbs-table').trigger( $.Event('click') );
     };
 
 
@@ -1020,9 +1021,9 @@ var _gui = (function () {
                 })                            
             });
             issues_list.sort();
-            html.push( '<table> <thead> <tr> <td> </td>' );
+            html.push( '<table> <thead> <tr> <th> </th>' );
             issues_list.forEach( function ( issue_name ) {
-               html.push( '<td>', issue_name, '</td>' );             
+               html.push( '<th>', issue_name, '</th>' );             
             });
             html.push( '</tr> </thead> <tbody>' );
             set['perspectives'].forEach( function ( perspective ) {
@@ -1030,8 +1031,9 @@ var _gui = (function () {
                 // TODO tmp
                 issues_list.forEach( function( issue_name, i ) {
                     if ( include( perspective['issues'] , issue_name )){
-                        idef = set['idef'] + '-' +  perspective['idef'] + '-' + issue_name
-                        html.push( '<td> <input value="', idef ,'" type="checkbox" /> </td>' );
+                        idef = set['idef'] + '-' +  perspective['idef'] + '-' + issue_name;
+                        
+                        html.push( '<td> <div  value="', idef ,'" class="pl-sr-unchecked" > </div> </td>' );
                     } 
                     else {
                         html.push( '<td> </td>' );

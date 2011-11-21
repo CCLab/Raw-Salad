@@ -62,10 +62,11 @@ var _store = (function () {
 
     // check if group exists
     that.group_exists = function ( data ) {
-        if( find_group( data ) === -1) {
-            return false;
+        var result = find_group( data );
+        if( result === -1) {
+            return null;
         }
-        return true;
+        return result;
     };
 
 
@@ -340,8 +341,13 @@ var _store = (function () {
         }
     };
 
-    that.active_group_name = function () {
-        return that.active_group()['name'];
+    that.active_group_name = function ( value ) {
+        if( arguments.length === 0 ) {
+            return that.active_group()['name'];
+        }
+        else {
+            that.active_group()['name'] = value;
+        }    
     };
 
     that.add_data = function ( new_data ) {
@@ -366,6 +372,22 @@ var _store = (function () {
         active_grp['sheets'].push( sheet );
         that.active_sheet_index( next_sheet_number );
     };
+    
+    that.search_result_exists = function ( query ) {
+        var active_grp_sheets = that.active_group()['sheets'];
+        var sheet;
+        var i;
+        
+        for ( i=0; i < active_grp_sheets.length; i++) {
+            sheet = active_grp_sheets[i];
+            if ( sheet['type'] === that.SEARCHED ) {
+                if ( sheet['query'] === query ) {
+                    return i;
+                }
+            }
+        }
+        return null;    
+    }
 
     that.get_all_groups = function () {
         return groups;
@@ -590,7 +612,8 @@ var _store = (function () {
             'columns': cols,
             'rows': rows,
             'name': data['name'],
-            'filtered': that.NORMAL,
+            'type': that.NORMAL,
+            'query': null,
             'sorted': false
         };
     }

@@ -34,6 +34,8 @@ var _table = (function () {
         $('#app-tb-datatable > tbody').empty();
         $('#app-tb-filteredtable > thead').empty();
         $('#app-tb-filteredtable > tbody').empty();
+        $('#app-tb-searchedtable > thead').empty();
+        $('#app-tb-searchedtable > tbody').empty();
     };
 
     that.init_table = function () {
@@ -51,7 +53,16 @@ var _table = (function () {
             });
         }
         else if( !!_store.active_searched() ){
-           alert("serch table !!!");
+           create_searched_tbody( );
+            $('#app-tb-tl-clear-button').hide();
+            $('#app-tb-tl-filter-button').hide();
+            $('#app-tb-tl-sort-button').hide();
+            $('#app-tb-tl-sort-button').css({
+                'border-radius': '5px',
+                '-moz-border-radius': '5px',
+                '-webkit-border-radius': '5px',
+                '-o-border-radius': '5px'
+            });
           // TODO
         }
         else {
@@ -348,6 +359,132 @@ var _table = (function () {
         html.push( '</tr>' );
 
         return $( html.join('') );
+    }
+
+    function create_searched_tbody( is_sorted ) {
+        var sheet = _store.active_sheet();
+        var columns = _store.active_columns();
+        var rows_copy = [];
+        
+        // deep copy is made to ensure that _store is not changed by sort
+        $.extend( true, rows_copy, _store.active_rows() );
+
+        rows_copy.forEach( function ( row ) {
+                     var new_node = generate_result_table( {
+                                         row: row,
+                                         columns: columns
+                                     });
+                     $('#app-tb-searchedtable > tbody').append( new_node );
+                 });
+    }
+
+    function generate_result_table( data ) {
+        var row = data['row'];
+        var hited_rows = row['list'];
+        var basic_columns = data['columns'];
+        var breadcrumb = row['breadcrumb'];
+        var html = [];
+        var over_button;
+        var result_table;
+        var table_html = [];
+        var path = row['path'];
+                        
+        path.sort( function( a, b ) {
+            return a['level'] < b['level'] ? -1 : 1;
+        });
+        result_table = $('<section> </section>');
+
+        html.push( '<div class="result-path-outer" > <div class="result-path-wrapper" >' );
+        html.push( '<p class="result-path left" >' );
+        html.push( breadcrumb );
+        html.push( '</p>' );
+        html.push( '</div></div>' );
+        result_table.append( $( html.join('') ) );
+
+        html = [];
+        html.push( '<div class="button blue right show-parents">' );
+        html.push( ' Wyższe poziomy ' );
+        html.push( '</div>' );
+        over_button = $( html.join('') );
+        over_button.click( show_parents_rows );
+        result_table.append( over_button );
+
+        html = [];
+        html.push( '<table class="sr-result-table result-table" > <thead> <tr>' );
+        basic_columns.forEach( function( col ) {
+            html.push( '<th>', col['label'], '</th>' );
+        });
+        html.push( '</tr></thead><tbody>' );
+
+        path.forEach( function( parent_row ) {
+            html.push( '<tr class="sr-parent-row" >' );
+            basic_columns.forEach( function( col ) {
+                html = html.concat( search_table_row( parent_row, col ) );
+            });
+            html.push( '</tr>' );                
+        });
+        
+        hited_rows.forEach( function ( single_row ) {
+            html.push( '<tr>' );
+            basic_columns.forEach( function( col ) {
+                html = html.concat( search_table_row( single_row, col ) );
+//                table_html.push( '<td class="', col['key'], ' ' ); 
+//                if( col['format'] !== '@' ) {
+//                    table_html.push( 'number">' );
+//                    table_html.push( _utils.money( single_row[ col['key']], col['format'] ));
+//                }
+//                else {
+//                    table_html.push( 'string">' );
+//                    table_html.push( single_row[ col['key']] );                
+//                }
+//                table_html.push( '</td>' );
+            });
+            html.push( '</tr>' );
+        });        
+        html.push( '</tbody></table>' );
+        result_table.append( $( html.join('') ) );
+
+        html = [];
+        html.push( '<div class="button blue right under-table">' );
+        html.push( 'Wszystkie pozycje tego poziomu');
+        html.push( '</div>' );
+        result_table.append( $( html.join('') ) );
+
+        //html = html.concat( table_html );
+        return result_table;
+    }
+
+    function search_table_row( row, col ) {
+        html = [];
+        html.push( '<td class="', col['key'], ' ' ); 
+        if( col['format'] !== '@' ) {
+            html.push( 'number">' );
+            html.push( _utils.money( row[ col['key']], col['format'] ));
+        }
+        else {
+            html.push( 'string">' );
+            html.push( row[ col['key']] );                
+        }
+        html.push( '</td>' );
+        return html;
+    }
+    
+    // TODO - move to _gui ???
+    function show_parents_rows() {
+        var result_table = $(this).next('table.sr-result-table');
+        var parents_rows = result_table.find('tr.sr-parent-row');
+        parents_rows.css( 'display', 'table-row' );
+        $(this).html( 'Ukryj wyższe poziomy' );
+        $(this).unbind().click( hide_parents_rows );
+    }
+
+    // TODO - move to _gui ???    
+    function hide_parents_rows() {
+        var result_table = $(this).next('table.sr-result-table');
+        var parents_rows = result_table.find('tr.sr-parent-row');
+        parents_rows.css( 'display', 'none' );
+        $(this).html( 'Wyższe poziomy' );
+        $(this).unbind().click( show_parents_rows );    
     }
 
     function generate_info_panel_button( data ) {
