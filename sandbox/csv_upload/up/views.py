@@ -34,16 +34,26 @@ def upload( req ):
 
     upl_file.seek( 0 )
 
+    dataset_id, view_id = find_ids(req.POST['dataset'], req.POST['view'])
+
     # update nav tree
     nav_dict= define_nav_id({
-        'dataset': req.POST.get( 'dataset_id', None ),
-        'view': req.POST.get( 'view_id', None ),
+        'dataset': dataset_id,
+        'view': view_id,
         'issue': req.POST.get( 'issue', None ),
         'dataset_name': req.POST.get( 'dataset', '' ),
         'dataset_descr': req.POST.get( 'ds_desc', '' ),
         'view_name': req.POST.get( 'view', '' ),
         'view_descr': req.POST.get( 'vw_desc', '' )
         } )
+
+    # temporary way to signalize that tuple (dataset_id, view_id, issue) is not unique
+    if nav_dict is None:
+        return home(req)
+
+    # default settings
+    nav_dict['dataset_long_descr'] = None
+    nav_dict['view_long_descr'] = None
 
     # actual csv processing goes here
     ns_name= req.POST.get( 'abbr', 'xxxxxx' )
@@ -64,6 +74,7 @@ def upload( req ):
     columns= process_csv( upl_file, delim )
     meta_data_draft.update({ 'columns': columns })
     req.session['meta_data_draft'] = meta_data_draft
+    req.session['navigator'] = nav_dict
 
     return render_to_response( 'meta.html', { 'file_name': upl_file.name, 'data': columns } )
 
@@ -81,11 +92,14 @@ def save_metadata( req ):
 def save_advanced( req ):
     advanced = json.loads( req.POST.get( 'advanced', {} ) )
     meta_data= req.session['meta_data_draft']
+    nav_dict = req.session['navigator']
 
     meta_data['sort']= convert_sort(advanced['order'])
     meta_data['batch_size']= advanced['batch_size']
 
     db= rsdb.DBconnect("mongodb").dbconnect
+
+    update_navigator(db, rsdb.nav_schema, nav_dict)
 
     coll= rsdb.Collection()
     ds_id, ps_id, iss, update_status= coll.save_complete_metadata(meta_data, db)
@@ -250,27 +264,18 @@ def define_nav_id(navig_dict):
     db= rsdb.DBconnect("mongodb").dbconnect
     navtree= rsdb.Navtree()
 
-    need_insert= False
     if navig_dict['dataset'] is None: # no such dataset in the db
         dataset= navtree.get_max_dataset(db)
         navig_dict['dataset']= dataset+1
         navig_dict['view']= 0 # the new dataset, so, the view is 0
-        need_insert= True
-        # new_dict= {} # define new element in navtree
     else:
         if navig_dict['view'] is None: # no such view of the dataset
             view= navtree.get_max_view(db, int(navig_dict['dataset'])) # check if there's such view
             navig_dict['view']= view+1
             need_insert= True
-            # new_dict= {} # define new element in navtree -> dataset
         else: # there's already such dataset and view - check if given issue is unique
             if navig_dict['issue'] in navtree.get_issue( db, navig_dict['dataset'], navig_dict['view'] ):
-                pass # error should be generated - issue already exist!
-
-    if need_insert:
-        # update navtree, insert new element
-        pass
-
+                return None # error - issue already exist!
 
     return navig_dict
 
@@ -280,3 +285,74 @@ def replace_locale_symbols(src): # find smarter way to do it!
            .replace(r'ż', 'z').replace(r'Ą', 'A').replace(r'Ć', 'C').replace(r'Ę', 'E')\
            .replace(r'Ł', 'L').replace(r'Ń', 'N').replace(r'Ó', 'O').replace(r'Ś', 'S')\
            .replace(r'Ź', 'Z').replace(r'Ż', 'Z')
+
+
+def find_ids(dataset_name, view_name):
+    ''' Finds id of dataset [and optionally view] which name is dataset_name
+        [and optional view's name is view name]
+        Returns tuple containing seeked ids, if id is not found, then it becomes None
+    '''
+    dataset_id = view_id = None
+    db= rsdb.DBconnect("mongodb").dbconnect
+    
+    navtree = rsdb.Navtree()
+    datasets = navtree.get_dataset(db)
+    for dataset in datasets:
+        if dataset['name'] == dataset_name:
+            dataset_id = dataset['idef']
+            break
+    
+    if dataset_id:
+        views = navtree.get_view(db, dataset_id)
+        for view in views:
+            if view['name'] == view_name:
+                view_id = view['idef']
+                break
+
+    return dataset_id, view_id
+
+
+def update_navigator(db, nav_coll, nav_dict):
+    ''' Updates site navigator collection with nav_dict containing information
+        about changed part, db and nav_coll specify database and collection.
+    '''
+    navtree = rsdb.Navtree()
+    coll = db[nav_coll]
+    if nav_dict['dataset'] == navtree.get_max_dataset(db) + 1: # no such dataset in the db
+        dataset_obj = {
+            'idef': nav_dict['dataset'],
+            'name': nav_dict['dataset_name'],
+            'description': nav_dict['dataset_descr'],
+            'long_description': nav_dict['dataset_long_descr'],
+            'perspectives': [
+                {
+                    'idef': nav_dict['view'],
+                    'name': nav_dict['view_name'],
+                    'description': nav_dict['view_descr'],
+                    'long_description': nav_dict['view_long_descr'],
+                    'issues': [ nav_dict['issue'] ]
+                }
+            ]
+        }
+    
+    elif nav_dict['view'] == navtree.get_max_view(db, int(nav_dict['dataset'])) + 1:
+        dataset_obj = coll.find_one({'idef': nav_dict['dataset']})
+        view_obj = {
+            'idef': nav_dict['view'],
+            'name': nav_dict['view_name'],
+            'description': nav_dict['view_descr'],
+            'long_description': nav_dict['view_long_descr'],
+            'issues': [ nav_dict['issue'] ]
+        }
+        dataset_obj['perspectives'].append(view_obj)
+    else:
+        dataset_obj = coll.find_one({'idef': nav_dict['dataset']})
+        try:
+            view_obj = dataset_obj['perspectives'][ nav_dict['view'] ]
+            view_obj['issues'].append(nav_dict['issue'])
+        except Exception as e:
+            return False
+
+    coll.save(dataset_obj)
+    
+    return True
