@@ -9,6 +9,8 @@ from csv import DictReader
 import re
 import simplejson as json
 import rsdbapi as rsdb
+from data_validator import DataValidator
+from hierarchy_inserter import HierarchyInserter
 
 def home( req ):
     f = FirstStepForm()
@@ -75,6 +77,7 @@ def upload( req ):
     meta_data_draft.update({ 'columns': columns })
     req.session['meta_data_draft'] = meta_data_draft
     req.session['navigator'] = nav_dict
+    req.session['data_file'] = tmp_name
 
     return render_to_response( 'meta.html', { 'file_name': upl_file.name, 'data': columns } )
 
@@ -93,17 +96,52 @@ def save_advanced( req ):
     advanced = json.loads( req.POST.get( 'advanced', {} ) )
     meta_data= req.session['meta_data_draft']
     nav_dict = req.session['navigator']
+    file_name = req.session['data_file']
+
+    print 'advanced', advanced
 
     meta_data['sort']= convert_sort(advanced['order'])
     meta_data['batch_size']= advanced['batch_size']
 
-    db= rsdb.DBconnect("mongodb").dbconnect
+    # TODO: change type of hierarchy information passed
+    advanced['hierarchy'] = [{'name': name, 'change_type': True} for name in advanced['hierarchy']]
+    advanced['field_type_label'] = 'Typ'
+    advanced['field_name_label'] = 'Nazwa'
 
-    update_navigator(db, rsdb.nav_schema, nav_dict)
+    # TODO: add obligatory parameter in columns decription
+    for column_descr in meta_data['columns']:
+        column_descr['obligatory'] = False
 
-    coll= rsdb.Collection()
-    ds_id, ps_id, iss, update_status= coll.save_complete_metadata(meta_data, db)
-    print ds_id, ps_id, iss, update_status
+    hierarchy_info = create_hierarchy_info(advanced, meta_data['columns'])
+
+    validator = DataValidator(file_name, meta_data['columns'])
+    validator.check_all()
+    # TODO: pass delimiter to DataValidator, HierarchyInserter constructors
+    if validator.is_all_correct():
+        hierarchy_inserter = HierarchyInserter(file_name, hierarchy_info, meta_data['columns'])
+        hierarchy_inserter.insert_hierarchy()
+        
+        if hierarchy_inserter.all_rows_correct():
+            modified_data = hierarchy_inserter.get_modified_rows()
+            print 'modified_data = ', modified_data
+            db = rsdb.DBconnect("mongodb").dbconnect
+
+            upload_data_file(db, meta_data['ns'], file_name, meta_data, hierarchy_info)
+
+            update_navigator(db, rsdb.nav_schema, nav_dict)
+
+            coll= rsdb.Collection()
+            ds_id, ps_id, iss, update_status= coll.save_complete_metadata(meta_data, db)
+            print ds_id, ps_id, iss, update_status
+        else:
+            errors_log = hierarchy_inserter.get_errors_log()
+            # TODO: return page with errors
+
+    else:
+        # TODO: remove print
+        print 'DATA NOT VALIDATED'
+        errors_log = validator.get_errors_log()
+        # TODO: return page with errors
 
     return HttpResponseRedirect( '/' )
 
@@ -356,3 +394,37 @@ def update_navigator(db, nav_coll, nav_dict):
     coll.save(dataset_obj)
     
     return True
+
+
+def create_hierarchy_info(info, columns):
+    ''' Creates information about hierarchy in csv file, info is information passed by user with
+        names of columns creating hierarchy, columns is list with description of each column.
+    '''
+
+    print 'columns = ', columns
+    columns_idx = {}
+    for i, column_descr in enumerate(columns):
+        name = column_descr['key']
+        columns_idx[name] = i
+    
+    #hierarchy_columns = [{'index': columns_idx[column_descr['name']], 'change_type': columns_idx[column_descr['change_type']} for column_descr in info['hierarchy']]
+    hierarchy_columns = info['hierarchy'][:]
+    for column_descr in hierarchy_columns:
+        column_descr['index'] = columns_idx[column_descr['name']]
+        del column_descr['name']
+    summable_fields = [columns_idx[column['key']] for column in columns if column['type'] == 'number']
+    
+    hierarchy_info = {
+        'columns': hierarchy_columns,
+        'field_type_label': info['field_type_label'],
+        'field_name_label': info['field_name_label'],
+        'summable': summable_fields
+    }
+
+    print 'create_hierarchy_info --> ', hierarchy_info
+
+    return hierarchy_info
+
+
+def upload_data_file(db, coll_name, file_name, meta_data, hierarchy_object):
+    return False
