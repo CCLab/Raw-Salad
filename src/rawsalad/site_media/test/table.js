@@ -312,9 +312,11 @@ var _table = (function () {
             rows_copy.sort( function ( a, b ) {
                 if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
                     return -1;
-                } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
+                } 
+                else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
                     return 1;
-                } else {
+                } 
+                else {
                     return 0;
                 }
             });

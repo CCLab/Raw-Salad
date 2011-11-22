@@ -39,16 +39,15 @@ var _store = (function () {
         // set it just once
 //        _assert.is_equal( meta_data.length, 0,
 //                          "meta_data already assigned" );
+        if( arguments.length === 0 ) {
+            return meta_data;
+        }
+        else {
+            meta_data = value;
+        }    
 
-        meta_data = value;
+        
     };
-
-
-    // get metadata about available datasets
-    that.meta_datasets = function () {
-        return meta_data;
-    };
-
 
     // get metadata about views available in a cerain dataset (name perspectives comes from db!)
     that.meta_views = function ( dataset_id ) {
@@ -58,8 +57,30 @@ var _store = (function () {
     that.get_dataset_name = function ( dataset_id ) {
         return meta_data[ dataset_id ]['name'];
     }
+    
+    // generate table with all colections id
+    that.get_all_collections = function () {
+        var meta_data = that.meta_data();
+        var collections = [];
+        var id_table;
+        var dataset_id;
+        var perspective_id;
 
-
+        
+        meta_data.forEach( function( set ) {
+            dataset_id = set['idef'];
+            set['perspectives'].forEach ( function( perspective ) {
+                perspective_id = perspective['idef'];
+                perspective['issues'].forEach( function ( issue_id ){
+                   id_table = [ dataset_id, perspective_id, issue_id ];
+                   collections.push( id_table.join( '-' ) ); 
+                });
+            });
+        }); 
+        return collections;  
+    };
+    
+    
     // check if group exists
     that.group_exists = function ( data ) {
         var result = find_group( data );

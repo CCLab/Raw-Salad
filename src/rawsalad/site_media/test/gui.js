@@ -290,26 +290,27 @@ var _gui = (function () {
                 }
                 
 //                var boxes = $('#pl-sr-table').find('input:checkbox:checked');
-                var boxes = $('.pl-sr-fl-col-det').find('input:checkbox:checked');
+                var boxes = $('.pl-sr-fl-col-det').find('pl-sr-issue-checked');
                 var collections;
 
                 if( boxes.length === 0 ) {
-                    collections = ['0-0-2011', '0-1-2011', '0-1-2012', '0-2-2011',
-                                   '0-2-2012', '1-0-2011', '1-1-2011', '1-1-2012',
-                                   '1-2-2011', '1-2-2012', '2-1-2011', '2-2-2011',
-                                   '2-3-2011', '2-4-2011', '3-0-2011', '3-1-2011',
-                                   '4-0-2007', '4-1-2007',
-                                   '4-0-2008', '4-1-2008', '4-2-2008', '4-3-2008',
-                                   '4-0-2009', '4-1-2009', '4-2-2009', '4-3-2009',
-                                   '4-0-2010', '4-1-2010', '4-2-2010', '4-3-2010',
-                                   '4-0-2011', '4-1-2011', '4-2-2011', '4-3-2011',
-                                    ];
+                    collections = _store.get_all_collections();
+//                                   ['0-0-2011', '0-1-2011', '0-1-2012', '0-2-2011',
+//                                   '0-2-2012', '1-0-2011', '1-1-2011', '1-1-2012',
+//                                   '1-2-2011', '1-2-2012', '2-1-2011', '2-2-2011',
+//                                   '2-3-2011', '2-4-2011', '3-0-2011', '3-1-2011',
+//                                   '4-0-2007', '4-1-2007',
+//                                   '4-0-2008', '4-1-2008', '4-2-2008', '4-3-2008',
+//                                   '4-0-2009', '4-1-2009', '4-2-2009', '4-3-2009',
+//                                   '4-0-2010', '4-1-2010', '4-2-2010', '4-3-2010',
+//                                   '4-0-2011', '4-1-2011', '4-2-2011', '4-3-2011',
+//                                    ];
                 }
                 else {
                     collections = [];
                     boxes.each( function () {
-                        collections.push( $(this).val() );
-                        $(this).removeAttr( 'checked' );
+                        collections.push( $(this).attr( 'data-issue' ) );
+//                        $(this).removeAttr( 'checked' );
                     });
                 }
 
@@ -845,7 +846,7 @@ var _gui = (function () {
 
     function init_choose_panel( hide_panel ) {
         var html = [];
-        var datasets = _store.meta_datasets();
+        var datasets = _store.meta_data();
         var len = datasets.length;
         var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
         var datasets_height;
@@ -982,7 +983,7 @@ var _gui = (function () {
 
         panel
             .find('.panel-title')
-            .html( _store.meta_datasets()[ dataset_id ]['name'] );
+            .html( _store.meta_data()[ dataset_id ]['name'] );
         panel
             .find('.panel-desc')
             .html('Wybierz jedno z wydań danych.');
@@ -994,7 +995,7 @@ var _gui = (function () {
 
     function create_search_panel() {
         var html = [];
-        var datasets = _store.meta_datasets();
+        var datasets = _store.meta_data();
         var issues_list;
         var idef;
         
@@ -1003,7 +1004,7 @@ var _gui = (function () {
             issues_list = [];
             
             html.push( '<li>' );
-            html.push( '<input value="', set['idef'] ,'" type="checkbox"/>' );
+            html.push( '<div data-set="', set['idef'] ,'" class="pl-sr-set-unchecked pl-sr-set" > </div>' );
             html.push( '<section class="pl-sr-fl-det" >');
             html.push( '<img src="/site_media/img/corner.png" class="claud-pointer" >' );
             html.push( '<img src="/site_media/img/triangle.png" alt="triangle" class="search-arrow" data-set-id="', set['idef'], '" />' );
@@ -1033,10 +1034,10 @@ var _gui = (function () {
                     if ( include( perspective['issues'] , issue_name )){
                         idef = set['idef'] + '-' +  perspective['idef'] + '-' + issue_name;
                         
-                        html.push( '<td> <div  value="', idef ,'" class="pl-sr-unchecked" > </div> </td>' );
+                        html.push( '<td> <div  data-issue="', idef ,'" class="pl-sr-issue-unchecked pl-sr-checkbox" > </div> </td>' );
                     } 
                     else {
-                        html.push( '<td> </td>' );
+                        html.push( '<td> <div class="pl-sr-issue-nocheck pl-sr-checkbox" > </div></td>' );
                     }
                 });
                 html.push( '</tr>' );
@@ -1048,20 +1049,54 @@ var _gui = (function () {
         });        
         html.push( '</ul>' );
         $('#pl-sr-full').append( $( html.join('') ));
-        $('.search-arrow').click( show_search_collection );
-
-        $('#pl-sr-full > ul > li > input').change( function(){
-           if ( $(this).is( ':checked' ) ){
-               $(this).next().find( ':checkbox' )
-               .prop( 'checked', true );
-           }
-           else{
-               $(this).next().find( ':checkbox' )
-               .prop( 'checked', false );    
-           }
+        
+        
+        $( '.search-arrow' ).click( show_search_collection );
+        $( '#pl-sr-full > ul > li > div.pl-sr-set' ).click( function() {        
+            check_all_dataset( $(this) );       
+        });
+        $( '.pl-sr-fl-col-det' ).find('div.pl-sr-issue-unchecked').click( function() {
+            check_issue( $(this) );
         });
 
     };
+    
+    function check_issue( my_this ) {
+        my_this.removeClass( 'pl-sr-issue-unchecked' ).addClass( 'pl-sr-issue-checked' );
+        my_this.unbind();
+        my_this.click( function() {
+            uncheck_issue( $(this) );
+        });       
+    };
+    
+    function uncheck_issue( my_this ) {
+        my_this.removeClass( 'pl-sr-issue-checked' ).addClass( 'pl-sr-issue-unchecked' );
+        my_this.unbind();
+        my_this.click( function() {
+            check_issue( $(this) );
+        });       
+    };
+
+    
+    
+    function check_all_dataset( my_this ) {
+        my_this.removeClass( 'pl-sr-set-unchecked' ).addClass( 'pl-sr-set-checked' );
+        my_this.next().find( '.pl-sr-issue-unchecked' ).trigger( $.Event( 'click' ) );
+        my_this.unbind();
+        my_this.click( function() {
+            uncheck_all_dataset( $(this) );
+        });
+    };
+
+    function uncheck_all_dataset( my_this ) {
+        my_this.removeClass( 'pl-sr-set-checked' ).addClass( 'pl-sr-set-unchecked' );
+        my_this.next().find( '.pl-sr-issue-checked' ).trigger( $.Event( 'click' ) );
+        my_this.unbind();
+        my_this.click( function() {
+            check_all_dataset( $(this) );
+        });    
+    };
+
     
     function include( arr, obj ) {
         var i;

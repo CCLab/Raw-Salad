@@ -738,7 +738,7 @@ var _tools = (function () {
 
     function construct_scope() {
         var scope = [];
-        _store.meta_datasets().forEach( function ( dataset, dset_id ) {
+        _store.meta_data().forEach( function ( dataset, dset_id ) {
             dataset['perspectives'].forEach( function ( perspective, per_id ) {
                 perspective['issues'].forEach( function ( issue ) {
                     scope.push( dset_id + '-' + per_id + '-' + issue );
@@ -750,7 +750,7 @@ var _tools = (function () {
     }
 
     function generate_search_results( results ) {
-        var meta = _store.meta_datasets();
+        var meta = _store.meta_data();
         var collection_name;
         var dataset;
         var view;

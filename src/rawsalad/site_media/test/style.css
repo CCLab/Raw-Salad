@@ -390,28 +390,67 @@ textarea {
   img.claud-pointer {
 	float: left;
 	margin-left: -14px;
+	margin-top: 5px;
 	position: absolute;
 	display: none;
   }
-  .pl-sr-unchecked{
-    background-image: url("/site_media/img/checkbox02_normal.png");               
+  
+  
+  .pl-sr-checkbox{
     float: left;
     width: 38px;
     height: 19px;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 2px;
-    margin-bottom: 2px;
+    margin-bottom: 2px;  
+  }
+
+    
+  .pl-sr-set-unchecked {
+    background-image: url("/site_media/img/checkbox01_normal.png");
+  }
+
+  .pl-sr-set-unchecked:hover {
+    background-image: url("/site_media/img/checkbox01_hover.png");
+  }
+
+  
+  .pl-sr-set-checked {
+    background-image: url("/site_media/img/checkbox01_checked.png");  
+  }
+
+  .pl-sr-set-checked:hover {
+    background-image: url("/site_media/img/checkbox01_checkedHover.png");  
+  }
+
+  .pl-sr-issue-nocheck{
+    background-image: url("/site_media/img/checkbox02_inactive.png");                   
+  }
+
+  .pl-sr-issue-checked{
+    background-image: url("/site_media/img/checkbox02_checked.png");               
   }
   
-  .pl-sr-unchecked:hover{
+  .pl-sr-issue-unchecked:hover{
     background-image: url("/site_media/img/checkbox02_hover.png");                 
   }  
     
-  #pl-sr-full input {
+  .pl-sr-issue-unchecked{
+    background-image: url("/site_media/img/checkbox02_normal.png");               
+  }
+  
+  .pl-sr-issue-unchecked:hover{
+    background-image: url("/site_media/img/checkbox02_hover.png");                 
+  }  
+
+  
+  .pl-sr-set{
+    width: 28px;
+    height: 22px;
     float: left;
-    margin-right: 10px;
-    margin-top: 12px;
+    margin-right: 15px;
+    margin-top: 10px;  
   }
 
   .pl-sr-fl-collection {
