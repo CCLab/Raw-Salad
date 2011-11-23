@@ -40,14 +40,23 @@ class HierarchyInserter:
         print 'hierarchy_def = ', hierarchy_def
         print 'columns = ', columns
         # TODO:TODO TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: done here i have
-        self.hierarchy_fields = hierarchy_def['columns']
-        self.hierarchy_field_label = hierarchy_def['field_name_label']
+        #self.hierarchy_fields = []hierarchy_def['columns']
+        self.hierarchy_fields = [column_descr['index'] for column_descr in hierarchy_def['columns']]
+        self.name_label = hierarchy_def['field_name_label']
+        print 'h_c_l = ', self.csv_data.get_header()
+        print 'h_f = ', self.hierarchy_fields
         self.hierarchy_columns_labels = [self.csv_data.get_header()[i] for i in self.hierarchy_fields]
+        # TODO: remove both
+        print 'self.hierarchy_columns_labels', self.hierarchy_columns_labels
+        self.lowest_type = self.hierarchy_columns_labels[-1]
+        self.name_column_nr = self.hierarchy_fields[-1]
+
+        self.changeable_types = [column_descr['change_type'] for column_descr in hierarchy_def['columns']]
         self.type_label = hierarchy_def['field_type_label']
         self.modified_rows = []
         self.summable = hierarchy_def['summable']
         self.columns = columns[:]
-        self.delete_order = sorted(self.hierarchy_fields + [self.name_column_nr], reverse=True)
+        self.delete_order = sorted(self.hierarchy_fields, reverse=True)
         self.hierarchy_obj = HierarchyNode(0)
         self.use_teryt = False
         if teryt_data:
@@ -74,34 +83,36 @@ class HierarchyInserter:
         header = self.csv_data.get_header()
         for nr in self.delete_order:
             del header[nr]
-        header.insert(0, self.type_label)
-        header.insert(1, self.hierarchy_field_label)
-        if self.add_id:
-            header.insert(0, 'id')
+
+        header.insert(0, 'id')
+        header.insert(1, self.type_label)
+        header.insert(2, self.name_label)
+
         self.modified_rows = [header]
         
         row = self.csv_data.get_next_row(row_type='list')
         if row is None:
+            # TODO: no prints
             print 'Only header in csv data. No data rows were changed'
             return
         
         row_len = len(header)
         old_hierarchy = []
         new_hierarchy = []
-        i = 1
+        i = 0
         while row is not None:
             i += 1
-            if i == 10:
-                pass
             try:
                 new_hierarchy = self.get_hierarchy(row)
             except HierarchyError as e:
                 log = ('row nr %d, ' % i) + e.log
                 self.bad_hierarchy_log.append(log)
             else:
+                new_hierarchy = new_hierarchy[:-1] # TODO: check if this is necessary
                 if new_hierarchy != old_hierarchy:
                     new_hierarchy_rows = self.create_hierarchy_rows(new_hierarchy,
                                              row_len)
+                    print 'new_hierarchy_rows:', new_hierarchy_rows
                     self.modified_rows.extend(new_hierarchy_rows)
                 
                 self.modified_rows.append(self.clean_row(row, new_hierarchy))
@@ -109,8 +120,8 @@ class HierarchyInserter:
             old_hierarchy = new_hierarchy
             row = self.csv_data.get_next_row(row_type='list')
             
-        if self.add_id:
-            self.fill_summable_values()
+        self.fill_summable_values()
+        self.modify_columns_description()
                 
     def all_rows_correct(self):
         """Returns True if no errors were found, otherwise False."""
@@ -151,12 +162,12 @@ class HierarchyInserter:
         for nr in self.delete_order:
             del cleaned_row[nr]
         
-        cleaned_row.insert(0, self.lowest_type)
-        cleaned_row.insert(1, hierarchy_field_name)
-        if self.add_id:
-            row_hierarchy = hierarchy + [next_id]
-            full_id = self.get_full_id(row_hierarchy)
-            cleaned_row.insert(0, full_id)
+        row_hierarchy = hierarchy + [next_id]
+        full_id = self.get_full_id(row_hierarchy)
+
+        cleaned_row.insert(0, full_id)
+        cleaned_row.insert(1, self.lowest_type)
+        cleaned_row.insert(2, hierarchy_field_name)
         
         return cleaned_row
     
@@ -186,8 +197,7 @@ class HierarchyInserter:
         hierarchy_rows = []
         partial_hierarchy = []
         act_hierarchy_obj = self.hierarchy_obj
-        i = 0
-        for field in new_hierarchy:
+        for i, field in enumerate(new_hierarchy):
             partial_hierarchy.append(field)
             child = act_hierarchy_obj.get_child(field)
             # if this row represents new hierarchy
@@ -202,18 +212,14 @@ class HierarchyInserter:
                 child = HierarchyNode(new_id)
                 act_hierarchy_obj.add_child(child, field)
                 new_row = ['' for _ in range(row_len)]
-                if self.add_id:
-                    new_row[0] = self.get_full_id(partial_hierarchy)
-                    new_row[1] = self.hierarchy_columns_labels[i]
-                    new_row[2] = field
-                else:
-                    new_row[0] = self.hierarchy_columns_labels[i]
-                    new_row[1] = field
+                new_row[0] = self.get_full_id(partial_hierarchy)
+                new_row[1] = self.hierarchy_columns_labels[i]
+                new_row[2] = field
                     
                 hierarchy_rows.append(new_row)
             
             act_hierarchy_obj = child
-            i += 1
+
         return hierarchy_rows
     
     def get_hierarchy_node(self, hierarchy):
@@ -254,17 +260,16 @@ class HierarchyInserter:
             for col_nr in self.delete_order:
                 if col_nr < summable_cols[i]:
                     summable_cols[i] -= 1
-            
-            if self.add_id:
-                summable_cols[i] += 3
-            else:
-                summable_cols[i] += 2                
-        summable_cols_types = [self.fields[i]['type'] for i in self.summable]
+            summable_cols[i] += 3
+
+        summable_cols_types = [self.columns[i]['type'] for i in self.summable]
         
         rows_dict = {}
         i = -1
         for row in self.modified_rows:
             i += 1
+            print 'i:', i, 'row:', row
+            print 'summable_cols:', summable_cols
             # omitting header
             if i == 0:
                 continue
@@ -274,6 +279,7 @@ class HierarchyInserter:
             while parent_id:
                 parent_row = rows_dict[parent_id]
                 j = 0
+                print 'j', j
                 for col_nr in summable_cols:
                     value = row[col_nr]
                     type = summable_cols_types[j]
@@ -281,7 +287,18 @@ class HierarchyInserter:
                         parent_row[col_nr] = 0
                     if value == '':
                         continue
-                    if type == 'int':
+                    if type == 'number':
+                        try:
+                            value = int(value)
+                        except:
+                            value = float(value)
+                        if parent_row[col_nr] == '':
+                            parent_row[col_nr] = value
+                        else:
+                            print 'parent_row[col_nr]', parent_row[col_nr], '|| value =', value
+                            parent_row[col_nr] += value
+                    # TODO: remove it
+                    '''if type == 'int':
                         parent_row[col_nr] += int(value)
                     elif type == 'float' and value != '':
                         commas_in_field = value.count(',')
@@ -292,10 +309,49 @@ class HierarchyInserter:
                         else:
                             value = value.replace(',', '', commas_in_field - 1)
                             parent_row[col_nr] += float( value.replace(',', '.') )
+                    '''
 
                     j += 1
                 parent_id = self.get_parent_id(parent_id)
-                
+
+    def modify_columns_description(self):
+        """Modifies columns description that was passed during object creation, so that
+        it reflects new form of data.
+        """
+        for index in self.delete_order:
+            del self.columns[index]
+        
+        id_column_description = self.create_column_description('ID', 'idef')
+        type_column_description = self.create_column_description(unicode(self.type_label), u'type')
+        name_column_description = self.create_column_description(unicode(self.name_label), u'name')
+        
+        self.columns.insert(0, id_column_description)
+        self.columns.insert(1, type_column_description)
+        self.columns.insert(2, name_column_description)
+    
+    def create_column_description(self, label, key):
+        """Creates standard column description that will be inserted because of hierarchy transformation.
+        
+        Arguments:
+        label -- label of new column
+        key -- key of new column
+        """
+        return {
+           u'format': u'@',
+           u'label': label,
+           u'obligatory': True,
+           u'processable': True,
+           u'key': key,
+           u'basic': True,
+           u'checkable': False,
+           u'type': u'string'
+        }
+
+    def get_columns_description(self):
+        """Returns description of columns in data. Columns description changes after
+        inserting hierarchy in rows.
+        """
+        return self.columns
     
     def get_parent_id(self, id):
         """Returns id of parent of row with given id. If this row has

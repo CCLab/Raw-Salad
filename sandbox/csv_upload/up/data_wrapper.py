@@ -173,32 +173,31 @@ class Data:
     
     """Class used to save data in csv file."""
     
-    def __init__(self, rows, name):
+    def __init__(self, rows):
         """Saves passed values.
         
         Arguments:
         rows -- data to save, it must be list
-        name -- name of the file that will contain data
         """
         self.rows = rows
-        self.name = name
         
-    def save(self, delim=';', quote='"', quoting=csv.QUOTE_NONNUMERIC):
-        """Opens file which name was passed in constructor. Delimiter and
-        quote char values can be specified. If file can't be opened, no
-        data will be saved.
+    def save(self, name, delim=';', quote='"', quoting=csv.QUOTE_NONNUMERIC):
+        """Opens file with name = name. Delimiter and quote char values
+         can be specified. If file can't be opened, no data will be saved.
         
         Arguments:
+        name -- name of the file that will contain data
         delim -- delimiter in the csv file
         quote -- quote char in the cav file
         quoting -- quoting style
         """
         try:
-            file = open(self.name, 'wb')
+            file = open(name, 'wb')
         except IOError:
-            print 'File %s cannot be opened' % self.name
-        writer = csv.writer(open(self.name, 'wb'), delimiter=delim, 
-                            quotechar=quote, quoting=csv.QUOTE_NONNUMERIC)
+            print 'File %s cannot be opened' % name
+        writer = csv.writer(file, delimiter=delim, quotechar=quote,
+                             quoting=csv.QUOTE_NONNUMERIC)
+
         for row in self.rows:
             writer.writerow(row)
         file.close()

@@ -11,6 +11,7 @@ import simplejson as json
 import rsdbapi as rsdb
 from data_validator import DataValidator
 from hierarchy_inserter import HierarchyInserter
+from data_wrapper import CsvFile, CsvData, Data
 
 def home( req ):
     f = FirstStepForm()
@@ -119,14 +120,27 @@ def save_advanced( req ):
     # TODO: pass delimiter to DataValidator, HierarchyInserter constructors
     if validator.is_all_correct():
         hierarchy_inserter = HierarchyInserter(file_name, hierarchy_info, meta_data['columns'])
+        print 'old hierarchy = '
+        for x in meta_data['columns']:
+            print x['key']
+
         hierarchy_inserter.insert_hierarchy()
         
         if hierarchy_inserter.all_rows_correct():
-            modified_data = hierarchy_inserter.get_modified_rows()
-            print 'modified_data = ', modified_data
+            modified_rows = hierarchy_inserter.get_modified_rows()
+            meta_data['columns'] = hierarchy_inserter.get_columns_description()
+            
+            print 'modified_rows = ', modified_rows
+            print 'new hierarchy = '
+            for x in meta_data['columns']:
+                print x['key']
+            print '------------------------'
+            modified_data = Data(modified_rows)
+            modified_data.save(file_name) # clean source file and save trasnformed data in it
             db = rsdb.DBconnect("mongodb").dbconnect
 
-            upload_data_file(db, meta_data['ns'], file_name, meta_data, hierarchy_info)
+            print 'ns = ', meta_data['ns']
+            upload_data_file(db, meta_data['ns'], file_name, meta_data['columns'])
 
             update_navigator(db, rsdb.nav_schema, nav_dict)
 
@@ -326,10 +340,10 @@ def replace_locale_symbols(src): # find smarter way to do it!
 
 
 def find_ids(dataset_name, view_name):
-    ''' Finds id of dataset [and optionally view] which name is dataset_name
+    """ Finds id of dataset [and optionally view] which name is dataset_name
         [and optional view's name is view name]
         Returns tuple containing seeked ids, if id is not found, then it becomes None
-    '''
+    """
     dataset_id = view_id = None
     db= rsdb.DBconnect("mongodb").dbconnect
     
@@ -351,9 +365,9 @@ def find_ids(dataset_name, view_name):
 
 
 def update_navigator(db, nav_coll, nav_dict):
-    ''' Updates site navigator collection with nav_dict containing information
+    """ Updates site navigator collection with nav_dict containing information
         about changed part, db and nav_coll specify database and collection.
-    '''
+    """
     navtree = rsdb.Navtree()
     coll = db[nav_coll]
     if nav_dict['dataset'] == navtree.get_max_dataset(db) + 1: # no such dataset in the db
@@ -397,9 +411,9 @@ def update_navigator(db, nav_coll, nav_dict):
 
 
 def create_hierarchy_info(info, columns):
-    ''' Creates information about hierarchy in csv file, info is information passed by user with
+    """ Creates information about hierarchy in csv file, info is information passed by user with
         names of columns creating hierarchy, columns is list with description of each column.
-    '''
+    """
 
     print 'columns = ', columns
     columns_idx = {}
@@ -425,6 +439,34 @@ def create_hierarchy_info(info, columns):
 
     return hierarchy_info
 
+def upload_data_file(db, coll_name, file_name, columns):
+    """Uploads file file_name to database db to collection coll_name,
+    columns describe columns inside that file
+    
+    Arguments:
+    db -- database where data will be uploaded
+    collection -- collection that will contain uploaded data
+    file_name -- name of file containing data to upload
+    columns -- description of columns in the file
+    """
+    coll = db[coll_name]
+    coll.remove()
 
-def upload_data_file(db, coll_name, file_name, meta_data, hierarchy_object):
+    keys_list = [column_descr['key'] for column_descr in columns]
+    print 'keys_list = ', keys_list
+    
+    # TODO: parameterize delim
+    csv_file = CsvFile(file_name, delim=';', quote='"')
+    csv_data = CsvData(csv_file)
+    row = csv_data.get_next_row(row_type='list')
+    while row:
+        print 'row = ', row
+        db_row = {}
+        for i, value in enumerate(row):
+            db_row[ keys_list[i] ] = value
+        print 'db_row = ', db_row
+        coll.insert(db_row)
+
+        row = csv_data.get_next_row(row_type='list')
+
     return False
