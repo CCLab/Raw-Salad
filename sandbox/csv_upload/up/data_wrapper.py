@@ -12,7 +12,7 @@ class CsvFile:
     of the file or use specified quotechar and delimiter values. 
     """
     
-    def __init__(self, filename, quote=None, delim=None, enc='utf-8'):
+    def __init__(self, filename, quote=None, delim=None, encoding='utf-8'):
         """Opens file and creates csv reader object. If quote or delim are
         not specified, then Sniffer object is used to find file's dialect.
         
@@ -20,7 +20,7 @@ class CsvFile:
         filename -- name of the csv file
         quote -- char used for quoting in the csv file
         delim -- char used as delimiter in the csv file
-        enc -- file's encoding format
+        encoding -- file's encoding format
         """
         self.name = filename
         self.file = open(filename, 'rb')
@@ -32,7 +32,7 @@ class CsvFile:
             self.dialect = csv.Sniffer().sniff(self.file.read(1024))
             self.file.seek(0)
         self.create_reader()
-        self.encoding = enc
+        self.encoding = encoding
     
     def create_reader(self):
         """Creates csv reader object using sniffed dialect
@@ -181,15 +181,16 @@ class Data:
         """
         self.rows = rows
         
-    def save(self, name, delim=';', quote='"', quoting=csv.QUOTE_NONNUMERIC):
+    def save(self, name, delim=';', quote='"', quoting=csv.QUOTE_NONNUMERIC, encoding='cp1250'):
         """Opens file with name = name. Delimiter and quote char values
          can be specified. If file can't be opened, no data will be saved.
         
         Arguments:
         name -- name of the file that will contain data
         delim -- delimiter in the csv file
-        quote -- quote char in the cav file
+        quote -- quote char in the csv file
         quoting -- quoting style
+        encoding -- encoding in which file should be saved
         """
         try:
             file = open(name, 'wb')
@@ -199,5 +200,13 @@ class Data:
                              quoting=csv.QUOTE_NONNUMERIC)
 
         for row in self.rows:
-            writer.writerow(row)
+            encoded_row = []
+            for field in row:
+                if not field:
+                    field = ''
+                if isinstance(field, basestring):
+                    field = field.encode('cp1250')
+                encoded_row.append(field)
+            writer.writerow(encoded_row)
+            #writer.writerow(row)
         file.close()

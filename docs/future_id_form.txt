@@ -1,0 +1,29 @@
+When I write it, I hope that future me will not have to read it.
+If you read it, it must mean that something wrong with ids happened and
+big changes in code must be done to satisfy new form of ids.
+If you are future me, I'm sorry:(, if not, then ... hahahaha, sucker.
+
+It turned out, that there might be a problem when hierarchy has holes:
+e.g.
+Dzial 2
+--- Rozdzial 3
+------ Paragraf 5
+--- Paragraf 3
+
+ids of those rows in old form would be:
+0002
+0002-0003
+0002-0003-0005
+0002-0003    ups, here is a problem
+
+New form of id is: {level}{number}-{level}{number}-...
+
+so those ids in new form would be:
+a0002
+a0002-b0003
+a0002-b0003-c0005
+a0002-c0003
+
+It is possible, that this situation will not happen,
+so these changes will have to be done when data validator
+will detect it.

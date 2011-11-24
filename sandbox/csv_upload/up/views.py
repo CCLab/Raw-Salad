@@ -108,6 +108,8 @@ def save_advanced( req ):
     advanced['hierarchy'] = [{'name': name, 'change_type': True} for name in advanced['hierarchy']]
     advanced['field_type_label'] = 'Typ'
     advanced['field_name_label'] = 'Nazwa'
+    advanced['field_parent_label'] = 'Rodzic'
+    advanced['field_level_label'] = 'Poziom'
 
     # TODO: add obligatory parameter in columns decription
     for column_descr in meta_data['columns']:
@@ -129,6 +131,7 @@ def save_advanced( req ):
         if hierarchy_inserter.all_rows_correct():
             modified_rows = hierarchy_inserter.get_modified_rows()
             meta_data['columns'] = hierarchy_inserter.get_columns_description()
+            meta_data['aux'] = create_aux_fields() 
             
             print 'modified_rows = ', modified_rows
             print 'new hierarchy = '
@@ -137,6 +140,7 @@ def save_advanced( req ):
             print '------------------------'
             modified_data = Data(modified_rows)
             modified_data.save(file_name) # clean source file and save trasnformed data in it
+            
             db = rsdb.DBconnect("mongodb").dbconnect
 
             print 'ns = ', meta_data['ns']
@@ -210,10 +214,13 @@ def fill_column_types(columns, csvdict):
                     except:
                         cur_prec= 0
                     out[i]['type_precision']= max( new_prec, cur_prec )
+            else: # if field is empty, assume it's string
+                out[i]['type_tmp'] = 'string'
             i += 1
 
     # filling formats
     for out_doc in out:
+        print 'out_doc=', out_doc
         if out_doc['type_tmp'] in ['int', 'float']:
 
             # filling type
@@ -432,6 +439,8 @@ def create_hierarchy_info(info, columns):
         'columns': hierarchy_columns,
         'field_type_label': info['field_type_label'],
         'field_name_label': info['field_name_label'],
+        'field_parent_label': info['field_parent_label'],
+        'field_level_label': info['field_level_label'],
         'summable': summable_fields
     }
 
@@ -458,15 +467,73 @@ def upload_data_file(db, coll_name, file_name, columns):
     # TODO: parameterize delim
     csv_file = CsvFile(file_name, delim=';', quote='"')
     csv_data = CsvData(csv_file)
+    parents_dict = {}
     row = csv_data.get_next_row(row_type='list')
+    almost_ready_rows = []
     while row:
         print 'row = ', row
         db_row = {}
         for i, value in enumerate(row):
+            if isinstance(value, basestring):
+                value = value.decode('cp1250')
             db_row[ keys_list[i] ] = value
+        add_helper_attributes(db_row, parents_dict)
+
         print 'db_row = ', db_row
-        coll.insert(db_row)
+        #coll.insert(db_row)
 
         row = csv_data.get_next_row(row_type='list')
+        almost_ready_rows.append(db_row)
+    
+    for ready_row in almost_ready_rows:
+        ready_row['leaf'] = not (ready_row['idef'] in parents_dict)
+        coll.insert(ready_row)
 
     return False
+
+def add_helper_attributes(row, parents_dict):
+    """Changes row so that it is ready to be uploaded to db, adds id and parent which are
+    the same as id_sort and previous_sort, then converts format of id_sort and parent_sort.    
+
+    Arguments:
+    row -- data row to change
+    parent_dict -- dictionary containing ids of parent nodes
+    """
+
+    row['idef'] = row['idef_sort']
+    row['idef_sort'] = sort_format(row['idef_sort'])
+    if row['level'] == 'a':
+        row['parent'] = None
+    else:
+        row['parent'] = row['parent_sort']
+        row['parent_sort'] = sort_format(row['parent_sort'])
+        parents_dict[ row['parent'] ] = True
+
+
+def sort_format(src):
+    """
+    Formats 1-2-3... to 0001-0002-0003... and returns new form of src.
+
+    Arguments:
+    src -- id that should have its format changed
+    """
+    src_list= src.split('-')
+    res_list= []
+    for elm in src_list:
+        try:
+            res_list.append('%04d' % int(elm))
+        except:
+            res_list.append(elm)
+    res= '-'.join(res_list)
+    return res
+
+def create_aux_fields():
+    """Creates and returns list containing auxiliary fields: idef, leaf, parent."""
+    aux_fields = {
+        'idef': 1,
+        'leaf': 1,
+        'parent': 1
+    }
+
+    return aux_fields
+

@@ -5,6 +5,7 @@ Created on 25-08-2011
 '''
 
 from data_wrapper import CsvFile, CsvData
+import string
 
 class HierarchyInserter:
     
@@ -16,10 +17,10 @@ class HierarchyInserter:
                             type of row(position in hierarchy),
         "field_name_label": name of column(that will be inserted), representing
                             name of row,
-        "name_column": number of column which value represents name of data row
-                       and will be moved to new field(its name is field_name_label),
-        "lowest_type": name that will be inserted to the type column in rows
-                       that are in the lowest position in hierarchy
+        "field_parent_label": name of column(that will be inserted), representing
+                            id of parent,
+        "field_level_label": name of column(that will be inserted), representing
+                            level of row
         "summable": [list of columns that should be summed after creating hierarchy]
     }
     Data passed to HierarchyInserter should be correct, otherwise created
@@ -53,10 +54,19 @@ class HierarchyInserter:
 
         self.changeable_types = [column_descr['change_type'] for column_descr in hierarchy_def['columns']]
         self.type_label = hierarchy_def['field_type_label']
+        self.parent_label = hierarchy_def['field_parent_label']
+        self.level_label = hierarchy_def['field_level_label']
+        self.id_label = 'ID' #  it should not be parameterized
+        self.additional_fields = 5
         self.modified_rows = []
         self.summable = hierarchy_def['summable']
         self.columns = columns[:]
-        self.delete_order = sorted(self.hierarchy_fields, reverse=True)
+        self.delete_order = []
+        for field_nr in self.hierarchy_fields:
+            self.delete_order.append(field_nr)
+            self.delete_order.append(field_nr + 1)
+
+        self.delete_order = sorted(self.delete_order, reverse=True)
         self.hierarchy_obj = HierarchyNode(0)
         self.use_teryt = False
         if teryt_data:
@@ -84,9 +94,11 @@ class HierarchyInserter:
         for nr in self.delete_order:
             del header[nr]
 
-        header.insert(0, 'id')
+        header.insert(0, self.id_label)
         header.insert(1, self.type_label)
         header.insert(2, self.name_label)
+        header.insert(3, self.parent_label)
+        header.insert(4, self.level_label)
 
         self.modified_rows = [header]
         
@@ -96,6 +108,7 @@ class HierarchyInserter:
             print 'Only header in csv data. No data rows were changed'
             return
         
+        print '///////////////////////////////////////////////////////////////'
         row_len = len(header)
         old_hierarchy = []
         new_hierarchy = []
@@ -104,18 +117,20 @@ class HierarchyInserter:
             i += 1
             try:
                 new_hierarchy = self.get_hierarchy(row)
+                hierarchy_values = self.get_hierarchy_values(row)
             except HierarchyError as e:
                 log = ('row nr %d, ' % i) + e.log
                 self.bad_hierarchy_log.append(log)
             else:
+                print 'new_hierarchy = ', new_hierarchy, ' old_hierarchy = ', old_hierarchy
                 new_hierarchy = new_hierarchy[:-1] # TODO: check if this is necessary
                 if new_hierarchy != old_hierarchy:
                     new_hierarchy_rows = self.create_hierarchy_rows(new_hierarchy,
-                                             row_len)
+                                             hierarchy_values, row_len)
                     print 'new_hierarchy_rows:', new_hierarchy_rows
                     self.modified_rows.extend(new_hierarchy_rows)
                 
-                self.modified_rows.append(self.clean_row(row, new_hierarchy))
+                self.modified_rows.append(self.clean_row(row, new_hierarchy, hierarchy_values))
             
             old_hierarchy = new_hierarchy
             row = self.csv_data.get_next_row(row_type='list')
@@ -140,7 +155,7 @@ class HierarchyInserter:
         """Returns string containing errors separated by new line."""
         return '\n'.join(self.bad_hierarchy_log)
     
-    def clean_row(self, row, hierarchy):
+    def clean_row(self, row, hierarchy, hierarchy_values):
         """Adds id of this row to hierarchy object.
         Removes hierarchy fields from the row, moves its type and name(fields
         described by name and type column in schema) to the beginning of it.
@@ -150,6 +165,7 @@ class HierarchyInserter:
         Arguments:
         row -- row to clean
         hierarchy -- hierarchy in the row
+        hierarchy_values -- list of values connected with hierarchy fields
         """
         cleaned_row = row[:]
         node = self.get_hierarchy_node(hierarchy)
@@ -157,17 +173,28 @@ class HierarchyInserter:
         row_node = HierarchyNode(next_id)
         node.add_child(row_node, next_id)
          
-        hierarchy_field_name = cleaned_row[self.name_column_nr]
+        row_type = self.lowest_type
+        if hierarchy_values[-1] != '':
+            row_type += ' ' + hierarchy_values[-1]
+        row_name = cleaned_row[self.name_column_nr]
+        hierarchy_val = hierarchy_values[-1]
          
         for nr in self.delete_order:
             del cleaned_row[nr]
         
         row_hierarchy = hierarchy + [next_id]
         full_id = self.get_full_id(row_hierarchy)
+        level = string.lowercase[ full_id.count('-') ]
+        if level == 'a':
+            parent_id = None
+        else:
+            parent_id = full_id.rsplit('-', 1)[0]
 
         cleaned_row.insert(0, full_id)
-        cleaned_row.insert(1, self.lowest_type)
-        cleaned_row.insert(2, hierarchy_field_name)
+        cleaned_row.insert(1, row_type)
+        cleaned_row.insert(2, row_name)
+        cleaned_row.insert(3, parent_id)
+        cleaned_row.insert(4, level)
         
         return cleaned_row
     
@@ -179,12 +206,21 @@ class HierarchyInserter:
         """
         hierarchy = []
         for nr in self.hierarchy_fields:
-            if row[nr] == '':
-                break
             hierarchy.append(row[nr])
         return hierarchy
+
+    def get_hierarchy_values(self, row):
+        """Returns list representing values assigned to hierarchy levels in the row.
+        
+        Arguments:
+        row -- data row
+        """
+        hierarchy_values = []
+        for nr in self.hierarchy_fields:
+            hierarchy_values.append(row[nr + 1])
+        return hierarchy_values    
     
-    def create_hierarchy_rows(self, new_hierarchy, row_len):
+    def create_hierarchy_rows(self, new_hierarchy, hierarchy_values, row_len):
         """Returns rows list of hierarchy rows that should be put inside
         data to show new_hierarchy. If hierarchy rows have been added for
         new_hierarchy already, empty list will be returned. Hierarchy rows
@@ -192,30 +228,38 @@ class HierarchyInserter:
         
         Arguments:
         new_hierarchy -- list representing hierarchy in row in data 
+        hierarchy_values -- list representing values assigned to specified
+                            elements of hierarchy(like funcion '3')
         row_len -- length of that row, needed create correct hierarchy row
         """
         hierarchy_rows = []
         partial_hierarchy = []
         act_hierarchy_obj = self.hierarchy_obj
         for i, field in enumerate(new_hierarchy):
+            if field == '':
+                continue
             partial_hierarchy.append(field)
             child = act_hierarchy_obj.get_child(field)
             # if this row represents new hierarchy
             if child is None:
-                if self.use_teryt:
-                    new_id = self.teryt_id_generator.get_teryt_id(partial_hierarchy)
-                    if new_id is None:
-                        self.teryt_id_generator.add_teryt_unit(partial_hierarchy)
-                        new_id = self.teryt_id_generator.get_teryt_id(partial_hierarchy)
-                else:
-                    new_id = act_hierarchy_obj.get_new_child_id()
+                new_id = act_hierarchy_obj.get_new_child_id()
                 child = HierarchyNode(new_id)
                 act_hierarchy_obj.add_child(child, field)
                 new_row = ['' for _ in range(row_len)]
                 new_row[0] = self.get_full_id(partial_hierarchy)
                 new_row[1] = self.hierarchy_columns_labels[i]
+                if hierarchy_values[i] != '':
+                    new_row[1] += ' ' + hierarchy_values[i]
                 new_row[2] = field
-                    
+
+                level = string.lowercase[ new_row[0].count('-') ]
+                if level == 'a':
+                    parent_id = None
+                else:
+                    parent_id = new_row[0].rsplit('-', 1)[0]
+                new_row[3] = parent_id
+                new_row[4] = level
+
                 hierarchy_rows.append(new_row)
             
             act_hierarchy_obj = child
@@ -231,6 +275,8 @@ class HierarchyInserter:
         """
         node = self.hierarchy_obj
         for field in hierarchy:
+            if field == '':
+                continue
             if not node.has_child(field):
                 return None
             node = node.get_child(field)
@@ -246,8 +292,10 @@ class HierarchyInserter:
         id_list = []
         node = self.hierarchy_obj
         for field in hierarchy:
+            if field == '':
+                continue
             if not node.has_child(field):
-                raise HierarchyError('Can not create full id for hierarchy %s' % hierarchy)
+                raise HierarchyError('Cannot create full id for hierarchy %s' % hierarchy)
             node = node.get_child(field)
             id_list.append( str(node.get_id()) )
         
@@ -260,7 +308,7 @@ class HierarchyInserter:
             for col_nr in self.delete_order:
                 if col_nr < summable_cols[i]:
                     summable_cols[i] -= 1
-            summable_cols[i] += 3
+            summable_cols[i] += self.additional_fields
 
         summable_cols_types = [self.columns[i]['type'] for i in self.summable]
         
@@ -321,20 +369,26 @@ class HierarchyInserter:
         for index in self.delete_order:
             del self.columns[index]
         
-        id_column_description = self.create_column_description('ID', 'idef')
-        type_column_description = self.create_column_description(unicode(self.type_label), u'type')
-        name_column_description = self.create_column_description(unicode(self.name_label), u'name')
+        id_column_description = self.create_column_description(unicode(self.id_label), u'idef_sort', False)
+        type_column_description = self.create_column_description(unicode(self.type_label), u'type', True)
+        name_column_description = self.create_column_description(unicode(self.name_label), u'name', True)
+        parent_column_description = self.create_column_description(unicode(self.parent_label), u'parent_sort', False)
+        level_column_description = self.create_column_description(unicode(self.level_label), u'level', False)
         
         self.columns.insert(0, id_column_description)
         self.columns.insert(1, type_column_description)
         self.columns.insert(2, name_column_description)
+        self.columns.insert(3, parent_column_description)
+        self.columns.insert(4, level_column_description)
     
-    def create_column_description(self, label, key):
-        """Creates standard column description that will be inserted because of hierarchy transformation.
+    def create_column_description(self, label, key, basic):
+        """Creates standard column description that will be inserted to meta data description
+        because of hierarchy transformation.
         
         Arguments:
         label -- label of new column
         key -- key of new column
+        basic -- is column basic
         """
         return {
            u'format': u'@',
@@ -342,14 +396,14 @@ class HierarchyInserter:
            u'obligatory': True,
            u'processable': True,
            u'key': key,
-           u'basic': True,
+           u'basic': basic,
            u'checkable': False,
            u'type': u'string'
         }
 
     def get_columns_description(self):
-        """Returns description of columns in data. Columns description changes after
-        inserting hierarchy in rows.
+        """Returns description of columns in data. Columns description changes
+        after inserting hierarchy in rows.
         """
         return self.columns
     
@@ -437,294 +491,3 @@ class HierarchyError(Exception):
         """Returns string representation of error."""
         return repr(self.log)
     
-
-class TerytIdGenerator:
-    
-    """Class creating TERYT codes."""
-    
-    def __init__(self, data):
-        """Initiates this object using data from file with TERYT codes.
-        
-        Arguments:
-        data -- csv data of file with TERYT codes
-        """
-        self.codes = {}
-        self.errors = []
-        row = data.get_next_row()
-        while row:
-            type = row['Nazwa typu jednostki']
-            name = unicode(row['Nazwa']).lower()
-            full_code = row['TERYT']
-            woj_code = full_code[:2]
-            pow_code = full_code[2:4]
-            gm_code = full_code[4:6]
-            
-            if self.is_type_ignored(type):
-                row = data.get_next_row()
-                continue
-            
-            if self.is_wojewodztwo(type):
-                self.codes[name] = {'id': woj_code, 'name': name, 'powiats': {}}
-                last_woj = self.codes[name]
-                last_woj_code = woj_code
-            elif self.is_powiat(type):
-                new_pow_dict = {'id': pow_code, 'name': name, 'gminas': {}}
-                if woj_code == last_woj_code:
-                    last_woj['powiats'][name] = new_pow_dict
-                else:
-                    woj = self.get_teryt_object(woj_code)
-                    if woj is None:
-                        self.errors.append('Error: unknown województwo, code=%s' % woj_code)
-                        print 'Error: unknown województwo, code=', woj_code
-                        row = data.get_next_row()
-                        continue
-                    woj['powiats'][name] = new_pow_dict
-                last_pow = new_pow_dict
-                last_pow_code = pow_code
-            elif self.is_gmina(type):
-                new_gm_dict = {'id': gm_code, 'name': name}
-                if woj_code == last_woj_code and pow_code == last_pow_code:
-                    # handle situation when there is "AAA" - gmina miejska and "AAA" - gmina wiejska
-                    # it becomes: "AAA - miasto" - gmina miejska and "AAA" - gmina wiejska 
-                    if name in last_pow['gminas']:
-                        miasto_gm_name = name + ' - miasto'
-                        last_pow['gminas'][miasto_gm_name] = last_pow['gminas'][name]
-                        last_pow['gminas'][miasto_gm_name]['name'] = miasto_gm_name
-                        last_pow['gminas'][name] = new_gm_dict
-                    else:
-                        last_pow['gminas'][name] = new_gm_dict
-                else:
-                    pow = self.get_teryt_object(woj_code, pow_code)
-                    if pow is None:
-                        self.errors.append('Error: unknown powiat, code=%s' % pow_code)
-                        print 'Error: unknown powiat, code=', pow_code
-                        row = data.get_next_row()
-                        continue
-                    # handle situation when there is "AAA" - gmina miejska and "AAA" - gmina wiejska
-                    # it becomes: "AAA - miasto" - gmina miejska and "AAA" - gmina wiejska 
-                    if name in pow['gminas']:
-                        miasto_gm_name = name + ' - miasto'
-                        pow['gminas'][miasto_gm_name] = pow['gminas'][name]
-                        pow['gminas'][miasto_gm_name]['name'] = miasto_gm_name
-                        pow['gminas'][name] = new_gm_dict
-                    else:
-                        pow['gminas'][name] = new_gm_dict
-            else:
-                self.errors.append('Error: unknown unit type: %s' % type)
-                print 'Error: unknown unit type:', type
-        
-            row = data.get_next_row()
-    
-    def is_wojewodztwo(self, type):
-        return type == 'województwo'
-    
-    def is_powiat(self, type):
-        return type in ['powiat', 'miasto na prawach powiatu',
-                        'miasto stołeczne, na prawach powiatu']
-    
-    def is_gmina(self, type):
-        return type in ['gmina miejska', 'gmina wiejska', 'gmina miejsko-wiejska',
-                         'dzielnica', 'delegatura',
-                         'gmina miejska, miasto stołeczne']
-    
-    def is_type_ignored(self, type):
-        return type in ['miasto', 'obszar wiejski']
-        
-    def get_teryt_object(self, woj_code, pow_code=None, gm_code=None):
-        """Returns dict representing teritorial unit which code is
-        woj_code[ + pow_code[ + gm_code]]. If such a unit cannot be found,
-        None is returned.
-        
-        Arguments:
-        woj_code -- code of unit's wojewodztwo
-        pow_code -- code of unit's powiat
-        gm_code -- code of unit's gmina
-        """
-        woj_dict = None
-        for woj in self.codes:
-            if woj['id'] == woj_code:
-                woj_dict = woj
-                last_dict = woj_dict
-                break
-        
-        if woj_dict is None:
-            return None
-        
-        if pow_code:
-            pow_dict = None
-            for pow in woj_dict['powiats']:
-                if pow['id'] == pow_code:
-                    pow_dict = pow
-                    last_dict = pow_dict
-                    break
-                
-            if pow_dict is None:
-                return None
-        
-        if gm_code:
-            for gm in pow_dict:
-                if gm['id'] == gm_code:
-                    gm_dict = gm
-                    last_dict = gm_dict
-                    break
-            if gm_dict is None:
-                return None
-        
-        return last_dict
-    
-    def get_teryt_name(self, code):
-        """Returns name of teritorial unit which code is
-        woj_code[ + pow_code[ + gm_code]]. If such a unit cannot be found,
-        None is returned.
-        
-        Arguments:
-        code -- unit's TERYT code
-        """
-        woj_code = code[:2]
-        if len(code) > 3:
-            pow_code = code[2:4]
-            if len(code) > 5:
-                gm_code = code[4:6]
-        teryt_object_dict = self.get_teryt_object(woj_code, pow_code, gm_code)
-        try:
-            return teryt_object_dict['name']
-        except TypeError:
-            return None
-    
-    def get_teryt_id(self, hierarchy):
-        """Returns teryt id of teritorial unit represented by hierarchy.
-        Letters in hierarchy strings are lowercased and changed so that
-        they could be in the same form as they are expected.
-        If such a unit can not be found, returns None.
-        
-        Arguments:
-        hierarchy -- list containing name of unit's wojewodztwo,
-                     powiat(optionally) and gmina(optionally)
-        """
-        modified_hierarchy = [unicode(name).lower() for name in hierarchy]
-        woj_name = modified_hierarchy[0]
-        pow_name, gm_name = None, None
-        if len(modified_hierarchy) > 1:
-            pow_name = self.correct_powiat_name(modified_hierarchy[1])
-        if len(modified_hierarchy) > 2:
-            gm_name = self.correct_gmina_name(modified_hierarchy[2])
-        
-        tmp_obj = self.codes
-        try:
-            tmp_obj = tmp_obj[woj_name]
-        except KeyError:
-            return None
-        
-        if pow_name:
-            try:
-                tmp_obj = tmp_obj['powiats'][pow_name]
-            except KeyError:
-                return None
-        
-        if gm_name:
-            try:
-                tmp_obj = tmp_obj['gminas'][gm_name]
-            except KeyError:
-                return None
-        
-        return tmp_obj['id']
-    
-    def add_teryt_unit(self, hierarchy):
-        """ Add new teritorial unit. If it exists in actual hierarchy,
-        nothing will happen. Otherwise, this unit will be placed in hierarchy.
-        
-        Arguments:
-        hierarchy -- hierarchy of new teritorial unit
-        """
-        modified_hierarchy = [unicode(name).lower() for name in hierarchy]
-        if len(modified_hierarchy) > 1:
-            modified_hierarchy[1] = self.correct_powiat_name(modified_hierarchy[1])
-        if len(modified_hierarchy) > 2:
-            modified_hierarchy[2] = self.correct_gmina_name(modified_hierarchy[2])
-            
-        if self.get_teryt_id(modified_hierarchy):
-            return
-        
-        tmp_obj = self.codes
-        i = 0
-        for field in modified_hierarchy:
-            if field in tmp_obj:
-                if i == 0:
-                    tmp_obj = tmp_obj[field]['powiats']
-                else:
-                    tmp_obj = tmp_obj[field]['gminas']
-            else:
-                if i == 0:
-                    id = self.find_highest_id(tmp_obj) + 1
-                    tmp_obj[field] = {'id': str(id), 'name': field, 'powiats': {}}
-                elif i == 1:
-                    id = self.find_highest_id(tmp_obj['powiats']) + 1
-                    tmp_obj[field] = {'id': str(id), 'name': field, 'gminas': {}}
-                elif i == 2:
-                    id = self.find_highest_id(tmp_obj['gminas']) + 1
-                    tmp_obj[field] = {'id': str(id), 'name': field}
-            i += 1
-    
-    def find_highest_id(self, objects):
-        """Returns highest id of objects in list.
-        
-        Argument:
-        objects -- list of objects that have id value
-        """
-        highest_id = 0
-        for obj in objects:
-            id = int(objects[obj]['id'])
-            if id > highest_id:
-                highest_id = id
-        
-        return highest_id
-    
-    def correct_powiat_name(self, full_name):
-        """Returns only powiat's name, without 'powiat' part, 'm. st.'
-        
-        Arguments:
-        full_name -- full name of powiat
-        """
-        
-        short_name = full_name
-        if 'powiat' in short_name:
-            short_name = short_name.lstrip('powiat')
-            if short_name[0] == ' ':
-                short_name = short_name[1:]
-        
-        if short_name.startswith('m.'):
-            short_name = short_name.lstrip('m.')
-            if short_name[0] == ' ':
-                short_name = short_name[1:]
-        
-        if short_name.startswith('st.'):
-            short_name = short_name.lstrip('st.')
-            if short_name[0] == ' ':
-                short_name = short_name[1:]
-        
-        return short_name
-    
-    def correct_gmina_name(self, full_name):
-        """Returns only gmina's name, without 'm.' part.
-        
-        Arguments:
-        full_name -- full name of gmina
-        """
-        
-        short_name = full_name
-        if 'gmina' in short_name:
-            short_name = short_name.lstrip('gmina')
-            if short_name[0] == ' ':
-                short_name = short_name[1:]
-                
-        if short_name.startswith('m.'):
-            short_name = short_name.lstrip('m.')
-            if short_name[0] == ' ':
-                short_name = short_name[1:]
-        
-        if short_name.startswith('st.'):
-            short_name = short_name.lstrip('st.')
-            if short_name[0] == ' ':
-                short_name = short_name[1:]
-        
-        return short_name

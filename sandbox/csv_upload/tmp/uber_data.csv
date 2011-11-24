@@ -1,0 +1,9 @@
+"dzial";"dzial_nr";"rozdzial";"rozdzial_nr";"paragraf";"paragraf_nr";"wartosc"
+"drogi";"3";"autostrady";"4";"budowa";"10";1000
+"drogi";"3";"autostrady";"4";"remont";"11";1500
+"drogi";"3";"";"";"pensje";"50";2000
+"budynki";"4";"bunkry";"4";"budowa";"10";100
+"budynki";"4";"bunkry";"4";"dozbrajanie";"12";100
+"budynki";"4";"mosty";"5";"budowa";"10";1000
+"budynki";"4";"";"";"pensje";"50";1000
+"inne";"5";"edukacja";"10";"szkoły";"100";1000
