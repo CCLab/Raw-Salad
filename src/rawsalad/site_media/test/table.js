@@ -63,7 +63,6 @@ var _table = (function () {
                 '-webkit-border-radius': '5px',
                 '-o-border-radius': '5px'
             });
-          // TODO
         }
         else {
             create_thead();
@@ -90,8 +89,6 @@ var _table = (function () {
         add_rows( children );
         _gui.make_zebra();
     };
-
-    return that;
 
 //  P R I V A T E   I N T E R F A C E
 
@@ -178,15 +175,11 @@ var _table = (function () {
 
         for( ; i >= 0; i -= 1 ) {
             parent = $( '#' + data[i]['data']['parent'] );
-//            if( parent.attr( 'data-open' ) === 'false' ) {
-//                continue;
-//            }
             parent.after( generate_row({
                 node: data[i],
                 schema: schema
             }));
         }
-//        _gui.make_zebra();
     }
 
 
@@ -224,8 +217,6 @@ var _table = (function () {
                 html.push( data[column['key']] );
             }
             if( !!data['info'] && column['key'] === 'type' ) {
-                //html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
-                //html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
                 html.push( generate_info_panel_button( data ) );
             }
             html.push( '</td>' );
@@ -254,8 +245,8 @@ var _table = (function () {
 
         row.find('img')
            .click( function ( event ) {
-           //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
                 var info_panel_close_button = $('#app-tb-in-con-button-x');
+
                 if ( info_panel_close_button.length === 1 ){
                    info_panel_close_button.trigger( $.Event( 'click' ));
                 }
@@ -275,7 +266,7 @@ var _table = (function () {
                     .click( function () {
                         $('#app-tb-in-con-button-x')
                             .trigger( $.Event( 'click' ));
-                });
+                    });
                 }
                 event.stopPropagation();
            });
@@ -286,6 +277,7 @@ var _table = (function () {
 
         return row;
     }
+
 
     function create_filtered_thead() {
         var schema = _store.active_columns();
@@ -329,6 +321,7 @@ var _table = (function () {
                      $('#app-tb-filteredtable > tbody').append( new_node );
                  });
     }
+
 
     function generate_filtered_row( args ) {
         var node = args['node'];
@@ -380,6 +373,7 @@ var _table = (function () {
                  });
     }
 
+
     function generate_result_table( data ) {
         var row = data['row'];
         var hited_rows = row['list'];
@@ -388,7 +382,6 @@ var _table = (function () {
         var html = [];
         var over_button;
         var result_table;
-        var table_html = [];
         var path = row['path'];
                         
         path.sort( function( a, b ) {
@@ -396,6 +389,7 @@ var _table = (function () {
         });
         result_table = $('<section class="sr-result-node"> </section>');
 
+        // prepare breadcrumb
         html.push( '<div class="result-path-outer" > <div class="result-path-wrapper" >' );
         html.push( '<p class="result-path left" >' );
         html.push( breadcrumb );
@@ -403,6 +397,7 @@ var _table = (function () {
         html.push( '</div></div>' );
         result_table.append( $( html.join('') ) );
 
+        // prepare over_button
         html = [];
         html.push( '<div class="button blue right show-parents">' );
         html.push( ' Wyższe poziomy ' );
@@ -411,6 +406,7 @@ var _table = (function () {
         over_button.click( show_parents_rows );
         result_table.append( over_button );
 
+        // prepare search result table
         html = [];
         html.push( '<table class="sr-result-table result-table" > <thead> <tr>' );
         basic_columns.forEach( function( col ) {
@@ -430,34 +426,18 @@ var _table = (function () {
             html.push( '<tr>' );
             basic_columns.forEach( function( col ) {
                 html = html.concat( search_table_row( single_row, col ) );
-//                table_html.push( '<td class="', col['key'], ' ' ); 
-//                if( col['format'] !== '@' ) {
-//                    table_html.push( 'number">' );
-//                    table_html.push( _utils.money( single_row[ col['key']], col['format'] ));
-//                }
-//                else {
-//                    table_html.push( 'string">' );
-//                    table_html.push( single_row[ col['key']] );                
-//                }
-//                table_html.push( '</td>' );
             });
             html.push( '</tr>' );
         });        
         html.push( '</tbody></table>' );
         result_table.append( $( html.join('') ) );
 
-        html = [];
-        html.push( '<div class="button blue right under-table">' );
-        html.push( 'Wszystkie pozycje tego poziomu');
-        html.push( '</div>' );
-        result_table.append( $( html.join('') ) );
-
-        //html = html.concat( table_html );
         return result_table;
     }
 
+
     function search_table_row( row, col ) {
-        html = [];
+        var html = [];
         html.push( '<td class="', col['key'], ' ' ); 
         if( col['format'] !== '@' ) {
             html.push( 'number">' );
@@ -470,6 +450,7 @@ var _table = (function () {
         html.push( '</td>' );
         return html;
     }
+
     
     // TODO - move to _gui ???
     function show_parents_rows() {
@@ -484,6 +465,7 @@ var _table = (function () {
         $(this).unbind().click( hide_parents_rows );
     }
 
+
     // TODO - move to _gui ???    
     function hide_parents_rows() {
         var result_table = $(this).next('table.sr-result-table');
@@ -496,6 +478,7 @@ var _table = (function () {
         $(this).html( 'Wyższe poziomy' );
         $(this).unbind().click( show_parents_rows );    
     }
+
 
     function generate_info_panel_button( data ) {
         var html = [ '<div class="app-tb-info-button">' ];
@@ -528,6 +511,7 @@ var _table = (function () {
 
     }
 
+
     function generate_info_panel_text( info ) {
         var html = [];
         var functions_map = {
@@ -555,6 +539,7 @@ var _table = (function () {
         html = text_generator( info, visible_attrs );
         return html;
     }
+
 
     function generate_text_for_budzet_ksiegowy( info, visible_attrs ) {
         var html = [];
@@ -612,6 +597,7 @@ var _table = (function () {
         return html.join('');
     }
 
+
     function generate_text_for_fundusze_zad( info, visible_attrs ) {
         var attr;
         var html = [];
@@ -646,6 +632,7 @@ var _table = (function () {
         return html.join('');
     }
 
+
     function generate_text_for_nfz( info, visible_attrs ) {
         var html = [];
         var attr;
@@ -673,6 +660,7 @@ var _table = (function () {
         html.push( '</table>' );
         return html.join('');
     }
+
 
     function prepare_visible_attributes() {
         var visible_attrs = {};
@@ -709,6 +697,7 @@ var _table = (function () {
         return visible_attrs;
     }
 
+
     function find_parent( id ) {
         var parent_id = _utils.get_parent_id( id );
         var parent;
@@ -723,6 +712,7 @@ var _table = (function () {
         // if parent not found, return ''
         return null;
     }
+
 
     function apply_selection( id ) {
         var node = $('#' + id);
@@ -873,5 +863,6 @@ var _table = (function () {
         return prev.hasClass('a') ? prev : a_parent( prev );
     }
 
-})();
+    return that;
 
+})();

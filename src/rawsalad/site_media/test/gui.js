@@ -267,7 +267,6 @@ var _gui = (function () {
                 }
             });
             
-
         $('#pl-sr-select').click( function () {
             // select all checkboxes
             $('#pl-sr-table')
@@ -282,41 +281,26 @@ var _gui = (function () {
                 .removeAttr( 'checked' );
         });
 
-
         $('#pl-sr-button')
             .click( function () {
                 if(  $('#pl-sr-query').val() === '' ) {
                     return;
-                }
-                
-//                var boxes = $('#pl-sr-table').find('input:checkbox:checked');
+                }                
                 var boxes = $('.pl-sr-fl-col-det').find('.pl-sr-issue-checked');
                 var collections;
 
                 if( boxes.length === 0 ) {
                     collections = _store.get_all_collections();
-//                                   ['0-0-2011', '0-1-2011', '0-1-2012', '0-2-2011',
-//                                   '0-2-2012', '1-0-2011', '1-1-2011', '1-1-2012',
-//                                   '1-2-2011', '1-2-2012', '2-1-2011', '2-2-2011',
-//                                   '2-3-2011', '2-4-2011', '3-0-2011', '3-1-2011',
-//                                   '4-0-2007', '4-1-2007',
-//                                   '4-0-2008', '4-1-2008', '4-2-2008', '4-3-2008',
-//                                   '4-0-2009', '4-1-2009', '4-2-2009', '4-3-2009',
-//                                   '4-0-2010', '4-1-2010', '4-2-2010', '4-3-2010',
-//                                   '4-0-2011', '4-1-2011', '4-2-2011', '4-3-2011',
-//                                    ];
                 }
                 else {
                     collections = [];
                     boxes.each( function () {
                         collections.push( $(this).attr( 'data-issue' ) );
-//                        $(this).removeAttr( 'checked' );
                     });
                 }
 
                 $('#pl-sr-results')
                     .slideUp( 200 );
-
                 _utils.create_preloader( 'Szukam' );
                 _db.search( $('#pl-sr-query').val(), collections, false );
             });
@@ -326,7 +310,6 @@ var _gui = (function () {
                 $('#pl-sr-button').trigger( $.Event( 'click' ) );
                 return false;
             });
-
 
         $('#app-sh-submit')
             .click( function () {
@@ -523,31 +506,20 @@ var _gui = (function () {
         $('#app-tb-tl-rename-form').hide();
         $('#app-tb-tl-title').show();
 
-
-
-
-        groups.forEach( function ( group, group_num ){
+        groups.forEach( function ( group, group_num ) {
             group['sheets'].forEach( function ( sheet, sheet_num ) {
                 var sheet_name = sheet['name'];
-
                 var html = [];
                 var new_sheet;
-
 
                 html.push( '<li ' );
                 html.push( 'id="snap-' + group_num + '-' + sheet_num + '" ' );
                 html.push( 'class="sheet tab button" ' );
                 html.push( 'title="', sheet_name, '">' );
                 html.push( //get_name_max_length();
-
-
-
                            sheet_name.length > max_length ?
                            sheet_name.slice( 0, max_length - 3 ) + '...' :
                            sheet_name );
-
-
-
                 html.push( '</li>' );
 
                 new_snap = $( html.join('') );
@@ -568,7 +540,7 @@ var _gui = (function () {
                                             _store.remove_active_sheet();
                                             that.refresh_gui();
                                         })
-                            )
+                            );
                     }
                     new_snap.addClass('active');
                     $('#app-tb-tl-title').html( sheet_name );
@@ -577,10 +549,9 @@ var _gui = (function () {
                             .html( '('+ group_name + ')' )
                             .show();
                     }
-
                 }
                 $('#app-tb-sheets').append( new_snap );
-            })
+            });
         });
 
         _table.clean_table();
@@ -637,15 +608,12 @@ var _gui = (function () {
         // add the bottom border
         table.find('.next').removeClass('next');
         next.addClass('next');
-    }
+    };
 
 
     that.show_table_tab = function() {
         hide_top_panels();
     };
-
-
-    return that;
 
 
 // P R I V A T E   I N T E R F A C E
@@ -659,7 +627,7 @@ var _gui = (function () {
             more: no_action,
             english: no_action,
             feedback: no_action
-        }
+        };
 
         var active = button.hasClass( 'active' );
         var action = button.attr('id').split('-').pop();
@@ -851,7 +819,6 @@ var _gui = (function () {
         var mid = len % 2 === 0 ? Math.floor( len / 2 )-1 : Math.floor( len / 2 );
         var datasets_height;
 
-
         html.push( '<ul class="left">' );
         datasets.forEach( function ( set, i ) {
 
@@ -872,8 +839,6 @@ var _gui = (function () {
             }
         });
         html.push( '</ul>' );
-
-
 
         $('#pl-ch-datasets')
             .append( $( html.join('') ))
@@ -908,8 +873,8 @@ var _gui = (function () {
                     'opacity': '0.4'
                 });
         }
-    datasets_height = $("#pl-ch-datasets").height();
-    };
+        datasets_height = $("#pl-ch-datasets").height();
+    }
 
 
     function create_views_panel( dataset_id ) {
@@ -993,6 +958,7 @@ var _gui = (function () {
             .show();
     };
 
+
     function create_search_panel() {
         var html = [];
         var datasets = _store.meta_data();
@@ -1019,22 +985,26 @@ var _gui = (function () {
                     if ( !include( issues_list, issue ) ) {
                         issues_list.push( issue );
                     }   
-                })                            
+                });                            
             });
+            
             issues_list.sort();
             html.push( '<table> <thead> <tr> <th> </th>' );
+
             issues_list.forEach( function ( issue_name ) {
                html.push( '<th>', issue_name, '</th>' );             
             });
+
             html.push( '</tr> </thead> <tbody>' );
+
             set['perspectives'].forEach( function ( perspective ) {
                 html.push( '<tr> <td>', perspective['name'], '</td>' );
-                // TODO tmp
+
                 issues_list.forEach( function( issue_name, i ) {
                     if ( include( perspective['issues'] , issue_name )){
-                        idef = set['idef'] + '-' +  perspective['idef'] + '-' + issue_name;
-                        
-                        html.push( '<td> <div  data-issue="', idef ,'" class="pl-sr-issue-unchecked pl-sr-checkbox" > </div> </td>' );
+                        idef = set['idef'] + '-' +  perspective['idef'] + '-' + issue_name;                        
+                        html.push( '<td> <div  data-issue="', idef ,'"'); 
+                        html.push( 'class="pl-sr-issue-unchecked pl-sr-checkbox" > </div></td>' );
                     } 
                     else {
                         html.push( '<td> <div class="pl-sr-issue-nocheck pl-sr-checkbox" > </div></td>' );
@@ -1042,86 +1012,111 @@ var _gui = (function () {
                 });
                 html.push( '</tr>' );
             });
+
             html.push( '</tbody></table>' );
             html.push( '</section>' );
             html.push( '</section>' );
             html.push( '</li>' );
         });        
+
         html.push( '</ul>' );
-        $('#pl-sr-full').append( $( html.join('') ));
-        
-        
+        $('#pl-sr-full').append( $( html.join('') ) );
+                
         $( '.search-arrow' ).click( show_search_collection );
+
         $( '#pl-sr-full > ul > li > div.pl-sr-set' ).click( function() {        
             check_all_dataset( $(this) );       
         });
-        $( '.pl-sr-fl-col-det' ).find('div.pl-sr-issue-unchecked').click( function() {
-            check_issue( $(this) );
-        });
+
+        $( '.pl-sr-fl-col-det' )
+            .find('div.pl-sr-issue-unchecked')
+            .click( function() {
+                check_issue( $(this) );
+            });
 
     };
+
     
     function check_issue( my_this ) {
         var collection_det = my_this.parents( 'section.pl-sr-fl-det' );
         var dataset_checkbox = collection_det.prev( 'div.pl-sr-set' );
 
         if ( ( collection_det.find('.pl-sr-issue-unchecked').length === 1 ) &&
-             dataset_checkbox.hasClass('pl-sr-set-unchecked') ){
-            check_dataset( dataset_checkbox );        
+             ( dataset_checkbox.hasClass('pl-sr-set-unchecked') ) ){
+                check_dataset( dataset_checkbox );        
         }
-        my_this.removeClass( 'pl-sr-issue-unchecked' ).addClass( 'pl-sr-issue-checked' );
-        my_this.unbind();
-        my_this.click( function() {
-            uncheck_issue( $(this) );
-        });       
+        my_this
+            .removeClass( 'pl-sr-issue-unchecked' )
+            .addClass( 'pl-sr-issue-checked' )
+            .unbind()
+            .click( function() {
+                uncheck_issue( $(this) );
+            });       
     };
+
     
     function uncheck_issue( my_this ) {    
         var collection_det = my_this.parents( 'section.pl-sr-fl-det' );
         var dataset_checkbox = collection_det.prev( 'div.pl-sr-set-checked' );
         
-        my_this.removeClass( 'pl-sr-issue-checked' ).addClass( 'pl-sr-issue-unchecked' );
-        my_this.unbind();
-        my_this.click( function() {
-            check_issue( $(this) );
-        });       
+        my_this
+            .removeClass( 'pl-sr-issue-checked' )
+            .addClass( 'pl-sr-issue-unchecked' )
+            .unbind()
+            .click( function() {
+                check_issue( $(this) );
+            });       
         uncheck_dataset( dataset_checkbox );
     };
 
-    function uncheck_dataset( this_checkbox ) {
-        this_checkbox.removeClass( 'pl-sr-set-checked' ).addClass( 'pl-sr-set-unchecked' );
-        this_checkbox.unbind();
-        this_checkbox.click( function() {
-            check_all_dataset( $(this) );
-        });
 
+    function uncheck_dataset( this_checkbox ) {
+        this_checkbox
+            .removeClass( 'pl-sr-set-checked' )
+            .addClass( 'pl-sr-set-unchecked' )
+            .unbind()
+            .click( function() {
+                check_all_dataset( $(this) );
+            });
     };
+
     
     function check_dataset( dataset_checkbox ) {
-        var tmp = dataset_checkbox.removeClass( 'pl-sr-set-unchecked' ).addClass( 'pl-sr-set-checked' );
-        tmp.unbind();
-        tmp.click( function() {
-            uncheck_all_dataset( $(this) );
-        });      
+        dataset_checkbox
+            .removeClass( 'pl-sr-set-unchecked' )
+            .addClass( 'pl-sr-set-checked' )
+            .unbind()
+            .click( function() {
+                uncheck_all_dataset( $(this) );
+            });      
     };
 
     
     function check_all_dataset( my_this ) {
-        my_this.removeClass( 'pl-sr-set-unchecked' ).addClass( 'pl-sr-set-checked' );
-        my_this.next().find( '.pl-sr-issue-unchecked' ).trigger( $.Event( 'click' ) );
-        my_this.unbind();
-        my_this.click( function() {
-            uncheck_all_dataset( $(this) );
-        });
+        my_this
+            .removeClass( 'pl-sr-set-unchecked' )
+            .addClass( 'pl-sr-set-checked' )
+        my_this
+            .next().find( '.pl-sr-issue-unchecked' ).trigger( $.Event( 'click' ) );
+        my_this
+            .unbind()
+            .click( function() {
+                uncheck_all_dataset( $(this) );
+            });
     };
 
+
     function uncheck_all_dataset( my_this ) {
-        my_this.removeClass( 'pl-sr-set-checked' ).addClass( 'pl-sr-set-unchecked' );
-        my_this.next().find( '.pl-sr-issue-checked' ).trigger( $.Event( 'click' ) );
-        my_this.unbind();
-        my_this.click( function() {
-            check_all_dataset( $(this) );
-        });    
+        my_this
+            .removeClass( 'pl-sr-set-checked' )
+            .addClass( 'pl-sr-set-unchecked' );
+        my_this
+            .next().find( '.pl-sr-issue-checked' ).trigger( $.Event( 'click' ) );
+        my_this
+            .unbind()
+            .click( function() {
+                check_all_dataset( $(this) );
+            });    
     };
 
     
@@ -1144,6 +1139,7 @@ var _gui = (function () {
 	    $(this).unbind().click( hide_search_collection );
     };
 
+
     function hide_search_collection(){
 	    $(this).parent('.pl-sr-fl-det').removeClass('col-details');
 	    $(this).parent('.pl-sr-fl-deepdet').removeClass('col-deepdet');
@@ -1153,6 +1149,7 @@ var _gui = (function () {
 	    $(this).attr('src', '/site_media/img/triangle.png' );
 	    $(this).click( show_search_collection );	
     };
+
 
     function update_share_tab() {
         var html = [];
@@ -1213,4 +1210,7 @@ var _gui = (function () {
                 .removeAttr( 'checked' );
         });
     };
+    
+    return that;
+    
 })();

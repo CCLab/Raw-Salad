@@ -666,7 +666,7 @@ textarea {
   }
 
   #app-table > .panel-main {
-    overflow: visible;
+    overflow: auto;
   }
 
   #app-table header li {
@@ -914,10 +914,17 @@ textarea {
   background-color: #b6b6b6;
 }
 
-.result-table {
+.app-tb-result {
   width: 940px;
   border-collapse: collapse;
-
+  float: left;
+}  
+  
+.result-table{  
+  width: 940px;
+  border-collapse: collapse;
+  float: left;
+  margin-bottom: 25px;
 }
 
       #app-tb-filteredtable tr {
@@ -971,6 +978,9 @@ textarea {
       }
        
       #app-tb-searchedtable {
+        width: 940px;
+        border-collapse: collapse;
+        float: left;
       }
 
       #app-tb-searchedtable .show-parents {
@@ -994,15 +1004,12 @@ textarea {
         padding: 5px;
       }
        
-       .sr-result-node {
-        margin-top: 20px;
-      }
-        
       .sr-result-table > thead {
         background-color: #C8C8C8;
       }
 
-      .sr-result-table td, th {
+      .sr-result-table td,
+      .sr-result-table  th {
         padding: 10px;
         padding-right: 10px;
         padding-top: 10px;

@@ -82,11 +82,9 @@ var _algorithms = (function () {
 
         sorting_setting.push( hidden_attribute );
     };
-    
-    
+        
     that.is_search_result = function ( query, row, columns ) {
         var string;
-        var tmp;
         var i;
         var column;
         var reg_query = new RegExp( query, 'i' );

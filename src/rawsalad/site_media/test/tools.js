@@ -36,6 +36,7 @@ var _tools = (function () {
         _store.set_sorted( true );
     };
 
+
     that.prepare_tools = function () {
         prepare_manage_columns_interface();
         prepare_sorting_interface();
@@ -44,6 +45,7 @@ var _tools = (function () {
         prepare_search_interface();
         prepare_rename_sheet_interface();
     };
+
 
     that.show_search_results = function( results ) {
         var search_results = generate_search_results( results );
@@ -67,6 +69,7 @@ var _tools = (function () {
             });
     };
 
+
     that.create_info_breadcrumb = function( id ) {
         var tmp_id = id;
         var node;
@@ -87,6 +90,7 @@ var _tools = (function () {
         return breadcrumb_list.join( ' > ' );
     };
 
+
     that.open_subtrees = function( basic_rows, subtree_rows ) {
         var nodes_to_open = {};
 
@@ -103,6 +107,7 @@ var _tools = (function () {
             }
         });
     };    
+
 
     that.create_breadcrumb = function ( id, no_html ) {
         var tmp_id = id;
