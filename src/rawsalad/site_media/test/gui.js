@@ -290,7 +290,7 @@ var _gui = (function () {
                 }
                 
 //                var boxes = $('#pl-sr-table').find('input:checkbox:checked');
-                var boxes = $('.pl-sr-fl-col-det').find('pl-sr-issue-checked');
+                var boxes = $('.pl-sr-fl-col-det').find('.pl-sr-issue-checked');
                 var collections;
 
                 if( boxes.length === 0 ) {
@@ -1010,7 +1010,7 @@ var _gui = (function () {
             html.push( '<img src="/site_media/img/triangle.png" alt="triangle" class="search-arrow" data-set-id="', set['idef'], '" />' );
             html.push( '<section class="pl-sr-fl-collection" >' );
             html.push( '<header> <h3> ', set['name'], ' </h3> </header>' );
-            html.push( '<section> <p>', set['description'] , '</p> </section>' ); 
+            html.push( '<section class="pl-sr-fl-col-des" > <p>', set['description'] , '</p> </section>' ); 
             html.push( '</section>' );
             html.push( '<section class="pl-sr-fl-col-det" > ' );
 
@@ -1062,6 +1062,13 @@ var _gui = (function () {
     };
     
     function check_issue( my_this ) {
+        var collection_det = my_this.parents( 'section.pl-sr-fl-det' );
+        var dataset_checkbox = collection_det.prev( 'div.pl-sr-set' );
+
+        if ( ( collection_det.find('.pl-sr-issue-unchecked').length === 1 ) &&
+             dataset_checkbox.hasClass('pl-sr-set-unchecked') ){
+            check_dataset( dataset_checkbox );        
+        }
         my_this.removeClass( 'pl-sr-issue-unchecked' ).addClass( 'pl-sr-issue-checked' );
         my_this.unbind();
         my_this.click( function() {
@@ -1069,15 +1076,35 @@ var _gui = (function () {
         });       
     };
     
-    function uncheck_issue( my_this ) {
+    function uncheck_issue( my_this ) {    
+        var collection_det = my_this.parents( 'section.pl-sr-fl-det' );
+        var dataset_checkbox = collection_det.prev( 'div.pl-sr-set-checked' );
+        
         my_this.removeClass( 'pl-sr-issue-checked' ).addClass( 'pl-sr-issue-unchecked' );
         my_this.unbind();
         my_this.click( function() {
             check_issue( $(this) );
         });       
+        uncheck_dataset( dataset_checkbox );
     };
 
+    function uncheck_dataset( this_checkbox ) {
+        this_checkbox.removeClass( 'pl-sr-set-checked' ).addClass( 'pl-sr-set-unchecked' );
+        this_checkbox.unbind();
+        this_checkbox.click( function() {
+            check_all_dataset( $(this) );
+        });
+
+    };
     
+    function check_dataset( dataset_checkbox ) {
+        var tmp = dataset_checkbox.removeClass( 'pl-sr-set-unchecked' ).addClass( 'pl-sr-set-checked' );
+        tmp.unbind();
+        tmp.click( function() {
+            uncheck_all_dataset( $(this) );
+        });      
+    };
+
     
     function check_all_dataset( my_this ) {
         my_this.removeClass( 'pl-sr-set-unchecked' ).addClass( 'pl-sr-set-checked' );
@@ -1110,19 +1137,22 @@ var _gui = (function () {
 	    $(this).parent('.pl-sr-fl-det').addClass('col-details');
     	$(this).parent('.pl-sr-fl-deepdet').addClass('col-deepdet');
     	$(this).prev().show();
+	    $(this).siblings('.pl-sr-fl-collection').find('.pl-sr-fl-col-des').css({ display: "none" });
 	    $(this).siblings('.pl-sr-fl-col-det').css({ display: "inline-block" });
+	    $(this).siblings('.claud-pointer').css({ display: "inline-block" });	    
 	    $(this).attr('src', '/site_media/img/triangle-down.png' );	
 	    $(this).unbind().click( hide_search_collection );
-    }
+    };
 
     function hide_search_collection(){
 	    $(this).parent('.pl-sr-fl-det').removeClass('col-details');
 	    $(this).parent('.pl-sr-fl-deepdet').removeClass('col-deepdet');
 	    $(this).prev().hide();
+	    $(this).siblings('.pl-sr-fl-collection').find('.pl-sr-fl-col-des').css({ display: "block" });
 	    $(this).siblings('.pl-sr-fl-col-det').css({ display: 'none' });
 	    $(this).attr('src', '/site_media/img/triangle.png' );
 	    $(this).click( show_search_collection );	
-    }
+    };
 
     function update_share_tab() {
         var html = [];
@@ -1182,5 +1212,5 @@ var _gui = (function () {
                 .find(':checkbox')
                 .removeAttr( 'checked' );
         });
-    }
+    };
 })();

@@ -242,7 +242,7 @@ var _db = (function () {
                 };
 
                 // create group
-                _store.create_group({
+                _store.create_new_group({
                    "dataset": col_id.dataset,
                    "view": col_id.view,
                    "issue": col_id.issue,

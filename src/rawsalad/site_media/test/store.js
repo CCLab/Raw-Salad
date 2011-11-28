@@ -113,6 +113,7 @@ var _store = (function () {
         return false;
     };
 
+    // TODO remove - we use create_new_group
     // creates a new group and sets an activ group index
     that.create_group = function (data) {
         // create a group for new data collection
@@ -157,11 +158,15 @@ var _store = (function () {
         var active_grp = that.active_group();
 
         // store original version of collection
+        if ( active_grp['sheets'].length > 0 ){
+            active_grp['active_sheet_number']++;
+        }
         active_grp['name'] = data['name'];
         active_grp['initialized'] = true;
         active_grp['basic_rows'] = sheet( data, true );
         // add data to mutable list of sheets
         active_grp['sheets'].push( sheet( data ) );
+        
     };
 
 

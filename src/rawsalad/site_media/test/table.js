@@ -394,7 +394,7 @@ var _table = (function () {
         path.sort( function( a, b ) {
             return a['level'] < b['level'] ? -1 : 1;
         });
-        result_table = $('<section> </section>');
+        result_table = $('<section class="sr-result-node"> </section>');
 
         html.push( '<div class="result-path-outer" > <div class="result-path-wrapper" >' );
         html.push( '<p class="result-path left" >' );
@@ -473,8 +473,12 @@ var _table = (function () {
     
     // TODO - move to _gui ???
     function show_parents_rows() {
-        var result_table = $(this).next('table.sr-result-table');
+        var result_table = $(this).next('table.sr-result-table');        
         var parents_rows = result_table.find('tr.sr-parent-row');
+        var breadcrumb = $(this).prev('div.result-path-outer');
+        var breadcrumb_text = breadcrumb.find('p');
+        
+        breadcrumb_text.hide();
         parents_rows.css( 'display', 'table-row' );
         $(this).html( 'Ukryj wyższe poziomy' );
         $(this).unbind().click( hide_parents_rows );
@@ -484,6 +488,10 @@ var _table = (function () {
     function hide_parents_rows() {
         var result_table = $(this).next('table.sr-result-table');
         var parents_rows = result_table.find('tr.sr-parent-row');
+        var breadcrumb = $(this).prev('div.result-path-outer');
+        var breadcrumb_text = breadcrumb.find('p');
+        
+        breadcrumb_text.show();       
         parents_rows.css( 'display', 'none' );
         $(this).html( 'Wyższe poziomy' );
         $(this).unbind().click( show_parents_rows );    

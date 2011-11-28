@@ -370,10 +370,11 @@ textarea {
     margin-top: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
+    width: 875px;
   }
 
   .pl-sr-fl-collection header {
-    border-bottom: 1px solid #919191;
+    margin-top: 8px;
   }
 
   .search-arrow  {
@@ -400,10 +401,6 @@ textarea {
     float: left;
     width: 38px;
     height: 19px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 2px;
-    margin-bottom: 2px;  
   }
 
     
@@ -473,19 +470,38 @@ textarea {
 
   .pl-sr-fl-col-det table{
     overflow: auto;
+    border-collapse: collapse;
   } 
 
   .pl-sr-fl-col-det th{
     text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #8B8B8B;    
   }
 
   .pl-sr-fl-col-det > table > tbody td:first-child {
-    display: block;
-    width: 100px;
-    text-align: right;
-    margin-right: 30px;
+    width: 180px;
+    text-align: left;
+    padding-right: 30px;
   }
-  
+    
+  .pl-sr-fl-col-det td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #C8C8C8;
+  }  
+
+  .pl-sr-fl-col-det > table > tbody > tr:last-child > td {
+    border-bottom: none;    
+  }
+
   .col-details {
     background-color: white;
     border-color: #919191;
@@ -959,6 +975,7 @@ textarea {
 
       #app-tb-searchedtable .show-parents {
         margin-top: 25px;
+        float: right;
         border-radius: 2px 2px 0 0;
         -moz-border-radius: 2px 2px 0 0;
         -webkit-border-radius: 2px 2px 0 0;
@@ -976,13 +993,17 @@ textarea {
       #app-tb-searchedtable .button {
         padding: 5px;
       }
+       
+       .sr-result-node {
+        margin-top: 20px;
+      }
         
       .sr-result-table > thead {
         background-color: #C8C8C8;
       }
 
       .sr-result-table td, th {
-        padding-left: 10px;
+        padding: 10px;
         padding-right: 10px;
         padding-top: 10px;
         font-weight: normal;
