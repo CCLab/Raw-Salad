@@ -309,7 +309,7 @@ var _gui = (function () {
             .submit( function () {
                 $('#pl-sr-button').trigger( $.Event( 'click' ) );
                 return false;
-            });
+            });            
 
         $('#app-sh-submit')
             .click( function () {

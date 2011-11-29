@@ -99,202 +99,34 @@
 
         <!-- S E A R C H   F O R M -->
         <section id="pl-sr-form-panel">
-          <section class="panel-main">
-            <form id="pl-sr-form" action="">
-              <!-- <label for="pl-sr-query">Znajdź:</label> -->
-              <input type="text" class="input-text" placeholder="Szukana fraza" id="pl-sr-query" name="pl-sr-query" />
-              <!-- <input type="checkbox" name="pl-sr-strict" value="pl-sr-strict" />
-              <label for="pl-sr-strict">Dokładne dopasowanie</label> -->
-              <!-- <br /> -->
-              <!-- <label for="pl-sr-full">w kolekcjach danych</label> -->
-              <!-- <input type="radio" name="pl-sr-full" /> -->
-              <!-- <label for="pl-sr-sheet">w aktualnym arkuszu</label> -->
-              <!-- <input type="radio" name="pl-sr-sheet" /> -->
-            </form>
+          <section id="pl-sr-pl-wrapper" >
+            <section class="panel-main">
+              <form id="pl-sr-form" action="">
+                <!-- <label for="pl-sr-query">Znajdź:</label> -->
+                <input type="text" class="input-text" placeholder="Szukana fraza" id="pl-sr-query" name="pl-sr-query" />
+              </form>
+
+              <!-- S E A R C H   B U T T O N -->
+              <div class="pl-bt-container">
+                <div id="pl-sr-button" class="blue button">Szukaj</div>
+              </div>
+            </section>
           </section>
           
-
           <!-- S E A R C H  C O L L E C T I O N S   S E L E C T I O N -->
           <section id="pl-sr-full" class="panel-main">
-          
-          
-<!-- TODO - REMOVE          
-            <p>Wybierz kolekcje danych, które chcesz przeszukać.</p>
-            <hr />
-            <table id="pl-sr-table">
-              <tbody>
-              <tr>
-                <td class="pl-sr-select-buttons" rowspan="34">
-                  <div id="pl-sr-select" class="rounded grey button">Zaznacz wszystkie</div>
-                  <br class="clear"/>
-                  <div id="pl-sr-unselect" class="rounded grey button">Odznacz wszystkie</div>
-                </td>
-                <td class="check"><input value="0-0-2011" type="checkbox" /></td>
-                <td>Budżet centralny w ujęciu tradycyjnym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="0-1-2011" type="checkbox" /></td>
-                <td>Budżet centralny w ujęciu zadaniowym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="0-1-2012" type="checkbox" /></td>
-                <td>Budżet centralny w ujęciu zadaniowym 2012</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="0-2-2011" type="checkbox" /></td>
-                <td>Budżet centralny w ujęciu instytucjonalnym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="0-2-2012" type="checkbox" /></td>
-                <td>Budżet centralny w ujęciu instytucjonalnym 2012</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="1-0-2011" type="checkbox" /></td>
-                <td>Budżet środków europejskich w ujęciu tradycyjnym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="1-1-2011" type="checkbox" /></td>
-                <td>Budżet środków europejskich w ujęciu zadaniowym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="1-1-2012" type="checkbox" /></td>
-                <td>Budżet środków europejskich w ujęciu zadaniowym 2012</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="1-2-2011" type="checkbox" /></td>
-                <td>Budżet środków europejskich w ujęciu instytucjonalnym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="1-2-2012" type="checkbox" /></td>
-                <td>Budżet środków europejskich w ujęciu instytucjonalnym 2012</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="2-0-2011" type="checkbox" /></td>
-                <td>Fundusze celowe w ujęciu tradycyjnym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="2-1-2011" type="checkbox" /></td>
-                <td>Fundusze celowe w ujęciu zadaniowym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="2-2-2011" type="checkbox" /></td>
-                <td>Agencje państwowe w ujęciu tradycyjnym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="2-3-2011" type="checkbox" /></td>
-                <td>Agencje państwowe w ujęciu zadaniowym 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="3-0-2011" type="checkbox" /></td>
-                <td>Wydatki Narodowego Funduszu Zdrowia - dane zagregowane na rok 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="3-1-2011" type="checkbox" /></td>
-                <td>Wydatki Narodowego Funduszu Zdrowia - dane ośrodków regionalnych na rok 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-0-2007" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty ogólnopolskie na rok 2007</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-0-2008" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty ogólnopolskie na rok 2008</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-0-2009" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty ogólnopolskie na rok 2009</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-0-2010" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty ogólnopolskie na rok 2010</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-0-2011" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty ogólnopolskie na rok 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-1-2007" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty wojewódzkie na rok 2007</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-1-2008" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty wojewódzkie na rok 2008</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-1-2009" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty wojewódzkie na rok 2009</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-1-2010" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty wojewódzkie na rok 2010</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-1-2011" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty wojewódzkie na rok 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-2-2008" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty powiatowe na rok 2008</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-2-2009" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty powiatowe na rok 2009</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-2-2010" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty powiatowe na rok 2010</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-2-2011" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty powiatowe na rok 2011</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-3-2008" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty gminne na rok 2008</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-3-2009" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty gminne na rok 2009</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-3-2010" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty gminne na rok 2010</td>
-              </tr>
-              <tr>
-                <td class="check"><input value="4-3-2011" type="checkbox" /></td>
-                <td>Projekty Europejskiego Funduszu Rozwoju Regionalnego - projekty gminne na rok 2011</td>
-              </tr>
-              </tbody>
-            </table>
-            -->
-            
+                      
           </section>
           
           <div class="pl-bt-container" style="margin-top: -5px">
             <div id="pl-sr-more" class="button left">Zaawansowane</div>
           </div>
           
-          <!-- S E A R C H   B U T T O N -->
-          <div class="pl-bt-container">
-            <div id="pl-sr-button" class="blue button">Szukaj</div>
-          </div>
         </section>
         <section id="pl-sr-results" class="panel-main">
           <p  class="pl-sr-results-col"> liczba wystąpień </p>          
           <p class="pl-sr-results-col"> kolekcja </p >          
           <section id="pl-sr-results-panel" >
-
-<!--        <table>
-              <thead>
-                <tr style="padding-bottom: 15px">
-                  <th style="font-weight: normal; color: #8b8b8b;">liczba wystąpień</th>
-                  <th style="text-align: left; padding-left: 15px; font-weight: normal; color: #8b8b8b;">kolekcja</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
--->
           </section>
         </section>
       </section>
@@ -537,7 +369,9 @@
             </section>
             <!-- C O L U M N S -->
             <section>
-              <div id="app-tb-tl-columns-button" class="button right">Dodaj/Usuń kolumny</div>
+              <div id="app-tb-tl-col-button-wrapper" > 
+                <div id="app-tb-tl-columns-button" class="button right">Dodaj/Usuń kolumny</div>
+              <div>
               <br class="clear"/>
               <div id="app-tb-tl-columns-list" class="right">
                 <form id="app-tb-tl-columns-form">    
@@ -553,19 +387,19 @@
           </section>
 
           <!-- D A T A   T A B L E  --> 
-          <table id="app-tb-datatable" class="result-table" >
+          <table id="app-tb-datatable" class="app-tb-result" >
             <thead></thead>
             <tbody></tbody>
           </table>
 
           <!-- S E R C H E D   R E S U L T -->
-          <table id="app-tb-searchedtable" class="result-table" >
+          <table id="app-tb-searchedtable" class="app-tb-result" >
             <thead></thead>
             <tbody></tbody>
           </table>
           
           <!-- F I L T E R E D   T A B L E -->
-          <table id="app-tb-filteredtable" class="result-table" >
+          <table id="app-tb-filteredtable" class="app-tb-result" >
             <thead></thead>
             <tbody></tbody>
           </table>

@@ -659,6 +659,29 @@ var _tools = (function () {
     }
 
     function prepare_search_interface() {
+
+        // fix search main panel 
+//        var main_sr_panel = $('#pl-sr-form-panel').children('.panel-main');
+//        var top = main_sr_panel.offset().top - parseFloat( main_sr_panel.css('marginTop').replace( /auto/, 0 ) );        
+//        $(window).scroll(function (event) {
+//            // what the y position of the scroll is
+//            var y = $(this).scrollTop();
+//  
+//            // whether that's below the form
+//            if (y >= top) {
+
+//                // if so, ad the fixed class
+//                main_sr_panel.addClass( 'fixed' );
+//            }
+//            else {
+//                
+//                // otherwise remove it
+//                main_sr_panel.removeClass('fixed');
+//            }
+//        });
+
+    
+    
         $('#search-form')
             .submit( function () {
                 var query;

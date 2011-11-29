@@ -43,6 +43,7 @@ var _table = (function () {
             create_filtered_thead();
             create_filtered_tbody( _store.active_sorted() );
             $('#app-tb-tl-columns-button').hide();
+            $('#app-tb-tl-col-button-wrapper').removeClass('column-button-underline');            
             $('#app-tb-tl-clear-button').hide();
             $('#app-tb-tl-filter-button').hide();
             $('#app-tb-tl-sort-button').css({
@@ -53,7 +54,9 @@ var _table = (function () {
             });
         }
         else if( !!_store.active_searched() ){
-           create_searched_tbody( );
+            create_searched_tbody();
+            $('#app-tb-tl-columns-button').show();
+            $('#app-tb-tl-col-button-wrapper').addClass('column-button-underline');
             $('#app-tb-tl-clear-button').hide();
             $('#app-tb-tl-filter-button').hide();
             $('#app-tb-tl-sort-button').hide();
@@ -63,12 +66,14 @@ var _table = (function () {
                 '-webkit-border-radius': '5px',
                 '-o-border-radius': '5px'
             });
+            
         }
         else {
             create_thead();
             create_tbody();
             _gui.make_zebra();
             $('#app-tb-tl-columns-button').show();
+            $('#app-tb-tl-col-button-wrapper').removeClass('column-button-underline');
             $('#app-tb-tl-clear-button').show();
             $('#app-tb-tl-filter-button').show();
             $('#app-tb-tl-sort-button').show();
@@ -398,13 +403,15 @@ var _table = (function () {
         result_table.append( $( html.join('') ) );
 
         // prepare over_button
-        html = [];
-        html.push( '<div class="button blue right show-parents">' );
-        html.push( ' Wyższe poziomy ' );
-        html.push( '</div>' );
-        over_button = $( html.join('') );
-        over_button.click( show_parents_rows );
-        result_table.append( over_button );
+        if ( breadcrumb.length > 0 ) {
+            html = [];
+            html.push( '<div class="button blue right show-parents">' );
+            html.push( ' Wyższe poziomy ' );
+            html.push( '</div>' );
+            over_button = $( html.join('') );
+            over_button.click( show_parents_rows );
+            result_table.append( over_button );
+        }
 
         // prepare search result table
         html = [];
