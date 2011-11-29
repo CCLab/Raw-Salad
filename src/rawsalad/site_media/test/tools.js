@@ -36,6 +36,7 @@ var _tools = (function () {
         _store.set_sorted( true );
     };
 
+
     that.prepare_tools = function () {
         prepare_manage_columns_interface();
         prepare_sorting_interface();
@@ -44,6 +45,7 @@ var _tools = (function () {
         prepare_search_interface();
         prepare_rename_sheet_interface();
     };
+
 
     that.show_search_results = function( results ) {
         var search_results = generate_search_results( results );
@@ -67,6 +69,7 @@ var _tools = (function () {
             });
     };
 
+
     that.create_info_breadcrumb = function( id ) {
         var tmp_id = id;
         var node;
@@ -87,6 +90,7 @@ var _tools = (function () {
         return breadcrumb_list.join( ' > ' );
     };
 
+
     that.open_subtrees = function( basic_rows, subtree_rows ) {
         var nodes_to_open = {};
 
@@ -102,7 +106,8 @@ var _tools = (function () {
                 store_row['state']['open'] = true;
             }
         });
-    }
+    };    
+
 
     that.create_breadcrumb = function ( id, no_html ) {
         var tmp_id = id;
@@ -178,7 +183,7 @@ var _tools = (function () {
         });
 
         return breadcrumb.join('');
-    }
+    };
 
     return that;
 
@@ -353,7 +358,7 @@ var _tools = (function () {
             .append( $( html.join('') ));
     }
 
-// >>
+
     function prepare_sorting_interface() {
 
         $('#app-tb-tl-sort-button')
@@ -432,8 +437,6 @@ var _tools = (function () {
                 that.sort( _store.active_rows(), settings );
 
                 _gui.refresh_gui();
-                //_table.clean_table();
-                //_table.init_table();
                 $(this).hide();
 
                 return false;
@@ -555,18 +558,13 @@ var _tools = (function () {
                 new_sheet = {};
                 $.extend( true, new_sheet, _store.active_sheet() );
                 new_sheet['rows'] = create_filter_result( filtered_rows );
-                new_sheet['filtered'] = true;
+                new_sheet['type'] = _store.FILTERED;
                 // if new sheet is created from sheet that hasn't been filtered yet,
                 // it will be treated as not sorted
                 new_sheet['sorted'] = _store.active_sorted() && _store.active_filtered();
 
                 _sheet.create_new_sheet( new_sheet, "Arkusz", true );
-
-                _table.clean_table();
-                _table.init_table();
-
                 $(this).hide();
-
                 return false;
            });
     };
@@ -661,6 +659,29 @@ var _tools = (function () {
     }
 
     function prepare_search_interface() {
+
+        // fix search main panel 
+//        var main_sr_panel = $('#pl-sr-form-panel').children('.panel-main');
+//        var top = main_sr_panel.offset().top - parseFloat( main_sr_panel.css('marginTop').replace( /auto/, 0 ) );        
+//        $(window).scroll(function (event) {
+//            // what the y position of the scroll is
+//            var y = $(this).scrollTop();
+//  
+//            // whether that's below the form
+//            if (y >= top) {
+
+//                // if so, ad the fixed class
+//                main_sr_panel.addClass( 'fixed' );
+//            }
+//            else {
+//                
+//                // otherwise remove it
+//                main_sr_panel.removeClass('fixed');
+//            }
+//        });
+
+    
+    
         $('#search-form')
             .submit( function () {
                 var query;
@@ -745,7 +766,7 @@ var _tools = (function () {
 
     function construct_scope() {
         var scope = [];
-        _store.meta_datasets().forEach( function ( dataset, dset_id ) {
+        _store.meta_data().forEach( function ( dataset, dset_id ) {
             dataset['perspectives'].forEach( function ( perspective, per_id ) {
                 perspective['issues'].forEach( function ( issue ) {
                     scope.push( dset_id + '-' + per_id + '-' + issue );
@@ -757,7 +778,7 @@ var _tools = (function () {
     }
 
     function generate_search_results( results ) {
-        var meta = _store.meta_datasets();
+        var meta = _store.meta_data();
         var collection_name;
         var dataset;
         var view;

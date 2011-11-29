@@ -34,27 +34,16 @@ var _table = (function () {
         $('#app-tb-datatable > tbody').empty();
         $('#app-tb-filteredtable > thead').empty();
         $('#app-tb-filteredtable > tbody').empty();
+        $('#app-tb-searchedtable > thead').empty();
+        $('#app-tb-searchedtable > tbody').empty();
     };
 
     that.init_table = function () {
-        if ( !_store.active_filtered() ) {
-            create_thead();
-            create_tbody();
-            _gui.make_zebra();
-            $('#app-tb-tl-columns-button').show();
-            $('#app-tb-tl-clear-button').show();
-            $('#app-tb-tl-filter-button').show();
-            $('#app-tb-tl-sort-button').show();
-            $('#app-tb-tl-sort-button').css({
-                'border-radius': '5px 0px 0px 5px',
-                '-moz-border-radius': '5px 0px 0px 5px',
-                '-webkit-border-radius': '5px 0px 0px 5px',
-                '-o-border-radius': '5px 0px 0px 5px'
-            });
-        } else {
+        if( !!_store.active_filtered() ) {
             create_filtered_thead();
             create_filtered_tbody( _store.active_sorted() );
             $('#app-tb-tl-columns-button').hide();
+            $('#app-tb-tl-col-button-wrapper').removeClass('column-button-underline');            
             $('#app-tb-tl-clear-button').hide();
             $('#app-tb-tl-filter-button').hide();
             $('#app-tb-tl-sort-button').css({
@@ -64,6 +53,37 @@ var _table = (function () {
                 '-o-border-radius': '5px'
             });
         }
+        else if( !!_store.active_searched() ){
+            create_searched_tbody();
+            $('#app-tb-tl-columns-button').show();
+            $('#app-tb-tl-col-button-wrapper').addClass('column-button-underline');
+            $('#app-tb-tl-clear-button').hide();
+            $('#app-tb-tl-filter-button').hide();
+            $('#app-tb-tl-sort-button').hide();
+            $('#app-tb-tl-sort-button').css({
+                'border-radius': '5px',
+                '-moz-border-radius': '5px',
+                '-webkit-border-radius': '5px',
+                '-o-border-radius': '5px'
+            });
+            
+        }
+        else {
+            create_thead();
+            create_tbody();
+            _gui.make_zebra();
+            $('#app-tb-tl-columns-button').show();
+            $('#app-tb-tl-col-button-wrapper').removeClass('column-button-underline');
+            $('#app-tb-tl-clear-button').show();
+            $('#app-tb-tl-filter-button').show();
+            $('#app-tb-tl-sort-button').show();
+            $('#app-tb-tl-sort-button').css({
+                'border-radius': '5px 0px 0px 5px',
+                '-moz-border-radius': '5px 0px 0px 5px',
+                '-webkit-border-radius': '5px 0px 0px 5px',
+                '-o-border-radius': '5px 0px 0px 5px'
+            });
+        } 
     };
 
     that.add_node = function ( parent_id ) {
@@ -74,8 +94,6 @@ var _table = (function () {
         add_rows( children );
         _gui.make_zebra();
     };
-
-    return that;
 
 //  P R I V A T E   I N T E R F A C E
 
@@ -162,15 +180,11 @@ var _table = (function () {
 
         for( ; i >= 0; i -= 1 ) {
             parent = $( '#' + data[i]['data']['parent'] );
-//            if( parent.attr( 'data-open' ) === 'false' ) {
-//                continue;
-//            }
             parent.after( generate_row({
                 node: data[i],
                 schema: schema
             }));
         }
-//        _gui.make_zebra();
     }
 
 
@@ -208,8 +222,6 @@ var _table = (function () {
                 html.push( data[column['key']] );
             }
             if( !!data['info'] && column['key'] === 'type' ) {
-                //html.push( '<img src="/site_media/img/info_small.png" border="0" i' );
-                //html.push( 'data-id="', data['idef'], '" style="margin-left: 5px;"/>' );
                 html.push( generate_info_panel_button( data ) );
             }
             html.push( '</td>' );
@@ -238,8 +250,8 @@ var _table = (function () {
 
         row.find('img')
            .click( function ( event ) {
-           //     console.log( _store.get_info( $(this).attr('data-id') ).toString() );
                 var info_panel_close_button = $('#app-tb-in-con-button-x');
+
                 if ( info_panel_close_button.length === 1 ){
                    info_panel_close_button.trigger( $.Event( 'click' ));
                 }
@@ -259,7 +271,7 @@ var _table = (function () {
                     .click( function () {
                         $('#app-tb-in-con-button-x')
                             .trigger( $.Event( 'click' ));
-                });
+                    });
                 }
                 event.stopPropagation();
            });
@@ -270,6 +282,7 @@ var _table = (function () {
 
         return row;
     }
+
 
     function create_filtered_thead() {
         var schema = _store.active_columns();
@@ -296,9 +309,11 @@ var _table = (function () {
             rows_copy.sort( function ( a, b ) {
                 if ( a['data']['idef_sort'] < b['data']['idef_sort'] ) {
                     return -1;
-                } else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
+                } 
+                else if ( a['data']['idef_sort'] > b['data']['idef_sort'] ) {
                     return 1;
-                } else {
+                } 
+                else {
                     return 0;
                 }
             });
@@ -311,6 +326,7 @@ var _table = (function () {
                      $('#app-tb-filteredtable > tbody').append( new_node );
                  });
     }
+
 
     function generate_filtered_row( args ) {
         var node = args['node'];
@@ -344,6 +360,132 @@ var _table = (function () {
 
         return $( html.join('') );
     }
+
+    function create_searched_tbody( is_sorted ) {
+        var sheet = _store.active_sheet();
+        var columns = _store.active_columns();
+        var rows_copy = [];
+        
+        // deep copy is made to ensure that _store is not changed by sort
+        $.extend( true, rows_copy, _store.active_rows() );
+
+        rows_copy.forEach( function ( row ) {
+                     var new_node = generate_result_table( {
+                                         row: row,
+                                         columns: columns
+                                     });
+                     $('#app-tb-searchedtable > tbody').append( new_node );
+                 });
+    }
+
+
+    function generate_result_table( data ) {
+        var row = data['row'];
+        var hited_rows = row['list'];
+        var basic_columns = data['columns'];
+        var breadcrumb = row['breadcrumb'];
+        var html = [];
+        var over_button;
+        var result_table;
+        var path = row['path'];
+                        
+        path.sort( function( a, b ) {
+            return a['level'] < b['level'] ? -1 : 1;
+        });
+        result_table = $('<section class="sr-result-node"> </section>');
+
+        // prepare breadcrumb
+        html.push( '<div class="result-path-outer" > <div class="result-path-wrapper" >' );
+        html.push( '<p class="result-path left" >' );
+        html.push( breadcrumb );
+        html.push( '</p>' );
+        html.push( '</div></div>' );
+        result_table.append( $( html.join('') ) );
+
+        // prepare over_button
+        if ( breadcrumb.length > 0 ) {
+            html = [];
+            html.push( '<div class="button blue right show-parents">' );
+            html.push( ' Wyższe poziomy ' );
+            html.push( '</div>' );
+            over_button = $( html.join('') );
+            over_button.click( show_parents_rows );
+            result_table.append( over_button );
+        }
+
+        // prepare search result table
+        html = [];
+        html.push( '<table class="sr-result-table result-table" > <thead> <tr>' );
+        basic_columns.forEach( function( col ) {
+            html.push( '<th>', col['label'], '</th>' );
+        });
+        html.push( '</tr></thead><tbody>' );
+
+        path.forEach( function( parent_row ) {
+            html.push( '<tr class="sr-parent-row" >' );
+            basic_columns.forEach( function( col ) {
+                html = html.concat( search_table_row( parent_row, col ) );
+            });
+            html.push( '</tr>' );                
+        });
+        
+        hited_rows.forEach( function ( single_row ) {
+            html.push( '<tr>' );
+            basic_columns.forEach( function( col ) {
+                html = html.concat( search_table_row( single_row, col ) );
+            });
+            html.push( '</tr>' );
+        });        
+        html.push( '</tbody></table>' );
+        result_table.append( $( html.join('') ) );
+
+        return result_table;
+    }
+
+
+    function search_table_row( row, col ) {
+        var html = [];
+        html.push( '<td class="', col['key'], ' ' ); 
+        if( col['format'] !== '@' ) {
+            html.push( 'number">' );
+            html.push( _utils.money( row[ col['key']], col['format'] ));
+        }
+        else {
+            html.push( 'string">' );
+            html.push( row[ col['key']] );                
+        }
+        html.push( '</td>' );
+        return html;
+    }
+
+    
+    // TODO - move to _gui ???
+    function show_parents_rows() {
+        var result_table = $(this).next('table.sr-result-table');        
+        var parents_rows = result_table.find('tr.sr-parent-row');
+        var breadcrumb = $(this).prev('div.result-path-outer');
+        var breadcrumb_text = breadcrumb.find('p');
+        
+        breadcrumb_text.hide();
+        parents_rows.css( 'display', 'table-row' );
+        $(this).html( 'Ukryj wyższe poziomy' );
+        $(this).unbind().click( hide_parents_rows );
+    }
+
+
+    // TODO - move to _gui ???    
+    function hide_parents_rows() {
+        var result_table = $(this).next('table.sr-result-table');
+        var parents_rows = result_table.find('tr.sr-parent-row');
+        var breadcrumb = $(this).prev('div.result-path-outer');
+        var breadcrumb_text = breadcrumb.find('p');
+        
+        breadcrumb_text.show();       
+        parents_rows.css( 'display', 'none' );
+        $(this).html( 'Wyższe poziomy' );
+        $(this).unbind().click( show_parents_rows );    
+    }
+
 
     function generate_info_panel_button( data ) {
         var html = [ '<div class="app-tb-info-button">' ];
@@ -380,6 +522,7 @@ var _table = (function () {
 
     }
 
+
     function generate_info_panel_text( info ) {
         var html = [];
         var functions_map = {
@@ -407,6 +550,7 @@ var _table = (function () {
         html = text_generator( info, visible_attrs );
         return html;
     }
+
 
     function generate_text_for_budzet_ksiegowy( info, visible_attrs ) {
         var html = [];
@@ -464,6 +608,7 @@ var _table = (function () {
         return html.join('');
     }
 
+
     function generate_text_for_fundusze_zad( info, visible_attrs ) {
         var attr;
         var html = [];
@@ -498,6 +643,7 @@ var _table = (function () {
         return html.join('');
     }
 
+
     function generate_text_for_nfz( info, visible_attrs ) {
         var html = [];
         var attr;
@@ -525,6 +671,7 @@ var _table = (function () {
         html.push( '</table>' );
         return html.join('');
     }
+
 
     function prepare_visible_attributes() {
         var visible_attrs = {};
@@ -561,6 +708,7 @@ var _table = (function () {
         return visible_attrs;
     }
 
+
     function find_parent( id ) {
         var parent_id = _utils.get_parent_id( id );
         var parent;
@@ -575,6 +723,7 @@ var _table = (function () {
         // if parent not found, return ''
         return null;
     }
+
 
     function apply_selection( id ) {
         var node = $('#' + id);
@@ -725,5 +874,6 @@ var _table = (function () {
         return prev.hasClass('a') ? prev : a_parent( prev );
     }
 
-})();
+    return that;
 
+})();

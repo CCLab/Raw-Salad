@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title> RawSalad search </title>
+      <link rel = "stylesheet" href = "style.css" />
+      <script src = "jquery.min.js">
+      </script> 
+    </head >
+  <body> 
+
+    <div id = "wrapper" > 
+        <div id = "app-wrapper" > 
+            <section id ="panels" > 
+
+                <section class = "panel" id = "pl-search" >
+                    <header>
+                        <p class="panel-title">Wyszukaj</p>
+                        <img src="img/info.png" alt="Ikona informacji" class="panel-icon"/>
+                        <p class="panel-desc">Wyszukaj konkretne informacje w naszej bazie danych.</p>
+                    </header>
+                    <section id = "pl-sr-form-panel" > 
+                        <section class = "panel-main" > 
+                            <form id ="pl-sr-form" action = "get" >
+                                <input type = "http://www.youtube.com/watch?v=DaZGeZKHdh4&feature=BFa&list=PL22F04891F25771EC&lf=results_main&index=3text" class = "input-text" placeholder = "Szukana fraza" id = "pl-sr-query" name = "pl-sr-query" />
+                            </form >
+                        </section >
+                    </section >
+                    <section id="pl-sr-results" class="panel-main" style="display: block; ">
+                       <p  class="pl-sr-results-col">
+                           liczba wystąpień
+                       </p>
+                       <p class="pl-sr-results-col">
+                           kolekcja
+                       </p >
+                       <p class="pl-sr-results-colection-name">
+                           Budżet centralny
+                       </p> 
+                       <table>
+                           <tbody>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >5</td>
+                                  <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Budżet księgowy 2011</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                   <td class="pl-sr-results-number" >4</td>
+                                   <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Budżet zadaniowy 2011 - Podzadanie</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >5</td>
+                                  <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Budżet Instytucjonalny 2011</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >4</td>
+                                  <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Dane sprawozdawcze - wydatki 2010</div></td>
+                              </tr>
+                           </tbody>
+                       </table>
+                       
+                       <p class="pl-sr-results-colection-name">
+                           Środki europejskie
+                       </p>
+                       <table>
+                           <tbody>                                                            
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >4</td>
+                                  <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Budżet środków europejskich 2011 w układzie zadaniowym</div></td>
+                              </tr>
+                           </tbody>
+                       </table>
+                       
+                       <p class="pl-sr-results-colection-name">
+                           Fundusze Celowe
+                       </p>
+                       <table>
+                           <tbody>                                                                                   
+                              
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >1</td>
+                                  <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Wydatky i koszty państwowych Funduszy Celowych 2011 - 2013 (w układzie tradycyjnym)</div></td>
+                              </tr>
+                           </tbody>
+                       </table>
+                       
+                       <p class="pl-sr-results-colection-name">
+                           EFRR
+                       </p>
+                       <table>
+                           <tbody>                                                                                   
+
+
+
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >1</td>
+                                  <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Europejski Fundusz Rozwoju Regionalnego Szczebel krajowy 2009</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >3</td>
+                                  <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Europejski Fundusz Rozwoju Regionalnego Szczebel powiatowy 2009</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >38</td>
+                                  <td class="pl-sr-results-name"><div class="pl-sr-results-name-text left">Europejski Fundusz Rozwoju Regionalnego Szczebel gminny 2009</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                   <td class="pl-sr-results-number" >1</td>
+                                   <td class="pl-sr-results-name" style="cursor: pointer; "><div class="pl-sr-results-name-text left" style="color: rgb(0, 0, 0); ">Europejski Fundusz Rozwoju Regionalnego Szczebel krajowy 2010</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >7</td>
+                                  <td class="pl-sr-results-name"><div class="pl-sr-results-name-text left">Europejski Fundusz Rozwoju Regionalnego Szczebel wojewódzki 2010</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >1</td>
+                                  <td class="pl-sr-results-name"><div class="pl-sr-results-name-text left">Europejski Fundusz Rozwoju Regionalnego Szczebel powiatowy 2010</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >189</td>
+                                  <td class="pl-sr-results-name"><div class="pl-sr-results-name-text left">Europejski Fundusz Rozwoju Regionalnego Szczebel gminny 2010</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >4</td>
+                                  <td class="pl-sr-results-name"><div class="pl-sr-results-name-text left">Europejski Fundusz Rozwoju Regionalnego Szczebel wojewódzki 2011</div></td>
+                              </tr>
+                              <tr style="background-color: #e3e3e3">
+                                  <td class="pl-sr-results-number" >116</td>
+                                  <td class="pl-sr-results-name"><div class="pl-sr-results-name-text left">Europejski Fundusz Rozwoju Regionalnego Szczebel gminny 2011</div></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </section>
+              </section>
+          </section>
+      </div>
+    </div>
+  </body>
+</html>
+          

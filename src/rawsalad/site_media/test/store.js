@@ -29,19 +29,19 @@ var _store = (function () {
 //  P U B L I C   I N T E R F A C E
     var that = {};
 
+    that.NORMAL   = 0;
+    that.FILTERED = 1;
+    that.SEARCHED = 2;
+    
+
     // meta_data setter/getter
     that.meta_data = function ( value ) {
-        // set it just once
-//        _assert.is_equal( meta_data.length, 0,
-//                          "meta_data already assigned" );
-
-        meta_data = value;
-    };
-
-
-    // get metadata about available datasets
-    that.meta_datasets = function () {
-        return meta_data;
+        if( arguments.length === 0 ) {
+            return meta_data;
+        }
+        else {
+            meta_data = value;
+        }            
     };
 
 
@@ -50,13 +50,43 @@ var _store = (function () {
         return meta_data[ dataset_id ]['perspectives'];
     };
 
+    
+    that.get_dataset_name = function ( dataset_id ) {
+        return meta_data[ dataset_id ]['name'];
+    };
 
+    
+    // generate table with all colections id
+    that.get_all_collections = function () {
+        var meta_data = that.meta_data();
+        var collections = [];
+        var id_table;
+        var dataset_id;
+        var perspective_id;
+        
+        meta_data.forEach( function( set ) {
+            dataset_id = set['idef'];
+
+            set['perspectives'].forEach( function( perspective ) {
+                perspective_id = perspective['idef'];
+
+                perspective['issues'].forEach( function ( issue_id ){
+                   id_table = [ dataset_id, perspective_id, issue_id ];
+                   collections.push( id_table.join( '-' ) ); 
+                });
+            });
+        }); 
+        return collections;  
+    };
+    
+    
     // check if group exists
     that.group_exists = function ( data ) {
-        if( find_group( data ) === -1) {
-            return false;
+        var result = find_group( data );
+        if( result === -1) {
+            return null;
         }
-        return true;
+        return result;
     };
 
 
@@ -72,7 +102,7 @@ var _store = (function () {
 
         sheets = that.get_group( grp_number )['sheets'];
         for( i = 0; i < sheets.length; ++i ) {
-            if( sheets[i]['filtered'] === false ) {
+            if( sheets[i]['type'] === that.FILTERED ) {
                 // the group exists and there is a non-filtered sheet present
                 return true;
             }
@@ -80,13 +110,6 @@ var _store = (function () {
 
         // though group exists, there are only filtered sheets
         return false;
-    };
-
-    // creates a new group and sets an activ group index
-    that.create_group = function (data) {
-        // create a group for new data collection
-        groups.push( group( data ));
-        that.active_group( groups.length - 1 );
     };
 
 
@@ -98,7 +121,7 @@ var _store = (function () {
             that.active_group( found );
             return false;
         }
-
+        
         // create a group for new data collection
         groups.push( group( data ));
         that.active_group( groups.length - 1 );
@@ -126,10 +149,15 @@ var _store = (function () {
         var active_grp = that.active_group();
 
         // store original version of collection
+        if ( active_grp['sheets'].length > 0 ){
+            active_grp['active_sheet_number']++;
+        }
         active_grp['name'] = data['name'];
+        active_grp['initialized'] = true;
         active_grp['basic_rows'] = sheet( data, true );
         // add data to mutable list of sheets
         active_grp['sheets'].push( sheet( data ) );
+        
     };
 
 
@@ -211,9 +239,7 @@ var _store = (function () {
                 node['state']['visible'] = state;
                 return;
             }
-
         }
-
     };
 
 
@@ -259,6 +285,7 @@ var _store = (function () {
         return null;
     };
 
+
     that.get_node_name = function ( id ) {
         var node = that.get_node_from_active_sheet( id );
         var name = node['data']['name'];
@@ -267,6 +294,7 @@ var _store = (function () {
         }
         return null;
     };
+
 
 //    that.active_pending_nodes = function () {
 //        return that.active_sheet()['pending_nodes'];
@@ -277,17 +305,25 @@ var _store = (function () {
         that.active_group()['basic_changed'] = value;
     };
 
+
     that.active_filtered = function () {
-        return that.active_sheet()['filtered'];
+        return that.active_sheet()['type'] === that.FILTERED;
     };
 
+
+    that.active_searched = function () {
+        return that.active_sheet()['type'] === that.SEARCHED;
+    };
+
+    
     that.active_sorted = function () {
         return that.active_sheet()['sorted'];
     };
 
+
     that.set_sorted = function ( is_sorted ) {
         that.active_sheet()['sorted'] = is_sorted;
-    }
+    };
 
 
     // active sheet getter / setter
@@ -301,19 +337,20 @@ var _store = (function () {
         active_grp['active_sheet_number'] = value;
     };
 
+
     // active group getter / setter
     that.active_group = function ( value ) {
         var num;
         if( arguments.length === 0 ) {
             return groups[ active_group_number ];
 
-        }else if ( typeof value === 'number' ){
-
+        }
+        else if ( typeof value === 'number' ){
             active_group_number = value;
-
-        }else if ( typeof value === 'object' &&
-            typeof value.dataset === 'string' &&
-            typeof value.view === 'string' ){
+        }
+        else if ( typeof value === 'object' &&
+                  typeof value.dataset === 'string' &&
+                  typeof value.view === 'string' ) {
 
                 num = find_group( value );
                 if ( num === -1 ) {
@@ -325,9 +362,16 @@ var _store = (function () {
         }
     };
 
-    that.active_group_name = function () {
-        return that.active_group()['name'];
+
+    that.active_group_name = function ( value ) {
+        if( arguments.length === 0 ) {
+            return that.active_group()['name'];
+        }
+        else {
+            that.active_group()['name'] = value;
+        }    
     };
+
 
     that.add_data = function ( new_data ) {
         var rows = that.active_rows();
@@ -344,6 +388,7 @@ var _store = (function () {
             });
     };
 
+
     that.add_new_sheet = function ( sheet ) {
         var active_grp = that.active_group();
         var next_sheet_number = that.next_sheet_number() ;
@@ -352,12 +397,31 @@ var _store = (function () {
         that.active_sheet_index( next_sheet_number );
     };
 
+    
+    that.search_result_exists = function ( query ) {
+        var active_grp_sheets = that.active_group()['sheets'];
+        var sheet;
+        var i;
+        
+        for ( i=0; i < active_grp_sheets.length; i++) {
+            sheet = active_grp_sheets[i];
+            if ( sheet['type'] === that.SEARCHED ) {
+                if ( sheet['query'] === query ) {
+                    return i;
+                }
+            }
+        }
+        return null;    
+    };
+
+
     that.get_all_groups = function () {
         return groups;
     };
 
+
     // check if column exists in active_sheet
-    that.is_column_in_active_sheet = function( key ){
+    that.is_column_in_active_sheet = function( key ) {
         var i;
         var cols = that.active_columns();
 
@@ -369,13 +433,16 @@ var _store = (function () {
         return false;
     };
 
+
     that.get_group = function ( group ) {
         return groups[group];
     };
 
+
     that.get_sheet = function ( group, sheet ) {
         return groups[group]['sheets'][sheet];
     };
+
 
     that.remove_active_group = function() {
         if (groups.length === 1){
@@ -386,7 +453,8 @@ var _store = (function () {
             active_group_number = that.active_group_index()-1;
         }
         return true;
-    }
+    };
+
 
     that.remove_active_sheet = function () {
         var active_grp = that.active_group();
@@ -404,12 +472,14 @@ var _store = (function () {
         return true;
     };
 
+
     that.active_sheet_name = function (sheet_name) {
         if( arguments.length === 0 ) {
             return that.active_sheet()['name'];
         }
         that.active_sheet()['name'] = sheet_name;
     };
+
 
     that.reset_sheet = function () {
         var active_sheet = that.active_sheet();
@@ -419,6 +489,7 @@ var _store = (function () {
         active_sheet['rows'] = basic_rows;
         active_sheet['rows']['total'] = total;
     };
+
 
     that.next_sheet_name = function () {
         var next_num=1;
@@ -436,6 +507,7 @@ var _store = (function () {
         return 'Arkusz ' + next_num;
     };
 
+
     that.get_info = function ( id ) {
         var node = that.active_rows().filter( function ( e ) {
                 return e['data']['idef'] === id;
@@ -445,6 +517,7 @@ var _store = (function () {
         return node['data']['info'];
     };
 
+
     that.get_all_sheets_num = function () {
         var groups = that.get_all_groups();
         var num = 0;
@@ -453,6 +526,7 @@ var _store = (function () {
         });
         return num;
     };
+
 
     that.restore_state = function ( state ) {
         // traverse the state list and prepare data to proper format
@@ -496,6 +570,7 @@ var _store = (function () {
         that.active_sheet_index( 0 );
     };
 
+
 // P R I V A T E   I N T E R F A C E
 
     function add_state( rows ) {
@@ -525,8 +600,6 @@ var _store = (function () {
     var groups = [];
     var active_group_number = null;
 
-
-
     // returns group id if it exists or -1 if there is no such a group
     function find_group( data ) {
         var i;
@@ -542,7 +615,6 @@ var _store = (function () {
 
         return -1;
     }
-
 
 
 // O B J E C T   F A C T O R I E S
@@ -575,11 +647,11 @@ var _store = (function () {
             'columns': cols,
             'rows': rows,
             'name': data['name'],
-            'filtered': false,
+            'type': that.NORMAL,
+            'query': null,
             'sorted': false
         };
     }
-
 
     // list of all sheets of the same dataset/view/issue
     function group( data ) {
@@ -592,7 +664,8 @@ var _store = (function () {
             'active_sheet_number': 0,
             'sheets': [],
             'basic_rows': null,
-            'basic_changed': false
+            'basic_changed': false,
+            'initialized': false,
         };
     }
 
