@@ -26,6 +26,8 @@
 
 var _db = (function () {
 
+    var RESULTS_LIMIT = 500;
+    
 //  P U B L I C   I N T E R F A C E
     var that = {};
 
@@ -82,76 +84,101 @@ var _db = (function () {
             dataType: 'json',
             success: function ( received_data ) {
                 var html = [];
-                var thead = $('#pl-sr-results').find('thead');
-                var tbody = $('#pl-sr-results').find('tbody');
-                tbody.empty();
+                var head_html = [];
+                var table;
+                var last_dataset = null;
+                var results_panel = $('#pl-sr-results-panel');
 
-                if( received_data['records_found_total'] === 0 ) {
-                    html.push( '<tr style="background-color: #e3e3e3">' );
-                    html.push( '<td>Niestety wyszukiwane hasło nie znajduje się wśród zebranych tutaj danych</td>' );
-                    html.push( '</tr>' );
-
-                    tbody.append( $( html.join( '' ) ) );
-                    thead.hide();
+                results_panel.empty();
+                if( received_data['records_found_total'] === 0 ) { 
+                    $('.pl-sr-results-col').hide();               
+                    html.push( '<p> Niestety wyszukiwane hasło nie znajduje się wśród zebranych tutaj danych</p>' );
                 }
                 else {
-                    received_data['result'].forEach( function ( collection ) {
-                        var html = [];
-                        var single_row;
-                        var results_length = collection['data'].length;
-                        var results_limit = 250;
-
-                        html.push( '<tr style="background-color: #e3e3e3">' );
-                        html.push( '<td class="pl-sr-results-number right">', collection['data'].length, '</td>' );
-                        html.push( '<td class="pl-sr-results-name">' );
-                        html.push( '<div class="pl-sr-results-name-text left">', collection['perspective'], '</div>' );
-                        if( results_length > results_limit ) {
-                            html.push( '<div class="pl-sr-results-button left">&gt;</div>' );
-                            html.push( '<div style="font-weight: bold; margin-top:5px; clear: both; color: #7345c6">' );
-                            html.push( 'Zbyt wiele wyników - nie sposób ich wyświetlić</div>' );
+                    $('.pl-sr-results-col').show();
+                    received_data['result'].sort( function( a, b) {
+                        if ( a['dataset'] !== b['dataset'] ) {
+                            return a['dataset'] - b['dataset'];
                         }
+                        else {
+                            if ( a['view'] !== b['view'] ) {
+                                return a['view'] - b['view'];
+                            }
+                            else {
+                                return  a['issue'] < b['issue'] ? -1 : 1;
+                            } 
+                        }
+                    });                                                                               
+                    received_data['result'].forEach( function ( data_view ) {
+                        var html = [];                        
+                        var single_row = [];
+                        var results_length = data_view['data'].length;                        
+                        
+                        if ( data_view['dataset'] !== last_dataset ) {
+                            if ( last_dataset !== null ) {
+                                results_panel.append( $( head_html.join('') ) );
+                                results_panel.append( table );
+                            }
+                            last_dataset = data_view['dataset'];
+                            head_html = [];
+                            head_html.push( '<p class="pl-sr-results-colection-name">' );
+                            head_html.push( _store.get_dataset_name( last_dataset ), '</p> ' );
+                            table = $('<table><tbody></tbody></table>');                            
+                        }                       
+                        html.push( '<tr>');
+                        html.push( '<td class="pl-sr-results-number">' );
+                        html.push( results_length );
+                        html.push( '</td>' );    
+                        if( results_length > RESULTS_LIMIT ) {
+                            html.push( '<td class="pl-sr-results-name" style="color: #7345c6;" >' );
+                            html.push( data_view['perspective'] );
+                            html.push( '<div style="font-weight: bold; margin-top:5px; clear: both; display: inline;">' );
+                            html.push( ' - Zbyt wiele wyników, spróbuj wyszukać innymi słowami</div>' );
+                        }
+                        else {
+                            html.push( '<td class="pl-sr-results-name">' );
+                            html.push( data_view['perspective'] );                                                
+                        }                        
                         html.push( '</td>' );
-                        html.push( '</tr>' );
-
                         single_row = $( html.join('') );
-
-                        if( results_length < results_limit ) {
+                        if( results_length < RESULTS_LIMIT ) {
                             single_row
                                 .click( function () {
                                     that.add_search_data({
-                                        dataset: collection['dataset'].toString(),
-                                        view: collection['view'].toString(),
-                                        issue: collection['issue'].toString(),
-                                        idef: collection['data'].toString(),
+                                        dataset: data_view['dataset'].toString(),
+                                        view: data_view['view'].toString(),
+                                        issue: data_view['issue'].toString(),
+                                        idef: data_view['data'].toString(),
                                         query: query
                                     });
                                 })
                                 .find( '.pl-sr-results-name' )
-                                    .hover(
-                                        function () {
-                                            $(this)
-                                                .css( 'cursor', 'pointer' )
-                                                .find( '.pl-sr-results-name-text' )
-                                                .css( 'color', '#1ea3e8' )
-                                                .end()
-                                                .find( '.pl-sr-results-button' )
-                                                .css( 'background-color', '#1ea3e8' );
-                                        },
-                                        function () {
-                                            $(this)
-                                                .find( '.pl-sr-results-name-text' )
-                                                .css( 'color', '#000' )
-                                                .end()
-                                                .find( '.pl-sr-results-button' )
-                                                .css( 'background-color', '#c1c1c1' );
-                                        }
-                                    );
+                                .hover(
+                                    function () {
+                                        $(this)
+                                            .css( 'cursor', 'pointer' )
+                                            .find( '.pl-sr-results-name-text' )
+                                            .css( 'color', '#1ea3e8' )
+                                            .end()
+                                            .find( '.pl-sr-results-button' )
+                                            .css( 'background-color', '#1ea3e8' );
+                                    },
+                                    function () {
+                                        $(this)
+                                            .find( '.pl-sr-results-name-text' )
+                                            .css( 'color', '#000' )
+                                            .end()
+                                            .find( '.pl-sr-results-button' )
+                                            .css( 'background-color', '#c1c1c1' );
+                                    }
+                                );
                         }
-
-                        tbody.append( single_row );
+                        table.append( single_row );
                     });
-                    thead.show();
+                    results_panel.append( $( head_html.join('') ) );
+                    results_panel.append( table );
                 }
+                results_panel.append( $( html.join('') ));
                 _utils.clear_preloader();
 
                 $('#pl-sr-full')
@@ -164,13 +191,11 @@ var _db = (function () {
                     .slideDown( 200 )
                     .find('tr')
                     .each( function () {
-                        var h = $(this).find('.pl-sr-results-name').height();
-
+                        var name_height = $(this).find('.pl-sr-results-name').height();
                         $(this)
                             .find('.pl-sr-results-number')
-                            .height( h );
+                            .height( name_height );
                     });
-
                 $('#pl-sr-show').show();
             }
         });
@@ -182,6 +207,7 @@ var _db = (function () {
             view: search_list['view'],
             perspective: search_list['view'],
             issue: search_list['issue'],
+            query: search_list['query'],
         };
         _utils.create_preloader( "Wczytuję dane z bazy danych" );
         $.ajax({
@@ -189,17 +215,11 @@ var _db = (function () {
             data: search_list,
             dataType: 'json',
             success: function ( received_data ) {
-                console.log( '>>>> received object' );
-                console.log( received_data );
-
-                if ( _store.group_exists( col_id ) ) {
-                    _sheet.create_searched_sheet( col_id, received_data );
-                }
-                else {
-                    _sheet.add_searched_group( col_id, received_data );
-                }
+//              To see recived object - uncoment 2 lines           
+//              console.log( '>>>> received object' );
+//              console.log( received_data );
+                _sheet.display_search_result( col_id, received_data );             
                 _utils.clear_preloader();
-                _gui.show_table_tab();
 
                 $('#app-tb-datatable > tbody td').each( function () {
                     if( $(this).html().toLowerCase().indexOf( search_list['query'].toLowerCase() ) !== -1 ) {
@@ -235,7 +255,7 @@ var _db = (function () {
                 };
 
                 // create group
-                _store.create_group({
+                _store.create_new_group({
                    "dataset": col_id.dataset,
                    "view": col_id.view,
                    "issue": col_id.issue,

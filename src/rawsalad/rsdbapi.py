@@ -14,6 +14,7 @@ import os
 meta_src= "md_budg_scheme"
 state_counter= "md_sta_cnt"
 nav_schema= "ms_nav"
+usrkey_coll= "ms_usrkey"
 
 dir_path = os.path.dirname( __file__ )
 conf_filename = os.path.join(dir_path, 'site_media', 'rawsdata.conf')
@@ -98,6 +99,18 @@ class Response:
                 'httpresp': 500,
                 'descr': 'ERROR: Cannot update document!'
                 },
+            '50': {
+                'httpresp': 404,
+                'descr': 'ERROR: No such user key!'
+                },
+            '51': {
+                'httpresp': 400,
+                'descr': 'ERROR: Key already exist!'
+                },
+            '52': {
+                'httpresp': 500,
+                'descr': 'ERROR while trying to save user key!'
+                }
             }
 
     def __del__(self):
@@ -613,7 +626,7 @@ class State:
     the current state of open datasheets
     """
     def __init__(self):
-        self.response= Response().get_response(0) # CollectionState class is optimistic
+        self.response= Response().get_response(0) # State class is optimistic
         
     def __del__(self):
         pass
@@ -921,3 +934,43 @@ class Search:
             } )
 
         return out
+
+
+class Usrkey:
+    """
+    get/set user key from/to mongo
+    """
+    def __init__(self):
+        self.response= Response().get_response(0) # Usrkey class is optimistic
+        
+    def __del__(self):
+        pass
+
+    def get_key(self, usrkey, datasrc):
+        """ extracts user key (string) from the db """
+        success= True
+        foundkey= datasrc[usrkey_coll].find_one({ 'key': usrkey }) # usrkey is unique, preserved by save_key
+        
+        if foundkey is None:
+            self.response= Response().get_response(50) # no state data
+            success= False
+
+        return success
+
+    def save_key(self, usrkey, datasrc):
+        """
+        saves a user key
+        """
+        success= True
+        if self.get_key(usrkey, datasrc):
+            self.response= Response().get_response(51) # already exist
+            success= False
+        else:
+            try:
+                datasrc[usrkey_coll].save({ 'key' : str(usrkey) })
+            except Exception as e:
+                self.response= Response().get_response(52) # for unknown reason
+                self.response['descr']= ' '.join([ self.response['descr'], str(e) ])
+                success= False                
+
+        return success
