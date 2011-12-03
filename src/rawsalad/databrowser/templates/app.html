@@ -1052,7 +1052,13 @@
  </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <!-- minification area: /site_media/test/ -->
+  <script type="text/javascript">
+  (function () {
+    if( window.location.host === 'odd.centrumcyfrowe.pl' ) {
+      window.location.href = 'http://racoon.cecyf.megivps.pl';
+    }
+  })();
+  </script> <!-- minification area: /site_media/test/ -->
   <script src="/site_media/test/hide.js"></script>
   <script src="/site_media/test/assert.js"></script>
   <script src="/site_media/test/store.js"></script>

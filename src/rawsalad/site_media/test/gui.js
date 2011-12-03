@@ -32,7 +32,7 @@ var _gui = (function () {
     that.init_gui = function ( hide_panel ) {
         var datasets_height;
 
-        window.onbeforeunload = _utils.beforeunload;
+//        window.onbeforeunload = _utils.beforeunload;
 
         $('#most-top')
             .find('table')
@@ -246,7 +246,7 @@ var _gui = (function () {
                     $('#tm-choose').trigger( $.Event( 'click' ) );
                 }
                 // arm backbutton and others again - timeout for letting download work
-                setTimeout( function () { window.onbeforeunload = _utils.beforeunload; }, 1000 );
+                //setTimeout( function () { window.onbeforeunload = _utils.beforeunload; }, 1000 );
             });
 
         $('#pl-feedback')
