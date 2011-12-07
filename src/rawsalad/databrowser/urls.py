@@ -9,6 +9,7 @@ urlpatterns = patterns( 'databrowser.views',
     (r'^feedback/$', 'feedback_email' ),
     (r'^search/$', 'search_data' ),
     (r'^get_searched/$', 'get_searched_data' ),
+    (r'^get_context/$', 'get_context' ),
     (r'^$', 'app_page' ),
     (r'^en/$', 'redirect_en' ),
     (r'^old_browser/$', 'old_browser_page' )

@@ -286,6 +286,52 @@ var _store = (function () {
     };
 
 
+// TODO finish or remove    
+    that.set_search_context_row = function ( rows, idef ) {
+//        var sheet = that.active_sheet();
+//        var node;
+//        
+//        
+//        if ( sheet['type'] === SEARCHED ) {
+//            return -1;
+//        }
+//        node = get_node_from_active_sheet( idef ); 
+//        if ( node !== null && !(node['context']) ) {
+//            rows
+//                .map( function ( row ) {
+//                    return 
+//                }
+//           node['context'] = rows;
+//           
+//           
+//        }
+//        else {
+//            return -1;
+//        }
+//        
+    };
+        
+        
+        
+        
+        
+//       var rows = that.active_rows();
+
+//        new_data
+//            .map( function ( row ) {
+//                return {
+//                    data: row,
+//                    state: { open: false, selected: false, visible: true }
+//                };
+//            })
+//            .forEach( function ( e ) {
+//                rows.push( e );
+//            });
+
+    
+//    }
+
+
     that.get_node_name = function ( id ) {
         var node = that.get_node_from_active_sheet( id );
         var name = node['data']['name'];

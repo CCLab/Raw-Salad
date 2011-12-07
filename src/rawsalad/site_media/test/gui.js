@@ -313,7 +313,7 @@ var _gui = (function () {
                 if(  $('#pl-sr-query').val() === '' ) {
                     return;
                 }
-                var boxes = $('.pl-sr-fl-col-det').find('.pl-sr-issue-checked');
+                var boxes = $('.pl-sr-fl-col-det').find('.pl-sr-fl-issue-checked');
                 var collections;
 
                 if( boxes.length === 0 ) {
@@ -561,7 +561,7 @@ var _gui = (function () {
 
                 if( ( group_num === active_group ) && ( sheet_num === active_sheet ) ) {
                     var group_name = _store.active_group_name();
-                    close_sheet = $( '<div class="close-sheet-button button" >x</div>' );
+                    close_sheet = $( '<div class="app-tb-close-sheet button" >x</div>' );
                     if( !( groups.length === 1 && group['sheets'].length === 1 ) ) {
                         new_snap
                             .append( close_sheet
@@ -999,10 +999,10 @@ var _gui = (function () {
             issues_list = [];
 
             html.push( '<li>' );
-            html.push( '<div data-set="', set['idef'] ,'" class="pl-sr-set-unchecked pl-sr-set" > </div>' );
+            html.push( '<div data-set="', set['idef'] ,'" class="pl-sr-fl-set-unchecked pl-sr-fl-set" > </div>' );
             html.push( '<section class="pl-sr-fl-det" >');
-            html.push( '<img src="/site_media/img/corner.png" class="claud-pointer" >' );
-            html.push( '<img src="/site_media/img/triangle.png" alt="triangle" class="search-arrow" data-set-id="', set['idef'], '" />' );
+            html.push( '<img src="/site_media/img/corner.png" class="pl-sr-fl-pointer" >' );
+            html.push( '<img src="/site_media/img/triangle.png" alt="triangle" class="pl-sr-fl-arrow" data-set-id="', set['idef'], '" />' );
             html.push( '<section class="pl-sr-fl-collection" >' );
             html.push( '<header> <h3> ', set['name'], ' </h3> </header>' );
             html.push( '<section class="pl-sr-fl-col-des" > <p>', set['description'] , '</p> </section>' );
@@ -1033,10 +1033,10 @@ var _gui = (function () {
                     if ( include( perspective['issues'] , issue_name )){
                         idef = set['idef'] + '-' +  perspective['idef'] + '-' + issue_name;
                         html.push( '<td> <div  data-issue="', idef ,'"');
-                        html.push( 'class="pl-sr-issue-unchecked pl-sr-checkbox" > </div></td>' );
+                        html.push( 'class="pl-sr-fl-issue-unchecked pl-sr-fl-checkbox" > </div></td>' );
                     }
                     else {
-                        html.push( '<td> <div class="pl-sr-issue-nocheck pl-sr-checkbox" > </div></td>' );
+                        html.push( '<td> <div class="pl-sr-fl-issue-nocheck pl-sr-fl-checkbox" > </div></td>' );
                     }
                 });
                 html.push( '</tr>' );
@@ -1051,14 +1051,14 @@ var _gui = (function () {
         html.push( '</ul>' );
         $('#pl-sr-full').append( $( html.join('') ) );
 
-        $( '.search-arrow' ).click( show_search_collection );
+        $( '.pl-sr-fl-arrow' ).click( show_search_collection );
 
-        $( '#pl-sr-full > ul > li > div.pl-sr-set' ).click( function() {
+        $( '#pl-sr-full > ul > li > div.pl-sr-fl-set' ).click( function() {
             check_all_dataset( $(this) );
         });
 
         $( '.pl-sr-fl-col-det' )
-            .find('div.pl-sr-issue-unchecked')
+            .find('div.pl-sr-fl-issue-unchecked')
             .click( function() {
                 check_issue( $(this) );
             });
@@ -1068,15 +1068,15 @@ var _gui = (function () {
 
     function check_issue( my_this ) {
         var collection_det = my_this.parents( 'section.pl-sr-fl-det' );
-        var dataset_checkbox = collection_det.prev( 'div.pl-sr-set' );
+        var dataset_checkbox = collection_det.prev( 'div.pl-sr-fl-set' );
 
-        if ( ( collection_det.find('.pl-sr-issue-unchecked').length === 1 ) &&
-             ( dataset_checkbox.hasClass('pl-sr-set-unchecked') ) ){
+        if ( ( collection_det.find('.pl-sr-fl-issue-unchecked').length === 1 ) &&
+             ( dataset_checkbox.hasClass('pl-sr-fl-set-unchecked') ) ){
                 check_dataset( dataset_checkbox );
         }
         my_this
-            .removeClass( 'pl-sr-issue-unchecked' )
-            .addClass( 'pl-sr-issue-checked' )
+            .removeClass( 'pl-sr-fl-issue-unchecked' )
+            .addClass( 'pl-sr-fl-issue-checked' )
             .unbind()
             .click( function() {
                 uncheck_issue( $(this) );
@@ -1086,11 +1086,11 @@ var _gui = (function () {
 
     function uncheck_issue( my_this ) {
         var collection_det = my_this.parents( 'section.pl-sr-fl-det' );
-        var dataset_checkbox = collection_det.prev( 'div.pl-sr-set-checked' );
+        var dataset_checkbox = collection_det.prev( 'div.pl-sr-fl-set-checked' );
 
         my_this
-            .removeClass( 'pl-sr-issue-checked' )
-            .addClass( 'pl-sr-issue-unchecked' )
+            .removeClass( 'pl-sr-fl-issue-checked' )
+            .addClass( 'pl-sr-fl-issue-unchecked' )
             .unbind()
             .click( function() {
                 check_issue( $(this) );
@@ -1101,8 +1101,8 @@ var _gui = (function () {
 
     function uncheck_dataset( this_checkbox ) {
         this_checkbox
-            .removeClass( 'pl-sr-set-checked' )
-            .addClass( 'pl-sr-set-unchecked' )
+            .removeClass( 'pl-sr-fl-set-checked' )
+            .addClass( 'pl-sr-fl-set-unchecked' )
             .unbind()
             .click( function() {
                 check_all_dataset( $(this) );
@@ -1112,8 +1112,8 @@ var _gui = (function () {
 
     function check_dataset( dataset_checkbox ) {
         dataset_checkbox
-            .removeClass( 'pl-sr-set-unchecked' )
-            .addClass( 'pl-sr-set-checked' )
+            .removeClass( 'pl-sr-fl-set-unchecked' )
+            .addClass( 'pl-sr-fl-set-checked' )
             .unbind()
             .click( function() {
                 uncheck_all_dataset( $(this) );
@@ -1123,10 +1123,10 @@ var _gui = (function () {
 
     function check_all_dataset( my_this ) {
         my_this
-            .removeClass( 'pl-sr-set-unchecked' )
-            .addClass( 'pl-sr-set-checked' )
+            .removeClass( 'pl-sr-fl-set-unchecked' )
+            .addClass( 'pl-sr-fl-set-checked' )
         my_this
-            .next().find( '.pl-sr-issue-unchecked' ).trigger( $.Event( 'click' ) );
+            .next().find( '.pl-sr-fl-issue-unchecked' ).trigger( $.Event( 'click' ) );
         my_this
             .unbind()
             .click( function() {
@@ -1137,10 +1137,10 @@ var _gui = (function () {
 
     function uncheck_all_dataset( my_this ) {
         my_this
-            .removeClass( 'pl-sr-set-checked' )
-            .addClass( 'pl-sr-set-unchecked' );
+            .removeClass( 'pl-sr-fl-set-checked' )
+            .addClass( 'pl-sr-fl-set-unchecked' );
         my_this
-            .next().find( '.pl-sr-issue-checked' ).trigger( $.Event( 'click' ) );
+            .next().find( '.pl-sr-fl-issue-checked' ).trigger( $.Event( 'click' ) );
         my_this
             .unbind()
             .click( function() {
@@ -1158,20 +1158,20 @@ var _gui = (function () {
     };
 
     function show_search_collection(){
-	    $(this).parent('.pl-sr-fl-det').addClass('col-details');
-    	$(this).parent('.pl-sr-fl-deepdet').addClass('col-deepdet');
+	    $(this).parent('.pl-sr-fl-det').addClass('pl-sr-fl-col-details');
+    	$(this).parent('.pl-sr-fl-deepdet').addClass('pl-sr-fl-col-deepdet');
     	$(this).prev().show();
 	    $(this).siblings('.pl-sr-fl-collection').find('.pl-sr-fl-col-des').css({ display: "none" });
 	    $(this).siblings('.pl-sr-fl-col-det').css({ display: "inline-block" });
-	    $(this).siblings('.claud-pointer').css({ display: "inline-block" });
+	    $(this).siblings('.pl-sr-fl-pointer').css({ display: "inline-block" });
 	    $(this).attr('src', '/site_media/img/triangle-down.png' );
 	    $(this).unbind().click( hide_search_collection );
     };
 
 
     function hide_search_collection(){
-	    $(this).parent('.pl-sr-fl-det').removeClass('col-details');
-	    $(this).parent('.pl-sr-fl-deepdet').removeClass('col-deepdet');
+	    $(this).parent('.pl-sr-fl-det').removeClass('pl-sr-fl-col-details');
+	    $(this).parent('.pl-sr-fl-deepdet').removeClass('pl-sr-fl-col-deepdet');
 	    $(this).prev().hide();
 	    $(this).siblings('.pl-sr-fl-collection').find('.pl-sr-fl-col-des').css({ display: "block" });
 	    $(this).siblings('.pl-sr-fl-col-det').css({ display: 'none' });

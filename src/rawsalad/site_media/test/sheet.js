@@ -144,7 +144,7 @@ var _sheet = (function () {
         breadcrumb.reverse();        
         return {
             'list': list,
-            'path': path,
+            'data': path,
             'breadcrumb': breadcrumb.join(' > ')
         };     
     }

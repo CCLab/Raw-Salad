@@ -94,6 +94,7 @@ var _table = (function () {
         add_rows( children );
         _gui.make_zebra();
     };
+    
 
 //  P R I V A T E   I N T E R F A C E
 
@@ -364,15 +365,21 @@ var _table = (function () {
     function create_searched_tbody( is_sorted ) {
         var sheet = _store.active_sheet();
         var columns = _store.active_columns();
+        var group = _store.active_group();
         var rows_copy = [];
+        
         
         // deep copy is made to ensure that _store is not changed by sort
         $.extend( true, rows_copy, _store.active_rows() );
+        
+        
+        
 
         rows_copy.forEach( function ( row ) {
                      var new_node = generate_result_table( {
                                          row: row,
-                                         columns: columns
+                                         columns: columns,
+                                         group: group,
                                      });
                      $('#app-tb-searchedtable > tbody').append( new_node );
                  });
@@ -381,22 +388,37 @@ var _table = (function () {
 
     function generate_result_table( data ) {
         var row = data['row'];
-        var hited_rows = row['list'];
+        var hit_rows = row['list'];
+        var result_table_id = hit_rows[0]['idef']; 
         var basic_columns = data['columns'];
         var breadcrumb = row['breadcrumb'];
+        var path = row['data'];
+        var group = data['group']; 
+        
+        var hits_data; 
         var html = [];
         var over_button;
+        var under_button;
         var result_table;
-        var path = row['path'];
                         
         path.sort( function( a, b ) {
             return a['level'] < b['level'] ? -1 : 1;
         });
+        
+        hits_data = hit_rows.map( function ( row ) {
+                        return { dataset: group['dataset'],
+                                 view: group['view'],
+                                 issue: group['issue'],
+                                 idef: row['idef'],
+                               };                               
+                    });
+
+        
         result_table = $('<section class="sr-result-node"> </section>');
 
         // prepare breadcrumb
-        html.push( '<div class="result-path-outer" > <div class="result-path-wrapper" >' );
-        html.push( '<p class="result-path left" >' );
+        html.push( '<div class="sr-result-path-outer" > <div class="sr-result-path-wrapper" >' );
+        html.push( '<p class="sr-result-path left" >' );
         html.push( breadcrumb );
         html.push( '</p>' );
         html.push( '</div></div>' );
@@ -406,7 +428,7 @@ var _table = (function () {
         if ( breadcrumb.length > 0 ) {
             html = [];
             html.push( '<div class="button blue right show-parents">' );
-            html.push( ' Wyższe poziomy ' );
+            html.push( 'Wyższe poziomy' );
             html.push( '</div>' );
             over_button = $( html.join('') );
             over_button.click( show_parents_rows );
@@ -415,7 +437,8 @@ var _table = (function () {
 
         // prepare search result table
         html = [];
-        html.push( '<table class="sr-result-table result-table" > <thead> <tr>' );
+        html.push( '<table class="sr-result-table app-result-table" id="', result_table_id );
+        html.push( '" > <thead> <tr>' );
         basic_columns.forEach( function( col ) {
             html.push( '<th>', col['label'], '</th>' );
         });
@@ -426,44 +449,127 @@ var _table = (function () {
             basic_columns.forEach( function( col ) {
                 html = html.concat( search_table_row( parent_row, col ) );
             });
+            
             html.push( '</tr>' );                
         });
         
-        hited_rows.forEach( function ( single_row ) {
-            html.push( '<tr>' );
-            basic_columns.forEach( function( col ) {
-                html = html.concat( search_table_row( single_row, col ) );
-            });
-            html.push( '</tr>' );
-        });        
-        html.push( '</tbody></table>' );
+        html.push( generate_result_rows( basic_columns, hit_rows ).join('') );        
+        html.push( '</tbody></table>' );        
         result_table.append( $( html.join('') ) );
+
+        // prepare under_button
+        html = [];
+        html.push( '<div id="pl-sr-res-more" class="button blue right show-context">' );
+        html.push( 'Wszystkie pozycje tego poziomu' );
+        html.push( '</div>' );
+        under_button = $( html.join('') );
+        under_button.click( function(){
+            var tbody = $(this).prev('table').find('tbody');
+            var callback = function ( received_data ) {
+                var context_rows = received_data['rows'].filter( function ( row ){
+                  if ( !is_hit_row( row, hit_rows ) ) {
+                    row['context_row'] = true;
+                    return row;
+                  }
+                } );
+
+                _store.add_data( context_rows );                                        
+                tbody.find('.sr-res-tab-hit').remove();                
+                tbody.append( generate_result_rows( basic_columns, hit_rows, received_data['rows'] ).join('') );
+                under_button.unbind();                                    
+                under_button.empty().append('Ukryj kontekst');
+                under_button.click( hide_context_rows );
+            };
+            
+            _db.get_context( hits_data[0], callback );
+            
+        });
+        result_table.append( under_button );
 
         return result_table;
     }
+    
+    function hide_context_rows() {
+        var button = $(this);
+        var table = button.prev('table');
+        table.find('.sr-res-tab-context').css( 'display', 'none' );
+        button.unbind().click( show_context_rows );    
+        button.empty().append('Wszystkie pozycje tego poziomu');        
+    }
+    
+    function show_context_rows() {
+        var button = $(this);
+        var table = button.prev('table');
+        table.find('.sr-res-tab-context').css( 'display', 'table-row' );
+        button.unbind().click( hide_context_rows );
+        button.empty().append('Ukryj kontekst');
+    }
+    
+    function is_hit_row( row, hit_rows ) {
+        var i;
+        for ( i = 0; i < hit_rows.length ; i++ ) {
+            if ( row['idef'] ===  hit_rows[i]['idef'] ) {
+                return true;
+            }
+        }
+        return false;    
+    }
 
+    function generate_result_rows( columns, hit_rows, context_rows ) {
+        var cr = context_rows || hit_rows;
+        var res = [];
+        var i = 0;
+        var j;
+
+//        cr.forEach( function ( single_row )
+        for ( j = 0; j < cr.length ; j++ )
+        {
+            var single_row = cr[j]; 
+            
+            if ( ( i < hit_rows.length ) && ( single_row['idef'] === hit_rows[i]['idef'] ) ) {
+                i++;
+                res.push( '<tr class="sr-res-tab-hit" >' );                
+            }
+            else {
+                res.push( '<tr class="sr-res-tab-context" >' );                            
+            } 
+            columns.forEach( function( col ) {
+                res = res.concat( search_table_row( single_row, col ) );
+            });    
+            res.push( '</tr>' );
+        }
+        return res;            
+    }
+
+// TODO remove
+//    function show_context_rows( rows, tbody, hits_data ) {
+//        //var context = _db.get_context( hits_data[0] );
+//        //var tmp = 3;
+//        var hit = tbody.find('.sr-res-tab-hit');
+//        rows.forEach
+//        //var tbody = $(this).prev('table').find('tbody'); 
+//    };
 
     function search_table_row( row, col ) {
-        var html = [];
-        html.push( '<td class="', col['key'], ' ' ); 
+        var res_html = [];
+        res_html.push( '<td class="', col['key'], ' ' ); 
         if( col['format'] !== '@' ) {
-            html.push( 'number">' );
-            html.push( _utils.money( row[ col['key']], col['format'] ));
+            res_html.push( 'number">' );
+            res_html.push( _utils.money( row[ col['key']], col['format'] ));
         }
         else {
-            html.push( 'string">' );
-            html.push( row[ col['key']] );                
+            res_html.push( 'string">' );
+            res_html.push( row[ col['key']] );                
         }
-        html.push( '</td>' );
-        return html;
+        res_html.push( '</td>' );
+        return res_html;
     }
 
     
-    // TODO - move to _gui ???
     function show_parents_rows() {
         var result_table = $(this).next('table.sr-result-table');        
         var parents_rows = result_table.find('tr.sr-parent-row');
-        var breadcrumb = $(this).prev('div.result-path-outer');
+        var breadcrumb = $(this).prev('div.sr-result-path-outer');
         var breadcrumb_text = breadcrumb.find('p');
         
         breadcrumb_text.hide();
@@ -473,11 +579,10 @@ var _table = (function () {
     }
 
 
-    // TODO - move to _gui ???    
     function hide_parents_rows() {
         var result_table = $(this).next('table.sr-result-table');
         var parents_rows = result_table.find('tr.sr-parent-row');
-        var breadcrumb = $(this).prev('div.result-path-outer');
+        var breadcrumb = $(this).prev('div.sr-result-path-outer');
         var breadcrumb_text = breadcrumb.find('p');
         
         breadcrumb_text.show();       
@@ -485,7 +590,6 @@ var _table = (function () {
         $(this).html( 'Wyższe poziomy' );
         $(this).unbind().click( show_parents_rows );    
     }
-
 
     function generate_info_panel_button( data ) {
         var html = [ '<div class="app-tb-info-button">' ];

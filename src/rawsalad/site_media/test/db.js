@@ -30,21 +30,35 @@ var _db = (function () {
     
 //  P U B L I C   I N T E R F A C E
     var that = {};
-
-    that.get_context = function ( idef ) {
-        console.log( '>>>> idef: ' + idef );
+    
+    // TODO remove spaghetti with res_tbody and hits_data
+    that.get_context = function ( data, callback ) {
+        var rows = null;
+        console.log( '>>>> idef: ' + data['idef'] );
         $.ajax({
             url: 'get_context/',
-            data: { idef: idef },
-            type: 'GET',
-            success: function ( res ) {
-                console.log( '>>>> results:' );
-                console.log( res )
+            data: { dataset: data['dataset'],
+                    view: data['view'],
+                    issue: data['issue'],
+                    idef: data['idef'],            
             },
+            type: 'GET',
+            dataType: 'json',
+            success: callback,
+//            function ( res ) {
+//                console.log( '>>>> results:' );
+//                console.log( res );
+//                rows = res['rows'];
+//                console.log( '>>>> rows:' );
+//                console.log( rows );
+//                _table.show_context_rows( rows, res_tbody, hits_data );
+////                  return res;
+//            },
             error: function ( err ) {
                 console.log( '>>>> ERROR:\n' + err )
             }
         });
+//        return rows;
     };
 
 
@@ -87,15 +101,15 @@ var _db = (function () {
                 var head_html = [];
                 var table;
                 var last_dataset = null;
-                var results_panel = $('#pl-sr-results-panel');
+                var results_panel = $('#pl-sr-res-list');
 
                 results_panel.empty();
                 if( received_data['records_found_total'] === 0 ) { 
-                    $('.pl-sr-results-col').hide();               
+                    $('.pl-sr-res-col').hide();               
                     html.push( '<p> Niestety wyszukiwane hasło nie znajduje się wśród zebranych tutaj danych</p>' );
                 }
                 else {
-                    $('.pl-sr-results-col').show();
+                    $('.pl-sr-res-col').show();
                     received_data['result'].sort( function( a, b) {
                         if ( a['dataset'] !== b['dataset'] ) {
                             return a['dataset'] - b['dataset'];
@@ -121,22 +135,22 @@ var _db = (function () {
                             }
                             last_dataset = data_view['dataset'];
                             head_html = [];
-                            head_html.push( '<p class="pl-sr-results-colection-name">' );
+                            head_html.push( '<p class="pl-sr-res-colection-name">' );
                             head_html.push( _store.get_dataset_name( last_dataset ), '</p> ' );
                             table = $('<table><tbody></tbody></table>');                            
                         }                       
                         html.push( '<tr>');
-                        html.push( '<td class="pl-sr-results-number">' );
+                        html.push( '<td class="pl-sr-res-num">' );
                         html.push( results_length );
                         html.push( '</td>' );    
                         if( results_length > RESULTS_LIMIT ) {
-                            html.push( '<td class="pl-sr-results-name" style="color: #7345c6;" >' );
+                            html.push( '<td class="pl-sr-res-name" style="color: #7345c6;" >' );
                             html.push( data_view['perspective'] );
                             html.push( '<div style="font-weight: bold; margin-top:5px; clear: both; display: inline;">' );
                             html.push( ' - Zbyt wiele wyników, spróbuj wyszukać innymi słowami</div>' );
                         }
                         else {
-                            html.push( '<td class="pl-sr-results-name">' );
+                            html.push( '<td class="pl-sr-res-name">' );
                             html.push( data_view['perspective'] );                                                
                         }                        
                         html.push( '</td>' );
@@ -152,23 +166,23 @@ var _db = (function () {
                                         query: query
                                     });
                                 })
-                                .find( '.pl-sr-results-name' )
+                                .find( '.pl-sr-res-name' )
                                 .hover(
                                     function () {
                                         $(this)
                                             .css( 'cursor', 'pointer' )
-                                            .find( '.pl-sr-results-name-text' )
+                                            .find( '.pl-sr-res-name-text' )
                                             .css( 'color', '#1ea3e8' )
                                             .end()
-                                            .find( '.pl-sr-results-button' )
+                                            .find( '.pl-sr-res-button' )
                                             .css( 'background-color', '#1ea3e8' );
                                     },
                                     function () {
                                         $(this)
-                                            .find( '.pl-sr-results-name-text' )
+                                            .find( '.pl-sr-res-name-text' )
                                             .css( 'color', '#000' )
                                             .end()
-                                            .find( '.pl-sr-results-button' )
+                                            .find( '.pl-sr-res-button' )
                                             .css( 'background-color', '#c1c1c1' );
                                     }
                                 );
@@ -191,9 +205,9 @@ var _db = (function () {
                     .slideDown( 200 )
                     .find('tr')
                     .each( function () {
-                        var name_height = $(this).find('.pl-sr-results-name').height();
+                        var name_height = $(this).find('.pl-sr-res-name').height();
                         $(this)
-                            .find('.pl-sr-results-number')
+                            .find('.pl-sr-res-num')
                             .height( name_height );
                     });
                 $('#pl-sr-show').show();

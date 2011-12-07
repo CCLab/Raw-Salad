@@ -660,27 +660,44 @@ var _tools = (function () {
 
     function prepare_search_interface() {
 
-        // fix search main panel 
-//        var main_sr_panel = $('#pl-sr-form-panel').children('.panel-main');
-//        var top = main_sr_panel.offset().top - parseFloat( main_sr_panel.css('marginTop').replace( /auto/, 0 ) );        
-//        $(window).scroll(function (event) {
-//            // what the y position of the scroll is
-//            var y = $(this).scrollTop();
-//  
-//            // whether that's below the form
-//            if (y >= top) {
+        //fix search main panel 
+        var main_sr_panel = $('#pl-sr-pl-wrapper');
+        var top = main_sr_panel.offset().top - parseFloat( main_sr_panel.css('marginTop').replace( /auto/, 0 ) );        
+        var old_top;
+        var fixed_panel = false;
+        var panel_end;
+        var out_off_panel = false;
+        
+        $(window).scroll(function (event) {
+            // what position of the scroll is
+            if ( $('#pl-sr-full').css('display') !== 'none' ) {        
 
-//                // if so, ad the fixed class
-//                main_sr_panel.addClass( 'fixed' );
-//            }
-//            else {
-//                
-//                // otherwise remove it
-//                main_sr_panel.removeClass('fixed');
-//            }
-//        });
-
-    
+                var scroll = $(window).scrollTop();
+                var org_pos = main_sr_panel.offset().top;  
+                // whether that's below the form
+                if ( !fixed_panel && scroll >= org_pos ) {
+                    // if so, ad the fixed class
+                    fixed_panel = true;
+                    panel_end = $('#pl-sr-more').offset().top;
+                    old_top = org_pos;
+                    main_sr_panel.addClass( 'fixed' );
+                    
+                }
+                else if ( !!fixed_panel && scroll <= old_top ) {
+                    // otherwise remove it
+                    fixed_panel = false;
+                    main_sr_panel.removeClass('fixed');
+                }else if ( !!fixed_panel && scroll > panel_end ) {
+                    main_sr_panel.removeClass('fixed');
+                    out_off_panel = true;                                                       
+                }else if ( !!fixed_panel && !!out_off_panel && scroll <= panel_end ){
+                    main_sr_panel.addClass( 'fixed' );
+                    out_off_panel = false;               
+                }
+               
+            }
+        });    
+        
     
         $('#search-form')
             .submit( function () {
