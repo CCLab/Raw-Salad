@@ -1,8 +1,0 @@
-{
-    "columns": [6, 7, 8],
-    "field_type_label": "Typ",
-    "field_name_label": "Nazwa",
-    "name_column": 1,
-    "lowest_type": "Projekt",
-    "summable": [9, 10, 11, 12]
-}
