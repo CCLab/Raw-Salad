@@ -152,7 +152,7 @@
 
             var tmp = [];
             $('.hierarchy').find('.metadata').each( function() {
-                var v = $(this).attr('id').replace('_', '').replace(/[0-9]/g, '');
+                var v = $(this).attr('id');//.replace(/[0-9]/g, '');
                 var k = $(this).val();
 
                 if( k === 'null' ) {

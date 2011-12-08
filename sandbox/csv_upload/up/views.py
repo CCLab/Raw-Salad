@@ -12,12 +12,14 @@ import rsdbapi as rsdb
 from data_validator import DataValidator
 from hierarchy_inserter import HierarchyInserter
 from data_wrapper import CsvFile, CsvData, Data
+import slughifi
 
 def home( req ):
     f = FirstStepForm()
 
     return render_to_response( 'home.html', { 'form': f } )
 
+DEBUG_V = False
 
 @csrf_exempt
 def upload( req ):
@@ -49,7 +51,7 @@ def upload( req ):
         'view_name': req.POST.get( 'view', '' ),
         'view_descr': req.POST.get( 'vw_desc', '' )
         } )
-
+    
     # temporary way to signalize that tuple (dataset_id, view_id, issue) is not unique
     if nav_dict is None:
         return home(req)
@@ -62,6 +64,8 @@ def upload( req ):
     ns_name= req.POST.get( 'abbr', 'xxxxxx' )
     ns_name= re.sub(r'[\W\s]+', '_', ns_name.lower(), re.U)
     ns_name= 'du_' + ns_name[:6] + nav_dict['issue']
+    # TODO: perspective should be a new field
+    perspective = req.POST.get('view', 'empty view') + ' ' + req.POST.get('issue', 'empty issue' );
     meta_data_draft= {
         'dataset': nav_dict['dataset'],
         'idef': nav_dict['view'],
@@ -79,6 +83,7 @@ def upload( req ):
     req.session['meta_data_draft'] = meta_data_draft
     req.session['navigator'] = nav_dict
     req.session['data_file'] = tmp_name
+    req.session['delimiter'] = delim
 
     return render_to_response( 'meta.html', { 'file_name': upl_file.name, 'data': columns } )
 
@@ -88,7 +93,9 @@ def save_metadata( req ):
     columns_update = json.loads( req.POST.get( 'metadata', [] ) )
     req.session['meta_data_draft']['columns'] = columns_update
     req.session.modified = True
-
+    print '-----------------------------------'
+    for c in req.session['meta_data_draft']['columns']:
+        print c
     return render_to_response( 'advanced.html', { 'data': req.session['meta_data_draft']['columns'] })
 
 
@@ -98,13 +105,15 @@ def save_advanced( req ):
     meta_data= req.session['meta_data_draft']
     nav_dict = req.session['navigator']
     file_name = req.session['data_file']
+    csv_delim = req.session['delimiter']
 
     print 'advanced', advanced
 
-    meta_data['sort']= convert_sort(advanced['order'])
+    meta_data['sort'] = { '0': {u'idef_sort': 1} }
     meta_data['batch_size']= advanced['batch_size']
 
-    # TODO: change type of hierarchy information passed
+    # TODO: change type of hierarchy information passed, 
+    # TODO: instead of boolean value, name of column with id?
     advanced['hierarchy'] = [{'name': name, 'change_type': True} for name in advanced['hierarchy']]
     advanced['field_type_label'] = 'Typ'
     advanced['field_name_label'] = 'Nazwa'
@@ -117,7 +126,7 @@ def save_advanced( req ):
 
     hierarchy_info = create_hierarchy_info(advanced, meta_data['columns'])
 
-    validator = DataValidator(file_name, meta_data['columns'])
+    validator = DataValidator(file_name, meta_data['columns'], csv_delim)
     validator.check_all()
     # TODO: pass delimiter to DataValidator, HierarchyInserter constructors
     if validator.is_all_correct():
@@ -127,14 +136,18 @@ def save_advanced( req ):
             print x['key']
 
         hierarchy_inserter.insert_hierarchy()
+        print 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        print hierarchy_inserter.get_modified_rows()[1]
+        print 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
         
         if hierarchy_inserter.all_rows_correct():
             modified_rows = hierarchy_inserter.get_modified_rows()
             meta_data['columns'] = hierarchy_inserter.get_columns_description()
-            meta_data['aux'] = create_aux_fields() 
+            meta_data['aux'] = create_aux_fields()
             
-            print 'modified_rows = ', modified_rows
-            print 'new hierarchy = '
+            if DEBUG_V:
+                print 'modified_rows = ', modified_rows
+                print 'new hierarchy = '
             for x in meta_data['columns']:
                 print x['key']
             print '------------------------'
@@ -144,11 +157,12 @@ def save_advanced( req ):
             db = rsdb.DBconnect("mongodb").dbconnect
 
             print 'ns = ', meta_data['ns']
-            upload_data_file(db, meta_data['ns'], file_name, meta_data['columns'])
+            upload_data_file(db, meta_data['ns'], file_name, meta_data['columns'], csv_delim)
 
             update_navigator(db, rsdb.nav_schema, nav_dict)
 
             coll= rsdb.Collection()
+            clean_columns_description(meta_data['columns'])
             ds_id, ps_id, iss, update_status= coll.save_complete_metadata(meta_data, db)
             print ds_id, ps_id, iss, update_status
         else:
@@ -159,6 +173,7 @@ def save_advanced( req ):
         # TODO: remove print
         print 'DATA NOT VALIDATED'
         errors_log = validator.get_errors_log()
+        print errors_log
         # TODO: return page with errors
 
     return HttpResponseRedirect( '/' )
@@ -174,7 +189,9 @@ def process_csv( src_file, delim ):
 
     csv_dict= DictReader(src_file, skipinitialspace= True, delimiter= csv_delim, quotechar= csv_quote)
 
+    print 'fieldnames:', csv_dict.fieldnames
     columns_list= fill_column_names( csv_dict.fieldnames )
+    print 'columns_list:', columns_list
     columns_list= fill_column_types( columns_list, csv_dict )
 
     return columns_list
@@ -220,7 +237,8 @@ def fill_column_types(columns, csvdict):
 
     # filling formats
     for out_doc in out:
-        print 'out_doc=', out_doc
+        if DEBUG_V:
+            print 'out_doc=', out_doc
         if out_doc['type_tmp'] in ['int', 'float']:
 
             # filling type
@@ -257,7 +275,6 @@ def check_type(val):
 
     return tp
 
-
 def fill_column_names(field_names):
     """
     cleaning the header:
@@ -274,13 +291,22 @@ def fill_column_names(field_names):
     out= []
     i= 0
 
+    added_keys = {}
+
     for field in field_names:
         i += 1
         label= field.strip().replace('\n', ' ')
         if len(label) == 0: # field with no name
             label= 'Pole %s' % i
-        key= re.sub(r'[\W\s]+', '_', replace_locale_symbols(label.lower()), re.U)
-        key= re.sub(r'_$', '', key)
+        #key= re.sub(r'[\W\s]+', '_', replace_locale_symbols(label.lower()), re.U)
+        #key= re.sub(r'_$', '', key)
+        key = slughifi.slughifi(label, True).replace('-', '_')
+        if key in added_keys:
+            nr = added_keys[key]
+            added_keys[key] += 1
+            key += str(nr)
+        else:
+            added_keys[key] = 2
 
         basic, processable= False, True
         for kw in basic_keywords:
@@ -422,7 +448,13 @@ def create_hierarchy_info(info, columns):
         names of columns creating hierarchy, columns is list with description of each column.
     """
 
-    print 'columns = ', columns
+    print 'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ'
+    print 'columns = '
+    for c in columns:
+        print c
+    print 'hierarchy = '
+    for i in info['hierarchy']:
+        print i
     columns_idx = {}
     for i, column_descr in enumerate(columns):
         name = column_descr['key']
@@ -431,6 +463,7 @@ def create_hierarchy_info(info, columns):
     #hierarchy_columns = [{'index': columns_idx[column_descr['name']], 'change_type': columns_idx[column_descr['change_type']} for column_descr in info['hierarchy']]
     hierarchy_columns = info['hierarchy'][:]
     for column_descr in hierarchy_columns:
+        print 'COLUMN_DESCR = ', column_descr
         column_descr['index'] = columns_idx[column_descr['name']]
         del column_descr['name']
     summable_fields = [columns_idx[column['key']] for column in columns if column['type'] == 'number']
@@ -448,7 +481,7 @@ def create_hierarchy_info(info, columns):
 
     return hierarchy_info
 
-def upload_data_file(db, coll_name, file_name, columns):
+def upload_data_file(db, coll_name, file_name, columns, csv_delim):
     """Uploads file file_name to database db to collection coll_name,
     columns describe columns inside that file
     
@@ -457,29 +490,51 @@ def upload_data_file(db, coll_name, file_name, columns):
     collection -- collection that will contain uploaded data
     file_name -- name of file containing data to upload
     columns -- description of columns in the file
+    delim -- delimiter in csv file
     """
     coll = db[coll_name]
     coll.remove()
 
     keys_list = [column_descr['key'] for column_descr in columns]
+    types_list = [column_descr['type'] for column_descr in columns]
     print 'keys_list = ', keys_list
     
     # TODO: parameterize delim
-    csv_file = CsvFile(file_name, delim=';', quote='"')
+    csv_file = CsvFile(file_name, delim=csv_delim, quote='"')
     csv_data = CsvData(csv_file)
     parents_dict = {}
     row = csv_data.get_next_row(row_type='list')
     almost_ready_rows = []
+    print "KEYS_LIST:", keys_list
+    print "TYPES_LIST:", types_list
     while row:
-        print 'row = ', row
+        if DEBUG_V:
+            print 'row = ', row
         db_row = {}
         for i, value in enumerate(row):
-            if isinstance(value, basestring):
+            #if isinstance(value, basestring):
+            if types_list[i] == 'string':
                 value = value.decode('cp1250')
+            elif types_list[i] == 'number':
+                if value.count('.') > 0:
+                    value = float(value)
+                else:
+                    if value == '':
+                        value = 0
+                    try:
+                        value = int(value)
+                    except Exception as e:
+                        print 'i:', i
+                        print 'row:', row
+                        print 'value:', value
+                        raise e
+            else:
+                raise RuntimeError("Unknown field type: %s", types_list[i])
             db_row[ keys_list[i] ] = value
         add_helper_attributes(db_row, parents_dict)
 
-        print 'db_row = ', db_row
+        if DEBUG_V:
+            print 'db_row = ', db_row
         #coll.insert(db_row)
 
         row = csv_data.get_next_row(row_type='list')
@@ -527,6 +582,7 @@ def sort_format(src):
     res= '-'.join(res_list)
     return res
 
+
 def create_aux_fields():
     """Creates and returns list containing auxiliary fields: idef, leaf, parent."""
     aux_fields = {
@@ -537,3 +593,8 @@ def create_aux_fields():
 
     return aux_fields
 
+
+def clean_columns_description(columns):
+    """Removes obligatory parameter from each column"""
+    for column_descr in columns:
+        del column_descr['obligatory']

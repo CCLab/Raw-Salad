@@ -256,6 +256,8 @@ class Navtree:
             sort= [('idef', -1)],
             limit= 1
             )
+            
+        result = -1
         for ii in dsmax_dict:
             result= int(ii['idef']) # it is anyway only one record
 
@@ -273,7 +275,9 @@ class Navtree:
         vwid_list= []
         for vw in vwmax_dict['perspectives']:
             vwid_list.append( int(vw['idef']) )
-
+            
+        if vwid_list == []:
+            return -1
         return max(vwid_list)
 
 

@@ -27,43 +27,21 @@ class DataValidator:
     }
     Other keys are ignored.
     """
-    def __init__(self, file_name, fields):
+    def __init__(self, file_name, fields, delimiter):
         """Initiates object.
         
         Arguments:
         file_name -- name of file with data
         fields -- description of fields
+        delimiter -- delimiter in csv file
         """
-        csv_file = CsvFile(file_name, quote='"', delim=';') 
+        csv_file = CsvFile(file_name, quote='"', delim=delimiter) 
         self.data = CsvData(csv_file)
         self.fields_descr = fields[:]
         self.row_len = len(self.fields_descr)
         self.header_errors = []
         self.data_errors = []
         self.empty_fields = []
-        self.rules = []
-        self.add_rules()
-    
-    # TODO: change it so that it accepts rules saved in a file
-    def add_rules(self):
-        """Adds rules. Now it's hardcoded method and should be changed so that
-        rules can be read from a file.
-        """
-        # example of a hardcoded rule
-        """caly_kraj_cond = {
-            6: ['Cały kraj', 'Dolnośląskie', 'Kujawsko-pomorskie', 'Lubelskie',
-                'Lubuskie', 'Łódzkie', 'Małopolskie', 'Mazowieckie', 'Opolskie',
-                 'Podkarpackie', 'Podlaskie', 'Pomorskie', 'Śląskie',
-                 'Warmińsko-mazurskie', 'Wielkopolskie', 'Zachodniopomorskie' 
-                ]
-        }
-        caly_kraj_exp_vals = {
-            7: [''],
-            8: ['']
-        }
-        caly_kraj_rule = Rule(caly_kraj_cond, caly_kraj_exp_vals)
-        self.rules.append(caly_kraj_rule)
-        """
         
     def check_all(self):
         """Clears lists of errors and checks if header in the file is correct.
@@ -140,16 +118,14 @@ class DataValidator:
                 self.data_errors.append('ROW nr %d: unexpected length of the row: %d' % (i, len(row)))
             field_nr = 0
             for field in row:
-                expected = self.get_expected_values(row, field_nr)
-                self.check_field(field, i, field_nr, expected)
+                self.check_field(field, i, field_nr)
                 field_nr += 1
             
             row = self.data.get_next_row(row_type='list')
             i += 1
             
-    def check_field(self, value, row_nr, field_nr, exp_values=[]):
+    def check_field(self, value, row_nr, field_nr):
         """Tries to validate field in a row. Checks if:
-        - value is in the list of expected values(if it is not empty)
         - field is expected(its number is consistent with length of fields
           in schema), it is ok as long as rows have correct length
         - field has nonempty value when it is obligatory
@@ -159,15 +135,7 @@ class DataValidator:
         value -- value in the field
         row_nr -- number of the row
         field_nr -- number of the field in the row
-        exp_values -- list of expected values, implicitly it is empty(if there
-                      are no rules)
         """
-        if exp_values != []:
-            if value not in exp_values:
-                self.data_errors.append('ROW nr %d, field nr %d(%s): value is %s, expected value from list: %s' %
-                                        (row_nr, field_nr, value, exp_values, self.fields_descr[field_nr]['label']))
-            return
-        
         try:
             expected_type = self.fields_descr[field_nr]['type']
             obligatory = self.fields_descr[field_nr]['obligatory']
@@ -208,72 +176,4 @@ class DataValidator:
         in any row.
         """
         return self.empty_fields
-    
-    def get_expected_values(self, row, field_nr):
-        """Uses list of rules to check, if the row accepts any rules.
-        Returns list of expected values for field nr field_nr in the row.
-        
-        Arguments:
-        row -- row of data
-        field_nr -- number of field that is checked
-        """
-        expected_values = []
-        for rule in self.rules:
-            if rule.conditions_met(row):
-                expected_values.extend(rule.get_expected_values(field_nr))
-        return expected_values
-    
-    
-class Rule:
-    
-    """Class describing rules(exceptions to schema) that might appear in data.
-    Each rule has conditions and values. They form is the same and following:
-    {
-        (int)field_nr: [ list of values ],
-        ...
-    }
-    Rule is accepted when for each field_nr, value number field_nr in row is
-    in that list. Then expected values of fields of the row are in the values
-    dict[field_nr], e.g.
-    conds = {
-        1: ['abc', 'def'],
-        3: ['qwe']
-    }
-    values = {
-        2: ['', 'zxc'],
-        4: ['']
-    }
-    If row[1] is 'abc' or 'def' and row[3] == 'qwe',
-    then row[2] should be in '' or 'zxc' and row[4] == ''.
-    """
-    
-    def __init__(self, conditions, values):
-        """Initiates rule with conditions and expected values.
-        
-        Arguments:
-        conditions -- conditions needed to accept this Rule 
-        values -- expected values of fields in row
-        """
-        self.conditions = conditions
-        self.values = values
-    
-    def conditions_met(self, row):
-        """Returns True if this Rule can be accepted by the given row,
-        False if not.
-        
-        Arguments:
-        row -- row to check 
-        """
-        for field, field_values in self.conditions.iteritems():
-            row_value = row[field]
-            if row_value not in field_values:
-                return False
-        return True
-    
-    def get_expected_values(self, field_nr):
-        """Returns list of expected values for the field of number field_nr."""
-        try:
-            return self.values[field_nr]
-        except KeyError:
-            return []
-    
+

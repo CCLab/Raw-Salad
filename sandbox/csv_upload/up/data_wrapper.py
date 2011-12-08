@@ -51,7 +51,6 @@ class CsvFile:
     def get_next(self):
         """Reads next line from the file and decodes it using utf-8 decoder."""
         line = self.reader.next()
-        #x = [el.decode('utf-8') for el in line]
         try:
             return [el.decode(self.encoding) for el in line]
         except UnicodeDecodeError:
@@ -202,11 +201,10 @@ class Data:
         for row in self.rows:
             encoded_row = []
             for field in row:
-                if not field:
+                if field is None:
                     field = ''
                 if isinstance(field, basestring):
-                    field = field.encode('cp1250')
+                    field = field.encode(encoding)
                 encoded_row.append(field)
             writer.writerow(encoded_row)
-            #writer.writerow(row)
         file.close()

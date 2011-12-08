@@ -7,6 +7,8 @@ Created on 25-08-2011
 from data_wrapper import CsvFile, CsvData
 import string
 
+DEBUG_HI = False
+
 class HierarchyInserter:
     
     """Inserts hierarchy from the given collection. Uses hierarchy described in
@@ -38,19 +40,15 @@ class HierarchyInserter:
         """
         csv_file = CsvFile(file_name, delim=';', quote='"')
         self.csv_data = CsvData(csv_file)
+        print '************************************************'
         print 'hierarchy_def = ', hierarchy_def
         print 'columns = ', columns
-        # TODO:TODO TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: TODO: done here i have
-        #self.hierarchy_fields = []hierarchy_def['columns']
         self.hierarchy_fields = [column_descr['index'] for column_descr in hierarchy_def['columns']]
         self.name_label = hierarchy_def['field_name_label']
         print 'h_c_l = ', self.csv_data.get_header()
         print 'h_f = ', self.hierarchy_fields
         self.hierarchy_columns_labels = [self.csv_data.get_header()[i] for i in self.hierarchy_fields]
-        # TODO: remove both
         print 'self.hierarchy_columns_labels', self.hierarchy_columns_labels
-        self.lowest_type = self.hierarchy_columns_labels[-1]
-        self.name_column_nr = self.hierarchy_fields[-1]
 
         self.changeable_types = [column_descr['change_type'] for column_descr in hierarchy_def['columns']]
         self.type_label = hierarchy_def['field_type_label']
@@ -104,7 +102,6 @@ class HierarchyInserter:
         
         row = self.csv_data.get_next_row(row_type='list')
         if row is None:
-            # TODO: no prints
             print 'Only header in csv data. No data rows were changed'
             return
         
@@ -119,18 +116,27 @@ class HierarchyInserter:
                 new_hierarchy = self.get_hierarchy(row)
                 hierarchy_values = self.get_hierarchy_values(row)
             except HierarchyError as e:
+                if DEBUG_HI:
+                    print "!!!!!!!!!!!!!!!!!!!!!! Error"
                 log = ('row nr %d, ' % i) + e.log
                 self.bad_hierarchy_log.append(log)
             else:
-                print 'new_hierarchy = ', new_hierarchy, ' old_hierarchy = ', old_hierarchy
-                new_hierarchy = new_hierarchy[:-1] # TODO: check if this is necessary
+                new_hierarchy = new_hierarchy[:-1]
+                if DEBUG_HI:
+                    print 'For row: ', row
+                    print 'new hierarchy is:', new_hierarchy
+                    print 'hierarchy_values:', hierarchy_values
                 if new_hierarchy != old_hierarchy:
                     new_hierarchy_rows = self.create_hierarchy_rows(new_hierarchy,
                                              hierarchy_values, row_len)
-                    print 'new_hierarchy_rows:', new_hierarchy_rows
+                    if DEBUG_HI:
+                        print 'new_hierarchy_rows:', new_hierarchy_rows
                     self.modified_rows.extend(new_hierarchy_rows)
                 
-                self.modified_rows.append(self.clean_row(row, new_hierarchy, hierarchy_values))
+                cleaned_row = self.clean_row(row, new_hierarchy, hierarchy_values)
+                if DEBUG_HI:
+                    print 'cleaned_row:', cleaned_row
+                self.modified_rows.append(cleaned_row)
             
             old_hierarchy = new_hierarchy
             row = self.csv_data.get_next_row(row_type='list')
@@ -169,14 +175,17 @@ class HierarchyInserter:
         """
         cleaned_row = row[:]
         node = self.get_hierarchy_node(hierarchy)
-        next_id = node.get_new_child_id()
-        row_node = HierarchyNode(next_id)
-        node.add_child(row_node, next_id)
          
-        row_type = self.lowest_type
+        row_type = self.hierarchy_columns_labels[-1]
         if hierarchy_values[-1] != '':
             row_type += ' ' + hierarchy_values[-1]
-        row_name = cleaned_row[self.name_column_nr]
+            next_id = self.clean_row_nr(hierarchy_values[-1])
+        else:
+            next_id = node.get_new_child_id()
+
+        row_node = HierarchyNode(next_id)
+        node.add_child(row_node, next_id)
+        row_name = cleaned_row[ self.hierarchy_fields[-1] ]
         hierarchy_val = hierarchy_values[-1]
          
         for nr in self.delete_order:
@@ -184,6 +193,11 @@ class HierarchyInserter:
         
         row_hierarchy = hierarchy + [next_id]
         full_id = self.get_full_id(row_hierarchy)
+        if DEBUG_HI:
+            print '***********************'
+            print 'row_hierarchy=', row_hierarchy
+            print 'full_id=', full_id
+            print '***********************'
         level = string.lowercase[ full_id.count('-') ]
         if level == 'a':
             parent_id = None
@@ -242,7 +256,14 @@ class HierarchyInserter:
             child = act_hierarchy_obj.get_child(field)
             # if this row represents new hierarchy
             if child is None:
-                new_id = act_hierarchy_obj.get_new_child_id()
+                if hierarchy_values[i] == '':
+                    new_id = act_hierarchy_obj.get_new_child_id()
+                else:
+                    new_id = self.clean_row_nr(hierarchy_values[i])
+                if DEBUG_HI:
+                    print '---------------'
+                    print 'new_id=', new_id
+                    print '---------------'
                 child = HierarchyNode(new_id)
                 act_hierarchy_obj.add_child(child, field)
                 new_row = ['' for _ in range(row_len)]
@@ -316,8 +337,9 @@ class HierarchyInserter:
         i = -1
         for row in self.modified_rows:
             i += 1
-            print 'i:', i, 'row:', row
-            print 'summable_cols:', summable_cols
+            if DEBUG_HI:
+                print 'i:', i, 'row:', row
+                print 'summable_cols:', summable_cols
             # omitting header
             if i == 0:
                 continue
@@ -327,7 +349,8 @@ class HierarchyInserter:
             while parent_id:
                 parent_row = rows_dict[parent_id]
                 j = 0
-                print 'j', j
+                if DEBUG_HI:
+                    print 'j', j
                 for col_nr in summable_cols:
                     value = row[col_nr]
                     type = summable_cols_types[j]
@@ -343,22 +366,9 @@ class HierarchyInserter:
                         if parent_row[col_nr] == '':
                             parent_row[col_nr] = value
                         else:
-                            print 'parent_row[col_nr]', parent_row[col_nr], '|| value =', value
+                            if DEBUG_HI:
+                                print 'parent_row[col_nr]', parent_row[col_nr], '|| value =', value
                             parent_row[col_nr] += value
-                    # TODO: remove it
-                    '''if type == 'int':
-                        parent_row[col_nr] += int(value)
-                    elif type == 'float' and value != '':
-                        commas_in_field = value.count(',')
-                        dots_in_field = value.count('.')
-                        if commas_in_field > 0:
-                            if dots_in_field > 0:
-                                parent_row[col_nr] += float( value.replace(',', '', commas_in_field) )
-                        else:
-                            value = value.replace(',', '', commas_in_field - 1)
-                            parent_row[col_nr] += float( value.replace(',', '.') )
-                    '''
-
                     j += 1
                 parent_id = self.get_parent_id(parent_id)
 
@@ -417,7 +427,21 @@ class HierarchyInserter:
         if id.count('-') == 0:
             return None
         return id.rsplit('-', 1)[0]
-            
+
+    def clean_row_nr(self, type_nr):
+        """Returns last part of type_nr with special characters removed
+        ('/', '-', '.')
+
+        Parameters:
+        type_nr -- number of type in hierarchy on specified level
+        """
+        new_nr = type_nr
+        new_nr = new_nr.split('/')[-1]
+        new_nr = new_nr.split('-')[-1]
+        new_nr = new_nr.split('.')[-1]
+
+        return new_nr
+
 
 class HierarchyNode:
     
@@ -490,4 +514,47 @@ class HierarchyError(Exception):
     def __str__(self):
         """Returns string representation of error."""
         return repr(self.log)
-    
+
+
+class HierarchyValidator:
+
+    """Class validating hierarchy, makes sure that irregular hierarchy with 
+    holes inside will not cause bad id generation, if it happens, then validator
+    will alert about such situtation
+    """
+
+    def __init__(self):
+        """ Inititates object, remembered hierarchy is empty."""
+        self.hierarchy_dict = {}
+
+    def add_hierarchy(self, hierarchy, full_id):
+        """Tries to add id to collection of previous ids. If such an id was
+        generated earlier and holes do not match, then we have a conflict.
+
+        Arguments:
+        hierarchy -- contatins hierarchy of actual object
+        full_id -- id of that object
+        """
+        hierarchy_holes = self.find_holes(hierarchy)
+        if full_id in self.hierarchy_dict:
+            return self.check_hierarchy(self.hierarchy_dict[full_id], hierarchy_holes)
+        else:
+            self.hierarchy_dict[full_id] = hierarchy_holes
+            return True
+
+    def check_hierarchy(self, first_hierarchy, second_hierarchy):
+        """Checks if holes in both hierarchies do match
+
+        Arguments:
+        first_hierarchy, second_hierarchy -- hierarchies to check
+        """
+        return True
+
+    def find_holes(self, hierarchy):
+        """Returns list with indexes of empty hierarchy values.
+
+        Arguments:
+        hierarchy -- hierarchy to be checked
+        """
+
+        return []
