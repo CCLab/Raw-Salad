@@ -1,0 +1,120 @@
+[
+    {
+        "idef": 0,
+        "name": "Budżet centralny",
+        "description": "Budżet Rzeczpospolitej Polskiej",
+        "long_description": null,
+        "perspectives": [
+            {
+                "idef": 0,
+                "name": "Budżet tradycyjny",
+                "description": "Ustawa budżetowa as such",
+                "long_description": null,
+                "issues": [ "2011" ]
+                }, 
+            {
+                "idef": 1,
+                "name": "Budżet zadaniowy",
+                "description": "Dwadzieścia dwie funkcje państwa",
+                "long_description": null,
+                "issues": [ "2011", "2012" ]
+                },
+            {
+                "idef": 2,
+                "name": "Budżet instytucjonalny",
+                "description": "Wszyscy dysponenci ustawy budżetowej",
+                "long_description": null,
+                "issues": [ "2011", "2012" ]
+                }
+            ]
+      },
+    {
+        "idef": 1,
+        "name": "Budżet Środków Europejskich",
+        "description": "Środki europejskie przeznaczone na realizację programów współfinansowanych przez Unię Europejską",
+        "long_description": null,
+        "perspectives": [
+            { 
+                "idef": 0,
+                "name": "Budżet środków europejskich w układzie tradycyjnym",
+                "description": "Wydatki środków europejskich zorganizowane w sposób odpowiadający tradycyjnego układowi budżetu państwa",
+                "long_description": null,
+                "issues": [ "2011" ]
+                },             
+            { 
+                "idef": 1,
+                "name": "Budżet środków europejskich w układzie zadaniowym",
+                "description": "Wydatki środków europejskich wpisane w strukturę budżetu zadaniowego",
+                "long_description": null,
+                "issues": [ "2011", "2012" ]
+                },
+            {
+                "idef": 2,
+                "name": "Budżet środków europejskich w układzie instytucionalnym",
+                "description": "Wydatki środków europejskich z perspektywy ich dysponentów. Struktura kolekcji zaczerpnięta jest z budżetu zadaniowego",
+                "long_description": null,
+                "issues": [ "2011", "2012" ]
+                }
+            ]
+        },
+    {
+        "idef": 2,
+        "name": "Fundusze celowe i agencje narodowe",
+        "description": "Części kosztowe budżetów wszystkich funduszy celowych i agencji narodowych",
+        "long_description": null,
+        "perspectives": [
+            {
+                "idef": 0,
+                "name": "Fundusze celowe w układzie zadaniowym",
+                "description": "Z podziałem na funkcje, zadania i podzadania",
+                "long_description": null,
+                "issues": [ "2011" ]
+                },
+            {
+                "idef": 1,
+                "name": "Fundusze celowe w układzie tradycyjnym",
+                "description": "Odpowiadające tradycyjnemu układowi budżetu państwa",
+                "long_description": null,
+                "issues": [ "2011" ]
+                },
+            {
+                "idef": 2,
+                "name": "Agencje narodowe w układzie zadaniowym",
+                "description": "Z podziałem na funkcje, zadania i podzadania",
+                "long_description": null,
+                "issues": [ "2011" ]
+                },
+            {
+                "idef": 3,
+                "name": "Agencje narodowe w układzie tradycyjnym",
+                "description": "Odpowiadające klasycznemu układowi budżetu państwa",
+                "long_description": null,
+                "issues": [ "2011" ]
+                }
+            ]
+   
+        },
+    {
+        "idef": 3,
+        "name": "Narodowy Fundusz Zdrowia",
+        "description": "Budżet Narodowego Funduszu Zdrowia z rozbiciem na ośrodki wojewódzkie",
+        "long_description": null,
+        "perspectives": [
+            {
+                "idef": 0,
+                "name": "Dane zagregowane",
+                "description": "Dane szczebla centralnego",
+                "long_description": null,
+                "issues": [ "2011" ]
+                },
+            {
+                "idef": 1,
+                "name": "Dane ośrodków regionalnych",
+                "description": "Dane budżetowe ośrodków regionalnych NFZ",
+                "long_description": null,
+                "issues": [ "2011" ]
+                }
+            ]
+   
+        }
+]

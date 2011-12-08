@@ -1,0 +1,70 @@
+Simple rsdbapi doc:
+
+class Error: - used to get error messages
+    throw_error(code) - return error message related to code
+
+class DBConnect: - it is used to set up connection to a database inside:MongoDB or PostgreSQL(not implemented yet)
+                   and to authenticate to the database, it uses configuration file
+- fill_connection(db_type) - uses configuration file to obtain arguments needed in connection to database
+
+
+class NavTree:
+Class used to get information about collections in database.
+
+methods:
+
+- get_nav_full(datasrc) - gets list of all collections from datasrc(db collection)
+- get_dataset(datasrc) - gets list of all datasets from datasrc
+- get_view(datasrc, dataset_idef) - gets list of all views from datasrc from dataset with id = dataset_idef
+- get_issue(datasrc, dataset_idef, view_idef) - gets list of all issues from datasrc from view with dataset_id = dataset_idef
+                                                and view_id = view_idef
+- get_count(datasrc, dataset_idef= None, view_idef= None) - returns number of datasets(if dataset_idef = None),
+                                                            number of views of specified dataset(if dataset_idef != None and
+                                                            view_idef = None),
+                                                            number of issues of specified view(if both dataset_idef and
+                                                            view_idef are not None)
+
+class Collection
+Class used to get schema and data of collections from database.
+
+methods:
+
+- get_metadata(datasrc, dataset_id, view_id, issue) - gets meta data of selected collection(specified by dataset id = ds_id,
+                                                    perspective id = ps_id, issue = iss) from db collection = dbase, removes
+                                                    not needed attributes from full meta data, defaultly returns list of all
+                                                    columns, but if there are user defined fields, result will contain only them
+                                                    (if some of those user defined fields are wrong(don't exisr in collection),
+                                                    warning is set. If no meta data can be found, throws an exception
+                                                    
+- get_complete_metadata(ds_id, ps_id, iss, dbase) - gets full meta data of selected collection(specified by dataset id = ds_id,
+                                                    perspective id = ps_id, issue = iss) from db collection = dbase
+
+- get_data(datasrc, dataset_id, view_id, issue) - gets data from collection specified by dataset_id, view_id and issue
+                                                  from db collection = datasrc, if there are no user defined fields, return
+                                                  all basic columns, otherwise return user defined columns + mandatory columns
+                                                  (like leaf, parent, level)
+
+- get_tree(datasrc, dataset_id, view_id, issue) - gets the same data as get_data, but returns it in form of tree
+
+- build_tree(cl, query, columns, sortby, root) - builds tree using db collection cl, query specifying what to get, columns is
+                                                 a list of names of columns from collection schema that should be returned,
+                                                 sortby is sort order for columns for each row, root is id of parent whose
+                                                 children should be returned,
+                                                 if root is not a leaf,  recursively calls _get_children_recurse to get all
+                                                 descendants of root
+                                                 
+
+- _get_children_recurse(parent, coll, curr_query, columns, srt) - parent is not leaf, returns data of its children from
+                                                                  db collection coll, query curr_query, columns to get
+                                                                  for each child = columns and sort order = srt
+                                                                  
+- get_count(datasrc, collection, count_query= {}) - returns number of elements from db collection specified by datasrc
+                                                    and collection
+
+- get_fields(meta_data) - gets list of fields that should returned in data for every node
+
+- get_sort_list(meta_data) - gets list specyfing sort order
+
+- fill_warning(field_names_list) - sets warning when user defines columns that are not present in schema of collection,
+                                   columns are elements on the list field_name_list
+                                   

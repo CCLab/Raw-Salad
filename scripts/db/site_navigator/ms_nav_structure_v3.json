@@ -1,0 +1,213 @@
+[
+    {
+        "description": "Budżet centralny Rzeczpospolitej Polskiej, czyli komplet finansów centralnych planowanych w ustawie budżetowej. Poza planami finansowymi kolekcja zawiera sprawozdania finansowe - stronę dochodów i wydatków.",
+        "idef": 0,
+        "long_description": null,
+        "name": "Bud\u017cet centralny",
+        "perspectives": [
+            {
+                "description": "Budżet tradycyjny, czyli ta postać budżetu państwa, która zapisana jest w ustawie budżetowej.",
+                "idef": 0,
+                "issues": [
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Bud\u017cet tradycyjny"
+            },
+            {
+                "description": "Budżet zadaniowy to załącznik do projektu ustawy budżetowej, który sam w sobie nie posiada mocy prawnej.",
+                "idef": 1,
+                "issues": [
+                    "2011",
+                    "2012"
+                ],
+                "long_description": null,
+                "name": "Bud\u017cet zadaniowy"
+            },
+            {
+                "description": "Jest to wariacja budżetu zadaniowego agregująca wszystkie isntytucje uczestniczące w budżecie państwa.",
+                "idef": 2,
+                "issues": [
+                    "2011",
+                    "2012"
+                ],
+                "long_description": null,
+                "name": "Bud\u017cet instytucjonalny"
+            },
+            {
+                "description": "Sprawozdania z wykonania bud\u017etu centralnego w układzie tradycyjnym",
+                "idef": 3,
+                "issues": [
+                    "2010"
+                ],
+                "long_description": null,
+                "name": "Sprawozdanie z wykonania - wydatki"
+            }
+        ]
+    },
+    {
+        "description": "\u015arodki europejskie przeznaczone na realizacj\u0119 program\u00f3w wsp\u00f3\u0142finansowanych przez Uni\u0119 Europejsk\u0105",
+        "idef": 1,
+        "long_description": null,
+        "name": "Bud\u017cet \u015arodk\u00f3w Europejskich",
+        "perspectives": [
+            {
+                "description": "Wydatki \u015brodk\u00f3w europejskich zorganizowane w spos\u00f3b odpowiadaj\u0105cy tradycyjnego uk\u0142adowi bud\u017cetu pa\u0144stwa",
+                "idef": 0,
+                "issues": [
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Bud\u017cet \u015brodk\u00f3w europejskich w uk\u0142adzie tradycyjnym"
+            },
+            {
+                "description": "Wydatki \u015brodk\u00f3w europejskich wpisane w struktur\u0119 bud\u017cetu zadaniowego",
+                "idef": 1,
+                "issues": [
+                    "2011",
+                    "2012"
+                ],
+                "long_description": null,
+                "name": "Bud\u017cet \u015brodk\u00f3w europejskich w uk\u0142adzie zadaniowym"
+            },
+            {
+                "description": "Wydatki \u015brodk\u00f3w europejskich z perspektywy ich dysponent\u00f3w. Struktura kolekcji zaczerpni\u0119ta jest z bud\u017cetu zadaniowego",
+                "idef": 2,
+                "issues": [
+                    "2011",
+                    "2012"
+                ],
+                "long_description": null,
+                "name": "Bud\u017cet \u015brodk\u00f3w europejskich w uk\u0142adzie instytucionalnym"
+            }
+        ]
+    },
+    {
+        "description": "Cz\u0119\u015bci kosztowe bud\u017cet\u00f3w wszystkich funduszy celowych i agencji narodowych",
+        "idef": 2,
+        "long_description": null,
+        "name": "Fundusze celowe i agencje narodowe",
+        "perspectives": [
+            {
+                "description": "Z podzia\u0142em na funkcje, zadania i podzadania",
+                "idef": 0,
+                "issues": [
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Fundusze celowe w uk\u0142adzie zadaniowym"
+            },
+            {
+                "description": "Odpowiadaj\u0105ce tradycyjnemu uk\u0142adowi bud\u017cetu pa\u0144stwa",
+                "idef": 1,
+                "issues": [
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Fundusze celowe w uk\u0142adzie tradycyjnym"
+            },
+            {
+                "description": "Z podzia\u0142em na funkcje, zadania i podzadania",
+                "idef": 2,
+                "issues": [
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Agencje narodowe w uk\u0142adzie zadaniowym"
+            },
+            {
+                "description": "Odpowiadaj\u0105ce klasycznemu uk\u0142adowi bud\u017cetu pa\u0144stwa",
+                "idef": 3,
+                "issues": [
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Agencje narodowe w uk\u0142adzie tradycyjnym"
+            }
+        ]
+    },
+    {
+        "description": "Bud\u017cet Narodowego Funduszu Zdrowia z rozbiciem na o\u015brodki wojew\u00f3dzkie",
+        "idef": 3,
+        "long_description": null,
+        "name": "Narodowy Fundusz Zdrowia",
+        "perspectives": [
+            {
+                "description": "Dane szczebla centralnego",
+                "idef": 0,
+                "issues": [
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Dane zagregowane"
+            },
+            {
+                "description": "Dane bud\u017cetowe o\u015brodk\u00f3w regionalnych NFZ",
+                "idef": 1,
+                "issues": [
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Dane o\u015brodk\u00f3w regionalnych"
+            }
+        ]
+    },
+    {
+        "description": "Projekty realizowane w ramach Europejskiego Funduszu Rozwoju Regionalnego",
+        "idef": 4,
+        "long_description": null,
+        "name": "Europejski Fundusz Rozwoju Regionalnego",
+        "perspectives": [
+            {
+                "description": "Projekty realizowane na szczeblu krajowym",
+                "idef": 0,
+                "issues": [
+                    "2007",
+                    "2008",
+                    "2009",
+                    "2010",
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Szczebel krajowy"
+            },
+            {
+                "description": "Projekty realizowane na szczeblu wojew\u00f3dzkim",
+                "idef": 1,
+                "issues": [
+                    "2007",
+                    "2008",
+                    "2009",
+                    "2010",
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Szczebel wojew\u00f3dzki"
+            },
+            {
+                "description": "Projekty realizowane na szczeblu powiatowym",
+                "idef": 2,
+                "issues": [
+                    "2008",
+                    "2009",
+                    "2010",
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Szczebel powiatowy"
+            },
+            {
+                "description": "Projekty realizowane na szczeblu gminnym",
+                "idef": 3,
+                "issues": [
+                    "2008",
+                    "2009",
+                    "2010",
+                    "2011"
+                ],
+                "long_description": null,
+                "name": "Szczebel gminny"
+            }
+        ]
+    }
+]

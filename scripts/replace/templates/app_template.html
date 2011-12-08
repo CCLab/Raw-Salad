@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<title>$app_title</title>
+  <link rel="stylesheet" type="text/css" href="/site_media/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/site_media/css/classes.css" />
+  <link rel="stylesheet" type="text/css" href="/site_media/css/table_style.css" />
+</head>
+<body>
+ <header id="most-top">
+
+  <table>
+  	<tbody>
+  		<tr>
+  			<td style="width: 320px;"></td>
+  			<td style="width: 320px;"></td>
+  		</tr>
+  	</tbody>
+  </table>
+
+ </header>
+ <div id="wrapper">
+
+   <div id="app-wrapper">
+   
+   <!--  H E A D E R  -->
+    <header id="top">
+      <nav id="top-menu">
+        <ul>
+          <li id="tm-choose" class="tab button active">$app_tm_choose</li>
+          <li id="tm-search" class="tab button">$app_search</li>
+          <li id="tm-download" class="tab button">$app_download</li>
+        </ul>
+      </nav>
+    </header>
+     
+    <br class="clear" /> 
+
+    <!-- P A N E L S -->
+    <section id="panels">
+      <!-- C H O O S E   P A N E L --> 
+      <section class="panel" id="pl-choose">
+        <header>
+          <p class="panel-title">$app_panel_title</p>
+          <img src="/site_media/img/info.png" 
+               alt="Ikona informacji" 
+               class="panel-icon" />
+          <p class="panel-desc">$app_pl_sr_full</p>
+        </header>
+        <div id="pl-ch-area">
+          <!-- D A T A S E T S --> 
+          <section id="pl-ch-datasets" class="panel-main">
+            <p class="pl-ch-back left">
+              <!-- empty on purpose: used as a spacer! -->
+            </p>
+          </section>
+
+          <!-- V I E W S -->
+          <section id="pl-ch-views" class="panel-main">
+            <p class="pl-ch-back left">
+              <img src="/site_media/img/datasets.png" class="left" /> 
+            </p>
+          </section>
+        </div>
+      </section>
+
+      <!-- S E A R C H   P A N E L -->
+      <section class="panel" id="pl-search">
+        <header>
+          <p class="panel-title">$app_search</p>
+          <img src="/site_media/img/info.png" 
+               alt="Ikona informacji" 
+               class="panel-icon" />
+          <p class="panel-desc">$app_pl_search_panel_desc</p>
+        </header>
+
+        <!-- S E A R C H   F O R M -->
+        <section id="pl-sr-form-panel">
+          <section class="panel-main">
+            <form id="pl-sr-form" action="get">
+              <input type="text" class="input-text" placeholder="$app_pl_sr_form_panel_placeholder" id="pl-sr-query" name="pl-sr-query" />
+            </form>
+          </section>
+          
+          <!-- S E A R C H  C O L L E C T I O N S   S E L E C T I O N -->
+          <section id="pl-sr-full" class="panel-main">
+            <p>$app_pl_sr_full</p>
+            <hr />
+            <table id="pl-sr-table">
+              <tbody>
+              <tr>
+                <td class="pl-sr-select-buttons" rowspan="35">
+                  <div id="pl-sr-select" class="rounded grey button">$app_select</div>
+                  <br class="clear"/>
+                  <div id="pl-sr-unselect" class="rounded grey button">$app_deselect</div>
+                </td>
+                <td class="check"><input value="0-0-2006" type="checkbox" /></td>
+                <td>Czech budget 2006</td>
+              </tr>
+              <tr>
+                <td class="check"><input value="0-0-2007" type="checkbox" /></td>
+                <td>Czech budget 2007</td>
+              </tr>
+              <tr>
+                <td class="check"><input value="0-0-2008" type="checkbox" /></td>
+                <td>Czech budget 2008</td>
+              </tr>
+              <tr>
+                <td class="check"><input value="0-0-2009" type="checkbox" /></td>
+                <td>Czech budget 2009</td>
+              </tr>
+              <tr>
+                <td class="check"><input value="0-0-2010" type="checkbox" /></td>
+                <td>Czech budget 2010</td>
+              </tr>
+              </tbody>
+            </table>
+          </section>
+          
+          <div class="pl-bt-container" style="margin-top: -5px">
+            <div id="pl-sr-more" class="button left">$app_pl_sr_more</div>
+          </div>
+          
+          <!-- S E A R C H   B U T T O N -->
+          <div class="pl-bt-container">
+            <div id="pl-sr-button" class="blue button">$app_pl_sr_button</div>
+          </div>
+        </section>
+        <section id="pl-sr-results-panel">
+          <section id="pl-sr-results" class="panel-main">
+            <table>
+              <thead>
+                <tr style="padding-bottom: 15px">
+                  <th style="font-weight: normal; color: #8b8b8b;">$app_pl_sr_results_count</th>
+                  <th style="text-align: left; padding-left: 15px; font-weight: normal; color: #8b8b8b;">$app_pl_sr_results_coll</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </section>
+        </section>
+      </section>
+
+      <!-- D O W N L O A D   P A N E L -->
+      <section class="panel" id="pl-download">
+        <header>
+          <p class="panel-title">$app_pl_download_panel_title</p>
+          <img src="/site_media/img/info.png" 
+               alt="Ikona informacji" 
+               class="panel-icon" />
+          <p class="panel-desc">$app_pl_download_panel_desc</p>
+        </header>
+
+        <form>
+          <!-- S H E E T S -->
+          <section id="pl-dl-sheets" class="panel-main">
+            <p>$app_pl_dl_sheets</p>
+            <hr />
+            <table id="pl-dl-sh-table"><!-- generated dynamically -->
+            </table>
+          </section>
+        
+          <!-- F U L L   C O L L E C T I O N S -->
+          <section id="pl-dl-full" class="panel-main">
+            <p>$app_pl_dl_full</p>
+            <hr />
+            <table id="pl-dl-fl-table">
+              <tbody>
+              <tr>
+                <td class="pl-dl-select-buttons" rowspan="35">
+                  <div id="pl-dl-fl-tb-select" class="grey button">$app_select</div>
+                  <br class="clear"/>
+                  <div id="pl-dl-fl-tb-unselect" class="grey button">$app_deselect</div>
+                </td>
+                <td class="check"><input value="0-0-2006.csv" type="checkbox" /></td>
+                <td>Czech budget 2006</td>
+              </tr>
+              <tr>
+                <td class="check"><input value="0-0-2007.csv" type="checkbox" /></td>
+                <td>Czech budget 2007</td>
+              </tr>
+              <tr>
+                <td class="check"><input value="0-0-2008.csv" type="checkbox" /></td>
+                <td>Czech budget 2008</td>
+              </tr>
+              <tr>
+                <td class="check"><input value="0-0-2009.csv" type="checkbox" /></td>
+                <td>Czech budget 2009</td>
+              </tr>
+              <tr>
+                <td class="check"><input value="0-0-2010.csv" type="checkbox" /></td>
+                <td>Czech budget 2010</td>
+              </tr>
+              </tbody>
+            </table>
+          </section>
+        </form>
+        <!-- D O W N L O A D   B U T T O N -->
+        <div class="pl-bt-container">
+          <div id="pl-dl-button" class="blue button">$app_download</div>
+        </div>
+
+        <!-- H I D D E N   D O W N L O A D   F O R M -->
+        <form id="pl-dl-hidden-form" action="/download/" method="post" style="display: none;">
+          <input type="text" name="csv_string" />
+        </form>
+      </section> <!-- E O:  D O W N L O A D   P A N E L -->
+      
+      <div id="pl-close-bar" class="button">
+        $app_pl_dl_hidden_form
+      </div>
+    </section> <!-- E O:  P A N E L S -->
+
+    <!-- A P P L I C A T I O N -->
+    <section id="application">
+      <header>
+        <nav id="app-tabs">
+          <ul>
+            <li id="app-tbs-table" class="tab button active">$app_app_tbs_table</li>
+            <li id="app-tbs-share" class="tab button">$app_app_tbs_share</li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- T A B L E -->
+      <section id="app-table" class="app-container">
+        <header> 
+          <div id="app-tb-save-sheet" class="blue button left">$app_app_tb_save_sheet</div>
+          <ul id="app-tb-sheets">
+            <!-- <li class="tab button active">Budżet zadanio...</li>
+            <li class="tab button">Arkusz 1</li>
+            <li class="tab button">Narodowy Fun...</li>-->
+          </ul>
+        </header>
+        <section class="panel-main">
+          <!-- T A B L E   T O O L S -->
+          <section id="app-tb-tools">
+            <section>
+              <h3 id="app-tb-tl-title" class="left"></h3>
+              <form id="app-tb-tl-rename-form" style="display: none;" class="left" >
+                  <input type="text" class="input-text" id="app-tb-tl-rename-input" /> 
+              </form>
+              <div id="app-tb-tl-old-title" class="left" style="display: none;" > </div>
+              <div id="app-tb-tl-rename-button" class="button left">$app_app_tb_tl_rename_button</div>
+              <div id="app-tb-tl-bt-container" class="right">
+                <div id="app-tb-tl-clear-button" class="button left">$app_app_tb_tl_clear_button</div>
+                <div id="app-tb-tl-sort-button" class="button left">$app_sort</div>
+                <div id="app-tb-tl-filter-button" class="button left">$app_filter</div>
+              </div>
+            </section>
+            <!-- S O R T   F O R M -->
+            <section id="app-tb-tl-srft-forms">
+              <form id="app-tb-tl-sort-form" class="sort-filter-form left">
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>$app_select_column</th>
+                      <th>$app_app_tb_tl_sort_form_order</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+
+                <div id="app-tb-tl-sort-add" class="grey button">$app_add_key</div>
+                <div id="app-tb-tl-sort-submit" class="blue button">$app_sort</div>
+
+              </form>
+              <!-- F I L T E R   F O R M -->
+              <form id="app-tb-tl-filter-form" class="sort-filter-form left">
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>$app_select_column</th>
+                      <th>$app_app_tb_tl_filter_form_operation</th>
+                      <th>$app_app_tb_tl_filter_form_content</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+
+                <div id="app-tb-tl-filter-add" class="grey button">$app_add_key</div>
+                <div id="app-tb-tl-filter-submit" class="blue button">$app_filter</div>
+                
+              </form>
+            </section>
+            <!-- C O L U M N S -->
+            <section>
+              <div id="app-tb-tl-columns-button" class="button right">$app_app_tb_tl_columns_button</div>
+              <br class="clear"/>
+              <div id="app-tb-tl-columns-list" class="right">
+                <form id="app-tb-tl-columns-form">    
+                  <div id="app-tb-tl-lt-select" class="grey button left">$app_select</div>
+                  <div id="app-tb-tl-lt-unselect" class="grey button left">$app_deselect</div>
+                  <div id="app-tb-tl-lt-submit" class="blue button left">$app_app_tb_tl_lt_submit</div>
+                  <br class="clear" />
+                  <table>
+                    <tbody></tbody>
+                  </table>
+                </form>
+                </div>
+            </section>
+          </section>
+
+          <!-- D A T A   T A B L E  --> 
+          <table id="app-tb-datatable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+          
+          <!-- F I L T E R E D   T A B L E -->
+          <table id="app-tb-filteredtable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+
+        </section> <!-- E O:  M A I N   P A N E L --> 
+      </section> <!-- E O:  T A B L E -->
+      <!-- S H A R E -->
+      <section id="app-share" class="app-container">
+          
+        <section id="app-sh-panel" class="panel-main">
+          <p>$app_app_sh_panel</p>
+          <hr />
+          <table id="app-sh-table"><!-- generated dynamically -->
+          </table>
+        </section>
+
+        <div class="pl-bt-container" style="margin-top: -5px; width: 500px">
+          <div id="app-sh-submit" class="rounded blue button left" style="margin-top: 5px;">$app_app_sh_submit</div>
+          <div id="app-sh-permalink" class="left" style="margin-left: 101px;"><input type="text" class="input-text" style="width: 200px;"/></div>
+        </div>
+
+      </section> <!-- E O:  S H A R E -->
+
+    </section> <!-- E O:  A P P L I C A T I O N -->
+    </div>
+ </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <!-- minification area: /site_media/js/ -->
+  <script src="/site_media/js/hide.js"></script>
+  <script src="/site_media/js/assert.js"></script>
+  <script src="/site_media/js/store.js"></script>
+  <script src="/site_media/js/db.js"></script>
+  <script src="/site_media/js/gui.js"></script>
+  <script src="/site_media/js/table.js"></script>
+  <script src="/site_media/js/sheet.js"></script>
+  <script src="/site_media/js/utils.js"></script>
+  <script src="/site_media/js/tools.js"></script>
+  <script src="/site_media/js/algorithms.js"></script>
+  <script src="/site_media/js/download.js"></script>
+  <!-- OEF minification area -->
+  <script type="text/javascript" language="javascript">
+  // <![CDATA[
+      var translation = {
+          'js_save_permalink_preloader': '$js_save_permalink_preloader',
+          'js_search_not_found': '$js_search_not_found',
+          'js_search_too_many_results': '$js_search_too_many_results',
+          'js_search_show_advanced': '$js_search_show_advanced',
+          'js_loading_data': '$js_loading_data',
+          'js_selected_header': '$js_selected_header',
+          'js_sheet': '$js_sheet',
+          'js_info_panel_header': '$js_info_panel_header',
+          'js_info_basic_val': '$js_info_basic_val',
+          'js_info_cur_val': '$js_info_cur_val',
+          'js_info_cur_val_label': '$js_info_basic_val_label',
+          'js_sort_ascending': '$js_sort_ascending',
+          'js_sort_descending': '$js_sort_descending',
+          "js_filter_contain": '$js_filter_contain',
+          "js_filter_begin": '$js_filter_begin',
+          "js_filter_not_contain": '$js_filter_not_contain',
+          "js_filter_not_begin": '$js_filter_not_begin',
+          "js_search_nothing": '$js_search_nothing',
+          "js_search_title": '$js_search_title',
+          "js_unload_warning": '$js_unload_warning',
+          "js_choose_panel_text": '$js_choose_panel_text',
+          "js_choose_panel_col": '$js_choose_panel_col',
+          "js_email_sent": '$js_email_sent',
+          "js_search_close_advanced": '$js_search_close_advanced',
+          "js_search_preloader": '$js_search_preloader',
+          "js_restore_preloader": '$js_restore_preloader',
+          "js_select": '$app_select',
+          "js_deselect": '$app_deselect',
+          "js_choose_panel_see": '$js_choose_panel_see',
+          "js_choose_panel_issue": '$js_choose_panel_issue',
+      }; 
+      (function () {
+        // new template
+        _store.meta_data( {{ meta.meta_data|safe }} );
+        {% if idef %}
+        _gui.init_gui( true );
+        _gui.restore_session( {{ idef }} );
+        {% else %}
+        _gui.init_gui();
+
+        {% endif %}
+      })();
+  // ]]>
+  </script> 
+
+</body>
+</html>
+

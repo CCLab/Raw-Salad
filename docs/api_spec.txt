@@ -1,0 +1,192 @@
+DATA COLLECTIONS 
+----------------
+All data in Raw Salad DB are organized in data collections. Each data collection
+consists of a hierarchical triple: dataset, view and issue. 
+
+EXAMPLES:
+
+   DATASET                       VIEW                      ISSUE
+   National budget             > Performance budget      > 2011
+                                                         > 2012
+                               > Institutional budget    > 2011
+                                                         > 2012
+   National agencies budgets   > Traditional structure   > 2011
+                               > Performance structure   > 2011
+                               
+As shown in the example, some datasets contain a few distinct views and some of 
+the views have multiple issues. The issues don't have to be a year date and 
+should be treated as an arbitrary (though self-descriptive) identifier. 
+
+A specified triple of dataset-view-issue is called "Data collection" and with 
+data format creates a basic URL structure.
+
+
+DATA FORMATS
+------------
+Public API of Raw Salad provides users with two optional data formats: XML and 
+JSON both encoded in UTF-8. In future YAML is to be implemented as well. 
+
+
+RESPONSE STRUCTURE
+------------------
+To be written
+
+
+BASIC URL STRUCTURE
+-------------------
+The basic part of API URL consists of three parts: host, format, collection:
+
+              HOST              FORMAT               COLLECTION
+   |--------------------------|--------|---------------------------------------|
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/issue/<idef>/
+
+
+EXAMPLES:
+
+   National budget > Institutional structure > 2012 in XML format
+   http://cecyf.megivps.pl/api/xml/dataset/0/view/2/issue/2012/
+   
+   National agencies budget > Performance structure > 2011 in JSON format
+   http://cecyf.megivps.pl/api/json/dataset/2/view/3/issue/2011/
+   
+
+All URLs in the API have to contain a trailing slash!
+
+All API URLs are self descriptive and reflective. It means that all information 
+necessary to browse Raw Salad DB and build software (or language wrappers) on 
+top of Raw Salad API is included in API responses. 
+
+
+STEP BY STEP THROUGH BASIC URL
+------------------------------
+
+   List of available formats
+   http://cecyf.megivps.pl/api/
+
+   List of available datasets (response in <format>)
+   http://cecyf.megivps.pl/api/<format>/
+   http://cecyf.megivps.pl/api/<format>/dataset/
+
+   List of available views of specified dataset (response in <format>)
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/
+
+   List of available issues of specified dataset-view (response in <format>)
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/issue/
+
+   List of all data in specified collection (response in <format>)
+   http://cecyf.megivps.pl/api/<format>/dataset/<idef>/view/<idef>/issue/<idef>/
+
+The last URL is the first API call that responses with raw data from a specified
+collection in a specified format. The futher specification is provided below.
+
+
+RAW DATA API
+------------
+Throughout this part "<col>" is used to indicate URL for a specific collection 
+in a specific format (see section above). 
+
+
+The structure of the raw data urls is as follows:
+    
+   the whole collection:
+
+      <col>/           - a flat list of all entities in a whole collection
+      <col>/meta       - metadata for the collection including 'max_level' and
+                         children 'count'
+      <col>/tree       - the whole collection as a tree
+        
+
+   EXAMPLES:
+
+      A flat list of all entities in the national performance budget 2012
+      http://cecyf.megivps.pl/api/json/dataset/0/view/1/issue/2012/  
+      
+      A tree of all entities in the national traditional budget 2011
+      http://cecyf.megivps.pl/api/xml/dataset/0/view/0/issue/2011/tree  
+      
+
+   a single level:
+
+      <col>/a/(<idef>/<level>/)*   - a flat list of all <level> children
+                                     of the last specified node
+
+
+   EXAMPLE:
+
+      A flat list of all tasks in function 1 in the performance budget 2011
+      http://cecyf.megivps.pl/api/json/dataset/0/view/1/issue/2012/a/1/b/
+
+
+   a specified entity:
+      
+      <col>/(<level>/<idef>/)+         - a specified <idef> entity
+      <col>/(<level>/<idef>/)+meta/    - a specified <idef> entity metadata
+                                         including children 'count'
+      <col>/(<level>/<idef>/)+tree/    - a subtree of the collection with 
+                                         a specified <idef> entity as a root
+
+
+   <level> is represented by a single letter reflecting tree level (a, b, c...)
+   <idef> is a unique (in scope of the single collection) id of the entity
+    
+   EXAMPLES:
+
+      National agencies budget 2011 in JSON
+      <col> = http://cecyf.megivps.pl/api/json/dataset/2/view/3/issue/2011/  
+
+      Constant costs of National Film Institute
+      <col>/a/21/b/21-1/
+      
+      All Polish Turistic Organization data as a JSON tree
+      <col>/a/13/tree/
+      
+      Metadata (including children count) for National Film Institute
+      <col>/a/21/meta/
+      
+
+   In all URLs <idef> can be represented by a single entity idef or as a group 
+   expresion. Following keywords are allowed:
+
+      +TO+ - sets a range from one ifed to another
+      +AND+ - appends another idef to the list of specified idefs
+
+   To use a scope expresions one follow the syntax:
+
+      <col>/(<level>/<idef>/)*<level>/\[<idef>(\+(AND|TO)\+<idef>)+\]/(<level>)*
+
+   The group expression can be used only to the deepest level requested and only
+   for the flat list view - users can't use grouping with tree results.
+
+   EXAMPLES:
+
+      National performance budget 2012 in JSON
+      <col> = http://cecyf.megivps.pl/api/json/dataset/0/view/1/issue/2012/  
+
+      A list of functions 1, 2, 3 and 6
+      <col>/a/[1+TO+3+AND+6]/
+
+      A list of lists of tasks of functions 1 and 4
+      <col>/a/[1+AND+4]/b/
+
+      A list of lists of subtasks of tasks 1-2, 1-3, 1-4 and 1-7 of function 1
+      <col>/a/1/b/[1-2+TO+1-4+AND+1-7]/c/
+
+
+2. Additional GET attribute "fields" can be used to narrow the result's size:
+
+   fields=<field_name>(, <field_name>)+ - list of fields of specified entities
+
+   EXAMPLES:
+      
+      National Health Fund budget 2011 in XML
+      <col> = http://cecyf.megivps.pl/api/json/dataset/3/view/1/issue/2012/  
+
+      A list of all entities with only name and total value as a result:
+      <col>/a/?fields=name,val
+
+      A list of two regions with idef and total value as a result
+      <col>/a/[280000+AND+320000]/?fields=idef,val
+
+
